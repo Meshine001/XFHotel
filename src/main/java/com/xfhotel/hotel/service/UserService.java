@@ -14,4 +14,6 @@ public interface UserService {
 	public User getUserById(long id);
 
 	public void removeUser(long id);
+	
+	public User getUser(String username,String password);
 }

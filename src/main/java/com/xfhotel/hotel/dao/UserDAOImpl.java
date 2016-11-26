@@ -2,6 +2,7 @@ package com.xfhotel.hotel.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -14,23 +15,22 @@ import com.xfhotel.hotel.entity.User;
 @Repository
 public class UserDAOImpl implements UserDAO {
 	private static final Logger logger = LoggerFactory.getLogger(UserDAOImpl.class);
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
-
 
 	@Override
 	public void addUser(User u) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.persist(u);
-		logger.info("添加用户成功："+u);
+		logger.info("添加用户成功：" + u);
 	}
 
 	@Override
 	public void updateUser(User u) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.update(u);
-		logger.info("更新用户成功："+u);
+		logger.info("更新用户成功：" + u);
 	}
 
 	@Override
@@ -38,8 +38,8 @@ public class UserDAOImpl implements UserDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<User> list = session.createQuery("from User").list();
 		logger.info("查询所有用户");
-		for(User u:list){
-			logger.info(""+u);
+		for (User u : list) {
+			logger.info("" + u);
 		}
 		return list;
 	}
@@ -48,7 +48,7 @@ public class UserDAOImpl implements UserDAO {
 	public User getUserById(long id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		User u = (User) session.load(User.class, new Long(id));
-		logger.info("通过Id查询:"+u);
+		logger.info("通过Id查询:" + u);
 		return u;
 	}
 
@@ -56,10 +56,23 @@ public class UserDAOImpl implements UserDAO {
 	public void removeUser(long id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		User u = (User) session.load(User.class, new Long(id));
-		if(null != u){
+		if (null != u) {
 			session.delete(u);
 		}
-		logger.info("删除用户:"+u);
+		logger.info("删除用户:" + u);
+	}
+
+	@Override
+	public User getUser(String username, String password) {
+		String hql = "from User where username = ? and password = ?";
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createQuery(hql);
+		query.setString(0, username);
+		query.setString(1, password);
+		List<User> list = query.list();
+		if (list.isEmpty())
+			return null;
+		return list.get(0);
 	}
 
 }

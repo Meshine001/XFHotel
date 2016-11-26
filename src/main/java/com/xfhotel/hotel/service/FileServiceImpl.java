@@ -1,0 +1,57 @@
+package com.xfhotel.hotel.service;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+/**
+ * 
+ * @author Ming
+ *
+ */
+@Service
+public class FileServiceImpl implements FileService {
+
+	@Override
+	public boolean removeFile(String path) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String saveFile(MultipartFile file, String path) {
+		String type = null;// 文件类型
+		String fileName = file.getOriginalFilename();// 文件原名称
+		type = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length())
+				: null;
+		if (type != null) {
+			if ("GIF".equals(type.toUpperCase()) || "PNG".equals(type.toUpperCase())
+					|| "JPG".equals(type.toUpperCase())) {
+				UUID uuid = UUID.randomUUID();
+				StringBuffer sb = new StringBuffer();
+				sb.append(uuid).append(".").append(type);
+				File dir = new File(path + "images/");
+				if (!dir.exists()) {
+					dir.mkdir();
+				}
+				try {
+					file.transferTo(new File(path+"images/" + sb.toString()));
+					return new StringBuffer(sb.toString()).toString();
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return null;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+		return null;
+	}
+
+}
