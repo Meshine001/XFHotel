@@ -36,7 +36,7 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate);
 
-		return "home";
+		return "/admin/dashboard";
 	}
 	
 	@RequestMapping(value = "/json", method = RequestMethod.GET)
