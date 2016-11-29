@@ -18,9 +18,12 @@ public class AdminController {
 	
 	
 	@RequestMapping("")
-	public String admin(){
-		
-		return "admin/admin";
+	public String admin(HttpSession session){
+		User u = (User) session.getAttribute("admin");
+		if(null == u){
+			return "admin/login";
+		}
+		return "admin/dashboard";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
