@@ -1,4 +1,4 @@
-package com.xfhotel.hotel.dao;
+package com.xfhotel.hotel.dao.impl;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.xfhotel.hotel.dao.UserDAO;
 import com.xfhotel.hotel.entity.User;
 
 @Repository
@@ -23,21 +24,21 @@ public class UserDAOImpl implements UserDAO {
 	public void addUser(User u) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.persist(u);
-		logger.info("添加用户成功：" + u);
+		logger.info("娣诲姞鐢ㄦ埛鎴愬姛锛�" + u);
 	}
 
 	@Override
 	public void updateUser(User u) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.update(u);
-		logger.info("更新用户成功：" + u);
+		logger.info("鏇存柊鐢ㄦ埛鎴愬姛锛�" + u);
 	}
 
 	@Override
 	public List<User> listUsers() {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<User> list = session.createQuery("from User").list();
-		logger.info("查询所有用户");
+		logger.info("鏌ヨ鎵�鏈夌敤鎴�");
 		for (User u : list) {
 			logger.info("" + u);
 		}
@@ -48,7 +49,7 @@ public class UserDAOImpl implements UserDAO {
 	public User getUserById(long id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		User u = (User) session.load(User.class, new Long(id));
-		logger.info("通过Id查询:" + u);
+		logger.info("閫氳繃Id鏌ヨ:" + u);
 		return u;
 	}
 
@@ -59,7 +60,7 @@ public class UserDAOImpl implements UserDAO {
 		if (null != u) {
 			session.delete(u);
 		}
-		logger.info("删除用户:" + u);
+		logger.info("鍒犻櫎鐢ㄦ埛:" + u);
 	}
 
 	@Override

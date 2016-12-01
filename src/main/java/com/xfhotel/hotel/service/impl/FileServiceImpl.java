@@ -1,4 +1,4 @@
-package com.xfhotel.hotel.service;
+package com.xfhotel.hotel.service.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.xfhotel.hotel.service.FileService;
 
 /**
  * 
@@ -23,8 +25,8 @@ public class FileServiceImpl implements FileService {
 
 	@Override
 	public String saveFile(MultipartFile file, String path) {
-		String type = null;// 文件类型
-		String fileName = file.getOriginalFilename();// 文件原名称
+		String type = null;// 鏂囦欢绫诲瀷
+		String fileName = file.getOriginalFilename();// 鏂囦欢鍘熷悕绉�
 		type = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length())
 				: null;
 		if (type != null) {

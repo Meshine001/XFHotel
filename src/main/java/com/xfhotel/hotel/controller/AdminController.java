@@ -36,4 +36,5 @@ public class AdminController {
 		session.setAttribute(Constants.ADMIN_SESSION_ATTR, u);
 		return "/admin/dashboard";
 	}
+	
 }
