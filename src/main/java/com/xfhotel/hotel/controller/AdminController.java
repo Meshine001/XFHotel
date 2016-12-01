@@ -33,4 +33,5 @@ public class AdminController {
 		session.setAttribute("admin", u);
 		return "admin/dashboard";
 	}
+	
 }

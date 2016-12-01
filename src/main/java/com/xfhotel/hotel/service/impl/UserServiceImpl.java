@@ -1,4 +1,4 @@
-package com.xfhotel.hotel.service;
+package com.xfhotel.hotel.service.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.UserDAO;
 import com.xfhotel.hotel.entity.User;
+import com.xfhotel.hotel.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{
