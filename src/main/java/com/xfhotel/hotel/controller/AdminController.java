@@ -25,17 +25,15 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="/login",method = RequestMethod.GET)
-	public String loginPage(@RequestParam("next")Optional<String> next){
-		return "/login";
+	public String loginPage(){
+		return "/admin/login";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	 public String login(@RequestParam("next")Optional<String> next,HttpSession session){
-		Optional<String> username = next.of("username");
-		Optional<String> password = next.of("password");
-		User u = userService.getUser(username.get(), password.get());
-		if(null == u) return "/login";
+	 public String login(User user,HttpSession session){
+		User u = userService.getUser(user.getUsername(),user.getPassword());
+		if(null == u) return "/admin/login";
 		session.setAttribute(Constants.ADMIN_SESSION_ATTR, u);
-		return "redirect:".concat(next.orElse("/"));
+		return "/admin/dashboard";
 	}
 }
