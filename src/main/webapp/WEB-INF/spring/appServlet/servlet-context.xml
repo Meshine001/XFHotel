@@ -28,6 +28,19 @@
 
 	<context:component-scan base-package="com.xfhotel.hotel" />
 
+	<interceptors>
+		<beans:bean
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+			<interceptor>
+				<mapping path="/**"/>
+				<beans:bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor"/>
+			</interceptor>
+		<interceptor>
+			<mapping path="/admin/**" />
+			<exclude-mapping path="/admin/login"/>
+			<beans:bean class="com.xfhotel.hotel.interceptor.AdminLoginInterceptor"/>
+		</interceptor>
+	</interceptors>
 
 	<!-- JDBC Data Source. It is assumed you have MySQL running on server port 
 		3306 with username root and password. Change below if it's not the case -->
