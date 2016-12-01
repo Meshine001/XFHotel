@@ -10,5 +10,5 @@ public interface UserDAO {
 	public List<User> listUsers();
 	public User getUserById(long id);
 	public void removeUser(long id);
-	
+	public User getUser(String username,String password);
 }
