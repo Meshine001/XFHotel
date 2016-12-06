@@ -4,4 +4,5 @@ import com.xfhotel.hotel.entity.Apartment;
 
 public interface ApartmentService {
 	public String Add(Apartment apartment);
+	public Apartment findById(long id);
 }

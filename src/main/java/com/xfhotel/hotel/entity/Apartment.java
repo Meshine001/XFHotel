@@ -28,19 +28,25 @@ public class Apartment {
 	//coordinate
 	private long latitude; //for map
 	private long longitude;
+	
 	@OneToMany
-	@JoinColumn(name="apartmentId")
+	@JoinColumn(name="apartment_id")
 	public Set<Room> rooms; //
+	
 	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
 	@JoinTable(name="t_apartment_facility",
-		joinColumns={@JoinColumn(name="apartmentId")},
-		inverseJoinColumns={@JoinColumn(name="facilityId")})
+		joinColumns={@JoinColumn(name="apartment_id")},
+		inverseJoinColumns={@JoinColumn(name="facility_id")})
 	public Set<Facility> facilities; //
-	@OneToMany
-	@JoinColumn(name="apartmentId")
+	
+	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
+	@JoinTable(name="t_apartment_feature",
+		joinColumns={@JoinColumn(name="apartment_id")},
+		inverseJoinColumns={@JoinColumn(name="feature_id")})
 	public Set<Feature> features;//label for apartment
+	
 	@OneToMany
-	@JoinColumn(name="apartmentId")
+	@JoinColumn(name="apartment_id")
 	public Set<Price> prices;//
 	
 	private String type; // hotel ,short ;;;;together,sigle
@@ -53,26 +59,6 @@ public class Apartment {
 	private String description;//enviroment,transportation,etc.
 
 	//private Set<File> pics;//
-	
-	public Apartment(long latitude, long longitude, Set<Room> rooms, Set<Facility> facilities, Set<Feature> features,
-			Set<Price> prices, String type, String address, String floor, String direction, double square,
-			String capacity, String layout, String description) {
-		super();
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.rooms = rooms;
-		this.facilities = facilities;
-		this.features = features;
-		this.prices = prices;
-		this.type = type;
-		this.address = address;
-		this.floor = floor;
-		this.direction = direction;
-		this.square = square;
-		this.capacity = capacity;
-		this.layout = layout;
-		this.description = description;
-	}
 
 	public Apartment() {
 		// TODO Auto-generated constructor stub

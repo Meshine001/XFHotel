@@ -46,7 +46,7 @@
 							<div class="title">控制面板</div>
 					</a></li>
 
-					<li><a href="./admin/apartment/init">
+					<li><a href="<%=request.getContextPath()%>/admin/apartment/admin/apartment/init">
 							<div class="icon">
 								<i class="fa fa-bed" aria-hidden="true"></i>
 							</div>

@@ -2,9 +2,14 @@ package com.xfhotel.hotel.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +25,8 @@ public class Room {
 	//facilities
 	//pictures
 	@Id
-	@GenericGenerator(name = "generator", strategy = "identity ")
+	@GeneratedValue(generator="apartmentgenerator")
+	@GenericGenerator(name="apartmentgenerator",strategy="increment")
 	private long id;
 	
 	@ManyToOne
@@ -28,23 +34,21 @@ public class Room {
 	@OneToMany
 	@JoinColumn(name="roomId")
 	public Set<Price> prices;//
+	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
+	@JoinTable(name="t_room_facility",
+		joinColumns={@JoinColumn(name="room_id")},
+		inverseJoinColumns={@JoinColumn(name="facility_id")})
+	public Set<Facility> facilities; //
 	
 	private double Square;//
 	private String direction;//
 	private String capacity;//
 	private String description;//
 	
-	public Room(Apartment apartment, Set<Price> prices, double square, String direction, String capacity,
-			String description) {
-		super();
-		this.apartment = apartment;
-		this.prices = prices;
-		Square = square;
-		this.direction = direction;
-		this.capacity = capacity;
-		this.description = description;
+	public Room() {
+		// TODO Auto-generated constructor stub
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -86,6 +90,14 @@ public class Room {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Set<Facility> getFacilities() {
+		return facilities;
+	}
+
+	public void setFacilities(Set<Facility> facilities) {
+		this.facilities = facilities;
 	}
 	
 }

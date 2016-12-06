@@ -23,4 +23,11 @@ public class ApartmentServiceImpl implements ApartmentService {
 		return "";
 	}
 
+	@Override
+	@Transactional
+	public Apartment findById(long id) {
+		// TODO Auto-generated method stub
+		return apartmentDAO.getApartmentById(id);
+	}
+
 }
