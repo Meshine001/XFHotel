@@ -1,9 +1,12 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -21,93 +24,68 @@ public class Room {
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name="roomId")
 	private Apartment apartment;
+	@OneToMany
+	@JoinColumn(name="roomId")
+	public Set<Price> prices;//
 	
-	private double Square;//面积
-	private String capacity;//人数
-	private String direction;//房间朝向
-	private String description;//名称
+	private double Square;//
+	private String direction;//
+	private String capacity;//
+	private String description;//
 	
-	public Room(Apartment apartment, double square, String capacity, String direction, String description, int payway,
-			int price) {
+	public Room(Apartment apartment, Set<Price> prices, double square, String direction, String capacity,
+			String description) {
 		super();
 		this.apartment = apartment;
+		this.prices = prices;
 		Square = square;
+		this.direction = direction;
 		this.capacity = capacity;
-		this.direction = direction;
-		this.description = description;
-		this.payway = payway;
-		this.price = price;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public String getDirection() {
-		return direction;
-	}
-
-	public void setDirection(String direction) {
-		this.direction = direction;
-	}
-
-	private int payway;//支付方式
-	private int price;//价格基准
-	//private Set<Files> pictures;//参考图片
 	
-
-	public String getCapacity() {
-		return capacity;
-	}
-
-	public double getSquare() {
-		return Square;
-	}
-
-	public void setSquare(double square) {
-		Square = square;
-	}
-
-	public void setCapacity(String capacity) {
-		this.capacity = capacity;
-	}
-
-	public int getPayway() {
-		return payway;
-	}
-
-	public void setPayway(int payway) {
-		this.payway = payway;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
 	public long getId() {
 		return id;
 	}
-
+	public void setId(long id) {
+		this.id = id;
+	}
 	public Apartment getApartment() {
 		return apartment;
 	}
-
 	public void setApartment(Apartment apartment) {
 		this.apartment = apartment;
 	}
-
-	public void setId(long id) {
-		this.id = id;
+	public Set<Price> getPrices() {
+		return prices;
+	}
+	public void setPrices(Set<Price> prices) {
+		this.prices = prices;
+	}
+	public double getSquare() {
+		return Square;
+	}
+	public void setSquare(double square) {
+		Square = square;
+	}
+	public String getDirection() {
+		return direction;
+	}
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+	public String getCapacity() {
+		return capacity;
+	}
+	public void setCapacity(String capacity) {
+		this.capacity = capacity;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

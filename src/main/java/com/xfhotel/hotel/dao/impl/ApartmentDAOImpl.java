@@ -1,5 +1,6 @@
 package com.xfhotel.hotel.dao.impl;
 
+
 import java.util.List;
 
 import org.hibernate.Session;
@@ -24,7 +25,7 @@ public class ApartmentDAOImpl implements ApartmentDAO {
 		// TODO Auto-generated method stub
 		try {
 			Session session = this.sessionFactory.getCurrentSession();
-			session.persist(apartment);
+			session.saveOrUpdate(apartment);
 		} catch (Exception e) {
 			return 0;
 		}
@@ -47,7 +48,7 @@ public class ApartmentDAOImpl implements ApartmentDAO {
 	public List<Apartment> listApartments() {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Apartment> list = session.createQuery("from t_apartment").list();
+		List<Apartment> list = session.createQuery("from Apartment").list();
 		return list;
 	}
 
