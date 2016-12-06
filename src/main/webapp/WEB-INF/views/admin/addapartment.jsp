@@ -23,11 +23,13 @@ function addroom(){
 <body>
 	<form action="./add" method="POST">
 		<div>
-			小区名称：<input type="text" name="community" /> 房屋户型：<input type="text"
-				name="bedroom" />室<input type="text" name="livingroom" />厅<input
-				type="text" name="bathroom" />卫<input type="text" name="balcony" />阳台
+			地址：<input type="text" name="address" /> 
+			小区名称：<input type="text" name="community" /> 
+			楼号：<input type="text" name="num_building" /> 
 			楼层：第<input type="text" name="floor" />层&nbsp;共<input type="text"
-				name="totalfloor" />层 朝向： <select name="direction">
+				name="totalfloor" />层 
+			朝向： 
+			<select name="direction">
 				<option value="e">东</option>
 				<option value="se">东南</option>
 				<option value="s">南</option>
@@ -36,28 +38,29 @@ function addroom(){
 				<option value="nw">西北</option>
 				<option value="n">北</option>
 				<option value="ne">东北</option>
-			</select> 布局图：
+			</select> 
+			面积：<input type="text" name="square" />
+			人数：<input type="text" name="capacity" />
+			房屋户型：<input type="text"
+				name="bedroom" />室<input type="text" name="livingroom" />厅<input
+				type="text" name="bathroom" />卫<input type="text" name="balcony" />阳台
+			备注：<input type="text" name="description">
+			布局图：
+			出租类型：<select name="type1">
+				<option value="1">酒店型公寓</option>
+				<option value="2">短租型公寓</option>
+			</select>
+			<select name="type2">
+				<option value="1">单租型</option>
+				<option value="2">合租型</option>
+				<option value="3">混合型</option>
+			</select>
 		</div>
-		<div>设施：</div>
-		<div>
-			<c:forEach items="${roomList}" var="room" varStatus="p">
-				<div>
-					名称：<input type="text" name="description" />
-					朝向： <select name="r_direction">
-						<option value="e">东</option>
-						<option value="se">东南</option>
-						<option value="s">南</option>
-						<option value="sw">西南</option>
-						<option value="w">西</option>
-						<option value="nw">西北</option>
-						<option value="n">北</option>
-						<option value="ne">东北</option>
-					</select> 面积：<input type="text" name="square" /> 人数：<input type="text"
-						name="capacity" /> 价格：<input type="text" name="price" /> 支付方式：
-					图片：
-				</div>
-			</c:forEach>
-			<button type="button" onclick="addroom()">新增房间</button>
+		<div>设施：
+		<c:forEach items="${lf}" var="facility" varStatus="p">
+			<input type="checkbox" name="${facility.description}" value="1" > ${facility.description }
+		</c:forEach>
+		</div>
 		</div>
 		<button type="submit">提交</button>
 	</form>
