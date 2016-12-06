@@ -38,9 +38,9 @@ public class HomeController {
 
 		return "/customer/home";
 	}
-	
+
 	@RequestMapping(value = "/json", method = RequestMethod.GET)
-	public @ResponseBody User jsonTest(){
+	public @ResponseBody User jsonTest() {
 		User u = new User();
 		u.setId(1);
 		u.setUsername("user");
@@ -49,4 +49,21 @@ public class HomeController {
 		return u;
 	}
 
+	/**
+	 * 跳转注册页面
+	 * @return
+	 */
+	@RequestMapping(value = "reg", method = RequestMethod.GET)
+	public String regPage() {
+		return "/customer/register";
+	}
+
+	/**
+	 * 跳转登录页面
+	 * @return
+	 */
+	@RequestMapping(value = "login", method = RequestMethod.GET)
+	public String loginPage() {
+		return "/customer/login";
+	}
 }

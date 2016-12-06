@@ -6,7 +6,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>青舍公寓-西安租房_西安合租</title>
+<title>青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="<%=basePath%>/dist/customer/css/bootstrap.css"
@@ -58,17 +58,17 @@ body {
 						class="icon-bar"></span> <span class="icon-bar"></span>
 					</a>
 					<h1 class="brand">
-						<a href="#top">青舍公寓</a>
+						<a href="#top">青舍都市公寓</a>
 					</h1>
 					<nav class="pull-right nav-collapse collapse">
 						<ul id="menu-main" class="nav">
 							<li><a title="home" href="">首页</a></li>
-							<li><a title="services" href="#services">在线找房</a></li>
-							<li><a title="news" href="#news">青舍生活</a></li>
-							<li><a title="team" href="#team">服务中心</a></li>
-							<li><a title="contact" href="#contact">在线管家</a></li>
-							<li><a title="login">登录</a></li>
-							<li><a title="register">注册</a></li>
+							<li><a title="hotel" href="">酒店型公寓</a></li>
+							<li><a title="day-hotel" href="">短租型公寓</a></li>
+							<li><a title="search" href="">在线找房</a></li>
+							<li><a title="story" href="">青客生活</a></li>
+							<li><a title="login" href="<%=basePath%>/login">登录</a></li>
+							<li><a title="register" href="<%=basePath%>/reg">注册</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -79,7 +79,7 @@ body {
 	<div id="headerwrap">
 		<header class="clearfix">
 			<h1>
-				<span>青舍公寓</span> We make world a beautiful place.
+				<span>青舍都市公寓</span> We make world a beautiful place.
 			</h1>
 			<div class="container">
 				<div class="row">
