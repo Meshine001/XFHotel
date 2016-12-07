@@ -22,4 +22,11 @@ public class FeatureServiceImpl implements FeatureService {
 		// TODO Auto-generated method stub
 		return featureDAO.listFeatures();
 	}
+
+	@Override
+	@Transactional
+	public Feature findById(Long id) {
+		// TODO Auto-generated method stub
+		return featureDAO.findById(id);
+	}
 }

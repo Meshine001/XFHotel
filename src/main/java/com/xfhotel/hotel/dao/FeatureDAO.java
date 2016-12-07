@@ -6,5 +6,7 @@ import com.xfhotel.hotel.entity.Feature;
 
 
 public interface FeatureDAO {
-	public List<Feature> listFeatures(); 
+	public List<Feature> listFeatures();
+
+	public Feature findById(Long id); 
 }

@@ -23,4 +23,11 @@ public class FacilityServiceImpl implements FacilityService {
 		return facilityDAO.listFacilities();
 	}
 
+	@Override
+	@Transactional
+	public Facility findById(Long id) {
+		// TODO Auto-generated method stub
+		return facilityDAO.findById(id);
+	}
+
 }

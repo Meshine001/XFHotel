@@ -27,4 +27,12 @@ public class FeatureDAOImpl implements FeatureDAO {
 		return list;
 	}
 
+	@Override
+	public Feature findById(Long id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		Feature feature = (Feature) session.load(Feature.class, new Long(id));
+		return feature;
+	}
+
 }

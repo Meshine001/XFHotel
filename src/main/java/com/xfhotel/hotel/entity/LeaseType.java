@@ -15,7 +15,7 @@ public class LeaseType {
 	private long id;
 	private String description;
 	@OneToMany
-	@JoinColumn(name="leasetypeId")
+	@JoinColumn(name="leasetype_id")
 	private Set<Price> prices;
 	
 	public LeaseType(String description, Set<Price> prices) {

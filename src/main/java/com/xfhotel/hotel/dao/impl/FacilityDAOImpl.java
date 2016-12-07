@@ -25,4 +25,12 @@ public class FacilityDAOImpl implements FacilityDAO {
 		return list;
 	}
 
+	@Override
+	public Facility findById(long id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		Facility facility = (Facility) session.load(Facility.class, new Long(id));
+		return facility;
+	}
+
 }

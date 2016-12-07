@@ -48,29 +48,19 @@
 			</div>
 			<div>
 				特色：
-				<c:forEach items="${lfea}" var="feature" varStatus="p">
-					<input type="checkbox" name="${feature.description}" value="1"> ${feature.description }
+				<c:forEach items="${l_feature}" var="feature" varStatus="p">
+					<input type="checkbox" name="feature" value="${feature.id}"> ${feature.description }
 				</c:forEach>
 			</div>
 			<div>
 				备注：<input type="text" name="description">
 			</div>
 			<div>布局图：</div>
-			<div>
-				出租类型：<select name="type1">
-					<option value="1">酒店型公寓</option>
-					<option value="2">短租型公寓</option>
-				</select> <select name="type2">
-					<option value="1">单租型</option>
-					<option value="2">合租型</option>
-					<option value="3">混合型</option>
-				</select>
-			</div>
 		</div>
 		<div>
 			设施：
-			<c:forEach items="${lf}" var="facility" varStatus="p">
-				<input type="checkbox" name="${facility.description}" value="1"> ${facility.description }
+			<c:forEach items="${l_facility}" var="facility" varStatus="p">
+				<input type="checkbox" name="facility" value="${facility.id}"> ${facility.description }
 		</c:forEach>
 		</div>
 		<div>
@@ -78,6 +68,73 @@
 			<div>
 				总房间数：<input type="text" name="num_room">
 			</div>
+		</div>
+		<script type="text/javascript">
+			var type1 = 0;
+			var type2 = 0;
+			document.getElementById("lease").style.display = "none";
+			document.getElementById("leasesub").style.display = "none";
+			function type1change(op) {
+				if (op == 1) {
+					document.getElementById("leasesub").style.display = "";
+				} else {
+					document.getElementById("leasesub").style.display = "none";
+				}
+			}
+			function type2change(op) {
+				if (op == 1)
+					document.getElementById("lease").style.display = "";
+				if (op == 2)
+					document.getElementById("lease").style.display = "none";
+				if (op == 3)
+					document.getElementById("lease").style.display = "";
+			}
+		</script>
+
+		<div>
+			出租类型：<select name="type1"
+				onchange="type1change(this.options[this.options.selectedIndex].value)">
+				<option value="0">请选择</option>
+				<option value="1">酒店型公寓</option>
+				<option value="2">短租型公寓</option>
+			</select> <select name="type2"
+				onchange="type2change(this.options[this.options.selectedIndex].value)">
+				<option value="0">请选择</option>
+				<option value="1">单租型</option>
+				<option value="2">合租型</option>
+				<option value="3">混合型</option>
+			</select>
+		</div>
+		<div id="lease" style="display: none">
+			<table>
+				<tr>
+					<td>选择</td>
+					<td>出租类型</td>
+					<td>出租价格</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="daytype"></td>
+					<td>天</td>
+					<td><input type="text" name="dayprice"></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="weektype"></td>
+					<td>周</td>
+					<td><input type="text" name="weekprice"></td>
+				</tr>
+				<div id="leasesub" style="display: none">
+				<tr>
+					<td><input type="checkbox" name="monthtype"></td>
+					<td>月</td>
+					<td><input type="text" name="monthprice"></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="yeartype"></td>
+					<td>年</td>
+					<td><input type="text" name="yearprice"></td>
+				</tr>
+				</div>
+			</table>
 		</div>
 		<button type="submit">提交</button>
 	</form>
