@@ -32,7 +32,7 @@ public class Room {
 	@ManyToOne
 	private Apartment apartment;
 	@OneToMany
-	@JoinColumn(name="roomId")
+	@JoinColumn(name="room_id")
 	public Set<Price> prices;//
 	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
 	@JoinTable(name="t_room_facility",

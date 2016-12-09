@@ -69,17 +69,35 @@
 				总房间数：<input type="text" name="num_room">
 			</div>
 		</div>
+		<script type="text/javascript"
+			src="<%=request.getContextPath()%>/dist/commons/jquery/jquery-3.1.1.js"></script>
 		<script type="text/javascript">
-			var type1 = 0;
-			var type2 = 0;
 			document.getElementById("lease").style.display = "none";
-			document.getElementById("leasesub").style.display = "none";
 			function type1change(op) {
-				if (op == 1) {
-					document.getElementById("leasesub").style.display = "";
-				} else {
-					document.getElementById("leasesub").style.display = "none";
-				}
+				$.ajax({
+					async : false,
+					cache : false,
+					type : 'POST',
+					dataType : 'json',
+					data : {'apartmenttypeid':op},
+					url : "<%=request.getContextPath()%>/admin/apartment/getleasetype",//请求的action路径
+					error : function() {//请求失败处理函数
+						alert("获取数据失败！");
+					},
+					success : function(data) {
+						 var leasetypes = data.leasetype;
+						 var leasetypeids = data.leasetypeid;
+						 var htmltext = "";
+						 for( var i in leasetypes){
+						 	var ids = leasetypeids[i];
+						 	var types = leasetypes[i];
+						 	htmltext = htmltext +"<div>";
+						 	htmltext = htmltext + types +"<input type='text' name='leasetypes" + ids +"'>";	
+						 	htmltext = htmltext +"</div>";
+						 }
+						 $("#lease").html(htmltext);
+					}
+				});
 			}
 			function type2change(op) {
 				if (op == 1)
@@ -92,12 +110,14 @@
 		</script>
 
 		<div>
-			出租类型：<select name="type1"
+			出租类型：<select name="apartmenttype"
 				onchange="type1change(this.options[this.options.selectedIndex].value)">
 				<option value="0">请选择</option>
-				<option value="1">酒店型公寓</option>
-				<option value="2">短租型公寓</option>
-			</select> <select name="type2"
+				<c:forEach items="${l_apartmenttype}" var="apartmenttype"
+					varStatus="p">
+					<option value="${apartmenttype.id }">${apartmenttype.description }</option>
+				</c:forEach>
+			</select> <select name="type"
 				onchange="type2change(this.options[this.options.selectedIndex].value)">
 				<option value="0">请选择</option>
 				<option value="1">单租型</option>
@@ -105,36 +125,7 @@
 				<option value="3">混合型</option>
 			</select>
 		</div>
-		<div id="lease" style="display: none">
-			<table>
-				<tr>
-					<td>选择</td>
-					<td>出租类型</td>
-					<td>出租价格</td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" name="daytype"></td>
-					<td>天</td>
-					<td><input type="text" name="dayprice"></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" name="weektype"></td>
-					<td>周</td>
-					<td><input type="text" name="weekprice"></td>
-				</tr>
-				<div id="leasesub" style="display: none">
-				<tr>
-					<td><input type="checkbox" name="monthtype"></td>
-					<td>月</td>
-					<td><input type="text" name="monthprice"></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" name="yeartype"></td>
-					<td>年</td>
-					<td><input type="text" name="yearprice"></td>
-				</tr>
-				</div>
-			</table>
+		<div id="lease" style="display:none;">
 		</div>
 		<button type="submit">提交</button>
 	</form>

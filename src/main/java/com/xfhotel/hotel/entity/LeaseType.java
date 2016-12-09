@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -14,10 +15,27 @@ public class LeaseType {
 	@Id
 	private long id;
 	private String description;
+	
 	@OneToMany
 	@JoinColumn(name="leasetype_id")
 	private Set<Price> prices;
 	
+	@ManyToOne
+	private ApartmentType apartmentType;
+	
+	
+	public LeaseType() {
+		super();
+	}
+
+	public ApartmentType getApartmentType() {
+		return apartmentType;
+	}
+
+	public void setApartmentType(ApartmentType apartmentType) {
+		this.apartmentType = apartmentType;
+	}
+
 	public LeaseType(String description, Set<Price> prices) {
 		super();
 		this.description = description;

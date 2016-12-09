@@ -23,4 +23,11 @@ public class LeaseTypeServiceImpl implements LeaseTypeService {
 		return leaseTypeDAO.listLeaseTypes();
 	}
 
+	@Override
+	@Transactional
+	public List findApartmentTypeLeases(long id) {
+		// TODO Auto-generated method stub
+		return leaseTypeDAO.findApartmentTypeLeases(id);
+	}
+
 }

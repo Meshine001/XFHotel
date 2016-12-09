@@ -1,16 +1,21 @@
 package com.xfhotel.hotel.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "t_price")
 public class Price {
 	@Id
+	@GeneratedValue(generator="apartmentgenerator")
+	@GenericGenerator(name="apartmentgenerator",strategy="increment")
 	private long id;
 	private double price;
 	@ManyToOne

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -49,6 +50,9 @@ public class Apartment {
 	@JoinColumn(name="apartment_id")
 	public Set<Price> prices;//
 	
+	@ManyToOne
+	private ApartmentType apartmentType;
+	
 	private String type; // hotel ,short ;;;;together,sigle
 	private String address;//address : cell : num_building
 	private String floor;//current floor : total floor
@@ -62,6 +66,14 @@ public class Apartment {
 
 	public Apartment() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public ApartmentType getApartmentType() {
+		return apartmentType;
+	}
+
+	public void setApartmentType(ApartmentType apartmentType) {
+		this.apartmentType = apartmentType;
 	}
 
 	public long getId() {

@@ -7,30 +7,30 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.xfhotel.hotel.dao.LeaseTypeDAO;
+import com.xfhotel.hotel.dao.ApartmentTypeDAO;
+import com.xfhotel.hotel.entity.ApartmentType;
 import com.xfhotel.hotel.entity.Facility;
-import com.xfhotel.hotel.entity.LeaseType;
 
 @Repository
-public class LeaseTypeDAOImpl implements LeaseTypeDAO {
+public class ApartmentTypeDAOImpl implements ApartmentTypeDAO{
 
 	@Autowired
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	@Override
-	public List<LeaseType> listLeaseTypes() {
+	public List<ApartmentType> listApartmentTypes() {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		List<LeaseType> list = session.createQuery("from LeaseType").list();
+		List<ApartmentType> list = session.createQuery("from ApartmentType").list();
 		return list;
 	}
 
 	@Override
-	public List findApartmentTypeLeases(long id) {
+	public ApartmentType findById(Long id) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		List<LeaseType> list = 	session.createQuery("from LeaseType where apartmentType.id=:id").setLong("id", id).list();
-		return null;
+		ApartmentType apartmentType = (ApartmentType) session.createQuery("from ApartmentType where id=:id").setLong("id", id).list().get(0);
+		return apartmentType;
 	}
 
 }
