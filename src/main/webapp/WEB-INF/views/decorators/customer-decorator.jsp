@@ -41,18 +41,21 @@
 					<div class="e_name">
 						<div class="y_100"></div>
 						<img
-							src="http://mf.znimg.com/public/images/face-90x90.png?r=90x90_1481006350"
+							src="<%=basePath%>/images/${c.details.avatar}"
 							id="my-face" width="90" height="90"
-							onclick="location.href='/home/ziliao.html'">
+							onclick="location.href='<%=basePath%>/customer/details'">
 						<p class="e_name_m">
-							187****9465<a href="/logout.php" title="退出登录">退出</a>
+							${c.details.nick}<a href="/logout.php" title="退出登录">退出</a>
 						</p>
+			
 						<p class="e_name_n">
-							您还没有撰写您的个性宣言，请先<a href="/home/ziliao.html">完善资料</a>吧~
+							<c:if test="${c.details.sex == '' }">
+							您还没有撰写您的个性宣言，请先<a href="<%=basePath%>/customer/details">完善资料</a>吧~
+							</c:if>
 						</p>
 					</div>
 					<ul class="e_list">
-						<li id="wodeyuyue" class="e_list_on">
+						<li id="wodeyuyue" class='<c:if test="${page == 'reservation' }">e_list_on</c:if>'>
 							<p>我的预约</p> <i></i>
 						</li>
 						<!-- <li id="wodegongyu" class="">
@@ -61,10 +64,10 @@
 		<li id="jiaofei" class="">
 			<p>缴费</p><i></i>
 		</li>	 -->
-						<li id="wodeshoucang" class="">
+						<li id="wodeshoucang" class='<c:if test="${page == '' }">e_list_on</c:if>'>
 							<p>我的收藏</p> <i></i>
 						</li>
-						<li id="youhuiquan" class="">
+						<li id="youhuiquan" class='<c:if test="${page == '' }">e_list_on</c:if>'>
 							<p>我的优惠券</p> <i></i>
 						</li>
 						<li id="tuiguang" class="">
@@ -73,7 +76,7 @@
 						<li id="wodetousu" class="">
 							<p>我的投诉</p> <i></i>
 						</li>
-						<li id="gerenziliao" class="">
+						<li id="gerenziliao" class='<c:if test="${page == 'details' }">e_list_on</c:if>'>
 							<p>个人资料</p> <i></i>
 						</li>
 						<li id="zhanghaoshezhi" class="">

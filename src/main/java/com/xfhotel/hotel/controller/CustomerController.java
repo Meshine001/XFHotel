@@ -26,6 +26,7 @@ public class CustomerController {
 		Customer c = customerService.login(tel, password);
 		if(c != null){
 			session.setAttribute("c", c);
+			session.setAttribute(Constants.PAGE, Constants.PAGE_DETAILS);
 			return "/customer/details";
 		}
 		
@@ -41,6 +42,7 @@ public class CustomerController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		session.setAttribute(Constants.PAGE, Constants.PAGE_DETAILS);
 		return  "/customer/details";
 	}
 	
@@ -64,8 +66,9 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/details", method = RequestMethod.GET)
-	public String detailsPage(Model model){
+	public String detailsPage(Model model,HttpSession session){
 		model.addAttribute("title", "我的资料");
+		session.setAttribute(Constants.PAGE, Constants.PAGE_DETAILS);
 		return "/customer/details";
 	}
 }
