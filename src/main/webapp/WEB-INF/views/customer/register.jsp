@@ -28,9 +28,9 @@
 			<div class="box-main">
 				<dl>
 					<dd class="box-main-left">
-						<form>
+						<form action="<%=basePath%>/customer/reg" method="post">
 							<ul>
-								<li><input type="tel" id="tel" placeholder="常用手机" onblur=""></li>
+								<li><input type="tel" id="tel" placeholder="常用手机" onblur="" name="tel"></li>
 								<li><input type="text" id="volidate-code"
 									placeholder="请输入验证码"> <input type="button"
 									id="first-code" value="获取验证码"></li>
