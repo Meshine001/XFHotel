@@ -1,10 +1,15 @@
 package com.xfhotel.hotel.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.xfhotel.hotel.common.Constants;
 
 @Entity
 @Table(name = "t_customer")
@@ -14,6 +19,10 @@ public class Customer {
 	private int id;
 	private String tel;
 	private String password;
+	
+	@OneToOne
+	@JoinColumn(name = "details_id",unique = true)
+	private CustomerDetails details;
 	
 	public Customer() {
 		super();
@@ -47,11 +56,19 @@ public class Customer {
 		this.password = password;
 	}
 
+	
 
-	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", tel=" + tel + ", password=" + password + "]";
+	public CustomerDetails getDetails() {
+		return details;
 	}
+
+
+	public void setDetails(CustomerDetails details) {
+		this.details = details;
+	}
+
+
+
 	
 	
 }

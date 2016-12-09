@@ -57,13 +57,13 @@
 									<span class="input-group-addon" id="basic-addon1"> <i
 										class="fa fa-user" aria-hidden="true"></i></span> <input type="text"
 										class="form-control" placeholder="用户名"
-										aria-describedby="basic-addon1">
+										aria-describedby="basic-addon1" name="user.username">
 								</div>
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon2"> <i
 										class="fa fa-key" aria-hidden="true"></i></span> <input type="text"
 										class="form-control" placeholder="密  码"
-										aria-describedby="basic-addon2">
+										aria-describedby="basic-addon2" name="user.password">
 								</div>
 								<div class="text-center">
 									<input type="submit" class="btn btn-success btn-submit"
