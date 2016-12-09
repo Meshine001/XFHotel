@@ -28,9 +28,9 @@
 			<div class="box-main">
 				<dl>
 					<dd class="box-main-left">
-						<form>
+						<form action="<%=basePath%>/customer/login" method="post">
 							<ul>
-								<li><input type="tel" id="tel" placeholder="输入手机号"
+								<li><input name="tel" type="tel" id="tel" placeholder="输入手机号"
 									onblur=""></li>
 
 								<li><input type="password" value="" name="password"
