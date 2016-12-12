@@ -33,7 +33,12 @@
 						<!-- a title="修改手机号" class="red" style="cursor:pointer;" id="change_mobile">修改手机号</a -->
 					</dd>
 				</dl>
-
+				<dl>
+					<dt>身份证：</dt>
+					<dd>
+						<input name="idcard" type="text" value="${c.details.idCard}">
+					</dd>
+				</dl>
 				<dl class="data_xb">
 					<dt>
 						性别：<INPUT type="hidden" name="sex" value="${c.details.sex}"
@@ -154,8 +159,8 @@
 					<dd>
 						<div class="e_sele e_sele2" id="select_xingzuo">
 							<span class="e_slc" id="c_text"><c:if
-									test="${c.details.constellation != ''}">${c.details.constellation}</c:if>
-								<c:if test="${c.details.constellation == ''}">请选择</c:if></span><i
+									test="${c.details.constellation != null}">${c.details.constellation}</c:if>
+								<c:if test="${c.details.constellation == null}">请选择</c:if></span><i
 								class="e_sj" style="right: -115px;"></i> <select class="e_set"
 								name="xingzuo" id="xingzuo">
 								<option value="0" selected="selected">请选择</option>
@@ -192,10 +197,10 @@
 					<dd>
 						<div class="e_sele e_sele2" id="select_jiaoyu">
 							<span class="e_slc" id="e_text"><c:if
-									test="${c.details.education != ''}">${c.details.education}</c:if>
-								<c:if test="${c.details.education == ''}">请选择</c:if></span><i class="e_sj"
-								style="right: -115px;"></i> <select class="e_set" name="jiaoyu"
-								id="jiaoyu">
+									test="${c.details.education != null}">${c.details.education}</c:if>
+								<c:if test="${c.details.education == null}">请选择</c:if></span><i
+								class="e_sj" style="right: -115px;"></i> <select class="e_set"
+								name="jiaoyu" id="jiaoyu">
 								<option value="0" selected="selected">请选择</option>
 								<option value="1">小学</option>
 								<option value="2">初中</option>
@@ -220,11 +225,12 @@
 					<dd></dd>
 				</dl>
 				<dl class="aihao">
-					<dt>
-						兴趣爱好：<input type="text" name="hobby" id="xingqu"
-							value="${c.details.hobby}">
-					</dt>
-					<dd style="display: none;">
+					<dt>兴趣爱好：</dt>
+					<dd>
+						<input type="text" name="hobby" id="xingqu"
+							value="${c.details.hobby}" style="width: 360px;">
+	
+						<!-- 
 						<ul>
 							<li class="select_xingqu" id="select_xingqu_1"
 								onclick="select_xingqu('1')"><span class="ah_list ">看书/新闻/阅读<em></em></span></li>
@@ -245,6 +251,7 @@
 							<li class="select_xingqu" id="select_xingqu_9"
 								onclick="select_xingqu('9')"><span class="ah_list ">跑步/户外运动<em></em></span></li>
 						</ul>
+					-->
 					</dd>
 				</dl>
 				<div class="cen_all_btn">
@@ -263,8 +270,9 @@
 					<a style="cursor: pointer;" title="上传头像" id="upload_button"
 						onclick="upload_face()">修改头像</a>
 				</div>
-				<input type="hidden" name="avatar" id="face_url" value="${c.details.avatar}">
-				<input type="hidden" name="customerId" value="${c.id}">
+				<input type="hidden" name="avatar" id="face_url"
+					value="${c.details.avatar}"> <input type="hidden"
+					name="customerId" value="${c.id}">
 			</div>
 		</div>
 	</form>

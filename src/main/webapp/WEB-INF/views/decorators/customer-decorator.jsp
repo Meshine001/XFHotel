@@ -22,13 +22,11 @@
 		<div class="main">
 			<div class="logo" onclick="location.href='/'"></div>
 			<div class="nav">
-
 				<ul id="nav_ul" class="nav_ul">
-					<li class="nav_on"><a href="http://www.monph.com/"
-						title="魔飞首页">首页</a></li>
-					<li><a href="/list/" title="我要找房">我要找房</a></li>
-					<li><a href="/maplist/" title="地图搜房">地图搜房</a></li>
-					<li><a href="/shenghuo/" title="青舍生活">青舍生活</a></li>
+					<li class="nav_on"><a href="../">首页</a></li>
+					<li><a href="" title="我要找房">我要找房</a></li>
+					<li><a href="" title="地图搜房">地图搜房</a></li>
+					<li><a href="" title="青舍生活">青舍生活</a></li>
 
 				</ul>
 			</div>
@@ -40,22 +38,20 @@
 				<div class="e_left">
 					<div class="e_name">
 						<div class="y_100"></div>
-						<img
-							src="<%=basePath%>/images/${c.details.avatar}"
-							id="my-face" width="90" height="90"
-							onclick="location.href='<%=basePath%>/customer/details'">
+						<img src="<%=basePath%>/images/${c.details.avatar}" id="my-face"
+							width="90" height="90">
 						<p class="e_name_m">
-							${c.details.nick}<a href="/logout.php" title="退出登录">退出</a>
+							${c.details.nick}<a href="./logout" title="退出登录">退出</a>
 						</p>
-			
 						<p class="e_name_n">
-							<c:if test="${c.details.sex == '' }">
+							<c:if test="${c.details.sex == null }">
 							您还没有撰写您的个性宣言，请先<a href="<%=basePath%>/customer/details">完善资料</a>吧~
 							</c:if>
 						</p>
 					</div>
 					<ul class="e_list">
-						<li id="wodeyuyue" class='<c:if test="${page == 'reservation' }">e_list_on</c:if>'>
+						<li id="wodeyuyue"
+							class='<c:if test="${page == 'reservation' }">e_list_on</c:if>'>
 							<p>我的预约</p> <i></i>
 						</li>
 						<!-- <li id="wodegongyu" class="">
@@ -64,23 +60,19 @@
 		<li id="jiaofei" class="">
 			<p>缴费</p><i></i>
 		</li>	 -->
-						<li id="wodeshoucang" class='<c:if test="${page == '' }">e_list_on</c:if>'>
-							<p>我的收藏</p> <i></i>
+						<li id=""
+							class='<c:if test="${page == '' }">e_list_on</c:if>'>
+							<p>我的订单</p> <i></i>
 						</li>
-						<li id="youhuiquan" class='<c:if test="${page == '' }">e_list_on</c:if>'>
-							<p>我的优惠券</p> <i></i>
+						<li id="my" class="">
+							<p>我的舍友</p> <i></i>
 						</li>
-						<li id="tuiguang" class="">
-							<p>我的推广</p> <i></i>
+						<li id="gerenziliao"
+							class='<c:if test="${page == 'details' }">e_list_on</c:if>'>
+							<a href="<%=basePath%>/customer/details"><p>个人资料</p></a><i></i>
 						</li>
-						<li id="wodetousu" class="">
+												<li id="" class="">
 							<p>我的投诉</p> <i></i>
-						</li>
-						<li id="gerenziliao" class='<c:if test="${page == 'details' }">e_list_on</c:if>'>
-							<p>个人资料</p> <i></i>
-						</li>
-						<li id="zhanghaoshezhi" class="">
-							<p>帐号设置</p> <i></i>
 						</li>
 					</ul>
 					<div class="anquan">
@@ -89,7 +81,7 @@
 						</p>
 						<!--账户安全级别只需要更改<em>的长度即可。长度为百分比。-->
 						<i class="bg_f"> <em class="bg_b" style="width: 60%;"></em>
-						</i> <a href="/home/change_password.html" title="修改密码"
+						</i> <a href="<%=basePath%>/customer/change_password" title="修改密码"
 							class="xg_pwd fr">修改密码&gt;</a>
 					</div>
 					<div class="e_ewm">

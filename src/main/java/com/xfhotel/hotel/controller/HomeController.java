@@ -36,9 +36,21 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate);
 
-		return "/customer/home";
+		return "/customer/home1";
 	}
 
+	@RequestMapping(value = "home", method = RequestMethod.GET)
+	public String home2() {
+
+		return "/customer/home";
+	}
+	
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public String list() {
+
+		return "/customer/list";
+	}
+	
 	@RequestMapping(value = "/json", method = RequestMethod.GET)
 	public @ResponseBody User jsonTest() {
 		User u = new User();

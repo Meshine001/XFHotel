@@ -11,24 +11,24 @@ import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.service.CustomerService;
 
 @Service
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	CustomerDAOImpl customerDAO;
 	@Autowired
 	CustomerDetailsDAOImpl customerDetailsDAO;
-	
+
 	@Transactional
 	@Override
 	public Customer login(String tel, String password) {
 		String hql = "from Customer where tel = ? and password = ?";
-		String[] values = {tel,password};
+		String[] values = { tel, password };
 		return customerDAO.getByHQL(hql, values);
 	}
 
 	@Transactional
 	@Override
-	public boolean register(Customer c,CustomerDetails details) {
+	public boolean register(Customer c, CustomerDetails details) {
 		try {
 			customerDetailsDAO.saveOrUpdate(details);
 			customerDAO.save(c);
@@ -37,16 +37,25 @@ public class CustomerServiceImpl implements CustomerService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
-		}	
+		}
 	}
 
 	@Transactional
 	@Override
-	public Customer modify(CustomerDetails c,int cId) {
+	public Customer modify(CustomerDetails c, int cId) {
 		// TODO Auto-generated method stub
 		customerDetailsDAO.saveOrUpdate(c);
-		
+
 		return customerDAO.get(cId);
+	}
+
+	@Transactional
+	@Override
+	public boolean checkTel(String tel) {
+		String hql = "from Customer where tel = ?";
+		String[] values = { tel };
+		Customer c = customerDAO.getByHQL(hql, values);
+		return c != null ? true : false;
 	}
 
 }

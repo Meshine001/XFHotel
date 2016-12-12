@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String basePath = request.getContextPath();
 %>
@@ -67,8 +68,14 @@ body {
 							<li><a title="day-hotel" href="">短租型公寓</a></li>
 							<li><a title="search" href="">在线找房</a></li>
 							<li><a title="story" href="">青客生活</a></li>
-							<li><a title="login" href="<%=basePath%>/login">登录</a></li>
-							<li><a title="register" href="<%=basePath%>/reg">注册</a></li>
+							<c:if test="${c.id != null }">
+								<li><a title="details" href="<%=basePath%>/customer/details"><span>${c.details.nick}</span></a></li>
+							</c:if>
+							<c:if test="${c.id == null }">
+								<li><a title="login" href="<%=basePath%>/login">登录</a></li>
+								<li><a title="register" href="<%=basePath%>/reg">注册</a></li>
+							</c:if>
+
 						</ul>
 					</nav>
 				</div>
@@ -125,12 +132,13 @@ body {
 			<div class="align">
 				<i class="icon-desktop-circled"></i>
 			</div>
-			<h1 id="folio-headline">Portfolio...</h1>
+			<h1 id="folio-headline">精选公寓</h1>
 			<div class="row">
 				<div class="span4">
 					<div class="mask2">
-						<a href="<%=basePath%>/dist/customer/img/portfolio-01.jpg" rel="prettyPhoto"><img
-							src="<%=basePath%>/dist/customer/img/portfolio-01.jpg" alt=""></a>
+						<a href="<%=basePath%>/dist/customer/img/apartment-01.jpg"
+							rel="prettyPhoto"><img
+							src="<%=basePath%>/dist/customer/img/apartment-01.jpg" alt=""></a>
 					</div>
 					<div class="inside">
 						<hgroup>
@@ -148,8 +156,9 @@ body {
 				</div>
 				<div class="span4">
 					<div class="mask2">
-						<a href="<%=basePath%>/dist/customer/img/portfolio-02.jpg" rel="prettyPhoto"><img
-							src="<%=basePath%>/dist/customer/img/portfolio-02.jpg" alt=""></a>
+						<a href="<%=basePath%>/dist/customer/img/apartment-02.jpg"
+							rel="prettyPhoto"><img
+							src="<%=basePath%>/dist/customer/img/apartment-02.jpg" alt=""></a>
 					</div>
 					<div class="inside">
 						<hgroup>
@@ -167,8 +176,9 @@ body {
 				</div>
 				<div class="span4">
 					<div class="mask2">
-						<a href="<%=basePath%>/dist/customer/img/portfolio-03.jpg" rel="prettyPhoto"><img
-							src="<%=basePath%>/dist/customer/img/portfolio-03.jpg" alt=""></a>
+						<a href="<%=basePath%>/dist/customer/img/apartment-03.jpg"
+							rel="prettyPhoto"><img
+							src="<%=basePath%>/dist/customer/img/apartment-03.jpg" alt=""></a>
 					</div>
 					<div class="inside">
 						<hgroup>
@@ -188,8 +198,9 @@ body {
 			<div class="row">
 				<div class="span4">
 					<div class="mask2">
-						<a href="<%=basePath%>/dist/customer/img/portfolio-01.jpg" rel="prettyPhoto"><img
-							src="<%=basePath%>/dist/customer/img/portfolio-03.jpg" alt=""></a>
+						<a href="<%=basePath%>/dist/customer/img/apartment-01.jpg"
+							rel="prettyPhoto"><img
+							src="<%=basePath%>/dist/customer/img/apartment-03.jpg" alt=""></a>
 					</div>
 					<div class="inside">
 						<hgroup>
@@ -207,8 +218,9 @@ body {
 				</div>
 				<div class="span4">
 					<div class="mask2">
-						<a href="<%=basePath%>/dist/customer/img/portfolio-02.jpg" rel="prettyPhoto"><img
-							src="<%=basePath%>/dist/customer/img/portfolio-01.jpg" alt=""></a>
+						<a href="<%=basePath%>/dist/customer/img/apartment-02.jpg"
+							rel="prettyPhoto"><img
+							src="<%=basePath%>/dist/customer/img/apartment-01.jpg" alt=""></a>
 					</div>
 					<div class="inside">
 						<hgroup>
@@ -226,8 +238,9 @@ body {
 				</div>
 				<div class="span4">
 					<div class="mask2">
-						<a href="<%=basePath%>/dist/customer/img/portfolio-03.jpg" rel="prettyPhoto"><img
-							src="<%=basePath%>/dist/customer/img/portfolio-02.jpg" alt=""></a>
+						<a href="<%=basePath%>/dist/customer/img/apartment-03.jpg"
+							rel="prettyPhoto"><img
+							src="<%=basePath%>/dist/customer/img/apartment-02.jpg" alt=""></a>
 					</div>
 					<div class="inside">
 						<hgroup>
@@ -320,7 +333,8 @@ body {
 			<h1>Our Blog</h1>
 			<div class="row">
 				<article class="span4 post">
-					<img class="img-news" src="<%=basePath%>/dist/customer/img/blog_img-01.jpg" alt="">
+					<img class="img-news"
+						src="<%=basePath%>/dist/customer/img/blog_img-01.jpg" alt="">
 					<div class="inside">
 						<p class="post-date">
 							<i class="icon-calendar"></i> March 17, 2013
@@ -335,7 +349,8 @@ body {
 					</div>
 				</article>
 				<article class="span4 post">
-					<img class="img-news" src="<%=basePath%>/dist/customer/img/blog_img-02.jpg" alt="">
+					<img class="img-news"
+						src="<%=basePath%>/dist/customer/img/blog_img-02.jpg" alt="">
 					<div class="inside">
 						<p class="post-date">February 28, 2013</p>
 						<h2>A bear sleeping on a tree</h2>
@@ -348,7 +363,8 @@ body {
 					</div>
 				</article>
 				<article class="span4 post">
-					<img class="img-news" src="<%=basePath%>/dist/customer/img/blog_img-03.jpg" alt="">
+					<img class="img-news"
+						src="<%=basePath%>/dist/customer/img/blog_img-03.jpg" alt="">
 					<div class="inside">
 						<p class="post-date">February 06, 2013</p>
 						<h2>A Panda playing with his baby</h2>
@@ -374,35 +390,40 @@ body {
 			<div class="row">
 				<div class="span2 offset1">
 					<div class="teamalign">
-						<img class="team-thumb img-circle" src="<%=basePath%>/dist/customer/img/portrait-1.jpg" alt="">
+						<img class="team-thumb img-circle"
+							src="<%=basePath%>/dist/customer/img/portrait-1.jpg" alt="">
 					</div>
 					<h3>Andrew</h3>
 					<div class="job-position">web designer</div>
 				</div>
 				<div class="span2">
 					<div class="teamalign">
-						<img class="team-thumb img-circle" src="<%=basePath%>/dist/customer/img/portrait-2.jpg" alt="">
+						<img class="team-thumb img-circle"
+							src="<%=basePath%>/dist/customer/img/portrait-2.jpg" alt="">
 					</div>
 					<h3>Stephen</h3>
 					<div class="job-position">web developer</div>
 				</div>
 				<div class="span2">
 					<div class="teamalign">
-						<img class="team-thumb img-circle" src="<%=basePath%>/dist/customer/img/portrait-3.jpg" alt="">
+						<img class="team-thumb img-circle"
+							src="<%=basePath%>/dist/customer/img/portrait-3.jpg" alt="">
 					</div>
 					<h3>Maria</h3>
 					<div class="job-position">graphic designer</div>
 				</div>
 				<div class="span2">
 					<div class="teamalign">
-						<img class="team-thumb img-circle" src="<%=basePath%>/dist/customer/img/portrait-4.jpg" alt="">
+						<img class="team-thumb img-circle"
+							src="<%=basePath%>/dist/customer/img/portrait-4.jpg" alt="">
 					</div>
 					<h3>John</h3>
 					<div class="job-position">project manager</div>
 				</div>
 				<div class="span2">
 					<div class="teamalign">
-						<img class="team-thumb img-circle" src="<%=basePath%>/dist/customer/img/portrait-2.jpg" alt="">
+						<img class="team-thumb img-circle"
+							src="<%=basePath%>/dist/customer/img/portrait-2.jpg" alt="">
 					</div>
 					<h3>Ashton</h3>
 					<div class="job-position">real owner</div>

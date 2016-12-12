@@ -9,6 +9,7 @@ public class Constants {
 	public static final String PAGE = "page";
 	
 	public static final String PAGE_DETAILS = "details";
-	
+	public static final String PAGE_RESERVATION = "reservation";
+	public static final String PAGE_CHANGE_PWD = "change-pwd";
 	
 }

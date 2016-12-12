@@ -30,13 +30,16 @@
 					<dd class="box-main-left">
 						<form action="<%=basePath%>/customer/reg" method="post">
 							<ul>
-								<li><input type="tel" id="tel" placeholder="常用手机" onblur="" name="tel"></li>
+								<li><input type="tel" id="tel" placeholder="常用手机"
+									name="tel">
+								<p id="tel-v">${msg}</p></li>
 								<li><input type="text" id="volidate-code"
 									placeholder="请输入验证码"> <input type="button"
 									id="first-code" value="获取验证码"></li>
 								<li><input type="password" value="" name="password"
 									id="password" placeholder="输入密码"></li>
-								<li><input type="submit" value="注册" name=""></li>
+								<li><input type="submit" value="注册" name="" id="reg-submit"
+									disabled="disabled"></li>
 							</ul>
 						</form>
 					</dd>
@@ -45,8 +48,10 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/dist/customer/js/reg-login.js"></script>
+	<script type="text/javascript"
+		src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
+	<script type="text/javascript"
+		src="<%=basePath%>/dist/customer/js/reg-login.js"></script>
 
 </body>
 </html>

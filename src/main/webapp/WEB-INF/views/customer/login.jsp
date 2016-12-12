@@ -28,14 +28,17 @@
 			<div class="box-main">
 				<dl>
 					<dd class="box-main-left">
-						<form action="<%=basePath%>/customer/login" method="post">
+						<form id="login-form" action="<%=basePath%>/customer/login"
+							method="post">
 							<ul>
-								<li><input name="tel" type="tel" id="tel" placeholder="输入手机号"
-									onblur=""></li>
+								<li><input name="tel" type="tel" id="tel"
+									placeholder="输入手机号" onblur=""></li>
 
 								<li><input type="password" value="" name="password"
 									id="password" placeholder="输入密码"></li>
-								<li><input type="submit" value="登录" name=""></li>
+								<li><p id="msg">${msg}</p></li>
+								<li><input type="submit" value="登录" name=""
+									id="login-submit"></li>
 							</ul>
 						</form>
 					</dd>
