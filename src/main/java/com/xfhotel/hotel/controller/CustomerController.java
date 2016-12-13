@@ -1,5 +1,7 @@
 package com.xfhotel.hotel.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.support.Message;
 
 @Controller
 @RequestMapping("/customer")
@@ -24,6 +27,15 @@ public class CustomerController {
 	@Autowired
 	HttpSession session;
 
+	
+	
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String loginRegPage(String forword,Model model) {
+		model.addAttribute("forword", forword);
+		return "/customer/login-reg";
+	}
+	
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout() {
 		session.removeAttribute("c");
@@ -31,48 +43,51 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(String tel, String password,Model model) {
+	public @ResponseBody Message login(String tel, String password, Model model) {
 		Customer c = customerService.login(tel, password);
 		if (c != null) {
 			session.setAttribute("c", c);
 			session.setAttribute(Constants.PAGE, Constants.PAGE_RESERVATION);
-			return "redirect:/customer/reservation";
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "登录成功");
 		} else {
-			model.addAttribute("msg", "用户或密码错误");
-			return "redirect:/login";
+			return new Message(Constants.MESSAGE_ERR_CODE, "账号或密码错误");
 		}
 
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modify(CustomerDetails c, int customerId) {
+	public @ResponseBody Message modify(CustomerDetails c, int customerId) {
 		try {
 			Customer c1 = customerService.modify(c, customerId);
 			session.setAttribute("c", c1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "内部错误");
 		}
 		session.setAttribute(Constants.PAGE, Constants.PAGE_DETAILS);
-		return "/customer/details";
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
 	}
 
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-	public String reg(String tel, String password, Model model) {
+	public @ResponseBody Message reg(String tel, String password, Model model) {
 		if (customerService.checkTel(tel)) {
-			model.addAttribute("msg", "手机号已使用");
-			return "redirect:reg";
+			return new Message(Constants.MESSAGE_ERR_CODE, "手机号已使用");
 		}
-		CustomerDetails details = new CustomerDetails(tel, Constants.DEFAULT_AVATAR);
+		CustomerDetails details = new CustomerDetails(tel, Constants.DEFAULT_AVATAR,tel);
 		Customer c = new Customer(tel, password);
+		c.setConsumptionTimes(0);
+		c.setConsumptionCount(0.00F);
 		c.setDetails(details);
+		c.setRegTime(new Date().getTime());
+		c.setLevel(0);
+		
 		if (customerService.register(c, details) == true) {
 			session.setAttribute("c", c);
-			setPage(model, "我的预约", Constants.PAGE_RESERVATION);
-			return "redirect:/customer/reservation";
-		} else {
-			return "redirect:reg";
-		}
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "注册成功");
+		} 
+		
+		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
 
 	@RequestMapping(value = "/reservation", method = RequestMethod.GET)

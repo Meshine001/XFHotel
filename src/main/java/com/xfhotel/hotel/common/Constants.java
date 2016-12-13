@@ -12,4 +12,7 @@ public class Constants {
 	public static final String PAGE_RESERVATION = "reservation";
 	public static final String PAGE_CHANGE_PWD = "change-pwd";
 	
+	public static final int MESSAGE_ERR_CODE = 0;
+	public static final int MESSAGE_SUCCESS_CODE = 1;
+	
 }

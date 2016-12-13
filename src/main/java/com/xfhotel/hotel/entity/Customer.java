@@ -36,7 +36,7 @@ public class Customer {
 	/**
 	 * 消费金额
 	 */
-	private Long consumptionCount;
+	private Float consumptionCount;
 	
 	@OneToOne
 	@JoinColumn(name = "details_id",unique = true)
@@ -116,13 +116,16 @@ public class Customer {
 	}
 
 
-	public Long getConsumptionCount() {
+	public Float getConsumptionCount() {
 		return consumptionCount;
 	}
 
 
-	public void setConsumptionCount(Long consumptionCount) {
+	public void setConsumptionCount(Float consumptionCount) {
 		this.consumptionCount = consumptionCount;
 	}
+
+
+	
 
 }
