@@ -18,7 +18,10 @@
 						编号：<input type="text" id="id" name="id">
 					</div>
 					<div>
-						类型：<input type="text" id="type" name="type">
+						类型：<select id="type" name="type">
+							<option value="primary">主卧</option>
+							<option value="secondary">次卧</option>
+						</select>
 					</div>
 					<div>
 						朝向： <select name="direction">
@@ -37,7 +40,8 @@
 					</div>
 					<div>
 						设施：
-						<c:forEach items="${l_facility}" var="facility" varStatus="p" begin="0">
+						<c:forEach items="${l_facility}" var="facility" varStatus="p"
+							begin="0">
 							<input type="checkbox" name="${facility.id}_${i}" value="1"> ${facility.description }
 						</c:forEach>
 					</div>

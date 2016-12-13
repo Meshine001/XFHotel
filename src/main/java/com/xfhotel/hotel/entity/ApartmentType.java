@@ -2,10 +2,12 @@ package com.xfhotel.hotel.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -19,11 +21,13 @@ public class ApartmentType {
 	private String description;
 	
 	@OneToMany
-	@JoinColumn(name="apartmenType_id")
+	@JoinColumn(name="apartmentType_id")
 	public Set<Apartment> apartments;
 	
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="apartmentType_id")
+	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
+	@JoinTable(name="t_apartmenttype_leasetype",
+		joinColumns={@JoinColumn(name="apartmenttype_id")},
+		inverseJoinColumns={@JoinColumn(name="leasetype_id")})
 	public Set<LeaseType> leaseTypes;
 
 	public long getId() {

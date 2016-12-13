@@ -7,16 +7,28 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.ApartmentType;
 import com.xfhotel.hotel.entity.Facility;
+import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.LeaseType;
 import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
@@ -25,6 +37,7 @@ import com.xfhotel.hotel.service.ApartmentTypeService;
 import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.LeaseTypeService;
+import com.xfhotel.hotel.service.PriceService;
 import com.xfhotel.hotel.service.RoomService;
 
 @Controller
@@ -43,24 +56,29 @@ public class ApartmentController {
 	LeaseTypeService leaseTypeService;
 	@Autowired
 	ApartmentTypeService apartmentTypeService;
+	@Autowired
+	PriceService priceService;
+	@Autowired
+	HttpSession session;
 
 	@RequestMapping(value = "/init")
 	public String addApartment(HttpServletRequest request) {
 		List l_facility = facilityService.listFacilities();
-		request.setAttribute("l_facility", l_facility);
+		session.setAttribute("l_facility", l_facility);
 		List l_feature = featureService.listFeatures();
-		request.setAttribute("l_feature", l_feature);
+		session.setAttribute("l_feature", l_feature);
 		List l_apartmenttype = apartmentTypeService.listApartmentTypes();
-		request.setAttribute("l_apartmenttype", l_apartmenttype);
+		session.setAttribute("l_apartmenttype", l_apartmenttype);
 		return "/admin/addapartment";
 	}
 
 	@RequestMapping(value = "/getleasetype", method = RequestMethod.POST)
-	public @ResponseBody HashMap getLeaseType(HttpServletRequest request, String apartmenttypeid) {
+	public @ResponseBody HashMap getLeaseType( String apartmenttypeid) {
 		ApartmentType apartmentType = apartmentTypeService.findById(Long.valueOf(apartmenttypeid));
 		ArrayList s_leaseType = new ArrayList();
 		ArrayList s_leaseTypeId = new ArrayList();
-		Iterator it = apartmentType.getLeaseTypes().iterator();
+		Set s_LeaseType = apartmentType.getLeaseTypes();
+		Iterator it = s_LeaseType.iterator();
 		while (it.hasNext()) {
 			LeaseType lt = (LeaseType) it.next();
 			s_leaseType.add(lt.getDescription());
@@ -76,7 +94,7 @@ public class ApartmentController {
 	public String add(HttpServletRequest request, String address, String community, String num_building, String floor,
 			String totalfloor, String direction, String square, String capacity, String bedroom, String livingroom,
 			String bathroom, String balcony, String description, String[] facility, String[] feature,
-			String apartmenttype, String type, String num_room) {
+			String apartmenttype, String type, String num_room, RedirectAttributes attr) {
 		Apartment apartment = new Apartment();
 		apartment.setAddress(address + "@" + community + "@" + num_building);
 		apartment.setFloor(floor + "@" + totalfloor);
@@ -110,28 +128,71 @@ public class ApartmentController {
 			Set ps = new HashSet();
 			while (itl.hasNext()) {
 				LeaseType lt = (LeaseType) itl.next();
-				if (request.getParameter("leasetypes"+lt.getId())!=null && request.getParameter("leasetypes"+lt.getId()).length()>0) {
-					Price p = new Price(Double.valueOf(request.getParameter("leasetypes"+lt.getId())), lt, apartment, null);
+				if (request.getParameter("leasetypes" + lt.getId()) != null
+						&& request.getParameter("leasetypes" + lt.getId()).length() > 0) {
+					Price p = new Price(Double.valueOf(request.getParameter("leasetypes" + lt.getId())), lt, null,
+							null);
+					priceService.add(p);
 					ps.add(p);
 				}
 			}
 			apartment.setPrices(ps);
 		} else
 			apartment.setPrices(null);
-		apartmentService.Add(apartment);
-		if (num_room.equals("0") || type.equals("1"))
-			return "/admin/addcomplete";
-		else {
-			request.setAttribute("num_room", num_room);
-			List l_facility = facilityService.listFacilities();
-			request.setAttribute("l_facility", l_facility);
-			request.setAttribute("apartment_id", apartment.getId());
-			return "/admin/addroom";
+		apartmentService.add(apartment);
+		for (int i = 0; i < Integer.valueOf(num_room); i++) {
+			Room room = new Room();
+			room.setApartment(apartment);
+			room.setCapacity("");
+			room.setDescription("房间" + String.valueOf(i + 1) + "@" + "" + "@" + type);
+			room.setSquare(0);
+			room.setDirection("");
+			room.setPrices(null);
+			room.setFacilities(null);
+			roomService.add(room);
 		}
+		attr.addAttribute("apartmentid", apartment.getId());
+		return "redirect:/admin/apartment/edit";
 	}
 
-	@RequestMapping(value = "/addroom", method = RequestMethod.POST)
-	public String addRoom(HttpServletRequest request, String apartment_id, String num_room, String[] id, String[] type,
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public String edit( String apartmentid) {
+		session.setAttribute("apartmentid", apartmentid);
+		List l_facility = facilityService.listFacilities();
+		session.setAttribute("l_facility", l_facility);
+		List l_feature = featureService.listFeatures();
+		session.setAttribute("l_feature", l_feature);
+		List l_apartmenttype = apartmentTypeService.listApartmentTypes();
+		session.setAttribute("l_apartmenttype", l_apartmenttype);
+		return "admin/editapartment";
+	}
+
+	@RequestMapping(value = "/getapartment", method = RequestMethod.POST)
+	public @ResponseBody HashMap getApartment( String apartmentid) {
+		HashMap map = apartmentService.getApartmentInfo(Long.valueOf(apartmentid));
+		return map;
+	}
+	
+	@RequestMapping(value = "/editroom")
+	public String editroom( String roomid){
+		session.setAttribute("roomid", roomid);
+		List l_facility = facilityService.listFacilities();
+		session.setAttribute("l_facility", l_facility);
+		List l_feature = featureService.listFeatures();
+		session.setAttribute("l_feature", l_feature);
+		System.out.println("111111111111");
+		return "admin/editroom";
+	}
+	
+	@RequestMapping(value = "/getroom", method = RequestMethod.POST)
+	public @ResponseBody HashMap getRoom( String roomid) {
+		HashMap map = roomService.getRoomInfo(Long.valueOf(roomid));
+		System.out.println(map.toString());
+		return map;
+	}
+	
+	@RequestMapping(value = "/editroom1")
+	public String editroom1(HttpServletRequest request, String apartment_id, String num_room, String[] id, String[] type,
 			String[] square, String[] direction, String facility) {
 		Apartment apartment = apartmentService.findById(Long.valueOf(apartment_id));
 		List lf = facilityService.listFacilities();

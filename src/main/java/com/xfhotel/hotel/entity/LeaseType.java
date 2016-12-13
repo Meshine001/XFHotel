@@ -3,8 +3,10 @@ package com.xfhotel.hotel.entity;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,19 +22,19 @@ public class LeaseType {
 	@JoinColumn(name="leasetype_id")
 	private Set<Price> prices;
 	
-	@ManyToOne
-	private ApartmentType apartmentType;
+	@ManyToMany(fetch = FetchType.LAZY,mappedBy="leaseTypes")
+	private Set<ApartmentType> apartmentType;
 	
 	
 	public LeaseType() {
 		super();
 	}
 
-	public ApartmentType getApartmentType() {
+	public Set<ApartmentType> getApartmentType() {
 		return apartmentType;
 	}
 
-	public void setApartmentType(ApartmentType apartmentType) {
+	public void setApartmentType(Set<ApartmentType> apartmentType) {
 		this.apartmentType = apartmentType;
 	}
 

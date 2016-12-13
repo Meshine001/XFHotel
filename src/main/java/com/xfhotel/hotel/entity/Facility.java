@@ -1,5 +1,6 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -42,6 +43,13 @@ public class Facility {
 	}
 	public void setRooms(Set<Room> rooms) {
 		this.rooms = rooms;
+	}
+	public HashMap toMap() {
+		// TODO Auto-generated method stub
+		HashMap map = new HashMap();
+		map.put("description", description);
+		map.put("id", id);
+		return map;
 	}
 
 }

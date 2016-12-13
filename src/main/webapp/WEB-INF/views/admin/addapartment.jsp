@@ -74,6 +74,7 @@
 		<script type="text/javascript">
 			document.getElementById("lease").style.display = "none";
 			function type1change(op) {
+			if(op!=-1){
 				$.ajax({
 					async : false,
 					cache : false,
@@ -81,23 +82,28 @@
 					dataType : 'json',
 					data : {'apartmenttypeid':op},
 					url : "<%=request.getContextPath()%>/admin/apartment/getleasetype",//请求的action路径
-					error : function() {//请求失败处理函数
-						alert("获取数据失败！");
-					},
-					success : function(data) {
-						 var leasetypes = data.leasetype;
-						 var leasetypeids = data.leasetypeid;
-						 var htmltext = "";
-						 for( var i in leasetypes){
-						 	var ids = leasetypeids[i];
-						 	var types = leasetypes[i];
-						 	htmltext = htmltext +"<div>";
-						 	htmltext = htmltext + types +"<input type='text' name='leasetypes" + ids +"'>";	
-						 	htmltext = htmltext +"</div>";
-						 }
-						 $("#lease").html(htmltext);
-					}
-				});
+								error : function() {//请求失败处理函数
+									alert("获取数据失败！");
+								},
+								success : function(data) {
+									var leasetypes = data.leasetype;
+									var leasetypeids = data.leasetypeid;
+									var htmltext = "";
+									for ( var i in leasetypes) {
+										var ids = leasetypeids[i];
+										var types = leasetypes[i];
+										htmltext = htmltext + "<div>";
+										htmltext = htmltext
+												+ types
+												+ "<input type='text' name='leasetypes" + ids +"'>";
+										htmltext = htmltext + "</div>";
+									}
+									$("#lease").html(htmltext);
+								}
+							});
+				}
+				else
+					$("#lease").html("");
 			}
 			function type2change(op) {
 				if (op == 1)
@@ -112,7 +118,7 @@
 		<div>
 			出租类型：<select name="apartmenttype"
 				onchange="type1change(this.options[this.options.selectedIndex].value)">
-				<option value="0">请选择</option>
+				<option value="-1" selected="selected">请选择</option>
 				<c:forEach items="${l_apartmenttype}" var="apartmenttype"
 					varStatus="p">
 					<option value="${apartmenttype.id }">${apartmenttype.description }</option>
@@ -125,8 +131,7 @@
 				<option value="3">混合型</option>
 			</select>
 		</div>
-		<div id="lease" style="display:none;">
-		</div>
+		<div id="lease" style="display: none;"></div>
 		<button type="submit">提交</button>
 	</form>
 </body>

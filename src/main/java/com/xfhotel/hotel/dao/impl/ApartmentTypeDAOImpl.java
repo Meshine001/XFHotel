@@ -2,8 +2,11 @@ package com.xfhotel.hotel.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -29,8 +32,10 @@ public class ApartmentTypeDAOImpl implements ApartmentTypeDAO{
 	public ApartmentType findById(Long id) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		ApartmentType apartmentType = (ApartmentType) session.createQuery("from ApartmentType where id=:id").setLong("id", id).list().get(0);
-		return apartmentType;
+		Criteria c = session.createCriteria(ApartmentType.class);
+		c.add(Restrictions.eq("id",id));
+		c.setFetchMode("leaseTypes",FetchMode.JOIN);
+		return (ApartmentType) c.uniqueResult();
 	}
 
 }

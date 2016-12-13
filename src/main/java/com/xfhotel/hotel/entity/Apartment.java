@@ -1,5 +1,6 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -53,7 +54,7 @@ public class Apartment {
 	@ManyToOne
 	private ApartmentType apartmentType;
 	
-	private String type; // hotel ,short ;;;;together,sigle
+	private String type; //together,sigle
 	private String address;//address : cell : num_building
 	private String floor;//current floor : total floor
 	private String direction;//
@@ -196,6 +197,4 @@ public class Apartment {
 		this.description = description;
 	}
 
-	
-	
 }

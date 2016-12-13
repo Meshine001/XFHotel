@@ -1,5 +1,6 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -40,7 +41,7 @@ public class Room {
 		inverseJoinColumns={@JoinColumn(name="facility_id")})
 	public Set<Facility> facilities; //
 	
-	private double Square;//
+	private double square;//
 	private String direction;//
 	private String capacity;//
 	private String description;//
@@ -68,10 +69,10 @@ public class Room {
 		this.prices = prices;
 	}
 	public double getSquare() {
-		return Square;
+		return square;
 	}
 	public void setSquare(double square) {
-		Square = square;
+		square = square;
 	}
 	public String getDirection() {
 		return direction;
@@ -98,6 +99,19 @@ public class Room {
 
 	public void setFacilities(Set<Facility> facilities) {
 		this.facilities = facilities;
+	}
+	
+	public HashMap toMap() {
+		// TODO Auto-generated method stub
+		HashMap map = new HashMap();
+		map.put("square", square);
+		map.put("direction", direction);
+		map.put("capacity", capacity);
+		map.put("description", description.split("@")[0]);
+		map.put("type", description.split("@")[1]);
+		map.put("ltype", description.split("@")[2]);
+		map.put("id", id);
+		return map;
 	}
 	
 }

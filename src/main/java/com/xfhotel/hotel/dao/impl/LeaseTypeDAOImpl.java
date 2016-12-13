@@ -29,7 +29,7 @@ public class LeaseTypeDAOImpl implements LeaseTypeDAO {
 	public List findApartmentTypeLeases(long id) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		List<LeaseType> list = 	session.createQuery("from LeaseType where apartmentType.id=:id").setLong("id", id).list();
+		List<LeaseType> list = 	session.createQuery("from LeaseType where apartmentType.id=?").setLong(0, id).list();
 		return null;
 	}
 

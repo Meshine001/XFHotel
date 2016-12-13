@@ -1,5 +1,7 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.HashMap;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,6 +27,11 @@ public class Price {
 	@ManyToOne
 	private Room room;
 	
+	
+	public Price() {
+		super();
+	}
+
 	public Price(double price, LeaseType leasetype, Apartment apartment, Room room) {
 		super();
 		this.price = price;
@@ -62,6 +69,16 @@ public class Price {
 	}
 	public void setRoom(Room room) {
 		this.room = room;
+	}
+
+	public HashMap toMap() {
+		// TODO Auto-generated method stub
+		HashMap map = new HashMap();
+		map.put("price", price);
+		map.put("id", id);
+		map.put("leasetypeid", leasetype.getId());
+		map.put("leasetype", leasetype.getDescription());
+		return map;
 	}
 	
 }
