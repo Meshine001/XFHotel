@@ -15,8 +15,8 @@
 <script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
 <script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body>
-	<div class="container">
+<body >
+	<my_body style="margin-top: 20px">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="page-header">
@@ -124,7 +124,9 @@
 						</ul>
 					</div>
 					<div class="col-md-3">
-						<h3>1302<small>元/月</small></h3>
+						<h3>
+							1302<small>元/月</small>
+						</h3>
 						<h4>原价:￥1480/月</h4>
 					</div>
 				</div>
@@ -137,6 +139,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</my_body>
 </body>
 </html>

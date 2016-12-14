@@ -47,6 +47,12 @@ public class HomeController {
 		return u;
 	}
 	
+	@RequestMapping(value = "info", method = RequestMethod.GET)
+	public String info() {
+		
+		return "/customer/info";
+	}
+	
 	@RequestMapping(value = "test", method = RequestMethod.GET)
 	public String test() {
 

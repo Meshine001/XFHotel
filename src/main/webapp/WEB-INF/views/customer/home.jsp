@@ -31,33 +31,35 @@
 </head>
 <body>
 	<!-- 导航 -->
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="navbar navabar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
+				<button class="navbar-toggle collapsed" type="button"
+					data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="sr-only">Toggle navigation</span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">青舍都市公寓</a>
+				<a class="navbar-brand hidden-sm" href="" onclick="">青舍都市公寓</a>
 			</div>
-			<div id="navbar" class="collapse navbar-collapse">
+
+			<nav class="navbar-collapse collapse" role="navigation">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">首页</a></li>
 					<li><a href="">酒店型公寓</a></li>
 					<li><a href="">短租型公寓</a></li>
-					<li><a href="">在线找房</a></li>
+					<li><a href="<%=basePath%>/list">在线找房</a></li>
 					<li><a href="">青客生活</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right hidden-sm">
 					<li><a href="./customer?forword=login">登录</a></li>
 					<li><a href="./customer?forword=reg">注册</a></li>
 				</ul>
-			</div>
-			<!--/.nav-collapse -->
+			</nav>
 		</div>
-	</nav>
+	</div>
 	<!-- ./导航 -->
+
 
 	<!-- 滑动窗口 -->
 	<!-- Carousel
@@ -104,13 +106,13 @@
 		</a>
 	</div>
 
-	<!--./滑动窗口 -->
-
-
-
-
 
 	<div class="container">
+
+
+
+
+
 		<!-- 搜索框 -->
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
