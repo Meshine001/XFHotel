@@ -51,7 +51,7 @@
 								<form id="login-form" action="" method="post" role="form"
 									style="display: block;">
 									<div class="form-group">
-										<input type="text" name="tel" id="tel" tabindex="1"
+										<input type="text" name="tel" id="username" tabindex="1"
 											class="form-control" placeholder="请输入手机号" value="">
 									</div>
 									<div class="form-group">
