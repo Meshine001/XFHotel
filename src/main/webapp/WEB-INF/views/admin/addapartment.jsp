@@ -80,7 +80,7 @@
 					cache : false,
 					type : 'POST',
 					dataType : 'json',
-					data : {'apartmenttypeid':op},
+					data : {'type':0,'id':op},
 					url : "<%=request.getContextPath()%>/admin/apartment/getleasetype",//请求的action路径
 								error : function() {//请求失败处理函数
 									alert("获取数据失败！");

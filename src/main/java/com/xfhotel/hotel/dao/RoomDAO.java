@@ -7,4 +7,6 @@ public interface RoomDAO {
 	public int add(Room room);
 
 	public Room getRoomById(Long id);
+
+	public Long getApartmentId(Long id);
 }

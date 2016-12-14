@@ -40,4 +40,14 @@ public class RoomDAOImpl implements RoomDAO {
 		return (Room) c.uniqueResult();
 	}
 
+	@Override
+	public Long getApartmentId(Long id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria c = session.createCriteria(Room.class);
+		c.add(Restrictions.eq("id", id));
+		Room room = (Room) c.setFetchMode("apartment", FetchMode.JOIN).uniqueResult();
+		return room.getApartment().getId();
+	}
+
 }

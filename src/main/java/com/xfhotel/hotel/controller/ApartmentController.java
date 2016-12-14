@@ -73,8 +73,16 @@ public class ApartmentController {
 	}
 
 	@RequestMapping(value = "/getleasetype", method = RequestMethod.POST)
-	public @ResponseBody HashMap getLeaseType( String apartmenttypeid) {
-		ApartmentType apartmentType = apartmentTypeService.findById(Long.valueOf(apartmenttypeid));
+	public @ResponseBody HashMap getLeaseType(String type, String id) {
+		ApartmentType apartmentType = new ApartmentType();
+		if(type.equals("0")){
+			apartmentType = apartmentTypeService.findById(Long.valueOf(id));
+			
+		}
+		else{
+			Long apartmentTypeId = roomService.getApartmentType(Long.valueOf(id));
+			apartmentType = apartmentTypeService.findById(apartmentTypeId);
+		}
 		ArrayList s_leaseType = new ArrayList();
 		ArrayList s_leaseTypeId = new ArrayList();
 		Set s_LeaseType = apartmentType.getLeaseTypes();
@@ -156,7 +164,7 @@ public class ApartmentController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String edit( String apartmentid) {
+	public String edit(String apartmentid) {
 		session.setAttribute("apartmentid", apartmentid);
 		List l_facility = facilityService.listFacilities();
 		session.setAttribute("l_facility", l_facility);
@@ -164,36 +172,35 @@ public class ApartmentController {
 		session.setAttribute("l_feature", l_feature);
 		List l_apartmenttype = apartmentTypeService.listApartmentTypes();
 		session.setAttribute("l_apartmenttype", l_apartmenttype);
-		return "admin/editapartment";
+		return "/admin/editapartment";
 	}
 
 	@RequestMapping(value = "/getapartment", method = RequestMethod.POST)
-	public @ResponseBody HashMap getApartment( String apartmentid) {
+	public @ResponseBody HashMap getApartment(String apartmentid) {
 		HashMap map = apartmentService.getApartmentInfo(Long.valueOf(apartmentid));
 		return map;
 	}
-	
+
 	@RequestMapping(value = "/editroom")
-	public String editroom( String roomid){
+	public String editroom(String roomid) {
 		session.setAttribute("roomid", roomid);
 		List l_facility = facilityService.listFacilities();
 		session.setAttribute("l_facility", l_facility);
 		List l_feature = featureService.listFeatures();
 		session.setAttribute("l_feature", l_feature);
-		System.out.println("111111111111");
-		return "admin/editroom";
+		return "/admin/editroom";
 	}
-	
+
 	@RequestMapping(value = "/getroom", method = RequestMethod.POST)
-	public @ResponseBody HashMap getRoom( String roomid) {
+	public @ResponseBody HashMap getRoom(String roomid) {
 		HashMap map = roomService.getRoomInfo(Long.valueOf(roomid));
 		System.out.println(map.toString());
 		return map;
 	}
-	
+
 	@RequestMapping(value = "/editroom1")
-	public String editroom1(HttpServletRequest request, String apartment_id, String num_room, String[] id, String[] type,
-			String[] square, String[] direction, String facility) {
+	public String editroom1(HttpServletRequest request, String apartment_id, String num_room, String[] id,
+			String[] type, String[] square, String[] direction, String facility) {
 		Apartment apartment = apartmentService.findById(Long.valueOf(apartment_id));
 		List lf = facilityService.listFacilities();
 		int n = Integer.valueOf(num_room);

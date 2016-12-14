@@ -67,15 +67,7 @@
 			});
 		});
 		function editroom(id){
-		alert(id);
-			$.ajax({
-				async : false,
-				cache : false,
-				type : 'POST',
-				dataType : 'json',
-				data : {'roomid':id},
-				url : "<%=request.getContextPath()%>/admin/apartment/editroom"
-				});
+			window.location.href = '<%=request.getContextPath()%>/admin/apartment/editroom?roomid='+ id;
 		}
 	</script>
 	<form action="<%=request.getContextPath()%>/admin/apartment/add"
@@ -136,8 +128,7 @@
 		</c:forEach>
 		</div>
 		<div>
-			房间设置：
-			<input type="hidden" name="num_room" value="0" >
+			房间设置： <input type="hidden" name="num_room" value="0">
 			<div id="rooms"></div>
 		</div>
 		<script type="text/javascript"
@@ -150,7 +141,7 @@
 					cache : false,
 					type : 'POST',
 					dataType : 'json',
-					data : {'apartmenttypeid':op},
+					data : {'type':0,'id':op},
 					url : "<%=request.getContextPath()%>/admin/apartment/getleasetype",//请求的action路径
 							error : function() {//请求失败处理函数
 								alert("获取数据失败！");

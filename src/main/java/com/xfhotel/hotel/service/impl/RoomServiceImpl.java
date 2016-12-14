@@ -17,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xfhotel.hotel.dao.ApartmentDAO;
 import com.xfhotel.hotel.dao.RoomDAO;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.ApartmentType;
 import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Price;
@@ -30,6 +32,8 @@ public class RoomServiceImpl implements RoomService {
 
 	@Autowired
 	private RoomDAO roomDAO;
+	@Autowired
+	private ApartmentDAO apartmentDAO;
 	
 	@Override
 	@Transactional
@@ -39,6 +43,7 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
+	@Transactional
 	public HashMap getRoomInfo(Long id) {
 		// TODO Auto-generated method stub
 		Room room = roomDAO.getRoomById(id);
@@ -60,6 +65,21 @@ public class RoomServiceImpl implements RoomService {
 		}
 		map.put("prices", prices);
 		return map;
+	}
+
+	@Override
+	@Transactional
+	public Room findById(Long id) {
+		// TODO Auto-generated method stub
+		return roomDAO.getRoomById(id);
+	}
+
+	@Override
+	@Transactional
+	public Long getApartmentType(Long id) {
+		// TODO Auto-generated method stub
+		Long apartmentid =roomDAO.getApartmentId(id);
+		return apartmentDAO.getApartmentById(apartmentid).getApartmentType().getId();
 	}
 
 }
