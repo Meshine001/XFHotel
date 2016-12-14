@@ -1,135 +1,93 @@
 $(document).ready(function() {
-
-	//上传头像
-	$("#upload").click(function() {
-		 var formData = new FormData($( "#uploadForm" )[0]);  
-	     $.ajax({  
-	          url: '../file/upload' ,  
-	          type: 'POST',  
-	          data: formData,  
-	          async: false,  
-	          cache: false,  
-	          contentType: false,  
-	          processData: false,  
-	          success: function (data) {  
-	              $("#face_url").attr("value",data);
-	              $("#face_pic_2").attr("src",'../images/'+data);
-	          },  
-	          error: function (data) {  
-	              alert(returndata);  
-	          }  
-	     });  
-	     $.colorbox.close();
-	});
-
 	
-	$("#submitButton").click(function() {
-		var birth = $("#b_year").text()+"/"+
-		$("#b_month").text()+"/"+
-		$("#b_day").text();
-		$("#birthday").val(birth);
-		var constellation = $("#c_text").text();
-		$("#constellation").val(constellation);
-		$("#education").val($("#e_text").text());
-		
-		$("#detailsForm").submit();
+	$("#education-select").change(function() {
+		console.log($(this).children('option:selected').val() );
+		$("#education").val($(this).children('option:selected').val());//这就是selected的值
+	});
+	$("#declaration-area").change(function() {
+		$("#declaration").val($("#declaration-area").val());
+	});
+	$("#hobby-area").change(function() {
+		$("#hobby").val($("#hobby-area").val());
 	});
 	
-	
-	if($("#birthday_str").text()!=''){
-		var arr = $("#birthday_str").text().split("/");
-		var year = arr[0];
-		var month = arr[1];
-		var day = arr[2];
-		$("#b_year").text(year);
-		$("#b_month").text(month);
-		$("#b_day").text(day);
-	}
-	
-	if($("#xingbie").val()!=''){
-		var sex = $("#xingbie").val();
-		if(sex == '男'){
-			select_xingbie(1);
-		}else{
-			select_xingbie(2);
-		}
-	}else{
-		select_xingbie(1);
-	}
-});
+	/**
+	 * 修改个人信息
+	 */
+	$("#modify").click(function() {
+		$.ajax({
+			cache : true,
+			type : "POST",
+			url : "./modify",
+			data : $('#details-form').serialize(),
+			async : false,
+			error : function(request) {
+				alert("连接异常！");
+			},
+			success : function(data) {
+				alert(data.content);
+				if (data.statusCode == 0) {
+					
+				} else {
+					location.reload()
+				}
 
-// 选择性别
-function select_xingbie(n) {
-	$(".selectedSex").each(function() {
-		$(this).children("i").removeClass("data_xb_on");
-	})
-	$("#xb_" + n).children("i").addClass("data_xb_on");
-	if(n ==1){
-		$("#xingbie").val("男");
-	}else{
-		$("#xingbie").val("女");
-	}
-	
-}
-
-function selectOptions(id) {
-	var btnSelect = document.getElementById(id);
-	var curSelect = btnSelect.getElementsByTagName("span")[0];
-	var oSelect = btnSelect.getElementsByTagName("select")[0];
-	var aOption = btnSelect.getElementsByTagName("option");
-	oSelect.onchange = function() {
-		var text = oSelect.options[oSelect.selectedIndex].text;
-		curSelect.innerHTML = text;
-	}
-}
-selectOptions('select_year');
-selectOptions('select_month');
-selectOptions('select_day');
-
-selectOptions('select_xingzuo');
-selectOptions('select_jiaoyu');
-
-function select_xingqu(k) {
-	var obj = $("#select_xingqu_" + k).children("span");
-
-	if (obj.hasClass("ah_list_on")) {
-		obj.removeClass("ah_list_on");
-
-		// 赋值
-		var xq = $("#xingqu").val();
-		/*
-		 * var xq_arr = xq.split(","); //移除末尾空白 xq_arr.pop(); var _in =
-		 * $.inArray(k, xq_arr); if(_in>-1){ var _xq = xq_arr.splice(_in,1);
-		 * 
-		 * $("#xingqu").val(_xq.join(",")+","); }
-		 */
-		// 查找
-		var cz = xq.indexOf('$' + k + '$');
-		if (cz > -1) {
-			var _xq = xq.replace('$' + k + '$', '$');
-			$("#xingqu").val(_xq);
-		}
-	} else {
-		obj.addClass("ah_list_on");
-		// 赋值
-		var xq = $("#xingqu").val();
-		// 查找
-		var cz = xq.indexOf('$' + k + '$');
-		if (cz == -1) {
-			$("#xingqu").val(xq + k + '$');
-		}
-
-	}
-
-}
-
-function upload_face() {
-	$.colorbox({
-		open : true,
-		inline : true,
-		width : 900,
-		href : "#upload-face",
-		overlayClose : true
+			}
+		});
 	});
-	return false;
-}
+	/**
+	 * 上传头像
+	 */
+	$("#uploadAvatar").click(function() {
+		$.ajaxFileUpload({
+			url : "../file/upload", // submit to UploadFileServlet
+			dataType: 'json',//返回数据的类型  
+			secureuri : false,
+			fileElementId : 'file',
+			success : function(data, status) {
+				console.log(data);
+				if (data.statusCode == 0) {
+					alert(data.content);
+				} else {
+					$("#avatar").val(data.content);
+					$("#avatarUrl").attr("src", "../images/" + data.content);
+					$('#myModal').modal('toggle');
+				}
+			},
+			error : function(data, status, e) {
+				alert("连接异常！");
+			}
+		});
+	});
+
+
+	/**
+	 * 预览头像
+	 */
+	$("#file").change(function() {
+		// 判断是否支持FileReader
+		if (window.FileReader) {
+			var reader = new FileReader();
+		} else {
+			alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+		}
+		console.log($(this));
+		// 获取文件
+		var file = $(this).prop("files")[0];
+		var imageType = /^image\//;
+		// 是否是图片
+		if (!imageType.test(file.type)) {
+			alert("请选择图片！");
+			return;
+		}
+		// 读取完成
+		reader.onload = function(e) {
+			// 获取图片dom
+			var img = document.getElementById("preAvatar");
+			// 图片路径设置为读取的图片
+			img.src = e.target.result;
+		};
+		reader.readAsDataURL(file);
+	});
+
+})

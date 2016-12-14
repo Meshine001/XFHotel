@@ -22,6 +22,9 @@ public class CustomerDetails {
 	private String nick;
 	private String sex;
 	private String birthday;
+	/**
+	 * 星座
+	 */
 	private String constellation;
 	private String job;
 	private String education;
@@ -29,7 +32,8 @@ public class CustomerDetails {
 	private String hobby;
 	private String avatar;
 	private String idCard;
-
+	private String tel;
+	
 	@OneToOne(mappedBy = "details")
 	private Customer customer;
 
@@ -121,6 +125,15 @@ public class CustomerDetails {
 		this.idCard = idCard;
 	}
 
+	
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -134,10 +147,11 @@ public class CustomerDetails {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CustomerDetails(String nick, String avatar) {
+	public CustomerDetails(String nick, String avatar,String tel) {
 		super();
 		this.nick = nick;
 		this.avatar = avatar;
+		this.tel = tel;
 	}
 
 	public CustomerDetails(String nick, String sex, String birthday, String constellation, String job, String education,

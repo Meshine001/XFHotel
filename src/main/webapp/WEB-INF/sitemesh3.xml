@@ -10,4 +10,9 @@
 	<content-processor>
 		<tag-rule-bundle class="com.xfhotel.hotel.support.SitemeshTagRuleBundle" />
 	</content-processor>
+
+	<mapping path="/list"
+		decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
+	<mapping path="/info"
+		decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
 </sitemesh>
