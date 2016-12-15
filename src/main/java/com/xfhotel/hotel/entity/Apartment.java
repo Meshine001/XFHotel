@@ -27,7 +27,7 @@ public class Apartment {
 	@GeneratedValue(generator="apartmentgenerator")
 	@GenericGenerator(name="apartmentgenerator",strategy="increment")
 	private long id;
-	//coordinate
+	//coordinate  地址经纬度
 	private long latitude; //for map
 	private long longitude;
 	
@@ -35,32 +35,46 @@ public class Apartment {
 	@JoinColumn(name="apartment_id")
 	public Set<Room> rooms; //
 	
+	//设施
 	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
 	@JoinTable(name="t_apartment_facility",
 		joinColumns={@JoinColumn(name="apartment_id")},
 		inverseJoinColumns={@JoinColumn(name="facility_id")})
 	public Set<Facility> facilities; //
 	
+	//特色
 	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
 	@JoinTable(name="t_apartment_feature",
 		joinColumns={@JoinColumn(name="apartment_id")},
 		inverseJoinColumns={@JoinColumn(name="feature_id")})
 	public Set<Feature> features;//label for apartment
 	
+	
 	@OneToMany
 	@JoinColumn(name="apartment_id")
 	public Set<Price> prices;//
 	
+	//酒店型或短租型
 	@ManyToOne
 	private ApartmentType apartmentType;
 	
+	//合租，整租
 	private String type; //together,sigle
+	
 	private String address;//address : cell : num_building
+	
 	private String floor;//current floor : total floor
+	
+	//朝向
 	private String direction;//
+	//面积
 	private double square;//square for apartment
+	//可住几人
 	private String capacity;//num of people
+	//布局
 	private String layout;// bedroom : livingroom : bathroom : balcony
+	
+	
 	private String description;//enviroment,transportation,etc.
 
 	//private Set<File> pics;//

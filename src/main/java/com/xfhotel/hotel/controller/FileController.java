@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.service.FileService;
+import com.xfhotel.hotel.support.Message;
 
 @Controller
 @RequestMapping("/file")
@@ -20,14 +22,14 @@ public class FileController {
 	FileService fileService;
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public @ResponseBody String upload(MultipartFile file, HttpServletRequest request) {
+	public @ResponseBody Message upload(MultipartFile file, HttpServletRequest request) {
 		if (file != null) {
 			StringBuffer sb = new StringBuffer();
 			sb.append(request.getSession().getServletContext().getRealPath("/"));
 			String fullPath = fileService.saveFile(file, sb.toString());
 			if (fullPath != null)
-				return fullPath;
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, fullPath);
 		}
-		return "failed";
+		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");
 	}
 }

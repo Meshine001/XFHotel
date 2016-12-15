@@ -29,6 +29,12 @@ public class AdminController {
 		return "/admin/login";
 	}
 	
+	@RequestMapping(value="/dashboard",method = RequestMethod.GET)
+	public String dashboardPage(){
+		return "/admin/dashboard";
+	}
+	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	 public String login(User user,HttpSession session){
 		User u = userService.getUser(user.getUsername(),user.getPassword());

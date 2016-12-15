@@ -20,6 +20,8 @@ public class Price {
 	@GenericGenerator(name="apartmentgenerator",strategy="increment")
 	private long id;
 	private double price;
+	
+	//租赁类型
 	@ManyToOne
 	private LeaseType leasetype;
 	@ManyToOne
