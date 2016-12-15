@@ -25,6 +25,8 @@
 
 <link href="<%=basePath%>/dist/customer/css/dashboard.css"
 	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/customer/css/crop-avatar.css" />
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
