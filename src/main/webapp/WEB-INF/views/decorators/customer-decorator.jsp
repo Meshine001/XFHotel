@@ -19,6 +19,9 @@
 <!-- Bootstrap core CSS -->
 <link href="<%=basePath%>/dist/commons/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
+<!-- cropper -->
+<link href="<%=basePath%>/dist/commons/cropper/cropper.min.css"
+	rel="stylesheet">
 
 <link href="<%=basePath%>/dist/customer/css/dashboard.css"
 	rel="stylesheet">
@@ -49,7 +52,7 @@
 					<li><a href="#">我要找房</a></li>
 					<li><a href="#">地图找房</a></li>
 					<li><a href="#">青舍生活</a></li>
-					
+
 				</ul>
 
 			</div>
@@ -59,7 +62,8 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar" id="sidebar">
-					<li id="reservation"><a href="<%=basePath%>/customer/reservation">我的预约</a></li>
+					<li id="reservation"><a
+						href="<%=basePath%>/customer/reservation">我的预约</a></li>
 					<li><a href="#">我的订单</a></li>
 					<li><a href="#">我的舍友</a></li>
 					<li id="details"><a href="<%=basePath%>/customer/details">个人资料</a></li>
@@ -79,6 +83,7 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
 	<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<%=basePath%>/dist/commons/cropper/cropper.min.js"></script>
 	<script
 		src="<%=basePath%>/dist/commons/ajaxfile-upload/ajaxfileupload.js"></script>
 	</my_script>
