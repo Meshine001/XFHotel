@@ -7,18 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "t_facility")
-public class Facility {
+@Table(name = "t_feature")
+public class Feature {
 	@Id
 	private long id;
 	private String description;
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy="facilities")
-	public Set<Apartment> apartments;
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy="facilities")
-	public Set<Room> rooms;
+	
+	@ManyToMany(fetch = FetchType.LAZY,mappedBy="features")
+	private Set<Apartment> apartments;
 	
 	public long getId() {
 		return id;
@@ -38,12 +38,6 @@ public class Facility {
 	public void setApartments(Set<Apartment> apartments) {
 		this.apartments = apartments;
 	}
-	public Set<Room> getRooms() {
-		return rooms;
-	}
-	public void setRooms(Set<Room> rooms) {
-		this.rooms = rooms;
-	}
 	public HashMap toMap() {
 		// TODO Auto-generated method stub
 		HashMap map = new HashMap();
@@ -51,5 +45,4 @@ public class Facility {
 		map.put("id", id);
 		return map;
 	}
-
 }

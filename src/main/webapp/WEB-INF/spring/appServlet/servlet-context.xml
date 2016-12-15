@@ -27,6 +27,7 @@
 	</beans:bean>
 
 	<context:component-scan base-package="com.xfhotel.hotel" />
+
 <!-- 
 	<interceptors>
 		<beans:bean
@@ -42,6 +43,7 @@
 		</interceptor>
 	</interceptors>
  -->
+ 
 	<!-- JDBC Data Source. It is assumed you have MySQL running on server port 
 		3306 with username root and password. Change below if it's not the case -->
 	<beans:bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"

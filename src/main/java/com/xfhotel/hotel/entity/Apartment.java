@@ -1,11 +1,17 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.HashMap;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,92 +24,177 @@ public class Apartment {
 	//facilities
 	//map
 	@Id
-	@GenericGenerator(name = "generator", strategy = "identity ")
+	@GeneratedValue(generator="apartmentgenerator")
+	@GenericGenerator(name="apartmentgenerator",strategy="increment")
 	private long id;
 	//coordinate
-	private long latitude;
+	private long latitude; //for map
 	private long longitude;
+	
 	@OneToMany
-	@JoinColumn(name="apartmentId")
-	public Set<Room> rooms;
-	@ManyToMany
-	@JoinColumn(name="apartmentId")
-	public Set<Facility> facilities;
+	@JoinColumn(name="apartment_id")
+	public Set<Room> rooms; //
 	
-	private String community;//小区
-	private String floor;//楼层、总楼层
-	private String direction;//朝向
-	private String layout;//布局
+	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
+	@JoinTable(name="t_apartment_facility",
+		joinColumns={@JoinColumn(name="apartment_id")},
+		inverseJoinColumns={@JoinColumn(name="facility_id")})
+	public Set<Facility> facilities; //
+	
+	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
+	@JoinTable(name="t_apartment_feature",
+		joinColumns={@JoinColumn(name="apartment_id")},
+		inverseJoinColumns={@JoinColumn(name="feature_id")})
+	public Set<Feature> features;//label for apartment
+	
+	@OneToMany
+	@JoinColumn(name="apartment_id")
+	public Set<Price> prices;//
+	
+	@ManyToOne
+	private ApartmentType apartmentType;
+	
+	private String type; //together,sigle
+	private String address;//address : cell : num_building
+	private String floor;//current floor : total floor
+	private String direction;//
+	private double square;//square for apartment
+	private String capacity;//num of people
+	private String layout;// bedroom : livingroom : bathroom : balcony
+	private String description;//enviroment,transportation,etc.
 
-	//private File layoutpic;//户型图片
-	
+	//private Set<File> pics;//
 
-	public Apartment(long latitude, long longitude, Set<Room> rooms, Set<Facility> facilities, String community,
-			String floor, String direction, String layout) {
-		super();
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.rooms = rooms;
-		this.facilities = facilities;
-		this.community = community;
-		this.floor = floor;
-		this.direction = direction;
-		this.layout = layout;
+	public Apartment() {
+		// TODO Auto-generated constructor stub
 	}
-	
-	public String getCommunity() {
-		return community;
+
+	public ApartmentType getApartmentType() {
+		return apartmentType;
 	}
-	public void setCommunity(String community) {
-		this.community = community;
+
+	public void setApartmentType(ApartmentType apartmentType) {
+		this.apartmentType = apartmentType;
 	}
-	public String getFloor() {
-		return floor;
-	}
-	public void setFloor(String floor) {
-		this.floor = floor;
-	}
-	public String getDirection() {
-		return direction;
-	}
-	public void setDirection(String direction) {
-		this.direction = direction;
-	}
-	public String getLayout() {
-		return layout;
-	}
-	public void setLayout(String layout) {
-		this.layout = layout;
-	}
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Set<Room> getRooms() {
-		return rooms;
-	}
-	public void setRooms(Set<Room> rooms) {
-		this.rooms = rooms;
-	}
-	public Set<Facility> getFacilities() {
-		return facilities;
-	}
-	public void setFacilities(Set<Facility> facilities) {
-		this.facilities = facilities;
-	}
+
 	public long getLatitude() {
 		return latitude;
 	}
+
 	public void setLatitude(long latitude) {
 		this.latitude = latitude;
 	}
+
 	public long getLongitude() {
 		return longitude;
 	}
+
 	public void setLongitude(long longitude) {
 		this.longitude = longitude;
 	}
-	
+
+	public Set<Room> getRooms() {
+		return rooms;
+	}
+
+	public void setRooms(Set<Room> rooms) {
+		this.rooms = rooms;
+	}
+
+	public Set<Facility> getFacilities() {
+		return facilities;
+	}
+
+	public void setFacilities(Set<Facility> facilities) {
+		this.facilities = facilities;
+	}
+
+	public Set<Feature> getFeatures() {
+		return features;
+	}
+
+	public void setFeatures(Set<Feature> features) {
+		this.features = features;
+	}
+
+	public Set<Price> getPrices() {
+		return prices;
+	}
+
+	public void setPrices(Set<Price> prices) {
+		this.prices = prices;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getFloor() {
+		return floor;
+	}
+
+	public void setFloor(String floor) {
+		this.floor = floor;
+	}
+
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public double getSquare() {
+		return square;
+	}
+
+	public void setSquare(double square) {
+		this.square = square;
+	}
+
+	public String getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(String capacity) {
+		this.capacity = capacity;
+	}
+
+	public String getLayout() {
+		return layout;
+	}
+
+	public void setLayout(String layout) {
+		this.layout = layout;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 }

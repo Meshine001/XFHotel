@@ -1,9 +1,18 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.HashMap;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -17,97 +26,92 @@ public class Room {
 	//facilities
 	//pictures
 	@Id
-	@GenericGenerator(name = "generator", strategy = "identity ")
+	@GeneratedValue(generator="apartmentgenerator")
+	@GenericGenerator(name="apartmentgenerator",strategy="increment")
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name="roomId")
 	private Apartment apartment;
+	@OneToMany
+	@JoinColumn(name="room_id")
+	public Set<Price> prices;//
+	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
+	@JoinTable(name="t_room_facility",
+		joinColumns={@JoinColumn(name="room_id")},
+		inverseJoinColumns={@JoinColumn(name="facility_id")})
+	public Set<Facility> facilities; //
 	
-	private double Square;//面积
-	private String capacity;//人数
-	private String direction;//房间朝向
-	private String description;//名称
+	private double square;//
+	private String direction;//
+	private String capacity;//
+	private String description;//
 	
-	public Room(Apartment apartment, double square, String capacity, String direction, String description, int payway,
-			int price) {
-		super();
-		this.apartment = apartment;
-		Square = square;
-		this.capacity = capacity;
-		this.direction = direction;
-		this.description = description;
-		this.payway = payway;
-		this.price = price;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getDirection() {
-		return direction;
-	}
-
-	public void setDirection(String direction) {
-		this.direction = direction;
-	}
-
-	private int payway;//支付方式
-	private int price;//价格基准
-	//private Set<Files> pictures;//参考图片
-	
-
-	public String getCapacity() {
-		return capacity;
-	}
-
-	public double getSquare() {
-		return Square;
-	}
-
-	public void setSquare(double square) {
-		Square = square;
-	}
-
-	public void setCapacity(String capacity) {
-		this.capacity = capacity;
-	}
-
-	public int getPayway() {
-		return payway;
-	}
-
-	public void setPayway(int payway) {
-		this.payway = payway;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
+	public Room() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public long getId() {
 		return id;
 	}
-
+	public void setId(long id) {
+		this.id = id;
+	}
 	public Apartment getApartment() {
 		return apartment;
 	}
-
 	public void setApartment(Apartment apartment) {
 		this.apartment = apartment;
 	}
+	public Set<Price> getPrices() {
+		return prices;
+	}
+	public void setPrices(Set<Price> prices) {
+		this.prices = prices;
+	}
+	public double getSquare() {
+		return square;
+	}
+	public void setSquare(double square) {
+		square = square;
+	}
+	public String getDirection() {
+		return direction;
+	}
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+	public String getCapacity() {
+		return capacity;
+	}
+	public void setCapacity(String capacity) {
+		this.capacity = capacity;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-	public void setId(long id) {
-		this.id = id;
+	public Set<Facility> getFacilities() {
+		return facilities;
+	}
+
+	public void setFacilities(Set<Facility> facilities) {
+		this.facilities = facilities;
+	}
+	
+	public HashMap toMap() {
+		// TODO Auto-generated method stub
+		HashMap map = new HashMap();
+		map.put("square", square);
+		map.put("direction", direction);
+		map.put("capacity", capacity);
+		map.put("description", description.split("@")[0]);
+		map.put("type", description.split("@")[1]);
+		map.put("ltype", description.split("@")[2]);
+		map.put("id", id);
+		return map;
 	}
 	
 }
