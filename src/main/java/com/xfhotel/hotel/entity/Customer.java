@@ -1,6 +1,9 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +22,21 @@ public class Customer {
 	private int id;
 	private String tel;
 	private String password;
+	private int level;
+	/**
+	 * 注册时间
+	 */
+	private Long regTime;
+	
+	/**
+	 * 消费次数
+	 */
+	private int consumptionTimes;
+	
+	/**
+	 * 消费金额
+	 */
+	private Float consumptionCount;
 	
 	@OneToOne
 	@JoinColumn(name = "details_id",unique = true)
@@ -68,7 +86,46 @@ public class Customer {
 	}
 
 
+	public int getLevel() {
+		return level;
+	}
+
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+
+	public Long getRegTime() {
+		return regTime;
+	}
+
+
+	public void setRegTime(Long regTime) {
+		this.regTime = regTime;
+	}
+
+
+	public int getConsumptionTimes() {
+		return consumptionTimes;
+	}
+
+
+	public void setConsumptionTimes(int consumptionTimes) {
+		this.consumptionTimes = consumptionTimes;
+	}
+
+
+	public Float getConsumptionCount() {
+		return consumptionCount;
+	}
+
+
+	public void setConsumptionCount(Float consumptionCount) {
+		this.consumptionCount = consumptionCount;
+	}
+
 
 	
-	
+
 }

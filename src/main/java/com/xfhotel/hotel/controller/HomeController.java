@@ -26,17 +26,15 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);
+	public String home() {
 
 		return "/customer/home";
+	}
+
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public String list() {
+
+		return "/customer/list";
 	}
 
 	@RequestMapping(value = "/json", method = RequestMethod.GET)
@@ -48,22 +46,17 @@ public class HomeController {
 		u.setAuthority(1);
 		return u;
 	}
-
-	/**
-	 * 跳转注册页面
-	 * @return
-	 */
-	@RequestMapping(value = "reg", method = RequestMethod.GET)
-	public String regPage() {
-		return "/customer/register";
+	
+	@RequestMapping(value = "info", method = RequestMethod.GET)
+	public String info() {
+		
+		return "/customer/info";
 	}
+	
+	@RequestMapping(value = "test", method = RequestMethod.GET)
+	public String test() {
 
-	/**
-	 * 跳转登录页面
-	 * @return
-	 */
-	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String loginPage() {
-		return "/customer/login";
+		return "/customer/reservation1";
 	}
+	
 }
