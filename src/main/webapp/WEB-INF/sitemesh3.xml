@@ -15,4 +15,6 @@
 		decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
 	<mapping path="/info"
 		decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
+		
+	<mapping path="/admin/*" decorator="/WEB-INF/views/decorators/admin-decorator.jsp"/>
 </sitemesh>
