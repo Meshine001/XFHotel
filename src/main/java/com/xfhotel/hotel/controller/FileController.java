@@ -38,11 +38,16 @@ public class FileController {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");
 	}
-
-	/**
-	 * 根据系统规则得到图片名称
-	 */
-	public String getImageName() {
-		return UUID.randomUUID().toString() + ".jpg";
+	
+	@RequestMapping(value = "/uploadAvatar", method = RequestMethod.POST)
+	public @ResponseBody Message uploadAvatar(String avatarData,MultipartFile avatarFile,HttpServletRequest request){
+		if (avatarFile != null) {
+			StringBuffer sb = new StringBuffer();
+			sb.append(request.getSession().getServletContext().getRealPath("/"));
+			String fullPath = fileService.saveFile(avatarFile, sb.toString());
+			if (fullPath != null)
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, fullPath);
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");
 	}
 }

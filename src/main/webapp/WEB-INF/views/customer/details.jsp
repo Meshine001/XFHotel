@@ -15,13 +15,20 @@
 	<h1 class="page-header">个人资料</h1>
 
 	<div class="row placeholders"></div>
+	<div class="row">
+		<div id="crop-avatar" class="col-md-6">
+			<div class="avatar-view" title=""
+				data-original-title="Change Logo Picture">
+				<img src="${c.details.avatar}" alt="">
+			</div>
+		</div>
+	</div>
 	<div class="modal fade" id="avatar-modal" aria-hidden="true"
 		aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1"
 		style="display: none;">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<form class="avatar-form"
-					action="http://www.jq22.com/demo/jquery-html5-upload20160106/%7B%7Burl('admin/upload-logo')%7D%7D"
+				<form class="avatar-form" action="<%=basePath%>/file/uploadAvatar"
 					enctype="multipart/form-data" method="post">
 					<div class="modal-header">
 						<button class="close" data-dismiss="modal" type="button">×</button>
@@ -31,66 +38,32 @@
 					<div class="modal-body">
 						<div class="avatar-body">
 							<div class="avatar-upload">
-								<input class="avatar-src" name="avatar_src" type="hidden">
-								<input class="avatar-data" name="avatar_data" type="hidden"
+								<input class="avatar-data" name="avatarData" type="hidden"
 									value="{&quot;x&quot;:80,&quot;y&quot;:30.000000000000004,&quot;height&quot;:239.99999999999997,&quot;width&quot;:239.99999999999997,&quot;rotate&quot;:0}">
 								<label for="avatarInput">图片上传</label> <input
-									class="avatar-input" id="avatarInput" name="avatar_file"
+									class="avatar-input" id="avatarInput" name="avatarFile"
 									type="file">
 							</div>
 							<div class="row">
 								<div class="col-md-9">
 									<div class="avatar-wrapper">
-										<img src="blob:null/43067964-d381-4d9a-a7d0-4784a54c5c48"
-											class="cropper-hidden">
-										<div class="cropper-container cropper-bg"
-											style="width: 621px; height: 364px;">
-											<div class="cropper-canvas"
-												style="width: 485.333px; height: 364px; left: 67.8333px; top: 0px;">
-												<img src="blob:null/43067964-d381-4d9a-a7d0-4784a54c5c48"
-													class=""
-													style="width: 485.333px; height: 364px; margin-left: 0px; margin-top: 0px; transform: none;">
-											</div>
-											<div class="cropper-drag-box cropper-modal cropper-crop"
-												data-drag="move"></div>
-											<div class="cropper-crop-box"
-												style="width: 291.2px; height: 291.2px; left: 164.9px; top: 36.4px;">
-												<span class="cropper-view-box"><img
-													src="blob:null/43067964-d381-4d9a-a7d0-4784a54c5c48"
-													style="width: 485.333px; height: 364px; margin-left: -97.0667px; margin-top: -36.4px; transform: none;"></span><span
-													class="cropper-dashed dashed-h"></span><span
-													class="cropper-dashed dashed-v"></span><span
-													class="cropper-face" data-drag="all"></span><span
-													class="cropper-line line-e" data-drag="e"></span><span
-													class="cropper-line line-n" data-drag="n"></span><span
-													class="cropper-line line-w" data-drag="w"></span><span
-													class="cropper-line line-s" data-drag="s"></span><span
-													class="cropper-point point-e" data-drag="e"></span><span
-													class="cropper-point point-n" data-drag="n"></span><span
-													class="cropper-point point-w" data-drag="w"></span><span
-													class="cropper-point point-s" data-drag="s"></span><span
-													class="cropper-point point-ne" data-drag="ne"></span><span
-													class="cropper-point point-nw" data-drag="nw"></span><span
-													class="cropper-point point-sw" data-drag="sw"></span><span
-													class="cropper-point point-se" data-drag="se"></span>
-											</div>
-										</div>
+										<img src="" class="cropper-hidden">
 									</div>
 								</div>
 								<div class="col-md-3">
 									<div class="avatar-preview preview-lg"
 										style="width: 184px; height: 184px;">
-										<img src="blob:null/43067964-d381-4d9a-a7d0-4784a54c5c48"
+										<img src=""
 											style="display: block; width: 303.333px; min-width: 0px !important; min-height: 0px !important; max-width: none !important; max-height: none !important; height: 227.5px; margin-left: -60.6667px; margin-top: -22.75px; transform: none;">
 									</div>
 									<div class="avatar-preview preview-md"
 										style="width: 100px; height: 100px;">
-										<img src="blob:null/43067964-d381-4d9a-a7d0-4784a54c5c48"
+										<img src=""
 											style="display: block; width: 163.333px; min-width: 0px !important; min-height: 0px !important; max-width: none !important; max-height: none !important; height: 122.5px; margin-left: -32.6667px; margin-top: -12.25px; transform: none;">
 									</div>
 									<div class="avatar-preview preview-sm"
 										style="width: 50px; height: 50px;">
-										<img src="blob:null/43067964-d381-4d9a-a7d0-4784a54c5c48"
+										<img src=""
 											style="display: block; width: 80px; min-width: 0px !important; min-height: 0px !important; max-width: none !important; max-height: none !important; height: 60px; margin-left: -16px; margin-top: -6px; transform: none;">
 									</div>
 								</div>
@@ -123,15 +96,12 @@
 			</div>
 		</div>
 	</div>
+	<div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
 	<div class="row">
 		<form class="form-horizontal" role="form" id="details-form">
 			<input type="hidden" name="customerId" value="${c.id}"> <input
 				type="hidden" name="id" value="${c.details.id}"> <input
 				type="hidden" id="avatar" name="avatar" value="${c.details.avatar}">
-			<img id="avatarUrl" alt=""
-				src="<%=basePath%>/images/${c.details.avatar}" class="img-circle">
-			<a type="button" class="btn btn-primary btn-lg" data-toggle="modal"
-				data-target="#avatar-modal">修改头像</a>
 			<div class="form-group">
 				<label>昵称</label> <input class="form-control" name="nick"
 					value="${c.details.nick }">
