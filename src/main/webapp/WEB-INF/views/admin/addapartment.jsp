@@ -235,52 +235,6 @@
 				总房间数：<input type="text" name="num_room">
 			</div>
 		</div>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/dist/commons/jquery/jquery-3.1.1.js"></script>
-		<script type="text/javascript">
-			document.getElementById("lease").style.display = "none";
-			function type1change(op) {
-			if(op!=-1){
-				$.ajax({
-					async : false,
-					cache : false,
-					type : 'POST',
-					dataType : 'json',
-					data : {'type':0,'id':op},
-					url : "<%=request.getContextPath()%>
-			/admin/apartment/getleasetype",//请求的action路径
-								error : function() {//请求失败处理函数
-									alert("获取数据失败！");
-								},
-								success : function(data) {
-									var leasetypes = data.leasetype;
-									var leasetypeids = data.leasetypeid;
-									var htmltext = "";
-									for ( var i in leasetypes) {
-										var ids = leasetypeids[i];
-										var types = leasetypes[i];
-										htmltext = htmltext + "<div>";
-										htmltext = htmltext
-												+ types
-												+ "<input type='text' name='leasetypes" + ids +"'>";
-										htmltext = htmltext + "</div>";
-									}
-									$("#lease").html(htmltext);
-								}
-							});
-				} else
-					$("#lease").html("");
-			}
-			function type2change(op) {
-				if (op == 1)
-					document.getElementById("lease").style.display = "";
-				if (op == 2)
-					document.getElementById("lease").style.display = "none";
-				if (op == 3)
-					document.getElementById("lease").style.display = "";
-			}
-		</script>
-
 		<div>
 			出租类型：<select name="apartmenttype"
 				onchange="type1change(this.options[this.options.selectedIndex].value)">
@@ -300,6 +254,49 @@
 		<div id="lease" style="display: none;"></div>
 		<button type="submit">提交</button>
 	</form>
+	<script type="text/javascript">
+			document.getElementById("lease").style.display = "none";
+			function type1change(op) {
+			if(op!=-1){
+				$.ajax({
+					async : false,
+					cache : false,
+					type : 'POST',
+					dataType : 'json',
+					data : {'type':0,'id':op},
+					url : "<%=request.getContextPath()%>/admin/apartment/getleasetype",//请求的action路径
+							error : function() {//请求失败处理函数
+								alert("获取数据失败！");
+							},
+							success : function(data) {
+								var leasetypes = data.leasetype;
+								var leasetypeids = data.leasetypeid;
+								var htmltext = "";
+								for ( var i in leasetypes) {
+									var ids = leasetypeids[i];
+									var types = leasetypes[i];
+									htmltext = htmltext + "<div>";
+									htmltext = htmltext
+											+ types
+											+ "<input type='hidden' name='leasetypeid' value='"+ids+"'>"
+											+ "<input type='text' name='leasetype'>";
+									htmltext = htmltext + "</div>";
+								}
+								$("#lease").html(htmltext);
+							}
+						});
+			} else
+				$("#lease").html("");
+		}
+		function type2change(op) {
+			if (op == 1)
+				document.getElementById("lease").style.display = "";
+			if (op == 2)
+				document.getElementById("lease").style.display = "none";
+			if (op == 3)
+				document.getElementById("lease").style.display = "";
+		}
+	</script>
 	</my_body>
 </body>
 </html>

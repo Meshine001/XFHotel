@@ -18,7 +18,7 @@ public class PriceServiceImpl implements PriceService{
 	@Transactional
 	public void add(Price price) {
 		// TODO Auto-generated method stub
-		priceDAOImpl.save(price);
+		priceDAOImpl.saveOrUpdate(price);
 	}
 
 }

@@ -17,8 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xfhotel.hotel.dao.ApartmentDAO;
 import com.xfhotel.hotel.dao.RoomDAO;
+import com.xfhotel.hotel.dao.impl.ApartmentDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.ApartmentType;
 import com.xfhotel.hotel.entity.Facility;
@@ -33,7 +33,7 @@ public class RoomServiceImpl implements RoomService {
 	@Autowired
 	private RoomDAO roomDAO;
 	@Autowired
-	private ApartmentDAO apartmentDAO;
+	private ApartmentDAOImpl apartmentDAO;
 	
 	@Override
 	@Transactional

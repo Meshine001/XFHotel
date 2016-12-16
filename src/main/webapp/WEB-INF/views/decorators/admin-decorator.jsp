@@ -25,6 +25,7 @@
 	href="<%=basePath%>/dist/admin/assets/css/theme/red.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/admin/assets/css/theme/yellow.css">
+		<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
 </head>
 <body>
 	<div class="app app-default">
