@@ -23,6 +23,11 @@ public class AdminController {
 	@Autowired
 	UserService userService;
 	
+	@RequestMapping(value="",method = RequestMethod.GET)
+	public String homePage(){
+		return "redirect:/admin/login";
+	}
+	
 	
 	@RequestMapping(value="/login",method = RequestMethod.GET)
 	public String loginPage(){

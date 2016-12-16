@@ -8,6 +8,10 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.map.util.JSONPObject;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +48,8 @@ public class FileController {
 		if (avatarFile != null) {
 			StringBuffer sb = new StringBuffer();
 			sb.append(request.getSession().getServletContext().getRealPath("/"));
-			String fullPath = fileService.saveFile(avatarFile, sb.toString());
+			JSONObject data = new JSONObject(avatarData);
+			String fullPath = fileService.cropImage(avatarFile, data, sb.toString());
 			if (fullPath != null)
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, fullPath);
 		}

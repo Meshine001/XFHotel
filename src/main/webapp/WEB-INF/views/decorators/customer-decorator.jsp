@@ -69,7 +69,7 @@
 					<li><a href="#">我的订单</a></li>
 					<li><a href="#">我的舍友</a></li>
 					<li id="details"><a href="<%=basePath%>/customer/details">个人资料</a></li>
-					<li id="settings"><a href="#">账户设置</a></li>
+					<li id="setting"><a href="<%=basePath%>/customer/setting">账户设置</a></li>
 				</ul>
 
 
@@ -86,9 +86,6 @@
 	<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
 	<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
 	<script src="<%=basePath%>/dist/commons/cropper/cropper.min.js"></script>
-	<script
-		src="<%=basePath%>/dist/commons/ajaxfile-upload/ajaxfileupload.js"></script>
-	</my_script>
 	<script src="<%=basePath%>/dist/customer/js/dashboard.js"></script>
 
 	<sitemesh:write property='my_script' />

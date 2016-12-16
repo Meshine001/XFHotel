@@ -11,7 +11,7 @@
 <body>
 	<my_body>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-6">
 			<div class="card">
 				<div class="card-header">添加房源</div>
 				<div class="card-body">
@@ -73,8 +73,10 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">总面积</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="square">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder=""
+										name="square"><span class="input-group-addon">平方</span>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
@@ -127,8 +129,16 @@
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">布局图</label>
+							<!-- Button trigger modal -->
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder="" name="">
+								<input type="file" class="btn btn-primary btn-lg" id="layout-image-input"/>
+							</div>
+							<div class="col-md-9">
+								<div class="col-md-3">
+									<img id="layout-image" alt=""
+										src="http://mf.znimg.com/thumb/dress_138x84/house_img/734/bcf19a0e72b41ef93d41f49374167924.jpg"
+										class="img-thumbnail">
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
@@ -175,6 +185,7 @@
 
 		</div>
 	</div>
+
 	<form action="<%=request.getContextPath()%>/admin/apartment/add"
 		method="POST">
 		<div>
@@ -264,7 +275,8 @@
 					type : 'POST',
 					dataType : 'json',
 					data : {'type':0,'id':op},
-					url : "<%=request.getContextPath()%>/admin/apartment/getleasetype",//请求的action路径
+					url : "<%=request.getContextPath()%>
+		/admin/apartment/getleasetype",//请求的action路径
 							error : function() {//请求失败处理函数
 								alert("获取数据失败！");
 							},
@@ -296,7 +308,6 @@
 			if (op == 3)
 				document.getElementById("lease").style.display = "";
 		}
-	</script>
-	</my_body>
+	</script> </my_body>
 </body>
 </html>

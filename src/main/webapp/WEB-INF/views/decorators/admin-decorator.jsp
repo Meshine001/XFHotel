@@ -46,7 +46,7 @@
 							<div class="title">控制面板</div>
 					</a></li>
 
-					<li><a href="/hotel/admin/apartment/admin/apartment/init">
+					<li><a href="<%=basePath%>/admin/apartment/init">
 							<div class="icon">
 								<i class="fa fa-bed" aria-hidden="true"></i>
 							</div>

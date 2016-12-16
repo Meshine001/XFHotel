@@ -3,11 +3,17 @@ package com.xfhotel.hotel.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+import java.util.logging.Logger;
 
+import org.codehaus.jackson.map.util.JSONPObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.xfhotel.hotel.service.FileService;
+import com.xfhotel.hotel.support.FileUtil;
+import com.xfhotel.hotel.support.ImageUtils;
 
 /**
  * 
@@ -17,16 +23,19 @@ import com.xfhotel.hotel.service.FileService;
 @Service
 public class FileServiceImpl implements FileService {
 
+	private static final Logger logger = Logger.getLogger(FileServiceImpl.class.getSimpleName());
+	
 	@Override
 	public boolean removeFile(String path) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+		
 	@Override
 	public String saveFile(MultipartFile file, String path) {
-		String type = null;// 鏂囦欢绫诲瀷
-		String fileName = file.getOriginalFilename();// 鏂囦欢鍘熷悕绉�
+		String type = null;// 
+		String fileName = file.getOriginalFilename();// 
 		System.out.println(path);
 		type = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length())
 				: null;
@@ -56,5 +65,37 @@ public class FileServiceImpl implements FileService {
 		}
 		return null;
 	}
+
+
+	@Override
+	public String cropImage(MultipartFile image, JSONObject imageData, String webRoot) {
+		try {
+			File source = new File(FileUtil.getTempDir(webRoot)+image.getOriginalFilename());
+			image.transferTo(source);
+			File target = new File(FileUtil.getImageDir(webRoot)+FileUtil.getUUName()+".jpg");
+			int x = imageData.getInt("x");
+			int y = imageData.getInt("y");
+			int w = imageData.getInt("width");
+			int h = imageData.getInt("height");
+			ImageUtils.crop(source, target, x, y, w, h);
+			System.out.println(target.getAbsolutePath());
+			return target.getName();
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+
 
 }

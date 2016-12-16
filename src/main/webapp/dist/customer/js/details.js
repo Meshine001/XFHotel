@@ -1,31 +1,50 @@
 $(document).ready(function() {
-
+	//修改详细信息
+	$('#modify').click(function(){
+		$('#education').val($('#education-select').val());
+		console.log($('#education').val());
+		$.ajax({
+			cache : true,
+			type : "POST",
+			url : "./modify",
+			data : $('#details-form').serialize(),
+			async : false,
+			error : function(request) {
+				alert("连接异常！");
+			},
+			success : function(data) {
+				if (data.statusCode == 0) {
+					alert(data.content);
+				} else {
+					alert("修改成功");
+					location.reload();
+				}
+			}
+		});
+	});
+	
+	
+	
+	
+	//图片裁剪
 	'use strict';
 	var $avatarView = $('.avatar-view');
+	var $avatarImg = $('.avatar-view img');
+	
 	var $avatar = $(".avatar-wrapper").find('img')
 	var $avatarModal = $('#avatar-modal');
 	var $avatarPreview = $avatarModal.find('.avatar-preview');
+	
+	var $formAvatar = $('#avatar');
 	
 	var $avatarForm = $('.avatar-form');
 	var $avatarInput = $avatarForm.find('.avatar-input');
 	var $avatarData = $avatarForm.find('.avatar-data');
 	var $avatarSave = $avatarForm.find('.avatar-save');
 	
-	 var options = {
+	var options = {
 		        aspectRatio: 1 / 1,
 		        preview: $avatarPreview,
-		        ready: function (e) {
-		          console.log(e.type);
-		        },
-		        cropstart: function (e) {
-		          console.log(e.type, e.detail.action);
-		        },
-		        cropmove: function (e) {
-		          console.log(e.type, e.detail.action);
-		        },
-		        cropend: function (e) {
-		          console.log(e.type, e.detail.action);
-		        },
 		        crop: function (data) {
 
 		          var json = [
@@ -63,7 +82,14 @@ $(document).ready(function() {
 	        processData: false,
 	        contentType: false,
 	        success:function(data){
-	        	console.log(data);
+	        	if(data.statusCode == 1){
+	        		$avatarImg.attr('src','../images/'+data.content);
+	        		$formAvatar.val(data.content);
+	        		$avatarModal.modal('toggle');
+	        	}
+	        	else{
+	        		alert(data.content);
+	        	}
 	        },
 	        error:function(data){
 	        	alert('连接异常');

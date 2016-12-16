@@ -17,8 +17,7 @@
 	<div class="row placeholders"></div>
 	<div class="row">
 		<div id="crop-avatar" class="col-md-6">
-			<div class="avatar-view" title=""
-				data-original-title="Change Logo Picture">
+			<div class="avatar-view" title="" data-original-title="修改头像">
 				<img src="<%=basePath %>/images/${c.details.avatar}" alt="">
 			</div>
 		</div>
@@ -32,8 +31,7 @@
 					enctype="multipart/form-data" method="post">
 					<div class="modal-header">
 						<button class="close" data-dismiss="modal" type="button">×</button>
-						<h4 class="modal-title" id="avatar-modal-label">Change Logo
-							Picture</h4>
+						<h4 class="modal-title" id="avatar-modal-label">修改头像</h4>
 					</div>
 					<div class="modal-body">
 						<div class="avatar-body">
@@ -69,7 +67,8 @@
 								</div>
 							</div>
 							<div class="row avatar-btns">
-								<div class="col-md-9">
+								<div class="col-md-9" style="display: none;">
+
 									<div class="btn-group">
 										<button class="btn" data-method="rotate" data-option="-90"
 											type="button" title="Rotate -90 degrees">
@@ -85,7 +84,7 @@
 								</div>
 								<div class="col-md-3">
 									<button class="btn btn-success btn-block avatar-save"
-										type="submit">
+										type="button">
 										<i class="fa fa-save"></i> 保存修改
 									</button>
 								</div>
@@ -117,13 +116,27 @@
 			<div class="form-group">
 				<label>性别</label>
 				<div class="radio">
-					<label> <input type="radio" name="sex" id="men" value="男"
-						checked="">男
-					</label>
+					<c:if test="${c.details.sex == '男' }">
+						<label> <input type="radio" name="sex" id="men" value="男"
+							checked="checked">男
+						</label>
+					</c:if>
+					<c:if test="${c.details.sex != '男' }">
+						<label> <input type="radio" name="sex" id="men" value="男">男
+						</label>
+					</c:if>
 				</div>
 				<div class="radio">
-					<label> <input type="radio" name="sex" id="women" value="女">女
-					</label>
+					<c:if test="${c.details.sex == '女' }">
+						<label> <input type="radio" name="sex" id="women"
+							value="女" checked="checked">女
+						</label>
+					</c:if>
+					<c:if test="${c.details.sex != '女' }">
+						<label> <input type="radio" name="sex" id="women"
+							value="女">女
+						</label>
+					</c:if>
 				</div>
 			</div>
 			<div class="form-group" style="display: none;">
@@ -139,7 +152,7 @@
 				<input type="hidden" id="education" name="education"
 					value="${c.details.education}"> <label>教育程度</label> <select
 					class="form-control" id="education-select">
-					<c:if test="${c.details.education == null }">
+					<c:if test="${c.details.education != null }">
 						<option>${c.details.education}</option>
 					</c:if>
 					<c:if test="${c.details.education == null }">

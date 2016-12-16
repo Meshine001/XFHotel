@@ -8,4 +8,7 @@ public interface CustomerService {
 	public boolean register(Customer c,CustomerDetails details);
 	public Customer modify(CustomerDetails c,int cId);
 	public boolean checkTel(String tel);
+	public void logout();
+	
+	public String changePsd(String oldPsd,String psd,int id);
 }
