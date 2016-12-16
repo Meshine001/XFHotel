@@ -8,6 +8,8 @@ $(document).ready(function() {
 	
 	var $avatarForm = $('.avatar-form');
 	var $avatarInput = $avatarForm.find('.avatar-input');
+	var $avatarData = $avatarForm.find('.avatar-data');
+	var $avatarSave = $avatarForm.find('.avatar-save');
 	
 	 var options = {
 		        aspectRatio: 1 / 1,
@@ -33,7 +35,7 @@ $(document).ready(function() {
 	                  '"width":' + data.width,
 	                  '"rotate":' + data.rotate + '}'
 	                ].join();
-		          console.log(json);
+		          $avatarData.val(json);
 		        },
 		        zoom: function (e) {
 		          console.log(e.type, e.detail.ratio);
@@ -48,6 +50,25 @@ $(document).ready(function() {
 
 	$avatarModal.modal({
 		show : false
+	});
+	
+	$avatarSave.click(function() {
+		var url = $avatarForm.attr('action');
+		var data = new FormData($avatarForm[0]);
+		$.ajax(url,{
+			headers: {'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
+	        type: 'post',
+	        data: data,
+	        dataType: 'json',
+	        processData: false,
+	        contentType: false,
+	        success:function(data){
+	        	console.log(data);
+	        },
+	        error:function(data){
+	        	alert('连接异常');
+	        }
+		});
 	});
 
 	// 点击头像触发

@@ -19,7 +19,7 @@
 		<div id="crop-avatar" class="col-md-6">
 			<div class="avatar-view" title=""
 				data-original-title="Change Logo Picture">
-				<img src="${c.details.avatar}" alt="">
+				<img src="<%=basePath %>/images/${c.details.avatar}" alt="">
 			</div>
 		</div>
 	</div>
