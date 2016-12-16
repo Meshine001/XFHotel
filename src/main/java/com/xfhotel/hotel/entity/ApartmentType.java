@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="t_apartmentype")
+@Table(name="t_apartmenttype")
 public class ApartmentType {
 	@Id
 	private long id;

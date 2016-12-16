@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xfhotel.hotel.dao.LeaseTypeDAO;
+import com.xfhotel.hotel.dao.impl.LeaseTypeDAOImpl;
 import com.xfhotel.hotel.entity.LeaseType;
 import com.xfhotel.hotel.service.LeaseTypeService;
 
@@ -14,7 +14,7 @@ import com.xfhotel.hotel.service.LeaseTypeService;
 public class LeaseTypeServiceImpl implements LeaseTypeService {
 
 	@Autowired
-	LeaseTypeDAO leaseTypeDAO;
+	LeaseTypeDAOImpl leaseTypeDAO;
 	
 	@Override
 	@Transactional
@@ -28,6 +28,13 @@ public class LeaseTypeServiceImpl implements LeaseTypeService {
 	public List findApartmentTypeLeases(long id) {
 		// TODO Auto-generated method stub
 		return leaseTypeDAO.findApartmentTypeLeases(id);
+	}
+
+	@Override
+	@Transactional
+	public LeaseType findById(Long id) {
+		// TODO Auto-generated method stub
+		return leaseTypeDAO.get(id);
 	}
 
 }
