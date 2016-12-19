@@ -14,7 +14,7 @@ import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.entity.Feature;
 
 @Repository
-public class FeatureDAOImpl implements FeatureDAO {
+public class FeatureDAOImpl extends BaseDAOImpl<Feature, Long> implements FeatureDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -34,5 +34,7 @@ public class FeatureDAOImpl implements FeatureDAO {
 		Feature feature = (Feature) session.load(Feature.class, new Long(id));
 		return feature;
 	}
+	
+
 
 }

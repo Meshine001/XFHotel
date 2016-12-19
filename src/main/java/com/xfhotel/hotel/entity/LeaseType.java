@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "t_leasetype")
+@Table(name = "t_lease_type")
 public class LeaseType {
 	@Id
 	private long id;
