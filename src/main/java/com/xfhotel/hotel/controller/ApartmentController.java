@@ -165,7 +165,7 @@ public class ApartmentController {
 		apartment.setCapacity(capacity);
 		apartment.setLayout(bedroom + "@" + livingroom + "@" + bathroom + "@" + balcony);
 		apartment.setDescription(description);
-		
+
 		// 存储布局图
 		String layoutPic = fileService.saveFile(file, request.getSession().getServletContext().getRealPath("/"));
 		apartment.setLayoutPic(layoutPic);
@@ -281,9 +281,10 @@ public class ApartmentController {
 		return map;
 	}
 
-	@RequestMapping(value = "/editroom")
-	public String editroom(String roomid) {
+	@RequestMapping(value = "/editroom", method = RequestMethod.POST)
+	public String editroom(String roomid, String apartmentid) {
 		session.setAttribute("roomid", roomid);
+		session.setAttribute("apartmentid", apartmentid);
 		List l_facility = facilityService.listFacilities();
 		session.setAttribute("l_facility", l_facility);
 		List l_feature = featureService.listFeatures();
@@ -298,36 +299,35 @@ public class ApartmentController {
 		return map;
 	}
 
-	@RequestMapping(value = "/editroom1")
-	public String editroom1(HttpServletRequest request, String apartment_id, String num_room, String[] id,
-			String[] type, String[] square, String[] direction, String facility) {
-		Apartment apartment = apartmentService.findById(Long.valueOf(apartment_id));
+	@RequestMapping(value = "/updateroom", method = RequestMethod.POST)
+	public String updateroom(RedirectAttributes attr, HttpServletRequest request, String id, String description,
+			String type, String square, String direction, String[] facility, String[] leasetype, String[] leasetypeid) {
+		String apartmentid = (String) session.getAttribute("apartmentid");
+		Room room = roomService.findById(Long.valueOf(id));
 		List lf = facilityService.listFacilities();
-		int n = Integer.valueOf(num_room);
-		for (int i = 0; i < n; i++) {
-			Room room = new Room();
-			room.setApartment(apartment);
-			room.setCapacity("0");
-			room.setDescription(id[i] + "@" + type[i]);
-			room.setSquare(Double.valueOf(square[i]));
-			room.setDirection(direction[i]);
-			room.setPrices(null);
-			List l_facility = facilityService.listFacilities();
-			Iterator it = l_facility.iterator();
-			Set fs = new HashSet();
-			while (it.hasNext()) {
-				Facility f = (Facility) it.next();
-				try {
-					if (request.getParameter(f.getId() + "_" + String.valueOf(i + 1)).equals("1")) {
-						fs.add(f);
-					}
-				} catch (Exception e) {
-					continue;
-				}
+		room.setDescription(description + "@" + type + "@" + "2");
+		room.setSquare(Double.valueOf(square));
+		room.setDirection(direction);
+		room.setPrices(null);
+		List l_facility = facilityService.listFacilities();
+		Set s_facility = new HashSet();
+		if (facility != null) {
+			for (int i = 0; i < facility.length; i++) {
+				Long fid = Long.valueOf(facility[i]);
+				s_facility.add(facilityService.findById(fid));
 			}
-			room.setFacilities(fs);
-			roomService.add(room);
 		}
-		return null;
+		room.setFacilities(s_facility);
+		Set ps = new HashSet();
+		for (int i = 0; i < leasetype.length; i++) {
+			Price p = new Price(Long.valueOf(leasetype[i]), leaseTypeService.findById(Long.valueOf(leasetypeid[i])),
+					null, room);
+			priceService.add(p);
+			ps.add(p);
+		}
+		room.setPrices(ps);
+		roomService.add(room);
+		attr.addAttribute("apartmentid", apartmentid);
+		return "redirect:/admin/apartment/edit";
 	}
 }
