@@ -13,7 +13,7 @@
 	<form action="<%=request.getContextPath()%>/admin/apartment/update"
 		method="POST">
 		<div>
-			<input type="text" id="apartmentid" name="apartmentid" />
+			<input type="hidden" id="apartmentid" name="apartmentid" />
 			<div>
 				地址：<input type="text" id="address" name="address" />
 			</div>
@@ -134,23 +134,27 @@
 					});
 					var roomshtml = "";
 					$.each(data.rooms,function(index,value){
-						roomshtml = roomshtml +
-							"<div>" + value.description
+						var url = "./editroom";
+						var form = $('<form></form>').attr('action',url).attr('method','post');
+						var ul = $('<ul></ul>');
+						var li =  $("<li>"+ value.description
 							+ "&nbsp" + value.type
 							+ "&nbsp" + value.square
 							+ "&nbsp" + value.direction
 							+ "&nbsp" + value.capacity
 							+ "&nbsp" + value.square 
-							+ "<button type='button' onclick='editroom(" + value.id +")' >编辑</button>"
-							+"</div>";
+							+ "</li>");
+						ul.append(li);
+						form.append(ul);
+						var submit = $('<input></input>').attr('type','submit').attr('value','编辑');
+						var inrid = $('<input></input>').attr('type','hidden').attr('value',value.id).attr('name','roomid');
+						var inaid = $('<input></input>').attr('type','hidden').attr('value',data.id).attr('name','apartmentid');
+						form.append(submit).append(inrid).append(inaid);
+						$("#rooms").append(form);
 					});
-					$("#rooms").html(roomshtml);
 				}
 			});
 		});
-		function editroom(id){
-			window.location.href = '<%=request.getContextPath()%>/admin/apartment/editroom?roomid='+ id;
-		}
 	</script>
 	<script type="text/javascript">
 			document.getElementById("lease").style.display = "none";
@@ -175,7 +179,7 @@
 								htmltext = htmltext + "<div>";
 								htmltext = htmltext
 										+ types
-										+ "<input type='text' id='leasetypeid"+ids+"' name='leasetypeid'/>"
+										+ "<input type='hidden' id='leasetypeid"+ids+"' name='leasetypeid'/>"
 										+ "<input type='text' id='leasetype"+ids+"' name='leasetype' />";
 								htmltext = htmltext + "</div>";
 							}
