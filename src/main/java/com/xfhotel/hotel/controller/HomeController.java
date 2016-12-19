@@ -1,7 +1,9 @@
 package com.xfhotel.hotel.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,7 @@ import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.LayoutType;
 import com.xfhotel.hotel.support.LeasePrice;
+import com.xfhotel.hotel.support.LeaseType;
 import com.xfhotel.hotel.support.RoomStatus;
 import com.xfhotel.hotel.support.Subway;
 
@@ -51,8 +54,15 @@ public class HomeController {
 		session.setAttribute("areas", Area.getAreas());
 		session.setAttribute("subways", Subway.getSubways());
 		session.setAttribute("leasePrices", LeasePrice.getPrices());
+		session.setAttribute("leaseTypes", LeaseType.getLeaseTypes());
 		session.setAttribute("layoutTypes", LayoutType.getLayouts());
-		session.setAttribute("features", featrueService.listFeatures());
+		List<Feature> fs = featrueService.listFeatures();
+		List<com.xfhotel.hotel.support.Feature> features = new ArrayList<com.xfhotel.hotel.support.Feature>();
+		for(Feature f:fs){
+			features.add(new com.xfhotel.hotel.support.Feature((int)f.getId(), f.getDescription()));
+		}
+		com.xfhotel.hotel.support.Feature.setFeatures(features);
+		session.setAttribute("features",com.xfhotel.hotel.support.Feature.getFeatures());
 		session.setAttribute("roomStatus", RoomStatus.getStatusArray());
 		return "/customer/list";
 	}
