@@ -23,8 +23,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.ApartmentType;
 import com.xfhotel.hotel.entity.Facility;
@@ -36,10 +38,12 @@ import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.ApartmentTypeService;
 import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FeatureService;
+import com.xfhotel.hotel.service.FileService;
 import com.xfhotel.hotel.service.LeaseTypeService;
 import com.xfhotel.hotel.service.PriceService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.service.impl.ApartmentServiceImpl;
+import com.xfhotel.hotel.support.Message;
 
 @Controller
 @RequestMapping("/admin/apartment")
@@ -59,8 +63,55 @@ public class ApartmentController {
 	ApartmentTypeService apartmentTypeService;
 	@Autowired
 	PriceService priceService;
+
+	@Autowired
+	FileService fileService;
 	@Autowired
 	HttpSession session;
+
+	@RequestMapping(value = "/features/add", method = RequestMethod.POST)
+	public @ResponseBody Message addFeatures(String description) {
+		Feature f = featureService.add(description);
+		if (f == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
+		} else {
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, f);
+		}
+
+	}
+
+	@RequestMapping(value = "/features/delete", method = RequestMethod.POST)
+	public @ResponseBody Message deleteFeatures(Feature f) {
+		try {
+			featureService.delete(f);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "删除成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "删除失败");
+	}
+
+	@RequestMapping(value = "/features/update", method = RequestMethod.POST)
+	public @ResponseBody Message updateFeatures(Feature f) {
+		try {
+			featureService.update(f);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+	}
+
+	@RequestMapping(value = "/features", method = RequestMethod.GET)
+	public @ResponseBody Message features() {
+		List featrues = featureService.listFeatures();
+		if (!featrues.isEmpty()) {
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, featrues);
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "暂时没有特色信息");
+	}
 
 	@RequestMapping(value = "/init")
 	public String addApartment(HttpServletRequest request) {
@@ -103,7 +154,9 @@ public class ApartmentController {
 			String totalfloor, String direction, String square, String capacity, String bedroom, String livingroom,
 			String bathroom, String balcony, String description, String[] facility, String[] feature,
 			String apartmenttype, String type, String num_room, String[] leasetypeid, String[] leasetype,
-			RedirectAttributes attr) {
+
+			MultipartFile file, RedirectAttributes attr) {
+
 		Apartment apartment = new Apartment();
 		apartment.setAddress(address + "@" + community + "@" + num_building);
 		apartment.setFloor(floor + "@" + totalfloor);
@@ -112,6 +165,10 @@ public class ApartmentController {
 		apartment.setCapacity(capacity);
 		apartment.setLayout(bedroom + "@" + livingroom + "@" + bathroom + "@" + balcony);
 		apartment.setDescription(description);
+		
+		// 存储布局图
+		String layoutPic = fileService.saveFile(file, request.getSession().getServletContext().getRealPath("/"));
+		apartment.setLayoutPic(layoutPic);
 		Set s_facility = new HashSet();
 		if (facility != null) {
 			for (int i = 0; i < facility.length; i++) {
@@ -134,7 +191,8 @@ public class ApartmentController {
 		if (type.equals("1") || type.equals("3")) {
 			Set ps = new HashSet();
 			for (int i = 0; i < leasetype.length; i++) {
-				Price p = new Price(Long.valueOf(leasetype[i]), leaseTypeService.findById(Long.valueOf(leasetypeid[i])), null, null);
+				Price p = new Price(Long.valueOf(leasetype[i]), leaseTypeService.findById(Long.valueOf(leasetypeid[i])),
+						null, null);
 				priceService.add(p);
 				ps.add(p);
 			}
@@ -156,13 +214,13 @@ public class ApartmentController {
 		attr.addAttribute("apartmentid", apartment.getId());
 		return "redirect:/admin/apartment/edit";
 	}
-	
+
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(HttpServletRequest request, String apartmentid, String address, String community, String num_building, String floor,
-			String totalfloor, String direction, String square, String capacity, String bedroom, String livingroom,
-			String bathroom, String balcony, String description, String[] facility, String[] feature,
-			String apartmenttype, String type, String num_room, String[] leasetypeid, String[] leasetype,
-			RedirectAttributes attr) {
+	public String update(HttpServletRequest request, String apartmentid, String address, String community,
+			String num_building, String floor, String totalfloor, String direction, String square, String capacity,
+			String bedroom, String livingroom, String bathroom, String balcony, String description, String[] facility,
+			String[] feature, String apartmenttype, String type, String num_room, String[] leasetypeid,
+			String[] leasetype, RedirectAttributes attr) {
 		Apartment apartment = apartmentService.findById(Long.valueOf(apartmentid));
 		apartment.setAddress(address + "@" + community + "@" + num_building);
 		apartment.setFloor(floor + "@" + totalfloor);
@@ -192,7 +250,8 @@ public class ApartmentController {
 		if (type.equals("1") || type.equals("3")) {
 			Set ps = new HashSet();
 			for (int i = 0; i < leasetype.length; i++) {
-				Price p = new Price(Long.valueOf(leasetype[i]), leaseTypeService.findById(Long.valueOf(leasetypeid[i])), apartment, null);
+				Price p = new Price(Long.valueOf(leasetype[i]), leaseTypeService.findById(Long.valueOf(leasetypeid[i])),
+						apartment, null);
 				priceService.add(p);
 				ps.add(p);
 			}

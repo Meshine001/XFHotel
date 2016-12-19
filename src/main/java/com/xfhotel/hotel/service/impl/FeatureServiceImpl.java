@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.FeatureDAO;
+import com.xfhotel.hotel.dao.impl.FeatureDAOImpl;
 import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.service.FeatureService;
 
@@ -14,8 +15,8 @@ import com.xfhotel.hotel.service.FeatureService;
 public class FeatureServiceImpl implements FeatureService {
 
 	@Autowired
-	FeatureDAO featureDAO;
-	
+	FeatureDAOImpl featureDAO;
+
 	@Override
 	@Transactional
 	public List<Feature> listFeatures() {
@@ -28,5 +29,32 @@ public class FeatureServiceImpl implements FeatureService {
 	public Feature findById(Long id) {
 		// TODO Auto-generated method stub
 		return featureDAO.findById(id);
+	}
+
+	@Transactional
+	@Override
+	public Feature add(String description) {
+		Feature f = new Feature();
+		try {
+			f.setDescription(description);
+			featureDAO.saveOrUpdate(f);
+			return f;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Transactional
+	@Override
+	public void delete(Feature t) {
+		featureDAO.delete(t);
+	}
+
+	@Transactional
+	@Override
+	public void update(Feature t) {
+		featureDAO.update(t);
 	}
 }

@@ -46,8 +46,8 @@
 						<hr>
 					</div>
 					<div class="panel-body">
-						<div class="row">
-							<div class="col-lg-12">
+						<div class="row clearfix">
+							<div class="col-md-12 column">
 								<form id="login-form" action="" method="post" role="form"
 									style="display: block;">
 									<div class="form-group">
@@ -83,14 +83,17 @@
 								<form id="register-form" action="" method="post" role="form"
 									style="display: none;">
 									<div class="form-group">
-										<input type="tel" name="tel" id="tel" tabindex="1"
+										<input type="text" name="tel" id="reg-tel" tabindex="1"
 											class="form-control" placeholder="请输入手机号" value="">
 									</div>
 									<div class="form-group">
-										<input type="text" name="validateCode" id="validate-code"
-											tabindex="1" class="form-control" placeholder="请输入验证码"
-											value=""> <span class="input-group-addon"><button
-												type="button" class="btn btn-primary">获取验证码</button></span>
+										<div class="input-group">
+											
+											<input type="text" name="validateCode" id="validate-code"
+												tabindex="1" class="form-control" placeholder="请输入验证码"
+												value="">
+												<div class="input-group-addon"><button type="button" class="btn btn-info">获取验证码</button></div>
+										</div>
 									</div>
 									<div class="form-group">
 										<input type="password" name="password" id="password"

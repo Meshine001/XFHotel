@@ -1,20 +1,8 @@
 $(document).ready(function() {
-	
-	$("#education-select").change(function() {
-		console.log($(this).children('option:selected').val() );
-		$("#education").val($(this).children('option:selected').val());//这就是selected的值
-	});
-	$("#declaration-area").change(function() {
-		$("#declaration").val($("#declaration-area").val());
-	});
-	$("#hobby-area").change(function() {
-		$("#hobby").val($("#hobby-area").val());
-	});
-	
-	/**
-	 * 修改个人信息
-	 */
-	$("#modify").click(function() {
+	//修改详细信息
+	$('#modify').click(function(){
+		$('#education').val($('#education-select').val());
+		console.log($('#education').val());
 		$.ajax({
 			cache : true,
 			type : "POST",
@@ -25,69 +13,121 @@ $(document).ready(function() {
 				alert("连接异常！");
 			},
 			success : function(data) {
-				alert(data.content);
-				if (data.statusCode == 0) {
-					
-				} else {
-					location.reload()
-				}
-
-			}
-		});
-	});
-	/**
-	 * 上传头像
-	 */
-	$("#uploadAvatar").click(function() {
-		$.ajaxFileUpload({
-			url : "../file/upload", // submit to UploadFileServlet
-			dataType: 'json',//返回数据的类型  
-			secureuri : false,
-			fileElementId : 'file',
-			success : function(data, status) {
-				console.log(data);
 				if (data.statusCode == 0) {
 					alert(data.content);
 				} else {
-					$("#avatar").val(data.content);
-					$("#avatarUrl").attr("src", "../images/" + data.content);
-					$('#myModal').modal('toggle');
+					alert("修改成功");
+					location.reload();
 				}
-			},
-			error : function(data, status, e) {
-				alert("连接异常！");
 			}
 		});
 	});
+	
+	
+	
+	
+	//图片裁剪
+	'use strict';
+	var $avatarView = $('.avatar-view');
+	var $avatarImg = $('.avatar-view img');
+	
+	var $avatar = $(".avatar-wrapper").find('img')
+	var $avatarModal = $('#avatar-modal');
+	var $avatarPreview = $avatarModal.find('.avatar-preview');
+	
+	var $formAvatar = $('#avatar');
+	
+	var $avatarForm = $('.avatar-form');
+	var $avatarInput = $avatarForm.find('.avatar-input');
+	var $avatarData = $avatarForm.find('.avatar-data');
+	var $avatarSave = $avatarForm.find('.avatar-save');
+	
+	var options = {
+		        aspectRatio: 1 / 1,
+		        preview: $avatarPreview,
+		        crop: function (data) {
 
-
-	/**
-	 * 预览头像
-	 */
-	$("#file").change(function() {
-		// 判断是否支持FileReader
-		if (window.FileReader) {
-			var reader = new FileReader();
-		} else {
-			alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
-		}
-		console.log($(this));
-		// 获取文件
-		var file = $(this).prop("files")[0];
-		var imageType = /^image\//;
-		// 是否是图片
-		if (!imageType.test(file.type)) {
-			alert("请选择图片！");
-			return;
-		}
-		// 读取完成
-		reader.onload = function(e) {
-			// 获取图片dom
-			var img = document.getElementById("preAvatar");
-			// 图片路径设置为读取的图片
-			img.src = e.target.result;
-		};
-		reader.readAsDataURL(file);
+		          var json = [
+	                  '{"x":' + data.x,
+	                  '"y":' + data.y,
+	                  '"height":' + data.height,
+	                  '"width":' + data.width,
+	                  '"rotate":' + data.rotate + '}'
+	                ].join();
+		          $avatarData.val(json);
+		        },
+		        zoom: function (e) {
+		          console.log(e.type, e.detail.ratio);
+		        }
+		      };
+	 
+	 var cropper = $avatar.cropper(options);
+	 
+	$avatarView.tooltip({
+		placement : 'bottom'
 	});
 
-})
+	$avatarModal.modal({
+		show : false
+	});
+	
+	$avatarSave.click(function() {
+		var url = $avatarForm.attr('action');
+		var data = new FormData($avatarForm[0]);
+		$.ajax(url,{
+			headers: {'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
+	        type: 'post',
+	        data: data,
+	        dataType: 'json',
+	        processData: false,
+	        contentType: false,
+	        success:function(data){
+	        	if(data.statusCode == 1){
+	        		$avatarImg.attr('src','../images/'+data.content);
+	        		$formAvatar.val(data.content);
+	        		$avatarModal.modal('toggle');
+	        	}
+	        	else{
+	        		alert(data.content);
+	        	}
+	        },
+	        error:function(data){
+	        	alert('连接异常');
+	        }
+		});
+	});
+
+	// 点击头像触发
+	$avatarView.click(function() {
+		$avatarModal.modal('show');
+		initPreview();
+	});
+
+	// 选择图片触发
+	$avatarInput.change(function() {
+		var files = $avatarInput.prop('files'), file;
+		if (files.length > 0) {
+			file = files[0];
+			if (/^image\/\w+/.test(file.type)) {
+				$avatar.attr('src',URL.createObjectURL(file));
+				 $avatar.cropper('destroy');
+				cropper = $avatar.cropper(options);
+				initPreview();				
+			}else{
+				alert("请选择图片！");
+			}
+		}
+	});
+	
+	
+	/**
+	 * 初始化预览
+	 * 
+	 * @returns
+	 */
+	function initPreview() {
+		var url = $avatar.attr('src');
+		$avatarPreview.empty().html('<img src="' + url + '">');
+	}
+
+});

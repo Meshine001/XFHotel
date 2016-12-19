@@ -15,8 +15,7 @@
 	href="<%=basePath%>/dist/admin/assets/css/vendor.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/admin/assets/css/flat-admin.css">
-
-<!-- Theme -->
+<!-- 
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/admin/assets/css/theme/blue-sky.css">
 <link rel="stylesheet" type="text/css"
@@ -25,7 +24,8 @@
 	href="<%=basePath%>/dist/admin/assets/css/theme/red.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/admin/assets/css/theme/yellow.css">
-		<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
+	 -->
+<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
 </head>
 <body>
 	<div class="app app-default">
@@ -46,7 +46,7 @@
 							<div class="title">控制面板</div>
 					</a></li>
 
-					<li><a href="/hotel/admin/apartment/admin/apartment/init">
+					<li><a href="<%=basePath%>/admin/apartment/init">
 							<div class="icon">
 								<i class="fa fa-bed" aria-hidden="true"></i>
 							</div>
@@ -223,5 +223,6 @@
 		src="<%=basePath%>/dist/admin/assets/js/vendor.js"></script>
 	<script type="text/javascript"
 		src="<%=basePath%>/dist/admin/assets/js/app.js"></script>
+	<sitemesh:write property='my_script' />
 </body>
 </html>

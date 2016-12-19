@@ -1,5 +1,7 @@
 package com.xfhotel.hotel.service.impl;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +19,10 @@ public class CustomerServiceImpl implements CustomerService {
 	CustomerDAOImpl customerDAO;
 	@Autowired
 	CustomerDetailsDAOImpl customerDetailsDAO;
-
+	
+	@Autowired
+	HttpSession session;
+	
 	@Transactional
 	@Override
 	public Customer login(String tel, String password) {
@@ -56,6 +61,25 @@ public class CustomerServiceImpl implements CustomerService {
 		String[] values = { tel };
 		Customer c = customerDAO.getByHQL(hql, values);
 		return c != null ? true : false;
+	}
+	
+	
+	@Transactional
+	@Override
+	public String changePsd(String oldPsd, String psd,int id) {
+		Customer c = customerDAO.get(id);
+		if(c.getPassword().equals(oldPsd)){
+			c.setPassword(psd);
+			customerDAO.update(c);
+			return "修改成功";
+		}else{
+			return "原密码错误";
+		}
+	}
+
+	@Override
+	public void logout() {
+		session.removeAttribute("c");
 	}
 
 }
