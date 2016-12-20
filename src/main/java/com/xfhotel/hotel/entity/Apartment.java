@@ -77,7 +77,8 @@ public class Apartment {
 	
 	private String description;//enviroment,transportation,etc.
 
-	//private Set<File> pics;//
+	private String layoutPic;
+//	private Set<String> pics;//
 
 	public Apartment() {
 		// TODO Auto-generated constructor stub
@@ -210,5 +211,15 @@ public class Apartment {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public String getLayoutPic() {
+		return layoutPic;
+	}
+
+	public void setLayoutPic(String layoutPic) {
+		this.layoutPic = layoutPic;
+	}
+	
+	
 
 }

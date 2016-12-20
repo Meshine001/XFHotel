@@ -1,9 +1,4 @@
-
-
-
-
 $(function() {
-	
 
 	$('#login-form-link').click(function(e) {
 		$("#login-form").delay(100).fadeIn(100);
@@ -12,8 +7,7 @@ $(function() {
 		$(this).addClass('active');
 		e.preventDefault();
 	});
-	
-	
+
 	$('#register-form-link').click(function(e) {
 		$("#register-form").delay(100).fadeIn(100);
 		$("#login-form").fadeOut(100);
@@ -73,16 +67,25 @@ $(function() {
 	/**
 	 * 验证手机
 	 */
-	$("#tel").blur(function() {
-		var tel = $("#tel").val();
-		if (tel == '')
-			alert("手机号不能为空！");
-		var reg = /^1[3|4|5|7|8][0-9]{9}$/; // 验证规则
-		if (!reg.test(tel)) {
+	$("#reg-tel").blur(function() {
+		var tel = $("#reg-tel").val();
 
-		} else {
+		$.ajax({
+			cache : true,
+			type : "GET",
+			url : "./customer/checkTel?tel=" + tel,
+			async : false,
+			error : function(request) {
 
-		}
+			},
+			success : function(data) {
+				if (data) {
+					
+				} else {
+					
+				}
+			}
+		});
 
 	});
 

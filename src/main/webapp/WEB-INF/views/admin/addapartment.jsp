@@ -1,21 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	String basePath = request.getContextPath();
+%>
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>-青舍都市公寓-西安租房_西安合租</title>
+<meta charset="utf-8">
 </head>
 <body>
 	<my_body>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-6">
 			<div class="card">
 				<div class="card-header">添加房源</div>
 				<div class="card-body">
-					<form action="" class="form form-horizontal">
+					<form action="<%=request.getContextPath()%>/admin/apartment/add"
+						method="POST" class="form form-horizontal" enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-md-3 control-label">地址</label>
 							<div class="col-md-9">
@@ -73,8 +76,10 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">总面积</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="square">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder=""
+										name="square"><span class="input-group-addon">平方</span>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
@@ -105,7 +110,7 @@
 										name="bathroom"> <span class="input-group-addon">卫</span>
 								</div>
 							</div>
-							<div class="col-sm-2">
+							<div class="col-sm-3">
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder=""
 										name="balcony"> <span class="input-group-addon">阳台</span>
@@ -113,9 +118,16 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">特色</label>
+							<label class="col-md-3 control-label">特色<small><a
+									id="edit-feature">编辑</a></small></label>
+
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder="">
+								<c:forEach items="${l_feature}" var="feature" varStatus="p">
+									<div class="checkbox checkbox-inline">
+										<input type="checkbox" id="fe-${feature.id}" name="feature" value="${feature.id}"> <label
+											for="fe-${feature.id}">${feature.description } </label>
+									</div>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="form-group">
@@ -127,14 +139,29 @@
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">布局图</label>
+							<!-- Button trigger modal -->
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder="" name="">
+								<input type="file" class="btn btn-primary btn-lg"
+									id="layout-image-input" name="file" />
+							</div>
+							<div class="col-md-9">
+								<div class="col-md-3">
+									<img id="layout-image" alt=""
+										src="http://mf.znimg.com/thumb/dress_138x84/house_img/734/bcf19a0e72b41ef93d41f49374167924.jpg"
+										class="img-thumbnail">
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">设施</label>
+							<label class="col-md-3 control-label">设施<small><a>编辑</a></small></label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder="" name="">
+								<c:forEach items="${l_facility}" var="facility" varStatus="p">
+									<div class="checkbox checkbox-inline">
+										<input type="checkbox" id="fa-${facility.id}" name="facility"
+											value="${facility.id}"> <label
+											for="fa-${facility.id}">${facility.description }</label>
+									</div>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="form-group">
@@ -147,25 +174,31 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
-								<select name="apartmenttype"
-									onchange="type1change(this.options[this.options.selectedIndex].value)">
+							<input type="hidden" name="apartmenttype" value="" id="apartment-type-input">
+								<select id="apartment-type">
 									<option value="-1" selected="selected">请选择</option>
-
-								</select> <select name="type"
-									onchange="type2change(this.options[this.options.selectedIndex].value)">
+									<c:forEach items="${l_apartmenttype}" var="apartmenttype"
+										varStatus="p">
+										<option value="${apartmenttype.id }">${apartmenttype.description }</option>
+									</c:forEach>
+								</select> <select name="type" id="lease-type">
 									<option value="0">请选择</option>
 									<option value="1">单租型</option>
 									<option value="2">合租型</option>
-									<option value="3">混合型</option>
 								</select>
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">价格</label>
+							<div id="lease-price" class="col-md-9"></div>
+						</div>
 
+						<br>
 						<div class="form-footer">
 							<div class="form-group">
 								<div class="col-md-9 col-md-offset-3">
-									<button type="submit" class="btn btn-primary">Save</button>
-									<button type="button" class="btn btn-default">Cancel</button>
+									<button type="submit" class="btn btn-primary">保存</button>
+									<button type="button" class="btn btn-default">取消</button>
 								</div>
 							</div>
 						</div>
@@ -175,131 +208,38 @@
 
 		</div>
 	</div>
-	<form action="<%=request.getContextPath()%>/admin/apartment/add"
-		method="POST">
-		<div>
-			<div>
-				地址：<input type="text" name="address" />
-			</div>
-			<div>
-				小区名称：<input type="text" name="community" />
-			</div>
-			<div>
-				楼号：<input type="text" name="num_building" />
-			</div>
-			<div>
-				楼层：第<input type="text" name="floor" />层&nbsp;共<input type="text"
-					name="totalfloor" />层
-			</div>
-			<div>
-				朝向： <select name="direction">
-					<option value="e">东</option>
-					<option value="se">东南</option>
-					<option value="s">南</option>
-					<option value="sw">西南</option>
-					<option value="w">西</option>
-					<option value="nw">西北</option>
-					<option value="n">北</option>
-					<option value="ne">东北</option>
-				</select>
-			</div>
-			<div>
-				面积：<input type="text" name="square" /> 人数：<input type="text"
-					name="capacity" />
-			</div>
-			<div>
-				房屋户型：<input type="text" name="bedroom" />室<input type="text"
-					name="livingroom" />厅<input type="text" name="bathroom" />卫<input
-					type="text" name="balcony" />阳台
-			</div>
-			<div>
-				特色：
-				<c:forEach items="${l_feature}" var="feature" varStatus="p">
-					<input type="checkbox" name="feature" value="${feature.id}"> ${feature.description }
-				</c:forEach>
-			</div>
-			<div>
-				备注：<input type="text" name="description">
-			</div>
-			<div>布局图：</div>
-		</div>
-		<div>
-			设施：
-			<c:forEach items="${l_facility}" var="facility" varStatus="p">
-				<input type="checkbox" name="facility" value="${facility.id}"> ${facility.description }
-		</c:forEach>
-		</div>
-		<div>
-			房间设置：
-			<div>
-				总房间数：<input type="text" name="num_room">
-			</div>
-		</div>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/dist/commons/jquery/jquery-3.1.1.js"></script>
-		<script type="text/javascript">
-			document.getElementById("lease").style.display = "none";
-			function type1change(op) {
-			if(op!=-1){
-				$.ajax({
-					async : false,
-					cache : false,
-					type : 'POST',
-					dataType : 'json',
-					data : {'type':0,'id':op},
-					url : "<%=request.getContextPath()%>
-			/admin/apartment/getleasetype",//请求的action路径
-								error : function() {//请求失败处理函数
-									alert("获取数据失败！");
-								},
-								success : function(data) {
-									var leasetypes = data.leasetype;
-									var leasetypeids = data.leasetypeid;
-									var htmltext = "";
-									for ( var i in leasetypes) {
-										var ids = leasetypeids[i];
-										var types = leasetypes[i];
-										htmltext = htmltext + "<div>";
-										htmltext = htmltext
-												+ types
-												+ "<input type='text' name='leasetypes" + ids +"'>";
-										htmltext = htmltext + "</div>";
-									}
-									$("#lease").html(htmltext);
-								}
-							});
-				} else
-					$("#lease").html("");
-			}
-			function type2change(op) {
-				if (op == 1)
-					document.getElementById("lease").style.display = "";
-				if (op == 2)
-					document.getElementById("lease").style.display = "none";
-				if (op == 3)
-					document.getElementById("lease").style.display = "";
-			}
-		</script>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="feature-modal" tabindex="-1" role="dialog"
+		aria-labelledby="feature-modal-label" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="feature-modal-lael">特色编辑</h4>
+				</div>
+				<div class="modal-body">
+					<ul id="features-li">
 
-		<div>
-			出租类型：<select name="apartmenttype"
-				onchange="type1change(this.options[this.options.selectedIndex].value)">
-				<option value="-1" selected="selected">请选择</option>
-				<c:forEach items="${l_apartmenttype}" var="apartmenttype"
-					varStatus="p">
-					<option value="${apartmenttype.id }">${apartmenttype.description }</option>
-				</c:forEach>
-			</select> <select name="type"
-				onchange="type2change(this.options[this.options.selectedIndex].value)">
-				<option value="0">请选择</option>
-				<option value="1">单租型</option>
-				<option value="2">合租型</option>
-				<option value="3">混合型</option>
-			</select>
+					</ul>
+					<form action="" id="add-feature-form">
+						<input type="text" name="description">
+						<button type="button" id="add-feature">添加</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary">提交更改</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
 		</div>
-		<div id="lease" style="display: none;"></div>
-		<button type="submit">提交</button>
-	</form>
+		<!-- /.modal -->
+	</div>
+
 	</my_body>
+
+	<my_script> <script type="text/javascript"
+		src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script></my_script>
 </body>
 </html>

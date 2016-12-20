@@ -5,18 +5,27 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "t_feature")
 public class Feature {
+	
 	@Id
+	@GeneratedValue(generator="featuregenerator")
+	@GenericGenerator(name="featuregenerator",strategy="increment")
 	private long id;
 	private String description;
 	
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY,mappedBy="features")
 	private Set<Apartment> apartments;
 	

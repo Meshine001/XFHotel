@@ -72,7 +72,7 @@ public class Room {
 		return square;
 	}
 	public void setSquare(double square) {
-		square = square;
+		this.square = square;
 	}
 	public String getDirection() {
 		return direction;

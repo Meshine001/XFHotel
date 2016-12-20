@@ -27,21 +27,43 @@ public class CustomerController {
 	@Autowired
 	HttpSession session;
 
-	
-	
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String loginRegPage(String forword,Model model) {
-		model.addAttribute("forword", forword);
-		return "/customer/login-reg";
+	/**
+	 * 修改密码
+	 * @param oldPsd
+	 * @param psd
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/changePsd", method = RequestMethod.POST)
+	public @ResponseBody Message changePsd(String oldPsd,String psd,int id){
+		String content = customerService.changePsd(oldPsd, psd, id);
+		if("修改成功".equals(content)){
+			customerService.logout();
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, content);
+		}else{
+			return new Message(Constants.MESSAGE_ERR_CODE,content);
+		}
+		
 	}
 	
-	
+
+	/**
+	 * 用户登出
+	 * @return
+	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout() {
-		session.removeAttribute("c");
+		customerService.logout();
 		return "redirect:/";
 	}
 
+	/**
+	 * 用户登录
+	 * @param tel
+	 * @param password
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public @ResponseBody Message login(String tel, String password, Model model) {
 		Customer c = customerService.login(tel, password);
@@ -55,6 +77,12 @@ public class CustomerController {
 
 	}
 
+	/**
+	 * 修改个人信息
+	 * @param c 个人详细信息
+	 * @param customerId 
+	 * @return
+	 */
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public @ResponseBody Message modify(CustomerDetails c, int customerId) {
 		try {
@@ -69,6 +97,13 @@ public class CustomerController {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
 	}
 
+	/**
+	 * 注册
+	 * @param tel
+	 * @param password
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	public @ResponseBody Message reg(String tel, String password, Model model) {
 		if (customerService.checkTel(tel)) {
@@ -90,6 +125,14 @@ public class CustomerController {
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
 
+	
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String loginRegPage(String forword,Model model) {
+		model.addAttribute("forword", forword);
+		return "/customer/login-reg";
+	}
+	
+	
 	@RequestMapping(value = "/reservation", method = RequestMethod.GET)
 	public String reservationPage(Model model) {
 		setPage(model, "我的预约", Constants.PAGE_RESERVATION);
@@ -102,13 +145,18 @@ public class CustomerController {
 		return "/customer/details";
 	}
 
-	@RequestMapping(value = "/change_password", method = RequestMethod.GET)
-	public String changePasswordPage(Model model) {
-		setPage(model, "修改密码", Constants.PAGE_CHANGE_PWD);
-		return "/customer/change-password";
+	@RequestMapping(value = "/setting", method = RequestMethod.GET)
+	public String changePasswordPage() {
+		
+		return "/customer/setting";
 	}
 
-	@RequestMapping(value = "/check_tel", method = RequestMethod.GET)
+	/**
+	 * 检查手机是否被注册
+	 * @param tel
+	 * @return true被注册，false未被注册
+	 */
+	@RequestMapping(value = "/checkTel", method = RequestMethod.GET)
 	public @ResponseBody boolean checkTel(String tel) {
 		return customerService.checkTel(tel);
 	}

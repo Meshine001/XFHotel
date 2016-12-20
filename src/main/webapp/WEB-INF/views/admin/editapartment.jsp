@@ -9,70 +9,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<script type="text/javascript"
-		src="<%=request.getContextPath()%>/dist/commons/jquery/jquery-3.1.1.js"></script>
-	<script type="text/javascript">
-		var apartmentid = ${apartmentid};
-		$(document).ready(function(){
-			$.ajax({
-				async : false,
-				cache : false,
-				type : 'POST',
-				dataType : 'json',
-				data : {'apartmentid':apartmentid},
-				url : "<%=request.getContextPath()%>/admin/apartment/getapartment",//请求的action路径
-				error : function() {//请求失败处理函数
-					alert("获取数据失败！");
-				},
-				success : function(data) {
-					$('#address').val(data.address);
-					$('#community').val(data.community);
-					$('#num_building').val(data.num_building);
-					$('#floor').val(data.floor);
-					$('#totalfloor').val(data.totalfloor);
-					$('#square').val(data.square);
-					$('#capacity').val(data.capacity);
-					$('#bedroom').val(data.bedroom);
-					$('#livingroom').val(data.livingroom);
-					$('#bathroom').val(data.bathroom);
-					$('#balcony').val(data.balcony);
-					$('#description').val(data.description);
-					$.each(data.facilities,function(index,value){
-						$('#facility'+value.id).attr('checked',true);
-					});
-					$.each(data.features,function(index,value){
-						$('#feature'+value.id).attr('checked',true);
-					});
-					$('#apartmenttype').val(data.apartmentType);
-					$('#type').val(data.type);
-					type1change(data.apartmentType);
-					type2change(data.type);
-					$.each(data.prices,function(index,value){
-						$('#leasetypes'+value.leasetypeid).val(value.price);
-					});
-					var roomshtml = "";
-					$.each(data.rooms,function(index,value){
-						roomshtml = roomshtml +
-							"<div>" + value.description
-							+ "&nbsp" + value.type
-							+ "&nbsp" + value.square
-							+ "&nbsp" + value.direction
-							+ "&nbsp" + value.capacity
-							+ "&nbsp" + value.square 
-							+ "<button type='button' onclick='editroom(" + value.id +")' >编辑</button>"
-							+"</div>";
-					});
-					$("#rooms").html(roomshtml);
-				}
-			});
-		});
-		function editroom(id){
-			window.location.href = '<%=request.getContextPath()%>/admin/apartment/editroom?roomid='+ id;
-		}
-	</script>
-	<form action="<%=request.getContextPath()%>/admin/apartment/add"
+	<my_body>
+	<form action="<%=request.getContextPath()%>/admin/apartment/update"
 		method="POST">
 		<div>
+			<input type="hidden" id="apartmentid" name="apartmentid" />
 			<div>
 				地址：<input type="text" id="address" name="address" />
 			</div>
@@ -131,52 +72,10 @@
 			房间设置： <input type="hidden" name="num_room" value="0">
 			<div id="rooms"></div>
 		</div>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/dist/commons/jquery/jquery-3.1.1.js"></script>
-		<script type="text/javascript">
-			document.getElementById("lease").style.display = "none";
-			function type1change(op) {
-				$.ajax({
-					async : false,
-					cache : false,
-					type : 'POST',
-					dataType : 'json',
-					data : {'type':0,'id':op},
-					url : "<%=request.getContextPath()%>/admin/apartment/getleasetype",//请求的action路径
-							error : function() {//请求失败处理函数
-								alert("获取数据失败！");
-							},
-							success : function(data) {
-								var leasetypes = data.leasetype;
-								var leasetypeids = data.leasetypeid;
-								var htmltext = "";
-								for ( var i in leasetypes) {
-									var ids = leasetypeids[i];
-									var types = leasetypes[i];
-									htmltext = htmltext + "<div>";
-									htmltext = htmltext
-											+ types
-											+ "<input type='text' id='leasetypes" + ids +"' name='leasetypes" + ids +"'>";
-									htmltext = htmltext + "</div>";
-								}
-								$("#lease").html(htmltext);
-							}
-						});
-			}
-			function type2change(op) {
-				if (op == 1)
-					document.getElementById("lease").style.display = "";
-				if (op == 2)
-					document.getElementById("lease").style.display = "none";
-				if (op == 3)
-					document.getElementById("lease").style.display = "";
-			}
-		</script>
-
 		<div>
 			出租类型：<select id="apartmenttype" name="apartmenttype"
 				onchange="type1change(this.options[this.options.selectedIndex].value)">
-				<option value="0">请选择</option>
+				<option value="-1" selected="selected">请选择</option>
 				<c:forEach items="${l_apartmenttype}" var="apartmenttype"
 					varStatus="p">
 					<option value="${apartmenttype.id }">${apartmenttype.description }</option>
@@ -192,5 +91,111 @@
 		<div id="lease" style="display: none;"></div>
 		<button type="submit">提交</button>
 	</form>
+	<script type="text/javascript">
+		var apartmentid = ${apartmentid};
+		$(document).ready(function(){
+			$.ajax({
+				async : false,
+				cache : false,
+				type : 'POST',
+				dataType : 'json',
+				data : {'apartmentid':apartmentid},
+				url : "<%=request.getContextPath()%>/admin/apartment/getapartment",//请求的action路径
+				error : function() {//请求失败处理函数
+					alert("获取数据失败！");
+				},
+				success : function(data) {
+					$('#apartmentid').val(data.id);
+					$('#address').val(data.address);
+					$('#community').val(data.community);
+					$('#num_building').val(data.num_building);
+					$('#floor').val(data.floor);
+					$('#totalfloor').val(data.totalfloor);
+					$('#square').val(data.square);
+					$('#capacity').val(data.capacity);
+					$('#bedroom').val(data.bedroom);
+					$('#livingroom').val(data.livingroom);
+					$('#bathroom').val(data.bathroom);
+					$('#balcony').val(data.balcony);
+					$('#description').val(data.description);
+					$.each(data.facilities,function(index,value){
+						$('#facility'+value.id).attr('checked',true);
+					});
+					$.each(data.features,function(index,value){
+						$('#feature'+value.id).attr('checked',true);
+					});
+					$('#apartmenttype').val(data.apartmentType);
+					$('#type').val(data.type);
+					type1change(data.apartmentType);
+					type2change(data.type);
+					$.each(data.prices,function(index,value){
+						$('#leasetypeid'+value.leasetypeid).val(value.leasetypeid);
+						$('#leasetype'+value.leasetypeid).val(value.price);
+					});
+					var roomshtml = "";
+					$.each(data.rooms,function(index,value){
+						var url = "./editroom";
+						var form = $('<form></form>').attr('action',url).attr('method','post');
+						var ul = $('<ul></ul>');
+						var li =  $("<li>"+ value.description
+							+ "&nbsp" + value.type
+							+ "&nbsp" + value.square
+							+ "&nbsp" + value.direction
+							+ "&nbsp" + value.capacity
+							+ "&nbsp" + value.square 
+							+ "</li>");
+						ul.append(li);
+						form.append(ul);
+						var submit = $('<input></input>').attr('type','submit').attr('value','编辑');
+						var inrid = $('<input></input>').attr('type','hidden').attr('value',value.id).attr('name','roomid');
+						var inaid = $('<input></input>').attr('type','hidden').attr('value',data.id).attr('name','apartmentid');
+						form.append(submit).append(inrid).append(inaid);
+						$("#rooms").append(form);
+					});
+				}
+			});
+		});
+	</script>
+	<script type="text/javascript">
+			document.getElementById("lease").style.display = "none";
+			function type1change(op) {
+				$.ajax({
+					async : false,
+					cache : false,
+					type : 'POST',
+					dataType : 'json',
+					data : {'type':0,'id':op},
+					url : "<%=request.getContextPath()%>/admin/apartment/getleasetype",//请求的action路径
+						error : function() {//请求失败处理函数
+							alert("获取数据失败！");
+						},
+						success : function(data) {
+							var leasetypes = data.leasetype;
+							var leasetypeids = data.leasetypeid;
+							var htmltext = "";
+							for ( var i in leasetypes) {
+								var ids = leasetypeids[i];
+								var types = leasetypes[i];
+								htmltext = htmltext + "<div>";
+								htmltext = htmltext
+										+ types
+										+ "<input type='hidden' id='leasetypeid"+ids+"' name='leasetypeid'/>"
+										+ "<input type='text' id='leasetype"+ids+"' name='leasetype' />";
+								htmltext = htmltext + "</div>";
+							}
+							$("#lease").html(htmltext);
+						}
+					});
+		}
+		function type2change(op) {
+			if (op == 1)
+				document.getElementById("lease").style.display = "";
+			if (op == 2)
+				document.getElementById("lease").style.display = "none";
+			if (op == 3)
+				document.getElementById("lease").style.display = "";
+		}
+	</script>
+	</my_body>
 </body>
 </html>
