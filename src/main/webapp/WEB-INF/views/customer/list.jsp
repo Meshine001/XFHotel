@@ -69,6 +69,9 @@
 				</div>
 			</div>
 			<div class="col-md-12 column">推荐/价格/面积</div>
+			<div class="listbox">
+			
+			</div>
 			<div class="col-md-12 column">
 				<div class="col-md-4 column">
 					<img width="" height="" class="img-responsive"
@@ -122,5 +125,9 @@
 		</div>
 	</div>
 	</my_body>
+	<my_script>
+			<script src="<%=basePath%>/dist/customer/js/list.js"></script>
+	</my_script>
 </body>
+
 </html>

@@ -1,6 +1,7 @@
 package com.xfhotel.hotel.entity;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -220,6 +221,26 @@ public class Apartment {
 		this.layoutPic = layoutPic;
 	}
 	
-	
+	public Map toMap(){
+		Map map = new HashMap();
+		map.put("id",this.getId());
+		map.put("latitude",this.getLatitude());
+		map.put("longitude",this.getLongitude());
+		map.put("type",this.getType());
+		map.put("address",this.getAddress().split("@")[0]);
+		map.put("community",this.getAddress().split("@")[1]);
+		map.put("num_building",this.getAddress().split("@")[2]);
+		map.put("floor",this.getFloor().split("@")[0]);
+		map.put("totalfloor",this.getFloor().split("@")[1]);
+		map.put("direction",this.getDirection());
+		map.put("square",this.getSquare());
+		map.put("capacity",this.getCapacity());
+		map.put("bedroom",this.getLayout().split("@")[0]);
+		map.put("livingroom",this.getLayout().split("@")[1]);
+		map.put("bathroom",this.getLayout().split("@")[2]);
+		map.put("balcony",this.getLayout().split("@")[3]);
+		map.put("description",this.getDescription());
+		return map;
+	}
 
 }

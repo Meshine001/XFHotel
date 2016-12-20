@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.entity.User;
@@ -27,6 +29,7 @@ import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.LayoutType;
 import com.xfhotel.hotel.support.LeasePrice;
 import com.xfhotel.hotel.support.LeaseType;
+import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.RoomStatus;
 import com.xfhotel.hotel.support.Subway;
 
@@ -74,10 +77,16 @@ public class HomeController {
 		return "/customer/list";
 	}
 	
-	@RequestMapping(value = "list", method = RequestMethod.POST)
-	public String search() {
-		List<Room> rooms = roomService.getAllRooms();
-		return "/customer/list";
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public @ResponseBody Message search() {
+		try {
+			List<Map>  rooms = roomService.getAllRooms();
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, rooms);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");
 	}
 
 	@RequestMapping(value = "/json", method = RequestMethod.GET)
