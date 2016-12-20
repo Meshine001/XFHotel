@@ -29,14 +29,8 @@
 			</div>
 			<div>
 				朝向： <select id="direction" name="direction">
-					<option value="e">东</option>
-					<option value="se">东南</option>
-					<option value="s">南</option>
-					<option value="sw">西南</option>
-					<option value="w">西</option>
-					<option value="nw">西北</option>
-					<option value="n">北</option>
-					<option value="ne">东北</option>
+					<option value="南北">南北</option>
+					<option value="东西">东西</option>
 				</select>
 			</div>
 			<div>

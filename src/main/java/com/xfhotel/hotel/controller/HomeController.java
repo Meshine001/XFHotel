@@ -54,6 +54,12 @@ public class HomeController {
 
 		return "/customer/home";
 	}
+	
+	@RequestMapping(value = "/map", method = RequestMethod.GET)
+	public String map() {
+
+		return "/customer/map";
+	}
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list() {

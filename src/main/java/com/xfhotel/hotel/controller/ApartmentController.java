@@ -150,15 +150,16 @@ public class ApartmentController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(HttpServletRequest request, String address, String community, String num_building, String floor,
-			String totalfloor, String direction, String square, String capacity, String bedroom, String livingroom,
-			String bathroom, String balcony, String description, String[] facility, String[] feature,
-			String apartmenttype, String type, String num_room, String[] leasetypeid, String[] leasetype,
-
-			MultipartFile file, RedirectAttributes attr) {
+	public String add(HttpServletRequest request, String address, String location, String lng, String lat,
+			String community, String num_building, String floor, String totalfloor, String direction, String square,
+			String capacity, String bedroom, String livingroom, String bathroom, String balcony, String description,
+			String[] facility, String[] feature, String apartmenttype, String type, String num_room,
+			String[] leasetypeid, String[] leasetype, MultipartFile file, RedirectAttributes attr) {
 
 		Apartment apartment = new Apartment();
-		apartment.setAddress(address + "@" + community + "@" + num_building);
+		apartment.setAddress(address + "@" + community + "@" + num_building + "@" +location);
+		apartment.setLatitude(Double.valueOf(lat));
+		apartment.setLongitude(Double.valueOf(lng));
 		apartment.setFloor(floor + "@" + totalfloor);
 		apartment.setDirection(direction);
 		apartment.setSquare(Double.valueOf(square));
