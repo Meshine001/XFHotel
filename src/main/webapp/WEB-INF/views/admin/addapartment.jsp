@@ -62,14 +62,8 @@
 							<label class="col-md-3 control-label">朝向</label>
 							<div class="col-md-9">
 								<select name="direction" class="">
-									<option value="e">东</option>
-									<option value="se">东南</option>
-									<option value="s">南</option>
-									<option value="sw">西南</option>
-									<option value="w">西</option>
-									<option value="nw">西北</option>
-									<option value="n">北</option>
-									<option value="ne">东北</option>
+									<option value="南北">南北</option>
+									<option value="东西">东西</option>
 								</select>
 							</div>
 						</div>
@@ -78,7 +72,7 @@
 							<div class="col-md-9">
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder=""
-										name="square"><span class="input-group-addon">平方</span>
+										name="square"><span class="input-group-addon">m<sup>2</sup></span>
 								</div>
 							</div>
 						</div>

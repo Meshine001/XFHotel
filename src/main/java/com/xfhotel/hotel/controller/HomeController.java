@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.entity.Feature;
+import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.entity.User;
+import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.FeatureService;
+import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.LayoutType;
 import com.xfhotel.hotel.support.LeasePrice;
@@ -38,6 +41,9 @@ public class HomeController {
 	
 	@Autowired
 	FeatureService featrueService;
+	@Autowired
+	RoomService roomService;
+	
 	@Autowired
 	HttpSession session;
 	/**
@@ -64,12 +70,13 @@ public class HomeController {
 		com.xfhotel.hotel.support.Feature.setFeatures(features);
 		session.setAttribute("features",com.xfhotel.hotel.support.Feature.getFeatures());
 		session.setAttribute("roomStatus", RoomStatus.getStatusArray());
+			
 		return "/customer/list";
 	}
 	
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	public String search() {
-		
+		List<Room> rooms = roomService.getAllRooms();
 		return "/customer/list";
 	}
 

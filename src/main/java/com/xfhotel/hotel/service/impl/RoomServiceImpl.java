@@ -3,6 +3,7 @@ package com.xfhotel.hotel.service.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.RoomDAO;
 import com.xfhotel.hotel.dao.impl.ApartmentDAOImpl;
+import com.xfhotel.hotel.dao.impl.RoomDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.ApartmentType;
 import com.xfhotel.hotel.entity.Facility;
@@ -31,7 +33,7 @@ import com.xfhotel.hotel.service.RoomService;
 public class RoomServiceImpl implements RoomService {
 
 	@Autowired
-	private RoomDAO roomDAO;
+	private RoomDAOImpl roomDAO;
 	@Autowired
 	private ApartmentDAOImpl apartmentDAO;
 	
@@ -80,6 +82,12 @@ public class RoomServiceImpl implements RoomService {
 		// TODO Auto-generated method stub
 		Long apartmentid =roomDAO.getApartmentId(id);
 		return apartmentDAO.getApartmentById(apartmentid).getApartmentType().getId();
+	}
+
+	@Override
+	public List<Room> getAllRooms() {
+		
+		return roomDAO.getListByHQL("from Room", null);
 	}
 
 }
