@@ -66,5 +66,6 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
 	<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
+	<sitemesh:write property='my_script' />
 </body>
 </html>

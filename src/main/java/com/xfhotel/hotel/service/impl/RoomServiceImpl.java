@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -46,10 +47,10 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	@Transactional
-	public HashMap getRoomInfo(Long id) {
+	public Map getRoomInfo(Long id) {
 		// TODO Auto-generated method stub
 		Room room = roomDAO.getRoomById(id);
-		HashMap map = room.toMap();
+		Map map = room.toMap();
 		
 		ArrayList facilities = new ArrayList();
 		Iterator itfc = room.getFacilities().iterator();
@@ -84,10 +85,16 @@ public class RoomServiceImpl implements RoomService {
 		return apartmentDAO.getApartmentById(apartmentid).getApartmentType().getId();
 	}
 
+	@Transactional
 	@Override
-	public List<Room> getAllRooms() {
+	public List<Map> getAllRooms() {
+		List<Room> rooms = roomDAO.getListByHQL("from Room", null);;
+		List<Map> list = new ArrayList<Map>();
+		for(Room r:rooms){
+			list.add(this.getRoomInfo(r.getId()));
+		}
 		
-		return roomDAO.getListByHQL("from Room", null);
+		return list;
 	}
 
 }

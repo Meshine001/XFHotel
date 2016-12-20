@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -277,8 +278,8 @@ public class ApartmentController {
 	}
 
 	@RequestMapping(value = "/getapartment", method = RequestMethod.POST)
-	public @ResponseBody HashMap getApartment(String apartmentid) {
-		HashMap map = apartmentService.getApartmentInfo(Long.valueOf(apartmentid));
+	public @ResponseBody Map getApartment(String apartmentid) {
+		Map map = apartmentService.getApartmentInfo(Long.valueOf(apartmentid));
 		return map;
 	}
 
@@ -294,8 +295,8 @@ public class ApartmentController {
 	}
 
 	@RequestMapping(value = "/getroom", method = RequestMethod.POST)
-	public @ResponseBody HashMap getRoom(String roomid) {
-		HashMap map = roomService.getRoomInfo(Long.valueOf(roomid));
+	public @ResponseBody Map getRoom(String roomid) {
+		Map map = roomService.getRoomInfo(Long.valueOf(roomid));
 		System.out.println(map.toString());
 		return map;
 	}

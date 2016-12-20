@@ -3,6 +3,7 @@ package com.xfhotel.hotel.service.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -51,27 +52,10 @@ public class ApartmentServiceImpl implements ApartmentService {
 
 	@Override
 	@Transactional
-	public HashMap getApartmentInfo(long id) {
+	public Map getApartmentInfo(long id) {
 		// TODO Auto-generated method stub
 		Apartment apartment = apartmentDAO.getApartmentById(id);
-		HashMap map = new HashMap();
-		map.put("id",apartment.getId());
-		map.put("latitude",apartment.getLatitude());
-		map.put("longitude",apartment.getLongitude());
-		map.put("type",apartment.getType());
-		map.put("address",apartment.getAddress().split("@")[0]);
-		map.put("community",apartment.getAddress().split("@")[1]);
-		map.put("num_building",apartment.getAddress().split("@")[2]);
-		map.put("floor",apartment.getFloor().split("@")[0]);
-		map.put("totalfloor",apartment.getFloor().split("@")[1]);
-		map.put("direction",apartment.getDirection());
-		map.put("square",apartment.getSquare());
-		map.put("capacity",apartment.getCapacity());
-		map.put("bedroom",apartment.getLayout().split("@")[0]);
-		map.put("livingroom",apartment.getLayout().split("@")[1]);
-		map.put("bathroom",apartment.getLayout().split("@")[2]);
-		map.put("balcony",apartment.getLayout().split("@")[3]);
-		map.put("description",apartment.getDescription());
+		Map map = apartment.toMap();
 		
 		ArrayList rooms = new ArrayList();
 		Iterator itr = apartment.getRooms().iterator();

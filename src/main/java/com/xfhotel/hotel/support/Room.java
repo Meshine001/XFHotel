@@ -1,56 +1,53 @@
-package com.xfhotel.hotel.entity;
+package com.xfhotel.hotel.support;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
+import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Facility;
+import com.xfhotel.hotel.entity.Price;
 
-@Entity
-@Table(name = "t_room")
 public class Room {
-	//apartment
-	//person
-	//informationi
-	//facilities
-	//pictures
-	@Id
-	@GeneratedValue(generator="apartmentgenerator")
-	@GenericGenerator(name="apartmentgenerator",strategy="increment")
+	
 	private long id;
-	
-	@ManyToOne
+
 	private Apartment apartment;
-	@OneToMany
-	@JoinColumn(name="room_id")
 	public Set<Price> prices;//
-	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
-	@JoinTable(name="t_room_facility",
-		joinColumns={@JoinColumn(name="room_id")},
-		inverseJoinColumns={@JoinColumn(name="facility_id")})
 	public Set<Facility> facilities; //
-	
+
 	private double square;//
 	private String direction;//
 	private String capacity;//
 	private String description;//
 	
+	
+	
 	public Room() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public Room(long id, Apartment apartment, Set<Price> prices, Set<Facility> facilities, double square,
+			String direction, String capacity, String description) {
+		super();
+		this.id = id;
+		this.apartment = apartment;
+		this.prices = prices;
+		this.facilities = facilities;
+		this.square = square;
+		this.direction = direction;
+		this.capacity = capacity;
+		this.description = description;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -68,6 +65,12 @@ public class Room {
 	}
 	public void setPrices(Set<Price> prices) {
 		this.prices = prices;
+	}
+	public Set<Facility> getFacilities() {
+		return facilities;
+	}
+	public void setFacilities(Set<Facility> facilities) {
+		this.facilities = facilities;
 	}
 	public double getSquare() {
 		return square;
@@ -93,27 +96,6 @@ public class Room {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public Set<Facility> getFacilities() {
-		return facilities;
-	}
-
-	public void setFacilities(Set<Facility> facilities) {
-		this.facilities = facilities;
-	}
 	
-	public Map toMap() {
-		// TODO Auto-generated method stub
-		Map map = new HashMap();
-		map.put("square", square);
-		map.put("direction", direction);
-		map.put("capacity", capacity);
-		map.put("description", description.split("@")[0]);
-		map.put("type", description.split("@")[1]);
-		map.put("ltype", description.split("@")[2]);
-		map.put("id", id);
-		map.put("apartment", this.getApartment().toMap());
-		return map;
-	}
 	
 }
