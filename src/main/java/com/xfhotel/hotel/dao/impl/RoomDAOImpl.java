@@ -13,7 +13,7 @@ import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Room;
 
 @Repository
-public class RoomDAOImpl implements RoomDAO {
+public class RoomDAOImpl extends BaseDAOImpl<Room, Long> implements RoomDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
