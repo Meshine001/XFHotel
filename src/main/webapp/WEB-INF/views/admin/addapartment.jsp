@@ -178,8 +178,6 @@
 										<option value="${apartmenttype.id }">${apartmenttype.description }</option>
 									</c:forEach>
 								</select>
-								<input type="hidden" name="type" value=""
-									id="type-input">
 								 <select name="type" id="lease-type">
 									<option value="1">单租型</option>
 									<option value="2">合租型</option>

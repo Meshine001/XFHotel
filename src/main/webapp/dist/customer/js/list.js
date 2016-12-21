@@ -16,18 +16,16 @@ $(document).ready(function(){
 	};
 	
 	var show = function(data){
-		console.log(data);
 		var listbox = $('.listbox');
 		
 		$.each(data,function(index,room){
-			console.log(room);
 			
 			var apartment = room.apartment;
 			
-			var imgUrl = 'http://mf.znimg.com/public/v3/images/fg_list_s/sg_1.jpg';
+			var imgUrl = './images/'+apartment.layoutpic;
 			var title = apartment.community+apartment.bedroom+'室'
 			+apartment.livingroom+'厅'
-			+'-'+room.direction+'-'+room.description;
+			+'-'+room.direction+'卧-'+room.description;
 			
 			var custom = '致青春';//缺数据
 			var floor = '第'+apartment.floor+'层/共'+apartment.totalfloor+'层';
@@ -36,10 +34,19 @@ $(document).ready(function(){
 			
 			var address = apartment.address;
 			
-			var features = ['地铁周边','商业中心'];//缺数据
-			var price = '1302';
+			var features = apartment.features;//缺数据
+			
+			var price = '未设置';
 			var leasyType = '月';
-			var oldPrice = '1444';
+			var oldPrice = '未设置';
+			
+			$.each(room.prices,function(index,p){
+				if(p.leasetype == '月'){
+					price = p.price;
+				}
+			});
+			
+			
 			
 			var description = apartment.description;
 			

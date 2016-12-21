@@ -1,6 +1,8 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -240,6 +242,13 @@ public class Apartment {
 		map.put("bathroom",this.getLayout().split("@")[2]);
 		map.put("balcony",this.getLayout().split("@")[3]);
 		map.put("description",this.getDescription());
+		map.put("layoutpic", this.getLayoutPic());
+		List<String> featuresList = new ArrayList<String>();
+		Set<Feature> features = this.getFeatures();
+		for(Feature f:features){
+			featuresList.add(f.getDescription());
+		}
+		map.put("features",featuresList);
 		return map;
 	}
 

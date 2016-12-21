@@ -192,7 +192,9 @@ public class ApartmentController {
 		apartment.setApartmentType(apartmentTypeService.findById(Long.valueOf(apartmenttype)));
 		apartment.setType(type);
 		apartment.setRooms(null);
-		if (type.equals("1") || type.equals("3")) {
+		
+		//单租型
+		if (type.equals("1")) {
 			Set ps = new HashSet();
 			for (int i = 0; i < leasetype.length; i++) {
 				Price p = new Price(Long.valueOf(leasetype[i]), leaseTypeService.findById(Long.valueOf(leasetypeid[i])),
@@ -201,9 +203,13 @@ public class ApartmentController {
 				ps.add(p);
 			}
 			apartment.setPrices(ps);
-		} else
+		} else{
 			apartment.setPrices(null);
+		}
+			
 		apartmentService.add(apartment);
+		
+		System.out.println("rooms:"+num_room);
 		for (int i = 0; i < Integer.valueOf(num_room); i++) {
 			Room room = new Room();
 			room.setApartment(apartment);

@@ -167,6 +167,7 @@ $(document).ready(
 
 			$('#lease-type').change(function() {
 				var op = $(this).children('option:selected').val();
+				$('#type-input').val(op);
 				if (op == 1) {
 					$('#lease-price').show();
 				} else {
