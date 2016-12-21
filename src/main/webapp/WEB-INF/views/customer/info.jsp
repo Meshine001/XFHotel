@@ -17,14 +17,14 @@
 			<ul class="breadcrumb">
 				<li>青舍首页</li>
 				<li>西安租房</li>
-				<li class="active">安和小区5居室-南卧-C房间</li>
+				<li class="active">${room.apartment.community}-${room.apartment.capacity }居室-${room.direction}-${room.description}</li>
 			</ul>
 			<div class="row clearfix">
 				<div class="col-md-8 column">
 					<div class="row clearfix">
 						<div class="col-md-12 column">
-							<h3>安和小区5居室-南卧-C房间</h3>
-							<p>郑东新区文苑南路与邢庄北街交叉口</p>
+							<h3>${room.apartment.community}-${room.apartment.capacity }居室-${room.direction}-${room.description}</h3>
+							<p>${room.apartment.address}</p>
 							<img alt="140x140" class="img-responsive"
 								src="http://mf.znimg.com/thumb/dress_810x497/house_img/734/aef67a23ccda45bbd5a3582c896953cb.jpg" />
 						</div>
@@ -32,7 +32,7 @@
 					<div class="row clearfix">
 						<div class="col-md-12 column">
 							<h3>房间基本情况.</h3>
-							<p>精致用心的装修满足生活的需要，青春少女激情的碰撞擦出别样的烟花</p>
+							<p>${room.apartment.description}</p>
 						</div>
 					</div>
 					<div class="row clearfix">

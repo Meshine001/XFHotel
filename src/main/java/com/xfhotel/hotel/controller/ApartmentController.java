@@ -170,6 +170,8 @@ public class ApartmentController {
 		// 存储布局图
 		String layoutPic = fileService.saveFile(file, request.getSession().getServletContext().getRealPath("/"));
 		apartment.setLayoutPic(layoutPic);
+		
+		
 		Set s_facility = new HashSet();
 		if (facility != null) {
 			for (int i = 0; i < facility.length; i++) {
@@ -178,6 +180,7 @@ public class ApartmentController {
 			}
 		}
 		apartment.setFacilities(s_facility);
+		
 		Set s_feature = new HashSet();
 		if (feature != null) {
 			for (int i = 0; i < feature.length; i++) {
@@ -296,7 +299,6 @@ public class ApartmentController {
 	@RequestMapping(value = "/getroom", method = RequestMethod.POST)
 	public @ResponseBody Map getRoom(String roomid) {
 		Map map = roomService.getRoomInfo(Long.valueOf(roomid));
-		System.out.println(map.toString());
 		return map;
 	}
 

@@ -76,6 +76,7 @@
 					$.each(data.facilities,function(index,value){
 						$('#facility'+value.id).attr('checked',true);
 					});
+					console.log(data);
 					if(data.ltype=="2" || data.ltype=="3"){
 						$.ajax({
 							async : false,

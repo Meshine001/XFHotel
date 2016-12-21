@@ -18,7 +18,8 @@
 				<div class="card-header">添加房源</div>
 				<div class="card-body">
 					<form action="<%=request.getContextPath()%>/admin/apartment/add"
-						method="POST" class="form form-horizontal" enctype="multipart/form-data">
+						method="POST" class="form form-horizontal"
+						enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-md-3 control-label">地址</label>
 							<div class="col-md-9">
@@ -118,8 +119,9 @@
 							<div class="col-md-9">
 								<c:forEach items="${l_feature}" var="feature" varStatus="p">
 									<div class="checkbox checkbox-inline">
-										<input type="checkbox" id="fe-${feature.id}" name="feature" value="${feature.id}"> <label
-											for="fe-${feature.id}">${feature.description } </label>
+										<input type="checkbox" id="fe-${feature.id}" name="feature"
+											value="${feature.id}"> <label for="fe-${feature.id}">${feature.description }
+										</label>
 									</div>
 								</c:forEach>
 							</div>
@@ -168,15 +170,17 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
-							<input type="hidden" name="apartmenttype" value="" id="apartment-type-input">
-								<select id="apartment-type">
+								<input type="hidden" name="apartmenttype" value=""
+									id="apartment-type-input"> <select id="apartment-type">
 									<option value="-1" selected="selected">请选择</option>
 									<c:forEach items="${l_apartmenttype}" var="apartmenttype"
 										varStatus="p">
 										<option value="${apartmenttype.id }">${apartmenttype.description }</option>
 									</c:forEach>
-								</select> <select name="type" id="lease-type">
-									<option value="0">请选择</option>
+								</select>
+								<input type="hidden" name="type" value=""
+									id="type-input">
+								 <select name="type" id="lease-type">
 									<option value="1">单租型</option>
 									<option value="2">合租型</option>
 								</select>

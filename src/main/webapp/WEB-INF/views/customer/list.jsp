@@ -72,38 +72,38 @@
 			<div class="listbox">
 			
 			</div>
-			<div class="col-md-12 column">
-				<div class="col-md-4 column">
+			<div class="col-md-12 column listbox-item" style="display: none;">
+				<div class="col-md-4 column listbox-imgbox">
 					<img width="" height="" class="img-responsive"
 						src="<%=basePath%>/dist/customer/img/apartment-01.jpg" alt="...">
 				</div>
-				<div class="col-md-8 column">
-					<div class="row clearfix">
+				<div class="col-md-8 column listbox-details">
+					<div class="row clearfix  listbox-details-title">
 						<div class="col-md-12 column">
 							<h3>安和小区5居室-南卧-C房间</h3>
 						</div>
 					</div>
-					<div class="row clearfix">
-						<div class="col-md-12 column">
-							<div class="col-md-8 column">
+					<div class="row clearfix listbox-details-body">
+						<div class="col-md-12 column listbox-details-custom-price">
+							<div class="col-md-8 column listbox-details-custom">
 								<ul>
 									<li>风格：<span>致青春</span></li>
 									<li>楼层：<span>第26层/共32层</span> 面积：<span>21.61平方</span> 朝向：<span>南</span></li>
 									<li>地址：<span>郑东新区文苑南路与邢庄北街交叉口</span></li>
 								</ul>
 							</div>
-							<div class="col-md-4 column">
+							<div class="col-md-4 column listbox-details-price">
 								<h3>
 									1302<small>元/月</small>
 								</h3>
 								<h4>原价:￥1480/月</h4>
 							</div>
 						</div>
-						<div class="col-md-12 column">
+						<div class="col-md-12 column listbox-details-features">
 							<span class="label label-default">市体育中心地铁口附近</span> <span
 								class="label label-default">供暖</span>
 						</div>
-						<div class="col-md-12 column">
+						<div class="col-md-12 column listbox-details-description">
 							<p>舒适温馨布局，精心时尚装修，青春的气息布满房间，向青春致敬，家的温暖在此展现。</p>
 						</div>
 					</div>
