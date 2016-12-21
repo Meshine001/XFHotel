@@ -14,9 +14,15 @@
 		method="POST">
 		<div>
 			<input type="hidden" id="apartmentid" name="apartmentid" />
+			<div id="location">
+				<input type="text" id="location_info" name="location"
+					readonly="readonly"> <input type="hidden" id="lng"
+					name="lng"> <input type="hidden" id="lat" name="lat">
+			</div>
 			<div>
 				地址：<input type="text" id="address" name="address" />
 			</div>
+			<div id="map" style="width: 500px; height: 500px"></div>
 			<div>
 				小区名称：<input type="text" id="community" name="community" />
 			</div>
@@ -29,14 +35,8 @@
 			</div>
 			<div>
 				朝向： <select id="direction" name="direction">
-					<option value="e">东</option>
-					<option value="se">东南</option>
-					<option value="s">南</option>
-					<option value="sw">西南</option>
-					<option value="w">西</option>
-					<option value="nw">西北</option>
-					<option value="n">北</option>
-					<option value="ne">东北</option>
+					<option value="南北">南北</option>
+					<option value="东西">东西</option>
 				</select>
 			</div>
 			<div>
@@ -92,6 +92,48 @@
 		<button type="submit">提交</button>
 	</form>
 	<script type="text/javascript">
+		document.getElementById("lease").style.display = "none";
+		function type1change(op) {
+			$.ajax({
+				async : false,
+				cache : false,
+				type : 'POST',
+				dataType : 'json',
+				data : {'type' : 0,'id' : op},
+				url :"<%=request.getContextPath()%>/admin/apartment/getleasetype",//请求的action路径
+				error : function() {//请求失败处理函数
+					alert("获取数据失败！");
+				},
+				success : function(data) {
+					var leasetypes = data.leasetype;
+					var leasetypeids = data.leasetypeid;
+					var htmltext = "";
+					for ( var i in leasetypes) {
+						var ids = leasetypeids[i];
+						var types = leasetypes[i];
+						htmltext = htmltext + "<div>";
+						htmltext = htmltext
+								+ types
+								+ "<input type='hidden' id='leasetypeid"+ids+"' name='leasetypeid'/>"
+								+ "<input type='text' id='leasetype"+ids+"' name='leasetype' />";
+						htmltext = htmltext + "</div>";
+					}
+					$("#lease").html(htmltext);
+				}
+			});
+		}
+		function type2change(op) {
+			if (op == 1)
+				document.getElementById("lease").style.display = "";
+			if (op == 2)
+				document.getElementById("lease").style.display = "none";
+			if (op == 3)
+				document.getElementById("lease").style.display = "";
+		}
+	</script>
+	<script
+		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
+		type="text/javascript"></script> <script type="text/javascript">
 		var apartmentid = ${apartmentid};
 		$(document).ready(function(){
 			$.ajax({
@@ -105,6 +147,31 @@
 					alert("获取数据失败！");
 				},
 				success : function(data) {
+					var map = new BMap.Map("map");
+					var geolocation = new BMap.Geolocation();
+					var point = new BMap.Point(data.longtitude,data.latitude);
+					var marker = new BMap.Marker(point);
+					marker.setPosition(map.getCenter());
+					map.addOverlay(marker);
+					map.centerAndZoom(point,12);
+					map.enableScrollWheelZoom(true);
+					map.addEventListener('ondragging', function(){
+						marker.setPosition(map.getCenter());
+        			});
+					map.addEventListener("dragend", function showInfo(){
+						var cp = map.getCenter();
+						getaddress(cp.lng,cp.lat);
+					});
+					function getaddress(lng,lat){
+						var pt = new BMap.Point(lng,lat);
+						var geoc = new BMap.Geocoder();  
+						geoc.getLocation(pt, function(rs){
+							var addComp = rs.addressComponents;
+							$('#location_info').val(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street);
+							$('#lng').val(lng);
+							$('#lat').val(lat);
+						});        
+					}
 					$('#apartmentid').val(data.id);
 					$('#address').val(data.address);
 					$('#community').val(data.community);
@@ -126,6 +193,9 @@
 					});
 					$('#apartmenttype').val(data.apartmentType);
 					$('#type').val(data.type);
+					$('#location_info').val(data.location);
+					$('#lng').val(data.longitude);
+					$('#lat').val(data.latitude);
 					type1change(data.apartmentType);
 					type2change(data.type);
 					$.each(data.prices,function(index,value){
@@ -155,46 +225,6 @@
 				}
 			});
 		});
-	</script>
-	<script type="text/javascript">
-			document.getElementById("lease").style.display = "none";
-			function type1change(op) {
-				$.ajax({
-					async : false,
-					cache : false,
-					type : 'POST',
-					dataType : 'json',
-					data : {'type':0,'id':op},
-					url : "<%=request.getContextPath()%>/admin/apartment/getleasetype",//请求的action路径
-						error : function() {//请求失败处理函数
-							alert("获取数据失败！");
-						},
-						success : function(data) {
-							var leasetypes = data.leasetype;
-							var leasetypeids = data.leasetypeid;
-							var htmltext = "";
-							for ( var i in leasetypes) {
-								var ids = leasetypeids[i];
-								var types = leasetypes[i];
-								htmltext = htmltext + "<div>";
-								htmltext = htmltext
-										+ types
-										+ "<input type='hidden' id='leasetypeid"+ids+"' name='leasetypeid'/>"
-										+ "<input type='text' id='leasetype"+ids+"' name='leasetype' />";
-								htmltext = htmltext + "</div>";
-							}
-							$("#lease").html(htmltext);
-						}
-					});
-		}
-		function type2change(op) {
-			if (op == 1)
-				document.getElementById("lease").style.display = "";
-			if (op == 2)
-				document.getElementById("lease").style.display = "none";
-			if (op == 3)
-				document.getElementById("lease").style.display = "";
-		}
 	</script>
 	</my_body>
 </body>
