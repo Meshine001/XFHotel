@@ -230,6 +230,7 @@ public class Apartment {
 		map.put("address",this.getAddress().split("@")[0]);
 		map.put("community",this.getAddress().split("@")[1]);
 		map.put("num_building",this.getAddress().split("@")[2]);
+		map.put("location",this.getAddress().split("@")[3]);
 		map.put("floor",this.getFloor().split("@")[0]);
 		map.put("totalfloor",this.getFloor().split("@")[1]);
 		map.put("direction",this.getDirection());

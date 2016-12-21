@@ -155,8 +155,11 @@ public class ApartmentController {
 			String community, String num_building, String floor, String totalfloor, String direction, String square,
 			String capacity, String bedroom, String livingroom, String bathroom, String balcony, String description,
 			String[] facility, String[] feature, String apartmenttype, String type, String num_room,
-			String[] leasetypeid, String[] leasetype, MultipartFile file, RedirectAttributes attr) {
-
+			String[] leasetypeid, String[] price, MultipartFile file, RedirectAttributes attr) {
+		System.out.println(address);
+		System.out.println(price);
+		System.out.println(request.getParameter("leasetypeid"));
+		
 		Apartment apartment = new Apartment();
 		apartment.setAddress(address + "@" + community + "@" + num_building + "@" +location);
 		apartment.setLatitude(Double.valueOf(lat));
@@ -192,8 +195,8 @@ public class ApartmentController {
 		apartment.setRooms(null);
 		if (type.equals("1") || type.equals("3")) {
 			Set ps = new HashSet();
-			for (int i = 0; i < leasetype.length; i++) {
-				Price p = new Price(Long.valueOf(leasetype[i]), leaseTypeService.findById(Long.valueOf(leasetypeid[i])),
+			for (int i = 0; i < price.length; i++) {
+				Price p = new Price(Long.valueOf(price[i]), leaseTypeService.findById(Long.valueOf(leasetypeid[i])),
 						null, null);
 				priceService.add(p);
 				ps.add(p);
