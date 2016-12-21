@@ -12,7 +12,7 @@
 	
 	<div>
 		<form action="<%=request.getContextPath()%>/admin/apartment/updateroom"
-			method="post">
+			method="post" enctype="multipart/form-data">
 			<div>
 				<input type="hidden" id="id" name="id" >
 				<div>
@@ -26,8 +26,10 @@
 				</div>
 				<div>
 					朝向： <select id="direction" name="direction">
-						<option value="南北">南北</option>
-						<option value="东西">东西</option>
+						<option value="东">东</option>
+							<option value="南">南</option>
+							<option value="西">西</option>
+							<option value="北">北</option>
 					</select>
 				</div>
 				<div>
@@ -41,7 +43,9 @@
 							value="${facility.id}"> ${facility.description }
 						</c:forEach>
 				</div>
-				<div>图片：</div>
+				<div>图片：<input type="file" name="file">
+						<input type="file" name="file">
+						<input type="file" name="file"></div>
 			</div>
 			<div id="lease"></div>
 			<input type="submit" id="btnSend" value="保存">

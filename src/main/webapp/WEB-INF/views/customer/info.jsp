@@ -25,9 +25,26 @@
 						<div class="col-md-12 column">
 							<h3>${room.apartment.community}-${room.apartment.capacity }居室-${room.direction}-${room.description}</h3>
 							<p>${room.apartment.address}</p>
+
 							<img alt="140x140" class="img-responsive"
-								src="http://mf.znimg.com/thumb/dress_810x497/house_img/734/aef67a23ccda45bbd5a3582c896953cb.jpg" />
+								src="../images/${room.pics[0]}" />
+
 						</div>
+						<div class="gallery">
+							<div class="col-md-3 column ">
+							<c:forEach items="${room.pics}" var="pic">
+								<div>
+									<a href="../images/${pic}"><img width="60px" src="../images/${pic}" /></a>
+								</div>
+							</c:forEach>
+							<c:forEach items="${room.department.pics}" var="pic">
+								<div>
+									<a href="../images/${pic}"><img src="../images/${pic}" /></a>
+								</div>
+							</c:forEach>
+						</div>
+						</div>
+						
 					</div>
 					<div class="row clearfix">
 						<div class="col-md-12 column">

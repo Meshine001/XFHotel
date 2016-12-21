@@ -243,7 +243,14 @@ public class Apartment {
 		map.put("bathroom",this.getLayout().split("@")[2]);
 		map.put("balcony",this.getLayout().split("@")[3]);
 		map.put("description",this.getDescription());
-		map.put("layoutpic", this.getLayoutPic());
+		String[] pics = layoutPic.split("@");
+		map.put("layoutPic", pics[0]);
+		if(pics.length == 2){
+			map.put("pics",pics[1]);
+		}else if(pics.length > 2){
+			map.put("pics", layoutPic.substring(pics[0].length()+1, layoutPic.length()).split("@"));
+		}
+		
 		List<String> featuresList = new ArrayList<String>();
 		Set<Feature> features = this.getFeatures();
 		for(Feature f:features){

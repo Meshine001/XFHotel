@@ -22,7 +22,7 @@ $(document).ready(function(){
 			
 			var apartment = room.apartment;
 			
-			var imgUrl = './images/'+apartment.layoutpic;
+			var imgUrl = './images/'+apartment.pics[1];
 			var title = apartment.community+apartment.bedroom+'室'
 			+apartment.livingroom+'厅'
 			+'-'+room.direction+'卧-'+room.description;
@@ -32,7 +32,7 @@ $(document).ready(function(){
 			var square = apartment.square+'平方';
 			var derection = apartment.direction;
 			
-			var address = apartment.address;
+			var address = apartment.location;
 			
 			var features = apartment.features;//缺数据
 			

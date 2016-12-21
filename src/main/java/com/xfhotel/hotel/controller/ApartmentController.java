@@ -23,8 +23,10 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xfhotel.hotel.common.Constants;
@@ -155,13 +157,18 @@ public class ApartmentController {
 			String community, String num_building, String floor, String totalfloor, String direction, String square,
 			String capacity, String bedroom, String livingroom, String bathroom, String balcony, String description,
 			String[] facility, String[] feature, String apartmenttype, String type, String num_room,
-			String[] leasetypeid, String[] price, MultipartFile file, RedirectAttributes attr) {
-		System.out.println(address);
-		System.out.println(price);
-		System.out.println(request.getParameter("leasetypeid"));
+			String[] leasetypeid, String[] price, @RequestParam(value="file",required=false)MultipartFile[] file, RedirectAttributes attr) {
+//		System.out.println(address);
+//		System.out.println(price);
+//		System.out.println(request.getParameter("leasetypeid"));
 		
 		Apartment apartment = new Apartment();
-		apartment.setAddress(address + "@" + community + "@" + num_building + "@" +location);
+		if(location == null){
+			apartment.setAddress(address + "@" + community + "@" + num_building + "@ " );
+		}else{
+			apartment.setAddress(address + "@" + community + "@" + num_building + "@" +location);
+		}
+	
 		apartment.setLatitude(Double.valueOf(lat));
 		apartment.setLongitude(Double.valueOf(lng));
 		apartment.setFloor(floor + "@" + totalfloor);
@@ -171,9 +178,24 @@ public class ApartmentController {
 		apartment.setLayout(bedroom + "@" + livingroom + "@" + bathroom + "@" + balcony);
 		apartment.setDescription(description);
 
+		StringBuffer pics = new StringBuffer();
 		// 存储布局图
-		String layoutPic = fileService.saveFile(file, request.getSession().getServletContext().getRealPath("/"));
-		apartment.setLayoutPic(layoutPic);
+		String layoutPic = fileService.saveFile(file[0], request.getSession().getServletContext().getRealPath("/"));
+		pics.append(layoutPic).append("@");
+		//公寓照片
+		for(int i=1;i<file.length;i++){
+			if(file[i]==null)continue;
+			String p = fileService.saveFile(file[i], request.getSession().getServletContext().getRealPath("/"));
+			System.out.println(p.toString());
+			if(i!=file.length-1){
+				pics.append(p).append("@");
+			}else{
+				pics.append(p);
+			}
+		}
+		
+		apartment.setLayoutPic(pics.toString());
+		
 		
 		
 		Set s_facility = new HashSet();
@@ -314,9 +336,25 @@ public class ApartmentController {
 
 	@RequestMapping(value = "/updateroom", method = RequestMethod.POST)
 	public String updateroom(RedirectAttributes attr, HttpServletRequest request, String id, String description,
-			String type, String square, String direction, String[] facility, String[] leasetype, String[] leasetypeid) {
+			String type, String square, String direction, String[] facility, String[] leasetype, String[] leasetypeid,@RequestParam(value="file",required=false)MultipartFile[] file) {
 		String apartmentid = (String) session.getAttribute("apartmentid");
 		Room room = roomService.findById(Long.valueOf(id));
+		//添加照片
+		StringBuffer pics = new StringBuffer();
+		for(int i=0;i<file.length;i++){
+			if(file[i]==null)continue;
+			String p = fileService.saveFile(file[i], request.getSession().getServletContext().getRealPath("/"));
+			System.out.println(p.toString());
+			if(i!=file.length-1){
+				pics.append(p).append("@");
+			}else{
+				pics.append(p);
+			}
+		}
+		room.setPics(pics.toString());
+		
+		
+		
 		List lf = facilityService.listFacilities();
 		room.setDescription(description + "@" + type + "@" + "2");
 		room.setSquare(Double.valueOf(square));

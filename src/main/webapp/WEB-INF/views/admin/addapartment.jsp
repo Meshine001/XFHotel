@@ -156,6 +156,18 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-md-3 control-label">公寓照片</label>
+							<!-- Button trigger modal -->
+							<div class="col-md-9">
+								<input type="file" class="btn btn-primary btn-lg"
+									name="file" />
+									<input type="file" class="btn btn-primary btn-lg"
+									 name="file" />
+									<input type="file" class="btn btn-primary btn-lg"
+									name="file" />
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-md-3 control-label">设施<small><a>编辑</a></small></label>
 							<div class="col-md-9">
 								<c:forEach items="${l_facility}" var="facility" varStatus="p">
