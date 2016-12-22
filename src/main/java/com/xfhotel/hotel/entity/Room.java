@@ -142,6 +142,7 @@ public class Room {
 			map.put("pics", pics.split("@"));
 		}
 		map.put("apartment", apartment.toMap());
+		map.put("prices", prices.split("@"));
 		return map;
 	}
 

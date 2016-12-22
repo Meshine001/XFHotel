@@ -73,61 +73,18 @@
 			<div id="rooms"></div>
 		</div>
 		<div>
-			出租类型：<select id="apartmenttype" name="apartmenttype"
-				onchange="type1change(this.options[this.options.selectedIndex].value)">
+			出租类型：<select id="apartmenttype" name="apartmenttype">
 				<option value="-1" selected="selected">请选择</option>
 
-			</select> <select id="type" name="type"
-				onchange="type2change(this.options[this.options.selectedIndex].value)">
-				<option value="0">请选择</option>
-				<option value="1">单租型</option>
-				<option value="2">合租型</option>
-				<option value="3">混合型</option>
+			</select> <select id="type" name="type">
+				<option value="-1">请选择</option>
+				<option value="单租型">单租型</option>
+				<option value="合租型">合租型</option>
 			</select>
 		</div>
 		<div id="lease" style="display: none;"></div>
 		<button type="submit">提交</button>
 	</form>
-	<script type="text/javascript">
-		document.getElementById("lease").style.display = "none";
-		function type1change(op) {
-			$.ajax({
-				async : false,
-				cache : false,
-				type : 'POST',
-				dataType : 'json',
-				data : {'type' : 0,'id' : op},
-				url :"<%=request.getContextPath()%>/admin/apartment/getleasetype",//请求的action路径
-				error : function() {//请求失败处理函数
-					alert("获取数据失败！");
-				},
-				success : function(data) {
-					var leasetypes = data.leasetype;
-					var leasetypeids = data.leasetypeid;
-					var htmltext = "";
-					for ( var i in leasetypes) {
-						var ids = leasetypeids[i];
-						var types = leasetypes[i];
-						htmltext = htmltext + "<div>";
-						htmltext = htmltext
-								+ types
-								+ "<input type='hidden' id='leasetypeid"+ids+"' name='leasetypeid'/>"
-								+ "<input type='text' id='leasetype"+ids+"' name='leasetype' />";
-						htmltext = htmltext + "</div>";
-					}
-					$("#lease").html(htmltext);
-				}
-			});
-		}
-		function type2change(op) {
-			if (op == 1)
-				document.getElementById("lease").style.display = "";
-			if (op == 2)
-				document.getElementById("lease").style.display = "none";
-			if (op == 3)
-				document.getElementById("lease").style.display = "";
-		}
-	</script>
 	<script
 		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
 		type="text/javascript"></script> <script type="text/javascript">
@@ -194,8 +151,6 @@
 					$('#location_info').val(data.location);
 					$('#lng').val(data.longitude);
 					$('#lat').val(data.latitude);
-					type1change(data.apartmentType);
-					type2change(data.type);
 					$.each(data.prices,function(index,value){
 						$('#leasetypeid'+value.leasetypeid).val(value.leasetypeid);
 						$('#leasetype'+value.leasetypeid).val(value.price);

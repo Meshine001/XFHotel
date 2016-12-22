@@ -8,6 +8,8 @@ import com.xfhotel.hotel.entity.Room;
 
 public interface RoomService {
 	public int add(Room room);
+	
+	public void update(Room room);
 
 	public Map getRoomInfo(Long id);
 

@@ -222,12 +222,11 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
-								<select name = "apartmenttype" id="apartment-type">
+								<select name="apartmenttype" id="apartment-type">
 									<option value="-1" selected="selected">请选择</option>
 									<option value="酒店型">酒店型</option>
 									<option value="短租型">短租型</option>
-								</select> 
-								<select name="type" id="lease-type">
+								</select> <select name="type" id="lease-type">
 									<option value="-1">请选择</option>
 									<option value="单租型">单租型</option>
 									<option value="合租型">合租型</option>
@@ -235,24 +234,27 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<input type="hidden" name="prices"> <label
-								class="col-md-3 control-label">价格</label>
-							<div id="lease-price" class="col-md-9" >
+							<label class="col-md-3 control-label">价格</label>
+							<div id="lease-price" class="col-md-9">
 								<div class="input-group day">
 									<span class="input-group-addon">天</span> <input type="text"
-										name="prices" class="price-day"> <span class="input-group-addon">元</span>
+										name="prices" class="price-day"> <span
+										class="input-group-addon">元</span>
 								</div>
 								<div class="input-group week">
-									<span class="input-group-addon">周</span> <input type="text" name="prices"
-										class="price-week"> <span class="input-group-addon">元</span>
+									<span class="input-group-addon">周</span> <input type="text"
+										name="prices" class="price-week"> <span
+										class="input-group-addon">元</span>
 								</div>
 								<div class="input-group month">
-									<span class="input-group-addon">月</span> <input type="text" name="prices"
-										class="price-month"> <span class="input-group-addon">元</span>
+									<span class="input-group-addon">月</span> <input type="text"
+										name="prices" class="price-month"> <span
+										class="input-group-addon">元</span>
 								</div>
 								<div class="input-group year">
-									<span class="input-group-addon">年</span> <input type="text" name="prices"
-										class="price-year"> <span class="input-group-addon">元</span>
+									<span class="input-group-addon">年</span> <input type="text"
+										name="prices" class="price-year"> <span
+										class="input-group-addon">元</span>
 								</div>
 							</div>
 						</div>

@@ -80,5 +80,12 @@ public class RoomServiceImpl implements RoomService {
 		
 		return list;
 	}
+	
+	
+	@Transactional
+	@Override
+	public void update(Room room) {
+		roomDAO.update(room);
+	}
 
 }

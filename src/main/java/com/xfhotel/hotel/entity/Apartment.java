@@ -303,13 +303,11 @@ public class Apartment {
 		map.put("bathroom",this.getLayout().split("@")[2]);
 		map.put("balcony",this.getLayout().split("@")[3]);
 		map.put("description",this.getDescription());
-//		String[] picsStr = pics.split("@");
-//		map.put("layoutPic", picsStr[0]);
-//		if(picsStr.length == 2){
-//			map.put("pics",picsStr[1]);
-//		}else if(picsStr.length > 2){
-//			map.put("pics", pics.substring(picsStr[0].length()+1, picsStr.length()).split("@"));
-//		}
+		map.put("pic1", pic1);
+		map.put("pic2", pic2.split("@"));
+		map.put("pic3", pic3.split("@"));
+		map.put("pic4", pic4.split("@"));
+
 		
 		List<String> featuresList = new ArrayList<String>();
 		Set<Feature> features = this.getFeatures();
