@@ -132,7 +132,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">布局图</label>
+							<label class="col-md-3 control-label">户型图</label>
 							<!-- Button trigger modal -->
 							<div class="col-md-9">
 								<input type="file" class="btn btn-primary btn-lg"
