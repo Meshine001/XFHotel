@@ -18,8 +18,12 @@
 
 <!-- Bootstrap core CSS -->
 <link href="<%=basePath%>/dist/commons/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
+	rel="stylesheet" media="all">
 
+<link href="<%=basePath%>/dist/commons/zoom/css/zoom.css"
+	rel="stylesheet">
+<script src="<%=basePath%>/dist/commons/jquery/jquery-2.1.4.min.js"></script>
+<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
@@ -38,8 +42,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand hidden-sm" href=""
-					onclick="">青舍都市公寓</a>
+				<a class="navbar-brand hidden-sm" href="" onclick="">青舍都市公寓</a>
 			</div>
 
 			<nav class="navbar-collapse collapse" role="navigation">
@@ -64,8 +67,8 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
-	<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="<%=basePath%>/dist/commons/zoom/js/zoom.min.js"></script>
 	<sitemesh:write property='my_script' />
 </body>
 </html>

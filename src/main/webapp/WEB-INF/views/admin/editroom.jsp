@@ -12,7 +12,7 @@
 	
 	<div>
 		<form action="<%=request.getContextPath()%>/admin/apartment/updateroom"
-			method="post">
+			method="post" enctype="multipart/form-data">
 			<div>
 				<input type="hidden" id="id" name="id" >
 				<div>
@@ -20,20 +20,16 @@
 				</div>
 				<div>
 					类型：<select id="type" name="type">
-						<option value="primary">主卧</option>
-						<option value="secondary">次卧</option>
+						<option value="主卧">主卧</option>
+						<option value="次卧">次卧</option>
 					</select>
 				</div>
 				<div>
 					朝向： <select id="direction" name="direction">
-						<option value="e">东</option>
-						<option value="se">东南</option>
-						<option value="s">南</option>
-						<option value="sw">西南</option>
-						<option value="w">西</option>
-						<option value="nw">西北</option>
-						<option value="n">北</option>
-						<option value="ne">东北</option>
+						<option value="东">东</option>
+							<option value="南">南</option>
+							<option value="西">西</option>
+							<option value="北">北</option>
 					</select>
 				</div>
 				<div>
@@ -47,7 +43,9 @@
 							value="${facility.id}"> ${facility.description }
 						</c:forEach>
 				</div>
-				<div>图片：</div>
+				<div>图片：<input type="file" name="file">
+						<input type="file" name="file">
+						<input type="file" name="file"></div>
 			</div>
 			<div id="lease"></div>
 			<input type="submit" id="btnSend" value="保存">
@@ -76,7 +74,8 @@
 					$.each(data.facilities,function(index,value){
 						$('#facility'+value.id).attr('checked',true);
 					});
-					if(data.ltype=="2" || data.ltype=="3"){
+					console.log(data);
+					if(data.ltype=="2"){
 						$.ajax({
 							async : false,
 							cache : false,

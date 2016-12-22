@@ -9,6 +9,7 @@
 <head>
 <title>-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 </head>
 <body>
 	<my_body>
@@ -17,15 +18,22 @@
 			<div class="card">
 				<div class="card-header">添加房源</div>
 				<div class="card-body">
-					<form action="<%=request.getContextPath()%>/admin/apartment/add"
-						method="POST" class="form form-horizontal" enctype="multipart/form-data">
+					<form action="<%=request.getContextPath()%>/admin/apartment/add" method="POST" class="form form-horizontal" enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-md-3 control-label">地址</label>
+							<div id="location">
+								<input type="text" id="location_info" class="form-control"
+									placeholder="" name="location" readonly="readonly"> <input
+									type="hidden" id="lng" class="form-control" placeholder=""
+									name="lng"> <input type="hidden" id="lat"
+									class="form-control" placeholder="" name="lat">
+							</div>
 							<div class="col-md-9">
 								<input type="text" class="form-control" placeholder=""
 									name="address">
 							</div>
 						</div>
+						<div id="map" style="width: 500px; height: 500px"></div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">小区名称</label>
 							<div class="col-md-9">
@@ -118,8 +126,9 @@
 							<div class="col-md-9">
 								<c:forEach items="${l_feature}" var="feature" varStatus="p">
 									<div class="checkbox checkbox-inline">
-										<input type="checkbox" id="fe-${feature.id}" name="feature" value="${feature.id}"> <label
-											for="fe-${feature.id}">${feature.description } </label>
+										<input type="checkbox" id="fe-${feature.id}" name="feature"
+											value="${feature.id}"> <label for="fe-${feature.id}">${feature.description }
+										</label>
 									</div>
 								</c:forEach>
 							</div>
@@ -147,6 +156,18 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-md-3 control-label">公寓照片</label>
+							<!-- Button trigger modal -->
+							<div class="col-md-9">
+								<input type="file" class="btn btn-primary btn-lg"
+									name="file" />
+									<input type="file" class="btn btn-primary btn-lg"
+									 name="file" />
+									<input type="file" class="btn btn-primary btn-lg"
+									name="file" />
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-md-3 control-label">设施<small><a>编辑</a></small></label>
 							<div class="col-md-9">
 								<c:forEach items="${l_facility}" var="facility" varStatus="p">
@@ -168,8 +189,8 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
-							<input type="hidden" name="apartmenttype" value="" id="apartment-type-input">
-								<select id="apartment-type">
+								<input type="hidden" name="apartmenttype" value=""
+									id="apartment-type-input"> <select id="apartment-type">
 									<option value="-1" selected="selected">请选择</option>
 									<c:forEach items="${l_apartmenttype}" var="apartmenttype"
 										varStatus="p">
@@ -230,8 +251,11 @@
 		</div>
 		<!-- /.modal -->
 	</div>
-
-	</my_body>
+	<script
+		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
+		type="text/javascript"></script> <script type="text/javascript">
+			
+		</script> </my_body>
 
 	<my_script> <script type="text/javascript"
 		src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script></my_script>

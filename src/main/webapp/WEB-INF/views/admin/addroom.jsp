@@ -25,14 +25,10 @@
 					</div>
 					<div>
 						朝向： <select name="direction">
-							<option value="e">东</option>
-							<option value="se">东南</option>
-							<option value="s">南</option>
-							<option value="sw">西南</option>
-							<option value="w">西</option>
-							<option value="nw">西北</option>
-							<option value="n">北</option>
-							<option value="ne">东北</option>
+							<option value="东">东</option>
+							<option value="南">南</option>
+							<option value="西">西</option>
+							<option value="北">北</option>
 						</select>
 					</div>
 					<div>
@@ -45,7 +41,11 @@
 							<input type="checkbox" name="${facility.id}_${i}" value="1"> ${facility.description }
 						</c:forEach>
 					</div>
-					<div>图片：</div>
+					<div>图片：
+						<input type="file" name="file">
+						<input type="file" name="file">
+						<input type="file" name="file">
+					</div>
 				</div>
 			</c:forEach>
 			<input type="hidden" name="apartment_id" value="${apartment_id }">

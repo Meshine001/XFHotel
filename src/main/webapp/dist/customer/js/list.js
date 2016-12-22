@@ -1,74 +1,106 @@
 $(document).ready(function(){
 
 	
+	var formatList = function(){
+		$('.listbox-item').addClass('col-md-12 column');
+		$('.listbox-imgbox').addClass('col-md-4 column');
+		$('.listbox-details').addClass('col-md-8 column');
+		$('.listbox-details-title').addClass('row clearfix');
+		$('.listbox-details-body').addClass('row clearfix');
+		
+		$('.listbox-details-custom-price').addClass('col-md-12 column');
+		$('.listbox-details-custom').addClass('col-md-8 column');
+		$('.listbox-details-price').addClass('col-md-4 column');
+		$('.listbox-details-features').addClass('col-md-12 column');
+		$('.listbox-details-description').addClass('col-md-12 column').css('margin-top','10px');
+	};
+	
 	var show = function(data){
-		for(var i=0;i<3;i++){
-			var listBox = $('<div></div>').attr('class','col-md-12 column');
+		var listbox = $('.listbox');
+		
+		$.each(data,function(index,room){
+			
+			var apartment = room.apartment;
+			
+			var imgUrl = './images/'+apartment.pics[1];
+			var title = apartment.community+apartment.bedroom+'室'
+			+apartment.livingroom+'厅'
+			+'-'+room.direction+'卧-'+room.description;
+			
+			var custom = '致青春';//缺数据
+			var floor = '第'+apartment.floor+'层/共'+apartment.totalfloor+'层';
+			var square = apartment.square+'平方';
+			var derection = apartment.direction;
+			
+			var address = apartment.location;
+			
+			var features = apartment.features;//缺数据
+			
+			var price = '未设置';
+			var leasyType = '月';
+			var oldPrice = '未设置';
+			
+			$.each(room.prices,function(index,p){
+				if(p.leasetype == '月'){
+					price = p.price;
+				}
+			});
+			
+			
+			
+			var description = apartment.description;
+			
+			
+			var item = $('<div></div>').addClass('listbox-item').css('margin-top','20px');
+			item.appendTo(listbox);
 			
 			//img
-			var imgUrl = 'http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg';
-			var img = $('<img></img>').attr('class','img-responsive').attr('src',imgUrl);
-				img.appendTo($('<div></div>').attr('class','col-md-4 column').appendTo(listBox));
-				
-			var right = $('<div></div>').attr('class','col-md-8 column');
+		
+			$('<img></img>').attr('src',imgUrl).addClass('img-responsive').appendTo($('<div></div>').addClass('listbox-imgbox').appendTo(item));
 			
-			var right_row1 = $('<div></div>').attr('class','row clearfix');
-			right_row1.appendTo(right);
-			var right_row2 = $('<div></div>').attr('class','row clearfix');
-			right_row2.appendTo(right);
-			
-			
+			var details = $('<div></div>').addClass('listbox-details').appendTo(item);
 			//title
-			var rightTitle = "安和小区5居室-南卧-C房间";
-			$('<h3></h3>').text(rightTitle).appendTo(
-					$('<div></div>').attr('class','col-md-12 column').appendTo(
-							right_row1
-					)	
-			);
+			var titleRow = $('<div></div>').addClass('listbox-details-title').appendTo(details);
+		
+			$('<h3></h3>').text(title).appendTo($('<div></div>').addClass('col-md-12 column').appendTo(titleRow));
 			
-			var right_row2_12 = $('<div></div>').attr('class','col-md-12 column');
-			 right_row2_12.appendTo(right_row2);
-			 
-			var right_row2_12_8 = $('<div></div>').attr('class','col-md-8 column');
-			right_row2_12_8.appendTo(right_row2_12);
+			//details body
+			var detailsBody = $('<div></div>').addClass('listbox-details-body').appendTo(details);
 			
-			var ul = $('<ul></ul>');
-			ul.appendTo(right_row2_12_8);
-			//features
-			var featureLi = $('<li>风格</li>');
-			var features = ['芷青村','piao liang'];
-			$.each(features,function(index,data){
-				$('<span></span>').text(data).appendTo(featureLi);
-			});
-			featureLi.appendTo(ul);
+			//custom and price
+			var customAndPrice = $('<div></div>').addClass('listbox-details-custom-price').appendTo(detailsBody);
+			var customRow = $('<div></div>').addClass('listbox-details-custom').appendTo(customAndPrice);
+			var customUl = $('<ul></ul>').appendTo(customRow);
+			//custom
+		
+			$('<li>风格：</li>').append($('<span></span>').text(custom)).appendTo(customUl);
 			
-			//floor
-			var floor = '第26层/共32层';
-			$('<span></span>').text(floor).appendTo(
-					$('<li>楼层</li>').appendTo(ul)	
-			);
+			$('<li>'+'楼层：'+ '<span>'+floor+'</span> '+'面积：'+ '<span>'+square+'</span> '+'朝向：'+ '<span>'+derection+'</span>'+'</li>').appendTo(customUl);
 			
-			//address
-			var address = '郑东新区文苑南路与邢庄北街交叉口';
-			$('<span></span>').text(address).appendTo(
-					$('<li>地址</li>').appendTo(ul)	
-			);
-			
-			var right_row2_12_4 = $('<div></div>').attr('class','col-md-4 column');
-			right_row2_12_4.appendTo(right_row2_12);
+			$('<li>地址：</li>').append($('<span></span>').text(address)).appendTo(customUl);
 			
 			//price
-			var oriPrice = '原价￥1422/月';
-			var price = '1302';
-			$('<h3></h3>').text(price).append($('<small>元/月</small>')).appendTo(right_row2_12_4);
-			$('<h3></h3>').text(oriPrice).appendTo(right_row2_12_4);
+
+			var priceRow = $('<div></div>').addClass('listbox-details-price').appendTo(customAndPrice);
+			$('<h3></h3>').text(price).append($('<small></small>').text('元/'+leasyType)).appendTo(priceRow);
+			$('<h4></h4>').text('原价：￥'+oldPrice+'/'+leasyType).appendTo(priceRow);
 			
-			right.appendTo(listBox);
-			listBox.appendTo($('.listbox'));
-		}
+			//features
+			var featuresRow = $('<div></div>').addClass('listbox-details-features').appendTo(detailsBody);
+			
+			
+			
+			$.each(features,function(index,item){
+				$('<span></span>').addClass('label label-default').text(item).appendTo(featuresRow);
+			});
+			
+			//description
+			var descriptionRow = $('<div></div>').addClass('listbox-details-description').appendTo(detailsBody);
+			
+			$('<p></p>').text(description).appendTo(descriptionRow);
+		});
 		
-		
-		
+		formatList();
 		
 	};
 	
@@ -84,7 +116,10 @@ $(document).ready(function(){
 				alert("连接异常！");
 			},
 			success : function(data) {
-				show(data);
+				if(data.statusCode == 1){
+					show(data.content);
+				}
+				
 			}
 		});
 	};
