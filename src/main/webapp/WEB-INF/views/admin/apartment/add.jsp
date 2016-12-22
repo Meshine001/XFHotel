@@ -18,22 +18,29 @@
 			<div class="card">
 				<div class="card-header">添加房源</div>
 				<div class="card-body">
-					<form action="<%=request.getContextPath()%>/admin/apartment/add" method="POST" class="form form-horizontal" enctype="multipart/form-data">
+					<form action="<%=request.getContextPath()%>/admin/apartment/add"
+						method="POST" class="form form-horizontal"
+						enctype="multipart/form-data">
 						<div class="form-group">
-							<label class="col-md-3 control-label">地址</label>
-							<div id="location">
-								<input type="text" id="location_info" class="form-control"
-									placeholder="" name="location" readonly="readonly"> <input
-									type="hidden" id="lng" class="form-control" placeholder=""
-									name="lng"> <input type="hidden" id="lat"
-									class="form-control" placeholder="" name="lat">
+							<label class="col-md-3 control-label">区域</label>
+							<div class="col-md-9">
+								<div id="location">
+									<input type="text" id="location_info" class="form-control"
+										placeholder="" name="location" readonly="readonly"> <input
+										type="hidden" id="lng" class="form-control" placeholder=""
+										name="lng"> <input type="hidden" id="lat"
+										class="form-control" placeholder="" name="lat">
+								</div>
 							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">详细地址</label>
+
 							<div class="col-md-9">
 								<input type="text" class="form-control" placeholder=""
 									name="address">
 							</div>
 						</div>
-						<div id="map" style="width: 500px; height: 500px"></div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">小区名称</label>
 							<div class="col-md-9">
@@ -149,22 +156,48 @@
 							</div>
 							<div class="col-md-9">
 								<div class="col-md-3">
-									<img id="layout-image" alt=""
-										src="http://mf.znimg.com/thumb/dress_138x84/house_img/734/bcf19a0e72b41ef93d41f49374167924.jpg"
-										class="img-thumbnail">
+									<img id="layout-image" alt="" src="" class="img-thumbnail">
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">公寓照片</label>
+							<label class="col-md-3 control-label">客厅图</label>
 							<!-- Button trigger modal -->
 							<div class="col-md-9">
-								<input type="file" class="btn btn-primary btn-lg"
-									name="file" />
-									<input type="file" class="btn btn-primary btn-lg"
-									 name="file" />
-									<input type="file" class="btn btn-primary btn-lg"
-									name="file" />
+								<input type="file" class="btn btn-primary btn-lg" name="file" />
+								<input type="file" class="btn btn-primary btn-lg" name="file" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">餐厅图</label>
+							<!-- Button trigger modal -->
+							<div class="col-md-9">
+								<input type="file" class="btn btn-primary btn-lg" name="file" />
+								<input type="file" class="btn btn-primary btn-lg" name="file" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">厨房图</label>
+							<!-- Button trigger modal -->
+							<div class="col-md-9">
+								<input type="file" class="btn btn-primary btn-lg" name="file" />
+								<input type="file" class="btn btn-primary btn-lg" name="file" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">卫生间图</label>
+							<!-- Button trigger modal -->
+							<div class="col-md-9">
+								<input type="file" class="btn btn-primary btn-lg" name="file" />
+								<input type="file" class="btn btn-primary btn-lg" name="file" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">小区实景图</label>
+							<!-- Button trigger modal -->
+							<div class="col-md-9">
+								<input type="file" class="btn btn-primary btn-lg" name="file" />
+								<input type="file" class="btn btn-primary btn-lg" name="file" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -189,23 +222,39 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
-								<input type="hidden" name="apartmenttype" value=""
-									id="apartment-type-input"> <select id="apartment-type">
+								<select name = "apartmenttype" id="apartment-type">
 									<option value="-1" selected="selected">请选择</option>
-									<c:forEach items="${l_apartmenttype}" var="apartmenttype"
-										varStatus="p">
-										<option value="${apartmenttype.id }">${apartmenttype.description }</option>
-									</c:forEach>
-								</select> <select name="type" id="lease-type">
-									<option value="0">请选择</option>
-									<option value="1">单租型</option>
-									<option value="2">合租型</option>
+									<option value="酒店型">酒店型</option>
+									<option value="短租型">短租型</option>
+								</select> 
+								<select name="type" id="lease-type">
+									<option value="-1">请选择</option>
+									<option value="单租型">单租型</option>
+									<option value="合租型">合租型</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">价格</label>
-							<div id="lease-price" class="col-md-9"></div>
+							<input type="hidden" name="prices"> <label
+								class="col-md-3 control-label">价格</label>
+							<div id="lease-price" class="col-md-9" >
+								<div class="input-group day">
+									<span class="input-group-addon">天</span> <input type="text"
+										name="prices" class="price-day"> <span class="input-group-addon">元</span>
+								</div>
+								<div class="input-group week">
+									<span class="input-group-addon">周</span> <input type="text" name="prices"
+										class="price-week"> <span class="input-group-addon">元</span>
+								</div>
+								<div class="input-group month">
+									<span class="input-group-addon">月</span> <input type="text" name="prices"
+										class="price-month"> <span class="input-group-addon">元</span>
+								</div>
+								<div class="input-group year">
+									<span class="input-group-addon">年</span> <input type="text" name="prices"
+										class="price-year"> <span class="input-group-addon">元</span>
+								</div>
+							</div>
 						</div>
 
 						<br>
@@ -221,6 +270,9 @@
 				</div>
 			</div>
 
+		</div>
+		<div class="col-md-6">
+			<div id="map" style="width: 500px; height: 500px"></div>
 		</div>
 	</div>
 	<!-- 模态框（Modal） -->
@@ -253,9 +305,7 @@
 	</div>
 	<script
 		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
-		type="text/javascript"></script> <script type="text/javascript">
-			
-		</script> </my_body>
+		type="text/javascript"></script> </my_body>
 
 	<my_script> <script type="text/javascript"
 		src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script></my_script>

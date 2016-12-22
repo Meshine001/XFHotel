@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.xfhotel.hotel.entity.Apartment;
-import com.xfhotel.hotel.entity.ApartmentType;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.User;
 
@@ -58,8 +57,7 @@ public class ApartmentDAOImpl extends BaseDAOImpl<Apartment, Long>{
 		Criteria c = session.createCriteria(Apartment.class);
 		c.add(Restrictions.eq("id", id));
 		c.setFetchMode("rooms", FetchMode.JOIN).setFetchMode("facilities", FetchMode.JOIN)
-				.setFetchMode("features", FetchMode.JOIN).setFetchMode("prices", FetchMode.JOIN)
-				.setFetchMode("apartmentType", FetchMode.JOIN);
+				.setFetchMode("features", FetchMode.JOIN);
 		return (Apartment) c.uniqueResult();
 	}
 

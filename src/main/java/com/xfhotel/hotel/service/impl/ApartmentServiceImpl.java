@@ -20,10 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.impl.ApartmentDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
-import com.xfhotel.hotel.entity.ApartmentType;
 import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.entity.Feature;
-import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 
@@ -81,15 +79,6 @@ public class ApartmentServiceImpl implements ApartmentService {
 		}
 		map.put("features", features);
 		
-		ArrayList prices = new ArrayList();
-		Iterator itp = apartment.getPrices().iterator();
-		while(itp.hasNext()){
-			Price p = (Price) itp.next();
-			prices.add(p.toMap());
-		}
-		map.put("prices", prices);
-		
-		map.put("apartmentType", apartment.getApartmentType().getId());	
 		return map;
 	}
 

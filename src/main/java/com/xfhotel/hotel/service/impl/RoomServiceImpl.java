@@ -23,10 +23,8 @@ import com.xfhotel.hotel.dao.RoomDAO;
 import com.xfhotel.hotel.dao.impl.ApartmentDAOImpl;
 import com.xfhotel.hotel.dao.impl.RoomDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
-import com.xfhotel.hotel.entity.ApartmentType;
 import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.entity.Feature;
-import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.RoomService;
 
@@ -60,13 +58,6 @@ public class RoomServiceImpl implements RoomService {
 		}
 		map.put("facilities", facilities);
 		
-		ArrayList prices = new ArrayList();
-		Iterator itp = room.getPrices().iterator();
-		while(itp.hasNext()){
-			Price p = (Price) itp.next();
-			prices.add(p.toMap());
-		}
-		map.put("prices", prices);
 		return map;
 	}
 
@@ -77,13 +68,6 @@ public class RoomServiceImpl implements RoomService {
 		return roomDAO.getRoomById(id);
 	}
 
-	@Override
-	@Transactional
-	public Long getApartmentType(Long id) {
-		// TODO Auto-generated method stub
-		Long apartmentid =roomDAO.getApartmentId(id);
-		return apartmentDAO.getApartmentById(apartmentid).getApartmentType().getId();
-	}
 
 	@Transactional
 	@Override

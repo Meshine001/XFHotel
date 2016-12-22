@@ -76,10 +76,7 @@
 			出租类型：<select id="apartmenttype" name="apartmenttype"
 				onchange="type1change(this.options[this.options.selectedIndex].value)">
 				<option value="-1" selected="selected">请选择</option>
-				<c:forEach items="${l_apartmenttype}" var="apartmenttype"
-					varStatus="p">
-					<option value="${apartmenttype.id }">${apartmenttype.description }</option>
-				</c:forEach>
+
 			</select> <select id="type" name="type"
 				onchange="type2change(this.options[this.options.selectedIndex].value)">
 				<option value="0">请选择</option>
@@ -149,9 +146,9 @@
 				success : function(data) {
 					var map = new BMap.Map("map");
 					var geolocation = new BMap.Geolocation();
-					var point = new BMap.Point(data.longtitude,data.latitude);
+					var point = new BMap.Point(data.longitude,data.latitude);
 					var marker = new BMap.Marker(point);
-					marker.setPosition(map.getCenter());
+					marker.setPosition(point);
 					map.addOverlay(marker);
 					map.centerAndZoom(point,12);
 					map.enableScrollWheelZoom(true);
@@ -170,6 +167,7 @@
 							$('#location_info').val(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street);
 							$('#lng').val(lng);
 							$('#lat').val(lat);
+							
 						});        
 					}
 					$('#apartmentid').val(data.id);

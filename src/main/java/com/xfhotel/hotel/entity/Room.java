@@ -36,9 +36,9 @@ public class Room {
 
 	@ManyToOne
 	private Apartment apartment;
-	@OneToMany
-	@JoinColumn(name = "room_id")
-	public Set<Price> prices;//
+
+	public String prices;//
+	
 	@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY)
 	@JoinTable(name = "t_room_facility", joinColumns = { @JoinColumn(name = "room_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "facility_id") })
@@ -79,11 +79,12 @@ public class Room {
 		this.apartment = apartment;
 	}
 
-	public Set<Price> getPrices() {
+
+	public String getPrices() {
 		return prices;
 	}
 
-	public void setPrices(Set<Price> prices) {
+	public void setPrices(String prices) {
 		this.prices = prices;
 	}
 
