@@ -105,27 +105,25 @@
 								<table>
 									<tbody>
 										<tr>
-											<c:forEach items="${room.pics}" var="pic">
-												<td>
-													<ul>
-														<li><a class="edit-img"><img alt=""
-																src="../../images/${pic}" class="img-thumbnail"
-																width="120px" height="80px">
-																<button type="button">更换</button></a></li>
-													</ul>
-												</td>
-											</c:forEach>
+
+											<td>
+												<ul id="img-list">
+													<c:forEach items="${room.pics}" var="pic">
+														<li><img alt="" src="../../images/${pic}"
+															class="img-thumbnail" width="120px" height="80px">
+														</li>
+													</c:forEach>
+												</ul>
+
+											</td>
+											<td><button type="button" class="btn btn-primary btn-lg"
+													data-toggle="modal" data-target="#edit-img-modal">编辑</button></td>
+
 										</tr>
 									</tbody>
 								</table>
 							</div>
-							<script type="text/javascript">
-								$('.edit-img').click(function(){
-									var url = $(this).find('img').attr('src');
-									$('#img-input-preview').attr('src',url);
-									$('#edit-img-modal').modal('toggle');
-								});
-							</script>
+
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">价格</label>
@@ -177,26 +175,73 @@
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">更换图片</h4>
+					<h4 class="modal-title" id="myModalLabel">编辑图片</h4>
 				</div>
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-12">
-							<form action="<%=basePath%>/file/upload" id="edit-img-form" method="post">
-								<input type="file" id="img-input" name="file"> <br> <img alt=""
-									src="" class="img-responsive" id="img-input-preview">
+							<form action="">
+								<input type="hidden" name="id" value="${room.id}">
+								<c:forEach items="${room.pics}" var="pic" varStatus="p">
+									<input type="hidden" name="pics" value="${pic}" id="pic-${p.index}">
+								</c:forEach>
+							</form>
+							<ul>
+								<c:forEach items="${room.pics}" var="pic" varStatus="p">
+									<li> <img alt="" src="../../images/${pic}" 
+										class="img-thumbnail edit-image-preview" width="120px" height="80px" id="img-${p.index}"><label  class="edit-image-label" id="${p.index}" for="img-input">更改</label><a>删除</a></li>
+								</c:forEach>
+							</ul>
+							<script type="text/javascript">
+								var picPosition;
+								$('.edit-image-label').click(function(){
+									picPosition = $(this).attr('id');
+								});
+						
+							</script>
+							<form action="<%=basePath%>/file/upload" id="upload-img-form"
+								method="post">
+								<input type="file" id="img-input" name="file">
+								 <br>
+								<img alt="" src="" class="img-responsive" id="img-input-preview">
 							</form>
 						</div>
 					</div>
 					<script type="text/javascript">
 							$('#img-input').change(function(){
+								var url = $('#upload-img-form').attr('action');
+								var data = new FormData($('#upload-img-form')[0]);
+								$.ajax(url,{
+									headers: {'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
+							        type: 'post',
+							        data: data,
+							        dataType: 'json',
+							        processData: false,
+							        contentType: false,
+							        success:function(data){
+							        	if(data.statusCode == 1){
+							        		$('#img-'+picPosition).attr('src','../../images/'+data.content);
+							        	}
+							        	else{
+							        		alert(data.content);
+							        	}
+							        },
+							        error:function(data){
+							        	alert('连接异常');
+							        }
+								});
+								
+								
 								var files = $('#img-input').prop('files');
 								var file;
 								if (files.length > 0) {
 									file = files[0];
 									if (/^image\/\w+/.test(file.type)) {
 										var url = URL.createObjectURL(file);
-										$('#img-input-preview').attr('src',url);
+										
+										
+									
+										
 									}else{
 										alert("请选择图片！");
 									}
@@ -209,29 +254,7 @@
 					<button type="button" class="btn btn-primary" id="edit-img-submit">保存</button>
 					<script type="text/javascript">
 							$('#edit-img-submit').click(function(){
-								var url = $('#edit-img-form').attr('action');
-								var data = new FormData($avatarForm[0]);
-								$.ajax(url,{
-									headers: {'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
-							        type: 'post',
-							        data: data,
-							        dataType: 'json',
-							        processData: false,
-							        contentType: false,
-							        success:function(data){
-							        	if(data.statusCode == 1){
-							        		$avatarImg.attr('src','../images/'+data.content);
-							        		$formAvatar.val(data.content);
-							        		$avatarModal.modal('toggle');
-							        	}
-							        	else{
-							        		alert(data.content);
-							        	}
-							        },
-							        error:function(data){
-							        	alert('连接异常');
-							        }
-								});
+								
 							});
 						</script>
 				</div>
