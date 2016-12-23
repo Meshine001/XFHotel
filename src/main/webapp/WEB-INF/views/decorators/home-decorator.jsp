@@ -20,10 +20,9 @@
 <link href="<%=basePath%>/dist/commons/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" media="all">
 
-<link href="<%=basePath%>/dist/commons/zoom/css/zoom.css"
+<link href="<%=basePath%>/dist/commons/gallery/css/jquery.galleryview-3.0-dev.css"
 	rel="stylesheet">
-<script src="<%=basePath%>/dist/commons/jquery/jquery-2.1.4.min.js"></script>
-<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
+
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
@@ -67,8 +66,11 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-
-	<script src="<%=basePath%>/dist/commons/zoom/js/zoom.min.js"></script>
+<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
+<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<%=basePath%>/dist/commons/gallery/js/jquery.timers-1.2.js"></script>
+	<script src="<%=basePath%>/dist/commons/gallery/js/jquery.easing.1.3.js"></script>
+	<script src="<%=basePath%>/dist/commons/gallery/js/jquery.galleryview-3.0-dev.js"></script>
 	<sitemesh:write property='my_script' />
 </body>
 </html>

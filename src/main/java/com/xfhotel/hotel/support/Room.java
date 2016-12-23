@@ -13,14 +13,12 @@ import javax.persistence.OneToMany;
 
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Facility;
-import com.xfhotel.hotel.entity.Price;
 
 public class Room {
 	
 	private long id;
 
 	private Apartment apartment;
-	public Set<Price> prices;//
 	public Set<Facility> facilities; //
 
 	private double square;//
@@ -35,12 +33,11 @@ public class Room {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Room(long id, Apartment apartment, Set<Price> prices, Set<Facility> facilities, double square,
+	public Room(long id, Apartment apartment,Set<Facility> facilities, double square,
 			String direction, String capacity, String description) {
 		super();
 		this.id = id;
 		this.apartment = apartment;
-		this.prices = prices;
 		this.facilities = facilities;
 		this.square = square;
 		this.direction = direction;
@@ -60,12 +57,7 @@ public class Room {
 	public void setApartment(Apartment apartment) {
 		this.apartment = apartment;
 	}
-	public Set<Price> getPrices() {
-		return prices;
-	}
-	public void setPrices(Set<Price> prices) {
-		this.prices = prices;
-	}
+
 	public Set<Facility> getFacilities() {
 		return facilities;
 	}

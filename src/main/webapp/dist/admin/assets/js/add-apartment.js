@@ -99,8 +99,10 @@ $(document).ready(
 				getFeatures();
 			});
 			
+		
 			
 			var $layoutImageInput = $('#layout-image-input');
+			
 			$layoutImageInput.change(function() {
 				var files = $layoutImageInput.prop('files'), file;
 				if (files.length > 0) {
@@ -114,65 +116,39 @@ $(document).ready(
 				}
 			});
 
+			
+			var hidePrices = function(){
+				$('.day').hide();
+				$('.week').hide();
+				$('.month').hide();
+				$('.year').hide();
+			}
+			
+			hidePrices();
+			
 			$('#apartment-type').change(
 					function() {
+						hidePrices();
 						var op = $(this).children('option:selected').val();
-						$("#lease-price").html("");
 						if (op != -1) {
-							$('#apartment-type-input').val(op);
-							$.ajax({
-								async : false,
-								cache : false,
-								type : 'POST',
-								dataType : 'json',
-								data : {
-									'type' : 0,
-									'id' : op
-								},
-								url : "../apartment/getleasetype",// 请求的action路径
-								error : function() {// 请求失败处理函数
-									alert("获取数据失败！");
-								},
-								success : function(data) {
-									console.log(data);
-									var leasetypes = data.leasetype;
-									var leasetypeids = data.leasetypeid;
-									for ( var i in leasetypes) {
-										var ids = leasetypeids[i];
-										var types = leasetypes[i];
-										var div = $('<div></dic>').attr('class','input-group');
-										var spanType = $('<span></span>').attr('class','input-group-addon').text(types);
-										var spanPrice = $('<span></span>').attr('class','input-group-addon').text('元');
-										var inputType = $('<input></input>')
-										.attr('type', 'text').attr(
-												'name', 'price');
-										div.append(spanType);
-										div.append(inputType);
-										div.append(spanPrice);
-										$('#lease-price').append(div);
-										var inputId = $('<input></input>')
-												.attr('type', 'hidden').attr(
-														'name', 'leasetypeid')
-												.val(ids);
-										div.append(inputId);
-//										label.appendTo('#lease-price');
-//										inputId.appendTo('#lease-price');
-//										inputType.appendTo('#lease-price');
-									}
-
-								}
-							});
+							if(op == '酒店型'){
+								$('#lease-type').hide();
+							}else{
+								$('#lease-type').show();
+							}
 						}
 			});
 
 			$('#lease-type').change(function() {
+				hidePrices();
 				var op = $(this).children('option:selected').val();
-				$('#type-input').val(op);
-				if (op == 1) {
-					$('#lease-price').show();
-				} else {
-					$('#lease-price').hide();
+				if(op != -1){
+					if(op != '合租型'){
+						$('.month').show();
+						$('.year').show();
+					}
 				}
+				
 			});
 		});
 

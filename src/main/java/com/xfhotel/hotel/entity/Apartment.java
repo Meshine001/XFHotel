@@ -53,181 +53,242 @@ public class Apartment {
 	public Set<Feature> features;//label for apartment
 	
 	
-	@OneToMany
-	@JoinColumn(name="apartment_id")
-	public Set<Price> prices;//
 	
-	//閰掑簵鍨嬫垨鐭鍨�
-	@ManyToOne
-	private ApartmentType apartmentType;
+	public String prices;//day@weekend@month@year
 	
-	//鍚堢锛屾暣绉�
+	private String apartmentType; //hotel or apartment
+	
 	private String type; //together,sigle
 	
 	private String address;//address : cell : num_building
 	
 	private String floor;//current floor : total floor
 	
-	//鏈濆悜
 	private String direction;//
-	//闈㈢Н
 	private double square;//square for apartment
-	//鍙綇鍑犱汉
 	private String capacity;//num of people
-	//甯冨眬
 	private String layout;// bedroom : livingroom : bathroom : balcony
-	
 	
 	private String description;//enviroment,transportation,etc.
 
-	private String layoutPic;
-//	private Set<String> pics;//
-
+	private String pic1;//layoutPic
+	private String pic2;//ke ting, can ting
+	private String pic3;//bathroom chufang
+	private String pic4;//xiao qu
+	
 	public Apartment() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ApartmentType getApartmentType() {
-		return apartmentType;
-	}
-
-	public void setApartmentType(ApartmentType apartmentType) {
-		this.apartmentType = apartmentType;
-	}
-
+	
 	public long getId() {
 		return id;
 	}
+
 
 	public void setId(long id) {
 		this.id = id;
 	}
 
+
 	public double getLatitude() {
 		return latitude;
 	}
+
 
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
+
 	public double getLongitude() {
 		return longitude;
 	}
+
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 
+
 	public Set<Room> getRooms() {
 		return rooms;
 	}
+
 
 	public void setRooms(Set<Room> rooms) {
 		this.rooms = rooms;
 	}
 
+
 	public Set<Facility> getFacilities() {
 		return facilities;
 	}
+
 
 	public void setFacilities(Set<Facility> facilities) {
 		this.facilities = facilities;
 	}
 
+
 	public Set<Feature> getFeatures() {
 		return features;
 	}
+
 
 	public void setFeatures(Set<Feature> features) {
 		this.features = features;
 	}
 
-	public Set<Price> getPrices() {
+
+	public String getPrices() {
 		return prices;
 	}
 
-	public void setPrices(Set<Price> prices) {
+
+	public void setPrices(String prices) {
 		this.prices = prices;
 	}
+
+
+	public String getApartmentType() {
+		return apartmentType;
+	}
+
+
+	public void setApartmentType(String apartmentType) {
+		this.apartmentType = apartmentType;
+	}
+
 
 	public String getType() {
 		return type;
 	}
 
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 
 	public String getAddress() {
 		return address;
 	}
 
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 
 	public String getFloor() {
 		return floor;
 	}
 
+
 	public void setFloor(String floor) {
 		this.floor = floor;
 	}
+
 
 	public String getDirection() {
 		return direction;
 	}
 
+
 	public void setDirection(String direction) {
 		this.direction = direction;
 	}
+
 
 	public double getSquare() {
 		return square;
 	}
 
+
 	public void setSquare(double square) {
 		this.square = square;
 	}
+
 
 	public String getCapacity() {
 		return capacity;
 	}
 
+
 	public void setCapacity(String capacity) {
 		this.capacity = capacity;
 	}
+
 
 	public String getLayout() {
 		return layout;
 	}
 
+
 	public void setLayout(String layout) {
 		this.layout = layout;
 	}
+
 
 	public String getDescription() {
 		return description;
 	}
 
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public String getLayoutPic() {
-		return layoutPic;
+
+
+
+	public String getPic1() {
+		return pic1;
 	}
 
-	public void setLayoutPic(String layoutPic) {
-		this.layoutPic = layoutPic;
+
+	public void setPic1(String pic1) {
+		this.pic1 = pic1;
 	}
-	
+
+
+	public String getPic2() {
+		return pic2;
+	}
+
+
+	public void setPic2(String pic2) {
+		this.pic2 = pic2;
+	}
+
+
+	public String getPic3() {
+		return pic3;
+	}
+
+
+	public void setPic3(String pic3) {
+		this.pic3 = pic3;
+	}
+
+
+	public String getPic4() {
+		return pic4;
+	}
+
+
+	public void setPic4(String pic4) {
+		this.pic4 = pic4;
+	}
+
+
 	public Map toMap(){
 		Map map = new HashMap();
 		map.put("id",this.getId());
 		map.put("latitude",this.getLatitude());
 		map.put("longitude",this.getLongitude());
+		map.put("apartmenttype", apartmentType);
 		map.put("type",this.getType());
 		map.put("address",this.getAddress().split("@")[0]);
 		map.put("community",this.getAddress().split("@")[1]);
@@ -243,13 +304,11 @@ public class Apartment {
 		map.put("bathroom",this.getLayout().split("@")[2]);
 		map.put("balcony",this.getLayout().split("@")[3]);
 		map.put("description",this.getDescription());
-		String[] pics = layoutPic.split("@");
-		map.put("layoutPic", pics[0]);
-		if(pics.length == 2){
-			map.put("pics",pics[1]);
-		}else if(pics.length > 2){
-			map.put("pics", layoutPic.substring(pics[0].length()+1, layoutPic.length()).split("@"));
-		}
+		map.put("pic1", pic1);
+		map.put("pic2", pic2.split("@"));
+		map.put("pic3", pic3.split("@"));
+		map.put("pic4", pic4.split("@"));
+
 		
 		List<String> featuresList = new ArrayList<String>();
 		Set<Feature> features = this.getFeatures();

@@ -36,7 +36,6 @@ public class FileServiceImpl implements FileService {
 	public String saveFile(MultipartFile file, String path) {
 		String type = null;// 
 		String fileName = file.getOriginalFilename();// 
-		System.out.println(path);
 		type = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length())
 				: null;
 		if (type != null) {
