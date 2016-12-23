@@ -210,9 +210,10 @@ public class ApartmentController {
 			Room room = new Room();
 			room.setApartment(apartment);
 			room.setCapacity("1");
-			room.setDescription("房间" + String.valueOf(i + 1) + "@" + "" + "@" + type);
+			//roomName @ roomType @ leasyType
+			room.setDescription("房间" + String.valueOf(i + 1) + "@" + "-1" + "@" + type);
 			room.setSquare(0);
-			room.setDirection("");
+			room.setDirection("-1");
 			room.setPics("default.jpg@default.jpg@default.jpg");
 			room.setPrices("-1@-1@-1@-1");
 			room.setFacilities(null);
@@ -305,6 +306,7 @@ public class ApartmentController {
 		session.setAttribute("l_facility", l_facility);
 		List l_feature = featureService.listFeatures();
 		session.setAttribute("l_feature", l_feature);
+		session.setAttribute("room", roomService.getRoomInfo(Long.valueOf(roomid)));
 		return "/admin/apartment/editroom";
 	}
 

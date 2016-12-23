@@ -288,6 +288,7 @@ public class Apartment {
 		map.put("id",this.getId());
 		map.put("latitude",this.getLatitude());
 		map.put("longitude",this.getLongitude());
+		map.put("apartmenttype", apartmentType);
 		map.put("type",this.getType());
 		map.put("address",this.getAddress().split("@")[0]);
 		map.put("community",this.getAddress().split("@")[1]);

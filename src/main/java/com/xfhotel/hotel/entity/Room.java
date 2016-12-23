@@ -36,7 +36,9 @@ public class Room {
 
 	@ManyToOne
 	private Apartment apartment;
-
+	
+	private String status;
+	
 	public String prices;//
 	
 	@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY)
@@ -54,6 +56,20 @@ public class Room {
 	public Room() {
 		// TODO Auto-generated constructor stub
 	}
+
+	
+	
+	public String getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
 
 	public String getPics() {
 		return pics;
@@ -143,6 +159,7 @@ public class Room {
 		}
 		map.put("apartment", apartment.toMap());
 		map.put("prices", prices.split("@"));
+		map.put("status", status);
 		return map;
 	}
 

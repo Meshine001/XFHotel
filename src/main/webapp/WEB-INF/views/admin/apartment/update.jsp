@@ -1,184 +1,310 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	String basePath = request.getContextPath();
+%>
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>-青舍都市公寓-西安租房_西安合租</title>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 </head>
 <body>
 	<my_body>
-	<form action="<%=request.getContextPath()%>/admin/apartment/update"
-		method="POST">
-		<div>
-			<input type="hidden" id="apartmentid" name="apartmentid" />
-			<div id="location">
-				<input type="text" id="location_info" name="location"
-					readonly="readonly"> <input type="hidden" id="lng"
-					name="lng"> <input type="hidden" id="lat" name="lat">
-			</div>
-			<div>
-				地址：<input type="text" id="address" name="address" />
-			</div>
-			<div id="map" style="width: 500px; height: 500px"></div>
-			<div>
-				小区名称：<input type="text" id="community" name="community" />
-			</div>
-			<div>
-				楼号：<input type="text" id="num_building" name="num_building" />
-			</div>
-			<div>
-				楼层：第<input type="text" id="floor" name="floor" />层&nbsp;共<input
-					type="text" id="totalfloor" name="totalfloor" />层
-			</div>
-			<div>
-				朝向： <select id="direction" name="direction">
-					<option value="南北">南北</option>
-					<option value="东西">东西</option>
-				</select>
-			</div>
-			<div>
-				面积：<input type="text" id="square" name="square" /> 人数：<input
-					type="text" id="capacity" name="capacity" />
-			</div>
-			<div>
-				房屋户型：<input type="text" id="bedroom" name="bedroom" />室<input
-					type="text" id="livingroom" name="livingroom" />厅<input
-					type="text" id="bathroom" name="bathroom" />卫<input type="text"
-					id="balcony" name="balcony" />阳台
-			</div>
-			<div>
-				特色：
-				<c:forEach items="${l_feature}" var="feature" varStatus="p">
-					<input type="checkbox" id="feature${feature.id}" name="feature"
-						value="${feature.id}"> ${feature.description }
-				</c:forEach>
-			</div>
-			<div>
-				备注：<input type="text" id="description" name="description">
-			</div>
-			<div>布局图：</div>
-		</div>
-		<div>
-			设施：
-			<c:forEach items="${l_facility}" var="facility" varStatus="p">
-				<input type="checkbox" id="facility${facility.id}" name="facility"
-					value="${facility.id}"> ${facility.description }
-		</c:forEach>
-		</div>
-		<div>
-			房间设置： <input type="hidden" name="num_room" value="0">
-			<div id="rooms"></div>
-		</div>
-		<div>
-			出租类型：<select id="apartmenttype" name="apartmenttype">
-				<option value="-1" selected="selected">请选择</option>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-header">编辑房源</div>
+				<div class="card-body">
+					<form action="/hotel/admin/apartment/update" method="POST"
+						class="form form-horizontal" enctype="multipart/form-data">
+						<input type="hidden" id="apartmentid" name="apartmentid"
+							value="${apartmentid}">
+						<div class="form-group">
+							<label class="col-md-3 control-label">区域</label>
+							<div class="col-md-9">
+								<div id="location">
+									<input type="text" id="location_info" class="form-control"
+										placeholder="" name="location" readonly="readonly"> <input
+										type="hidden" id="lng" class="form-control" placeholder=""
+										name="lng" value=""> <input type="hidden" id="lat"
+										class="form-control" placeholder="" name="lat" value="">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">详细地址</label>
 
-			</select> <select id="type" name="type">
-				<option value="-1">请选择</option>
-				<option value="单租型">单租型</option>
-				<option value="合租型">合租型</option>
-			</select>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder=""
+									name="address" id="address">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">小区名称</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder=""
+									name="community" id="community">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">楼号</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder=""
+									name="num_building" id="num_building">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">楼层</label>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">第</span> <input type="text"
+										class="form-control" placeholder="" name="floor" id="floor">
+									<span class="input-group-addon">层</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">共</span> <input type="text"
+										class="form-control" placeholder="" name="totalfloor"
+										id="totalfloor"> <span class="input-group-addon">层</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-3 control-label">朝向</label>
+							<div class="col-md-9">
+								<select name="direction" class="" id="direction">
+									<option value="南北">南北</option>
+									<option value="东西">东西</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">总面积</label>
+							<div class="col-md-9">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder=""
+										name="square" id="square"> <span
+										class="input-group-addon">m<sup>2</sup></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">可住人数</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder=""
+									name="capacity" id="capacity">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-3 control-label">户型</label>
+							<div class="col-sm-2">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder=""
+										name="bedroom" id="bedroom"> <span
+										class="input-group-addon">室</span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder=""
+										name="livingroom" id="livingroom"> <span
+										class="input-group-addon">厅</span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder=""
+										name="bathroom" id="bathroom"> <span
+										class="input-group-addon">卫</span>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder=""
+										name="balcony" id="balcony"> <span
+										class="input-group-addon">阳台</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">特色<small><a
+									id="edit-feature">编辑</a></small></label>
+
+							<div class="col-md-9">
+
+								<c:forEach items="${l_feature}" var="feature" varStatus="p">
+									<div class="checkbox checkbox-inline">
+										<input type="checkbox" id="fe-${feature.id}" name="feature"
+											value="${feature.id}"> <label for="fe-${feature.id}">${feature.description }
+										</label>
+									</div>
+								</c:forEach>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">备注</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder=""
+									name="description" id="description">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-3 control-label">设施<small><a>编辑</a></small></label>
+							<div class="col-md-9">
+								<c:forEach items="${l_facility}" var="facility" varStatus="p">
+									<div class="checkbox checkbox-inline">
+										<input type="checkbox" id="fa-${facility.id}" name="facility"
+											value="${facility.id}"> <label
+											for="fa-${facility.id}">${facility.description }</label>
+									</div>
+								</c:forEach>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">房间</label>
+							<div class="col-md-9">
+								<div id="rooms"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">图片</label>
+							<div class="col-md-9">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td>布局图
+											<td>
+											<td>
+												<ul>
+													<li><a><img alt="" src="" class="img-thumbnail"
+															width="120px" height="80px" id="layoutPic">
+															<button type="button">编辑</button></a></li>
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>客厅图
+											<td>
+											<td>
+												<ul id="livingroom-ul">
+
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>餐厅图
+											<td>
+											<td>
+												<ul id="eattingroom-ul">
+
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>浴室图
+											<td>
+											<td>
+												<ul id="bathroom-ul">
+
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>厨房图
+											<td>
+											<td>
+												<ul id="kitchen-ul">
+
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>小区实景图
+											<td>
+											<td>
+												<ul id="community-ul">
+
+												</ul>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">出租类型</label>
+							<div class="col-md-9">
+								<select name="apartmenttype" id="apartment-type">
+									<option value="-1" selected="selected">请选择</option>
+									<option value="酒店型">酒店型</option>
+									<option value="短租型">短租型</option>
+								</select> <select name="type" id="lease-type">
+									<option value="-1">请选择</option>
+									<option value="单租型">单租型</option>
+									<option value="合租型">合租型</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">价格</label>
+							<div id="lease-price" class="col-md-9">
+								<div class="input-group day" style="display: none;">
+									<span class="input-group-addon">天</span> <input type="text"
+										name="prices" class="price-day"> <span
+										class="input-group-addon">元</span>
+								</div>
+								<div class="input-group week" style="display: none;">
+									<span class="input-group-addon">周</span> <input type="text"
+										name="prices" class="price-week"> <span
+										class="input-group-addon">元</span>
+								</div>
+								<div class="input-group month" style="display: none;">
+									<span class="input-group-addon">月</span> <input type="text"
+										name="prices" class="price-month"> <span
+										class="input-group-addon">元</span>
+								</div>
+								<div class="input-group year" style="display: none;">
+									<span class="input-group-addon">年</span> <input type="text"
+										name="prices" class="price-year"> <span
+										class="input-group-addon">元</span>
+								</div>
+							</div>
+						</div>
+
+						<br>
+						<div class="form-footer">
+							<div class="form-group">
+								<div class="col-md-9 col-md-offset-3">
+									<button type="submit" class="btn btn-primary">保存</button>
+									<button type="button" class="btn btn-default">取消</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
 		</div>
-		<div id="lease" style="display: none;"></div>
-		<button type="submit">提交</button>
-	</form>
+		<div class="col-md-6">
+			<div class="card"><div id="map" style="width: 100%; height: 800px"></div></div>
+		</div>
+	</div>
+
 	<script
 		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
-		type="text/javascript"></script> <script type="text/javascript">
-		var apartmentid = ${apartmentid};
-		$(document).ready(function(){
-			$.ajax({
-				async : false,
-				cache : false,
-				type : 'POST',
-				dataType : 'json',
-				data : {'apartmentid':apartmentid},
-				url : "<%=request.getContextPath()%>/admin/apartment/getapartment",//请求的action路径
-				error : function() {//请求失败处理函数
-					alert("获取数据失败！");
-				},
-				success : function(data) {
-					var map = new BMap.Map("map");
-					var geolocation = new BMap.Geolocation();
-					var point = new BMap.Point(data.longitude,data.latitude);
-					var marker = new BMap.Marker(point);
-					marker.setPosition(point);
-					map.addOverlay(marker);
-					map.centerAndZoom(point,12);
-					map.enableScrollWheelZoom(true);
-					map.addEventListener('ondragging', function(){
-						marker.setPosition(map.getCenter());
-        			});
-					map.addEventListener("dragend", function showInfo(){
-						var cp = map.getCenter();
-						getaddress(cp.lng,cp.lat);
-					});
-					function getaddress(lng,lat){
-						var pt = new BMap.Point(lng,lat);
-						var geoc = new BMap.Geocoder();  
-						geoc.getLocation(pt, function(rs){
-							var addComp = rs.addressComponents;
-							$('#location_info').val(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street);
-							$('#lng').val(lng);
-							$('#lat').val(lat);
-							
-						});        
-					}
-					$('#apartmentid').val(data.id);
-					$('#address').val(data.address);
-					$('#community').val(data.community);
-					$('#num_building').val(data.num_building);
-					$('#floor').val(data.floor);
-					$('#totalfloor').val(data.totalfloor);
-					$('#square').val(data.square);
-					$('#capacity').val(data.capacity);
-					$('#bedroom').val(data.bedroom);
-					$('#livingroom').val(data.livingroom);
-					$('#bathroom').val(data.bathroom);
-					$('#balcony').val(data.balcony);
-					$('#description').val(data.description);
-					$.each(data.facilities,function(index,value){
-						$('#facility'+value.id).attr('checked',true);
-					});
-					$.each(data.features,function(index,value){
-						$('#feature'+value.id).attr('checked',true);
-					});
-					$('#apartmenttype').val(data.apartmentType);
-					$('#type').val(data.type);
-					$('#location_info').val(data.location);
-					$('#lng').val(data.longitude);
-					$('#lat').val(data.latitude);
-					$.each(data.prices,function(index,value){
-						$('#leasetypeid'+value.leasetypeid).val(value.leasetypeid);
-						$('#leasetype'+value.leasetypeid).val(value.price);
-					});
-					var roomshtml = "";
-					$.each(data.rooms,function(index,value){
-						var url = "./editroom";
-						var form = $('<form></form>').attr('action',url).attr('method','post');
-						var ul = $('<ul></ul>');
-						var li =  $("<li>"+ value.description
-							+ "&nbsp" + value.type
-							+ "&nbsp" + value.square
-							+ "&nbsp" + value.direction
-							+ "&nbsp" + value.capacity
-							+ "&nbsp" + value.square 
-							+ "</li>");
-						ul.append(li);
-						form.append(ul);
-						var submit = $('<input></input>').attr('type','submit').attr('value','编辑');
-						var inrid = $('<input></input>').attr('type','hidden').attr('value',value.id).attr('name','roomid');
-						var inaid = $('<input></input>').attr('type','hidden').attr('value',data.id).attr('name','apartmentid');
-						form.append(submit).append(inrid).append(inaid);
-						$("#rooms").append(form);
-					});
-				}
-			});
-		});
-	</script>
-	</my_body>
+		type="text/javascript"></script> </my_body>
+	<my_script> <script type="text/javascript"
+		src="<%=basePath%>/dist/admin/assets/js/update-apartment.js"></script></my_script>
 </body>
 </html>
