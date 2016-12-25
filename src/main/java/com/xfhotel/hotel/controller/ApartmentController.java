@@ -175,7 +175,7 @@ public class ApartmentController {
 
 		}
 
-		Set s_facility = new HashSet();
+		List s_facility = new ArrayList();
 		if (facility != null) {
 			for (int i = 0; i < facility.length; i++) {
 				Long id = Long.valueOf(facility[i]);
@@ -184,7 +184,7 @@ public class ApartmentController {
 		}
 		apartment.setFacilities(s_facility);
 
-		Set s_feature = new HashSet();
+		List s_feature = new ArrayList();
 		if (feature != null) {
 			for (int i = 0; i < feature.length; i++) {
 				Long id = Long.valueOf(feature[i]);
@@ -341,7 +341,7 @@ public class ApartmentController {
 		room.setDirection(direction);
 		
 		List l_facility = facilityService.listFacilities();
-		Set s_facility = new HashSet();
+		List s_facility = new ArrayList();
 		if (facility != null) {
 			for (int i = 0; i < facility.length; i++) {
 				Long fid = Long.valueOf(facility[i]);

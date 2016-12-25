@@ -1,6 +1,8 @@
 package com.xfhotel.hotel.entity;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -17,7 +19,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "t_feature")
-public class Feature {
+public class Feature implements Serializable {
 	
 	@Id
 	@GeneratedValue(generator="featuregenerator")

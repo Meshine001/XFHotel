@@ -1,6 +1,8 @@
 package com.xfhotel.hotel.entity;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -11,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "t_facility")
-public class Facility {
+public class Facility implements Serializable{
 	@Id
 	private long id;
 	private String description;

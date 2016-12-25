@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.entity.User;
@@ -47,6 +48,8 @@ public class HomeController {
 	FeatureService featrueService;
 	@Autowired
 	RoomService roomService;
+	@Autowired
+	ApartmentService apartmentService;
 	
 	@Autowired
 	HttpSession session;
@@ -88,6 +91,11 @@ public class HomeController {
 	public @ResponseBody Message search() {
 		try {
 			List<Map>  rooms = roomService.getAllRooms();
+			Apartment apartment = new Apartment();
+			Room room = new Room();
+			int  type=0;//0 缺省，1单租，2合租
+			String content = "";
+			apartmentService.findApartment(type, apartment);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, rooms);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

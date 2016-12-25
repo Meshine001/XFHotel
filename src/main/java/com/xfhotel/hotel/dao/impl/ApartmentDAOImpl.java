@@ -56,8 +56,8 @@ public class ApartmentDAOImpl extends BaseDAOImpl<Apartment, Long>{
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria c = session.createCriteria(Apartment.class);
 		c.add(Restrictions.eq("id", id));
-		c.setFetchMode("rooms", FetchMode.JOIN).setFetchMode("facilities", FetchMode.JOIN)
-				.setFetchMode("features", FetchMode.JOIN);
+		//c.setFetchMode("rooms", FetchMode.JOIN).setFetchMode("facilities", FetchMode.JOIN)
+		//		.setFetchMode("features", FetchMode.JOIN);
 		return (Apartment) c.uniqueResult();
 	}
 
@@ -75,6 +75,11 @@ public class ApartmentDAOImpl extends BaseDAOImpl<Apartment, Long>{
 			return 0;
 		}
 		return 1;
+	}
+
+	public List findApartment(int type, Apartment apartment) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
