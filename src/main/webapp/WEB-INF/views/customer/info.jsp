@@ -48,39 +48,34 @@
 										<th>付款方式</th>
 										<th>月租金</th>
 										<th>押金</th>
-										<th>服务费</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
+										<td>天付</td>
+										<td>${room.prices[0]}元/天</td>
+										<td>${room.prices[0]}元/天</td>
+									</tr>
+									<tr>
+										<td>周付</td>
+										<td>${room.prices[1]}元/周</td>
+										<td>${room.prices[1]}元/周</td>
+									</tr>
+									<tr>
 										<td>月付</td>
-										<td>¥1302/月</td>
-										<td>¥1480</td>
-										<td>¥104/月</td>
+										<td>${room.prices[2]}元/月</td>
+										<td>${room.prices[2]}元/月</td>
 									</tr>
-									<tr class="success">
-										<td>季付</td>
-										<td>¥1302/月</td>
-										<td>¥1480</td>
-										<td>¥104/月</td>
-									</tr>
-									<tr class="error">
-										<td>半年付</td>
-										<td>T¥1276/月</td>
-										<td>¥1480</td>
-										<td>¥102/月</td>
-									</tr>
-									<tr class="warning">
+									<tr>
 										<td>年付</td>
-										<td>¥1250/月</td>
-										<td>¥1480</td>
-										<td>¥100/月/td>
+										<td>${room.prices[3]}元/年</td>
+										<td>${room.prices[3]}元/年</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
-					<div class="row clearfix">
+					<div class="row clearfix" style="display: none;">
 						<div class="col-md-12 column">
 							<h3>我的室友</h3>
 							<table class="table">

@@ -154,8 +154,8 @@ public class ApartmentController {
 		apartment.setPic3(pics.toString());// 卫生间厨房
 
 		pics = new StringBuffer();
-		k1 = fileService.saveFile(file[5], request.getSession().getServletContext().getRealPath("/"));
-		k2 = fileService.saveFile(file[6], request.getSession().getServletContext().getRealPath("/"));
+		k1 = fileService.saveFile(file[9], request.getSession().getServletContext().getRealPath("/"));
+		k2 = fileService.saveFile(file[10], request.getSession().getServletContext().getRealPath("/"));
 		pics.append(k1).append("@").append(k2);
 		apartment.setPic4(pics.toString());// 小区实景
 
@@ -211,8 +211,9 @@ public class ApartmentController {
 			room.setApartment(apartment);
 			room.setCapacity("1");
 			//roomName @ roomType @ leasyType
-			room.setDescription("房间" + String.valueOf(i + 1) + "@" + "-1" + "@" + type);
+			room.setDescription("房间" + String.valueOf(i + 1) + "@" + "-1" + "@" + apartment.getApartmentType());
 			room.setSquare(0);
+			room.setStatus("未出租");
 			room.setDirection("-1");
 			room.setPics("default.jpg@default.jpg@default.jpg");
 			room.setPrices("-1@-1@-1@-1");
@@ -299,43 +300,40 @@ public class ApartmentController {
 	}
 
 	@RequestMapping(value = "/editroom", method = RequestMethod.POST)
-	public String editroom(String roomid, String apartmentid) {
+	public String editroom(Long roomid, String apartmentid) {
 		session.setAttribute("roomid", roomid);
 		session.setAttribute("apartmentid", apartmentid);
 		List l_facility = facilityService.listFacilities();
 		session.setAttribute("l_facility", l_facility);
 		List l_feature = featureService.listFeatures();
 		session.setAttribute("l_feature", l_feature);
-		session.setAttribute("room", roomService.getRoomInfo(Long.valueOf(roomid)));
+		session.setAttribute("room", roomService.getRoomInfo(roomid));
 		return "/admin/apartment/editroom";
 	}
-
+	
+	@RequestMapping(value = "/room/pic/update/{roomid}", method = RequestMethod.POST)
+	public @ResponseBody Message updateRoomPic(@PathVariable(value="roomid") Long roomid,String[] pics){
+		try {
+			roomService.updateRoomPic(roomid, pics);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE,"更新成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "更新房间图片失败");
+	}
+	
 	@RequestMapping(value = "/room/{roomid}", method = RequestMethod.POST)
 	public @ResponseBody Map getRoom(@PathVariable("roomid") String roomid) {
 		Map map = roomService.getRoomInfo(Long.valueOf(roomid));
 		return map;
 	}
 
-	@RequestMapping(value = "/room/update", method = RequestMethod.POST)
-	public String updateroom(RedirectAttributes attr, HttpServletRequest request, String id, String description,
-			String type,String ltype, String square, String direction, String[] facility, String[] prices,
-			@RequestParam(value = "file", required = false) MultipartFile[] file) {
+	@RequestMapping(value = "/room/update/{roomid}", method = RequestMethod.POST)
+	public String updateroom(@PathVariable(value ="roomid") Long roomid, RedirectAttributes attr, HttpServletRequest request, String description,
+			String type,String ltype, String square, String direction, String[] facility, String[] prices) {
 		String apartmentid = (String) session.getAttribute("apartmentid");
-		Room room = roomService.findById(Long.valueOf(id));
-		// 添加照片
-		StringBuffer pics = new StringBuffer();
-		for (int i = 0; i < file.length; i++) {
-			if (file[i] == null)
-				continue;
-			String p = fileService.saveFile(file[i], request.getSession().getServletContext().getRealPath("/"));
-			System.out.println(p.toString());
-			if (i != file.length - 1) {
-				pics.append(p).append("@");
-			} else {
-				pics.append(p);
-			}
-		}
-		room.setPics(pics.toString());
+		Room room = roomService.findById(roomid);
 
 		List lf = facilityService.listFacilities();
 		room.setDescription(description + "@" + type + "@" + ltype);

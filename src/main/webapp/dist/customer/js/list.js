@@ -38,7 +38,7 @@ $(document).ready(function(){
 				
 				var features = apartment.features;//缺数据
 				
-				var price = room.prices[1];
+				var price = room.prices[2];
 				var leasyType = '月';
 				var oldPrice = '';
 				

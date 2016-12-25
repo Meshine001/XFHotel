@@ -20,10 +20,8 @@
 				<div class="card-header">编辑房间</div>
 				<div class="card-body">
 					<form
-						action="<%=request.getContextPath()%>/admin/apartment/room/update"
-						method="POST" class="form form-horizontal"
-						enctype="multipart/form-data">
-						<input type="hidden" id="id" name="id" value="${room.id}">
+						action="<%=request.getContextPath()%>/admin/apartment/room/update/${room.id}"
+						method="POST" class="form form-horizontal">
 						<input type="hidden" id="ltype" name="ltype" value="${room.ltype}">
 						<div class="form-group">
 							<label class="col-md-3 control-label">房间名</label>
@@ -45,7 +43,8 @@
 							</div>
 							<script type="text/javascript">
 									$('#type option').each(function(){
-										if($(this).val() == ${room.type}){
+										var op = $(this).val();
+										if(op == '${room.type}'){
 											$(this).attr('selected','selected');
 										}
 									});
@@ -65,7 +64,7 @@
 							</div>
 							<script type="text/javascript">
 									$('#direction option').each(function(){
-										if($(this).val() == ${room.direction}){
+										if($(this).val() == '${room.direction}'){
 											$(this).attr('selected','selected');
 										}
 									});
@@ -86,18 +85,22 @@
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">设施</label>
-							<div class="col-md-9">
+							<div class="col-md-9" id="facilities">
 								<c:forEach items="${l_facility}" var="facility" varStatus="p">
 									<div class="checkbox checkbox-inline">
 										<input type="checkbox" id="fa-${facility.id}" name="facility"
 											value="${facility.id}"> <label
 											for="fa-${facility.id}">${facility.description }</label>
 									</div>
+									<c:forEach items="${room.facilities}" var="f">
+										<c:if test="${f.id == facility.id}">
+											<script type="text/javascript">
+												$('#fa-'+${facility.id}).attr('checked','checked');
+											</script>
+										</c:if>
+									</c:forEach>
 								</c:forEach>
 							</div>
-							<script type="text/javascript">
-								
-							</script>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">图片</label>
@@ -130,22 +133,22 @@
 							<div id="lease-price" class="col-md-9">
 								<div class="input-group day">
 									<span class="input-group-addon">天</span> <input type="text"
-										name="prices" class="price-day"> <span
+										name="prices" class="price-day" value="${room.prices[0]}"> <span
 										class="input-group-addon">元</span>
 								</div>
 								<div class="input-group week">
 									<span class="input-group-addon">周</span> <input type="text"
-										name="prices" class="price-week"> <span
+										name="prices" class="price-week" value="${room.prices[1]}"> <span
 										class="input-group-addon">元</span>
 								</div>
 								<div class="input-group month">
 									<span class="input-group-addon">月</span> <input type="text"
-										name="prices" class="price-month"> <span
+										name="prices" class="price-month" value="${room.prices[2]}"> <span
 										class="input-group-addon">元</span>
 								</div>
 								<div class="input-group year">
 									<span class="input-group-addon">年</span> <input type="text"
-										name="prices" class="price-year"> <span
+										name="prices" class="price-year" value="${room.prices[3]}"> <span
 										class="input-group-addon">元</span>
 								</div>
 							</div>
@@ -180,8 +183,7 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-12">
-							<form action="">
-								<input type="hidden" name="id" value="${room.id}">
+							<form action="./room/pic/update/${room.id}" id="update-img-form">
 								<c:forEach items="${room.pics}" var="pic" varStatus="p">
 									<input type="hidden" name="pics" value="${pic}" id="pic-${p.index}">
 								</c:forEach>
@@ -221,6 +223,7 @@
 							        success:function(data){
 							        	if(data.statusCode == 1){
 							        		$('#img-'+picPosition).attr('src','../../images/'+data.content);
+							        		$('#pic-'+picPosition).val(data.content);
 							        	}
 							        	else{
 							        		alert(data.content);
@@ -230,22 +233,6 @@
 							        	alert('连接异常');
 							        }
 								});
-								
-								
-								var files = $('#img-input').prop('files');
-								var file;
-								if (files.length > 0) {
-									file = files[0];
-									if (/^image\/\w+/.test(file.type)) {
-										var url = URL.createObjectURL(file);
-										
-										
-									
-										
-									}else{
-										alert("请选择图片！");
-									}
-								}
 							});
 						</script>
 				</div>
@@ -254,7 +241,26 @@
 					<button type="button" class="btn btn-primary" id="edit-img-submit">保存</button>
 					<script type="text/javascript">
 							$('#edit-img-submit').click(function(){
-								
+								var url = $('#update-img-form').attr('action');
+								$.ajax({
+									cache : true,
+									type : "POST",
+									url : url,
+									data : $('#update-img-form').serialize(),
+									async : false,
+									error : function(request) {
+										alert("连接异常！");
+									},
+									success : function(data) {
+										alert(data.content);
+										if (data.statusCode == 0) {
+
+										} else {
+											window.location.reload();
+										}
+
+									}
+								});
 							});
 						</script>
 				</div>

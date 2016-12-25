@@ -16,4 +16,6 @@ public interface RoomService {
 	public Room findById(Long id);
 
 	public List<Map>  getAllRooms();
+	
+	public void updateRoomPic(Long id,String[] pics);
 }
