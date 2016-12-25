@@ -88,11 +88,13 @@
 									</div>
 									<div class="form-group">
 										<div class="input-group">
-											
+
 											<input type="text" name="validateCode" id="validate-code"
 												tabindex="1" class="form-control" placeholder="请输入验证码"
 												value="">
-												<div class="input-group-addon"><button type="button" class="btn btn-info">获取验证码</button></div>
+											<div class="input-group-addon" style="background-color: rgba(238, 238, 238, 0);border: none;">
+												<button type="button" class="btn btn-info">获取验证码</button>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
