@@ -2,6 +2,7 @@ package com.xfhotel.hotel.entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,7 +35,7 @@ public class Apartment {
 	private double latitude; //for map
 	private double longitude;
 	
-	@OneToMany
+	@OneToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="apartment_id")
 	public Set<Room> rooms; //
 	
@@ -43,14 +44,14 @@ public class Apartment {
 	@JoinTable(name="t_apartment_facility",
 		joinColumns={@JoinColumn(name="apartment_id")},
 		inverseJoinColumns={@JoinColumn(name="facility_id")})
-	public Set<Facility> facilities; //
+	public List<Facility> facilities; //
 	
 	//鐗硅壊
 	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
 	@JoinTable(name="t_apartment_feature",
 		joinColumns={@JoinColumn(name="apartment_id")},
 		inverseJoinColumns={@JoinColumn(name="feature_id")})
-	public Set<Feature> features;//label for apartment
+	public List<Feature> features;//label for apartment
 	
 	
 	
@@ -121,22 +122,22 @@ public class Apartment {
 	}
 
 
-	public Set<Facility> getFacilities() {
+	public List<Facility> getFacilities() {
 		return facilities;
 	}
 
 
-	public void setFacilities(Set<Facility> facilities) {
+	public void setFacilities(List<Facility> facilities) {
 		this.facilities = facilities;
 	}
 
 
-	public Set<Feature> getFeatures() {
+	public List<Feature> getFeatures() {
 		return features;
 	}
 
 
-	public void setFeatures(Set<Feature> features) {
+	public void setFeatures(List<Feature> features) {
 		this.features = features;
 	}
 
@@ -308,14 +309,30 @@ public class Apartment {
 		map.put("pic2", pic2.split("@"));
 		map.put("pic3", pic3.split("@"));
 		map.put("pic4", pic4.split("@"));
-
 		
-		List<String> featuresList = new ArrayList<String>();
-		Set<Feature> features = this.getFeatures();
-		for(Feature f:features){
-			featuresList.add(f.getDescription());
+		ArrayList rooms = new ArrayList();
+		Iterator itr = this.getRooms().iterator();
+		while(itr.hasNext()){
+			Room r = (Room) itr.next();
+			rooms.add(r.toMap());
 		}
-		map.put("features",featuresList);
+		map.put("rooms", rooms);
+		
+		ArrayList facilities = new ArrayList();
+		Iterator itfc = this.getFacilities().iterator();
+		while(itfc.hasNext()){
+			Facility f = (Facility) itfc.next();
+			facilities.add(f.toMap());
+		}
+		map.put("facilities", facilities);
+		
+		ArrayList features = new ArrayList();
+		Iterator itft = this.getFeatures().iterator();
+		while(itft.hasNext()){
+			Feature f = (Feature) itft.next();
+			features.add(f.toMap());
+		}
+		map.put("features", features);
 		return map;
 	}
 

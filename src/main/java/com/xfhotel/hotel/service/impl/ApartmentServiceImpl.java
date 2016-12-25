@@ -3,6 +3,7 @@ package com.xfhotel.hotel.service.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,33 +54,13 @@ public class ApartmentServiceImpl implements ApartmentService {
 	public Map getApartmentInfo(long id) {
 		// TODO Auto-generated method stub
 		Apartment apartment = apartmentDAO.getApartmentById(id);
-		Map map = apartment.toMap();
-		
-		ArrayList rooms = new ArrayList();
-		Iterator itr = apartment.getRooms().iterator();
-		while(itr.hasNext()){
-			Room r = (Room) itr.next();
-			rooms.add(r.toMap());
-		}
-		map.put("rooms", rooms);
-		
-		ArrayList facilities = new ArrayList();
-		Iterator itfc = apartment.getFacilities().iterator();
-		while(itfc.hasNext()){
-			Facility f = (Facility) itfc.next();
-			facilities.add(f.toMap());
-		}
-		map.put("facilities", facilities);
-		
-		ArrayList features = new ArrayList();
-		Iterator itft = apartment.getFeatures().iterator();
-		while(itft.hasNext()){
-			Feature f = (Feature) itft.next();
-			features.add(f.toMap());
-		}
-		map.put("features", features);
-		
-		return map;
+		return apartment.toMap();
+	}
+
+	@Override
+	public List findApartment(int type, Apartment apartment) {
+		// TODO Auto-generated method stub
+		return apartmentDAO.findApartment(type,apartment);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.xfhotel.hotel.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "t_room")
-public class Room {
+public class Room implements Serializable{
 	// apartment
 	// person
 	// informationi
@@ -34,7 +35,7 @@ public class Room {
 	@GenericGenerator(name = "apartmentgenerator", strategy = "increment")
 	private long id;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Apartment apartment;
 	
 	private String status;
@@ -44,7 +45,7 @@ public class Room {
 	@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY)
 	@JoinTable(name = "t_room_facility", joinColumns = { @JoinColumn(name = "room_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "facility_id") })
-	public Set<Facility> facilities; //
+	public List<Facility> facilities; //
 
 	private double square;//
 	private String direction;//
@@ -136,11 +137,11 @@ public class Room {
 		this.description = description;
 	}
 
-	public Set<Facility> getFacilities() {
+	public List<Facility> getFacilities() {
 		return facilities;
 	}
 
-	public void setFacilities(Set<Facility> facilities) {
+	public void setFacilities(List<Facility> facilities) {
 		this.facilities = facilities;
 	}
 
@@ -157,7 +158,7 @@ public class Room {
 		if(pics != null){
 			map.put("pics", pics.split("@"));
 		}
-		map.put("apartment", apartment.toMap());
+		map.put("apartment", apartment.getId());
 		map.put("prices", prices.split("@"));
 		map.put("status", status);
 		return map;
