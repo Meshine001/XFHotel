@@ -17,14 +17,14 @@
 			<ul class="breadcrumb">
 				<li>青舍首页</li>
 				<li>西安租房</li>
-				<li class="active">${room.apartment.community}-${room.apartment.capacity }居室-${room.direction}-${room.description}</li>
+				<li class="active">${apartment.community}-${apartment.capacity }居室-${room.direction}-${room.description}</li>
 			</ul>
 			<div class="row clearfix">
 				<div class="col-md-8 column">
 					<div class="row clearfix">
 						<div class="col-md-12 column">
-							<h3>${room.apartment.community}-${room.apartment.capacity }居室-${room.direction}-${room.description}</h3>
-							<p>${room.apartment.address}</p>
+							<h3>${apartment.community}-${apartment.capacity }居室-${room.direction}-${room.description}</h3>
+							<p>${apartment.address}</p>
 							<ul id="gallery">
 								<c:forEach items="${room.pics}" var="pic">
 									<li><img src="../images/${pic}" alt="image1" /></li>
@@ -36,7 +36,7 @@
 					<div class="row clearfix">
 						<div class="col-md-12 column">
 							<h3>房间基本情况.</h3>
-							<p>${room.apartment.description}</p>
+							<p>${apartment.description}</p>
 						</div>
 					</div>
 					<div class="row clearfix">

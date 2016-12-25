@@ -15,28 +15,41 @@ $(document).ready(function(){
 		$('.listbox-details-description').addClass('col-md-12 column').css('margin-top','10px');
 	};
 	
+	
 	var show = function(data){
 		var listbox = $('.listbox');
 		
 		$.each(data,function(index,room){
-			if(room.prices[1] == '-1'){//还未设置价钱的房间不显示
+			if(room.prices[0] == '-1'){// 还未设置价钱的房间不显示
 				return true;﻿
 			}else{
-				var apartment = room.apartment;
-				
-				var imgUrl = './images/'+room.pics[1];
+				var apartment;
+				$.ajax({
+					cache : true,
+					type : "post",
+					dataType : "json",
+					data:{'apartmentid':room.apartment},
+					url : "./admin/apartment/getapartment",
+					async : false,
+					error : function(request) {
+					},
+					success : function(a) {
+						apartment = a;
+					}
+				});
+				var imgUrl = './images/'+room.pics[0];
 				var title = apartment.community+apartment.bedroom+'室'
 				+apartment.livingroom+'厅'
 				+'-'+room.direction+'卧-'+room.description;
 				
-				var custom = '致青春';//缺数据
+				var custom = '致青春';// 缺数据
 				var floor = '第'+apartment.floor+'层/共'+apartment.totalfloor+'层';
 				var square = apartment.square+'平方';
 				var derection = apartment.direction;
 				
 				var address = apartment.location;
 				
-				var features = apartment.features;//缺数据
+				var features = apartment.features;// 缺数据
 				
 				var price = room.prices[2];
 				var leasyType = '月';
@@ -51,24 +64,24 @@ $(document).ready(function(){
 				var item = $('<div></div>').addClass('listbox-item').css('margin-top','20px');
 				item.appendTo(listbox);
 				
-				//img
+				// img
 			
 				$('<img></img>').attr('src',imgUrl).addClass('img-responsive').appendTo($('<div></div>').addClass('listbox-imgbox').appendTo(item));
 				
 				var details = $('<div></div>').addClass('listbox-details').appendTo(item);
-				//title
+				// title
 				var titleRow = $('<div></div>').addClass('listbox-details-title').appendTo(details);
 			
 				$('<h3></h3>').text(title).appendTo($('<div></div>').addClass('col-md-12 column').appendTo(titleRow));
 				
-				//details body
+				// details body
 				var detailsBody = $('<div></div>').addClass('listbox-details-body').appendTo(details);
 				
-				//custom and price
+				// custom and price
 				var customAndPrice = $('<div></div>').addClass('listbox-details-custom-price').appendTo(detailsBody);
 				var customRow = $('<div></div>').addClass('listbox-details-custom').appendTo(customAndPrice);
 				var customUl = $('<ul></ul>').appendTo(customRow);
-				//custom
+				// custom
 			
 				$('<li>风格：</li>').append($('<span></span>').text(custom)).appendTo(customUl);
 				
@@ -76,22 +89,23 @@ $(document).ready(function(){
 				
 				$('<li>地址：</li>').append($('<span></span>').text(address)).appendTo(customUl);
 				
-				//price
+				// price
 
 				var priceRow = $('<div></div>').addClass('listbox-details-price').appendTo(customAndPrice);
 				$('<h3></h3>').text(price).append($('<small></small>').text('元/'+leasyType)).appendTo(priceRow);
-				$('<h4></h4>').text('原价：￥'+oldPrice+'/'+leasyType).appendTo(priceRow).hide();//TODO 还没做打折
+				$('<h4></h4>').text('原价：￥'+oldPrice+'/'+leasyType).appendTo(priceRow).hide();// TODO
+																								// 还没做打折
 				
-				//features
+				// features
 				var featuresRow = $('<div></div>').addClass('listbox-details-features').appendTo(detailsBody);
 				
 				
 				
 				$.each(features,function(index,item){
-					$('<span></span>').addClass('label label-default').text(item).appendTo(featuresRow);
+					$('<span></span>').addClass('label label-default').text(item.description).appendTo(featuresRow);
 				});
 				
-				//description
+				// description
 				var descriptionRow = $('<div></div>').addClass('listbox-details-description').appendTo(detailsBody);
 				
 				$('<p></p>').text(description).appendTo(descriptionRow);
