@@ -133,8 +133,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">特色<small><a
-									id="edit-feature">编辑</a></small></label>
+							<label class="col-md-3 control-label">特色</label>
 
 							<div class="col-md-9">
 
@@ -157,7 +156,7 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-3 control-label">设施<small><a>编辑</a></small></label>
+							<label class="col-md-3 control-label">设施</label>
 							<div class="col-md-9">
 								<c:forEach items="${l_facility}" var="facility" varStatus="p">
 									<div class="checkbox checkbox-inline">
@@ -182,18 +181,20 @@
 									<tbody>
 										<tr>
 											<td>布局图
-											<td>
+											</td>
 											<td>
 												<ul>
-													<li><a><img alt="" src="" class="img-thumbnail"
-															width="120px" height="80px" id="layoutPic">
-															<button type="button">编辑</button></a></li>
+													<li><img alt="" src="" class="img-thumbnail"
+														width="120px" height="80px" id="pic1-1-img"> 
+														<input type="hidden" name="pic1" id="pic1-1-input">
+														<a class="btn upload-label" id="pic1-1">更换</a>
+													</li>
 												</ul>
 											</td>
 										</tr>
 										<tr>
 											<td>客厅图
-											<td>
+											</td>
 											<td>
 												<ul id="livingroom-ul">
 
@@ -202,7 +203,7 @@
 										</tr>
 										<tr>
 											<td>餐厅图
-											<td>
+											</td>
 											<td>
 												<ul id="eattingroom-ul">
 
@@ -211,7 +212,7 @@
 										</tr>
 										<tr>
 											<td>浴室图
-											<td>
+											</td>
 											<td>
 												<ul id="bathroom-ul">
 
@@ -220,7 +221,7 @@
 										</tr>
 										<tr>
 											<td>厨房图
-											<td>
+											</td>
 											<td>
 												<ul id="kitchen-ul">
 
@@ -229,7 +230,7 @@
 										</tr>
 										<tr>
 											<td>小区实景图
-											<td>
+											</td>
 											<td>
 												<ul id="community-ul">
 
@@ -297,8 +298,13 @@
 
 		</div>
 		<div class="col-md-6">
-			<div class="card"><div id="map" style="width: 100%; height: 800px"></div></div>
+			<div class="card">
+				<div id="map" style="width: 100%; height: 800px"></div>
+			</div>
 		</div>
+		<form id="upload-form" action="../file/upload" enctype="multipart/form-data" method="post" style="display: none;">
+			<input type="file" name="file" id="upload-file-input">
+		</form>
 	</div>
 
 	<script

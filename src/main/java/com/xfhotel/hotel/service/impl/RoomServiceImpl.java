@@ -27,6 +27,7 @@ import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.RoomService;
+import com.xfhotel.hotel.support.StringSplitUtil;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -85,6 +86,14 @@ public class RoomServiceImpl implements RoomService {
 	@Transactional
 	@Override
 	public void update(Room room) {
+		roomDAO.update(room);
+	}
+	@Transactional
+	@Override
+	public void updateRoomPic(Long id, String[] pics) {
+		Room room = roomDAO.get(id);
+		String pic = StringSplitUtil.buildStrGroup(pics);
+		room.setPics(pic);
 		roomDAO.update(room);
 	}
 

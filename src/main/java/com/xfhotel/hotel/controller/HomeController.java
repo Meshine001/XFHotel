@@ -119,9 +119,9 @@ public class HomeController {
 	@RequestMapping(value = "info/{roomId}", method = RequestMethod.GET)
 	public String info(@PathVariable("roomId") Long roomId) {
 		Map room = roomService.getRoomInfo(roomId);
-		
+		Map apartment = apartmentService.getApartmentInfo((Long)room.get("apartment"));
 		session.setAttribute("room", room);
-		
+		session.setAttribute("apartment", apartment);
 		return "/customer/info";
 	}
 	

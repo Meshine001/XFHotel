@@ -20,10 +20,8 @@
 				<div class="card-header">编辑房间</div>
 				<div class="card-body">
 					<form
-						action="<%=request.getContextPath()%>/admin/apartment/room/update"
-						method="POST" class="form form-horizontal"
-						enctype="multipart/form-data">
-						<input type="hidden" id="id" name="id" value="${room.id}">
+						action="<%=request.getContextPath()%>/admin/apartment/room/update/${room.id}"
+						method="POST" class="form form-horizontal">
 						<input type="hidden" id="ltype" name="ltype" value="${room.ltype}">
 						<div class="form-group">
 							<label class="col-md-3 control-label">房间名</label>
@@ -45,7 +43,8 @@
 							</div>
 							<script type="text/javascript">
 									$('#type option').each(function(){
-										if($(this).val() == ${room.type}){
+										var op = $(this).val();
+										if(op == '${room.type}'){
 											$(this).attr('selected','selected');
 										}
 									});
@@ -65,7 +64,7 @@
 							</div>
 							<script type="text/javascript">
 									$('#direction option').each(function(){
-										if($(this).val() == ${room.direction}){
+										if($(this).val() == '${room.direction}'){
 											$(this).attr('selected','selected');
 										}
 									});
@@ -86,18 +85,22 @@
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">设施</label>
-							<div class="col-md-9">
+							<div class="col-md-9" id="facilities">
 								<c:forEach items="${l_facility}" var="facility" varStatus="p">
 									<div class="checkbox checkbox-inline">
 										<input type="checkbox" id="fa-${facility.id}" name="facility"
 											value="${facility.id}"> <label
 											for="fa-${facility.id}">${facility.description }</label>
 									</div>
+									<c:forEach items="${room.facilities}" var="f">
+										<c:if test="${f.id == facility.id}">
+											<script type="text/javascript">
+												$('#fa-'+${facility.id}).attr('checked','checked');
+											</script>
+										</c:if>
+									</c:forEach>
 								</c:forEach>
 							</div>
-							<script type="text/javascript">
-								
-							</script>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">图片</label>
@@ -105,49 +108,47 @@
 								<table>
 									<tbody>
 										<tr>
-											<c:forEach items="${room.pics}" var="pic">
-												<td>
-													<ul>
-														<li><a class="edit-img"><img alt=""
-																src="../../images/${pic}" class="img-thumbnail"
-																width="120px" height="80px">
-																<button type="button">更换</button></a></li>
-													</ul>
-												</td>
-											</c:forEach>
+
+											<td>
+												<ul id="img-list">
+													<c:forEach items="${room.pics}" var="pic">
+														<li><img alt="" src="../../images/${pic}"
+															class="img-thumbnail" width="120px" height="80px">
+														</li>
+													</c:forEach>
+												</ul>
+
+											</td>
+											<td><button type="button" class="btn btn-primary btn-lg"
+													data-toggle="modal" data-target="#edit-img-modal">编辑</button></td>
+
 										</tr>
 									</tbody>
 								</table>
 							</div>
-							<script type="text/javascript">
-								$('.edit-img').click(function(){
-									var url = $(this).find('img').attr('src');
-									$('#img-input-preview').attr('src',url);
-									$('#edit-img-modal').modal('toggle');
-								});
-							</script>
+
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">价格</label>
 							<div id="lease-price" class="col-md-9">
 								<div class="input-group day">
 									<span class="input-group-addon">天</span> <input type="text"
-										name="prices" class="price-day"> <span
+										name="prices" class="price-day" value="${room.prices[0]}"> <span
 										class="input-group-addon">元</span>
 								</div>
 								<div class="input-group week">
 									<span class="input-group-addon">周</span> <input type="text"
-										name="prices" class="price-week"> <span
+										name="prices" class="price-week" value="${room.prices[1]}"> <span
 										class="input-group-addon">元</span>
 								</div>
 								<div class="input-group month">
 									<span class="input-group-addon">月</span> <input type="text"
-										name="prices" class="price-month"> <span
+										name="prices" class="price-month" value="${room.prices[2]}"> <span
 										class="input-group-addon">元</span>
 								</div>
 								<div class="input-group year">
 									<span class="input-group-addon">年</span> <input type="text"
-										name="prices" class="price-year"> <span
+										name="prices" class="price-year" value="${room.prices[3]}"> <span
 										class="input-group-addon">元</span>
 								</div>
 							</div>
@@ -177,40 +178,41 @@
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">更换图片</h4>
+					<h4 class="modal-title" id="myModalLabel">编辑图片</h4>
 				</div>
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-12">
-							<form action="<%=basePath%>/file/upload" id="edit-img-form" method="post">
-								<input type="file" id="img-input" name="file"> <br> <img alt=""
-									src="" class="img-responsive" id="img-input-preview">
+							<form action="./room/pic/update/${room.id}" id="update-img-form">
+								<c:forEach items="${room.pics}" var="pic" varStatus="p">
+									<input type="hidden" name="pics" value="${pic}" id="pic-${p.index}">
+								</c:forEach>
+							</form>
+							<ul>
+								<c:forEach items="${room.pics}" var="pic" varStatus="p">
+									<li> <img alt="" src="../../images/${pic}" 
+										class="img-thumbnail edit-image-preview" width="120px" height="80px" id="img-${p.index}"><label  class="edit-image-label" id="${p.index}" for="img-input">更改</label><a>删除</a></li>
+								</c:forEach>
+							</ul>
+							<script type="text/javascript">
+								var picPosition;
+								$('.edit-image-label').click(function(){
+									picPosition = $(this).attr('id');
+								});
+						
+							</script>
+							<form action="<%=basePath%>/file/upload" id="upload-img-form"
+								method="post">
+								<input type="file" id="img-input" name="file">
+								 <br>
+								<img alt="" src="" class="img-responsive" id="img-input-preview">
 							</form>
 						</div>
 					</div>
 					<script type="text/javascript">
 							$('#img-input').change(function(){
-								var files = $('#img-input').prop('files');
-								var file;
-								if (files.length > 0) {
-									file = files[0];
-									if (/^image\/\w+/.test(file.type)) {
-										var url = URL.createObjectURL(file);
-										$('#img-input-preview').attr('src',url);
-									}else{
-										alert("请选择图片！");
-									}
-								}
-							});
-						</script>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" id="edit-img-submit">保存</button>
-					<script type="text/javascript">
-							$('#edit-img-submit').click(function(){
-								var url = $('#edit-img-form').attr('action');
-								var data = new FormData($avatarForm[0]);
+								var url = $('#upload-img-form').attr('action');
+								var data = new FormData($('#upload-img-form')[0]);
 								$.ajax(url,{
 									headers: {'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
 							        type: 'post',
@@ -220,9 +222,8 @@
 							        contentType: false,
 							        success:function(data){
 							        	if(data.statusCode == 1){
-							        		$avatarImg.attr('src','../images/'+data.content);
-							        		$formAvatar.val(data.content);
-							        		$avatarModal.modal('toggle');
+							        		$('#img-'+picPosition).attr('src','../../images/'+data.content);
+							        		$('#pic-'+picPosition).val(data.content);
 							        	}
 							        	else{
 							        		alert(data.content);
@@ -231,6 +232,34 @@
 							        error:function(data){
 							        	alert('连接异常');
 							        }
+								});
+							});
+						</script>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="edit-img-submit">保存</button>
+					<script type="text/javascript">
+							$('#edit-img-submit').click(function(){
+								var url = $('#update-img-form').attr('action');
+								$.ajax({
+									cache : true,
+									type : "POST",
+									url : url,
+									data : $('#update-img-form').serialize(),
+									async : false,
+									error : function(request) {
+										alert("连接异常！");
+									},
+									success : function(data) {
+										alert(data.content);
+										if (data.statusCode == 0) {
+
+										} else {
+											window.location.reload();
+										}
+
+									}
 								});
 							});
 						</script>

@@ -17,26 +17,34 @@
 			<ul class="breadcrumb">
 				<li>青舍首页</li>
 				<li>西安租房</li>
-				<li class="active">${room.apartment.community}-${room.apartment.capacity }居室-${room.direction}-${room.description}</li>
+				<li class="active">${apartment.community}-${apartment.capacity }居室-${room.direction}-${room.description}</li>
 			</ul>
 			<div class="row clearfix">
 				<div class="col-md-8 column">
 					<div class="row clearfix">
 						<div class="col-md-12 column">
-							<h3>${room.apartment.community}-${room.apartment.capacity }居室-${room.direction}-${room.description}</h3>
-							<p>${room.apartment.address}</p>
+							<h3>${apartment.community}-${apartment.capacity }居室-${room.direction}-${room.description}</h3>
+							<p>${apartment.address}</p>
 							<ul id="gallery">
 								<c:forEach items="${room.pics}" var="pic">
-									<li><img src="../images/${pic}" alt="image1" /></li>
+									<li><img src="../images/${pic}" /></li>
+								</c:forEach>
+								<c:forEach items="${apartment.pic2}" var="pic">
+									<li><img src="../images/${pic}" /></li>
+								</c:forEach>
+								<c:forEach items="${apartment.pic3}" var="pic">
+									<li><img src="../images/${pic}" /></li>
 								</c:forEach>
 							</ul>
 						</div>
-						
+
 					</div>
 					<div class="row clearfix">
 						<div class="col-md-12 column">
 							<h3>房间基本情况.</h3>
-							<p>${room.apartment.description}</p>
+							<c:forEach items="${room.facilities}" var="f">
+								<span class="label label-warning">${f.description}</span>
+							</c:forEach>
 						</div>
 					</div>
 					<div class="row clearfix">
@@ -48,39 +56,34 @@
 										<th>付款方式</th>
 										<th>月租金</th>
 										<th>押金</th>
-										<th>服务费</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
+										<td>天付</td>
+										<td>${room.prices[0]}元/天</td>
+										<td>${room.prices[0]}元/天</td>
+									</tr>
+									<tr>
+										<td>周付</td>
+										<td>${room.prices[1]}元/周</td>
+										<td>${room.prices[1]}元/周</td>
+									</tr>
+									<tr>
 										<td>月付</td>
-										<td>¥1302/月</td>
-										<td>¥1480</td>
-										<td>¥104/月</td>
+										<td>${room.prices[2]}元/月</td>
+										<td>${room.prices[2]}元/月</td>
 									</tr>
-									<tr class="success">
-										<td>季付</td>
-										<td>¥1302/月</td>
-										<td>¥1480</td>
-										<td>¥104/月</td>
-									</tr>
-									<tr class="error">
-										<td>半年付</td>
-										<td>T¥1276/月</td>
-										<td>¥1480</td>
-										<td>¥102/月</td>
-									</tr>
-									<tr class="warning">
+									<tr>
 										<td>年付</td>
-										<td>¥1250/月</td>
-										<td>¥1480</td>
-										<td>¥100/月/td>
+										<td>${room.prices[3]}元/年</td>
+										<td>${room.prices[3]}元/年</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
-					<div class="row clearfix">
+					<div class="row clearfix" style="display: none;">
 						<div class="col-md-12 column">
 							<h3>我的室友</h3>
 							<table class="table">
@@ -144,7 +147,12 @@
 					<div class="row clearfix">
 						<div class="col-md-12 column">
 							<h3>公共设施</h3>
-							<p>
+							<p>${apartment.description}</p>
+							<c:forEach items="${apartment.facilities}" var="f">
+								<span class="label label-warning">${f.description}</span>
+							</c:forEach>
+
+							<p style="display: none;">
 								温馨舒适，品牌家电，免费无线，单周保洁，合理布局，特制装修风格，品质家具，你想要的，魔飞应有尽有，让你享尽家的温暖。</p>
 						</div>
 					</div>
@@ -152,15 +160,16 @@
 					<div class="row clearfix">
 						<div class="col-md-12 column">
 							<h3>位置周边</h3>
+
 							<img alt="140x140" class="img-responsive"
-								src="http://api.map.baidu.com/staticimage?center=113.817967,34.772957&width=810&height=420&zoom=16&markers=113.817967,34.772957" />
+								src="http://api.map.baidu.com/staticimage?center=${apartment.longitude},${apartment.latitude}&width=810&height=420&zoom=16&markers=${apartment.longitude},${apartment.latitude}" />
 						</div>
 					</div>
 					<div class="row clearfix">
 						<div class="col-md-12 column">
 							<h3>公寓户型图</h3>
-							<img alt="140x140" class="img-responsive"
-								src="http://mf.znimg.com/upload/house_img/734/ab88d32926ff8e5766a1e2903def1b95.jpg" />
+							<img alt="户型图" class="img-responsive"
+								src="../images/${apartment.pic1}" />
 						</div>
 					</div>
 				</div>
@@ -168,34 +177,34 @@
 					<div class="row clearfix">
 						<div class="col-md-12 column">
 							<h3 class="text-left">
-								<small>￥</small>1320<small>/月</small><small> 原价:1480元/月</small>
+								<small>￥</small>${room.prices[2]}<small>/月</small><small
+									style="display: none;"> 原价:1480元/月</small>
 							</h3>
-							<span class="label label-default">地铁2号线</span> <span
-								class="label label-default">暖气</span>
+							<c:forEach items="${room.facilities}" var="f">
+								<span class="label label-default">${f.description}</span>
+							</c:forEach>
 							<dl class="dl-horizontal">
-								<dt>编号</dt>
-								<dd>41018236703</dd>
 								<dt>楼层</dt>
-								<dd>第26层/共32层</dd>
+								<dd>第${apartment.floor}层/共${apartment.totalfloor}层</dd>
 								<dt>卧室</dt>
-								<dd>面积：21.61㎡ 朝向：南</dd>
+								<dd>面积：${room.square}㎡ 朝向：${room.direction}</dd>
 								<dt>可住</dt>
-								<dd>2人</dd>
-								<dt>居室室</dt>
-								<dd>5室1厅2卫0阳台</dd>
+								<dd>${room.capacity}人</dd>
+								<dt>居室</dt>
+								<dd>${apartment.bedroom}室${apartment.livingroom}厅${apartment.bathroom}卫${apartment.balcony}阳台</dd>
 								<dt>小区</dt>
-								<dd>安和小区</dd>
+								<dd>${apartment.community}</dd>
 							</dl>
 							<h4>付款方式</h4>
 							<div class="col-md-12 column">
 								<div class="col-md-3 ">
-									<button type="button" class="btn btn-default btn-block">月付</button>
+									<button type="button" class="btn btn-default btn-block">天付</button>
 								</div>
 								<div class="col-md-3 ">
-									<button type="button" class="btn btn-default btn-block">季付</button>
+									<button type="button" class="btn btn-default btn-block">周付</button>
 								</div>
 								<div class="col-md-3 ">
-									<button type="button" class="btn btn-default btn-block">半年付</button>
+									<button type="button" class="btn btn-default btn-block">月年付</button>
 								</div>
 								<div class="col-md-3">
 									<button type="button" class="btn btn-default btn-block">年付</button>
@@ -219,23 +228,22 @@
 								<li><small>400-0322-222</small>
 								<li><small>周一至周日 07:00 - 23:00</small>
 							</ul>
-							<p>用心倾听每一通来电，认真记录每一个需求，快速解决生活当中的每一个麻烦，我们就是您在魔飞公寓的贴心小管家，随时恭候您的来电！</p>
+							<p>用心倾听每一通来电，认真记录每一个需求，快速解决生活当中的每一个麻烦，我们就是您在青舍都市公寓的贴心小管家，随时恭候您的来电！</p>
 
 						</div>
 					</div>
 					<div class="row clearfix">
 						<div class="col-md-12 column">
 							<h3>此公寓其他房间</h3>
-							<img alt="140x140" class="img-responsive"
-								src="http://mf.znimg.com/thumb/dress_810x497/house_img/734/bcf19a0e72b41ef93d41f49374167924.jpg" />
-							<p>
-								<em>安和小区5居室-南卧-A房间-带独卫、飘窗</em> <strong>已出租</strong>
-							</p>
-							<img alt="140x140" class="img-responsive"
-								src="http://mf.znimg.com/thumb/dress_810x497/house_img/734/a28958eb2530230ba8b09f63fe7c35b3.jpg" />
-							<p>
-								<em>安和小区5居室-南卧-A房间-带独卫、飘窗</em> <strong>已出租</strong>
-							</p>
+							<c:forEach items="${apartment.rooms}" var="r">
+								<c:if test="${room.id != r.id}">
+									<a href="../info/${r.id}"> <img alt="140x140"
+										class="img-responsive"
+										src="../images/${r.pics[0]}" />
+										<em>${apartment.community}-${apartment.bedroom}居室-${r.direction}卧-${r.description}</em> <strong>${r.status}</strong>
+									</a>
+								</c:if>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -243,6 +251,7 @@
 		</div>
 	</div>
 	</my_body>
-	<my_script><script src="<%=basePath%>/dist/customer/js/info.js"></script></my_script>
+	<my_script>
+	<script src="<%=basePath%>/dist/customer/js/info.js"></script></my_script>
 </body>
 </html>

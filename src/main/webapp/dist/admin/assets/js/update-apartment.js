@@ -131,52 +131,99 @@ $(document).ready(function(){
 				$("#rooms").append(form);
 			});
 			
-			$('#layoutPic').attr('src','../../images/'+data.pic1);
+			$('#pic1-1-img').attr('src','../../images/'+data.pic1);
+			$('#pic1-1-input').val(data.pic1);
 			$.each(data.pic2,function(index,pic){
 				var imgUrl = '../../images/'+pic;
-				var img = $('<img></img>').addClass('img-thumbnail').attr('src',imgUrl).css('height','80px').css('width','120px');
+				var id = 'pic2-'+(index+1);
+				var img = $('<img></img>').attr('id',id+'-img').addClass('img-thumbnail').attr('src',imgUrl).css('height','80px').css('width','120px');
+				var li;
 				if(index < 2){
 					//客厅图
-					var li = $('<li></li>').appendTo($('#livingroom-ul'));
-					var a = $('<a></a>').appendTo(li);
-					var button = $('<button>编辑</button>');
-					a.append(img).append(button);
+				    li = $('<li></li>').appendTo($('#livingroom-ul'));
 				}else{
 					//餐厅图
-					var li = $('<li></li>').appendTo($('#eattingroom-ul'));
-					var a = $('<a></a>').appendTo(li);
-					var button = $('<button>编辑</button>');
-					a.append(img).append(button);
+					li = $('<li></li>').appendTo($('#eattingroom-ul'));
 				}
+				var input = $('<input></input>').attr('type','hidden').attr('name','pic2').attr('id',id+'-input').val(pic);
+				var a = $('<a>更换</a>').appendTo(li).addClass('btn upload-label').attr('id',id);
+				li.append(img).append(input).append(a);
 			});
 			$.each(data.pic3,function(index,pic){
 				var imgUrl = '../../images/'+pic;
-				var img = $('<img></img>').addClass('img-thumbnail').attr('src',imgUrl).css('height','80px').css('width','120px');
+				var id = 'pic3-'+(index+1);
+				var img = $('<img></img>').attr('id',id+'-img').addClass('img-thumbnail').attr('src',imgUrl).css('height','80px').css('width','120px');
+				var li;
 				if(index < 2){
 					//浴室图
-					var li = $('<li></li>').appendTo($('#bathroom-ul'));
-					var a = $('<a></a>').appendTo(li);
-					var button = $('<button>编辑</button>');
-					a.append(img).append(button);
+				    li = $('<li></li>').appendTo($('#bathroom-ul'));
 				}else{
 					//厨房图
 					var li = $('<li></li>').appendTo($('#kitchen-ul'));
-					var a = $('<a></a>').appendTo(li);
-					var button = $('<button>编辑</button>');
-					a.append(img).append(button);
 				}
+				var input = $('<input></input>').attr('type','hidden').attr('name','pic3').attr('id',id+'-input').val(pic);
+				var a = $('<a>更换</a>').appendTo(li).addClass('btn upload-label').attr('id',id);
+				li.append(img).append(input).append(a);
 			});
 			$.each(data.pic4,function(index,pic){
 				var imgUrl = '../../images/'+pic;
-				var img = $('<img></img>').addClass('img-thumbnail').attr('src',imgUrl).css('height','80px').css('width','120px');
+				var id = 'pic4-'+(index+1);
+				var img = $('<img></img>').attr('id',id+'-img').addClass('img-thumbnail').attr('src',imgUrl).css('height','80px').css('width','120px');
 				//小区实景
 				var li = $('<li></li>').appendTo($('#community-ul'));
-				var a = $('<a></a>').appendTo(li);
-				var button = $('<button>编辑</button>');
-				a.append(img).append(button);
+				var input = $('<input></input>').attr('type','hidden').attr('name','pic4').attr('id',id+'-input').val(pic);
+				var a = $('<a>更换</a>').appendTo(li).addClass('btn upload-label').attr('id',id);
+				li.append(img).append(input).append(a);
 			});
 		}
 	});
 	
+	var uploadForm = $('#upload-form');
+	var uploadUrl = '../../file/upload';
 	
+	function uploadFile(data){
+		var result;
+		$.ajax(uploadUrl,{
+			headers: {'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
+	        type: 'post',
+	        data: data,
+	        async: false,
+	        dataType: 'json',
+	        processData: false,
+	        contentType: false,
+	        success:function(data){
+	        	console.log(data);
+	        	if(data.statusCode == 1){
+	        		result = data.content;
+	        	}
+	        	else{
+	        		alert(data.content);
+	        		result = false;
+	        	}
+	        },
+	        error:function(data){
+	        	alert('连接异常');
+	        	result = false;
+	        }
+		});
+		return result;
+	}
+	
+	var uploadId;
+	var uploadPre;
+	$('.upload-label').click(function(){
+		var uploadType = $(this).attr('id');
+		uploadId = uploadType +'-input';
+		uploadPre = uploadType + '-img';
+		$('#upload-file-input').click();
+	});
+	
+	$('#upload-file-input').change(function(){
+		var data = new FormData(uploadForm[0]);
+		var imgUrl = uploadFile(data);
+		if(imgUrl != false){
+			$('#'+uploadId).val(imgUrl);
+			$('#'+uploadPre).attr('src','../../images/'+imgUrl);
+		}
+	});
 });
