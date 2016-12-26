@@ -10,5 +10,5 @@ public interface ApartmentService {
 	public String add(Apartment apartment);
 	public Apartment findById(long id);
 	public Map getApartmentInfo(long id);
-	public List findApartment(int type, Apartment apartment);
+	public List findApartment(String content, Apartment apartment);
 }

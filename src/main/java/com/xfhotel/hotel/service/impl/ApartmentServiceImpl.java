@@ -58,9 +58,10 @@ public class ApartmentServiceImpl implements ApartmentService {
 	}
 
 	@Override
-	public List findApartment(int type, Apartment apartment) {
+	@Transactional
+	public List findApartment(String content, Apartment apartment) {
 		// TODO Auto-generated method stub
-		return apartmentDAO.findApartment(type,apartment);
+		return apartmentDAO.findApartment(content,apartment);
 	}
 
 }
