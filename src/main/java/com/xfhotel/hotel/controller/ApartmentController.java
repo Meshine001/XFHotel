@@ -210,7 +210,7 @@ public class ApartmentController {
 			Room room = new Room();
 			room.setApartment(apartment);
 			room.setCapacity("1");
-			//roomName @ roomType @ leasyType
+			// roomName @ roomType @ leasyType
 			room.setDescription("房间" + String.valueOf(i + 1) + "@" + "-1" + "@" + apartment.getApartmentType());
 			room.setSquare(0);
 			room.setStatus("未出租");
@@ -227,62 +227,53 @@ public class ApartmentController {
 
 	}
 
-	//
-	// @RequestMapping(value = "/update", method = RequestMethod.POST)
-	// public String update(HttpServletRequest request, String apartmentid,
-	// String address, String community,
-	// String num_building, String floor, String totalfloor, String direction,
-	// String square, String capacity,
-	// String bedroom, String livingroom, String bathroom, String balcony,
-	// String description, String[] facility,
-	// String[] feature, String apartmenttype, String type, String num_room,
-	// String[] leasetypeid,
-	// String[] leasetype, RedirectAttributes attr) {
-	// Apartment apartment =
-	// apartmentService.findById(Long.valueOf(apartmentid));
-	// apartment.setAddress(address + "@" + community + "@" + num_building);
-	// apartment.setFloor(floor + "@" + totalfloor);
-	// apartment.setDirection(direction);
-	// apartment.setSquare(Double.valueOf(square));
-	// apartment.setCapacity(capacity);
-	// apartment.setLayout(bedroom + "@" + livingroom + "@" + bathroom + "@" +
-	// balcony);
-	// apartment.setDescription(description);
-	// Set s_facility = new HashSet();
-	// if (facility != null) {
-	// for (int i = 0; i < facility.length; i++) {
-	// Long id = Long.valueOf(facility[i]);
-	// s_facility.add(facilityService.findById(id));
-	// }
-	// }
-	// apartment.setFacilities(s_facility);
-	// Set s_feature = new HashSet();
-	// if (feature != null) {
-	// for (int i = 0; i < feature.length; i++) {
-	// Long id = Long.valueOf(feature[i]);
-	// s_feature.add(featureService.findById(id));
-	// }
-	// }
-	// apartment.setFeatures(s_feature);
-	// apartment.setApartmentType(apartmentTypeService.findById(Long.valueOf(apartmenttype)));
-	// apartment.setType(type);
-	// if (type.equals("1") || type.equals("3")) {
-	// Set ps = new HashSet();
-	// for (int i = 0; i < leasetype.length; i++) {
-	// Price p = new Price(Long.valueOf(leasetype[i]),
-	// leaseTypeService.findById(Long.valueOf(leasetypeid[i])),
-	// apartment, null);
-	// priceService.add(p);
-	// ps.add(p);
-	// }
-	// apartment.setPrices(ps);
-	// } else
-	// apartment.setPrices(null);
-	// apartmentService.add(apartment);
-	// attr.addAttribute("apartmentid", apartment.getId());
-	// return "redirect:/admin/apartment/edit";
-	// }
-	//
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(Long apartmentid,String address, String location, String lng, String lat, String community, String num_building,
+			String floor, String totalfloor, String direction, String square, String capacity, String bedroom,
+			String livingroom, String bathroom, String balcony, String description, String[] facility, String[] feature,
+			String apartmenttype, String type, String num_room, String pic1,String[] pic2,String[] pic3,String[] pic4, String[] prices, RedirectAttributes attr) {
+		Apartment apartment = apartmentService.findById(Long.valueOf(apartmentid));
+		apartment.setAddress(address + "@" + community + "@" + num_building + "@" + location);
+		apartment.setLatitude(Double.valueOf(lat));
+		apartment.setLongitude(Double.valueOf(lng));
+		apartment.setFloor(floor + "@" + totalfloor);
+		apartment.setDirection(direction);
+		apartment.setSquare(Double.valueOf(square));
+		apartment.setCapacity(capacity);
+		apartment.setLayout(bedroom + "@" + livingroom + "@" + bathroom + "@" + balcony);
+		apartment.setDescription(description);
+		
+		List<Facility> s_facility = new ArrayList<Facility>();
+		if (facility != null) {
+			for (int i = 0; i < facility.length; i++) {
+				Long id = Long.valueOf(facility[i]);
+				s_facility.add(facilityService.findById(id));
+			}
+		}
+		apartment.setFacilities(s_facility);
+		
+		List<Feature> s_feature = new ArrayList<Feature>();
+		if (feature != null) {
+			for (int i = 0; i < feature.length; i++) {
+				Long id = Long.valueOf(feature[i]);
+				s_feature.add(featureService.findById(id));
+			}
+		}
+		apartment.setFeatures(s_feature);
+		
+		apartment.setPic1(pic1);
+		apartment.setPic2(StringSplitUtil.buildStrGroup(pic2));
+		apartment.setPic3(StringSplitUtil.buildStrGroup(pic3));
+		apartment.setPic4(StringSplitUtil.buildStrGroup(pic4));
+		apartment.setApartmentType(apartmenttype);
+		if(apartmenttype.equals("短租型")){
+			apartment.setType(type);
+		}
+		apartmentService.update(apartment);
+		attr.addAttribute("apartmentid", apartment.getId());
+		return "redirect:/admin/apartment/edit";
+	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String edit(String apartmentid) {
 		session.setAttribute("apartmentid", apartmentid);
@@ -310,19 +301,19 @@ public class ApartmentController {
 		session.setAttribute("room", roomService.getRoomInfo(roomid));
 		return "/admin/apartment/editroom";
 	}
-	
+
 	@RequestMapping(value = "/room/pic/update/{roomid}", method = RequestMethod.POST)
-	public @ResponseBody Message updateRoomPic(@PathVariable(value="roomid") Long roomid,String[] pics){
+	public @ResponseBody Message updateRoomPic(@PathVariable(value = "roomid") Long roomid, String[] pics) {
 		try {
 			roomService.updateRoomPic(roomid, pics);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE,"更新成功");
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "更新成功");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "更新房间图片失败");
 	}
-	
+
 	@RequestMapping(value = "/room/{roomid}", method = RequestMethod.POST)
 	public @ResponseBody Map getRoom(@PathVariable("roomid") String roomid) {
 		Map map = roomService.getRoomInfo(Long.valueOf(roomid));
@@ -330,8 +321,9 @@ public class ApartmentController {
 	}
 
 	@RequestMapping(value = "/room/update/{roomid}", method = RequestMethod.POST)
-	public String updateroom(@PathVariable(value ="roomid") Long roomid, RedirectAttributes attr, HttpServletRequest request, String description,
-			String type,String ltype, String square, String direction, String[] facility, String[] prices) {
+	public String updateroom(@PathVariable(value = "roomid") Long roomid, RedirectAttributes attr,
+			HttpServletRequest request, String description, String type, String ltype, String square, String direction,
+			String[] facility, String[] prices) {
 		String apartmentid = (String) session.getAttribute("apartmentid");
 		Room room = roomService.findById(roomid);
 
@@ -339,7 +331,7 @@ public class ApartmentController {
 		room.setDescription(description + "@" + type + "@" + ltype);
 		room.setSquare(Double.valueOf(square));
 		room.setDirection(direction);
-		
+
 		List l_facility = facilityService.listFacilities();
 		List s_facility = new ArrayList();
 		if (facility != null) {
@@ -349,13 +341,13 @@ public class ApartmentController {
 			}
 		}
 		room.setFacilities(s_facility);
-		
+
 		room.setPrices(StringSplitUtil.buildStrGroup(prices));
-		
+
 		roomService.update(room);
-		
+
 		attr.addAttribute("apartmentid", apartmentid);
-		
+
 		return "redirect:/admin/apartment/edit";
 	}
 }

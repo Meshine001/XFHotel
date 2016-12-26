@@ -127,8 +127,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">特色<small><a
-									id="edit-feature">编辑</a></small></label>
+							<label class="col-md-3 control-label">特色</label>
 
 							<div class="col-md-9">
 								<c:forEach items="${l_feature}" var="feature" varStatus="p">
@@ -201,7 +200,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">设施<small><a>编辑</a></small></label>
+							<label class="col-md-3 control-label">设施</label>
 							<div class="col-md-9">
 								<c:forEach items="${l_facility}" var="facility" varStatus="p">
 									<div class="checkbox checkbox-inline">

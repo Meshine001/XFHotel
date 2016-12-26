@@ -56,11 +56,18 @@ public class ApartmentServiceImpl implements ApartmentService {
 		Apartment apartment = apartmentDAO.getApartmentById(id);
 		return apartment.toMap();
 	}
-
+	
+	@Transactional
 	@Override
 	public List findApartment(int type, Apartment apartment) {
 		// TODO Auto-generated method stub
 		return apartmentDAO.findApartment(type,apartment);
+	}
+
+	@Transactional
+	@Override
+	public void update(Apartment apartment) {
+		apartmentDAO.update(apartment);
 	}
 
 }
