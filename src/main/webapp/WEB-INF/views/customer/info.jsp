@@ -29,6 +29,12 @@
 								<c:forEach items="${room.pics}" var="pic">
 									<li><img src="../images/${pic}" /></li>
 								</c:forEach>
+								<c:forEach items="${apartment.pic2}" var="pic">
+									<li><img src="../images/${pic}" /></li>
+								</c:forEach>
+								<c:forEach items="${apartment.pic3}" var="pic">
+									<li><img src="../images/${pic}" /></li>
+								</c:forEach>
 							</ul>
 						</div>
 
@@ -36,7 +42,9 @@
 					<div class="row clearfix">
 						<div class="col-md-12 column">
 							<h3>房间基本情况.</h3>
-							<p>${apartment.description}</p>
+							<c:forEach items="${room.facilities}" var="f">
+								<span class="label label-warning">${f.description}</span>
+							</c:forEach>
 						</div>
 					</div>
 					<div class="row clearfix">
@@ -139,6 +147,7 @@
 					<div class="row clearfix">
 						<div class="col-md-12 column">
 							<h3>公共设施</h3>
+							<p>${apartment.description}</p>
 							<c:forEach items="${apartment.facilities}" var="f">
 								<span class="label label-warning">${f.description}</span>
 							</c:forEach>
