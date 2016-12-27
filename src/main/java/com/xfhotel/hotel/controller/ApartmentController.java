@@ -174,24 +174,8 @@ public class ApartmentController {
 			}
 
 		}
-
-		List s_facility = new ArrayList();
-		if (facility != null) {
-			for (int i = 0; i < facility.length; i++) {
-				Long id = Long.valueOf(facility[i]);
-				s_facility.add(facilityService.findById(id));
-			}
-		}
-		apartment.setFacilities(s_facility);
-
-		List s_feature = new ArrayList();
-		if (feature != null) {
-			for (int i = 0; i < feature.length; i++) {
-				Long id = Long.valueOf(feature[i]);
-				s_feature.add(featureService.findById(id));
-			}
-		}
-		apartment.setFeatures(s_feature);
+		apartment.setFacilities(facility);
+		apartment.setFeatures(feature);
 
 		apartment.setApartmentType(apartmenttype);
 		if (apartmenttype.equals("酒店型")) {
@@ -243,23 +227,8 @@ public class ApartmentController {
 		apartment.setLayout(bedroom + "@" + livingroom + "@" + bathroom + "@" + balcony);
 		apartment.setDescription(description);
 		
-		List<Facility> s_facility = new ArrayList<Facility>();
-		if (facility != null) {
-			for (int i = 0; i < facility.length; i++) {
-				Long id = Long.valueOf(facility[i]);
-				s_facility.add(facilityService.findById(id));
-			}
-		}
-		apartment.setFacilities(s_facility);
-		
-		List<Feature> s_feature = new ArrayList<Feature>();
-		if (feature != null) {
-			for (int i = 0; i < feature.length; i++) {
-				Long id = Long.valueOf(feature[i]);
-				s_feature.add(featureService.findById(id));
-			}
-		}
-		apartment.setFeatures(s_feature);
+		apartment.setFacilities(facility);
+		apartment.setFeatures(feature);
 		
 		apartment.setPic1(pic1);
 		apartment.setPic2(StringSplitUtil.buildStrGroup(pic2));
@@ -332,15 +301,7 @@ public class ApartmentController {
 		room.setSquare(Double.valueOf(square));
 		room.setDirection(direction);
 
-		List l_facility = facilityService.listFacilities();
-		List s_facility = new ArrayList();
-		if (facility != null) {
-			for (int i = 0; i < facility.length; i++) {
-				Long fid = Long.valueOf(facility[i]);
-				s_facility.add(facilityService.findById(fid));
-			}
-		}
-		room.setFacilities(s_facility);
+		room.setFacilities(facility);
 
 		room.setPrices(StringSplitUtil.buildStrGroup(prices));
 

@@ -57,7 +57,6 @@ public class ApartmentServiceImpl implements ApartmentService {
 		return apartment.toMap();
 	}
 	
-	@Transactional
 	@Override
 	@Transactional
 	public List findApartment(String content, Apartment apartment) {

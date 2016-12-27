@@ -50,15 +50,6 @@ public class RoomServiceImpl implements RoomService {
 		// TODO Auto-generated method stub
 		Room room = roomDAO.getRoomById(id);
 		Map map = room.toMap();
-		
-		ArrayList facilities = new ArrayList();
-		Iterator itfc = room.getFacilities().iterator();
-		while(itfc.hasNext()){
-			Facility f = (Facility) itfc.next();
-			facilities.add(f.toMap());
-		}
-		map.put("facilities", facilities);
-		
 		return map;
 	}
 

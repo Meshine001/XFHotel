@@ -86,8 +86,6 @@ public class ApartmentDAOImpl extends BaseDAOImpl<Apartment, Long>{
 		if( !apartment.getType().equals("全部") )
 			c.add(Restrictions.eq("type", apartment.getType()));
 		if(apartment.getFeatures()!=null){
-			for( Feature f:apartment.getFeatures())
-				c.createAlias("featrues", "fs").add(Restrictions.eq("f.id",f.getId()));
 		}
 		//c.add(Restrictions.eq("id", id));
 		//c.setFetchMode("rooms", FetchMode.JOIN).setFetchMode("facilities", FetchMode.JOIN)

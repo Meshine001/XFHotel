@@ -93,7 +93,7 @@
 											for="fa-${facility.id}">${facility.description }</label>
 									</div>
 									<c:forEach items="${room.facilities}" var="f">
-										<c:if test="${f.id == facility.id}">
+										<c:if test="${f == facility.id}">
 											<script type="text/javascript">
 												$('#fa-'+${facility.id}).attr('checked','checked');
 											</script>
