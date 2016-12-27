@@ -184,10 +184,16 @@
 								<span class="label label-default">${f.description}</span>
 							</c:forEach>
 							<dl class="dl-horizontal">
+								<dt>编号</dt>
+								<dd>${room.id}</dd>
 								<dt>楼层</dt>
 								<dd>第${apartment.floor}层/共${apartment.totalfloor}层</dd>
 								<dt>卧室</dt>
-								<dd>面积：${room.square}㎡ 朝向：${room.direction}</dd>
+								<dd>${room.type}</dd>
+								<dt>面积</dt>
+								<dd>${room.square}㎡</dd>
+								<dt>朝向</dt>
+								<dd>${room.direction}</dd>
 								<dt>可住</dt>
 								<dd>${room.capacity}人</dd>
 								<dt>居室</dt>
@@ -195,24 +201,60 @@
 								<dt>小区</dt>
 								<dd>${apartment.community}</dd>
 							</dl>
-							<h4>付款方式</h4>
-							<div class="col-md-12 column">
-								<div class="col-md-3 ">
-									<button type="button" class="btn btn-default btn-block">天付</button>
-								</div>
-								<div class="col-md-3 ">
-									<button type="button" class="btn btn-default btn-block">周付</button>
-								</div>
-								<div class="col-md-3 ">
-									<button type="button" class="btn btn-default btn-block">月年付</button>
-								</div>
-								<div class="col-md-3">
-									<button type="button" class="btn btn-default btn-block">年付</button>
-								</div>
-							</div>
+
 							<hr class="divider">
 							<br>
-							<button type="button" class="btn btn-default btn-block">预约看房</button>
+							<button type="button" class="btn btn-info btn-block"
+								data-toggle="modal" data-target="#orderModal">立即预定</button>
+							<!-- Modal -->
+							<div class="modal fade" id="orderModal" tabindex="-1"
+								role="dialog" aria-labelledby="orderModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">
+												<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+											</button>
+											<h4 class="modal-title" id="orderModalLabel">确认订单</h4>
+										</div>
+										<div class="modal-body">
+											<div class="row">
+												<div class="col-md-12">
+													<h3>${apartment.community}-${apartment.capacity }居室-${room.direction}-${room.description}</h3>
+													<strong>编号:</strong>${room.id} <br>
+													<strong>楼层:</strong>第${apartment.floor}层/共${apartment.totalfloor}层
+													<br>
+													<strong>卧室:</strong>类型：${room.type}&nbsp;面积：${room.square}㎡&nbsp;朝向：${room.direction}
+													<br>
+													<strong>可住:</strong>${room.capacity}人 <br>
+													<strong>小区:</strong>${apartment.community} <br>
+													<strong>设施:</strong>
+													<c:forEach items="${room.facilities}" var="f">
+														<span class="label label-warning">${f.description}</span>
+													</c:forEach>
+													<br>
+													<strong>姓名:</strong><input type="text" name="name">
+													<br>
+													<strong>手机:</strong><input type="text" name="tel">
+													<br>
+													<strong>个人需求:</strong><input type="text" name="personal">
+													<br>
+													<strong>入住时间:</strong><input type="date" name="startTime">
+													至<input type="date" name="endTime"> <br>
+													<br><strong>共:</strong><input type="text" name="totalDay">天
+													<br><strong>总价:</strong><input type="text" name="totalPice">元
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">取消</button>
+											<button type="button" class="btn btn-primary">提交</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -238,9 +280,8 @@
 							<c:forEach items="${apartment.rooms}" var="r">
 								<c:if test="${room.id != r.id}">
 									<a href="../info/${r.id}"> <img alt="140x140"
-										class="img-responsive"
-										src="../images/${r.pics[0]}" />
-										<em>${apartment.community}-${apartment.bedroom}居室-${r.direction}卧-${r.description}</em> <strong>${r.status}</strong>
+										class="img-responsive" src="../images/${r.pics[0]}" /> <em>${apartment.community}-${apartment.bedroom}居室-${r.direction}卧-${r.description}</em>
+										<strong>${r.status}</strong>
 									</a>
 								</c:if>
 							</c:forEach>
@@ -251,7 +292,7 @@
 		</div>
 	</div>
 	</my_body>
-	<my_script>
-	<script src="<%=basePath%>/dist/customer/js/info.js"></script></my_script>
+	<my_script> <script
+		src="<%=basePath%>/dist/customer/js/info.js"></script></my_script>
 </body>
 </html>

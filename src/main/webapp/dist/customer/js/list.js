@@ -61,12 +61,11 @@ $(document).ready(function(){
 				var description = apartment.description;
 				
 				
-				var item = $('<div></div>').addClass('listbox-item').css('margin-top','20px');
-				item.appendTo(listbox);
+				var item = $('<div></div>').addClass('listbox-item').css('margin-top','20px').appendTo(listbox);
 				
 				// img
-			
-				$('<img></img>').attr('src',imgUrl).addClass('img-responsive').appendTo($('<div></div>').addClass('listbox-imgbox').appendTo(item));
+				var ancher = $('<a></a>').attr('href','./info/'+room.id).appendTo(item);
+				$('<img></img>').attr('src',imgUrl).addClass('img-responsive').appendTo($('<div></div>').addClass('listbox-imgbox').appendTo(ancher));
 				
 				var details = $('<div></div>').addClass('listbox-details').appendTo(item);
 				// title
