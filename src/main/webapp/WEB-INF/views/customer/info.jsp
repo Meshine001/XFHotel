@@ -42,7 +42,7 @@
 					<div class="row clearfix">
 						<div class="col-md-12 column">
 							<h3>房间基本情况.</h3>
-							<c:forEach items="${room.facilities}" var="f">
+							<c:forEach items="${room.facilityEntity}" var="f">
 								<span class="label label-warning">${f.description}</span>
 							</c:forEach>
 						</div>
@@ -148,7 +148,7 @@
 						<div class="col-md-12 column">
 							<h3>公共设施</h3>
 							<p>${apartment.description}</p>
-							<c:forEach items="${apartment.facilities}" var="f">
+							<c:forEach items="${apartment.facilityEntity}" var="f">
 								<span class="label label-warning">${f.description}</span>
 							</c:forEach>
 
@@ -180,7 +180,7 @@
 								<small>￥</small>${room.prices[2]}<small>/月</small><small
 									style="display: none;"> 原价:1480元/月</small>
 							</h3>
-							<c:forEach items="${room.facilities}" var="f">
+							<c:forEach items="${room.facilityEntity}" var="f">
 								<span class="label label-default">${f.description}</span>
 							</c:forEach>
 							<dl class="dl-horizontal">
@@ -222,28 +222,22 @@
 											<div class="row">
 												<div class="col-md-12">
 													<h3>${apartment.community}-${apartment.capacity }居室-${room.direction}-${room.description}</h3>
-													<strong>编号:</strong>${room.id} <br>
-													<strong>楼层:</strong>第${apartment.floor}层/共${apartment.totalfloor}层
-													<br>
-													<strong>卧室:</strong>类型：${room.type}&nbsp;面积：${room.square}㎡&nbsp;朝向：${room.direction}
-													<br>
-													<strong>可住:</strong>${room.capacity}人 <br>
-													<strong>小区:</strong>${apartment.community} <br>
-													<strong>设施:</strong>
-													<c:forEach items="${room.facilities}" var="f">
+													<strong>编号:</strong>${room.id} <br> <strong>楼层:</strong>第${apartment.floor}层/共${apartment.totalfloor}层
+													<br> <strong>卧室:</strong>类型：${room.type}&nbsp;面积：${room.square}㎡&nbsp;朝向：${room.direction}
+													<br> <strong>可住:</strong>${room.capacity}人 <br> <strong>小区:</strong>${apartment.community}
+													<br> <strong>设施:</strong>
+													<c:forEach items="${room.facilityEntity}" var="f">
 														<span class="label label-warning">${f.description}</span>
 													</c:forEach>
+													<br> <strong>姓名:</strong><input type="text"
+														name="name"> <br> <strong>手机:</strong><input
+														type="text" name="tel"> <br> <strong>个人需求:</strong><input
+														type="text" name="personal"> <br> <strong>入住时间:</strong><input
+														type="date" name="startTime"> 至<input type="date"
+														name="endTime"> <br> <br>
+													<strong>共:</strong><input type="text" name="totalDay">天
 													<br>
-													<strong>姓名:</strong><input type="text" name="name">
-													<br>
-													<strong>手机:</strong><input type="text" name="tel">
-													<br>
-													<strong>个人需求:</strong><input type="text" name="personal">
-													<br>
-													<strong>入住时间:</strong><input type="date" name="startTime">
-													至<input type="date" name="endTime"> <br>
-													<br><strong>共:</strong><input type="text" name="totalDay">天
-													<br><strong>总价:</strong><input type="text" name="totalPice">元
+													<strong>总价:</strong><input type="text" name="totalPice">元
 												</div>
 											</div>
 										</div>

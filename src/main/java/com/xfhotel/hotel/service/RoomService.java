@@ -12,6 +12,7 @@ public interface RoomService {
 	public void update(Room room);
 
 	public Map getRoomInfo(Long id);
+	
 
 	public Room findById(Long id);
 
