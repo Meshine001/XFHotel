@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.User;
 
 @Repository
@@ -77,9 +78,19 @@ public class ApartmentDAOImpl extends BaseDAOImpl<Apartment, Long>{
 		return 1;
 	}
 
-	public List findApartment(int type, Apartment apartment) {
+	public List findApartment(String content, Apartment apartment) {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria c = session.createCriteria(Apartment.class);
+		c.add(Restrictions.like("layout", apartment.getLayout().split("@")[0]+"@%@%@%"));
+		if( !apartment.getType().equals("全部") )
+			c.add(Restrictions.eq("type", apartment.getType()));
+		if(apartment.getFeatures()!=null){
+		}
+		//c.add(Restrictions.eq("id", id));
+		//c.setFetchMode("rooms", FetchMode.JOIN).setFetchMode("facilities", FetchMode.JOIN)
+		//		.setFetchMode("features", FetchMode.JOIN);
+		return c.list();
 	}
 
 }

@@ -17,10 +17,6 @@ public class Facility implements Serializable{
 	@Id
 	private long id;
 	private String description;
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy="facilities")
-	public Set<Apartment> apartments;
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy="facilities")
-	public Set<Room> rooms;
 	
 	public long getId() {
 		return id;
@@ -33,18 +29,6 @@ public class Facility implements Serializable{
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public Set<Apartment> getApartments() {
-		return apartments;
-	}
-	public void setApartments(Set<Apartment> apartments) {
-		this.apartments = apartments;
-	}
-	public Set<Room> getRooms() {
-		return rooms;
-	}
-	public void setRooms(Set<Room> rooms) {
-		this.rooms = rooms;
 	}
 	public HashMap toMap() {
 		// TODO Auto-generated method stub

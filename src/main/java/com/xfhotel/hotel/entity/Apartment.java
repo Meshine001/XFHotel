@@ -39,19 +39,8 @@ public class Apartment {
 	@JoinColumn(name="apartment_id")
 	public Set<Room> rooms; //
 	
-	//璁炬柦
-	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
-	@JoinTable(name="t_apartment_facility",
-		joinColumns={@JoinColumn(name="apartment_id")},
-		inverseJoinColumns={@JoinColumn(name="facility_id")})
-	public List<Facility> facilities; //
-	
-	//鐗硅壊
-	@ManyToMany(cascade={CascadeType.PERSIST},fetch=FetchType.LAZY)
-	@JoinTable(name="t_apartment_feature",
-		joinColumns={@JoinColumn(name="apartment_id")},
-		inverseJoinColumns={@JoinColumn(name="feature_id")})
-	public List<Feature> features;//label for apartment
+	public String facilities; //
+	public String features;//label for apartment
 	
 	
 	
@@ -122,23 +111,43 @@ public class Apartment {
 	}
 
 
-	public List<Facility> getFacilities() {
-		return facilities;
+	public String[] getFacilities() {
+		return facilities.split("@");
 	}
 
 
-	public void setFacilities(List<Facility> facilities) {
-		this.facilities = facilities;
+	public void setFacilities(String[] facilities) {
+		if(facilities==null){
+			this.facilities="";
+			return;
+		}
+		String str="";
+		for (int i = 0; i < facilities.length; i++) {
+			if(i>0)
+				str = str + "@";
+			str = str + facilities[i];
+		}
+		this.facilities=str;
 	}
 
 
-	public List<Feature> getFeatures() {
-		return features;
+	public String[] getFeatures() {
+		return features.split("@");
 	}
 
 
-	public void setFeatures(List<Feature> features) {
-		this.features = features;
+	public void setFeatures(String features[]) {
+		if(features==null){
+			this.features="";
+			return;
+		}
+		String str="";
+		for (int i = 0; i < features.length; i++) {
+			if(i>0)
+				str = str + "@";
+			str = str + features[i];
+		}
+		this.features = str;
 	}
 
 
@@ -317,22 +326,8 @@ public class Apartment {
 			rooms.add(r.toMap());
 		}
 		map.put("rooms", rooms);
-		
-		ArrayList facilities = new ArrayList();
-		Iterator itfc = this.getFacilities().iterator();
-		while(itfc.hasNext()){
-			Facility f = (Facility) itfc.next();
-			facilities.add(f.toMap());
-		}
-		map.put("facilities", facilities);
-		
-		ArrayList features = new ArrayList();
-		Iterator itft = this.getFeatures().iterator();
-		while(itft.hasNext()){
-			Feature f = (Feature) itft.next();
-			features.add(f.toMap());
-		}
-		map.put("features", features);
+		map.put("facilities", this.getFacilities());
+		map.put("features", this.getFeatures());
 		return map;
 	}
 

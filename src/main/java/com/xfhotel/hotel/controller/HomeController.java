@@ -92,13 +92,15 @@ public class HomeController {
 		try {
 			List<Map>  rooms = roomService.getAllRooms();
 			Apartment apartment = new Apartment();
+			apartment.setLayout("2@2@1@1");
+			apartment.setType("单租型");
+			apartment.setFeatures(null);
 			Room room = new Room();
-			int  type=0;//0 缺省，1单租，2合租
 			String content = "";
-			apartmentService.findApartment(type, apartment);
+			apartmentService.findApartment(content, apartment);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, rooms);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch blockp/0;'+
 			e.printStackTrace();
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");

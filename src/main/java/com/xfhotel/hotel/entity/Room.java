@@ -42,10 +42,7 @@ public class Room implements Serializable{
 	
 	public String prices;//
 	
-	@ManyToMany(cascade = { CascadeType.PERSIST }, fetch = FetchType.LAZY)
-	@JoinTable(name = "t_room_facility", joinColumns = { @JoinColumn(name = "room_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "facility_id") })
-	public List<Facility> facilities; //
+	public String facilities; //
 
 	private double square;//
 	private String direction;//
@@ -137,12 +134,22 @@ public class Room implements Serializable{
 		this.description = description;
 	}
 
-	public List<Facility> getFacilities() {
-		return facilities;
+	public String[] getFacilities() {
+		return facilities.split("@");
 	}
 
-	public void setFacilities(List<Facility> facilities) {
-		this.facilities = facilities;
+	public void setFacilities(String[] facilities) {
+		if(facilities==null){
+			this.facilities="";
+			return;
+		}
+		String str="";
+		for (int i = 0; i < facilities.length; i++) {
+			if(i>0)
+				str = str + "@";
+			str = str + facilities[i];
+		}
+		this.facilities=str;
 	}
 
 	public Map toMap() {
@@ -158,6 +165,7 @@ public class Room implements Serializable{
 		if(pics != null){
 			map.put("pics", pics.split("@"));
 		}
+		map.put("facilities", this.facilities.split("@"));
 		map.put("apartment", apartment.getId());
 		map.put("prices", prices.split("@"));
 		map.put("status", status);

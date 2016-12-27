@@ -27,10 +27,6 @@ public class Feature implements Serializable {
 	private long id;
 	private String description;
 	
-	@JsonIgnore
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy="features")
-	private Set<Apartment> apartments;
-	
 	public long getId() {
 		return id;
 	}
@@ -42,12 +38,6 @@ public class Feature implements Serializable {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public Set<Apartment> getApartments() {
-		return apartments;
-	}
-	public void setApartments(Set<Apartment> apartments) {
-		this.apartments = apartments;
 	}
 	public HashMap toMap() {
 		// TODO Auto-generated method stub

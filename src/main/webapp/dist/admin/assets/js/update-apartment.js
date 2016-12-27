@@ -90,10 +90,10 @@ $(document).ready(function(){
 			$('#balcony').val(data.balcony);
 			$('#description').val(data.description);
 			$.each(data.facilities,function(index,value){
-				$('#fa-'+value.id).attr('checked',true);
+				$('#fa-'+value).attr('checked',true);
 			});
 			$.each(data.features,function(index,value){
-				$('#fe-'+value.id).attr('checked',true);
+				$('#fe-'+value).attr('checked',true);
 			});
 			$("#apartment-type option").each(function (){  
 			    if($(this).text()==data.apartmenttype){   
