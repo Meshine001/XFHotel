@@ -27,6 +27,9 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/customer/css/crop-avatar.css" />
+	
+<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
+<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
@@ -46,7 +49,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">青舍都市公寓</a>
+				<a class="navbar-brand" href="../">青舍都市公寓</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -83,8 +86,7 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
-	<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
+
 	<script src="<%=basePath%>/dist/commons/cropper/cropper.min.js"></script>
 	<script src="<%=basePath%>/dist/customer/js/dashboard.js"></script>
 

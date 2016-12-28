@@ -45,15 +45,19 @@
 
 			<nav class="navbar-collapse collapse" role="navigation">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">首页</a></li>
-					<li><a href="">酒店型公寓</a></li>
-					<li><a href="">短租型公寓</a></li>
-					<li><a href="<%=basePath%>/list">在线找房</a></li>
+					<li class="active"><a href="<%=basePath%>">首页</a></li>
+					<li><a href="<%=basePath%>/hotel">酒店型公寓</a></li>
+					<li><a href="<%=basePath%>/apartment">短租型公寓</a></li>
 					<li><a href="">青客生活</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right hidden-sm">
-					<li><a href="./customer?forword=login">登录</a></li>
-					<li><a href="./customer?forword=reg">注册</a></li>
+					<c:if test="${c != null }">
+						<li><a href="./customer/logout">登出</a></li>
+					</c:if>
+					<c:if test="${c == null }">
+						<li><a href="./customer?forword=login">登录</a></li>
+						<li><a href="./customer?forword=reg">注册</a></li>
+					</c:if>
 				</ul>
 			</nav>
 		</div>

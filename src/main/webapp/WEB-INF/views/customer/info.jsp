@@ -16,7 +16,7 @@
 		<div class="col-md-12 column">
 			<ul class="breadcrumb">
 				<li>青舍首页</li>
-				<li>西安租房</li>
+				<li id="search-type">${sessionScope.searchType}</li>
 				<li class="active">${apartment.community}-${apartment.capacity }居室-${room.direction}-${room.description}</li>
 			</ul>
 			<div class="row clearfix">
@@ -47,7 +47,7 @@
 							</c:forEach>
 						</div>
 					</div>
-					<div class="row clearfix">
+					<div class="row clearfix paymethod">
 						<div class="col-md-12 column">
 							<h3>付款方式</h3>
 							<table class="table">
@@ -83,7 +83,7 @@
 							</table>
 						</div>
 					</div>
-					<div class="row clearfix" style="display: none;">
+					<div class="row clearfix my-apartment-friend">
 						<div class="col-md-12 column">
 							<h3>我的室友</h3>
 							<table class="table">
@@ -92,54 +92,34 @@
 										<th>房间</th>
 										<th>面积</th>
 										<th>朝向</th>
-										<th>特色</th>
 										<th>价格</th>
 										<th>性别</th>
 										<th>职业</th>
-										<th>状态</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>A房间</td>
-										<td>32.67㎡</td>
-										<td>南</td>
-										<td>独卫 飘窗</td>
-										<td>已出租</td>
-										<td>男</td>
+									<c:forEach items="${apartment.rooms}" var="r">
+										<c:if test="${r.id == room.id }">
+											<tr class="info">
+										</c:if>
+										<c:if test="${r.id != room.id }">
+											<tr class="">
+										</c:if>
+										<td>${r.description}</td>
+										<td>${r.square}㎡</td>
+										<td>${r.direction}</td>
+										<c:if test="${r.status == '已出租' }">
+											<td>已出租</td>
+										</c:if>
+										<c:if test="${r.status != '已出租' }">
+											<td>${r.prices[2]}元/月</td>
+										</c:if>
 										<td></td>
 										<td></td>
-									</tr>
-									<tr>
-										<td>B房间</td>
-										<td>32.67㎡</td>
-										<td>南</td>
-										<td>独卫 飘窗</td>
-										<td>已出租</td>
-										<td>男</td>
 										<td></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td>C房间</td>
-										<td>32.67㎡</td>
-										<td>南</td>
-										<td>独卫 飘窗</td>
-										<td>已出租</td>
-										<td>男</td>
-										<td></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td>D房间</td>
-										<td>32.67㎡</td>
-										<td>南</td>
-										<td>独卫 飘窗</td>
-										<td>已出租</td>
-										<td>男</td>
-										<td></td>
-										<td></td>
-									</tr>
+										</tr>
+									</c:forEach>
+
 								</tbody>
 							</table>
 						</div>
@@ -176,36 +156,74 @@
 				<div class="col-md-4 column">
 					<div class="row clearfix">
 						<div class="col-md-12 column">
-							<h3 class="text-left">
+							<h3 class="text-left type-hotel-price">
+								<small>￥</small>${room.prices[0]}<small>/天</small><small
+									style="display: none;"> 原价:1480元/天</small>
+							</h3>
+							<h3 class="text-left type-apartment-price">
 								<small>￥</small>${room.prices[2]}<small>/月</small><small
 									style="display: none;"> 原价:1480元/月</small>
 							</h3>
 							<c:forEach items="${room.facilityEntity}" var="f">
 								<span class="label label-default">${f.description}</span>
 							</c:forEach>
-							<dl class="dl-horizontal">
-								<dt>编号</dt>
-								<dd>${room.id}</dd>
-								<dt>楼层</dt>
-								<dd>第${apartment.floor}层/共${apartment.totalfloor}层</dd>
-								<dt>卧室</dt>
-								<dd>${room.type}</dd>
-								<dt>面积</dt>
-								<dd>${room.square}㎡</dd>
-								<dt>朝向</dt>
-								<dd>${room.direction}</dd>
-								<dt>可住</dt>
-								<dd>${room.capacity}人</dd>
-								<dt>居室</dt>
-								<dd>${apartment.bedroom}室${apartment.livingroom}厅${apartment.bathroom}卫${apartment.balcony}阳台</dd>
-								<dt>小区</dt>
-								<dd>${apartment.community}</dd>
-							</dl>
+							<ul>
+								<li><strong>编号</strong> <span>${room.id}</span></li>
+								<li><strong>楼层</strong> <span>第${apartment.floor}层/共${apartment.totalfloor}层</span>
+								</li>
+								<li><strong>卧室</strong> <span>${room.type}</span></li>
+								<li><strong>面积</strong> <span>${room.square}㎡</span></li>
+								<li><strong>朝向</strong> <span>${room.direction}</span></li>
+								<li><strong>可住</strong> <span>${room.capacity}人</span></li>
+								<li><strong>居室</strong> <span>${apartment.bedroom}室${apartment.livingroom}厅${apartment.bathroom}卫${apartment.balcony}阳台</span></li>
+								<li><strong>小区</strong> <span>${apartment.community}</span>
+								</li>
+							</ul>
 
 							<hr class="divider">
 							<br>
-							<button type="button" class="btn btn-info btn-block"
+							<c:if test="${searchType == '酒店型公寓' }">
+								<button type="button" class="btn btn-info btn-block"
 								data-toggle="modal" data-target="#orderModal">立即预定</button>
+							</c:if>
+							<c:if test="${searchType == '短租型公寓' }">
+								<button type="button" class="btn btn-info btn-block"
+								data-toggle="modal" data-target="#reservationModal">预约看房</button>
+							</c:if>
+							<!-- Modal -->
+							<div class="modal fade" id="reservationModal" tabindex="-1"
+								role="dialog" aria-labelledby="reservationModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">
+												<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+											</button>
+											<h4 class="modal-title" id="reservationModalLabel">在线预约</h4>
+										</div>
+										<div class="modal-body">
+											<div class="row">
+												<div class="col-md-12">
+													<form action="" method="post">
+														姓名：<input type="text" name="cusName" value=""><br>
+														手机：<input type="text" name="cusTel" value=""><br>
+														个人需求：<input type="text" name="cusPersonal" value=""><br>
+													</form>
+												</div>
+											</div>
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">取消</button>
+											<button type="button" class="btn btn-primary "
+												id="resercation-submit">提交</button>
+										</div>
+
+									</div>
+								</div>
+							</div>
 							<!-- Modal -->
 							<div class="modal fade" id="orderModal" tabindex="-1"
 								role="dialog" aria-labelledby="orderModalLabel"
@@ -221,7 +239,7 @@
 										<div class="modal-body">
 											<div class="row">
 												<div class="col-md-12">
-													<h3>${apartment.community}-${apartment.capacity }居室-${room.direction}-${room.description}</h3>
+													<h3 id="order-description-title">${apartment.community}-${apartment.capacity }居室-${room.direction}-${room.description}</h3>
 													<strong>编号:</strong>${room.id} <br> <strong>楼层:</strong>第${apartment.floor}层/共${apartment.totalfloor}层
 													<br> <strong>卧室:</strong>类型：${room.type}&nbsp;面积：${room.square}㎡&nbsp;朝向：${room.direction}
 													<br> <strong>可住:</strong>${room.capacity}人 <br> <strong>小区:</strong>${apartment.community}
@@ -229,23 +247,36 @@
 													<c:forEach items="${room.facilityEntity}" var="f">
 														<span class="label label-warning">${f.description}</span>
 													</c:forEach>
-													<br> <strong>姓名:</strong><input type="text"
-														name="name"> <br> <strong>手机:</strong><input
-														type="text" name="tel"> <br> <strong>个人需求:</strong><input
-														type="text" name="personal"> <br> <strong>入住时间:</strong><input
-														type="date" name="startTime"> 至<input type="date"
-														name="endTime"> <br> <br>
-													<strong>共:</strong><input type="text" name="totalDay">天
-													<br>
-													<strong>总价:</strong><input type="text" name="totalPice">元
+													<form action="../order/add" method="post" id="order-form">
+														<input type="hidden" name="cusId" value="${c.id}">
+														<input type="hidden" name="description" value=""
+															id="order-description"> <input type="hidden"
+															name="roomId" value="${room.id}"> <br> <strong>姓名:</strong><input
+															type="text" name="cusName"> <br> <strong>身份证:</strong><input
+															type="text" name="cusIdCard"> <strong>手机:</strong><input
+															type="text" name="cusTel" value="${c.tel}"> <br>
+														<strong>个人需求:</strong><input type="text" name="personal">
+														<br> <strong>入住时间:</strong><input class="order-date"
+															type="date" name="startTime" id="order-start"> 至<input
+															class="order-date" id="order-end" type="date"
+															name="endTime"> <br> <br> <strong>共:</strong><input
+															type="text" name="totalDay" id="order-total-day">天
+														<br> <input id="order-price" type="hidden"
+															name="price" value="${room.prices[0]}"> <strong>总价:</strong><input
+															type="text" name="totalPrice" id="order-total-price">元
+														<input type="hidden" name="type" value="0">
+													</form>
 												</div>
 											</div>
+
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">取消</button>
-											<button type="button" class="btn btn-primary">提交</button>
+											<button type="button" class="btn btn-primary "
+												id="order-submit">提交</button>
 										</div>
+
 									</div>
 								</div>
 							</div>

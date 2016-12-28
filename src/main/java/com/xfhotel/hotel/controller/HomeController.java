@@ -67,6 +67,19 @@ public class HomeController {
 
 		return "/customer/map";
 	}
+	
+	@RequestMapping(value = "/hotel", method = RequestMethod.GET)
+	public String hotle(){
+		session.setAttribute("searchType", "酒店型公寓");
+		return "redirect:/list";
+	}
+	
+	@RequestMapping(value = "/apartment", method = RequestMethod.GET)
+	public String apartment(){
+		session.setAttribute("searchType", "短租型公寓");
+		return "redirect:/list";
+	}
+
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list() {
