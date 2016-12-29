@@ -28,6 +28,9 @@
 
 <link href="<%=basePath%>/dist/customer/css/carousel.css"
 	rel="stylesheet">
+<link href="<%=basePath%>/dist/commons/web/css/base.css"
+	rel="stylesheet">
+<link href="<%=basePath%>/dist/customer/css/home.css" rel="stylesheet">
 </head>
 <body>
 	<!-- 导航 -->
@@ -112,10 +115,6 @@
 
 
 	<div class="container">
-
-
-
-
 
 		<!-- 搜索框 -->
 		<div class="row">
@@ -336,17 +335,47 @@
 		<!-- /END THE FEATURETTES -->
 
 
-		<!-- FOOTER -->
-		<footer>
-
-			<p>
-				© 2014 青舍都市公寓, 西安青舍都市公寓服务有限公司. · <a href="#">版权所有</a> · <a href="#"></a>
-			</p>
-		</footer>
 
 	</div>
 	<!-- /.container -->
 
+	<!-- FOOTER -->
+	<footer>
+		<div class="main">
+			<div class="top">
+				<div class="nav">
+					<ul class="nav-ul">
+						<li><span>网站首页</span> <a>酒店型公寓</a> <a>短租型公寓</a> <a>租前须知</a> <a>青舍生活</a>
+						</li>
+						<li><span>关于青舍</span> <a>关于我们</a> <a>免责声明</a> <a>联系我们</a> <a>加入我们</a>
+						</li>
+						<li><span>业务合作</span> <a>业主加盟</a> <a>网站地图</a></li>
+					</ul>
+					<div class="service-tel">
+						<span class="tel">888-8888-888</span> <span class="date"
+							style="color: #dbdbdb;">周一至周六 09:00 - 20:00<br>（仅收市话费）
+						</span> <span class="kefu">在线客服</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="main">
+				<p>
+					<span>友情链接：</span><a href="" title=""
+						target="_blank">去哪网</a> | <a href=""
+						title="" target="_blank">途牛网</a> | <a
+						href="" title="" target="_blank">阿里旅游</a>
+					| <a href="" title="" target="_blank">中国旅游信息网</a>
+					| <a href="" title=""
+						target="_blank"></a> 
+				</p>
+				<p>Copyright © 2016-2018 qingshe.com xxxxxxxxx有限公司 版权所有
+					陕ICP备xxxxxx号-x</p>
+			</div>
+		</div>
+
+	</footer>
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->

@@ -152,6 +152,28 @@
 								src="../images/${apartment.pic1}" />
 						</div>
 					</div>
+					<div class="row clearfix">
+						<div class="col-md-12 column">
+							<h3>用户评价</h3>
+							<ul class="media-list">
+								<li class="media">
+									<div class="media-body">
+										<div class="media">
+											<a class="pull-left"> <img
+												class="media-object img-circle "
+												src="http://themeandphoto.com/taplivedemos/2014/09/15/bootstrap-chat-example/assets/img/user.png">
+											</a>
+											<div class="media-body">
+												住着舒服，环境很好！！！ <br> <small
+													class="text-muted">Alex Deo | 23rd June at 5:00pm</small>
+												<hr>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 				<div class="col-md-4 column">
 					<div class="row clearfix">
@@ -184,11 +206,11 @@
 							<br>
 							<c:if test="${searchType == '酒店型公寓' }">
 								<button type="button" class="btn btn-info btn-block"
-								data-toggle="modal" data-target="#orderModal">立即预定</button>
+									data-toggle="modal" data-target="#orderModal">立即预定</button>
 							</c:if>
 							<c:if test="${searchType == '短租型公寓' }">
 								<button type="button" class="btn btn-info btn-block"
-								data-toggle="modal" data-target="#reservationModal">预约看房</button>
+									data-toggle="modal" data-target="#reservationModal">预约看房</button>
 							</c:if>
 							<!-- Modal -->
 							<div class="modal fade" id="reservationModal" tabindex="-1"
@@ -256,7 +278,9 @@
 															type="text" name="cusIdCard"> <strong>手机:</strong><input
 															type="text" name="cusTel" value="${c.tel}"> <br>
 														<strong>个人需求:</strong><input type="text" name="personal">
-														<br> <strong>入住时间:</strong><input class="order-date"
+														<br>
+														 <strong>单价:</strong>${room.prices[0]}元/天<br>
+														 <strong>入住时间:</strong><input class="order-date"
 															type="date" name="startTime" id="order-start"> 至<input
 															class="order-date" id="order-end" type="date"
 															name="endTime"> <br> <br> <strong>共:</strong><input

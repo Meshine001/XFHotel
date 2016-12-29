@@ -28,7 +28,7 @@ public class FeatureServiceImpl implements FeatureService {
 	@Transactional
 	public Feature findById(Long id) {
 		// TODO Auto-generated method stub
-		return featureDAO.findById(id);
+		return featureDAO.get(id);
 	}
 
 	@Transactional

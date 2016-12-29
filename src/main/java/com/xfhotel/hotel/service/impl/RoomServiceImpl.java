@@ -23,6 +23,7 @@ import com.xfhotel.hotel.dao.FacilityDAO;
 import com.xfhotel.hotel.dao.FeatureDAO;
 import com.xfhotel.hotel.dao.RoomDAO;
 import com.xfhotel.hotel.dao.impl.ApartmentDAOImpl;
+import com.xfhotel.hotel.dao.impl.FacilityDAOImpl;
 import com.xfhotel.hotel.dao.impl.RoomDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Facility;
@@ -38,10 +39,10 @@ public class RoomServiceImpl implements RoomService {
 	private RoomDAOImpl roomDAO;
 	@Autowired
 	private ApartmentDAOImpl apartmentDAO;
-	
+
 	@Autowired
-	private  FacilityDAO facilityDAO;;
-	
+	private FacilityDAOImpl facilityDAO;;
+
 	@Override
 	@Transactional
 	public int add(Room room) {
@@ -57,8 +58,12 @@ public class RoomServiceImpl implements RoomService {
 		Map map = room.toMap();
 		List<Map> facilities = new ArrayList<Map>();
 		String[] ids = (String[]) map.get("facilities");
-		for(String i:ids){
-			Map f = facilityDAO.findById(Long.valueOf(i)).toMap();
+		for (String i : ids) {
+			Map f = null;
+			Facility fa = facilityDAO.get(Long.valueOf(i));
+			if (fa == null)
+				continue;
+			f = fa.toMap();
 			facilities.add(f);
 		}
 		map.put("facilityEntity", facilities);
@@ -72,25 +77,25 @@ public class RoomServiceImpl implements RoomService {
 		return roomDAO.getRoomById(id);
 	}
 
-
 	@Transactional
 	@Override
 	public List<Map> getAllRooms() {
-		List<Room> rooms = roomDAO.getListByHQL("from Room", null);;
+		List<Room> rooms = roomDAO.getListByHQL("from Room", null);
+		;
 		List<Map> list = new ArrayList<Map>();
-		for(Room r:rooms){
+		for (Room r : rooms) {
 			list.add(this.getRoomInfo(r.getId()));
 		}
-		
+
 		return list;
 	}
-	
-	
+
 	@Transactional
 	@Override
 	public void update(Room room) {
 		roomDAO.update(room);
 	}
+
 	@Transactional
 	@Override
 	public void updateRoomPic(Long id, String[] pics) {
@@ -99,6 +104,5 @@ public class RoomServiceImpl implements RoomService {
 		room.setPics(pic);
 		roomDAO.update(room);
 	}
-	
 
 }

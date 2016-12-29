@@ -68,14 +68,15 @@ public class ApartmentController {
 		if (f == null) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
 		} else {
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, f);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
 		}
 
 	}
 
-	@RequestMapping(value = "/features/delete", method = RequestMethod.POST)
-	public @ResponseBody Message deleteFeatures(Feature f) {
+	@RequestMapping(value = "/features/delete/{id}", method = RequestMethod.POST)
+	public @ResponseBody Message deleteFeatures(@PathVariable("id")Long id) {
 		try {
+			Feature f = featureService.findById(id);
 			featureService.delete(f);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "删除成功");
 		} catch (Exception e) {
@@ -85,17 +86,34 @@ public class ApartmentController {
 		return new Message(Constants.MESSAGE_ERR_CODE, "删除失败");
 	}
 
-	@RequestMapping(value = "/features/update", method = RequestMethod.POST)
-	public @ResponseBody Message updateFeatures(Feature f) {
+	@RequestMapping(value = "/facility/add", method = RequestMethod.POST)
+	public @ResponseBody Message addFacility(String description) {
 		try {
-			featureService.update(f);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
+			Facility f = new Facility();
+			f.setDescription(description);
+			facilityService.add(f);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
+		}
+
+	}
+
+	@RequestMapping(value = "/facility/delete/{id}", method = RequestMethod.POST)
+	public @ResponseBody Message deleteFacility(@PathVariable("id")Long id) {
+		try {
+			Facility f = facilityService.findById(id);
+			facilityService.delete(f);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "删除成功");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+		return new Message(Constants.MESSAGE_ERR_CODE, "删除失败");
 	}
+
 
 	@RequestMapping(value = "/features", method = RequestMethod.GET)
 	public @ResponseBody Message features() {

@@ -49,7 +49,7 @@
 						<div class="app-form">
 							<div class="form-header">
 								<div class="app-brand">
-									<span class="highlight">西风客</span> Admin
+									<span class="highlight">青舍都市</span> Admin
 								</div>
 							</div>
 							<form action="<%=basePath%>/admin/login" method="post">
@@ -61,7 +61,7 @@
 								</div>
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon2"> <i
-										class="fa fa-key" aria-hidden="true"></i></span> <input type="text"
+										class="fa fa-key" aria-hidden="true"></i></span> <input type="password"
 										class="form-control" placeholder="密  码"
 										aria-describedby="basic-addon2" name="user.password">
 								</div>

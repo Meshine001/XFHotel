@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.User;
+import com.xfhotel.hotel.service.FacilityService;
+import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
 
@@ -21,7 +23,15 @@ import com.xfhotel.hotel.support.Message;
 public class AdminController {
 	
 	@Autowired
+	HttpSession session;
+	
+	@Autowired
 	UserService userService;
+	
+	@Autowired
+	FeatureService featureService;
+	@Autowired
+	FacilityService facilityService;
 	
 	@RequestMapping(value="",method = RequestMethod.GET)
 	public String homePage(){
@@ -39,9 +49,15 @@ public class AdminController {
 		return "/admin/dashboard";
 	}
 	
+	@RequestMapping(value="/system",method = RequestMethod.GET)
+	public String systemPage(){
+		session.setAttribute("features", featureService.listFeatures());
+		session.setAttribute("facilities", facilityService.listFacilities());
+		return "/admin/system";
+	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	 public String login(User user,HttpSession session){
+	 public String login(User user){
 		User u = userService.getUser(user.getUsername(),user.getPassword());
 		if(null == u) return "/admin/login";
 		session.setAttribute(Constants.ADMIN_SESSION_ATTR, u);

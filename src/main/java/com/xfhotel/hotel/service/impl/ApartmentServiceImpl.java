@@ -21,27 +21,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.FacilityDAO;
 import com.xfhotel.hotel.dao.impl.ApartmentDAOImpl;
+import com.xfhotel.hotel.dao.impl.FacilityDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 
-
 @Service
 public class ApartmentServiceImpl implements ApartmentService {
 	@Autowired
 	ApartmentDAOImpl apartmentDAO;
-	
+
 	@Autowired
-	FacilityDAO facilityDAO;
+	FacilityDAOImpl facilityDAO;
 
 	@Override
 	@Transactional
 	public String add(Apartment apartment) {
 		// TODO Auto-generated method stub
-		//validation
-		if( apartmentDAO.addApartment(apartment) == 1 )
+		// validation
+		if (apartmentDAO.addApartment(apartment) == 1)
 			return "";
 		return "";
 	}
@@ -59,23 +59,26 @@ public class ApartmentServiceImpl implements ApartmentService {
 	public Map getApartmentInfo(long id) {
 		// TODO Auto-generated method stub
 		Apartment apartment = apartmentDAO.getApartmentById(id);
-		Map map =apartment.toMap();
-		@SuppressWarnings("rawtypes")
+		Map map = apartment.toMap();
 		List<Map> facilities = new ArrayList<Map>();
 		String[] ids = (String[]) map.get("facilities");
-		for(String i:ids){
-			Map f = facilityDAO.findById(Long.valueOf(i)).toMap();
+		for (String i : ids) {
+			Map f = null;
+			Facility fa = facilityDAO.get(Long.valueOf(i));
+			if (fa == null)
+				continue;
+			f = fa.toMap();
 			facilities.add(f);
 		}
 		map.put("facilityEntity", facilities);
 		return map;
 	}
-	
+
 	@Override
 	@Transactional
 	public List findApartment(String content, Apartment apartment) {
 		// TODO Auto-generated method stub
-		return apartmentDAO.findApartment(content,apartment);
+		return apartmentDAO.findApartment(content, apartment);
 	}
 
 	@Transactional
@@ -83,6 +86,5 @@ public class ApartmentServiceImpl implements ApartmentService {
 	public void update(Apartment apartment) {
 		apartmentDAO.update(apartment);
 	}
-
 
 }
