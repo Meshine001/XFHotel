@@ -11,4 +11,5 @@ public interface OrderService {
 	public void delete(Order o);
 	public Order get(Long id);
 	public List<Order> list(int type);
+	public List<Order> listDiedOrders(int type);
 }

@@ -52,6 +52,19 @@
 							</div>
 							<div class="title">房源管理</div>
 					</a></li>
+
+					<li><a href="<%=basePath%>/admin/order">
+							<div class="icon">
+								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+							</div>
+							<div class="title">订单管理</div>
+					</a></li>
+					<li><a href="<%=basePath%>/admin/customer">
+							<div class="icon">
+								<i class="fa fa-users" aria-hidden="true"></i>
+							</div>
+							<div class="title">用户管理</div>
+					</a></li>
 					<li><a href="<%=basePath%>/admin/system">
 							<div class="icon">
 								<i class="fa fa-cog" aria-hidden="true"></i>

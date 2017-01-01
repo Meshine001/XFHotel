@@ -209,6 +209,7 @@ public class Order {
 		info.put("startTime", DateUtil.format(new Date(startTime), "yyyy-MM-dd"));
 		info.put("endTime", DateUtil.format(new Date(endTime), "yyyy-MM-dd"));
 		info.put("time", time+Constants.EFFECTIVE_ORDER_TIME_DURING);
+		info.put("timeStr", DateUtil.format(new Date(time), "yyyy-MM-dd HH:mm:ss"));
 		info.put("totalDay", totalDay);
 		info.put("price", price);
 		info.put("totalPrice",totalPrice);
