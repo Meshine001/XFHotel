@@ -87,4 +87,24 @@ public class ApartmentServiceImpl implements ApartmentService {
 		apartmentDAO.update(apartment);
 	}
 
+	
+	@Transactional
+	@Override
+	public List list() {
+		// TODO Auto-generated method stub
+		List<Apartment> list = apartmentDAO.listApartments();
+		List<Map> apartments = new ArrayList<Map>();
+		for(Apartment a:list){
+			apartments.add(getApartmentInfo(a.getId()));
+		}
+		return apartments;
+	}
+	
+	
+	@Transactional
+	@Override
+	public void delete(Apartment apartment) {
+		apartmentDAO.delete(apartment);
+	}
+
 }

@@ -222,14 +222,16 @@
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
 								<select name="apartmenttype" id="apartment-type">
-									<option value="-1" selected="selected">请选择</option>
+									<!--<option value="-1" selected="selected">请选择</option> -->
 									<option value="酒店型">酒店型</option>
-									<option value="短租型">短租型</option>
-								</select> <select name="type" id="lease-type">
+									<!-- <option value="短租型">短租型</option> -->
+								</select>
+								<!--
+								 <select name="type" id="lease-type">
 									<option value="-1">请选择</option>
 									<option value="单租型">单租型</option>
 									<option value="合租型">合租型</option>
-								</select>
+								</select>-->
 							</div>
 						</div>
 						<div class="form-group">
@@ -240,6 +242,7 @@
 										name="prices" class="price-day"> <span
 										class="input-group-addon">元</span>
 								</div>
+								<!--  
 								<div class="input-group week">
 									<span class="input-group-addon">周</span> <input type="text"
 										name="prices" class="price-week"> <span
@@ -255,6 +258,7 @@
 										name="prices" class="price-year"> <span
 										class="input-group-addon">元</span>
 								</div>
+								-->
 							</div>
 						</div>
 
@@ -275,34 +279,6 @@
 		<div class="col-md-6">
 			<div id="map" style="width: 500px; height: 500px"></div>
 		</div>
-	</div>
-	<!-- 模态框（Modal） -->
-	<div class="modal fade" id="feature-modal" tabindex="-1" role="dialog"
-		aria-labelledby="feature-modal-label" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="feature-modal-lael">特色编辑</h4>
-				</div>
-				<div class="modal-body">
-					<ul id="features-li">
-
-					</ul>
-					<form action="" id="add-feature-form">
-						<input type="text" name="description">
-						<button type="button" id="add-feature">添加</button>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary">提交更改</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal -->
 	</div>
 	<script
 		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"

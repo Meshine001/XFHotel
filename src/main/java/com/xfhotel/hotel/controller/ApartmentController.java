@@ -72,6 +72,12 @@ public class ApartmentController {
 		}
 
 	}
+	
+	@RequestMapping(value = "",method = RequestMethod.GET)
+	public String apartmentList(){
+		session.setAttribute("apartments", apartmentService.list());
+		return "/admin/apartment/list";
+	}
 
 	@RequestMapping(value = "/features/delete/{id}", method = RequestMethod.POST)
 	public @ResponseBody Message deleteFeatures(@PathVariable("id")Long id) {
@@ -215,7 +221,7 @@ public class ApartmentController {
 			// roomName @ roomType @ leasyType
 			room.setDescription("房间" + String.valueOf(i + 1) + "@" + "-1" + "@" + apartment.getApartmentType());
 			room.setSquare(0);
-			room.setStatus("未出租");
+			room.setStatus(Room.STATUS_IDLE);
 			room.setDirection("-1");
 			room.setPics("default.jpg@default.jpg@default.jpg");
 			room.setPrices("-1@-1@-1@-1");
@@ -271,6 +277,18 @@ public class ApartmentController {
 		return "/admin/apartment/update";
 	}
 
+	@RequestMapping(value = "/delete/{id}")
+	public String delete(@PathVariable("id")Long id){
+		Apartment apartment = apartmentService.findById(id);
+		Set<Room> rooms = apartment.getRooms();
+		for(Room room:rooms){
+			roomService.delete(room);
+		}
+		apartmentService.delete(apartment);
+		
+		return "forward:/admin/apartment";
+	}
+	
 	@RequestMapping(value = "/getapartment", method = RequestMethod.POST)
 	public @ResponseBody Map getApartment(String apartmentid) {
 		Map map = apartmentService.getApartmentInfo(Long.valueOf(apartmentid));

@@ -59,6 +59,7 @@ public class RoomServiceImpl implements RoomService {
 		List<Map> facilities = new ArrayList<Map>();
 		String[] ids = (String[]) map.get("facilities");
 		for (String i : ids) {
+			if(i.equals(""))continue;
 			Map f = null;
 			Facility fa = facilityDAO.get(Long.valueOf(i));
 			if (fa == null)
@@ -80,7 +81,9 @@ public class RoomServiceImpl implements RoomService {
 	@Transactional
 	@Override
 	public List<Map> getAllRooms() {
-		List<Room> rooms = roomDAO.getListByHQL("from Room", null);
+		
+		Integer[] value = {Room.STATUS_IDLE,Room.STATUS_WILL_IDLE};
+		List<Room> rooms = roomDAO.getListByHQL("from Room where status =? or status =?",value);
 		;
 		List<Map> list = new ArrayList<Map>();
 		for (Room r : rooms) {
@@ -103,6 +106,12 @@ public class RoomServiceImpl implements RoomService {
 		String pic = StringSplitUtil.buildStrGroup(pics);
 		room.setPics(pic);
 		roomDAO.update(room);
+	}
+
+	@Transactional
+	@Override
+	public void delete(Room room) {
+		roomDAO.delete(room);
 	}
 
 }

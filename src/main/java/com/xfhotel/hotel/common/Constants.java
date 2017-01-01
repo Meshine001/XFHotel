@@ -15,4 +15,6 @@ public class Constants {
 	public static final int MESSAGE_ERR_CODE = 0;
 	public static final int MESSAGE_SUCCESS_CODE = 1;
 	
+	public static final Long EFFECTIVE_ORDER_TIME_DURING = 1000*60*30L;
+	
 }

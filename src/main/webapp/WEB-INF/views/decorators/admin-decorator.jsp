@@ -46,11 +46,11 @@
 							<div class="title">控制面板</div>
 					</a></li>
 
-					<li><a href="<%=basePath%>/admin/apartment/add">
+					<li><a href="<%=basePath%>/admin/apartment">
 							<div class="icon">
 								<i class="fa fa-bed" aria-hidden="true"></i>
 							</div>
-							<div class="title">添加房源</div>
+							<div class="title">房源管理</div>
 					</a></li>
 					<li><a href="<%=basePath%>/admin/system">
 							<div class="icon">

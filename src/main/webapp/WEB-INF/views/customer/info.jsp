@@ -164,8 +164,8 @@
 												src="http://themeandphoto.com/taplivedemos/2014/09/15/bootstrap-chat-example/assets/img/user.png">
 											</a>
 											<div class="media-body">
-												住着舒服，环境很好！！！ <br> <small
-													class="text-muted">Alex Deo | 23rd June at 5:00pm</small>
+												住着舒服，环境很好！！！ <br> <small class="text-muted">Alex
+													Deo | 23rd June at 5:00pm</small>
 												<hr>
 											</div>
 										</div>
@@ -261,34 +261,26 @@
 										<div class="modal-body">
 											<div class="row">
 												<div class="col-md-12">
-													<h3 id="order-description-title">${apartment.community}-${apartment.capacity }居室-${room.direction}-${room.description}</h3>
-													<strong>编号:</strong>${room.id} <br> <strong>楼层:</strong>第${apartment.floor}层/共${apartment.totalfloor}层
-													<br> <strong>卧室:</strong>类型：${room.type}&nbsp;面积：${room.square}㎡&nbsp;朝向：${room.direction}
-													<br> <strong>可住:</strong>${room.capacity}人 <br> <strong>小区:</strong>${apartment.community}
-													<br> <strong>设施:</strong>
-													<c:forEach items="${room.facilityEntity}" var="f">
-														<span class="label label-warning">${f.description}</span>
-													</c:forEach>
 													<form action="../order/add" method="post" id="order-form">
-														<input type="hidden" name="cusId" value="${c.id}">
-														<input type="hidden" name="description" value=""
-															id="order-description"> <input type="hidden"
-															name="roomId" value="${room.id}"> <br> <strong>姓名:</strong><input
-															type="text" name="cusName"> <br> <strong>身份证:</strong><input
-															type="text" name="cusIdCard"> <strong>手机:</strong><input
-															type="text" name="cusTel" value="${c.tel}"> <br>
-														<strong>个人需求:</strong><input type="text" name="personal">
-														<br>
-														 <strong>单价:</strong>${room.prices[0]}元/天<br>
-														 <strong>入住时间:</strong><input class="order-date"
-															type="date" name="startTime" id="order-start"> 至<input
-															class="order-date" id="order-end" type="date"
-															name="endTime"> <br> <br> <strong>共:</strong><input
-															type="text" name="totalDay" id="order-total-day">天
-														<br> <input id="order-price" type="hidden"
-															name="price" value="${room.prices[0]}"> <strong>总价:</strong><input
-															type="text" name="totalPrice" id="order-total-price">元
-														<input type="hidden" name="type" value="0">
+													<input type="hidden" name="cusId" value="${c.id}" id="cusId">
+													<input type="hidden" name = "roomId" value="${room.id}">
+													<input type="hidden" name = "apartmentId" value="${room.apartment}">
+													<input type="hidden" name="type" value="0">
+														<ul>
+															<li><span>入离时间</span><span><input type="date"
+																	class="order-date" id="order-start" name="startTime"></span>至<span><input
+																	type="date" class="order-date" id="order-end" name="endTime"></span>共<span
+																id="order-total-day">0</span>晚<a class="btn">修改时间</a></li>
+															<li><span>房费</span><span><small>￥</small><span
+																	id="order-price">${room.prices[0]}</span></span><span></span></li>
+															<li><span>住客姓名</span><span><input type="text" name="cusName"></span></li>
+															<li><span>身份证</span><input type="text" name="cusIdCard"></li>
+															<li><span>联系手机</span><input type="text" name="cusTel"></li>
+															<li><span>个人需求</span><input type="text" name="cusPersonal"></li>
+															<li><span>发票</span><span><input
+																	type="checkbox" name="needFapiao">是否需要发票</span></li>
+														</ul>
+														<span>订单总额￥</span><span id="order-total-price">0.00</span>
 													</form>
 												</div>
 											</div>

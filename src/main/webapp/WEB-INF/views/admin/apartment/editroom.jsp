@@ -136,6 +136,7 @@
 										name="prices" class="price-day" value="${room.prices[0]}"> <span
 										class="input-group-addon">元</span>
 								</div>
+								<!--  
 								<div class="input-group week">
 									<span class="input-group-addon">周</span> <input type="text"
 										name="prices" class="price-week" value="${room.prices[1]}"> <span
@@ -151,6 +152,7 @@
 										name="prices" class="price-year" value="${room.prices[3]}"> <span
 										class="input-group-addon">元</span>
 								</div>
+								-->
 							</div>
 						</div>
 

@@ -1,23 +1,31 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.support.DateUtil;
+
 @Entity
 @Table(name = "t_order")
 public class Order {
-	
+
 	public final static int STATUS_NOT_COMPLETE = 0;
 	public final static int STATUS_ON_PAY = 1;
 	public final static int STATUS_COMPLETE = 2;
 	public final static int STATUS_CANCEL = 3;
-	
+	public final static int STATUS_TIME_OUT = 4;
+
 	public final static int TYPE_HOTEL = 0;
 	public final static int TYPE_APARTMENT = 1;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -30,29 +38,27 @@ public class Order {
 	private String personal;
 	private Long startTime;
 	private Long endTime;
-	private Long time;//下单时间
+	private Long time;// 下单时间
 	private int totalDay;
 	private String price;
-	private String totalPice;
+	private String totalPrice;
 	private String preferential;// 优惠
 	private int type;// 订单种类
 	private int status;// 订单状态
+	private boolean needFapiao;
 
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public Long getTime() {
 		return time;
 	}
 
-
 	public void setTime(Long time) {
 		this.time = time;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -166,24 +172,65 @@ public class Order {
 		this.status = status;
 	}
 
-	public String getTotalPice() {
-		return totalPice;
+	public String getTotalPrice() {
+		return totalPrice;
 	}
 
-	public void setTotalPice(String totalPice) {
-		this.totalPice = totalPice;
+	public void setTotalPrice(String totalPrice) {
+		this.totalPrice = totalPrice;
 	}
-
 
 	public String getCusIdCard() {
 		return cusIdCard;
 	}
 
-
 	public void setCusIdCard(String cusIdCard) {
 		this.cusIdCard = cusIdCard;
 	}
 
-	
+	public boolean isNeedFapiao() {
+		return needFapiao;
+	}
+
+	public void setNeedFapiao(boolean needFapiao) {
+		this.needFapiao = needFapiao;
+	}
+
+	public Map toMap(){
+		Map info = new HashMap();
+		info.put("id", id);
+		info.put("cusId", cusId);
+		info.put("description", description);
+		info.put("roomId", roomId);
+		info.put("cusName", cusName);
+		info.put("cusTel", cusTel);
+		info.put("cusIdCard", cusIdCard);
+		info.put("personal", personal);
+		info.put("startTime", DateUtil.format(new Date(startTime), "yyyy-MM-dd"));
+		info.put("endTime", DateUtil.format(new Date(endTime), "yyyy-MM-dd"));
+		info.put("time", time+Constants.EFFECTIVE_ORDER_TIME_DURING);
+		info.put("totalDay", totalDay);
+		info.put("price", price);
+		info.put("totalPrice",totalPrice);
+		info.put("preferential", preferential);
+		info.put("type", type);
+		info.put("status", getStatusString(status));
+		info.put("needFapiao", needFapiao);
+		return info;
+	}
+
+	String getStatusString(int status) {
+		switch (status) {
+		case STATUS_NOT_COMPLETE:
+			return "未完成";
+		case STATUS_ON_PAY:
+			return "等待支付";
+		case STATUS_CANCEL:
+			return "已取消";
+		case STATUS_TIME_OUT:
+			return "订单超时";
+		}
+		return "已完成";
+	}
 
 }

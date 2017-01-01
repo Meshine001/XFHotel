@@ -1,6 +1,5 @@
 package com.xfhotel.hotel.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,8 @@ public interface RoomService {
 	public int add(Room room);
 	
 	public void update(Room room);
+	
+	public void delete(Room room);
 
 	public Map getRoomInfo(Long id);
 	

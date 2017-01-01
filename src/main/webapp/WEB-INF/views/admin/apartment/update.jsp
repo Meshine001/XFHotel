@@ -247,9 +247,11 @@
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
 								<select name="apartmenttype" id="apartment-type">
-									<option value="-1" selected="selected">请选择</option>
+								<!-- 
+									<option value="-1" selected="selected">请选择</option> -->
 									<option value="酒店型">酒店型</option>
-									<option value="短租型">短租型</option>
+									<!-- <option value="短租型">短租型</option> -->
+								
 								</select> <select name="type" id="lease-type">
 									<option value="-1">请选择</option>
 									<option value="单租型">单租型</option>

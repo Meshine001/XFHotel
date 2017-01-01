@@ -42,21 +42,24 @@ $(document).ready(function(){
 	 		
 	 		if(startNum>endNum){ 
 	 			alert("结束时间不能在开始时间之前！"); 
-	 			$('#order-total-day').val('');
+	 			$('#order-total-day').text('');
 	 			return false; 
 	 		}
 	 		
 	 		var days = DateDiff(start,end);
-	 		$('#order-total-day').val(days);
-	 		var price = $('#order-price').val();
+	 		$('#order-total-day').text(days);
+	 		var price = $('#order-price').text();
 	 		var totalPrice = price*days;
-	 		$('#order-total-price').val(totalPrice);
+	 		$('#order-total-price').text(totalPrice);
 	 	});
 	
 	 //====================================================================>
 	 	//提交酒店型订单
 		$('#order-submit').click(function(){
-			$('#order-description').val($('#order-description-title').text());
+			if($('#cusId').val() == '' || $('#cusId') == null){
+				alert('请先登录');
+				return;
+			}
 			$('#order-form').submit();
 		});
 	
