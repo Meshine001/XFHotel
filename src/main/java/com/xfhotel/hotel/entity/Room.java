@@ -156,9 +156,7 @@ public class Room implements Serializable {
 		map.put("square", square);
 		map.put("direction", direction);
 		map.put("capacity", capacity);
-		map.put("description", description.split("@")[0]);
-		map.put("type", description.split("@")[1]);
-		map.put("ltype", description.split("@")[2]);
+		map.put("descriptionPersonal", description);
 		map.put("id", id);
 		if (pics != null) {
 			map.put("pics", pics.split("@"));

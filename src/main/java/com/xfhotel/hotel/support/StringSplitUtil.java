@@ -6,7 +6,7 @@ public class StringSplitUtil {
 		for (int i = 0; i < str.length; i++) {
 			String s = "";
 			if ("".equals(str[i])) {
-				s = "-1";
+				s = "";
 			} else {
 				s = str[i];
 			}
@@ -21,7 +21,7 @@ public class StringSplitUtil {
 	}
 
 	public static void main(String[] args) {
-		String[] ss = { "123", "1233", "1213", "1242" };
+		String[] ss = { "123", null, "1213", "1242" };
 		System.out.println(buildStrGroup(ss));
 	}
 }
