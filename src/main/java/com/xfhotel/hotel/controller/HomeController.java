@@ -94,9 +94,15 @@ public class HomeController {
 			Apartment apartment = new Apartment();
 			apartment.setLayout("2@2@1@1");
 			apartment.setType("单租型");
+			String fs = "";
 			apartment.setFeatures(null);
+			apartment.setPrice_scope("1");
 			Room room = new Room();
 			String content = "";
+			String subways[] = new String[]{"1"};
+			for(int i=0;i<subways.length;i++){
+				fs = fs + "@" + subways[i];
+			}
 			apartmentService.findApartment(content, apartment);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, rooms);
 		} catch (Exception e) {

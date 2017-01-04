@@ -86,6 +86,16 @@ public class ApartmentDAOImpl extends BaseDAOImpl<Apartment, Long>{
 		if( !apartment.getType().equals("全部") )
 			c.add(Restrictions.eq("type", apartment.getType()));
 		if(apartment.getFeatures()!=null){
+			String[] f = apartment.getFeatures();
+			for(int i=0;i<f.length;i++){
+				c.add(Restrictions.like("features", "%@"+i+"%"));
+			}
+		}
+		if(apartment.getPrice_scope()!=null){
+			c.add(Restrictions.eq("price_scope", apartment.getPrice_scope()));
+		}
+		if(apartment.getAddress()!=null){
+			c.add(Restrictions.like("address", "%"+apartment.getAddress()+"%"));
 		}
 		//c.add(Restrictions.eq("id", id));
 		//c.setFetchMode("rooms", FetchMode.JOIN).setFetchMode("facilities", FetchMode.JOIN)

@@ -1,5 +1,7 @@
 package com.xfhotel.hotel.service.impl;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import com.xfhotel.hotel.dao.impl.CustomerDetailsDAOImpl;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.support.PageResults;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -80,6 +83,13 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void logout() {
 		session.removeAttribute("c");
+	}
+
+	@Override
+	@Transactional
+	public PageResults<Customer> list(int page) {
+		// TODO Auto-generated method stub
+		return customerDAO.findPageByFetchedHql("from Customer", "select count(*) from Customer", page, 3, null);
 	}
 
 }

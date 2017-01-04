@@ -22,6 +22,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.xfhotel.hotel.common.Constants;
+
 @Entity
 @Table(name = "t_room")
 public class Room implements Serializable{
@@ -41,7 +43,8 @@ public class Room implements Serializable{
 	private String status;
 	
 	public String prices;//
-	
+	public String price_scope;
+
 	public String facilities; //
 
 	private double square;//
@@ -100,6 +103,13 @@ public class Room implements Serializable{
 
 	public void setPrices(String prices) {
 		this.prices = prices;
+		int tmp = Integer.valueOf(prices.split("@")[0]);
+		for(int i=0; i<Constants.price_scope.length;i++){
+			if(tmp<Constants.price_scope[i]){
+				this.price_scope=i+"";
+			}
+		}
+		this.price_scope=Constants.price_scope.length+"";
 	}
 
 	public double getSquare() {
@@ -135,7 +145,15 @@ public class Room implements Serializable{
 	}
 
 	public String[] getFacilities() {
-		return facilities.split("@");
+		return facilities.substring(1).split("@");
+	}
+
+	public String getPrice_scope() {
+		return price_scope;
+	}
+
+	public void setPrice_scope(String price_scope) {
+		this.price_scope = price_scope;
 	}
 
 	public void setFacilities(String[] facilities) {
@@ -145,8 +163,7 @@ public class Room implements Serializable{
 		}
 		String str="";
 		for (int i = 0; i < facilities.length; i++) {
-			if(i>0)
-				str = str + "@";
+			str = str + "@";
 			str = str + facilities[i];
 		}
 		this.facilities=str;

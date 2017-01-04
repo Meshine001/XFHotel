@@ -21,6 +21,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.xfhotel.hotel.common.Constants;
+
 @Entity
 @Table(name = "t_apartment")
 public class Apartment {
@@ -45,6 +47,7 @@ public class Apartment {
 	
 	
 	public String prices;//day@weekend@month@year
+	public String price_scope;
 	
 	private String apartmentType; //hotel or apartment
 	
@@ -71,6 +74,16 @@ public class Apartment {
 	}
 
 	
+	public String getPrice_scope() {
+		return price_scope;
+	}
+
+
+	public void setPrice_scope(String price_scope) {
+		this.price_scope = price_scope;
+	}
+
+
 	public long getId() {
 		return id;
 	}
@@ -112,7 +125,7 @@ public class Apartment {
 
 
 	public String[] getFacilities() {
-		return facilities.split("@");
+		return facilities.substring(1).split("@");
 	}
 
 
@@ -123,8 +136,7 @@ public class Apartment {
 		}
 		String str="";
 		for (int i = 0; i < facilities.length; i++) {
-			if(i>0)
-				str = str + "@";
+			str = str + "@";
 			str = str + facilities[i];
 		}
 		this.facilities=str;
@@ -158,6 +170,13 @@ public class Apartment {
 
 	public void setPrices(String prices) {
 		this.prices = prices;
+		int tmp = Integer.valueOf(prices.split("@")[0]);
+		for(int i=0; i<Constants.price_scope.length;i++){
+			if(tmp<Constants.price_scope[i]){
+				this.price_scope=i+"";
+			}
+		}
+		this.price_scope=Constants.price_scope.length+"";
 	}
 
 
@@ -328,6 +347,7 @@ public class Apartment {
 		map.put("rooms", rooms);
 		map.put("facilities", this.getFacilities());
 		map.put("features", this.getFeatures());
+		map.put("prices", prices.split("@"));
 		return map;
 	}
 

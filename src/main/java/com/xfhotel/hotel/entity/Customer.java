@@ -23,6 +23,7 @@ public class Customer {
 	private String tel;
 	private String password;
 	private int level;
+	private int status;
 	/**
 	 * 注册时间
 	 */
@@ -123,6 +124,16 @@ public class Customer {
 
 	public void setConsumptionCount(Float consumptionCount) {
 		this.consumptionCount = consumptionCount;
+	}
+
+
+	public int getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 

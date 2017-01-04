@@ -49,7 +49,6 @@ $(document).ready(function(){
 			alert("获取数据失败！");
 		},
 		success : function(data) {
-			console.log(data);
 			var map = new BMap.Map("map");
 			var geolocation = new BMap.Geolocation();
 			var point = new BMap.Point(data.longitude,data.latitude);

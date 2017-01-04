@@ -15,4 +15,6 @@ public class Constants {
 	public static final int MESSAGE_ERR_CODE = 0;
 	public static final int MESSAGE_SUCCESS_CODE = 1;
 	
+	public static final int price_scope[] = new int[]{800,1000,1500,2000};
+	
 }
