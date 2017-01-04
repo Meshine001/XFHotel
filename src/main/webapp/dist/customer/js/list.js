@@ -18,7 +18,7 @@ $(document).ready(function(){
 	
 	var show = function(data){
 		var listbox = $('.listbox');
-		
+		console.log(data);
 		$.each(data,function(index,room){
 			if(room.prices[0] == '-1'){// 还未设置价钱的房间不显示
 				return true;﻿
@@ -37,12 +37,12 @@ $(document).ready(function(){
 						apartment = a;
 					}
 				});
-				var imgUrl = './images/'+room.pics[0];
+				var imgUrl = './images/'+apartment.pic2[0];
 				var title = apartment.community+apartment.bedroom+'室'
-				+apartment.livingroom+'厅'
-				+'-'+room.direction+'卧-'+room.description;
+				+apartment.livingroom+'厅';
 				
-				var custom = '致青春';// 缺数据
+				
+				var customType = apartment.apartmenttype;
 				var floor = '第'+apartment.floor+'层/共'+apartment.totalfloor+'层';
 				var square = apartment.square+'平方';
 				var derection = apartment.direction;
@@ -51,8 +51,8 @@ $(document).ready(function(){
 				
 				var features = apartment.features;// 缺数据
 				
-				var price = room.prices[2];
-				var leasyType = '月';
+				var price = room.prices;
+				var leasyType = '日';
 				var oldPrice = '';
 				
 				
@@ -82,7 +82,7 @@ $(document).ready(function(){
 				var customUl = $('<ul></ul>').appendTo(customRow);
 				// custom
 			
-				$('<li>风格：</li>').append($('<span></span>').text(custom)).appendTo(customUl);
+				$('<li>类型：</li>').append($('<span></span>').text(customType)).appendTo(customUl);
 				
 				$('<li>'+'楼层：'+ '<span>'+floor+'</span> '+'面积：'+ '<span>'+square+'</span> '+'朝向：'+ '<span>'+derection+'</span>'+'</li>').appendTo(customUl);
 				

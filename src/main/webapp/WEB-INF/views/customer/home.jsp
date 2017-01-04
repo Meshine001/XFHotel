@@ -49,8 +49,8 @@
 			<nav class="navbar-collapse collapse" role="navigation">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="<%=basePath%>">首页</a></li>
-					<li><a href="<%=basePath%>/hotel">酒店型公寓</a></li>
-					<li><a href="<%=basePath%>/apartment">短租型公寓</a></li>
+					<li><a href="<%=basePath%>/list?type=酒店型公寓">酒店型公寓</a></li>
+					<li><a href="<%=basePath%>/list?type=休闲型公寓">休闲型公寓</a></li>
 					<li><a href="">青客生活</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right hidden-sm">

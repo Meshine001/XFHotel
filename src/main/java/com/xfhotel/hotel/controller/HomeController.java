@@ -62,27 +62,9 @@ public class HomeController {
 		return "/customer/home";
 	}
 	
-	@RequestMapping(value = "/map", method = RequestMethod.GET)
-	public String map() {
-
-		return "/customer/map";
-	}
-	
-	@RequestMapping(value = "/hotel", method = RequestMethod.GET)
-	public String hotle(){
-		session.setAttribute("searchType", "酒店型公寓");
-		return "redirect:/list";
-	}
-	
-	@RequestMapping(value = "/apartment", method = RequestMethod.GET)
-	public String apartment(){
-		session.setAttribute("searchType", "短租型公寓");
-		return "redirect:/list";
-	}
-
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public String list() {
+	public String list(String type) {
 		session.setAttribute("areas", Area.getAreas());
 		session.setAttribute("subways", Subway.getSubways());
 		session.setAttribute("leasePrices", LeasePrice.getPrices());
@@ -96,7 +78,11 @@ public class HomeController {
 		com.xfhotel.hotel.support.Feature.setFeatures(features);
 		session.setAttribute("features",com.xfhotel.hotel.support.Feature.getFeatures());
 		session.setAttribute("roomStatus", RoomStatus.getStatusArray());
-			
+		if(type.equals(Constants.TYPE_PLAY_ROOM)){
+			session.setAttribute("searchType", Constants.TYPE_PLAY_ROOM);
+		}else{
+			session.setAttribute("searchType", Constants.TYPE_HOTEL);
+		}
 		return "/customer/list";
 	}
 	

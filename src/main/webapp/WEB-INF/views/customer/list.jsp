@@ -16,7 +16,8 @@
 		<div class="col-md-12 column">
 			<ul class="breadcrumb">
 				<li>青舍首页</li>
-				<li class="active" id="search-type">${sessionScope.searchType}</li>
+					<li class="active">查找公寓</li>
+				<li class="active" id="search-type" style="display: none;">${sessionScope.searchType}</li>
 			</ul>
 			<div class="row clearfix">
 				<div class="col-md-12 column">

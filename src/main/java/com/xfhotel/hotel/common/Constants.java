@@ -17,4 +17,7 @@ public class Constants {
 	
 	public static final Long EFFECTIVE_ORDER_TIME_DURING = 1000*60*30L;
 	
+	public static final String TYPE_HOTEL = "酒店型公寓";
+	public static final String TYPE_PLAY_ROOM = "休闲型公寓";
+	
 }
