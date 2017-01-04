@@ -42,24 +42,10 @@ public class Apartment {
 	public List<Room> rooms; //
 
 	public String facilities; //
-	public String features;//label for apartment
-	
-	
-	
-	public String prices;//day@weekend@month@year
-	public String price_scope;
-	
-	private String apartmentType; //hotel or apartment
-	
-	private String type; //together,sigle
-	
-	private String address;//address : cell : num_building
-	
-	private String floor;//current floor : total floor
-	
 	public String features;// label for apartment
 
 	public String prices;// day@weekend@month@year
+	public String price_scope;
 
 	private String apartmentType; // hotel or apartment
 
@@ -87,16 +73,13 @@ public class Apartment {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public String getPrice_scope() {
 		return price_scope;
 	}
 
-
 	public void setPrice_scope(String price_scope) {
 		this.price_scope = price_scope;
 	}
-
 
 	public Long getCreateTime() {
 		return createTime;
@@ -182,12 +165,12 @@ public class Apartment {
 	public void setPrices(String prices) {
 		this.prices = prices;
 		int tmp = Integer.valueOf(prices.split("@")[0]);
-		for(int i=0; i<Constants.price_scope.length;i++){
-			if(tmp<Constants.price_scope[i]){
-				this.price_scope=i+"";
+		for (int i = 0; i < Constants.price_scope.length; i++) {
+			if (tmp < Constants.price_scope[i]) {
+				this.price_scope = i + "";
 			}
 		}
-		this.price_scope=Constants.price_scope.length+"";
+		this.price_scope = Constants.price_scope.length + "";
 	}
 
 	public String getApartmentType() {

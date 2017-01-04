@@ -8,7 +8,6 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,8 +41,6 @@ public class AdminController {
 	@Autowired
 	CustomerService customerService;
 	
-	@RequestMapping(value="",method = RequestMethod.GET)
-	public String homePage(){
 
 	@Autowired
 	FeatureService featureService;
