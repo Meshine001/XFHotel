@@ -19,7 +19,7 @@ import com.xfhotel.hotel.common.Constants;
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	private String tel;
 	private String password;
 	private int level;
@@ -56,10 +56,10 @@ public class Customer {
 	}
 
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getTel() {

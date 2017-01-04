@@ -20,6 +20,7 @@
 			<tr>
 				<th>编号</th>
 				<th>类型</th>
+				<th>状态</th>
 				<th>地址</th>
 				<th>位置</th>
 				<th>小区</th>
@@ -35,6 +36,7 @@
 				<tr>
 					<td>${apartment.id}</td>
 					<td>${apartment.apartmenttype}</td>
+					<td>${apartment.rooms[0].status}</td>
 					<td>${apartment.location}</td>
 					<td>${apartment.address}</td>
 					<td>${apartment.community}</td>
@@ -43,7 +45,7 @@
 					<td>${apartment.direction}</td>
 					<td>${apartment.square}</td>
 					<th><a
-						href="<%=basePath %>/admin/apartment/edit?apartmentid=${apartment.id}">编辑详情</a>&nbsp;&nbsp;<a>删除</a></th>
+						href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a>&nbsp;&nbsp;<a>删除</a></th>
 				</tr>
 			</c:forEach>
 		</tbody>

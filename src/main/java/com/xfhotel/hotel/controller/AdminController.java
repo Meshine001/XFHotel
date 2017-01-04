@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.CustomerService;
@@ -71,7 +72,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public String orderPage() {
-		List<Order> list = orderservice.list(Order.TYPE_HOTEL);
+		List<Order> list = orderservice.list(Apartment.TYPE_HOTEL);
 		List<Map> orders = new ArrayList<Map>();
 		for (Order o : list) {
 			orders.add(o.toMap());

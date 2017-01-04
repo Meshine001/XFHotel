@@ -26,6 +26,12 @@ import com.xfhotel.hotel.common.Constants;
 @Entity
 @Table(name = "t_apartment")
 public class Apartment {
+	
+	public final static int TYPE_ALL = 0;
+	public final static int TYPE_HOTEL = 1;
+	public final static int TYPE_APARTMENT = 2;
+	public final static int TYPE_PLAY_ROOM = 3;
+
 	// Position
 	// facilities
 	// map
@@ -133,8 +139,6 @@ public class Apartment {
 		String str = "";
 		for (int i = 0; i < facilities.length; i++) {
 			str = str + "@";
-			if (i > 0)
-				str = str + "@";
 			str = str + facilities[i];
 		}
 		this.facilities = str;

@@ -17,18 +17,15 @@
 			<ul class="breadcrumb">
 				<li>青舍首页</li>
 				<li id="search-type">${sessionScope.searchType}</li>
-				<li class="active">${apartment.community}-${apartment.capacity }居室-${room.direction}-${room.description}</li>
+				<li class="active">${apartment.community}-${apartment.capacity }居室</li>
 			</ul>
 			<div class="row clearfix">
 				<div class="col-md-8 column">
 					<div class="row clearfix">
 						<div class="col-md-12 column">
-							<h3>${apartment.community}-${apartment.capacity }居室-${room.direction}-${room.description}</h3>
+							<h3>${apartment.community}-${apartment.capacity }居室</h3>
 							<p>${apartment.address}</p>
 							<ul id="gallery">
-								<c:forEach items="${room.pics}" var="pic">
-									<li><img src="../images/${pic}" /></li>
-								</c:forEach>
 								<c:forEach items="${apartment.pic2}" var="pic">
 									<li><img src="../images/${pic}" /></li>
 								</c:forEach>
@@ -41,12 +38,23 @@
 					</div>
 					<div class="row clearfix">
 						<div class="col-md-12 column">
-							<h3>房间基本情况.</h3>
-							<c:forEach items="${room.facilityEntity}" var="f">
+							<h3>公共设施</h3>
+							<p>${apartment.description}</p>
+							<c:forEach items="${apartment.facilityEntity}" var="f">
 								<span class="label label-warning">${f.description}</span>
 							</c:forEach>
+
+							<p>${apartment.descriptionAround}</p>
+
 						</div>
 					</div>
+					<div class="row clearfix">
+						<div class="col-md-12 column">
+							<h3>房间基本情况.</h3>
+							<p>${room.descriptionPersonal}</p>
+						</div>
+					</div>
+					<!--  
 					<div class="row clearfix paymethod">
 						<div class="col-md-12 column">
 							<h3>付款方式</h3>
@@ -124,18 +132,8 @@
 							</table>
 						</div>
 					</div>
-					<div class="row clearfix">
-						<div class="col-md-12 column">
-							<h3>公共设施</h3>
-							<p>${apartment.description}</p>
-							<c:forEach items="${apartment.facilityEntity}" var="f">
-								<span class="label label-warning">${f.description}</span>
-							</c:forEach>
+					 -->
 
-							<p style="display: none;">
-								温馨舒适，品牌家电，免费无线，单周保洁，合理布局，特制装修风格，品质家具，你想要的，魔飞应有尽有，让你享尽家的温暖。</p>
-						</div>
-					</div>
 
 					<div class="row clearfix">
 						<div class="col-md-12 column">
@@ -193,7 +191,8 @@
 								<li><strong>编号</strong> <span>${room.id}</span></li>
 								<li><strong>楼层</strong> <span>第${apartment.floor}层/共${apartment.totalfloor}层</span>
 								</li>
-								<li><strong>卧室</strong> <span>${room.type}</span></li>
+								<li><strong>单元</strong> <span>${apartment.num_unit}</span></li>
+								<li><strong>房间</strong> <span>${apartment.num_door}</span></li>
 								<li><strong>面积</strong> <span>${room.square}㎡</span></li>
 								<li><strong>朝向</strong> <span>${room.direction}</span></li>
 								<li><strong>可住</strong> <span>${room.capacity}人</span></li>
@@ -262,23 +261,30 @@
 											<div class="row">
 												<div class="col-md-12">
 													<form action="../order/add" method="post" id="order-form">
-													<input type="hidden" name="cusId" value="${c.id}" id="cusId">
-													<input type="hidden" name = "roomId" value="${room.id}">
-													<input type="hidden" name = "apartmentId" value="${room.apartment}">
-													<input type="hidden" name="type" value="0">
+														<input type="hidden" name="cusId" value="${c.id}"
+															id="cusId"> <input type="hidden" name="roomId"
+															value="${room.id}"> <input type="hidden"
+															name="apartmentId" value="${room.apartment}"> <input
+															type="hidden" name="type" value="1">
 														<ul>
 															<li><span>入离时间</span><span><input type="date"
 																	class="order-date" id="order-start" name="startTime"></span>至<span><input
-																	type="date" class="order-date" id="order-end" name="endTime"></span>共<span
-																id="order-total-day">0</span>晚<a class="btn">修改时间</a></li>
+																	type="date" class="order-date" id="order-end"
+																	name="endTime"></span>共<span id="order-total-day">0</span>晚<a
+																class="btn">修改时间</a></li>
 															<li><span>房费</span><span><small>￥</small><span
 																	id="order-price">${room.prices[0]}</span></span><span></span></li>
-															<li><span>住客姓名</span><span><input type="text" name="cusName"></span></li>
-															<li><span>身份证</span><input type="text" name="cusIdCard"></li>
-															<li><span>联系手机</span><input type="text" name="cusTel"></li>
-															<li><span>个人需求</span><input type="text" name="cusPersonal"></li>
+															<li><span>住客姓名</span><span><input type="text"
+																	name="cusName"></span></li>
+															<li><span>身份证</span><input type="text"
+																name="cusIdCard"></li>
+															<li><span>联系手机</span><input type="text"
+																name="cusTel"></li>
+															<li><span>个人需求</span><input type="text"
+																name="cusPersonal"></li>
 															<li><span>发票</span><span><input
 																	type="checkbox" name="needFapiao">是否需要发票</span></li>
+																	<li><a>入住须知</a></li>
 														</ul>
 														<span>订单总额￥</span><span id="order-total-price">0.00</span>
 													</form>

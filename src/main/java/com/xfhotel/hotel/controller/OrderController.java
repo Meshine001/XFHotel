@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
+import com.xfhotel.hotel.support.Message;
 
 @Controller
 @RequestMapping("/order")
@@ -40,6 +42,26 @@ public class OrderController {
 		session.setAttribute("order", order.toMap());
 		return "customer/order";
 	}
+	
+	@RequestMapping(value = "/payOver/{id}", method = RequestMethod.GET)
+	public String payOver(@PathVariable("id")Long id,int status){
+		Order order = orderservice.get(id);
+		if(status == Order.STATUS_TIME_OUT){
+			order.setStatus(status);
+			session.setAttribute("err", "支付超时");
+			return "/customer/err";
+		}
+		order.setStatus(status);
+		orderservice.update(order);
+		
+		Room room = roomService.findById(order.getRoomId());
+		room.setStatus(Room.STATUS_LEASED);
+		roomService.update(room);
+		
+		return "/customer/success";
+	}
+	
+	
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(Long cusId, Long roomId, Long apartmentId, String cusName, String cusTel, String cusPersonal,
@@ -48,13 +70,17 @@ public class OrderController {
 		try {
 			
 			Room room = roomService.findById(roomId);
+			if(room.getStatus() == Room.STATUS_LEASED || room.getStatus() == Room.STATUS_ON_PAY ){
+				session.setAttribute("err", "房间已租出");
+				return "/customer/err";
+			}
+			
 			Map roomInfo = roomService.getRoomInfo(roomId);
 			Map apartmentInfo = apartmentService.getApartmentInfo(apartmentId);
 
 			StringBuffer sb = new StringBuffer();
 			sb.append(apartmentInfo.get("community") + " ");
 			sb.append(apartmentInfo.get("floor") + "/" + apartmentInfo.get("totalfloor") + " ");
-			sb.append(roomInfo.get("description"));
 
 			order = new Order();
 			order.setCusId(cusId);
@@ -76,7 +102,7 @@ public class OrderController {
 			order.setTotalDay(days);
 			String[] prices = (String[]) roomInfo.get("prices");
 			order.setPrice(prices[0]);
-			if (type == Order.TYPE_HOTEL) {
+			if (type == Apartment.TYPE_HOTEL) {
 				Double p = Double.valueOf(prices[0]);
 				Double totalPrice = p * days;
 				order.setTotalPrice(String.valueOf(totalPrice));
@@ -92,7 +118,9 @@ public class OrderController {
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
+			session.setAttribute("err", "无法生成订单");
+			return "/customer/err";
 		}
 
 		return "redirect:/order/pay/" + order.getId();

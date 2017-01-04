@@ -23,8 +23,7 @@ public class Order {
 	public final static int STATUS_CANCEL = 3;
 	public final static int STATUS_TIME_OUT = 4;
 
-	public final static int TYPE_HOTEL = 0;
-	public final static int TYPE_APARTMENT = 1;
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
