@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.FacilityDAO;
+import com.xfhotel.hotel.dao.impl.FacilityDAOImpl;
 import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.service.FacilityService;
 
@@ -14,7 +15,7 @@ import com.xfhotel.hotel.service.FacilityService;
 public class FacilityServiceImpl implements FacilityService {
 
 	@Autowired
-	FacilityDAO facilityDAO;
+	FacilityDAOImpl facilityDAO;
 	
 	@Override
 	@Transactional
@@ -27,7 +28,17 @@ public class FacilityServiceImpl implements FacilityService {
 	@Transactional
 	public Facility findById(Long id) {
 		// TODO Auto-generated method stub
-		return facilityDAO.findById(id);
+		return facilityDAO.get(id);
+	}
+	@Transactional
+	@Override
+	public void add(Facility f) {
+		facilityDAO.saveOrUpdate(f);
+	}
+	@Transactional
+	@Override
+	public void delete(Facility f) {
+		facilityDAO.delete(f);
 	}
 
 }

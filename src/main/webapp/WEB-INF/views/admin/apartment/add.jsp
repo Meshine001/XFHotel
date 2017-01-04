@@ -56,6 +56,13 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-md-3 control-label">单元号</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder=""
+									name="num_unit">
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-md-3 control-label">楼层</label>
 							<div class="col-md-3">
 								<div class="input-group">
@@ -70,6 +77,13 @@
 										class="form-control" placeholder="" name="totalfloor">
 									<span class="input-group-addon">层</span>
 								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">门牌号</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder=""
+									name="num_door">
 							</div>
 						</div>
 
@@ -89,13 +103,6 @@
 									<input type="text" class="form-control" placeholder=""
 										name="square"><span class="input-group-addon">m<sup>2</sup></span>
 								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">可住人数</label>
-							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="capacity">
 							</div>
 						</div>
 
@@ -127,6 +134,38 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-md-3 control-label">可住几人</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder=""
+									name="capacity">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">户型图</label>
+							<div class="col-md-9">
+								<ul>
+									<li><input type="hidden" name="pic1" id="pic1-1-input">
+										<img alt="" src="" class="img-thumbnail" width="120px"
+										height="80px" id="pic1-1-img"><span
+										class="badge badge-info badge-icon upload-image" id="pic1-1"><i
+											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
+								</ul>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">周边环境</label>
+							<div class="col-md-9">
+								<textarea name="descriptionAround" rows="3" class="form-control"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">个性描述</label>
+							<div class="col-md-9">
+								<textarea name="descriptionPersonal" rows="3"
+									class="form-control"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-md-3 control-label">特色</label>
 
 							<div class="col-md-9">
@@ -140,67 +179,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">备注</label>
-							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="description">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">户型图</label>
-							<!-- Button trigger modal -->
-							<div class="col-md-9">
-								<input type="file" class="btn btn-primary btn-lg"
-									id="layout-image-input" name="file" />
-							</div>
-							<div class="col-md-9">
-								<div class="col-md-3">
-									<img id="layout-image" alt="" src="" class="img-thumbnail">
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">客厅图</label>
-							<!-- Button trigger modal -->
-							<div class="col-md-9">
-								<input type="file" class="btn btn-primary btn-lg" name="file" />
-								<input type="file" class="btn btn-primary btn-lg" name="file" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">餐厅图</label>
-							<!-- Button trigger modal -->
-							<div class="col-md-9">
-								<input type="file" class="btn btn-primary btn-lg" name="file" />
-								<input type="file" class="btn btn-primary btn-lg" name="file" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">厨房图</label>
-							<!-- Button trigger modal -->
-							<div class="col-md-9">
-								<input type="file" class="btn btn-primary btn-lg" name="file" />
-								<input type="file" class="btn btn-primary btn-lg" name="file" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">卫生间图</label>
-							<!-- Button trigger modal -->
-							<div class="col-md-9">
-								<input type="file" class="btn btn-primary btn-lg" name="file" />
-								<input type="file" class="btn btn-primary btn-lg" name="file" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">小区实景图</label>
-							<!-- Button trigger modal -->
-							<div class="col-md-9">
-								<input type="file" class="btn btn-primary btn-lg" name="file" />
-								<input type="file" class="btn btn-primary btn-lg" name="file" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">设施</label>
+							<label class="col-md-3 control-label">配套设施</label>
 							<div class="col-md-9">
 								<c:forEach items="${l_facility}" var="facility" varStatus="p">
 									<div class="checkbox checkbox-inline">
@@ -211,49 +190,85 @@
 								</c:forEach>
 							</div>
 						</div>
+
 						<div class="form-group">
-							<label class="col-md-3 control-label">可租房间数</label>
+							<label class="col-md-3 control-label">图片展示</label>
+							<!-- Button trigger modal -->
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="num_room">
+								<ul>
+									<li><input type="hidden" name="pic2" id="pic2-1-input">
+										<img alt="" src="" class="img-thumbnail" width="120px"
+										height="80px" id="pic2-1-img"><span
+										class="badge badge-info badge-icon upload-image" id="pic2-1"><i
+											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
+									<li><input type="hidden" name="pic2" id="pic2-2-input">
+										<img alt="" src="" class="img-thumbnail" width="120px"
+										height="80px" id="pic2-2-img"><span
+										class="badge badge-info badge-icon upload-image" id="pic2-2"><i
+											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
+									<li><input type="hidden" name="pic2" id="pic2-3-input">
+										<img alt="" src="" class="img-thumbnail" width="120px"
+										height="80px" id="pic2-3-img"><span
+										class="badge badge-info badge-icon upload-image" id="pic2-3"><i
+											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
+									<li><input type="hidden" name="pic2" id="pic2-4-input">
+										<img alt="" src="" class="img-thumbnail" width="120px"
+										height="80px" id="pic2-4-img"><span
+										class="badge badge-info badge-icon upload-image" id="pic2-4"><i
+											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
+									<li><input type="hidden" name="pic2" id="pic2-5-input">
+										<img alt="" src="" class="img-thumbnail" width="120px"
+										height="80px" id="pic2-5-img"><span
+										class="badge badge-info badge-icon upload-image" id="pic2-5"><i
+											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
+								</ul>
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">小区图片</label>
+							<!-- Button trigger modal -->
+							<div class="col-md-9">
+								<ul>
+									<li><input type="hidden" name="pic3" id="pic3-1-input">
+										<img alt="" src="" class="img-thumbnail" width="120px"
+										height="80px" id="pic3-1-img"><span
+										class="badge badge-info badge-icon upload-image" id="pic3-1"><i
+											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
+									<li><input type="hidden" name="pic3" id="pic3-2-input">
+										<img alt="" src="" class="img-thumbnail" width="120px"
+										height="80px" id="pic3-2-img"><span
+										class="badge badge-info badge-icon upload-image" id="pic3-2"><i
+											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
+									<li><input type="hidden" name="pic3" id="pic3-3-input">
+										<img alt="" src="" class="img-thumbnail" width="120px"
+										height="80px" id="pic3-3-img"><span
+										class="badge badge-info badge-icon upload-image" id="pic3-3"><i
+											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
+								</ul>
+							</div>
+						</div>
+
 						<div class="form-group">
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
 								<select name="apartmenttype" id="apartment-type">
-									<option value="-1" selected="selected">请选择</option>
-									<option value="酒店型">酒店型</option>
-									<option value="短租型">短租型</option>
-								</select> <select name="type" id="lease-type">
-									<option value="-1">请选择</option>
-									<option value="单租型">单租型</option>
-									<option value="合租型">合租型</option>
+									<c:forEach items="${l_apartmenttype}" var="type">
+										<option value="${type}">${type}</option>
+									</c:forEach>
 								</select>
+
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">价格</label>
-							<div id="lease-price" class="col-md-9">
-								<div class="input-group day">
-									<span class="input-group-addon">天</span> <input type="text"
-										name="prices" class="price-day"> <span
-										class="input-group-addon">元</span>
+							<div class="col-md-9">
+								<div class="input-group">
+									<input type="text" name="dayPrice" class="price-day"> <span
+										class="input-group-addon">元/天</span>
 								</div>
-								<div class="input-group week">
-									<span class="input-group-addon">周</span> <input type="text"
-										name="prices" class="price-week"> <span
-										class="input-group-addon">元</span>
-								</div>
-								<div class="input-group month">
-									<span class="input-group-addon">月</span> <input type="text"
-										name="prices" class="price-month"> <span
-										class="input-group-addon">元</span>
-								</div>
-								<div class="input-group year">
-									<span class="input-group-addon">年</span> <input type="text"
-										name="prices" class="price-year"> <span
-										class="input-group-addon">元</span>
+								<div class="input-group" style="display: none;">
+									<input type="text" name="hourPrice" class="price-hour">
+									<span class="input-group-addon">元/小时</span>
 								</div>
 							</div>
 						</div>
@@ -275,34 +290,60 @@
 		<div class="col-md-6">
 			<div id="map" style="width: 500px; height: 500px"></div>
 		</div>
-	</div>
-	<!-- 模态框（Modal） -->
-	<div class="modal fade" id="feature-modal" tabindex="-1" role="dialog"
-		aria-labelledby="feature-modal-label" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="feature-modal-lael">特色编辑</h4>
-				</div>
-				<div class="modal-body">
-					<ul id="features-li">
+		<script
+			src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
+			type="text/javascript"></script>
+		<script type="text/javascript">
+			// ===============================
+			// 百度地图
+			var map = new BMap.Map("map");
+			var geolocation = new BMap.Geolocation();
+			var point = new BMap.Point(116.331398, 39.897445);
+			map.centerAndZoom(point, 12);
+			map.enableScrollWheelZoom(true);
+			var marker = new BMap.Marker(point);
+			marker.setPosition(map.getCenter());
+			map.addOverlay(marker);
+			geolocation.getCurrentPosition(function(r) {
+				if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+					map.panTo(r.point);
+					marker.setPosition(map.getCenter());
+					getaddress(r.point.lng, r.point.lat);
+				} else {
+					alert("定位失败！");
+				}
+			}, {
+				enableHighAccuracy : true
+			});
+			map.addEventListener('ondragging', function() {
+				marker.setPosition(map.getCenter());
+			});
+			map.addEventListener("dragend", function showInfo() {
+				var cp = map.getCenter();
+				getaddress(cp.lng, cp.lat);
+			});
 
-					</ul>
-					<form action="" id="add-feature-form">
-						<input type="text" name="description">
-						<button type="button" id="add-feature">添加</button>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary">提交更改</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal -->
+			function getaddress(lng, lat) {
+				var pt = new BMap.Point(lng, lat);
+				var geoc = new BMap.Geocoder();
+				geoc.getLocation(pt,
+						function(rs) {
+							var addComp = rs.addressComponents;
+							$('#location_info').val(
+									addComp.province + ", " + addComp.city
+											+ ", " + addComp.district + ", "
+											+ addComp.street);
+							$('#lng').val(lng);
+							$('#lat').val(lat);
+						});
+			}
+		</script>
+		<!-- 上传图片 -->
+		<form action="" id="upload-image-form">
+			<input type="file" id="upload-image-input" name="file"
+				style="display: none;">
+		</form>
+
 	</div>
 	<script
 		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"

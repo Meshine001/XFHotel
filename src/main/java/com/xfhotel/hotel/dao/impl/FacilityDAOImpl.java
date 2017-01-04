@@ -12,7 +12,7 @@ import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Facility;
 
 @Repository
-public class FacilityDAOImpl implements FacilityDAO {
+public class FacilityDAOImpl extends BaseDAOImpl<Facility, Long> implements FacilityDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;

@@ -12,31 +12,31 @@ $(document).ready(function(){
 	
 	hidePrices();
 	
-	$('#apartment-type').change(
-			function() {
-				hidePrices();
-				var op = $(this).children('option:selected').val();
-				if (op != -1) {
-					if(op == '酒店型'){
-						$('#lease-type').hide();
-					}else{
-						$('#lease-type').show();
-					}
-				}
-	});
-
-	$('#lease-type').change(function() {
-		hidePrices();
-		var op = $(this).children('option:selected').val();
-		if(op != -1){
-			if(op != '合租型'){
-				$('.month').show();
-				$('.year').show();
-			}
-		}
-		
-	});
-	
+//	$('#apartment-type').change(
+//			function() {
+//				hidePrices();
+//				var op = $(this).children('option:selected').val();
+//				if (op != -1) {
+//					if(op == '酒店型'){
+//						$('#lease-type').hide();
+//					}else{
+//						$('#lease-type').show();
+//					}
+//				}
+//	});
+//
+//	$('#lease-type').change(function() {
+//		hidePrices();
+//		var op = $(this).children('option:selected').val();
+//		if(op != -1){
+//			if(op != '合租型'){
+//				$('.month').show();
+//				$('.year').show();
+//			}
+//		}
+//		
+//	});
+//	
 	
 	$.ajax({
 		async : false,

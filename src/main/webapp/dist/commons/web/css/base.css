@@ -1,0 +1,27 @@
+div {
+	display: block;
+}
+
+section, article, aside, header, footer, nav, dialog, figure {
+	display: block;
+}
+
+ul, li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #333333;
+}
+
+footer {
+	background: #f4f4f5;
+	display: block;
+	overflow: hidden;
+}
+
+footer .main {
+	margin: 0 auto;
+	width: 1200px;
+}

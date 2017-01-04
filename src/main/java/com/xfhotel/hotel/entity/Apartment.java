@@ -1,4 +1,4 @@
-package com.xfhotel.hotel.entity;
+﻿package com.xfhotel.hotel.entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,21 +26,21 @@ import com.xfhotel.hotel.common.Constants;
 @Entity
 @Table(name = "t_apartment")
 public class Apartment {
-	//Position
-	//facilities
-	//map
+	// Position
+	// facilities
+	// map
 	@Id
-	@GeneratedValue(generator="apartmentgenerator")
-	@GenericGenerator(name="apartmentgenerator",strategy="increment")
+	@GeneratedValue(generator = "apartmentgenerator")
+	@GenericGenerator(name = "apartmentgenerator", strategy = "increment")
 	private long id;
-	//coordinate  鍦板潃缁忕含搴�
-	private double latitude; //for map
+	// coordinate 鍦板潃缁忕含搴�
+	private double latitude; // for map
 	private double longitude;
-	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="apartment_id")
-	public Set<Room> rooms; //
-	
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "apartment_id")
+	public List<Room> rooms; //
+
 	public String facilities; //
 	public String features;//label for apartment
 	
@@ -57,18 +57,32 @@ public class Apartment {
 	
 	private String floor;//current floor : total floor
 	
-	private String direction;//
-	private double square;//square for apartment
-	private String capacity;//num of people
-	private String layout;// bedroom : livingroom : bathroom : balcony
-	
-	private String description;//enviroment,transportation,etc.
+	public String features;// label for apartment
 
-	private String pic1;//layoutPic
-	private String pic2;//ke ting, can ting
-	private String pic3;//bathroom chufang
-	private String pic4;//xiao qu
-	
+	public String prices;// day@weekend@month@year
+
+	private String apartmentType; // hotel or apartment
+
+	private String type; // together,sigle
+
+	private String address;// address : cell : num_building
+
+	private String floor;// current floor : total floor
+
+	private String direction;//
+	private double square;// square for apartment
+	private String capacity;// num of people
+	private String layout;// bedroom : livingroom : bathroom : balcony
+
+	private String description;// enviroment,transportation,etc.
+
+	private String pic1;// layoutPic
+	private String pic2;// ke ting, can ting
+	private String pic3;// bathroom chufang
+	private String pic4;// xiao qu
+
+	private Long createTime;
+
 	public Apartment() {
 		// TODO Auto-generated constructor stub
 	}
@@ -84,89 +98,86 @@ public class Apartment {
 	}
 
 
+	public Long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Long createTime) {
+		this.createTime = createTime;
+	}
+
 	public long getId() {
 		return id;
 	}
-
 
 	public void setId(long id) {
 		this.id = id;
 	}
 
-
 	public double getLatitude() {
 		return latitude;
 	}
-
 
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
-
 	public double getLongitude() {
 		return longitude;
 	}
-
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 
-
-	public Set<Room> getRooms() {
+	public List<Room> getRooms() {
 		return rooms;
 	}
 
-
-	public void setRooms(Set<Room> rooms) {
+	public void setRooms(List<Room> rooms) {
 		this.rooms = rooms;
 	}
-
 
 	public String[] getFacilities() {
 		return facilities.substring(1).split("@");
 	}
 
-
 	public void setFacilities(String[] facilities) {
-		if(facilities==null){
-			this.facilities="";
+		if (facilities == null) {
+			this.facilities = "";
 			return;
 		}
-		String str="";
+		String str = "";
 		for (int i = 0; i < facilities.length; i++) {
 			str = str + "@";
+			if (i > 0)
+				str = str + "@";
 			str = str + facilities[i];
 		}
-		this.facilities=str;
+		this.facilities = str;
 	}
-
 
 	public String[] getFeatures() {
 		return features.split("@");
 	}
 
-
 	public void setFeatures(String features[]) {
-		if(features==null){
-			this.features="";
+		if (features == null) {
+			this.features = "";
 			return;
 		}
-		String str="";
+		String str = "";
 		for (int i = 0; i < features.length; i++) {
-			if(i>0)
+			if (i > 0)
 				str = str + "@";
 			str = str + features[i];
 		}
 		this.features = str;
 	}
 
-
 	public String getPrices() {
 		return prices;
 	}
-
 
 	public void setPrices(String prices) {
 		this.prices = prices;
@@ -179,168 +190,142 @@ public class Apartment {
 		this.price_scope=Constants.price_scope.length+"";
 	}
 
-
 	public String getApartmentType() {
 		return apartmentType;
 	}
-
 
 	public void setApartmentType(String apartmentType) {
 		this.apartmentType = apartmentType;
 	}
 
-
 	public String getType() {
 		return type;
 	}
-
 
 	public void setType(String type) {
 		this.type = type;
 	}
 
-
 	public String getAddress() {
 		return address;
 	}
-
 
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
-
 	public String getFloor() {
 		return floor;
 	}
-
 
 	public void setFloor(String floor) {
 		this.floor = floor;
 	}
 
-
 	public String getDirection() {
 		return direction;
 	}
-
 
 	public void setDirection(String direction) {
 		this.direction = direction;
 	}
 
-
 	public double getSquare() {
 		return square;
 	}
-
 
 	public void setSquare(double square) {
 		this.square = square;
 	}
 
-
 	public String getCapacity() {
 		return capacity;
 	}
-
 
 	public void setCapacity(String capacity) {
 		this.capacity = capacity;
 	}
 
-
 	public String getLayout() {
 		return layout;
 	}
-
 
 	public void setLayout(String layout) {
 		this.layout = layout;
 	}
 
-
 	public String getDescription() {
 		return description;
 	}
-
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
-
-
 	public String getPic1() {
 		return pic1;
 	}
-
 
 	public void setPic1(String pic1) {
 		this.pic1 = pic1;
 	}
 
-
 	public String getPic2() {
 		return pic2;
 	}
-
 
 	public void setPic2(String pic2) {
 		this.pic2 = pic2;
 	}
 
-
 	public String getPic3() {
 		return pic3;
 	}
-
 
 	public void setPic3(String pic3) {
 		this.pic3 = pic3;
 	}
 
-
 	public String getPic4() {
 		return pic4;
 	}
-
 
 	public void setPic4(String pic4) {
 		this.pic4 = pic4;
 	}
 
-
-	public Map toMap(){
+	public Map toMap() {
 		Map map = new HashMap();
-		map.put("id",this.getId());
-		map.put("latitude",this.getLatitude());
-		map.put("longitude",this.getLongitude());
+		map.put("id", this.getId());
+		map.put("latitude", this.getLatitude());
+		map.put("longitude", this.getLongitude());
 		map.put("apartmenttype", apartmentType);
-		map.put("type",this.getType());
-		map.put("address",this.getAddress().split("@")[0]);
-		map.put("community",this.getAddress().split("@")[1]);
-		map.put("num_building",this.getAddress().split("@")[2]);
-		map.put("location",this.getAddress().split("@")[3]);
-		map.put("floor",this.getFloor().split("@")[0]);
-		map.put("totalfloor",this.getFloor().split("@")[1]);
-		map.put("direction",this.getDirection());
-		map.put("square",this.getSquare());
-		map.put("capacity",this.getCapacity());
-		map.put("bedroom",this.getLayout().split("@")[0]);
-		map.put("livingroom",this.getLayout().split("@")[1]);
-		map.put("bathroom",this.getLayout().split("@")[2]);
-		map.put("balcony",this.getLayout().split("@")[3]);
-		map.put("description",this.getDescription());
+		map.put("type", this.getType());
+		map.put("address", this.getAddress().split("@")[0]);
+		map.put("community", this.getAddress().split("@")[1]);
+		map.put("num_building", this.getAddress().split("@")[2]);
+		map.put("location", this.getAddress().split("@")[3]);
+		map.put("floor", this.getFloor().split("@")[0]);
+		map.put("totalfloor", this.getFloor().split("@")[1]);
+		map.put("num_unit", floor.split("@")[2]);
+		map.put("num_door", floor.split("@")[3]);
+		map.put("direction", this.getDirection());
+		map.put("square", this.getSquare());
+		map.put("capacity", this.getCapacity());
+		map.put("bedroom", this.getLayout().split("@")[0]);
+		map.put("livingroom", this.getLayout().split("@")[1]);
+		map.put("bathroom", this.getLayout().split("@")[2]);
+		map.put("balcony", this.getLayout().split("@")[3]);
+		map.put("descriptionAround", this.getDescription());
 		map.put("pic1", pic1);
 		map.put("pic2", pic2.split("@"));
 		map.put("pic3", pic3.split("@"));
 		map.put("pic4", pic4.split("@"));
-		
+		map.put("dayPrice", prices);
+
 		ArrayList rooms = new ArrayList();
 		Iterator itr = this.getRooms().iterator();
-		while(itr.hasNext()){
+		while (itr.hasNext()) {
 			Room r = (Room) itr.next();
 			rooms.add(r.toMap());
 		}

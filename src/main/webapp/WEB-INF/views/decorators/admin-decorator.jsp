@@ -46,11 +46,30 @@
 							<div class="title">控制面板</div>
 					</a></li>
 
-					<li><a href="<%=basePath%>/admin/apartment/init">
+					<li><a href="<%=basePath%>/admin/apartment">
 							<div class="icon">
 								<i class="fa fa-bed" aria-hidden="true"></i>
 							</div>
-							<div class="title">添加房源</div>
+							<div class="title">房源管理</div>
+					</a></li>
+
+					<li><a href="<%=basePath%>/admin/order">
+							<div class="icon">
+								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+							</div>
+							<div class="title">订单管理</div>
+					</a></li>
+					<li><a href="<%=basePath%>/admin/customer">
+							<div class="icon">
+								<i class="fa fa-users" aria-hidden="true"></i>
+							</div>
+							<div class="title">用户管理</div>
+					</a></li>
+					<li><a href="<%=basePath%>/admin/system">
+							<div class="icon">
+								<i class="fa fa-cog" aria-hidden="true"></i>
+							</div>
+							<div class="title">系统设置</div>
 					</a></li>
 
 				</ul>

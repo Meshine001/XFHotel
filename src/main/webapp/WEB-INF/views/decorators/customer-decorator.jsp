@@ -27,6 +27,9 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/customer/css/crop-avatar.css" />
+	
+<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
+<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
@@ -46,7 +49,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">青舍都市公寓</a>
+				<a class="navbar-brand" href="../">青舍都市公寓</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -68,7 +71,8 @@
 						href="<%=basePath%>/customer/reservation">我的预约</a></li>
 					<li><a href="#">我的订单</a></li>
 					<li><a href="#">我的舍友</a></li>
-					<li id="details"><a href="<%=basePath%>/customer/details">个人资料</a></li>
+					<li id="details"><a href="<%=basePath%>/customer/details">我的资料</a></li>
+					<li><a href="#">我的优惠券</a></li>
 					<li id="setting"><a href="<%=basePath%>/customer/setting">账户设置</a></li>
 				</ul>
 
@@ -83,8 +87,7 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
-	<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
+
 	<script src="<%=basePath%>/dist/commons/cropper/cropper.min.js"></script>
 	<script src="<%=basePath%>/dist/customer/js/dashboard.js"></script>
 

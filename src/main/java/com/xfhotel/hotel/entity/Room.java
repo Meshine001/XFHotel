@@ -1,4 +1,4 @@
-package com.xfhotel.hotel.entity;
+﻿package com.xfhotel.hotel.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,7 +26,12 @@ import com.xfhotel.hotel.common.Constants;
 
 @Entity
 @Table(name = "t_room")
-public class Room implements Serializable{
+public class Room implements Serializable {
+
+	public static final int STATUS_ON_PAY = 0;
+	public static final int STATUS_LEASED = 1;
+	public static final int STATUS_IDLE = 2;
+	public static final int STATUS_WILL_IDLE = 3;
 	// apartment
 	// person
 	// informationi
@@ -37,11 +42,11 @@ public class Room implements Serializable{
 	@GenericGenerator(name = "apartmentgenerator", strategy = "increment")
 	private long id;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Apartment apartment;
-	
-	private String status;
-	
+
+	private int status;
+
 	public String prices;//
 	public String price_scope;
 
@@ -58,19 +63,13 @@ public class Room implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-
-
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
-
-
 
 	public String getPics() {
 		return pics;
@@ -95,7 +94,6 @@ public class Room implements Serializable{
 	public void setApartment(Apartment apartment) {
 		this.apartment = apartment;
 	}
-
 
 	public String getPrices() {
 		return prices;
@@ -157,16 +155,18 @@ public class Room implements Serializable{
 	}
 
 	public void setFacilities(String[] facilities) {
-		if(facilities==null){
-			this.facilities="";
+		if (facilities == null) {
+			this.facilities = "";
 			return;
 		}
-		String str="";
+		String str = "";
 		for (int i = 0; i < facilities.length; i++) {
 			str = str + "@";
+			if (i > 0)
+				str = str + "@";
 			str = str + facilities[i];
 		}
-		this.facilities=str;
+		this.facilities = str;
 	}
 
 	public Map toMap() {
@@ -175,18 +175,30 @@ public class Room implements Serializable{
 		map.put("square", square);
 		map.put("direction", direction);
 		map.put("capacity", capacity);
-		map.put("description", description.split("@")[0]);
-		map.put("type", description.split("@")[1]);
-		map.put("ltype", description.split("@")[2]);
+		map.put("descriptionPersonal", description);
 		map.put("id", id);
-		if(pics != null){
+		if (pics != null) {
 			map.put("pics", pics.split("@"));
 		}
 		map.put("facilities", this.facilities.split("@"));
 		map.put("apartment", apartment.getId());
 		map.put("prices", prices.split("@"));
-		map.put("status", status);
+		map.put("status", getStatusString(status));
 		return map;
+	}
+
+	String getStatusString(int s) {
+		switch (s) {
+		case STATUS_ON_PAY:
+			return "正在支付";
+		case STATUS_LEASED:
+			return "已出租";
+		case STATUS_WILL_IDLE:
+			return "可能续租";
+		default:
+			return "未出租";
+
+		}
 	}
 
 }
