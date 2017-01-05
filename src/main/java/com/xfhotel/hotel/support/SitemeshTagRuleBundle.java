@@ -17,8 +17,8 @@ public class SitemeshTagRuleBundle implements TagRuleBundle {
 	public void install(State defaultState, ContentProperty contentProperty, SiteMeshContext siteMeshContext) {
 		defaultState.addRule("e_right",
 				new ExportTagToContentRule(siteMeshContext, contentProperty.getChild("e_right"), false));
-		defaultState.addRule("my_hearder",
-				new ExportTagToContentRule(siteMeshContext, contentProperty.getChild("my_hearder"), false));
+		defaultState.addRule("my_header",
+				new ExportTagToContentRule(siteMeshContext, contentProperty.getChild("my_header"), false));
 		defaultState.addRule("my_script",
 				new ExportTagToContentRule(siteMeshContext, contentProperty.getChild("my_script"), false));
 		defaultState.addRule("my_body",

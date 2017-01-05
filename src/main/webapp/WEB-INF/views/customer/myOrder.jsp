@@ -56,7 +56,7 @@
 						</c:choose></td>
 					<td>${order.preferential}</td>
 					<td>
-						<c:if test="${order.status == '已完成' }"><a>立即评价</a></c:if>
+						<c:if test="${order.status == '已完成' }"><a href="<%=basePath%>/order/comment/${order.id}">立即评价</a></c:if>
 						<c:if test="${order.status != '已完成' }"><a>申请取消</a></c:if>
 					</td>
 				</tr>

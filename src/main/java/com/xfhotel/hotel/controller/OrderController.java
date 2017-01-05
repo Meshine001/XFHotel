@@ -35,6 +35,17 @@ public class OrderController {
 
 	@Autowired
 	HttpSession session;
+	
+	@RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
+	public String comment(@PathVariable("id")Long id){
+		Map<String, Object> order = orderservice.get(id).toMap();
+		Map<String, Object> room = roomService.getRoomInfo((Long)order.get("roomId"));
+		session.setAttribute("order", order);
+		session.setAttribute("room", room);
+		Map<String, Object> apartment = apartmentService.getApartmentInfo((Long)room.get("apartment"));
+		session.setAttribute("apartment", apartment);
+		return "customer/comment";
+	}
 
 	@RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
 	public String pay(@PathVariable("id") Long id) {
