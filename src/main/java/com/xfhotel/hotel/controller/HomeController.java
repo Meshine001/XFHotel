@@ -62,6 +62,10 @@ public class HomeController {
 		return "/customer/home";
 	}
 	
+	@RequestMapping(value = "/test/upload",method = RequestMethod.GET)
+	public String uploadTest(){
+		return "/test/upload";
+	}
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list(String type) {
