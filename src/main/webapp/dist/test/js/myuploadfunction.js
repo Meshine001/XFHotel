@@ -1,9 +1,9 @@
 $(function () {
+	
     $('#fileupload').fileupload({
-        dataType: 'json',
-
+    	url:'../file/uploadFile',
+    	dataType: 'json',
         done: function (e, data) {
-        	$("tr:has(td)").remove();
             $.each(data.result, function (index, file) {
 
                 $("#uploaded-files").append(

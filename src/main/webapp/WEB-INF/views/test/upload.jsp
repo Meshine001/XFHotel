@@ -31,16 +31,17 @@
 <script
 	src="<%=basePath%>/dist/commons/jquery-file-upload/js/jquery.fileupload.js"></script>
 <!-- we code these -->
-<link href="<%=basePath%>/dist/test/css/dropzone.css" type="text/css" rel="stylesheet" />
+<link href="<%=basePath%>/dist/test/css/dropzone.css" type="text/css"
+	rel="stylesheet" />
 <script src="<%=basePath%>/dist/test/js/myuploadfunction.js"></script>
 </head>
 <body>
 	<h1>Spring MVC - jQuery File Upload</h1>
 	<div style="width: 500px; padding: 20px">
-
-		<input id="fileupload" type="file" name="files[]"
-			data-url="<%=basePath%>/file/uploadFile" multiple>
-
+		<span class="btn btn-success fileinput-button"> <i
+			class="glyphicon glyphicon-plus"></i> <span>Add files...</span> <!-- The file input field used as target for the file upload widget -->
+			<input id="fileupload" type="file" name="files[]" multiple="multiple">
+		</span>
 		<div id="dropzone">Drop files here</div>
 
 		<div id="progress">
