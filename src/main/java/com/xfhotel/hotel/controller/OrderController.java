@@ -13,14 +13,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
+import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Message;
+import com.xfhotel.hotel.support.StringSplitUtil;
 
 @Controller
 @RequestMapping("/order")
@@ -32,10 +37,18 @@ public class OrderController {
 	RoomService roomService;
 	@Autowired
 	ApartmentService apartmentService;
-
+	@Autowired
+	CommentService commentService;
+	
+	
 	@Autowired
 	HttpSession session;
 	
+	/**
+	 * 跳转到订单评价页面
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
 	public String comment(@PathVariable("id")Long id){
 		Map<String, Object> order = orderservice.get(id).toMap();
@@ -45,6 +58,27 @@ public class OrderController {
 		Map<String, Object> apartment = apartmentService.getApartmentInfo((Long)room.get("apartment"));
 		session.setAttribute("apartment", apartment);
 		return "customer/comment";
+	}
+	
+	@RequestMapping(value = "/comment/post", method = RequestMethod.POST)
+	public @ResponseBody Message postComment(Long roomId,Long from,Long to,String c_score,String feel,String[] pics){
+		try {
+			Comment comment = new Comment();
+			comment.setFromWho(from);
+			comment.setToWho(to);
+			comment.setRoomId(roomId);
+			comment.setScore(c_score);
+			comment.setFeel(feel);
+			comment.setPics(StringSplitUtil.buildStrGroup(pics));
+			comment.setTime(new Date().getTime());
+			
+			commentService.add(comment);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "评论成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "评论失败");
+		}
 	}
 
 	@RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
