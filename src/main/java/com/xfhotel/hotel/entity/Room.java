@@ -162,8 +162,6 @@ public class Room implements Serializable {
 		String str = "";
 		for (int i = 0; i < facilities.length; i++) {
 			str = str + "@";
-			if (i > 0)
-				str = str + "@";
 			str = str + facilities[i];
 		}
 		this.facilities = str;

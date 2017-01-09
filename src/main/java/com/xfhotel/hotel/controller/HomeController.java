@@ -3,6 +3,7 @@ package com.xfhotel.hotel.controller;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -62,6 +63,30 @@ public class HomeController {
 		return "/customer/home";
 	}
 	
+	@RequestMapping(value = "/test/upload",method = RequestMethod.GET)
+	public String uploadTest(){
+		return "/test/upload";
+	}
+	
+	@RequestMapping(value = "/test/calendar",method = RequestMethod.GET)
+	public String calendarTest(){
+//		return "/test/calendar";
+		return "/test/priceCalendar";
+	}
+	
+	@RequestMapping(value = "/test/prices",method = RequestMethod.GET)
+	public @ResponseBody List calendarPricesTest(){
+		List<Object> list = new ArrayList<Object>();
+		for(int i=1;i<9;i++){
+			Map<String, String> info = new HashMap<String, String>();
+			String date = "2017-01-0"+i;
+			String price = "100"+i;
+			info.put("Date", date);
+			info.put("Price", price);
+			list.add(info);
+		}
+		return list;
+	}
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list(String type) {

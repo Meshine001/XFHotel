@@ -74,7 +74,7 @@
 			<li><a href="">微信支付</a></li>
 			<li><a href="">支付宝</a></li>
 		</ul>
-		<a>支付完成</a>
+		<a href="<%=basePath%>/order/payOver/${order.id}?status=2">支付完成</a>
 	</div>
 	</my_body>
 </body>

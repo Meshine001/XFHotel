@@ -12,4 +12,6 @@ public interface OrderService {
 	public Order get(Long id);
 	public List<Order> list(int type);
 	public List<Order> listDiedOrders(int type);
+	public List<Order> getCustomerOrders(Long cId,int type);
+		
 }

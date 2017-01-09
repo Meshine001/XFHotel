@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.dao.impl.OrderDAOImpl;
+import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.OrderService;
 
@@ -45,30 +46,59 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	@Override
 	public List<Order> list(int type) {
+		if (type == Apartment.TYPE_ALL) {
+			return orderDAO.getListByHQL("from Order", null);
+		}
 		String hql = "from Order where type=?";
 		Integer[] values = new Integer[1];
 		switch (type) {
-		case Order.TYPE_HOTEL:
-			values[0] = Order.TYPE_APARTMENT;
+		case Apartment.TYPE_APARTMENT:
+			values[0] = Apartment.TYPE_APARTMENT;
+		case Apartment.TYPE_PLAY_ROOM:
+			values[0] = Apartment.TYPE_PLAY_ROOM;
 		default:
-			values[0] = Order.TYPE_HOTEL;
+			values[0] = Apartment.TYPE_HOTEL;
 		}
 
 		return orderDAO.getListByHQL(hql, values);
 	}
 
+	@Transactional
 	@Override
 	public List<Order> listDiedOrders(int type) {
 		Long diedLine = new Date().getTime() - Constants.EFFECTIVE_ORDER_TIME_DURING;
-		String hql = "from Order where type =? and time<"+diedLine;
+		String hql = "from Order where type =? and time<" + diedLine;
 		Integer[] values = new Integer[1];
 		switch (type) {
-		case Order.TYPE_HOTEL:
-			values[0] = Order.TYPE_APARTMENT;
+		case Apartment.TYPE_HOTEL:
+			values[0] = Apartment.TYPE_APARTMENT;
 		default:
-			values[0] = Order.TYPE_HOTEL;
+			values[0] = Apartment.TYPE_HOTEL;
 		}
-		 return orderDAO.getListByHQL(hql, values);
+		return orderDAO.getListByHQL(hql, values);
+	}
+
+	@Transactional
+	@Override
+	public List<Order> getCustomerOrders(Long cId, int type) {
+		if (type == Apartment.TYPE_ALL) {
+			Object[] values = new Object[1];
+			values[0] = cId;
+			return orderDAO.getListByHQL("from Order where cusId=?", values);
+		}
+		String hql = "from Order where cusId=? and type=?";
+		Object[] values = new Object[2];
+		values[0] = cId;
+		switch (type) {
+		case Apartment.TYPE_APARTMENT:
+			values[1] = Apartment.TYPE_APARTMENT;
+		case Apartment.TYPE_PLAY_ROOM:
+			values[1] = Apartment.TYPE_PLAY_ROOM;
+		default:
+			values[1] = Apartment.TYPE_HOTEL;
+		}
+
+		return orderDAO.getListByHQL(hql, values);
 	}
 
 }

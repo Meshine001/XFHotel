@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.OrderService;
@@ -27,7 +28,7 @@ public class OrderTask{
 	 */
 	@Scheduled(cron = "0 0/20 * * * ?")
 	public void refreshRoomStatus(){
-		List<Order> diedOrders = orderService.listDiedOrders(Order.TYPE_HOTEL);
+		List<Order> diedOrders = orderService.listDiedOrders(Apartment.TYPE_HOTEL);
 		for(Order o:diedOrders){
 			Room room = roomService.findById(o.getRoomId());
 			room.setStatus(Room.STATUS_IDLE);

@@ -69,7 +69,7 @@
 				<ul class="nav nav-sidebar" id="sidebar">
 					<li id="reservation"><a
 						href="<%=basePath%>/customer/reservation">我的预约</a></li>
-					<li><a href="#">我的订单</a></li>
+					<li><a href="<%=basePath%>/customer/myOrder">我的订单</a></li>
 					<li><a href="#">我的舍友</a></li>
 					<li id="details"><a href="<%=basePath%>/customer/details">我的资料</a></li>
 					<li><a href="#">我的优惠券</a></li>

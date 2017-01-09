@@ -5,15 +5,17 @@
 		decorator="/WEB-INF/views/decorators/customer-decorator.jsp" />
 	<!-- 指明满足“/exclude.jsp*”的页面，将被排除，不被装饰 -->
 	<mapping path="/exclude.jsp*" exclue="true" />
+	
+
+	<mapping path="/list" decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
+	<mapping path="/info/*" decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
+	<mapping path="/order/*" decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
+
+	<mapping path="/admin/*" decorator="/WEB-INF/views/decorators/admin-decorator.jsp" />
+	<mapping path="/admin/login" exclue="true" />
+	
 	<!-- 自定义 tag 规则 -->
 	<content-processor>
 		<tag-rule-bundle class="com.xfhotel.hotel.support.SitemeshTagRuleBundle" />
 	</content-processor>
-
-	<mapping path="/list" decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
-	<mapping path="/info/*" decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
-<mapping path="/order/*" decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
-
-	<mapping path="/admin/*" decorator="/WEB-INF/views/decorators/admin-decorator.jsp" />
-	<mapping path="/admin/login" exclue="true" />
 </sitemesh>

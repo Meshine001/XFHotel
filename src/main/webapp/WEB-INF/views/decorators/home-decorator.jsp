@@ -25,6 +25,7 @@
 	rel="stylesheet">
 <script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
 <script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
+<sitemesh:write property='my_header' />
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
@@ -65,7 +66,7 @@
 			</nav>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" style="margin-top: 50px">
 		<sitemesh:write property='my_body' />
 	</div>
 
