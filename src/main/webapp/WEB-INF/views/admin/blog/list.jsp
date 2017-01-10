@@ -16,15 +16,21 @@
 	<table class="table" id="list">
 	</table>
 	<a id="firstpage"><<</a> <a id="formerpage"><</a> <a id="currentpage">
-	</a> <a id="latterpage">></a> <a id="lastpage">>></a> 共 <a id="totalcount"></a>条记录
+	</a> <a id="latterpage">></a> <a id="lastpage">>></a>
 	共 <a id="pagecount"></a>页 <script type="text/javascript">
-		function getStatus(s) {
-			var status = "";
-			if (s == 1)
-				status = "激活";
-			if (s == 0)
-				status = "冻结";
-			return status;
+		Date.prototype.format = function(f){
+		    var o ={
+		        "M+" : this.getMonth()+1, //month
+		        "d+" : this.getDate(),    //day
+		        "h+" : this.getHours(),   //hour
+		        "m+" : this.getMinutes(), //minute
+		        "s+" : this.getSeconds(), //second
+		        "q+" : Math.floor((this.getMonth()+3)/3),  //quarter
+		        "S" : this.getMilliseconds() //millisecond
+		    }
+		    if(/(y+)/.test(f))f=f.replace(RegExp.$1,(this.getFullYear()+"").substr(4 - RegExp.$1.length));
+		    for(var k in o)
+		        if(new RegExp("("+ k +")").test(f))f = f.replace(RegExp.$1,RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));return f
 		};
 		function list(page) {
 			$.ajax({
@@ -35,8 +41,9 @@
 				data : {
 					'page' : page
 				},
-				url : "./get_customers",//请求的action路径
-				error : function() {//请求失败处理函数
+				url : "./get_blogs",//请求的action路径
+				error : function(data) {//请求失败处理函数
+					console.log(data);
 					alert("获取数据失败！");
 				},
 				success : function(data) {
@@ -61,24 +68,16 @@
 					$("#pagecount").html(data.pageCount);
 					$("#totalcount").html(data.totalCount);
 					
-					var trtitle=$('<tr></tr>').append('<td>序号</td><td>等级</td><td>电话</td><td>注册时间</td><td>消费总额</td><td>消费次数</td><td>详情</td><td>状态</td>');
-					$("#list").html(trtitle);
+					$("#list").html("");
+					console.log(data);
 					$.each(data.results, function(index, value) {
 						var tr = $('<tr></tr>');
-						var td_id = $('<td></td>').append(value.id);
-						var td_level = $('<td></td>').append(value.level);
-						var td_tel = $('<td></td>').append(value.tel);
-						var td_regTime = $('<td></td>').append(value.regTime);
-						var td_consumptionCount = $('<td></td>').append(
-								value.consumptionCount);
-						var td_consumptionTimes = $('<td></td>').append(
-								value.consumptionTimes);
-						var td_details = $('<td></td>').append(value.details);
-						var td_status = $('<td></td>').append(value.status);
-						tr.append(td_id).append(td_level).append(td_tel)
-								.append(td_regTime).append(td_consumptionCount)
-								.append(td_consumptionTimes).append(td_details)
-								.append(td_status);
+						var d= new Date();
+						d.setTime(value.date);
+						var s=d.format('yyyy-MM-dd hh:mm:ss');
+						var td_date = $('<td></td>').append(s);
+						var td_title = $('<td></td>').append(value.title);
+						tr.append(td_date).append(td_title);
 						$("#list").append(tr);
 					});
 				}
@@ -87,4 +86,3 @@
 		$(document).ready(list(1));
 	</script> </my_body>
 </body>
-</html>

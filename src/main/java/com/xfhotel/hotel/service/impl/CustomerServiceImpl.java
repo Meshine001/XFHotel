@@ -89,7 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional
 	public PageResults<Customer> list(int page) {
 		// TODO Auto-generated method stub
-		return customerDAO.findPageByFetchedHql("from Customer", "select count(*) from Customer", page, 3, null);
+		return customerDAO.findPageByFetchedHql("from Customer", "select count(*) from Customer", page, 10, null);
 	}
 
 }

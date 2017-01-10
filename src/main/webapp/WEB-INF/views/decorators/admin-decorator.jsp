@@ -26,6 +26,7 @@
 	href="<%=basePath%>/dist/admin/assets/css/theme/yellow.css">
 	 -->
 <script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
+<sitemesh:write property='my_header' />
 </head>
 <body>
 	<div class="app app-default">
