@@ -29,7 +29,7 @@
 }
 
 .search .search_input {
-	width: 740px;
+	width: 600px;
 	height: 50px;
 	line-height: 50px;
 	background: #fff;
@@ -42,8 +42,8 @@
 	box-flex: 1;
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
-	max-width: 740px;
-	min-width: 740px;
+	max-width: 600px;
+	min-width: 600px;
 }
 
 .search .search_btn {
@@ -667,6 +667,11 @@
 
 
 .search-input-item {
+    width: 200px;
     border: none;
     padding: 10px;
+}
+
+div#index_list_calendar-box {
+    top: 45px;
 }

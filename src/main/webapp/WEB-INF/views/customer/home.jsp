@@ -16,37 +16,160 @@
 
 <title>青舍都市公寓-西安租房_西安合租</title>
 
-<link rel="stylesheet" type="text/css" href="<%=basePath%>/dist/public/v1/css/base.css?r=3">
-<link rel="stylesheet" type="text/css" href="<%=basePath%>/dist/public/v1/css/layout.css?r=3">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/public/v1/css/base.css?r=3">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/public/v1/css/layout.css?r=3">
 
 
-<script src="<%=basePath%>/dist/public/js/jquery.min.js" type="text/javascript"></script>
-<script src="<%=basePath%>/dist/public/js/jquery.lazyload.min.js" type="text/javascript"></script>
+<script src="<%=basePath%>/dist/public/js/jquery.min.js"
+	type="text/javascript"></script>
+<script src="<%=basePath%>/dist/public/js/jquery.lazyload.min.js"
+	type="text/javascript"></script>
 
-<link rel="stylesheet" type="text/css" href="<%=basePath%>/dist/public/css/colorbox.css?r=2">
-<link rel="stylesheet" type="text/css" href="<%=basePath%>/dist/commons/boostrap/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=basePath%>/dist/commons/awesome/css/font-awesome.min.css">
-<script src="<%=basePath%>/dist/public/js/jquery.colorbox-min.js" type="text/javascript"></script>
-<script src="<%=basePath%>/dist/public/js/swipe.js" type="text/javascript"></script>
-<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/public/css/colorbox.css?r=2">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/commons/boostrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/commons/awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/public/css/calendar.css">
+<script src="<%=basePath%>/dist/public/js/jquery.colorbox-min.js"
+	type="text/javascript"></script>
+<script src="<%=basePath%>/dist/public/js/swipe.js"
+	type="text/javascript"></script>
+<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"
+	type="text/javascript"></script>
 
 <style type="text/css">
-#jxfocus {width:320px; height:497px; overflow:hidden; position:relative;}
-.hua_d {height:497px; position:absolute;}
-#jxfocus dl {float:left; width:320px; height:497px; overflow:hidden; position:relative;} 
-.readyload{background:#E4EBEC url('http://mf.znimg.com/public/images/loading.gif') no-repeat scroll center center;}
-.swipe{overflow:hidden; visibility:hidden; position:relative; left:135px; width:930px; height:620px; margin:0 auto; margin-top: 40px;}
-.swipe-wrap {overflow:hidden; position:relative;}
-.swipe-wrap > div {float:left; width:100%; position:relative;}		
-.pics_pre{background: url(http://mf.znimg.com/public/v1/images/ck_left.png) no-repeat; width: 44px; height: 44px; display: block; position: absolute; left: 0px; top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);-o-transform: translateY(-50%);transform:translateY(-50%);cursor: pointer;}
-.pics_pre:hover{background:url(http://mf.znimg.com/public/v1/images/ck_lf.png) no-repeat;}
-.pics_next{background: url(http://mf.znimg.com/public/v1/images/ck_right.png) no-repeat;width: 44px;height: 44px;display: block;position: absolute;right: -280px;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);-o-transform: translateY(-50%);transform:translateY(-50%);cursor: pointer;}
-.te_num{width: 90px;height: 30px;position: absolute;right: -194px;top: 101%;font-size:20px; color:#ffffff;}
-.te_fg{width: 150px;height: 30px;position: absolute;left: 134px;top: 101%;font-size:20px; color:#ffffff;}
-.pics_next:hover{background:url(http://mf.znimg.com/public/v1/images/ck_rg.png) no-repeat;}
-.colse{background:url(http://mf.znimg.com/public/v1/images/ck_close.png) no-repeat; height:40px; width:40px; display:inline-block;right: -280px; position:absolute; text-align:center; line-height:50px; font-size:70px; top:-40px; cursor:pointer;}
-.exm_ul li{cursor: pointer;}
+#jxfocus {
+	width: 320px;
+	height: 497px;
+	overflow: hidden;
+	position: relative;
+}
 
+.hua_d {
+	height: 497px;
+	position: absolute;
+}
+
+#jxfocus dl {
+	float: left;
+	width: 320px;
+	height: 497px;
+	overflow: hidden;
+	position: relative;
+}
+
+.readyload {
+	background: #E4EBEC url('http://mf.znimg.com/public/images/loading.gif')
+		no-repeat scroll center center;
+}
+
+.swipe {
+	overflow: hidden;
+	visibility: hidden;
+	position: relative;
+	left: 135px;
+	width: 930px;
+	height: 620px;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+.swipe-wrap {
+	overflow: hidden;
+	position: relative;
+}
+
+.swipe-wrap>div {
+	float: left;
+	width: 100%;
+	position: relative;
+}
+
+.pics_pre {
+	background: url(http://mf.znimg.com/public/v1/images/ck_left.png)
+		no-repeat;
+	width: 44px;
+	height: 44px;
+	display: block;
+	position: absolute;
+	left: 0px;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	cursor: pointer;
+}
+
+.pics_pre:hover {
+	background: url(http://mf.znimg.com/public/v1/images/ck_lf.png)
+		no-repeat;
+}
+
+.pics_next {
+	background: url(http://mf.znimg.com/public/v1/images/ck_right.png)
+		no-repeat;
+	width: 44px;
+	height: 44px;
+	display: block;
+	position: absolute;
+	right: -280px;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	cursor: pointer;
+}
+
+.te_num {
+	width: 90px;
+	height: 30px;
+	position: absolute;
+	right: -194px;
+	top: 101%;
+	font-size: 20px;
+	color: #ffffff;
+}
+
+.te_fg {
+	width: 150px;
+	height: 30px;
+	position: absolute;
+	left: 134px;
+	top: 101%;
+	font-size: 20px;
+	color: #ffffff;
+}
+
+.pics_next:hover {
+	background: url(http://mf.znimg.com/public/v1/images/ck_rg.png)
+		no-repeat;
+}
+
+.colse {
+	background: url(http://mf.znimg.com/public/v1/images/ck_close.png)
+		no-repeat;
+	height: 40px;
+	width: 40px;
+	display: inline-block;
+	right: -280px;
+	position: absolute;
+	text-align: center;
+	line-height: 50px;
+	font-size: 70px;
+	top: -40px;
+	cursor: pointer;
+}
+
+.exm_ul li {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -77,17 +200,30 @@
 	</header>
 	<article>
 		<div class="banner po_r">
-			
-			<a href="http://www.monph.com/kuaixun/info-459.html" title="魔飞年终欢乐送，元旦春节不打烊" target="_blank" style="width: 100%; height: 100%;">
-				<div class="hr_img banner_img" style="position: absolute; width: 100%; height: 100%; background: url(&quot;http://mf.znimg.com/upload/home/20170103/80ca7da79d6d1fcc45f3dab8b383c65c.jpg&quot;) center 0px no-repeat; display: block; opacity: 0.733271;">
+
+			<a href="http://www.monph.com/kuaixun/info-459.html"
+				title="魔飞年终欢乐送，元旦春节不打烊" target="_blank"
+				style="width: 100%; height: 100%;">
+				<div class="hr_img banner_img"
+					style="position: absolute; width: 100%; height: 100%; background: url(&quot;http://mf.znimg.com/upload/home/20170103/80ca7da79d6d1fcc45f3dab8b383c65c.jpg&quot;) center 0px no-repeat; display: block; opacity: 0.733271;">
 				</div>
-			</a> 
-			 <span class="pics_pre1" style="" onclick="pre_pic()"></span> <span class="pics_next1" style="" onclick="next_pic()"></span>
+			</a> <span class="pics_pre1" style="" onclick="pre_pic()"></span> <span
+				class="pics_next1" style="" onclick="next_pic()"></span>
 			<div class="main">
 				<form action="/list/" method="get" name="searchForm" id="searchForm">
 					<div class="search clearfix">
-					<div class="search_input"><span><i class="icon-calendar"></i></span><input id="search-input-time" placeholder="入住时间" type="text" class="search-input-item"><span><i class="icon-search"></i></span><input id="search-input-location"  placeholder="城市或目的地" type="text" class="search-input-item"></div>
-						 <input class="search_btn" value="搜索公寓" type="submit">
+						<div class="search_input">
+							<span><i class="icon-calendar"></i></span><input
+								readonly="readonly" id="search-input-time" placeholder="入住时间"
+								type="text" class="search-input-item"><span><i
+								class="icon-search"></i></span><input id="search-input-location"
+								readonly="readonly" placeholder="城市或目的地" type="text"
+								class="search-input-item">
+						</div>
+						<input type="hidden" name="checkinday" id="checkinday" value="">
+						<input type="hidden" name="checkoutday" id="checkoutday" value="">
+						<div id="index_list_calendar-box" style="display: none;"></div>
+						<input class="search_btn" value="搜索公寓" type="submit">
 						<div class="search_map">
 							<i></i><a title="地图搜房" href="/maplist/">地图搜房</a>
 						</div>
@@ -99,121 +235,195 @@
 			<div class="main">
 				<h3 class="tit">走哪玩哪 不亦乐乎</h3>
 				<div class="exm_nav fg_nav">
-					<span id="fg_on_1" onmouseover="on_fg(1);" class="exm_nav_on">日租单身间</span> <span id="fg_on_2" onmouseover="on_fg(2);" class="">游戏娱乐间</span> 
+					<span id="fg_on_1" onmouseover="on_fg(1);" class="exm_nav_on">日租单身间</span>
+					<span id="fg_on_2" onmouseover="on_fg(2);" class="">游戏娱乐间</span>
 				</div>
 				<ul class="exm_ul" id="fg_1">
-					<li onclick="fg_big(1,1);"><img src="%&gt;/dist/public/v1/images//fg_list_s/sg_1.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(1,2);"><img src="%&gt;/dist/public/v1/images//fg_list_s/sg_2.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(1,3);"><img src="%&gt;/dist/public/v1/images//fg_list_s/sg_3.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(1,4);"><img src="%&gt;/dist/public/v1/images//fg_list_s/sg_4.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(1,5);"><img src="%&gt;/dist/public/v1/images//fg_list_s/sg_5.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(1,6);"><img src="%&gt;/dist/public/v1/images//fg_list_s/sg_6.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(1,7);"><img src="%&gt;/dist/public/v1/images//fg_list_s/sg_7.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(1,8);"><img src="%&gt;/dist/public/v1/images//fg_list_s/sg_8.jpg" width="277.5" height="210"></li>
+					<li onclick="fg_big(1,1);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/sg_1.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(1,2);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/sg_2.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(1,3);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/sg_3.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(1,4);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/sg_4.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(1,5);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/sg_5.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(1,6);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/sg_6.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(1,7);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/sg_7.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(1,8);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/sg_8.jpg"
+						width="277.5" height="210"></li>
 				</ul>
 				<ul class="exm_ul" id="fg_2" style="display: none;">
-					<li onclick="fg_big(2,1);"><img src="%&gt;/dist/public/v1/images//fg_list_s/mkl_1.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(2,2);"><img src="%&gt;/dist/public/v1/images//fg_list_s/mkl_2.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(2,3);"><img src="%&gt;/dist/public/v1/images//fg_list_s/mkl_3.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(2,4);"><img src="%&gt;/dist/public/v1/images//fg_list_s/mkl_4.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(2,5);"><img src="%&gt;/dist/public/v1/images//fg_list_s/mkl_5.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(2,6);"><img src="%&gt;/dist/public/v1/images//fg_list_s/mkl_6.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(2,7);"><img src="%&gt;/dist/public/v1/images//fg_list_s/mkl_7.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(2,8);"><img src="%&gt;/dist/public/v1/images//fg_list_s/mkl_8.jpg" width="277.5" height="210"></li>
+					<li onclick="fg_big(2,1);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/mkl_1.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(2,2);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/mkl_2.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(2,3);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/mkl_3.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(2,4);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/mkl_4.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(2,5);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/mkl_5.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(2,6);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/mkl_6.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(2,7);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/mkl_7.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(2,8);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/mkl_8.jpg"
+						width="277.5" height="210"></li>
 				</ul>
 				<ul class="exm_ul" id="fg_3" style="display: none;">
-					<li onclick="fg_big(3,1);"><img src="%&gt;/dist/public/v1/images//fg_list_s/ql_1.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(3,2);"><img src="%&gt;/dist/public/v1/images//fg_list_s/ql_2.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(3,3);"><img src="%&gt;/dist/public/v1/images//fg_list_s/ql_3.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(3,4);"><img src="%&gt;/dist/public/v1/images//fg_list_s/ql_4.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(3,5);"><img src="%&gt;/dist/public/v1/images//fg_list_s/ql_5.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(3,6);"><img src="%&gt;/dist/public/v1/images//fg_list_s/ql_6.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(3,7);"><img src="%&gt;/dist/public/v1/images//fg_list_s/ql_7.jpg" width="277.5" height="210"></li>
-					<li onclick="fg_big(3,8);"><img src="%&gt;/dist/public/v1/images//fg_list_s/ql_8.jpg" width="277.5" height="210"></li>
+					<li onclick="fg_big(3,1);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/ql_1.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(3,2);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/ql_2.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(3,3);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/ql_3.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(3,4);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/ql_4.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(3,5);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/ql_5.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(3,6);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/ql_6.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(3,7);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/ql_7.jpg"
+						width="277.5" height="210"></li>
+					<li onclick="fg_big(3,8);"><img
+						src="%&gt;/dist/public/v1/images//fg_list_s/ql_8.jpg"
+						width="277.5" height="210"></li>
 				</ul>
 			</div>
-		</div><div class="service">
+		</div>
+		<div class="service">
 			<div class="main">
 				<h3 class="tit">动动手指享受智能服务</h3>
 				<ul class="service_ul">
 					<li><i class="sev_1"></i>
-					<p>
+						<p>
 							<span class="service_bt">押一付一</span><span class="service_tit">房租月付资金无压力</span>
 						</p></li>
 					<li><i class="sev_2"></i>
-					<p>
+						<p>
 							<span class="service_bt">免费WiFi</span><span class="service_tit">百兆光纤入户随心用</span>
 						</p></li>
 					<li><i class="sev_3"></i>
-					<p>
+						<p>
 							<span class="service_bt">精致装修</span><span class="service_tit">品牌家电设施，拎包入住</span>
 						</p></li>
 					<li><i class="sev_4"></i>
-					<p>
+						<p>
 							<span class="service_bt">快速维修</span><span class="service_tit">售后无忧，专业维修24H响应</span>
 						</p></li>
 					<li><i class="sev_5"></i>
-					<p>
+						<p>
 							<span class="service_bt">一客一锁</span><span class="service_tit">智能门锁，安全有保障</span>
 						</p></li>
 					<li><i class="sev_6"></i>
-					<p>
+						<p>
 							<span class="service_bt">每周保洁</span><span class="service_tit">专业保洁，生活更省心</span>
 						</p></li>
 					<li><i class="sev_7"></i>
-					<p>
+						<p>
 							<span class="service_bt">免中介费</span><span class="service_tit">透明收费无虚假</span>
 						</p></li>
 					<li><i class="sev_8"></i>
-					<p>
+						<p>
 							<span class="service_bt">专属客服</span><span class="service_tit">专业客服，全天候为您解忧</span>
 						</p></li>
 					<li><i class="sev_9"></i>
-					<p>
+						<p>
 							<span class="service_bt">专属活动</span><span class="service_tit">观影爬山聚会趴，嗨生活</span>
 						</p></li>
 				</ul>
 			</div>
 		</div>
-		
+
 		<div class="apartment">
 			<div class="main">
 				<h3 class="tit">这里有你需要的小窝</h3>
 				<div class="exm_nav fj_nav">
-					<span id="fj_on_1" onmouseover="on_fj(1);" class="exm_nav_on"></span>   
+					<span id="fj_on_1" onmouseover="on_fj(1);" class="exm_nav_on"></span>
 				</div>
 				<ul class="apt_ul" id="fj_1" style="display: none;">
-					<li><a href="/info-41014266102.html" target="_blank" title="正商城泰园4居室-卧-B房间-阳台"> <img class="readyload" src="%&gt;/dist/public/v1/images//5dea91f8fd5804252d49c1a786521cf8.jpg" data-original="%>/dist/public/v1/images//5dea91f8fd5804252d49c1a786521cf8.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41014266102.html" target="_blank"
+						title="正商城泰园4居室-卧-B房间-阳台"> <img class="readyload"
+							src="%&gt;/dist/public/v1/images//5dea91f8fd5804252d49c1a786521cf8.jpg"
+							data-original="%>/dist/public/v1/images//5dea91f8fd5804252d49c1a786521cf8.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span>1185</span>元/月
 							</p>
 							<p class="apt_bt">正商城泰园4居室-卧-B房间-阳台</p>
 					</a></li>
-					<li><a href="/info-41014253805.html" target="_blank" title="风和日丽四期5居室-卧-E房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/94/5a30ab5239efe90ca5a78bc613fd7ab6.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/94/5a30ab5239efe90ca5a78bc613fd7ab6.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41014253805.html" target="_blank"
+						title="风和日丽四期5居室-卧-E房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/94/5a30ab5239efe90ca5a78bc613fd7ab6.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/94/5a30ab5239efe90ca5a78bc613fd7ab6.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span>1241</span>元/月
 							</p>
 							<p class="apt_bt">风和日丽四期5居室-卧-E房间</p>
 					</a></li>
-					<li><a href="/info-41015446003.html" target="_blank" title="白庙社区3居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/508/0f3a19792bab5c60e597031f54a61862.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/508/0f3a19792bab5c60e597031f54a61862.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41015446003.html" target="_blank"
+						title="白庙社区3居室-卧-C房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/508/0f3a19792bab5c60e597031f54a61862.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/508/0f3a19792bab5c60e597031f54a61862.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span>1177</span>元/月
 							</p>
 							<p class="apt_bt">白庙社区3居室-卧-C房间</p>
 					</a></li>
-					<li><a href="/info-41011503001.html" target="_blank" title="紫薇里3居室-卧-A房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/272/c2abaccd6523d697da36b05d641951e4.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/272/c2abaccd6523d697da36b05d641951e4.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41011503001.html" target="_blank"
+						title="紫薇里3居室-卧-A房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/272/c2abaccd6523d697da36b05d641951e4.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/272/c2abaccd6523d697da36b05d641951e4.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span>1200</span>元/月
 							</p>
 							<p class="apt_bt">紫薇里3居室-卧-A房间</p>
 					</a></li>
-					<li><a href="/info-41013200802.html" target="_blank" title="白庙社区4居室-卧-B房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/502/0da363c3de5667b98caa07859778775f.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/502/0da363c3de5667b98caa07859778775f.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41013200802.html" target="_blank"
+						title="白庙社区4居室-卧-B房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/502/0da363c3de5667b98caa07859778775f.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/502/0da363c3de5667b98caa07859778775f.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span>1257</span>元/月
 							</p>
 							<p class="apt_bt">白庙社区4居室-卧-B房间</p>
 					</a></li>
-					<li><a href="/info-41014215803.html" target="_blank" title="白庙社区3居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/424/bf612cd6b6e60757dfb71f4e818e425a.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/424/bf612cd6b6e60757dfb71f4e818e425a.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41014215803.html" target="_blank"
+						title="白庙社区3居室-卧-C房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/424/bf612cd6b6e60757dfb71f4e818e425a.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/424/bf612cd6b6e60757dfb71f4e818e425a.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span>1276</span>元/月
 							</p>
@@ -222,37 +432,61 @@
 				</ul>
 
 				<ul class="apt_ul" id="fj_2">
-					<li><a href="/info-41017631406.html" target="_blank" title="翡翠公寓6居室-卧-F房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/100/ba0bea531d953466f778498e7c4a0c80.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/100/ba0bea531d953466f778498e7c4a0c80.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41017631406.html" target="_blank"
+						title="翡翠公寓6居室-卧-F房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/100/ba0bea531d953466f778498e7c4a0c80.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/100/ba0bea531d953466f778498e7c4a0c80.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_2_133">826元/月</span>
 							</p>
 							<p class="apt_bt">翡翠公寓6居室-卧-F房间</p>
 					</a></li>
-					<li><a href="/info-41014419103.html" target="_blank" title="罗庄4居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/710/2a39faf3111325fd38c7be207ef1d4a0.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/710/2a39faf3111325fd38c7be207ef1d4a0.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41014419103.html" target="_blank"
+						title="罗庄4居室-卧-C房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/710/2a39faf3111325fd38c7be207ef1d4a0.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/710/2a39faf3111325fd38c7be207ef1d4a0.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_2_2407">854元/月</span>
 							</p>
 							<p class="apt_bt">罗庄4居室-卧-C房间</p>
 					</a></li>
-					<li><a href="/info-41012709003.html" target="_blank" title="栖湖怡家3居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/685/38ccee116b1cb66545ad8296921da225.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/685/38ccee116b1cb66545ad8296921da225.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41012709003.html" target="_blank"
+						title="栖湖怡家3居室-卧-C房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/685/38ccee116b1cb66545ad8296921da225.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/685/38ccee116b1cb66545ad8296921da225.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_2_2300">854元/月</span>
 							</p>
 							<p class="apt_bt">栖湖怡家3居室-卧-C房间</p>
 					</a></li>
-					<li><a href="/info-41017124503.html" target="_blank" title="栖湖怡家3居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/682/7f465cd8d7cf345a9c0f8897db448a0a.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/682/7f465cd8d7cf345a9c0f8897db448a0a.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41017124503.html" target="_blank"
+						title="栖湖怡家3居室-卧-C房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/682/7f465cd8d7cf345a9c0f8897db448a0a.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/682/7f465cd8d7cf345a9c0f8897db448a0a.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_2_2290">854元/月</span>
 							</p>
 							<p class="apt_bt">栖湖怡家3居室-卧-C房间</p>
 					</a></li>
-					<li><a href="/info-41014239802.html" target="_blank" title="栖湖怡家3居室-卧-B房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/680/ad97e096070bfd73e4e0b6a7169f9458.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/680/ad97e096070bfd73e4e0b6a7169f9458.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41014239802.html" target="_blank"
+						title="栖湖怡家3居室-卧-B房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/680/ad97e096070bfd73e4e0b6a7169f9458.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/680/ad97e096070bfd73e4e0b6a7169f9458.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_2_2282">854元/月</span>
 							</p>
 							<p class="apt_bt">栖湖怡家3居室-卧-B房间</p>
 					</a></li>
-					<li><a href="/info-41019014403.html" target="_blank" title="清城美苑6居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/652/b202cf8625656a3428e9f46025a51052.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/652/b202cf8625656a3428e9f46025a51052.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41019014403.html" target="_blank"
+						title="清城美苑6居室-卧-C房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/652/b202cf8625656a3428e9f46025a51052.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/652/b202cf8625656a3428e9f46025a51052.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_2_2165">904元/月</span>
 							</p>
@@ -261,37 +495,61 @@
 
 				</ul>
 				<ul class="apt_ul" id="fj_3" style="display: none;">
-					<li><a href="/info-41014419101.html" target="_blank" title="罗庄4居室-卧-A房间-独卫"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/710/a8d49514a29d356c5e241d1fabf125bf.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/710/a8d49514a29d356c5e241d1fabf125bf.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41014419101.html" target="_blank"
+						title="罗庄4居室-卧-A房间-独卫"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/710/a8d49514a29d356c5e241d1fabf125bf.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/710/a8d49514a29d356c5e241d1fabf125bf.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_3_2405">1424元/月</span>
 							</p>
 							<p class="apt_bt">罗庄4居室-卧-A房间-独卫</p>
 					</a></li>
-					<li><a href="/info-41016419701.html" target="_blank" title="正商明钻4居室-卧-A房间-独卫-飘窗"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/698/0e39def4d8ddc20184aa45473f63db9a.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/698/0e39def4d8ddc20184aa45473f63db9a.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41016419701.html" target="_blank"
+						title="正商明钻4居室-卧-A房间-独卫-飘窗"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/698/0e39def4d8ddc20184aa45473f63db9a.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/698/0e39def4d8ddc20184aa45473f63db9a.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_3_2348">1329元/月</span>
 							</p>
 							<p class="apt_bt">正商明钻4居室-卧-A房间-独卫-飘窗</p>
 					</a></li>
-					<li><a href="/info-41011939301.html" target="_blank" title="紫英佳苑4居室-卧-A房间-独卫-飘窗"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/681/1f1c050c1731b638cc15455729b03c44.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/681/1f1c050c1731b638cc15455729b03c44.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41011939301.html" target="_blank"
+						title="紫英佳苑4居室-卧-A房间-独卫-飘窗"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/681/1f1c050c1731b638cc15455729b03c44.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/681/1f1c050c1731b638cc15455729b03c44.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_3_2284">1334元/月</span>
 							</p>
 							<p class="apt_bt">紫英佳苑4居室-卧-A房间-独卫-飘窗</p>
 					</a></li>
-					<li><a href="/info-41017798101.html" target="_blank" title="开元银田花园4居室-卧-A房间-阳台-独卫"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/675/002791d43add40c0f59b7811ca89c380.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/675/002791d43add40c0f59b7811ca89c380.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41017798101.html" target="_blank"
+						title="开元银田花园4居室-卧-A房间-阳台-独卫"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/675/002791d43add40c0f59b7811ca89c380.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/675/002791d43add40c0f59b7811ca89c380.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_3_2263">1329元/月</span>
 							</p>
 							<p class="apt_bt">开元银田花园4居室-卧-A房间-阳台-独…</p>
 					</a></li>
-					<li><a href="/info-41011549901.html" target="_blank" title="和昌湾景国际4居室-卧-A房间-独卫-飘窗"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/664/ac8aee8caebea098c41eb33ad6ba6f48.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/664/ac8aee8caebea098c41eb33ad6ba6f48.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41011549901.html" target="_blank"
+						title="和昌湾景国际4居室-卧-A房间-独卫-飘窗"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/664/ac8aee8caebea098c41eb33ad6ba6f48.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/664/ac8aee8caebea098c41eb33ad6ba6f48.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_3_2216">1329元/月</span>
 							</p>
 							<p class="apt_bt">和昌湾景国际4居室-卧-A房间-独卫-飘…</p>
 					</a></li>
-					<li><a href="/info-41017011301.html" target="_blank" title="九龙城龙腾西城5居室-卧-A房间-独卫-飘窗"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/662/1dce2deca0349a50b6f83fe85ea59102.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/662/1dce2deca0349a50b6f83fe85ea59102.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41017011301.html" target="_blank"
+						title="九龙城龙腾西城5居室-卧-A房间-独卫-飘窗"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/662/1dce2deca0349a50b6f83fe85ea59102.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/662/1dce2deca0349a50b6f83fe85ea59102.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_3_2207">1329元/月</span>
 							</p>
@@ -299,44 +557,73 @@
 					</a></li>
 				</ul>
 				<ul class="apt_ul" id="fj_4" style="display: none;">
-					<li><a href="/info-41016114103.html" target="_blank" title="栖湖怡家3居室-卧-C房间-飘窗"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/677/f4a43436d42742034de3a175a3f2175a.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/677/f4a43436d42742034de3a175a3f2175a.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41016114103.html" target="_blank"
+						title="栖湖怡家3居室-卧-C房间-飘窗"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/677/f4a43436d42742034de3a175a3f2175a.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/677/f4a43436d42742034de3a175a3f2175a.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_4_2273">800元/月</span>
 							</p>
 							<p class="apt_bt">栖湖怡家3居室-卧-C房间-飘窗</p>
 					</a></li>
-					<li><a href="/info-41015278803.html" target="_blank" title="紫薇里3居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/375/dc4524ed361683e61a43fdec0592b1ef.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/375/dc4524ed361683e61a43fdec0592b1ef.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41015278803.html" target="_blank"
+						title="紫薇里3居室-卧-C房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/375/dc4524ed361683e61a43fdec0592b1ef.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/375/dc4524ed361683e61a43fdec0592b1ef.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_4_1188">987元/月</span>
 							</p>
 							<p class="apt_bt">紫薇里3居室-卧-C房间</p>
 					</a></li>
-					<li><a href="/info-41011009501.html" target="_blank" title="六合幸福门3居室-卧-A房间-阳台"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/642/444c2bd095c44859cb1f7c77cd45c203.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/642/444c2bd095c44859cb1f7c77cd45c203.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41011009501.html" target="_blank"
+						title="六合幸福门3居室-卧-A房间-阳台"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/642/444c2bd095c44859cb1f7c77cd45c203.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/642/444c2bd095c44859cb1f7c77cd45c203.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_4_2119">1462元/月</span>
 							</p>
 							<p class="apt_bt">六合幸福门3居室-卧-A房间-阳台</p>
 					</a></li>
-					<li><a href="/info-41016446101.html" target="_blank" title="紫薇里3居室-卧-A房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/293/ee478129f49b8e044e559b202e3b4887.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/293/ee478129f49b8e044e559b202e3b4887.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41016446101.html" target="_blank"
+						title="紫薇里3居室-卧-A房间"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/293/ee478129f49b8e044e559b202e3b4887.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/293/ee478129f49b8e044e559b202e3b4887.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_4_913">1177元/月</span>
 							</p>
 							<p class="apt_bt">紫薇里3居室-卧-A房间</p>
 					</a></li>
-					<li><a href="/info-41017563105.html" target="_blank" title="威尼斯水城5居室-卧-E房间-阳台"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/106/70bbd76352e684fed4a1ad6aa1733bd8.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/106/70bbd76352e684fed4a1ad6aa1733bd8.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41017563105.html" target="_blank"
+						title="威尼斯水城5居室-卧-E房间-阳台"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/106/70bbd76352e684fed4a1ad6aa1733bd8.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/106/70bbd76352e684fed4a1ad6aa1733bd8.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_4_158">1241元/月</span>
 							</p>
 							<p class="apt_bt">威尼斯水城5居室-卧-E房间-阳台</p>
 					</a></li>
-					<li><a href="/info-41017046602.html" target="_blank" title="紫薇里3居室-卧-B房间-阳台"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/364/709039d211e735c492735b2a577d39c7.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/364/709039d211e735c492735b2a577d39c7.jpg" width="378" height="251" style="display: inline;">
+					<li><a href="/info-41017046602.html" target="_blank"
+						title="紫薇里3居室-卧-B房间-阳台"> <img class="readyload"
+							src="/hotel/dist/thumb/dress_378x251/house_img/364/709039d211e735c492735b2a577d39c7.jpg"
+							data-original="/hotel/dist/thumb/dress_378x251/house_img/364/709039d211e735c492735b2a577d39c7.jpg"
+							width="378" height="251" style="display: inline;">
 							<p class="apt_jg">
 								<span id="zujin_4_1154">1283元/月</span>
 							</p>
 							<p class="apt_bt">紫薇里3居室-卧-B房间-阳台</p>
 					</a></li>
 				</ul>
-				<input type="hidden" name="fangjian_id_2" id="fangjian_id_2" value="133,2407,2300,2290,2282,2165"> <input type="hidden" name="fangjian_id_3" id="fangjian_id_3" value="2405,2348,2284,2263,2216,2207"> <input type="hidden" name="fangjian_id_4" id="fangjian_id_4" value="2273,1188,2119,913,158,1154">
+				<input type="hidden" name="fangjian_id_2" id="fangjian_id_2"
+					value="133,2407,2300,2290,2282,2165"> <input type="hidden"
+					name="fangjian_id_3" id="fangjian_id_3"
+					value="2405,2348,2284,2263,2216,2207"> <input type="hidden"
+					name="fangjian_id_4" id="fangjian_id_4"
+					value="2273,1188,2119,913,158,1154">
 				<div class="more">
 					<a title="查看更多房源" href="/list/">MORE</a>
 				</div>
@@ -349,26 +636,51 @@
 				<div class="hai_list" id="jx_div">
 					<div class="hai_lf">
 						<div class="two">
-							<a onmouseover="showMask(1,0)" onmouseout="hideMask(1,0)" href="http://www.monph.com/shenghuo/info-421.html" title="魔飞“绘”生活零基础绘画活动" target="_blank"> <img class="readyload" src="/hotel/dist/public/images/blank.gif" data-original="/hotel/dist/upload/home/20161123/f22a9fb377dd061dcd3f790136511a4e.jpg" width="425" height="265">
+							<a onmouseover="showMask(1,0)" onmouseout="hideMask(1,0)"
+								href="http://www.monph.com/shenghuo/info-421.html"
+								title="魔飞“绘”生活零基础绘画活动" target="_blank"> <img
+								class="readyload" src="/hotel/dist/public/images/blank.gif"
+								data-original="/hotel/dist/upload/home/20161123/f22a9fb377dd061dcd3f790136511a4e.jpg"
+								width="425" height="265">
 								<div class="mask" style="display: none;" id="mask_1_0">
 									<span>魔飞“绘”生活零基础绘画活动</span><input class="mask_btn" value="点击查看">
 								</div>
-							</a> <a onmouseover="showMask(1,1)" onmouseout="hideMask(1,1)" href="http://www.monph.com/shenghuo/info-446.html" title="明星同款火锅，爆辣来袭" target="_blank"> <img class="readyload" src="/hotel/dist/public/images/blank.gif" data-original="/hotel/dist/upload/home/20161123/345e225babe35559b8960b8fc009cf59.jpg" width="425" height="265">
+							</a> <a onmouseover="showMask(1,1)" onmouseout="hideMask(1,1)"
+								href="http://www.monph.com/shenghuo/info-446.html"
+								title="明星同款火锅，爆辣来袭" target="_blank"> <img class="readyload"
+								src="/hotel/dist/public/images/blank.gif"
+								data-original="/hotel/dist/upload/home/20161123/345e225babe35559b8960b8fc009cf59.jpg"
+								width="425" height="265">
 								<div class="mask" style="display: none;" id="mask_1_1">
 									<span>明星同款火锅，爆辣来袭</span><input class="mask_btn" value="点击查看">
 								</div>
 							</a>
 						</div>
 						<div class="three">
-							<a onmouseover="showMask(2,0)" onmouseout="hideMask(2,0)" href="http://www.monph.com/shenghuo/info-390.html" title="魔飞嗨歌会" target="_blank"> <img class="readyload" src="/hotel/dist/public/images/blank.gif" data-original="/hotel/dist/upload/home/20161123/b428c6e726bf717402d4ffecb012414c.jpg" width="278" height="257">
+							<a onmouseover="showMask(2,0)" onmouseout="hideMask(2,0)"
+								href="http://www.monph.com/shenghuo/info-390.html" title="魔飞嗨歌会"
+								target="_blank"> <img class="readyload"
+								src="/hotel/dist/public/images/blank.gif"
+								data-original="/hotel/dist/upload/home/20161123/b428c6e726bf717402d4ffecb012414c.jpg"
+								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_0">
 									<span>魔飞嗨歌会</span><input class="mask_btn" value="点击查看">
 								</div>
-							</a> <a onmouseover="showMask(2,1)" onmouseout="hideMask(2,1)" href="http://www.monph.com/shenghuo/info-455.html?app=1" title="2016/17魔飞跨年音乐节" target="_blank"> <img class="readyload" src="/hotel/dist/public/images/blank.gif" data-original="/hotel/dist/upload/home/20161216/38afeb5a645e898f80febadaa66ed5f3.png" width="278" height="257">
+							</a> <a onmouseover="showMask(2,1)" onmouseout="hideMask(2,1)"
+								href="http://www.monph.com/shenghuo/info-455.html?app=1"
+								title="2016/17魔飞跨年音乐节" target="_blank"> <img
+								class="readyload" src="/hotel/dist/public/images/blank.gif"
+								data-original="/hotel/dist/upload/home/20161216/38afeb5a645e898f80febadaa66ed5f3.png"
+								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_1">
 									<span>2016/17魔飞跨年音乐节</span><input class="mask_btn" value="点击查看">
 								</div>
-							</a> <a onmouseover="showMask(2,2)" onmouseout="hideMask(2,2)" href="http://www.monph.com/shenghuo/info-442.html" title="魔飞公寓首届脱单趴" target="_blank"> <img class="readyload" src="/hotel/dist/public/images/blank.gif" data-original="/hotel/dist/upload/home/20161123/143f7acc3e0699e26b178dc8aaaeb64a.jpg" width="278" height="257">
+							</a> <a onmouseover="showMask(2,2)" onmouseout="hideMask(2,2)"
+								href="http://www.monph.com/shenghuo/info-442.html"
+								title="魔飞公寓首届脱单趴" target="_blank"> <img class="readyload"
+								src="/hotel/dist/public/images/blank.gif"
+								data-original="/hotel/dist/upload/home/20161123/143f7acc3e0699e26b178dc8aaaeb64a.jpg"
+								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_2">
 									<span>魔飞公寓首届脱单趴</span><input class="mask_btn" value="点击查看">
 								</div>
@@ -382,16 +694,21 @@
 								<a href="/gushi/info-82.html" target="_blank" title="速度与激情，魔飞风云">
 								</a>
 								<dl class="hai_dl">
-									<a href="/gushi/info-82.html" target="_blank" title="速度与激情，魔飞风云">
+									<a href="/gushi/info-82.html" target="_blank"
+										title="速度与激情，魔飞风云">
 										<dd>
-											<img src="/hotel/dist/thumb/dress_155x155/gushi/20150706/2180504d1853f6c725bec581a03eb26c.jpg" width="155" height="155">
+											<img
+												src="/hotel/dist/thumb/dress_155x155/gushi/20150706/2180504d1853f6c725bec581a03eb26c.jpg"
+												width="155" height="155">
 										</dd>
 									</a>
 									<dt>
-										<a href="/gushi/info-82.html" target="_blank" title="速度与激情，魔飞风云">
+										<a href="/gushi/info-82.html" target="_blank"
+											title="速度与激情，魔飞风云">
 											<h3>速度与激情，魔飞风云</h3>
 											<p>我叫程龙，2012年底退伍，我感受着这座城市带给我的美好和快乐，和魔飞的邂逅就始于那时。还记得搬进魔飞之前，我和女…...</p>
-										</a><a href="/gushi/info-82.html" target="_blank" title="速度与激情，魔飞风云" class="all_text">阅读全文</a>
+										</a><a href="/gushi/info-82.html" target="_blank"
+											title="速度与激情，魔飞风云" class="all_text">阅读全文</a>
 									</dt>
 								</dl>
 
@@ -400,14 +717,18 @@
 								<dl class="hai_dl">
 									<a href="/gushi/info-81.html" target="_blank" title="萌妹纸的魔飞小生活">
 										<dd>
-											<img src="/hotel/dist/thumb/dress_155x155/gushi/20150629/f3edcb5920aa0daa90e924e549618660.jpg" width="155" height="155">
+											<img
+												src="/hotel/dist/thumb/dress_155x155/gushi/20150629/f3edcb5920aa0daa90e924e549618660.jpg"
+												width="155" height="155">
 										</dd>
 									</a>
 									<dt>
-										<a href="/gushi/info-81.html" target="_blank" title="萌妹纸的魔飞小生活">
+										<a href="/gushi/info-81.html" target="_blank"
+											title="萌妹纸的魔飞小生活">
 											<h3>萌妹纸的魔飞小生活</h3>
 											<p>一位小学英语老师，孩子给我很多的快乐，他们简单善良，有时会在教师节出其不意的送我礼物。平时除了工作，就是喜欢和大家…...</p>
-										</a><a href="/gushi/info-81.html" target="_blank" title="萌妹纸的魔飞小生活" class="all_text">阅读全文</a>
+										</a><a href="/gushi/info-81.html" target="_blank"
+											title="萌妹纸的魔飞小生活" class="all_text">阅读全文</a>
 									</dt>
 								</dl>
 
@@ -416,29 +737,38 @@
 								<dl class="hai_dl">
 									<a href="/gushi/info-80.html" target="_blank" title="魔飞，我在这里">
 										<dd>
-											<img src="/hotel/dist/thumb/dress_155x155/gushi/20150629/9dcd063a56672b52d8ebee7a26c985b6.jpg" width="155" height="155">
+											<img
+												src="/hotel/dist/thumb/dress_155x155/gushi/20150629/9dcd063a56672b52d8ebee7a26c985b6.jpg"
+												width="155" height="155">
 										</dd>
 									</a>
 									<dt>
 										<a href="/gushi/info-80.html" target="_blank" title="魔飞，我在这里">
 											<h3>魔飞，我在这里</h3>
 											<p>毕业工作两年了，从来到魔飞公寓，第一感觉就是服务非常的不错，管家们也非常积极负责。之前有过类似的这样公寓居住的经历…...</p>
-										</a><a href="/gushi/info-80.html" target="_blank" title="魔飞，我在这里" class="all_text">阅读全文</a>
+										</a><a href="/gushi/info-80.html" target="_blank" title="魔飞，我在这里"
+											class="all_text">阅读全文</a>
 									</dt>
 								</dl>
 
-								<a href="/gushi/info-79.html" target="_blank" title="初次见到，便决定就是这里"> </a>
+								<a href="/gushi/info-79.html" target="_blank"
+									title="初次见到，便决定就是这里"> </a>
 								<dl class="hai_dl">
-									<a href="/gushi/info-79.html" target="_blank" title="初次见到，便决定就是这里">
+									<a href="/gushi/info-79.html" target="_blank"
+										title="初次见到，便决定就是这里">
 										<dd>
-											<img src="/hotel/dist/thumb/dress_155x155/gushi/20150629/5fa2351558c479857e2fd51aec7681df.jpg" width="155" height="155">
+											<img
+												src="/hotel/dist/thumb/dress_155x155/gushi/20150629/5fa2351558c479857e2fd51aec7681df.jpg"
+												width="155" height="155">
 										</dd>
 									</a>
 									<dt>
-										<a href="/gushi/info-79.html" target="_blank" title="初次见到，便决定就是这里">
+										<a href="/gushi/info-79.html" target="_blank"
+											title="初次见到，便决定就是这里">
 											<h3>初次见到，便决定就是这里</h3>
 											<p>从信阳到郑州，338.5公里。数字是与家相隔的距离，可是我却从未在这里失去家的舒适与温馨。第一次听到魔飞公寓，是朋…...</p>
-										</a><a href="/gushi/info-79.html" target="_blank" title="初次见到，便决定就是这里" class="all_text">阅读全文</a>
+										</a><a href="/gushi/info-79.html" target="_blank"
+											title="初次见到，便决定就是这里" class="all_text">阅读全文</a>
 									</dt>
 								</dl>
 
@@ -449,7 +779,15 @@
 							<li class=""></li>
 							<li class=""></li>
 							<li class="hai_on"></li>
-						<li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
 					</div>
 				</div>
 				<div class="more">
@@ -461,7 +799,8 @@
 			<div class="main">
 				<h3 class="tit">合作伙伴</h3>
 				<div class="qy_div" id="qyfocus" style="overflow: hidden;">
-					<ul class="cut_list" style="position: relative; height: 70px; padding: 0px; margin: 50px 0px; left: -4029.51px; width: 1920px;">
+					<ul class="cut_list"
+						style="position: relative; height: 70px; padding: 0px; margin: 50px 0px; left: -4029.51px; width: 1920px;">
 						<li><img src="%&gt;/dist/public/v1/images//hzlogo1.jpg"></li>
 						<li><img src="%&gt;/dist/public/v1/images//hzlogo2.jpg"></li>
 						<li><img src="%&gt;/dist/public/v1/images//hzlogo3.jpg"></li>
@@ -477,16 +816,32 @@
 					<li class=""></li>
 					<li class=""></li>
 					<li class=""></li>
-				<li></li><li></li><li></li><li></li><li class=""></li><li class=""></li><li class=""></li><li class=""></li></ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li class=""></li>
+					<li class=""></li>
+					<li class=""></li>
+					<li class=""></li>
+				</ul>
 			</div>
 		</div>
 		<div class="celan" style="top: 75%;">
 			<div class="celan_list">
-				<span class="weixin"><img src="%&gt;/dist/public/v1/images//wxx.png" width="60" height="60"></span> <span><a href="/down/" title="魔飞公寓官方APP" target="_blank"><img src="%&gt;/dist/public/v1/images//app.png" width="60" height="60"></a></span> <span class="customer2"><a href="javascript:;"><img src="%&gt;/dist/public/v1/images//kf.png" width="60" height="60"></a></span> <span><a href="javascript:goTop();" title="返回顶部"><img src="%&gt;/dist/public/v1/images//top.png" width="60" height="60"></a></span>
+				<span class="weixin"><img
+					src="%&gt;/dist/public/v1/images//wxx.png" width="60" height="60"></span>
+				<span><a href="/down/" title="魔飞公寓官方APP" target="_blank"><img
+						src="%&gt;/dist/public/v1/images//app.png" width="60" height="60"></a></span>
+				<span class="customer2"><a href="javascript:;"><img
+						src="%&gt;/dist/public/v1/images//kf.png" width="60" height="60"></a></span>
+				<span><a href="javascript:goTop();" title="返回顶部"><img
+						src="%&gt;/dist/public/v1/images//top.png" width="60" height="60"></a></span>
 			</div>
 			<div class="em" style="display: none;">
 				<div class="em_pr">
-					<img src="%&gt;/dist/public/v1/images//em.png" width="149" height="149"> <i></i>
+					<img src="%&gt;/dist/public/v1/images//em.png" width="149"
+						height="149"> <i></i>
 				</div>
 			</div>
 		</div>
@@ -496,100 +851,127 @@
 				<div id="mySwipe_1" class="swipe">
 					<div class="swipe-wrap">
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/sg_1.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/sg_1.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/sg_2.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/sg_2.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/sg_3.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/sg_3.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/sg_4.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/sg_4.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/sg_5.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/sg_5.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/sg_6.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/sg_6.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/sg_7.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/sg_7.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/sg_8.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/sg_8.jpg"
+								width="930" height="620">
 						</div>
 					</div>
 				</div>
 				<span class="pics_pre" onclick="mySwipe.prev();" index="">&nbsp;</span>
 				<span class="pics_next" onclick="mySwipe.next();" index="">&nbsp;</span>
-				<span class="colse"></span> <span class="te_fg">时光系列</span> <span class="te_num"></span>
+				<span class="colse"></span> <span class="te_fg">时光系列</span> <span
+					class="te_num"></span>
 			</div>
 			<div id="dt_div_2" class="dili po_r" style="width: 930px;">
 				<div id="mySwipe_2" class="swipe">
 					<div class="swipe-wrap">
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_1.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_1.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_2.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_2.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_3.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_3.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_4.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_4.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_5.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_5.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_6.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_6.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_7.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_7.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_8.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/mkl_8.jpg"
+								width="930" height="620">
 						</div>
 					</div>
 				</div>
 				<span class="pics_pre" onclick="mySwipe.prev();" index="">&nbsp;</span>
 				<span class="pics_next" onclick="mySwipe.next();" index="">&nbsp;</span>
-				<span class="colse"></span> <span class="te_fg">马卡龙系列</span> <span class="te_num"></span>
+				<span class="colse"></span> <span class="te_fg">马卡龙系列</span> <span
+					class="te_num"></span>
 			</div>
 			<div id="dt_div_3" class="dili po_r" style="width: 930px;">
 				<div id="mySwipe_3" class="swipe">
 					<div class="swipe-wrap">
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/ql_1.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/ql_1.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/ql_2.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/ql_2.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/ql_3.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/ql_3.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/ql_4.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/ql_4.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/ql_5.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/ql_5.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/ql_6.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/ql_6.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/ql_7.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/ql_7.jpg"
+								width="930" height="620">
 						</div>
 						<div>
-							<img src="%&gt;/dist/public/v1/images//fg_list/ql_8.jpg" width="930" height="620">
+							<img src="%&gt;/dist/public/v1/images//fg_list/ql_8.jpg"
+								width="930" height="620">
 						</div>
 					</div>
 				</div>
 				<span class="pics_pre" onclick="mySwipe.prev();" index="">&nbsp;</span>
 				<span class="pics_next" onclick="mySwipe.next();" index="">&nbsp;</span>
-				<span class="colse"></span> <span class="te_fg">晴朗系列</span> <span class="te_num"></span>
+				<span class="colse"></span> <span class="te_fg">晴朗系列</span> <span
+					class="te_num"></span>
 			</div>
 		</div>
 	</article>
@@ -603,8 +985,8 @@
 							title="魔飞微信" class="wx">
 							<div class="btm_em" style="display: none;">
 								<div class="em_pr">
-									<img src="%>/dist/public/v1/images//em.png"
-										width="149" height="149"> <i></i>
+									<img src="%>/dist/public/v1/images//em.png" width="149"
+										height="149"> <i></i>
 								</div>
 							</div>
 						</a>
@@ -613,12 +995,11 @@
 						<h4>下载官方APP</h4>
 						<a href="http://www.monph.com/app/Monph.apk" target="_blank"
 							title="Android下载" class="android"><img
-							src="%>/dist/public/v1/images//and.jpg" width="26"
-							height="29"></a> <a
+							src="%>/dist/public/v1/images//and.jpg" width="26" height="29"></a>
+						<a
 							href="https://itunes.apple.com/us/app/mo-fei-gong-yu-zheng-zhou/id887776293?mt=8"
 							target="_blank" title="IOS下载" class="ios"><img
-							src="%>/dist/public/v1/images/ios.jpg" width="26"
-							height="29"></a>
+							src="%>/dist/public/v1/images/ios.jpg" width="26" height="29"></a>
 					</div>
 				</div>
 				<div class="ftr_nav">
@@ -668,274 +1049,11 @@
 			</div>
 		</div>
 	</footer>
-<script>
 
-	function fg_big(k,index){
-		$.colorbox({
-			open:true,
-			fixed:false,
-			inline:true,
-			width:1230,
-			height:720,
-			href:"#dt_div_"+k,
-			overlayClose:true,
-			onComplete:function(){ 
-				//幻灯片
-				window.mySwipe = $('#mySwipe_'+k).Swipe({
-					startSlide: index-1,
-					//auto: 3000,
-					continuous: true,
-					disableScroll: true,
-					stopPropagation: true,
-					callback: function(index, element) {},
-					transitionEnd: function(index, element) {}
-					}).data('Swipe');
-			}
-		});
-		$(".pics_pre").attr('index',index);
-		$(".pics_next").attr('index',index);
-		$(".te_num").html(index+'/8');
-	}
-	var liulan = ',1';
-	function on_fj(k){
-		
-		$(".fj_nav span").removeClass('exm_nav_on');
-		$("#fj_on_"+k).addClass('exm_nav_on');
-		$(".apt_ul").hide();
-		$("#fj_"+k).css('display','');
-		
-		var kl = liulan.indexOf(','+k);
-		if(kl==-1){
-			liulan = liulan+','+k;
-			if(k==3){
-				var st = parseInt($(window).scrollTop())-1;
-			}else{
-				var st = parseInt($(window).scrollTop())+1;
-			}			
-			$('html,body').animate({ 'scrollTop': st }, 3);
-		}		
-	}
-	function on_fg(k){
-		$(".fg_nav span").removeClass('exm_nav_on');
-		$("#fg_on_"+k).addClass('exm_nav_on');
-		$(".exm_ul").hide();
-		$("#fg_"+k).css('display','');
-	}
-	var imageLen = $('div.hr_img').length;
-	var lastPic = imageLen - 1;
-	var firstPic = 0;
-	var timeInterval = 5000;
-	var fadeInOutTime = 2000;
-	var setInt;
-	$(window).load(function() {
-		setInt = setTimeout("next_pic()",timeInterval);   
-		//$(".pics_pre").show();
-		//$(".pics_next").show();
-		get_zujin(2);
-		get_zujin(3);
-		get_zujin(4);		
-	})
-	function get_zujin(k){
-		//获取价格
-		var fangjian_id = $("#fangjian_id_"+k).val();		
-		if(fangjian_id){
-			$.post('/?action=zujin',{fangjian_id:fangjian_id},function(data){
-				if(data){
-					$.each(data, function (fangjian_id, zujin) {						
-					    $("#zujin_"+k+"_"+fangjian_id).html(zujin+'元/月');
-					});
-				}
-				return;
-			},'json');
-		}
-		return;
-	}
-	function pre_pic()
-	{
-		var currentImage = $('.banner_img');
-		var currentIndex = $('div.hr_img').index($(currentImage));
-		if(currentIndex > firstPic && currentIndex <= lastPic){
-			 currentIndex--;
-		}
-		else {
-			currentIndex  = lastPic;
-		}
-		clearInterval(setInt);
-		currentImage.removeClass('banner_img').fadeOut(fadeInOutTime);
-		$('div.hr_img').eq(currentIndex).addClass('banner_img').fadeIn(fadeInOutTime);
-		setInt = setTimeout("next_pic()",timeInterval);   
-	} 
-	function next_pic()
-	{
-		var currentImage = $('.banner_img');
-		var currentIndex = $('div.hr_img').index(currentImage);
-		if(currentIndex >= firstPic && currentIndex < lastPic){
-			currentIndex++;
-		}
-		else {
-			currentIndex = firstPic;
-		}
-		clearInterval(setInt);
-		currentImage.removeClass('banner_img').fadeOut(fadeInOutTime);
-		$('div.hr_img').eq(currentIndex).addClass('banner_img').fadeIn(fadeInOutTime);
-		setInt = setTimeout("next_pic()",timeInterval);   
-	}	
-	function showHomeMenu()
-	{		
-		$("#home-menu").css('display','');
-	}
-	function hideHomeMenu()
-	{				
-		$("#home-menu").hide();
-	}
-	function showMask(n,k)
-	{		
-		$("#mask_"+n+"_"+k).css('display','');
-	}
-	function hideMask(n,k)
-	{				
-		$("#mask_"+n+"_"+k).hide();
-	}
-	function goTop() {
-		$('html,body').animate({ 'scrollTop': 0 }, 300);
-	}
-	$(document).ready(function(){
-		$('.colse').live("click",function(){    
-			$.colorbox.close();	
-		});	
-		$("img.readyload").lazyload({
-			threshold: 300,
-			effect: "fadeIn"
-		});
-		$(".weixin").live('mouseover',function(){    
-			$(".em").show();
-		});
-		$(".weixin").live('mouseout',function(){    
-			$(".em").hide();
-		});
-
-		$(".wx").live('mouseover',function(){    
-			$(".btm_em").show();
-		});
-		$(".wx").live('mouseout',function(){    
-			$(".btm_em").hide();
-		});
-
-		$(".customer2").live('click',function(){			
-			$("#nb_icon_wrap").click();			
-		});
-		$(".pics_pre").click(function(){
-			var index = $(".pics_pre").attr('index');			
-			if(index==1){
-				index = 8;
-			}else{
-				index = parseInt(index)-1;
-			}
-			$(".te_num").html(index+'/8');		
-			$(".pics_pre").attr('index',index);
-			$(".pics_next").attr('index',index);
-		});	
-		$(".pics_next").click(function(){
-			var index = $(".pics_next").attr('index');			
-			if(index==8){
-				index = 1;				
-			}else{
-				index = parseInt(index)+1;				
-			}
-			$(".te_num").html(index+'/8');
-			$(".pics_pre").attr('index',index);
-			$(".pics_next").attr('index',index);
-		});		
-	});	
-	
-	$(function() {
-		var jx_sWidth = $("#jxfocus").width(); //获取焦点图的宽度（显示面积）
-		var jx_len = $("#jxfocus dl").length; //获取焦点图个数
-		var jx_index = 0;
-		var on_index = 0;
-		var jx_picTimer;
-
-		//以下代码添加数字按钮和按钮后的半透明条，还有上一页、下一页两个按钮
-		var btn = "";
-		for(var i=0; i < jx_len; i++) {
-			btn += "<li></li>";
-		}		
-		$(".hai_ul").append(btn);
-			
-		//为小按钮添加鼠标滑入事件，以显示相应的内容
-		$(".hai_ul li").mouseenter(function() {
-			index = $(".hai_ul li").index(this);	
-			jx_index = index;	
-			jx_showPics(index);
-		}).eq(0).trigger("mouseenter");		
-
-		//本例为左右滚动，即所有li元素都是在同一排向左浮动，所以这里需要计算出外围ul元素的宽度
-		$(".hua_d").css("width",jx_sWidth * (jx_len));
-		
-		//鼠标滑上焦点图时停止自动播放，滑出时开始自动播放
-		$("#jx_div").hover(function() {
-			clearInterval(jx_picTimer);
-		},function() {
-			jx_picTimer = setInterval(function() {
-				jx_showPics(jx_index);
-				//alert(jx_index);
-				on_index = jx_index;
-				jx_index++;
-				if(jx_index == jx_len) {jx_index = 0;}
-			},3000); //此4000代表自动播放的间隔，单位：毫秒
-		}).trigger("mouseleave");
-		
-		//显示图片函数，根据接收的index值显示相应的内容
-		function jx_showPics(jx_index) { //普通切换
-			var jx_nowLeft = -jx_index*jx_sWidth; //根据index值计算ul元素的left值
-			$(".hai_ul li").removeClass("hai_on").eq(jx_index).addClass("hai_on");
-			$(".hua_d").stop(true,false).animate({"left":jx_nowLeft},300); //通过animate()调整ul元素滚动到计算出的position
-		}
-	});	
-	$(function() {
-		var qy_sWidth = $(".cut_list li").width(); //获取焦点图的宽度（显示面积）
-		var qy_len = $(".cut_list li").length; //获取焦点图个数
-		var qy_index = 0;
-		var qy_on_index = 0;
-		var qy_picTimer;
-
-		//以下代码添加数字按钮和按钮后的半透明条，还有上一页、下一页两个按钮
-		var btn_qy = "";
-		for(var i=0; i < (qy_len-4); i++) {
-			btn_qy += "<li></li>";
-		}		
-		$(".cut_ul").append(btn_qy);
-			
-		//为小按钮添加鼠标滑入事件，以显示相应的内容
-		$(".cut_ul li").mouseenter(function() {
-			index = $(".cut_ul li").index(this);	
-			qy_index = index;	
-			qy_showPics(index);
-		}).eq(0).trigger("mouseenter");		
-
-		//本例为左右滚动，即所有li元素都是在同一排向左浮动，所以这里需要计算出外围ul元素的宽度
-		$(".cut_list").css("width",qy_sWidth * (qy_len));
-		
-		//鼠标滑上焦点图时停止自动播放，滑出时开始自动播放
-		$(".qy_div").hover(function() {
-			clearInterval(qy_picTimer);
-		},function() {
-			qy_picTimer = setInterval(function() {
-				qy_showPics(qy_index);				
-				qy_on_index = qy_index;
-				qy_index++;
-				if(qy_index == (qy_len-4)) {qy_index = 0;}
-			},3000); //此4000代表自动播放的间隔，单位：毫秒
-		}).trigger("mouseleave");
-		
-		//显示图片函数，根据接收的index值显示相应的内容
-		function qy_showPics(qy_index) { //普通切换	
-			var qy_nowLeft = -qy_index*qy_sWidth;				
-			$(".cut_ul li").removeClass("cut_on").eq(qy_index).addClass("cut_on");
-			$(".cut_list").stop(true,false).animate({"left":qy_nowLeft},300); //通过animate()调整ul元素滚动到计算出的position
-		}
-	});	
-</script>
+	<script type="text/javascript"
+		src="<%=basePath%>/dist/public/js/calendar.js"></script>
+	<script type="text/javascript"
+		src="<%=basePath%>/dist/customer/js/home.js"></script>
 
 </body>
 
