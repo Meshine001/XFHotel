@@ -51,7 +51,7 @@
 	height: 50px;
 	border: none;
 	line-height: 50px;
-	background: #ff4400;
+	background: #f86060;
 	color: #fff;
 	font-size: 24px;
 	flex: 1;
@@ -112,6 +112,7 @@
 }
 
 .service {
+	background-color: #dcdcdc;
 	padding: 10px 0;
 }
 
@@ -234,7 +235,7 @@
 
 .exm_nav {
 	text-align: center;
-	padding: 30px 0 0;
+	padding: 10px 0 0;
 }
 
 .exm_nav span {
@@ -249,8 +250,8 @@
 }
 
 .exm_nav .exm_nav_on {
-	color: #ff6600;
-	border-bottom: 2px solid #ff6600;
+	color: #17cb4a;
+	border-bottom: 2px solid #17cb4a;
 }
 
 .exm_ul {
@@ -289,13 +290,13 @@
 .apt_ul li .apt_jg {
 	text-align: center;
 	font-size: 18px;
-	color: #ff6600;
+	color: #17cb4a;
 	margin-top: 10px;
 }
 
 .apt_ul li .apt_bt {
 	font-size: 16px;
-	color: #252535;
+	color: #999;
 	text-align: center;
 }
 

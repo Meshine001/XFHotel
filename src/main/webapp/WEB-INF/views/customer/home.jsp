@@ -178,12 +178,12 @@
 			<a href="/" title="青舍首页" class="logo"></a>
 			<div class="nav clearfix">
 				<ul class="nav_ul">
-					<li><a href="/" title="魔飞首页">首页</a></li>
-					<li><a href="/list/" title="我要租房">我要租房</a></li>
-					<li><a href="/maplist/" title="地图找房">地图找房</a></li>
-					<li><a href="/shenghuo/" title="嗨生活">嗨生活</a></li>
-					<li><a href="/qilejia.html" target="_blank" title="企乐家">企乐家</a></li>
-					<li><a href="/jiameng.html" target="_blank" title="业主加盟">业主加盟</a></li>
+					<li><a href="/" title="">首页</a></li>
+					<li><a href="/list/" title="">酒店式公寓</a></li>
+					<li><a href="/maplist/" title="">休闲式公寓</a></li>
+					<li><a href="/shenghuo/" title="">青客生活</a></li>
+					<li><a href="/qilejia.html" target="_blank" title="">服务中心</a></li>
+					<li><a href="/jiameng.html" target="_blank" title="">在线管家</a></li>
 				</ul>
 				<div class="lgorrg" onmouseover="" onmouseout="">
 					<a class="lg" href="/login.html" title="登录">登录</a>&nbsp;·&nbsp;<a
@@ -231,7 +231,172 @@
 				</form>
 			</div>
 		</div>
-		<div class="example">
+		<div class="apartment">
+			<div class="main">
+				<h3 class="tit">这里有你需要的公寓</h3>
+				<div class="exm_nav fj_nav">
+					<span id="fj_on_1" onmouseover="on_fj(1);" class="exm_nav_on"></span>
+				</div>
+				<ul class="apt_ul" id="fj_1" style="display: none;">
+					<li><a href="/info-41014266102.html" target="_blank" title="正商城泰园4居室-卧-B房间-阳台"> <img class="readyload" src="%&gt;/dist/public/v1/images//5dea91f8fd5804252d49c1a786521cf8.jpg" data-original="%&gt;/dist/public/v1/images//5dea91f8fd5804252d49c1a786521cf8.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span>1185</span>元/月
+							</p>
+							<p class="apt_bt">正商城泰园4居室-卧-B房间-阳台</p>
+					</a></li>
+					<li><a href="/info-41014253805.html" target="_blank" title="风和日丽四期5居室-卧-E房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/94/5a30ab5239efe90ca5a78bc613fd7ab6.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/94/5a30ab5239efe90ca5a78bc613fd7ab6.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span>1241</span>元/月
+							</p>
+							<p class="apt_bt">风和日丽四期5居室-卧-E房间</p>
+					</a></li>
+					<li><a href="/info-41015446003.html" target="_blank" title="白庙社区3居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/508/0f3a19792bab5c60e597031f54a61862.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/508/0f3a19792bab5c60e597031f54a61862.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span>1177</span>元/月
+							</p>
+							<p class="apt_bt">白庙社区3居室-卧-C房间</p>
+					</a></li>
+					<li><a href="/info-41011503001.html" target="_blank" title="紫薇里3居室-卧-A房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/272/c2abaccd6523d697da36b05d641951e4.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/272/c2abaccd6523d697da36b05d641951e4.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span>1200</span>元/月
+							</p>
+							<p class="apt_bt">紫薇里3居室-卧-A房间</p>
+					</a></li>
+					<li><a href="/info-41013200802.html" target="_blank" title="白庙社区4居室-卧-B房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/502/0da363c3de5667b98caa07859778775f.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/502/0da363c3de5667b98caa07859778775f.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span>1257</span>元/月
+							</p>
+							<p class="apt_bt">白庙社区4居室-卧-B房间</p>
+					</a></li>
+					<li><a href="/info-41014215803.html" target="_blank" title="白庙社区3居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/424/bf612cd6b6e60757dfb71f4e818e425a.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/424/bf612cd6b6e60757dfb71f4e818e425a.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span>1276</span>元/月
+							</p>
+							<p class="apt_bt">白庙社区3居室-卧-C房间</p>
+					</a></li>
+				</ul>
+
+				<ul class="apt_ul" id="fj_2">
+					<li><a href="/info-41017631406.html" target="_blank" title="翡翠公寓6居室-卧-F房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/100/ba0bea531d953466f778498e7c4a0c80.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/100/ba0bea531d953466f778498e7c4a0c80.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_2_133">826元/月</span>
+							</p>
+							<p class="apt_bt">翡翠公寓6居室-卧-F房间</p>
+					</a></li>
+					<li><a href="/info-41014419103.html" target="_blank" title="罗庄4居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/710/2a39faf3111325fd38c7be207ef1d4a0.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/710/2a39faf3111325fd38c7be207ef1d4a0.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_2_2407">854元/月</span>
+							</p>
+							<p class="apt_bt">罗庄4居室-卧-C房间</p>
+					</a></li>
+					<li><a href="/info-41012709003.html" target="_blank" title="栖湖怡家3居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/685/38ccee116b1cb66545ad8296921da225.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/685/38ccee116b1cb66545ad8296921da225.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_2_2300">854元/月</span>
+							</p>
+							<p class="apt_bt">栖湖怡家3居室-卧-C房间</p>
+					</a></li>
+					<li><a href="/info-41017124503.html" target="_blank" title="栖湖怡家3居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/682/7f465cd8d7cf345a9c0f8897db448a0a.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/682/7f465cd8d7cf345a9c0f8897db448a0a.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_2_2290">854元/月</span>
+							</p>
+							<p class="apt_bt">栖湖怡家3居室-卧-C房间</p>
+					</a></li>
+					<li><a href="/info-41014239802.html" target="_blank" title="栖湖怡家3居室-卧-B房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/680/ad97e096070bfd73e4e0b6a7169f9458.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/680/ad97e096070bfd73e4e0b6a7169f9458.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_2_2282">854元/月</span>
+							</p>
+							<p class="apt_bt">栖湖怡家3居室-卧-B房间</p>
+					</a></li>
+					<li><a href="/info-41019014403.html" target="_blank" title="清城美苑6居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/652/b202cf8625656a3428e9f46025a51052.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/652/b202cf8625656a3428e9f46025a51052.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_2_2165">904元/月</span>
+							</p>
+							<p class="apt_bt">清城美苑6居室-卧-C房间</p>
+					</a></li>
+
+				</ul>
+				<ul class="apt_ul" id="fj_3" style="display: none;">
+					<li><a href="/info-41014419101.html" target="_blank" title="罗庄4居室-卧-A房间-独卫"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/710/a8d49514a29d356c5e241d1fabf125bf.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/710/a8d49514a29d356c5e241d1fabf125bf.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_3_2405">1424元/月</span>
+							</p>
+							<p class="apt_bt">罗庄4居室-卧-A房间-独卫</p>
+					</a></li>
+					<li><a href="/info-41016419701.html" target="_blank" title="正商明钻4居室-卧-A房间-独卫-飘窗"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/698/0e39def4d8ddc20184aa45473f63db9a.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/698/0e39def4d8ddc20184aa45473f63db9a.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_3_2348">1329元/月</span>
+							</p>
+							<p class="apt_bt">正商明钻4居室-卧-A房间-独卫-飘窗</p>
+					</a></li>
+					<li><a href="/info-41011939301.html" target="_blank" title="紫英佳苑4居室-卧-A房间-独卫-飘窗"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/681/1f1c050c1731b638cc15455729b03c44.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/681/1f1c050c1731b638cc15455729b03c44.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_3_2284">1334元/月</span>
+							</p>
+							<p class="apt_bt">紫英佳苑4居室-卧-A房间-独卫-飘窗</p>
+					</a></li>
+					<li><a href="/info-41017798101.html" target="_blank" title="开元银田花园4居室-卧-A房间-阳台-独卫"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/675/002791d43add40c0f59b7811ca89c380.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/675/002791d43add40c0f59b7811ca89c380.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_3_2263">1329元/月</span>
+							</p>
+							<p class="apt_bt">开元银田花园4居室-卧-A房间-阳台-独…</p>
+					</a></li>
+					<li><a href="/info-41011549901.html" target="_blank" title="和昌湾景国际4居室-卧-A房间-独卫-飘窗"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/664/ac8aee8caebea098c41eb33ad6ba6f48.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/664/ac8aee8caebea098c41eb33ad6ba6f48.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_3_2216">1329元/月</span>
+							</p>
+							<p class="apt_bt">和昌湾景国际4居室-卧-A房间-独卫-飘…</p>
+					</a></li>
+					<li><a href="/info-41017011301.html" target="_blank" title="九龙城龙腾西城5居室-卧-A房间-独卫-飘窗"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/662/1dce2deca0349a50b6f83fe85ea59102.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/662/1dce2deca0349a50b6f83fe85ea59102.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_3_2207">1329元/月</span>
+							</p>
+							<p class="apt_bt">九龙城龙腾西城5居室-卧-A房间-独卫-…</p>
+					</a></li>
+				</ul>
+				<ul class="apt_ul" id="fj_4" style="display: none;">
+					<li><a href="/info-41016114103.html" target="_blank" title="栖湖怡家3居室-卧-C房间-飘窗"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/677/f4a43436d42742034de3a175a3f2175a.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/677/f4a43436d42742034de3a175a3f2175a.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_4_2273">800元/月</span>
+							</p>
+							<p class="apt_bt">栖湖怡家3居室-卧-C房间-飘窗</p>
+					</a></li>
+					<li><a href="/info-41015278803.html" target="_blank" title="紫薇里3居室-卧-C房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/375/dc4524ed361683e61a43fdec0592b1ef.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/375/dc4524ed361683e61a43fdec0592b1ef.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_4_1188">987元/月</span>
+							</p>
+							<p class="apt_bt">紫薇里3居室-卧-C房间</p>
+					</a></li>
+					<li><a href="/info-41011009501.html" target="_blank" title="六合幸福门3居室-卧-A房间-阳台"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/642/444c2bd095c44859cb1f7c77cd45c203.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/642/444c2bd095c44859cb1f7c77cd45c203.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_4_2119">1462元/月</span>
+							</p>
+							<p class="apt_bt">六合幸福门3居室-卧-A房间-阳台</p>
+					</a></li>
+					<li><a href="/info-41016446101.html" target="_blank" title="紫薇里3居室-卧-A房间"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/293/ee478129f49b8e044e559b202e3b4887.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/293/ee478129f49b8e044e559b202e3b4887.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_4_913">1177元/月</span>
+							</p>
+							<p class="apt_bt">紫薇里3居室-卧-A房间</p>
+					</a></li>
+					<li><a href="/info-41017563105.html" target="_blank" title="威尼斯水城5居室-卧-E房间-阳台"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/106/70bbd76352e684fed4a1ad6aa1733bd8.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/106/70bbd76352e684fed4a1ad6aa1733bd8.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_4_158">1241元/月</span>
+							</p>
+							<p class="apt_bt">威尼斯水城5居室-卧-E房间-阳台</p>
+					</a></li>
+					<li><a href="/info-41017046602.html" target="_blank" title="紫薇里3居室-卧-B房间-阳台"> <img class="readyload" src="/hotel/dist/thumb/dress_378x251/house_img/364/709039d211e735c492735b2a577d39c7.jpg" data-original="/hotel/dist/thumb/dress_378x251/house_img/364/709039d211e735c492735b2a577d39c7.jpg" width="378" height="251" style="display: inline;">
+							<p class="apt_jg">
+								<span id="zujin_4_1154">1283元/月</span>
+							</p>
+							<p class="apt_bt">紫薇里3居室-卧-B房间-阳台</p>
+					</a></li>
+				</ul>
+				<input type="hidden" name="fangjian_id_2" id="fangjian_id_2" value="133,2407,2300,2290,2282,2165"> <input type="hidden" name="fangjian_id_3" id="fangjian_id_3" value="2405,2348,2284,2263,2216,2207"> <input type="hidden" name="fangjian_id_4" id="fangjian_id_4" value="2273,1188,2119,913,158,1154">
+				<div class="more">
+					<a title="查看更多房源" href="/list/">MORE</a>
+				</div>
+			</div>
+		</div><div class="example" style="display: none;">
 			<div class="main">
 				<h3 class="tit">走哪玩哪 不亦乐乎</h3>
 				<div class="exm_nav fg_nav">
@@ -362,273 +527,7 @@
 			</div>
 		</div>
 
-		<div class="apartment">
-			<div class="main">
-				<h3 class="tit">这里有你需要的小窝</h3>
-				<div class="exm_nav fj_nav">
-					<span id="fj_on_1" onmouseover="on_fj(1);" class="exm_nav_on"></span>
-				</div>
-				<ul class="apt_ul" id="fj_1" style="display: none;">
-					<li><a href="/info-41014266102.html" target="_blank"
-						title="正商城泰园4居室-卧-B房间-阳台"> <img class="readyload"
-							src="%&gt;/dist/public/v1/images//5dea91f8fd5804252d49c1a786521cf8.jpg"
-							data-original="%>/dist/public/v1/images//5dea91f8fd5804252d49c1a786521cf8.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span>1185</span>元/月
-							</p>
-							<p class="apt_bt">正商城泰园4居室-卧-B房间-阳台</p>
-					</a></li>
-					<li><a href="/info-41014253805.html" target="_blank"
-						title="风和日丽四期5居室-卧-E房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/94/5a30ab5239efe90ca5a78bc613fd7ab6.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/94/5a30ab5239efe90ca5a78bc613fd7ab6.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span>1241</span>元/月
-							</p>
-							<p class="apt_bt">风和日丽四期5居室-卧-E房间</p>
-					</a></li>
-					<li><a href="/info-41015446003.html" target="_blank"
-						title="白庙社区3居室-卧-C房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/508/0f3a19792bab5c60e597031f54a61862.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/508/0f3a19792bab5c60e597031f54a61862.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span>1177</span>元/月
-							</p>
-							<p class="apt_bt">白庙社区3居室-卧-C房间</p>
-					</a></li>
-					<li><a href="/info-41011503001.html" target="_blank"
-						title="紫薇里3居室-卧-A房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/272/c2abaccd6523d697da36b05d641951e4.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/272/c2abaccd6523d697da36b05d641951e4.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span>1200</span>元/月
-							</p>
-							<p class="apt_bt">紫薇里3居室-卧-A房间</p>
-					</a></li>
-					<li><a href="/info-41013200802.html" target="_blank"
-						title="白庙社区4居室-卧-B房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/502/0da363c3de5667b98caa07859778775f.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/502/0da363c3de5667b98caa07859778775f.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span>1257</span>元/月
-							</p>
-							<p class="apt_bt">白庙社区4居室-卧-B房间</p>
-					</a></li>
-					<li><a href="/info-41014215803.html" target="_blank"
-						title="白庙社区3居室-卧-C房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/424/bf612cd6b6e60757dfb71f4e818e425a.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/424/bf612cd6b6e60757dfb71f4e818e425a.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span>1276</span>元/月
-							</p>
-							<p class="apt_bt">白庙社区3居室-卧-C房间</p>
-					</a></li>
-				</ul>
-
-				<ul class="apt_ul" id="fj_2">
-					<li><a href="/info-41017631406.html" target="_blank"
-						title="翡翠公寓6居室-卧-F房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/100/ba0bea531d953466f778498e7c4a0c80.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/100/ba0bea531d953466f778498e7c4a0c80.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_2_133">826元/月</span>
-							</p>
-							<p class="apt_bt">翡翠公寓6居室-卧-F房间</p>
-					</a></li>
-					<li><a href="/info-41014419103.html" target="_blank"
-						title="罗庄4居室-卧-C房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/710/2a39faf3111325fd38c7be207ef1d4a0.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/710/2a39faf3111325fd38c7be207ef1d4a0.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_2_2407">854元/月</span>
-							</p>
-							<p class="apt_bt">罗庄4居室-卧-C房间</p>
-					</a></li>
-					<li><a href="/info-41012709003.html" target="_blank"
-						title="栖湖怡家3居室-卧-C房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/685/38ccee116b1cb66545ad8296921da225.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/685/38ccee116b1cb66545ad8296921da225.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_2_2300">854元/月</span>
-							</p>
-							<p class="apt_bt">栖湖怡家3居室-卧-C房间</p>
-					</a></li>
-					<li><a href="/info-41017124503.html" target="_blank"
-						title="栖湖怡家3居室-卧-C房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/682/7f465cd8d7cf345a9c0f8897db448a0a.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/682/7f465cd8d7cf345a9c0f8897db448a0a.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_2_2290">854元/月</span>
-							</p>
-							<p class="apt_bt">栖湖怡家3居室-卧-C房间</p>
-					</a></li>
-					<li><a href="/info-41014239802.html" target="_blank"
-						title="栖湖怡家3居室-卧-B房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/680/ad97e096070bfd73e4e0b6a7169f9458.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/680/ad97e096070bfd73e4e0b6a7169f9458.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_2_2282">854元/月</span>
-							</p>
-							<p class="apt_bt">栖湖怡家3居室-卧-B房间</p>
-					</a></li>
-					<li><a href="/info-41019014403.html" target="_blank"
-						title="清城美苑6居室-卧-C房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/652/b202cf8625656a3428e9f46025a51052.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/652/b202cf8625656a3428e9f46025a51052.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_2_2165">904元/月</span>
-							</p>
-							<p class="apt_bt">清城美苑6居室-卧-C房间</p>
-					</a></li>
-
-				</ul>
-				<ul class="apt_ul" id="fj_3" style="display: none;">
-					<li><a href="/info-41014419101.html" target="_blank"
-						title="罗庄4居室-卧-A房间-独卫"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/710/a8d49514a29d356c5e241d1fabf125bf.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/710/a8d49514a29d356c5e241d1fabf125bf.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_3_2405">1424元/月</span>
-							</p>
-							<p class="apt_bt">罗庄4居室-卧-A房间-独卫</p>
-					</a></li>
-					<li><a href="/info-41016419701.html" target="_blank"
-						title="正商明钻4居室-卧-A房间-独卫-飘窗"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/698/0e39def4d8ddc20184aa45473f63db9a.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/698/0e39def4d8ddc20184aa45473f63db9a.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_3_2348">1329元/月</span>
-							</p>
-							<p class="apt_bt">正商明钻4居室-卧-A房间-独卫-飘窗</p>
-					</a></li>
-					<li><a href="/info-41011939301.html" target="_blank"
-						title="紫英佳苑4居室-卧-A房间-独卫-飘窗"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/681/1f1c050c1731b638cc15455729b03c44.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/681/1f1c050c1731b638cc15455729b03c44.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_3_2284">1334元/月</span>
-							</p>
-							<p class="apt_bt">紫英佳苑4居室-卧-A房间-独卫-飘窗</p>
-					</a></li>
-					<li><a href="/info-41017798101.html" target="_blank"
-						title="开元银田花园4居室-卧-A房间-阳台-独卫"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/675/002791d43add40c0f59b7811ca89c380.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/675/002791d43add40c0f59b7811ca89c380.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_3_2263">1329元/月</span>
-							</p>
-							<p class="apt_bt">开元银田花园4居室-卧-A房间-阳台-独…</p>
-					</a></li>
-					<li><a href="/info-41011549901.html" target="_blank"
-						title="和昌湾景国际4居室-卧-A房间-独卫-飘窗"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/664/ac8aee8caebea098c41eb33ad6ba6f48.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/664/ac8aee8caebea098c41eb33ad6ba6f48.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_3_2216">1329元/月</span>
-							</p>
-							<p class="apt_bt">和昌湾景国际4居室-卧-A房间-独卫-飘…</p>
-					</a></li>
-					<li><a href="/info-41017011301.html" target="_blank"
-						title="九龙城龙腾西城5居室-卧-A房间-独卫-飘窗"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/662/1dce2deca0349a50b6f83fe85ea59102.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/662/1dce2deca0349a50b6f83fe85ea59102.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_3_2207">1329元/月</span>
-							</p>
-							<p class="apt_bt">九龙城龙腾西城5居室-卧-A房间-独卫-…</p>
-					</a></li>
-				</ul>
-				<ul class="apt_ul" id="fj_4" style="display: none;">
-					<li><a href="/info-41016114103.html" target="_blank"
-						title="栖湖怡家3居室-卧-C房间-飘窗"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/677/f4a43436d42742034de3a175a3f2175a.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/677/f4a43436d42742034de3a175a3f2175a.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_4_2273">800元/月</span>
-							</p>
-							<p class="apt_bt">栖湖怡家3居室-卧-C房间-飘窗</p>
-					</a></li>
-					<li><a href="/info-41015278803.html" target="_blank"
-						title="紫薇里3居室-卧-C房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/375/dc4524ed361683e61a43fdec0592b1ef.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/375/dc4524ed361683e61a43fdec0592b1ef.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_4_1188">987元/月</span>
-							</p>
-							<p class="apt_bt">紫薇里3居室-卧-C房间</p>
-					</a></li>
-					<li><a href="/info-41011009501.html" target="_blank"
-						title="六合幸福门3居室-卧-A房间-阳台"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/642/444c2bd095c44859cb1f7c77cd45c203.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/642/444c2bd095c44859cb1f7c77cd45c203.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_4_2119">1462元/月</span>
-							</p>
-							<p class="apt_bt">六合幸福门3居室-卧-A房间-阳台</p>
-					</a></li>
-					<li><a href="/info-41016446101.html" target="_blank"
-						title="紫薇里3居室-卧-A房间"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/293/ee478129f49b8e044e559b202e3b4887.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/293/ee478129f49b8e044e559b202e3b4887.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_4_913">1177元/月</span>
-							</p>
-							<p class="apt_bt">紫薇里3居室-卧-A房间</p>
-					</a></li>
-					<li><a href="/info-41017563105.html" target="_blank"
-						title="威尼斯水城5居室-卧-E房间-阳台"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/106/70bbd76352e684fed4a1ad6aa1733bd8.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/106/70bbd76352e684fed4a1ad6aa1733bd8.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_4_158">1241元/月</span>
-							</p>
-							<p class="apt_bt">威尼斯水城5居室-卧-E房间-阳台</p>
-					</a></li>
-					<li><a href="/info-41017046602.html" target="_blank"
-						title="紫薇里3居室-卧-B房间-阳台"> <img class="readyload"
-							src="/hotel/dist/thumb/dress_378x251/house_img/364/709039d211e735c492735b2a577d39c7.jpg"
-							data-original="/hotel/dist/thumb/dress_378x251/house_img/364/709039d211e735c492735b2a577d39c7.jpg"
-							width="378" height="251" style="display: inline;">
-							<p class="apt_jg">
-								<span id="zujin_4_1154">1283元/月</span>
-							</p>
-							<p class="apt_bt">紫薇里3居室-卧-B房间-阳台</p>
-					</a></li>
-				</ul>
-				<input type="hidden" name="fangjian_id_2" id="fangjian_id_2"
-					value="133,2407,2300,2290,2282,2165"> <input type="hidden"
-					name="fangjian_id_3" id="fangjian_id_3"
-					value="2405,2348,2284,2263,2216,2207"> <input type="hidden"
-					name="fangjian_id_4" id="fangjian_id_4"
-					value="2273,1188,2119,913,158,1154">
-				<div class="more">
-					<a title="查看更多房源" href="/list/">MORE</a>
-				</div>
-			</div>
-		</div>
+		
 
 		<div class="hai">
 			<div class="main">
