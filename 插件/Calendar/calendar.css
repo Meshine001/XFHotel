@@ -65,12 +65,12 @@
 .calendar-month .cal_select span, .calendar-month .show-date span:hover
 	{
 	color: #fff;
-	background-color: #22bb62;
+	background-color: #da2f2f;
 	display: inline-block;
 	width: 100%;
 	height: 32px;
 	line-height: 32px;
-	cursor: pointer
+	cursor: pointer;
 }
 
 .calendar-week li {
@@ -78,7 +78,7 @@
 }
 
 .calendar-week .pink {
-	color: #22bb62
+	color: #da2f2f;
 }
 
 .calendar-month .line3 em {
@@ -133,11 +133,11 @@
 	position: absolute;
 	top: 12px;
     right: 12px;
-	background: url(/resourcesWeb/v201510/images/clear_data_gray.png) no-repeat center center;
+	background: url(images/clear_data_gray.png) no-repeat center center;
 }
 
 .clear_date:hover {
-	background: url(/resourcesWeb/v201510/images/clear_data_green.png) no-repeat center center
+	background: url(images/clear_data_green.png) no-repeat center center
 		!important;
 }
 
@@ -153,14 +153,14 @@
 .cal_pre {
 	left: 0;
 	background:
-		url(/resourcesWeb/v201510/images/commom/cal_icon_left_on.png)
+		url(images/cal_icon_left_on.png)
 		no-repeat center center
 }
 
 .cal_next {
 	right: 0;
 	background:
-		url(/resourcesWeb/v201510/images/commom/cal_icon_right_on.png)
+		url(images/cal_icon_right_on.png)
 		no-repeat center center
 }
 
