@@ -19,7 +19,8 @@
 <!-- Bootstrap core CSS -->
 <link href="<%=basePath%>/dist/commons/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
-
+<link rel="stylesheet"
+	href="<%=basePath%>/dist/commons/awesome/css/font-awesome.min.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
@@ -111,230 +112,186 @@
 			class="glyphicon glyphicon-chevron-right"></span> <span
 			class="sr-only">Next</span>
 		</a>
+		<div class="search-row">
+			<form class="" role="search">
+				<div class="search-col">
+					<span><i class="icon-calendar icon-large"></i></span><input
+						class="search-input" name="" type="text" value="入住时间">
+				</div>
+				<div class="search-col">
+					<span><i class="icon-search icon-large"></i></span><input
+						class="search-input" name="" type="text" value="城市">
+				</div>
+				<div class="search-col">
+					<button class="search-submit">搜索</button>
+				</div>
+			</form>
+		</div>
 	</div>
-
-
 	<div class="container">
-
-		<!-- 搜索框 -->
-		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
-				<form class="" role="search">
-					<div class="input-group">
-						<input type="text" class="form-control"> <span
-							class="input-group-addon"><button>搜索公寓</button></span>
-					</div>
-				</form>
+		<div class="home-section tuijian">
+			<h2 class="section-title">走到哪玩到哪 不亦乐乎</h2>
+			<ul>
+				<li class="tuijian-hotel"><span><i
+						class=" icon-caret-right icon-small"></i></span> 日租</li>
+				<li class="tuijian-play"><span><i
+						class=" icon-caret-right icon-small"></i></span> 游戏</li>
+			</ul>
+			<div class="row tuijian-box">
+				<div class="col-md-3">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive"></a>
+				</div>
+				<div class="col-md-3">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive"></a>
+				</div>
+				<div class="col-md-3">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive"></a>
+				</div>
+				<div class="col-md-3">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive"></a>
+				</div>
+				<div class="col-md-3">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive"></a>
+				</div>
+				<div class="col-md-3">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive"></a>
+				</div>
+				<div class="col-md-3">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive"></a>
+				</div>
+				<div class="col-md-3">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive"></a>
+				</div>
 			</div>
 		</div>
-
-		<!-- ./搜索框 -->
-		<hr class="featurette-divider">
 		<!-- 服务 -->
-		<h2>我们提供什么</h2>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="media">
-					<div class="media-left media-middle">
-						<img alt="" src="<%=basePath%>/images/info.png">
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">押一付一</h4>
-						<p>房租月付资金无压力</p>
-					</div>
+		<div class="home-section service well">
+			<h2 class="section-title">动动手指享受智能服务</h2>
+			<h3 class="section-title-sub">全新的安全机制 自助智能管家</h3>
+			<div class="row">
+				<div class="col-md-2 service-items">
+					<i class="icon-coffee icon-large"></i>
+					<p>续租
 				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="media">
-					<div class="media-left media-middle">
-						<img alt="" src="<%=basePath%>/images/info.png">
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">押一付一</h4>
-						<p>房租月付资金无压力</p>
-					</div>
+				<div class="col-md-2 service-items">
+					<i class="icon-coffee icon-large"></i>
+					<p>续租
 				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="media">
-					<div class="media-left media-middle">
-						<img alt="" src="<%=basePath%>/images/info.png">
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">押一付一</h4>
-						<p>房租月付资金无压力</p>
-					</div>
+				<div class="col-md-2 service-items">
+					<i class="icon-coffee icon-large"></i>
+					<p>续租
 				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="media">
-					<div class="media-left media-middle">
-						<img alt="" src="<%=basePath%>/images/info.png">
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">押一付一</h4>
-						<p>房租月付资金无压力</p>
-					</div>
+				<div class="col-md-2 service-items">
+					<i class="icon-coffee icon-large"></i>
+					<p>续租
 				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="media">
-					<div class="media-left media-middle">
-						<img alt="" src="<%=basePath%>/images/info.png">
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">押一付一</h4>
-						<p>房租月付资金无压力</p>
-					</div>
+				<div class="col-md-2 service-items">
+					<i class="icon-coffee icon-large"></i>
+					<p>续租
 				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="media">
-					<div class="media-left media-middle">
-						<img alt="" src="<%=basePath%>/images/info.png">
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">押一付一</h4>
-						<p>房租月付资金无压力</p>
-					</div>
+				<div class="col-md-2 service-items">
+					<i class="icon-coffee icon-large"></i>
+					<p>续租
+				</div>
+				<div class="col-md-2 service-items">
+					<i class="icon-coffee icon-large"></i>
+					<p>续租
+				</div>
+				<div class="col-md-2 service-items">
+					<i class="icon-coffee icon-large"></i>
+					<p>续租
+				</div>
+				<div class="col-md-2 service-items">
+					<i class="icon-coffee icon-large"></i>
+					<p>续租
+				</div>
+				<div class="col-md-2 service-items">
+					<i class="icon-coffee icon-large"></i>
+					<p>续租
 				</div>
 			</div>
 		</div>
 		<!-- ./服务 -->
 
-		<hr class="featurette-divider">
-		<!-- 样板 -->
-		<h2>风格样板间</h2>
-		<div class="row">
-			<div class="col-md-3" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-01.jpg"
-					class="img-responsive ">
-			</div>
-			<div class="col-md-3" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-02.jpg"
-					class="img-responsive ">
-			</div>
-			<div class="col-md-3" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-03.jpg"
-					class="img-responsive ">
-			</div>
-			<div class="col-md-3" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-04.jpg"
-					class="img-responsive ">
-			</div>
-			<div class="col-md-3" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-05.jpg"
-					class="img-responsive ">
-			</div>
-			<div class="col-md-3" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-06.jpg"
-					class="img-responsive ">
-			</div>
-			<div class="col-md-3" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-01.jpg"
-					class="img-responsive ">
-			</div>
-			<div class="col-md-3" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-03.jpg"
-					class="img-responsive ">
-			</div>
-		</div>
-		<!-- ./样板 -->
-		<hr class="featurette-divider">
-		<!-- 精选 -->
-		<h2>精选公寓</h2>
-		<div class="row">
-			<div class="col-md-4" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-01.jpg"
-					class="img-responsive ">
-				<h3>800元/月</h3>
-				<p>紫英佳苑4居室-卧-C房间-阳台</p>
-			</div>
-			<div class="col-md-4" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-04.jpg"
-					class="img-responsive ">
-				<h3>800元/月</h3>
-				<p>紫英佳苑4居室-卧-C房间-阳台</p>
-			</div>
-			<div class="col-md-4" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-03.jpg"
-					class="img-responsive ">
-				<h3>800元/月</h3>
-				<p>紫英佳苑4居室-卧-C房间-阳台</p>
-			</div>
-			<div class="col-md-4" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-02.jpg"
-					class="img-responsive ">
-				<h3>800元/月</h3>
-				<p>紫英佳苑4居室-卧-C房间-阳台</p>
-			</div>
-			<div class="col-md-4" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-05.jpg"
-					class="img-responsive ">
-				<h3>800元/月</h3>
-				<p>紫英佳苑4居室-卧-C房间-阳台</p>
-			</div>
-			<div class="col-md-4" style="padding: 10px;">
-				<img alt="" src="<%=basePath%>/dist/customer/img/apartment-06.jpg"
-					class="img-responsive ">
-				<h3>800元/月</h3>
-				<p>紫英佳苑4居室-卧-C房间-阳台</p>
+		<div class="home-section ">
+			<h2 class="section-title">这里有你需要的小窝</h2>
+			<div class="row">
+				<div class="col-md-4 tuijian2-items">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive">
+					</a>
+					<h4 class="tuijian2-title">200元/天</h4>
+					<h4 class="tuijian2-content">幸福家园一室-C房间</h4>
+				</div>
+				<div class="col-md-4 tuijian2-items">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive">
+					</a>
+					<h4 class="tuijian2-title">200元/天</h4>
+					<h4 class="tuijian2-content">幸福家园一室-C房间</h4>
+				</div>
+				<div class="col-md-4 tuijian2-items">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive">
+					</a>
+					<h4 class="tuijian2-title">200元/天</h4>
+					<h4 class="tuijian2-content">幸福家园一室-C房间</h4>
+				</div>
+				<div class="col-md-4 tuijian2-items">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive">
+					</a>
+					<h4 class="tuijian2-title">200元/天</h4>
+					<h4 class="tuijian2-content">幸福家园一室-C房间</h4>
+				</div>
+				<div class="col-md-4 tuijian2-items">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive">
+					</a>
+					<h4 class="tuijian2-title">200元/天</h4>
+					<h4 class="tuijian2-content">幸福家园一室-C房间</h4>
+				</div>
+				<div class="col-md-4 tuijian2-items">
+					<a><img alt=""
+						src="http://localhost:8080/hotel/dist/customer/img/apartment-01.jpg"
+						class="img-responsive">
+					</a>
+					<h4 class="tuijian2-title">200元/天</h4>
+					<h4 class="tuijian2-content">幸福家园一室-C房间</h4>
+				</div>
 			</div>
 		</div>
-		<!-- ./精选 -->
-
-
-
-
-		<hr class="featurette-divider">
-		<h2>青舍生活</h2>
-		<div class="row featurette">
-			<div class="col-md-7">
-				<h2 class="featurette-heading">
-					魔飞“绘”生活零基础<span class="text-muted">绘画活动</span>
-				</h2>
-				<p class="lead">喝喝茶 聊聊天 画会画儿 远离喧嚣快节奏，让我们一起在暖暖的秋日午后
-					拿着画笔，专注于涂鸦一件事~ 我们每个人都是生活中的艺术家 哪怕你是画画小白！也请放下手机 和魔飞一起，和InArt
-					House印绘馆一起 在慢音乐中，画出自己的故事 送给自己一个午后慢生活.</p>
-			</div>
-			<div class="col-md-5">
-				<img class="featurette-image img-responsive"
-					data-src="holder.js/500x500/auto" alt="500x500"
-					src="http://mf.znimg.com/thumb/dress_620x350//gushi/20161128/ffc829177ec87e07e270c5622e025235.jpg"
-					data-holder-rendered="true">
-			</div>
+		
+		<div class="home-section story">
+		
+			
 		</div>
-
-		<hr class="featurette-divider">
-
-		<div class="row featurette">
-			<div class="col-md-5">
-				<img class="featurette-image img-responsive"
-					data-src="holder.js/500x500/auto" alt="500x500"
-					src="http://mf.znimg.com/upload/gushi/20161207/dc26d7aaea09c732da0d63eaa9d86ef7.jpg"
-					data-holder-rendered="true">
-			</div>
-			<div class="col-md-7">
-				<h2 class="featurette-heading">温馨冬至包饺子，这个冬天不太冷</h2>
-				<p class="lead">冬至到，吃水饺 每天吃外卖的你，是不是很久没有体会到围坐一桌，盘陷儿、和面、擀皮、包饺子的场景。
-					每到这一天，电话总会响起，接起电话，耳畔传来爸妈那亲切关怀的声音：“今天吃饺子了吗？别忘了吃饺子啊！！”独自在外，需要的就是这份温暖的关心。
-					现在，你不是一个人了！！！ 魔飞为答谢各位小伙伴们一年来的陪伴与支持，我们将上门和大家一起包饺子，陪大家过冬至，并送上节日大礼包！
-					为了让父母放心，为了不让生活变得只剩麻木，为了在这个冬天不被冻掉耳朵，快和魔飞家人们，一起加入到包饺子活动中来吧！！让魔飞带你吃在嘴里，暖在心里！
-
-					活动时间：2016年12月21日周三晚 活动地点：租客房间内
-					报名详情：魔飞APP嗨生活版块凭99积分报名（注：租客以整套房为单位，选一人报名即可，如报名成功，屋内所有租客都可参与，报名成功与否以短信通知为准）。</p>
-			</div>
+		
+		<div class="home-section company">
+		
+			
 		</div>
-
-
-
-		<hr class="featurette-divider">
-
-		<!-- /END THE FEATURETTES -->
-
-
 
 	</div>
 	<!-- /.container -->
@@ -362,13 +319,10 @@
 		<div class="bottom">
 			<div class="main">
 				<p>
-					<span>友情链接：</span><a href="" title=""
-						target="_blank">去哪网</a> | <a href=""
-						title="" target="_blank">途牛网</a> | <a
-						href="" title="" target="_blank">阿里旅游</a>
-					| <a href="" title="" target="_blank">中国旅游信息网</a>
-					| <a href="" title=""
-						target="_blank"></a> 
+					<span>友情链接：</span><a href="" title="" target="_blank">去哪网</a> | <a
+						href="" title="" target="_blank">途牛网</a> | <a href="" title=""
+						target="_blank">阿里旅游</a> | <a href="" title="" target="_blank">中国旅游信息网</a>
+					| <a href="" title="" target="_blank"></a>
 				</p>
 				<p>Copyright © 2016-2018 qingshe.com xxxxxxxxx有限公司 版权所有
 					陕ICP备xxxxxx号-x</p>

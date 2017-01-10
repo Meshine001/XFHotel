@@ -1,6 +1,92 @@
+.search-col {
+    display: inline;
+}
+
+input.search-input {
+    border: none;
+}
+
+button.search-submit {
+    border: none;
+    background-color: #E64966;
+    color: white;
+    padding: 10px;
+    width: 168px;
+}
+.search-row {
+    width: 600px;
+    position: relative;
+    bottom: 70px;
+    left: 50%;
+    margin-left: -300px;
+    background: white;
+}
+
+.search-row i {
+    margin: 10px;
+}
+
+.section-title {
+    font-size: medium;
+    text-align: center;
+}
+
+h3.section-title-sub {
+    margin-top: 10px;
+    font-size: smaller;
+    text-align: center;
+}
+.home-section{
+	margin-top: 50px;
+}
+
+.tuijian ul {
+    margin: 10px;
+    list-style: none;
+    text-align: center;
+}
+
+.tuijian li {
+    display: inline;
+}
+
+li.tuijian-hotel {
+    color: #E64966;
+}
+
+.tuijian img {
+    margin-top: 30px;
+}
+
 .carousel{
 	margin-top: 50px;
 }
+
+.navbar.navabar-inverse.navbar-fixed-top {
+    background-color: white;
+}
+
+.col-md-4.tuijian2-items {
+    margin-top: 20px;
+    text-align: center;
+    padding: 0px;
+    border: 1px solid;
+    border-color: transparent;
+    border-bottom-color: rgba(128, 128, 128, 0.27);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+h4.tuijian2-title {
+    color: gray;
+}
+
+h4.tuijian2-content {
+    color: gray;
+}
+
+
+
 footer .main .top {
 	background: #fff;
 	margin: 50px;
@@ -95,14 +181,15 @@ footer .bottom {
 	background: #31383c;
 	padding: 20px 0;
 }
-footer .bottom p{
+
+footer .bottom p {
 	font-size: 14px;
-    color: rgba(255,255,255,0.5);
-    padding-left: 100px;
+	color: rgba(255, 255, 255, 0.5);
+	padding-left: 100px;
 }
 
-footer .bottom p a{
+footer .bottom p a {
 	display: inline-block;
-    color: rgba(255,255,255,0.5);
-    margin: 0 5px;
+	color: rgba(255, 255, 255, 0.5);
+	margin: 0 5px;
 }
