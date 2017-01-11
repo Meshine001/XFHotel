@@ -59,25 +59,9 @@ function fg_big(k,index){
 		setInt = setTimeout("next_pic()",timeInterval);   
 		//$(".pics_pre").show();
 		//$(".pics_next").show();
-		get_zujin(2);
-		get_zujin(3);
-		get_zujin(4);		
+		
 	})
-	function get_zujin(k){
-		//获取价格
-		var fangjian_id = $("#fangjian_id_"+k).val();		
-		if(fangjian_id){
-			$.post('/?action=zujin',{fangjian_id:fangjian_id},function(data){
-				if(data){
-					$.each(data, function (fangjian_id, zujin) {						
-					    $("#zujin_"+k+"_"+fangjian_id).html(zujin+'元/月');
-					});
-				}
-				return;
-			},'json');
-		}
-		return;
-	}
+
 	function pre_pic()
 	{
 		var currentImage = $('.banner_img');
@@ -263,3 +247,12 @@ function fg_big(k,index){
 			$(".cut_list").stop(true,false).animate({"left":qy_nowLeft},300); //通过animate()调整ul元素滚动到计算出的position
 		}
 	});	
+	
+	$(document).on('click',function(e){
+		
+	});
+	
+
+	
+
+	

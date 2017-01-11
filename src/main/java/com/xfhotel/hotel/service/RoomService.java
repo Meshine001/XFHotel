@@ -14,6 +14,7 @@ public interface RoomService {
 
 	public Map getRoomInfo(Long id);
 	
+	public List<Room> getHomeRooms();
 
 	public Room findById(Long id);
 

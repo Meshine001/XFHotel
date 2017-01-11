@@ -336,7 +336,7 @@
 }
 
 .hai_lf {
-	float: left;
+	float: right;
 	width: 865px;
 }
 
@@ -403,7 +403,7 @@
 }
 
 .hai_rg {
-	float: right;
+	float: left;
 	width: 320px;
 	background: #fff;
 }

@@ -513,9 +513,7 @@ try{
 		$("#startenddate").click();
 	})
 }
-catch(e){
-	
-}
+catch(e){}
 
 function endDateWarn (inputObj)
 {
@@ -531,5 +529,5 @@ function endDateWarn (inputObj)
 }
 
 $(document).ready(function(){ 
-	var indexCalendar = new execCalendar('#search-input-time',{});   
+	var indexCalendar = new execCalendar('#startenddate',{});   
 })

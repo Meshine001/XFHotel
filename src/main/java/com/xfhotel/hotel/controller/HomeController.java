@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Banner;
 import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
+import com.xfhotel.hotel.service.BannerService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Area;
@@ -51,6 +53,8 @@ public class HomeController {
 	RoomService roomService;
 	@Autowired
 	ApartmentService apartmentService;
+	@Autowired
+	BannerService bannerService;
 	
 	@Autowired
 	HttpSession session;
@@ -59,7 +63,17 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-
+		List<Banner> homeBanner = bannerService.getHomeBanner();
+		session.setAttribute("homeBanner", homeBanner);
+		
+		List<Room> rooms = roomService.getHomeRooms();
+		List<Map> homeRooms = new ArrayList<Map>();
+		for(Room room :rooms){
+			Long apartmentId = (Long) roomService.getRoomInfo(room.getId()).get("apartment");
+			homeRooms.add(apartmentService.getApartmentInfo(apartmentId));
+		}
+		System.out.println(homeRooms);
+		session.setAttribute("homeRoom", homeRooms);
 		return "/customer/home";
 	}
 	
@@ -89,7 +103,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public String list(String type) {
+	public String list(String type,String checkinday,String checkoutday,String city) {
 		session.setAttribute("areas", Area.getAreas());
 		session.setAttribute("subways", Subway.getSubways());
 		session.setAttribute("leasePrices", LeasePrice.getPrices());
@@ -105,10 +119,19 @@ public class HomeController {
 		session.setAttribute("roomStatus", RoomStatus.getStatusArray());
 		if(type.equals(Constants.TYPE_PLAY_ROOM)){
 			session.setAttribute("searchType", Constants.TYPE_PLAY_ROOM);
-		}else{
+		}else if(type.equals(Constants.TYPE_HOTEL)){
 			session.setAttribute("searchType", Constants.TYPE_HOTEL);
+		}else{
+			session.setAttribute("searchType", Constants.TYPE_ALL);
 		}
 		return "/customer/list";
+	}
+	
+	@RequestMapping(value = "homeSearch", method = RequestMethod.GET)
+	public String homeSearch(String checkinday,String checkoutday,String city){
+		//TODO
+		
+		return "redirect:list?checkinday="+checkinday+"&checkoutday="+checkoutday+"&city="+city+"&type="+Constants.TYPE_ALL;
 	}
 	
 	@RequestMapping(value = "search", method = RequestMethod.GET)

@@ -55,8 +55,8 @@
 							</c:forEach></li>
 						<li><label>类型:</label><span
 							class="label label-info lease-type" id="0">全部</span> <span
-							class="label label-info lease-type" id="1">整租</span> <span
-							class="label label-info lease-type" id="2">合租</span></li>
+							class="label label-info lease-type" id="1">酒店型</span> <span
+							class="label label-info lease-type" id="2">休闲型</span></li>
 						<li><label>特色:</label> <c:forEach items="${features}" var="f">
 								<label class="checkbox-inline"> <input type="checkbox"
 									id="${f.featureId}" value="${f.feature}">${f.feature}
