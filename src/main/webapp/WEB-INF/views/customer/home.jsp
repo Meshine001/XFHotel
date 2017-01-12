@@ -64,8 +64,8 @@
 }
 
 .readyload {
-	background: #E4EBEC url('/images/loading.gif')
-		no-repeat scroll center center;
+	background: #E4EBEC url('/images/loading.gif') no-repeat scroll center
+		center;
 }
 
 .swipe {
@@ -186,11 +186,15 @@
 					<li><a href="" target="_blank" title="">在线管家</a></li>
 				</ul>
 				<div class="lgorrg" onmouseover="" onmouseout="">
-					<a class="lg" href="<%=basePath%>/customer?forword=login" title="登录">登录</a>&nbsp;·&nbsp;<a
-						class="rg" href="<%=basePath%>/customer?forword=reg" title="注册青舍用户">注册</a>
+					<a class="lg" href="<%=basePath%>/customer?forword=login"
+						title="登录">登录</a>&nbsp;&nbsp;<span><img alt=""
+						src="dist/public/v1/images/phone.jpg"></span>&nbsp;&nbsp;<a
+						class="rg" href="<%=basePath%>/customer?forword=reg"
+						title="注册青舍用户">注册</a>
 
 				</div>
-				<a target="_blank" title="下载APP" href="/down/" style="display: none;">
+				<a target="_blank" title="下载APP" href="/down/"
+					style="display: none;">
 					<div class="download">
 						<i></i>下载APP
 					</div>
@@ -203,15 +207,26 @@
 			<c:forEach items="${homeBanner}" var="banner">
 				<a href="${banner.linkUrl }" title="${banner.title}" target="_blank"
 					style="width: 100%; height: 100%;">
-					<div class="hr_img banner_img"
+					<div class="hr_img banner_img img-responsive"
 						style="position: absolute; width: 100%; height: 100%; background: url(&quot;<%=basePath%>/images/${banner.pic}&quot;) center 0px no-repeat; display: block; opacity: 0.733271;">
 					</div>
 				</a>
 			</c:forEach>
+			<a href="" title="" target="" style="width: 100%; height: 100%;">
+				<div class="hr_img banner_img"
+					style="position: absolute; width: 100%; height: 100%; background: url(&quot;dist/public/v1/images/banner.jpg&quot;) center 0px no-repeat; display: block; opacity: 0.733271;">
+				</div>
+			</a> 
+			<a href="" title="" target="" style="width: 100%; height: 100%;">
+				<div class="hr_img banner_img"
+					style="position: absolute; width: 100%; height: 100%; background: url(&quot;dist/public/v1/images/banner1.jpg&quot;) center 0px no-repeat; display: block; opacity: 0.733271;">
+				</div>
+			</a>
 			<span class="pics_pre1" style="" onclick="pre_pic()"></span> <span
 				class="pics_next1" style="" onclick="next_pic()"></span>
 			<div class="main">
-				<form action="<%=basePath%>/homeSearch" method="get" name="searchForm" id="searchForm">
+				<form action="<%=basePath%>/homeSearch" method="get"
+					name="searchForm" id="searchForm">
 					<div class="search clearfix">
 						<div class="search_input">
 							<span><i class="icon-calendar"></i></span><input
@@ -225,7 +240,7 @@
 						<input type="hidden" name="checkoutday" id="checkoutday" value="">
 						<div id="index_list_calendar-box" style="display: none;"></div>
 						<input class="search_btn" value="搜索公寓" type="submit">
-						<div class="search_map">
+						<div class="search_map" style="display: none;">
 							<i></i><a title="地图搜房" href="/maplist/">地图搜房</a>
 						</div>
 					</div>
@@ -258,7 +273,7 @@
 					name="fangjian_id_4" id="fangjian_id_4"
 					value="2273,1188,2119,913,158,1154">
 				<div class="more">
-					<a title="查看更多房源" href="/list/">MORE</a>
+					<a title="查看更多房源" href=""></a>
 				</div>
 			</div>
 		</div>
@@ -266,59 +281,45 @@
 		<div class="service">
 			<div class="main">
 				<h3 class="tit">动动手指享受智能服务</h3>
+				<h4 class="tit-sub">全新安全机制&nbsp;&nbsp;自助智能管家</h4>
 				<ul class="service_ul">
-					<li><i class="sev_1"></i>
-						<p>
-							<span class="service_bt">押一付一</span><span class="service_tit">房租月付资金无压力</span>
-						</p></li>
-					<li><i class="sev_2"></i>
-						<p>
-							<span class="service_bt">免费WiFi</span><span class="service_tit">百兆光纤入户随心用</span>
-						</p></li>
-					<li><i class="sev_3"></i>
-						<p>
-							<span class="service_bt">精致装修</span><span class="service_tit">品牌家电设施，拎包入住</span>
-						</p></li>
-					<li><i class="sev_4"></i>
-						<p>
-							<span class="service_bt">快速维修</span><span class="service_tit">售后无忧，专业维修24H响应</span>
-						</p></li>
-					<li><i class="sev_5"></i>
-						<p>
-							<span class="service_bt">一客一锁</span><span class="service_tit">智能门锁，安全有保障</span>
-						</p></li>
-					<li><i class="sev_6"></i>
-						<p>
-							<span class="service_bt">每周保洁</span><span class="service_tit">专业保洁，生活更省心</span>
-						</p></li>
-					<li><i class="sev_7"></i>
-						<p>
-							<span class="service_bt">免中介费</span><span class="service_tit">透明收费无虚假</span>
-						</p></li>
-					<li><i class="sev_8"></i>
-						<p>
-							<span class="service_bt">专属客服</span><span class="service_tit">专业客服，全天候为您解忧</span>
-						</p></li>
-					<li><i class="sev_9"></i>
-						<p>
-							<span class="service_bt">专属活动</span><span class="service_tit">观影爬山聚会趴，嗨生活</span>
-						</p></li>
+					<li><img src="dist/public/v1/images/xuzu.jpg">
+						<p>续租，退租</p></li>
+					<li><img src="dist/public/v1/images/mimashuo.jpg">
+						<p>密码锁</p></li>
+					<li><img src="dist/public/v1/images/shiyou.jpg">
+						<p>我的室友</p></li>
+					<li><img src="dist/public/v1/images/yongche.jpg">
+						<p>用车服务</p></li>
+					<li><img src="dist/public/v1/images/shebei.jpg">
+						<p>设备添加</p></li>
+					<li><img src="dist/public/v1/images/baojie.jpg">
+						<p>保洁服务</p></li>
+					<li><img src="dist/public/v1/images/jianyi.jpg">
+						<p>投诉建议</p></li>
+					<li><img src="dist/public/v1/images/guzhang.jpg">
+						<p>故障报修</p></li>
+					<li><img src="dist/public/v1/images/wenti.jpg">
+						<p>常见问题</p></li>
+					<li><img src="dist/public/v1/images/guanjia.jpg">
+						<p>呼叫管家</p></li>
 				</ul>
 			</div>
 		</div>
 
-
-
 		<div class="hai">
 			<div class="main">
 				<h3 class="tit">青舍生活</h3>
+				<div class="exm_nav fj_nav">
+					<span  class="exm_nav_on"></span>
+				</div>
 				<div class="hai_list" id="jx_div">
 					<div class="hai_lf">
 						<div class="two">
 							<a onmouseover="showMask(1,0)" onmouseout="hideMask(1,0)" href=""
 								title="青舍“绘”生活零基础绘画活动" target="_blank"> <img
 								class="readyload" src="/hotel/dist/public/images/blank.gif"
-								data-original="/hotel/dist/upload/home/20161123/f22a9fb377dd061dcd3f790136511a4e.jpg"
+								data-original="dist/public/v1/images/f22a9fb377dd061dcd3f790136511a4e.jpg"
 								width="425" height="265">
 								<div class="mask" style="display: none;" id="mask_1_0">
 									<span>青舍“绘”生活零基础绘画活动</span><input class="mask_btn" value="点击查看">
@@ -326,7 +327,7 @@
 							</a> <a onmouseover="showMask(1,1)" onmouseout="hideMask(1,1)"
 								href="" title="明星同款火锅，爆辣来袭" target="_blank"> <img
 								class="readyload" src="/hotel/dist/public/images/blank.gif"
-								data-original="/hotel/dist/upload/home/20161123/345e225babe35559b8960b8fc009cf59.jpg"
+								data-original="dist/public/v1/images/345e225babe35559b8960b8fc009cf59.jpg"
 								width="425" height="265">
 								<div class="mask" style="display: none;" id="mask_1_1">
 									<span>明星同款火锅，爆辣来袭</span><input class="mask_btn" value="点击查看">
@@ -338,7 +339,7 @@
 								href="http://www.monph.com/shenghuo/info-390.html" title="青舍嗨歌会"
 								target="_blank"> <img class="readyload"
 								src="/hotel/dist/public/images/blank.gif"
-								data-original="/hotel/dist/upload/home/20161123/b428c6e726bf717402d4ffecb012414c.jpg"
+								data-original="dist/public/v1/images/b428c6e726bf717402d4ffecb012414c.jpg"
 								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_0">
 									<span>青舍嗨歌会</span><input class="mask_btn" value="点击查看">
@@ -356,7 +357,7 @@
 								href="http://www.monph.com/shenghuo/info-442.html"
 								title="青舍公寓首届脱单趴" target="_blank"> <img class="readyload"
 								src="/hotel/dist/public/images/blank.gif"
-								data-original="/hotel/dist/upload/home/20161123/143f7acc3e0699e26b178dc8aaaeb64a.jpg"
+								data-original="dist/public/v1/images/143f7acc3e0699e26b178dc8aaaeb64a.jpg"
 								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_2">
 									<span>青舍公寓首届脱单趴</span><input class="mask_btn" value="点击查看">
@@ -468,7 +469,7 @@
 					</div>
 				</div>
 				<div class="more">
-					<a title="查看更多房源" href="/shenghuo/">MORE</a>
+					<a title="查看更多房源" href=""></a>
 				</div>
 			</div>
 		</div>
@@ -479,21 +480,19 @@
 					<ul class="cut_list"
 						style="position: relative; height: 70px; padding: 0px; margin: 50px 0px; left: -4029.51px; width: 1920px;">
 						<li><img
-							src="<%=basePath%>/dist/public/v1/images/hzlogo1.jpg"></li>
+							src="<%=basePath%>/dist/public/v1/images/guojia.jpg"></li>
 						<li><img
-							src="<%=basePath%>/dist/public/v1/images/hzlogo2.jpg"></li>
+							src="<%=basePath%>/dist/public/v1/images/keer.jpg"></li>
 						<li><img
-							src="<%=basePath%>/dist/public/v1/images/hzlogo3.jpg"></li>
+							src="<%=basePath%>/dist/public/v1/images/wecat.jpg"></li>
 						<li><img
-							src="<%=basePath%>/dist/public/v1/images/hzlogo4.jpg"></li>
+							src="<%=basePath%>/dist/public/v1/images/xiecheng.jpg"></li>
 						<li><img
-							src="<%=basePath%>/dist/public/v1/images/hzlogo5.jpg"></li>
+							src="<%=basePath%>/dist/public/v1/images/yijia.jpg"></li>
 						<li><img
-							src="<%=basePath%>/dist/public/v1/images/hzlogo6.jpg"></li>
+							src="<%=basePath%>/dist/public/v1/images/zhifubao.jpg"></li>
 						<li><img
-							src="<%=basePath%>/dist/public/v1/images/hzlogo7.jpg"></li>
-						<li><img
-							src="<%=basePath%>/dist/public/v1/images/hzlogo8.jpg"></li>
+							src="<%=basePath%>/dist/public/v1/images/zhunaer.jpg"></li>
 					</ul>
 				</div>
 				<ul class="cut_ul">
@@ -504,11 +503,6 @@
 					<li></li>
 					<li></li>
 					<li></li>
-					<li></li>
-					<li class=""></li>
-					<li class=""></li>
-					<li class=""></li>
-					<li class=""></li>
 				</ul>
 			</div>
 		</div>
@@ -541,7 +535,7 @@
 			<div class="ftr_top">
 				<div class="dld clearfix">
 					<div class="social">
-						<a href="http://weibo.com/5763512393" rel="nofollow" title="青舍微博"
+						<a href="http://weibo.com/" rel="nofollow" title="青舍微博"
 							target="_blank" class="sina"></a> <a href="javascript:;"
 							title="青舍微信" class="wx">
 							<div class="btm_em" style="display: none;">
@@ -578,13 +572,13 @@
 					</ul>
 					<div class="ftr_tel">
 
-						<a href="http://www.monph.com/app/Monph.apk" target="_blank"
+						<a href="" target="_blank"
 							title="Android下载" class="android"><img
-							src="/hotel/dist/public/v1/images//and.jpg" width="100"
+							src="dist/public/v1/images/em.png" width="100"
 							height="100"></a><a
-							href="https://itunes.apple.com/us/app/mo-fei-gong-yu-zheng-zhou/id887776293?mt=8"
+							href=""
 							target="_blank" title="IOS下载" class="ios"><img
-							src="/hotel/dist/public/v1/images/ios.jpg" width="100"
+							src="dist/public/v1/images/em.png" width="100"
 							height="100"></a>
 					</div>
 				</div>
