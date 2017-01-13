@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>价格日历</title>
+    <link rel="stylesheet" type="text/css" href="base.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="jquery.js"></script>
+    <style type="text/css">
+    #detailBookArea{
+      right: 100px;
+      float: right;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="detailBookArea">
+        <div class="reserve_box">
+            <div class="reserve_space">
+                <div class="clearfix">
+                    <div class="reserve_date">
+                        <div class="reserve_ico" id="detailCalendarIco"></div>
+                        <input type="text" class="date_input" id="startenddate" readonly="" value="2017-1-13至2017-1-20">
+                        <input type="hidden" name="startdate" id="startdate" value="2017-01-13" class="hasDatepicker">
+                        <input type="hidden" name="enddate" id="enddate" value="2017-01-20" class="hasDatepicker">
+                        <div id="calendar-box" style="display:block" class="calendar_box clearfix">
+                            <div class="calendar_l">
+                                <div class="calendar_tit"><span cury="2017" curm="1">2017-1</span></div>
+                                <div class="pl5">
+                                    <table border="0" cellspacing="2" cellpadding="0" class="calendar_table">
+                                        <thead>
+                                            <tr>
+                                                <th class="pink">日</th>
+                                                <th>一</th>
+                                                <th>二</th>
+                                                <th>三</th>
+                                                <th>四</th>
+                                                <th>五</th>
+                                                <th class="pink">六</th>
+                                            </tr>
+                                        </thead>
+                                        <thead>
+                                            <tr class="calendar-day"></tr>
+                                            <tr>
+                                                <td class="col_base col_gray " d="1" m="0" y="2017" w="0" today="0" ymd="2017-01-01" price="100" available="1"><span>1</span></td>
+                                                <td class="col_base col_gray " d="2" m="0" y="2017" w="1" today="0" ymd="2017-01-02" price="100" available="1"><span>2</span></td>
+                                                <td class="col_base col_gray " d="3" m="0" y="2017" w="2" today="0" ymd="2017-01-03" price="100" available="1"><span>3</span></td>
+                                                <td class="col_base col_gray " d="4" m="0" y="2017" w="3" today="0" ymd="2017-01-04" price="100" available="1"><span>4</span></td>
+                                                <td class="col_base col_gray " d="5" m="0" y="2017" w="4" today="0" ymd="2017-01-05" price="100" available="1"><span>5</span></td>
+                                                <td class="col_base col_gray " d="6" m="0" y="2017" w="5" today="0" ymd="2017-01-06" price="100" available="1"><span>6</span></td>
+                                                <td class="col_base col_gray " d="7" m="0" y="2017" w="6" today="0" ymd="2017-01-07" price="100" available="1"><span>7</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col_base col_gray " d="8" m="0" y="2017" w="0" today="0" ymd="2017-01-08" price="100" available="1"><span>8</span></td>
+                                                <td class="col_base col_gray " d="9" m="0" y="2017" w="1" today="0" ymd="2017-01-09" price="100" available="1"><span>9</span></td>
+                                                <td class="col_base col_gray " d="10" m="0" y="2017" w="2" today="0" ymd="2017-01-10" price="100" available="1"><span>10</span></td>
+                                                <td class="col_base col_gray " d="11" m="0" y="2017" w="3" today="0" ymd="2017-01-11" price="100" available="1"><span>11</span></td>
+                                                <td class="col_base col_gray " d="12" m="0" y="2017" w="4" today="0" ymd="2017-01-12" price="100" available="1"><span>12</span></td>
+                                                <td class="col_base show-date z" d="13" m="0" y="2017" w="5" today="1" ymd="2017-01-13" price="100" available="1"><span>入住<br><span>¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date z" d="14" m="0" y="2017" w="6" today="0" ymd="2017-01-14" price="100" available="1"><span>14<br><span class="col_">¥100</span></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col_base show-date z" d="15" m="0" y="2017" w="0" today="0" ymd="2017-01-15" price="100" available="1"><span>15<br><span class="col_">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date z" d="16" m="0" y="2017" w="1" today="0" ymd="2017-01-16" price="100" available="1"><span>16<br><span class="col_">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date z" d="17" m="0" y="2017" w="2" today="0" ymd="2017-01-17" price="100" available="1"><span>17<br><span class="col_">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date z" d="18" m="0" y="2017" w="3" today="0" ymd="2017-01-18" price="100" available="1"><span>18<br><span class="col_">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date z" d="19" m="0" y="2017" w="4" today="0" ymd="2017-01-19" price="100" available="1"><span>19<br><span class="col_">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date z" d="20" m="0" y="2017" w="5" today="0" ymd="2017-01-20" price="100" available="1"><span>离开<br><span>¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="21" m="0" y="2017" w="6" today="0" ymd="2017-01-21" price="100" available="1"><span>21<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col_base show-date " d="22" m="0" y="2017" w="0" today="0" ymd="2017-01-22" price="100" available="1"><span>22<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="23" m="0" y="2017" w="1" today="0" ymd="2017-01-23" price="100" available="1"><span>23<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="24" m="0" y="2017" w="2" today="0" ymd="2017-01-24" price="100" available="1"><span>24<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="25" m="0" y="2017" w="3" today="0" ymd="2017-01-25" price="100" available="1"><span>25<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="26" m="0" y="2017" w="4" today="0" ymd="2017-01-26" price="100" available="1"><span>26<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="27" m="0" y="2017" w="5" today="0" ymd="2017-01-27" price="100" available="1"><span>27<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="28" m="0" y="2017" w="6" today="0" ymd="2017-01-28" price="100" available="1"><span>28<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col_base show-date " d="29" m="0" y="2017" w="0" today="0" ymd="2017-01-29" price="100" available="1"><span>29<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="30" m="0" y="2017" w="1" today="0" ymd="2017-01-30" price="100" available="1"><span>30<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="31" m="0" y="2017" w="2" today="0" ymd="2017-01-31" price="100" available="1"><span>31<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_gray col_base"></td>
+                                                <td class="col_gray col_base"></td>
+                                                <td class="col_gray col_base"></td>
+                                                <td class="col_gray col_base"></td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="calendar_r">
+                                <div class="calendar_tit"><span cury="2017" curm="2">2017-2</span></div>
+                                <div class="pl5">
+                                    <table border="0" cellspacing="2" cellpadding="0" class="calendar_table">
+                                        <thead>
+                                            <tr>
+                                                <th class="pink">日</th>
+                                                <th>一</th>
+                                                <th>二</th>
+                                                <th>三</th>
+                                                <th>四</th>
+                                                <th>五</th>
+                                                <th class="pink">六</th>
+                                            </tr>
+                                        </thead>
+                                        <thead>
+                                            <tr class="calendar-day">
+                                                <td class="col_gray col_base"></td>
+                                                <td class="col_gray col_base"></td>
+                                                <td class="col_gray col_base"></td>
+                                                <td class="col_base show-date " d="1" m="1" y="2017" w="3" today="0" ymd="2017-02-01" price="100" available="1"><span>1<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="2" m="1" y="2017" w="4" today="0" ymd="2017-02-02" price="100" available="1"><span>2<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="3" m="1" y="2017" w="5" today="0" ymd="2017-02-03" price="100" available="1"><span>3<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="4" m="1" y="2017" w="6" today="0" ymd="2017-02-04" price="100" available="1"><span>4<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col_base show-date " d="5" m="1" y="2017" w="0" today="0" ymd="2017-02-05" price="100" available="1"><span>5<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="6" m="1" y="2017" w="1" today="0" ymd="2017-02-06" price="100" available="1"><span>6<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="7" m="1" y="2017" w="2" today="0" ymd="2017-02-07" price="100" available="1"><span>7<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="8" m="1" y="2017" w="3" today="0" ymd="2017-02-08" price="100" available="1"><span>8<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="9" m="1" y="2017" w="4" today="0" ymd="2017-02-09" price="100" available="1"><span>9<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="10" m="1" y="2017" w="5" today="0" ymd="2017-02-10" price="100" available="1"><span>10<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="11" m="1" y="2017" w="6" today="0" ymd="2017-02-11" price="100" available="1"><span>11<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col_base show-date " d="12" m="1" y="2017" w="0" today="0" ymd="2017-02-12" price="100" available="1"><span>12<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="13" m="1" y="2017" w="1" today="0" ymd="2017-02-13" price="100" available="1"><span>13<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="14" m="1" y="2017" w="2" today="0" ymd="2017-02-14" price="100" available="1"><span>14<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="15" m="1" y="2017" w="3" today="0" ymd="2017-02-15" price="100" available="1"><span>15<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="16" m="1" y="2017" w="4" today="0" ymd="2017-02-16" price="100" available="1"><span>16<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="17" m="1" y="2017" w="5" today="0" ymd="2017-02-17" price="100" available="1"><span>17<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="18" m="1" y="2017" w="6" today="0" ymd="2017-02-18" price="100" available="1"><span>18<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col_base show-date " d="19" m="1" y="2017" w="0" today="0" ymd="2017-02-19" price="100" available="1"><span>19<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="20" m="1" y="2017" w="1" today="0" ymd="2017-02-20" price="100" available="1"><span>20<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="21" m="1" y="2017" w="2" today="0" ymd="2017-02-21" price="100" available="1"><span>21<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="22" m="1" y="2017" w="3" today="0" ymd="2017-02-22" price="100" available="1"><span>22<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="23" m="1" y="2017" w="4" today="0" ymd="2017-02-23" price="100" available="1"><span>23<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="24" m="1" y="2017" w="5" today="0" ymd="2017-02-24" price="100" available="1"><span>24<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="25" m="1" y="2017" w="6" today="0" ymd="2017-02-25" price="100" available="1"><span>25<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col_base show-date " d="26" m="1" y="2017" w="0" today="0" ymd="2017-02-26" price="100" available="1"><span>26<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="27" m="1" y="2017" w="1" today="0" ymd="2017-02-27" price="100" available="1"><span>27<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_base show-date " d="28" m="1" y="2017" w="2" today="0" ymd="2017-02-28" price="100" available="1"><span>28<br><span class="col_gray">¥100</span></span>
+                                                </td>
+                                                <td class="col_gray col_base"></td>
+                                                <td class="col_gray col_base"></td>
+                                                <td class="col_gray col_base"></td>
+                                                <td class="col_gray col_base"></td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="day">特价日</div><span class="cal_next" id="nextMonth"></span></div>
+                    </div>
+                    <div class="select_box">
+                        <div class="select_arrow"></div>
+                        <input id="sameRoomNum" readonly="readOnly" data-bookroomnum="" type="text" value="1间">
+                        <ul class="select_con room_num_select" id="detailRoomNumSelect">
+                            <li data-num="1">1间</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="price_top">
+                    <div class="reserve_text">在线收取押金￥<span>300</span></div>
+                </div>
+                <div class="order_btn_container">
+                    <a class="order_btn" href="#ongo" id="day_yuding">立即预订<span class="f14">（总计￥1000）</span></a>
+                </div>
+            </div>
+            <div class="white_bg">
+                <input type="hidden" id="avgprice" value="100">
+                <input type="hidden" id="priceTip" value="">
+                <ul class="cal_box clearfix">
+                    <li>今天
+                        <br>¥100</li>
+                    <li>14
+                        <br>¥100</li>
+                    <li>15
+                        <br>¥100</li>
+                    <li>16
+                        <br>¥100</li>
+                    <li>1
+                        <br>¥100</li>
+                    <li class="line_none_r"><a id="showMoreCalendar" href="#">全部<br>日历</a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

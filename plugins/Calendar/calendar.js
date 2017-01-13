@@ -223,7 +223,7 @@ try{
 		else {
 			var li_classes = [this.classDayBase, this.classDayShow, checkDay];
 		}
-		var li_html =  '<li class="'+ li_classes.join(' ') +'" d="'+day.d+'" m="'+day.m+'" y="'+day.y+'" w="'+day.w+'" today="'+isToday+'" ymd="'+this.getYmd(writeDay)+'" ><span>'+ dayText +'</span>';
+		var li_html =  '<li class="'+ li_classes.join(' ') +'" d="'+day.d+'" m="'+day.m+'" y="'+day.y+'" w="'+day.w+'" today="'+isToday+'" ymd="'+this.getYmd(writeDay)+'" ><span>'+ dayText +'<br>'+"<span class='col_gray'>"+'$100'+'</span>'+'</span>';
 		var new_html = '';
 		if ( this.fillDayInfo) new_html = this.fillDayInfo(li_html);
 		return new_html == '' ? li_html : new_html;
