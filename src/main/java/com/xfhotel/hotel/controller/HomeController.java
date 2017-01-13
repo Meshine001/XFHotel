@@ -88,6 +88,18 @@ public class HomeController {
 		return "/test/priceCalendar";
 	}
 	
+	@RequestMapping(value = "/story",method = RequestMethod.GET)
+	public String storyPage(){
+		
+		return "/customer/story";
+	}
+	
+	@RequestMapping(value = "/serviceCenter",method = RequestMethod.GET)
+	public String serviceCenterPage(){
+		
+		return "/customer/serviceCenter";
+	}
+	
 	@RequestMapping(value = "/test/prices",method = RequestMethod.GET)
 	public @ResponseBody List calendarPricesTest(){
 		List<Object> list = new ArrayList<Object>();

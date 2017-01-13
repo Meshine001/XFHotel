@@ -181,17 +181,34 @@
 					<li><a href="<%=basePath%>/" title="">首页</a></li>
 					<li><a href="<%=basePath%>/list?type=酒店式公寓" title="">酒店式公寓</a></li>
 					<li><a href="<%=basePath%>/list?type=休闲式公寓" title="">休闲式公寓</a></li>
-					<li><a href="" title="">青客生活</a></li>
-					<li><a href="" target="_blank" title="">服务中心</a></li>
+					<li><a href="<%=basePath%>/story" title="">青客生活</a></li>
+					<li><a href="<%=basePath%>/serviceCenter" target="_blank"
+						title="">服务中心</a></li>
 					<li><a href="" target="_blank" title="">在线管家</a></li>
 				</ul>
-				<div class="lgorrg" onmouseover="" onmouseout="">
-					<a class="lg" href="<%=basePath%>/customer?forword=login"
-						title="登录">登录</a>&nbsp;&nbsp;<span><img alt=""
-						src="dist/public/v1/images/phone.jpg"></span>&nbsp;&nbsp;<a
-						class="rg" href="<%=basePath%>/customer?forword=reg"
-						title="注册青舍用户">注册</a>
-
+				<div class="lgorrg" onmouseover="showHomeMenu()" onmouseout="hideHomeMenu()">
+					<c:choose>
+						<c:when test="${c != null }">
+							<a href="<%=basePath%>/customer/details" title="${c.details.nick}">
+								<div class="name">
+									<img
+										src="<%=basePath%>/images/${c.details.avatar}"
+										width="40" height="40"><span>${c.details.nick}</span>
+								</div>
+							</a>
+							<ul class="name_ul" id="home-menu" style="display: none;">
+									<li><a href="<%=basePath%>/customer/details">个人资料</a></li>
+									<li><a href="<%=basePath%>/customer/logout">退出</a></li>
+							</ul>
+						</c:when>
+						<c:otherwise>
+							<a class="lg" href="<%=basePath%>/customer?forword=login"
+								title="登录">登录</a>&nbsp;&nbsp;<span><img alt=""
+								src="dist/public/v1/images/phone.jpg"></span>&nbsp;&nbsp;<a
+								class="rg" href="<%=basePath%>/customer?forword=reg"
+								title="注册青舍用户">注册</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<a target="_blank" title="下载APP" href="/down/"
 					style="display: none;">
@@ -216,13 +233,11 @@
 				<div class="hr_img banner_img"
 					style="position: absolute; width: 100%; height: 100%; background: url(&quot;dist/public/v1/images/banner.jpg&quot;) center 0px no-repeat; display: block; opacity: 0.733271;">
 				</div>
-			</a> 
-			<a href="" title="" target="" style="width: 100%; height: 100%;">
+			</a> <a href="" title="" target="" style="width: 100%; height: 100%;">
 				<div class="hr_img banner_img"
 					style="position: absolute; width: 100%; height: 100%; background: url(&quot;dist/public/v1/images/banner1.jpg&quot;) center 0px no-repeat; display: block; opacity: 0.733271;">
 				</div>
-			</a>
-			<span class="pics_pre1" style="" onclick="pre_pic()"></span> <span
+			</a> <span class="pics_pre1" style="" onclick="pre_pic()"></span> <span
 				class="pics_next1" style="" onclick="next_pic()"></span>
 			<div class="main">
 				<form action="<%=basePath%>/homeSearch" method="get"
@@ -283,25 +298,25 @@
 				<h3 class="tit">动动手指享受智能服务</h3>
 				<h4 class="tit-sub">全新安全机制&nbsp;&nbsp;自助智能管家</h4>
 				<ul class="service_ul">
-					<li><img src="dist/public/v1/images/xuzu.jpg">
+					<li><img src="dist/public/v1/images/xuzu.png">
 						<p>续租，退租</p></li>
-					<li><img src="dist/public/v1/images/mimashuo.jpg">
+					<li><img src="dist/public/v1/images/mimasuo.png">
 						<p>密码锁</p></li>
-					<li><img src="dist/public/v1/images/shiyou.jpg">
+					<li><img src="dist/public/v1/images/shiyou.png">
 						<p>我的室友</p></li>
-					<li><img src="dist/public/v1/images/yongche.jpg">
+					<li><img src="dist/public/v1/images/yongche.png">
 						<p>用车服务</p></li>
-					<li><img src="dist/public/v1/images/shebei.jpg">
+					<li><img src="dist/public/v1/images/shebei.png">
 						<p>设备添加</p></li>
-					<li><img src="dist/public/v1/images/baojie.jpg">
+					<li><img src="dist/public/v1/images/baojie.png">
 						<p>保洁服务</p></li>
-					<li><img src="dist/public/v1/images/jianyi.jpg">
+					<li><img src="dist/public/v1/images/jianyi.png">
 						<p>投诉建议</p></li>
-					<li><img src="dist/public/v1/images/guzhang.jpg">
+					<li><img src="dist/public/v1/images/guzhang.png">
 						<p>故障报修</p></li>
-					<li><img src="dist/public/v1/images/wenti.jpg">
+					<li><img src="dist/public/v1/images/wenti.png">
 						<p>常见问题</p></li>
-					<li><img src="dist/public/v1/images/guanjia.jpg">
+					<li><img src="dist/public/v1/images/guanjia.png">
 						<p>呼叫管家</p></li>
 				</ul>
 			</div>
@@ -311,7 +326,7 @@
 			<div class="main">
 				<h3 class="tit">青舍生活</h3>
 				<div class="exm_nav fj_nav">
-					<span  class="exm_nav_on"></span>
+					<span class="exm_nav_on"></span>
 				</div>
 				<div class="hai_list" id="jx_div">
 					<div class="hai_lf">
@@ -478,17 +493,13 @@
 				<h3 class="tit">合作伙伴</h3>
 				<div class="qy_div" id="qyfocus" style="overflow: hidden;">
 					<ul class="cut_list"
-						style="position: relative; height: 70px; padding: 0px; margin: 50px 0px; left: -4029.51px; width: 1920px;">
-						<li><img
-							src="<%=basePath%>/dist/public/v1/images/guojia.jpg"></li>
-						<li><img
-							src="<%=basePath%>/dist/public/v1/images/keer.jpg"></li>
-						<li><img
-							src="<%=basePath%>/dist/public/v1/images/wecat.jpg"></li>
+						style="position: relative; height: 90px; padding: 0px; margin: 50px 0px; left: -4029.51px; width: 1920px;">
+						<li><img src="<%=basePath%>/dist/public/v1/images/guojia.jpg"></li>
+						<li><img src="<%=basePath%>/dist/public/v1/images/keer.jpg"></li>
+						<li><img src="<%=basePath%>/dist/public/v1/images/wecat.jpg"></li>
 						<li><img
 							src="<%=basePath%>/dist/public/v1/images/xiecheng.jpg"></li>
-						<li><img
-							src="<%=basePath%>/dist/public/v1/images/yijia.jpg"></li>
+						<li><img src="<%=basePath%>/dist/public/v1/images/yijia.jpg"></li>
 						<li><img
 							src="<%=basePath%>/dist/public/v1/images/zhifubao.jpg"></li>
 						<li><img
@@ -547,7 +558,7 @@
 						</a>
 					</div>
 					<div class="app">
-						<span class="tel400">400-0371-921</span><span class="ftr_date"
+						<span class="tel400">400-0000-000</span><span class="ftr_date"
 							style="color: #dbdbdb;">周一至周六 09:00 - 20:00<br>（仅收市话费）
 						</span>
 
@@ -572,14 +583,10 @@
 					</ul>
 					<div class="ftr_tel">
 
-						<a href="" target="_blank"
-							title="Android下载" class="android"><img
-							src="dist/public/v1/images/em.png" width="100"
-							height="100"></a><a
-							href=""
-							target="_blank" title="IOS下载" class="ios"><img
-							src="dist/public/v1/images/em.png" width="100"
-							height="100"></a>
+						<a href="" target="_blank" title="Android下载" class="android"><img
+							src="dist/public/v1/images/em.png" width="100" height="100"></a><a
+							href="" target="_blank" title="IOS下载" class="ios"><img
+							src="dist/public/v1/images/em.png" width="100" height="100"></a>
 					</div>
 				</div>
 

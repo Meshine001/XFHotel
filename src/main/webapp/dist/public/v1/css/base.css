@@ -120,7 +120,7 @@ header {
 
 .logo {
 	background: url(../images/LOGO.jpg) no-repeat;
-	width: 500px;
+	width: 450px;
 	height: 70px;
 	display: inline-block;
 	margin-top: 0px;
@@ -179,7 +179,7 @@ header {
 	position: absolute;
 	top: 68px;
 	left: 0px;
-	border-top: 2px solid #ff6e39;
+	border-top: 2px solid #ff4b5e;
 	border-left: 1px solid #ddd;
 	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
@@ -294,7 +294,7 @@ footer {
 }
 
 .social .sina:hover {
-	background: url(../images/n_sina.png) no-repeat;
+	background: url(../images/sina_touch.png) no-repeat;
 }
 
 .social .wx {
@@ -306,7 +306,7 @@ footer {
 }
 
 .social .wx:hover {
-	background: url(../images/n_wx.png) no-repeat;
+	background: url(../images/wx_touch.png) no-repeat;
 }
 
 .btm_em {
