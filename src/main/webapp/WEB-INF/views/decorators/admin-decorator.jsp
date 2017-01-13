@@ -60,7 +60,7 @@
 							</div>
 							<div class="title">订单管理</div>
 					</a></li>
-					<li><a href="<%=basePath%>/admin/customer">
+					<li><a href="<%=basePath%>/admin/customer_list">
 							<div class="icon">
 								<i class="fa fa-users" aria-hidden="true"></i>
 							</div>

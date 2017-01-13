@@ -66,3 +66,45 @@ $(document).ready(function() {
 	});
 
 });
+
+var map = new BMap.Map("map");
+var geolocation = new BMap.Geolocation();
+var point = new BMap.Point(116.331398, 39.897445);
+map.centerAndZoom(point, 14);
+map.enableScrollWheelZoom(true);
+var marker = new BMap.Marker(point);
+marker.setPosition(map.getCenter());
+map.addOverlay(marker);
+geolocation.getCurrentPosition(function(r) {
+	if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+		map.panTo(r.point);
+		marker.setPosition(map.getCenter());
+		getaddress(r.point.lng, r.point.lat);
+	} else {
+		alert("定位失败！");
+	}
+}, {
+	enableHighAccuracy : true
+});
+map.addEventListener('ondragging', function() {
+	marker.setPosition(map.getCenter());
+});
+map.addEventListener("dragend", function showInfo() {
+	var cp = map.getCenter();
+	getaddress(cp.lng, cp.lat);
+});
+
+function getaddress(lng, lat) {
+	var pt = new BMap.Point(lng, lat);
+	var geoc = new BMap.Geocoder();
+	geoc.getLocation(pt,
+			function(rs) {
+				var addComp = rs.addressComponents;
+				$('#location_info').val(
+						addComp.province + ", " + addComp.city
+								+ ", " + addComp.district + ", "
+								+ addComp.street);
+				$('#lng').val(lng);
+				$('#lat').val(lat);
+			});
+}
