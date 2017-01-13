@@ -290,54 +290,6 @@
 		<div class="col-md-6">
 			<div id="map" style="width: 500px; height: 500px"></div>
 		</div>
-		<script
-			src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
-			type="text/javascript"></script>
-		<script type="text/javascript">
-			// ===============================
-			// 百度地图
-			var map = new BMap.Map("map");
-			var geolocation = new BMap.Geolocation();
-			var point = new BMap.Point(116.331398, 39.897445);
-			map.centerAndZoom(point, 12);
-			map.enableScrollWheelZoom(true);
-			var marker = new BMap.Marker(point);
-			marker.setPosition(map.getCenter());
-			map.addOverlay(marker);
-			geolocation.getCurrentPosition(function(r) {
-				if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-					map.panTo(r.point);
-					marker.setPosition(map.getCenter());
-					getaddress(r.point.lng, r.point.lat);
-				} else {
-					alert("定位失败！");
-				}
-			}, {
-				enableHighAccuracy : true
-			});
-			map.addEventListener('ondragging', function() {
-				marker.setPosition(map.getCenter());
-			});
-			map.addEventListener("dragend", function showInfo() {
-				var cp = map.getCenter();
-				getaddress(cp.lng, cp.lat);
-			});
-
-			function getaddress(lng, lat) {
-				var pt = new BMap.Point(lng, lat);
-				var geoc = new BMap.Geocoder();
-				geoc.getLocation(pt,
-						function(rs) {
-							var addComp = rs.addressComponents;
-							$('#location_info').val(
-									addComp.province + ", " + addComp.city
-											+ ", " + addComp.district + ", "
-											+ addComp.street);
-							$('#lng').val(lng);
-							$('#lat').val(lat);
-						});
-			}
-		</script>
 		<!-- 上传图片 -->
 		<form action="" id="upload-image-form">
 			<input type="file" id="upload-image-input" name="file"
@@ -349,7 +301,8 @@
 		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
 		type="text/javascript"></script> </my_body>
 
-	<my_script> <script type="text/javascript"
-		src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script></my_script>
+	<my_script> <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script>
+	<script src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1" type="text/javascript"></script>
+	</my_script>
 </body>
 </html>

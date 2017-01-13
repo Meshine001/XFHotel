@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -102,9 +104,29 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "get_customers", method = RequestMethod.POST)
-	public @ResponseBody PageResults<Customer> getCustomers (int page){
-		HashMap map = new HashMap();
-		return customerService.list(page);
+	public @ResponseBody Map getCustomers (int page){
+		PageResults<Customer> pr = customerService.list(page);
+		List cl = new ArrayList();
+		for(Customer c:pr.getResults()){
+			cl.add(c.toMap());
+		}
+		Map map = new HashMap();
+		map.put("results",cl);
+		map.put("currentPage",pr.getCurrentPage());
+		map.put("pageCount", pr.getPageCount());
+		return map;
+	}
+	
+	@RequestMapping(value = "change_status", method = RequestMethod.POST)
+	public @ResponseBody String changeStatus (long id, int status){
+		customerService.changeStatus(id,status);
+		return "1";
+	}
+	
+	@RequestMapping(value = "view_customer")
+	public String viewCustomer (HttpServletRequest request, long id){
+		request.getSession().setAttribute("c", customerService.getCustomer(id));
+		return "/admin/customer/details";
 	}
 	
 	public String login(User user) {

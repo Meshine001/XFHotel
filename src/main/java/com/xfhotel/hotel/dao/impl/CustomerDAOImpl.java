@@ -4,6 +4,6 @@ import org.springframework.stereotype.Repository;
 import com.xfhotel.hotel.entity.Customer;
 
 @Repository
-public class CustomerDAOImpl extends BaseDAOImpl<Customer, Integer> {
+public class CustomerDAOImpl extends BaseDAOImpl<Customer, Long> {
 
 }

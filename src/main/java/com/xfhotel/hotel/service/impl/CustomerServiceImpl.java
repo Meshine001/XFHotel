@@ -50,7 +50,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Transactional
 	@Override
-	public Customer modify(CustomerDetails c, int cId) {
+	public Customer modify(CustomerDetails c, long cId) {
 		// TODO Auto-generated method stub
 		customerDetailsDAO.saveOrUpdate(c);
 
@@ -69,7 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Transactional
 	@Override
-	public String changePsd(String oldPsd, String psd,int id) {
+	public String changePsd(String oldPsd, String psd,long id) {
 		Customer c = customerDAO.get(id);
 		if(c.getPassword().equals(oldPsd)){
 			c.setPassword(psd);
@@ -89,7 +89,27 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional
 	public PageResults<Customer> list(int page) {
 		// TODO Auto-generated method stub
-		return customerDAO.findPageByFetchedHql("from Customer", "select count(*) from Customer", page, 3, null);
+		return customerDAO.findPageByFetchedHql("from Customer", "select count(*) from Customer", page, 10, null);
+	}
+
+	@Override
+	@Transactional
+	public void changeStatus(long id, int status) {
+		// TODO Auto-generated method stub
+		Customer c = customerDAO.get(id);
+		if(status==1){
+			c.setStatus(0);
+		}else{
+			c.setStatus(1);
+		}
+		customerDAO.update(c);
+	}
+
+	@Override
+	@Transactional
+	public Customer getCustomer(long id) {
+		// TODO Auto-generated method stub
+		return customerDAO.get(id);
 	}
 
 }

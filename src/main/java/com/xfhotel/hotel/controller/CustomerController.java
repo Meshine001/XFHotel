@@ -96,13 +96,14 @@ public class CustomerController {
 	 * @return
 	 */
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public @ResponseBody Message modify(CustomerDetails c, int customerId) {
+	public @ResponseBody Message modify(CustomerDetails c, long customerId) {
 		try {
 			Customer c1 = customerService.modify(c, customerId);
 			session.setAttribute("c", c1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			// e.printStackTrace();
+			e.printStackTrace();
+			
 			return new Message(Constants.MESSAGE_ERR_CODE, "内部错误");
 		}
 		session.setAttribute(Constants.PAGE, Constants.PAGE_DETAILS);

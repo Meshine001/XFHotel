@@ -1,10 +1,14 @@
 package com.xfhotel.hotel.entity;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,10 +17,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.support.DateUtil;
 
 @Entity
 @Table(name = "t_customer")
-public class Customer {
+public class Customer implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -137,6 +142,18 @@ public class Customer {
 	}
 
 
-	
+	public Map toMap(){
+		Map map = new HashMap();
+		Date d = new Date(regTime);
+		map.put("id", id);
+		map.put("tel", tel);
+		map.put("password", password);
+		map.put("level", level);
+		map.put("status", status);
+		map.put("regTime", DateUtil.format(d));
+		map.put("consumptionTimes", consumptionTimes);
+		map.put("consumptionCount", consumptionCount);
+		return map;
+	}
 
 }

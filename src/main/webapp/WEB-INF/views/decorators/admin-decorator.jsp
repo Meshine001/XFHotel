@@ -26,6 +26,7 @@
 	href="<%=basePath%>/dist/admin/assets/css/theme/yellow.css">
 	 -->
 <script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
+<sitemesh:write property='my_header' />
 </head>
 <body>
 	<div class="app app-default">
@@ -59,7 +60,7 @@
 							</div>
 							<div class="title">订单管理</div>
 					</a></li>
-					<li><a href="<%=basePath%>/admin/customer">
+					<li><a href="<%=basePath%>/admin/customer_list">
 							<div class="icon">
 								<i class="fa fa-users" aria-hidden="true"></i>
 							</div>
