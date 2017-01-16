@@ -101,4 +101,11 @@ public class BlogServiceImpl implements BlogService{
 		return blogDAO.findPageByFetchedHql("from Blog blog order by blog.date desc", "select count(*) from Blog", page, 2, null);
 	}
 
+	@Override
+	@Transactional
+	public void delete(long id) {
+		// TODO Auto-generated method stub
+		blogDAO.deleteById(id);
+	}
+
 }

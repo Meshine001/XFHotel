@@ -30,9 +30,9 @@
 		<tbody id="list">
 		</tbody>
 	</table>
-	<a id="firstpage"><<</a> <a id="formerpage"><</a> <a id="currentpage">
-	</a> <a id="latterpage">></a> <a id="lastpage">>></a> 共 <a id="totalcount"></a>条记录
-	共 <a id="pagecount"></a>页 </my_body>
+	<ul id="pagecontroller"  class="pagination">
+	</ul>
+	</my_body>
 	<my_script> <script type="text/javascript"
 		src="<%=basePath%>/dist/admin/assets/js/list-customer.js"></script> </my_script>
 </body>

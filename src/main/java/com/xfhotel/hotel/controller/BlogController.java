@@ -37,17 +37,18 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value = "/publish")
-	public @ResponseBody int publishBlog(HttpServletRequest request, String title, String content) {
+	public @ResponseBody long publishBlog(HttpServletRequest request, String title, String content) {
 		String basepath = request.getSession().getServletContext().getRealPath("/");
 		Blog blog = new Blog();
 		blog.setTitle(title);
 		int status = blogService.publish(blog, content, basepath);
-		return status;
+		return blog.getId();
 	}
 	
 	
 	@RequestMapping(value = "/edit")
-	public String editBlog(String id) {
+	public String editBlog(HttpServletRequest request,String id) {
+		request.setAttribute("id", id);
 		return "/admin/blog/edit_blog";
 	}
 	
@@ -96,7 +97,12 @@ public class BlogController {
 	
 	@RequestMapping(value = "get_blogs", method = RequestMethod.POST)
 	public @ResponseBody PageResults<Blog> getBlogs (int page){
-		HashMap map = new HashMap();
 		return blogService.list(page);
+	}
+	
+	@RequestMapping(value = "delete_blog", method = RequestMethod.POST)
+	public @ResponseBody String deleteBlog (long id){
+		blogService.delete(id);
+		return "/";
 	}
 }
