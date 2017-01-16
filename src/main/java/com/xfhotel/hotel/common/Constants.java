@@ -21,4 +21,5 @@ public class Constants {
 	public static final String TYPE_HOTEL = "酒店型公寓";
 	public static final String TYPE_PLAY_ROOM = "休闲型公寓";
 	
+	public static final int pagesize = 10;
 }

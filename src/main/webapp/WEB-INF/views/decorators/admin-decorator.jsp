@@ -66,6 +66,12 @@
 							</div>
 							<div class="title">用户管理</div>
 					</a></li>
+					<li><a href="<%=basePath%>/admin/blog/list">
+							<div class="icon">
+								<i class="fa fa-users" aria-hidden="true"></i>
+							</div>
+							<div class="title">公告管理</div>
+					</a></li>
 					<li><a href="<%=basePath%>/admin/system">
 							<div class="icon">
 								<i class="fa fa-cog" aria-hidden="true"></i>

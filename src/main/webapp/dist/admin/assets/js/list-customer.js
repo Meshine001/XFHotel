@@ -48,33 +48,23 @@ function list(page) {
 			alert("获取数据失败！");
 		},
 		success : function(data) {
-			$("#currentpage").html(data.currentPage);
-			if (data.currentPage != 1) {
-				$("#firstpage").attr('onclick', 'list(1)').attr('href',
-						'javascript:void(0);');
-				$("#formerpage").attr('onclick',
-						'list(' + (data.currentPage - 1) + ')').attr('href',
-						'javascript:void(0);');
-			} else {
-				$("#firstpage").attr('onclick', 'javascript:void(0);').attr(
-						'href', 'javascript:void(0);');
-				$("#formerpage").attr('onclick', 'javascript:void(0);').attr(
-						'href', 'javascript:void(0);');
+			$('#pagecontroller').html('');
+			var a_f = $('<a></a>').attr('href','#').append('&laquo;').attr('onclick', 'list(1)').attr('href',
+			'javascript:void(0);');
+			var li_f = $('<li></li>').append(a_f);
+			$('#pagecontroller').append(li_f);
+			for (var i=data.sp;i<=data.ep;i++){
+				var a_p = $('<a></a>').attr('href','#').append(i).attr('onclick', 'list(' + i + ')')
+				.attr('href', 'javascript:void(0);');
+				var li_p = $('<li></li>').append(a_p);
+				if(i==data.currentPage)
+					li_p.attr('class','active');
+				$('#pagecontroller').append(li_p);
 			}
-			if (data.currentPage != data.pageCount) {
-				$("#lastpage").attr('onclick', 'list(' + data.pageCount + ')')
-						.attr('href', 'javascript:void(0);');
-				$("#latterpage").attr('onclick',
-						'list(' + (data.currentPage + 1) + ')').attr('href',
-						'javascript:void(0);');
-			} else {
-				$("#lastpage").attr('onclick', 'javascript:void(0);').attr(
-						'href', 'javascript:void(0);');
-				$("#latterpage").attr('onclick', 'javascript:void(0);').attr(
-						'href', 'javascript:void(0);');
-			}
-			$("#pagecount").html(data.pageCount);
-			$("#totalcount").html(data.totalCount);
+			var a_l = $('<a></a>').attr('href','#').append('&raquo;').attr('onclick', 'list(' + data.pageCount + ')')
+			.attr('href', 'javascript:void(0);');
+			var li_l = $('<li></li>').append(a_l);
+			$('#pagecontroller').append(li_l);
 
 			var trtitle = $('<tr></tr>').append('');
 			$("#list").html(trtitle);
