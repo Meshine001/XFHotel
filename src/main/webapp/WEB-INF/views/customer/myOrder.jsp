@@ -12,9 +12,8 @@
 </head>
 <body>
 	<my_body>
-		<h1 class="page-header">我的订单</h1>
+	<h1 class="e_tit">个人资料</h1>
 
-	<div class="row placeholders"></div>
 	<table class="table">
 		<thead>
 			<tr>

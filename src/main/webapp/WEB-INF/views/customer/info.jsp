@@ -203,6 +203,8 @@
 
 							<hr class="divider">
 							<br>
+							<button type="button" class="btn btn-info btn-block"
+								data-toggle="modal" data-target="#orderModal">立即预定</button>
 							<c:if test="${searchType == '酒店型公寓' }">
 								<button type="button" class="btn btn-info btn-block"
 									data-toggle="modal" data-target="#orderModal">立即预定</button>
@@ -284,7 +286,7 @@
 																name="cusPersonal"></li>
 															<li><span>发票</span><span><input
 																	type="checkbox" name="needFapiao">是否需要发票</span></li>
-																	<li><a>入住须知</a></li>
+															<li><a>入住须知</a></li>
 														</ul>
 														<span>订单总额￥</span><span id="order-total-price">0.00</span>
 													</form>

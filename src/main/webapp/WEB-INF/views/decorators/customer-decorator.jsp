@@ -19,15 +19,17 @@
 <!-- Bootstrap core CSS -->
 <link href="<%=basePath%>/dist/commons/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
+
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/public/v1/css/base.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/public/css/layout.css">
 <!-- cropper -->
 <link href="<%=basePath%>/dist/commons/cropper/cropper.min.css"
 	rel="stylesheet">
-
-<link href="<%=basePath%>/dist/customer/css/dashboard.css"
-	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/customer/css/crop-avatar.css" />
-	
+
 <script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
 <script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -39,30 +41,99 @@
 <sitemesh:write property='my_header' />
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="../">青舍都市公寓</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<%=basePath%>">首页</a></li>
-					<li><a href="#">我要找房</a></li>
-					<li><a href="#">地图找房</a></li>
-					<li><a href="#">青舍生活</a></li>
-
+	<header class="ty">
+		<div class="main">
+			<div class="logo" onclick="location.href='/'"></div>
+			<div class="nav">
+				<ul class="nav_ul" id="nav_ul">
+					<li class="nav_on"><a title="" href="<%=basePath%>/">首页</a></li>
+					<li><a title="" href="<%=basePath%>/">酒店式公寓</a></li>
+					<li><a title="" href="<%=basePath%>/">休闲式公寓</a></li>
+					<li><a title="" href="<%=basePath%>">青客生活</a></li>
+					<li><a title="" href="<%=basePath%>">服务中心</a></li>
+					<li><a title="" href="<%=basePath%>">在线管家</a></li>
 				</ul>
-
 			</div>
 		</div>
-	</nav>
+	</header>
+	<article>
+		<div class="main">
+			<div class="e_my">
+				<div class="e_left">
+					<div class="e_name">
+						<div class="y_100"></div>
+						<script type="text/javascript">
+							$(document).ready(function(){
+								$('#myOrder').click(function(){
+									location.href='/hotel/customer/myOrder';
+								});
+								$('#myDetails').click(function(){
+									location.href='/hotel/customer/details';
+								});
+								
+							});
+						
+						</script>
+						<c:choose>
+							<c:when test="${c != null}">
+								<img src="<%=basePath%>/images/${c.details.avatar}" id="my-face"
+									width="90" height="90" onclick="<%=basePath%>/customer/details">
+								<p class="e_name_m">
+									${c.details.nick}<a href="<%=basePath%>/customer/logout"
+										title="退出登录">退出</a>
+								</p>
+							</c:when>
+							<c:otherwise>
+								<img src="<%=basePath%>/images/avatar_default.jpg" id="my-face"
+									width="90" height="90" onclick="<%=basePath%>/customer/details">
+								<p class="e_name_n">
+									你还没有编辑详细资料<a href="<%=basePath%>/customer/details">点击这里</a>编辑吧
+								</p>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<ul class="e_list">
+						<li id="myOrder" class="">
+							<p>我的订单</p> <i></i>
+						</li>
+						<li>
+							<p>我的退款</p> <i></i>
+						</li>
+						<li>
+							<p>我的优惠</p> <i></i>
+						</li>
+						<li id="myDetails" class="">
+							<p>个人资料</p> <i></i>
+						</li>
+						<li id="" class="">
+							<p>帐号设置</p> <i></i>
+						</li>
+						<li id="" class="">
+							<p>意见反馈</p> <i></i>
+						</li>
+					</ul>
+					<div class="anquan">
+						<p>
+							<span class="fr"> 中等 </span> 账户安全级别：
+						</p>
+						<!--账户安全级别只需要更改<em>的长度即可。长度为百分比。-->
+						<i class="bg_f"> <em class="bg_b" style="width: 60%;"></em>
+						</i> <a href="<%=basePath%>/customer/setting" title="修改密码"
+							class="xg_pwd fr">修改密码&gt;</a>
+					</div>
+					<div class="e_ewm">
+						<img src="<%=basePath%>/dist/public/v1/images/em.png" width="121"
+							height="121">
+						<p>扫一扫 下载青舍APP</p>
+					</div>
+				</div>
+				<div class="e_right">
+					<sitemesh:write property='my_body' />
+				</div>
+			</div>
+		</div>
+	</article>
+	<!--  
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
@@ -79,11 +150,12 @@
 
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<sitemesh:write property='my_body' />
+				
 
 			</div>
 		</div>
 	</div>
+	  -->
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

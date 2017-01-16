@@ -61,13 +61,13 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/comment/post", method = RequestMethod.POST)
-	public @ResponseBody Message postComment(Long roomId,Long from,Long to,String c_score,String feel,String[] pics){
+	public @ResponseBody Message postComment(Long roomId,Long from,Long to,String[] c_score,String feel,String[] pics){
 		try {
 			Comment comment = new Comment();
 			comment.setFromWho(from);
 			comment.setToWho(to);
 			comment.setRoomId(roomId);
-			comment.setScore(c_score);
+			comment.setScore(StringSplitUtil.buildStrGroup(c_score));
 			comment.setFeel(feel);
 			comment.setPics(StringSplitUtil.buildStrGroup(pics));
 			comment.setTime(new Date().getTime());
