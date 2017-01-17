@@ -1,0 +1,457 @@
+.main{
+    float: right;
+    width: 820px;
+    padding: 39px 20px;
+}
+
+.order-main-wrap .order-remind-list {
+    position: relative;
+    height: 38px;
+    background: #f7f9fa;
+    border: 1px solid #e7ecef;
+}
+.order-main-wrap .order-remind-list li.cur {
+    border-bottom: 2px solid #009bb3;
+}
+.order-main-wrap .order-remind-list li {
+    float: left;
+    padding: 12px 20px;
+}
+
+.order-main-wrap .order-remind-list .last {
+    position: absolute;
+    right: 0;
+    margin: 5px 0 0;
+    padding: 0;
+}
+.order-main-wrap .order-remind-list .last a {
+    float: left;
+    width: 75px;
+    font: 12px/30px SimSun;
+    color: #9e9e9e;
+    margin-right: 16px;
+    padding: 0 8px;
+    _width: 91px;
+}
+.order-main-wrap a {
+    text-decoration: none;
+    color: #616161;
+    cursor: pointer;
+}
+.order-remind-list .last a i {
+    float: left;
+    background: url(http://simg1.qunarzz.com/order/iconpic.png) no-repeat;
+    width: 11px;
+    height: 12px;
+    overflow: hidden;
+    margin: 8px 4px 0 0;
+}
+
+.order-main-wrap .searchbar {
+    padding: 20px 0;
+    border: 1px solid #e7ecef;
+    border-top: 0;
+}
+.order-main-wrap .simple {
+    padding: 0 16px;
+}
+.order-main-wrap .simple .title {
+    float: left;
+    margin-right: 8px;
+    line-height: 26px;
+    color: #999;
+    width: auto;
+}
+.order-main-wrap .simple .simple-main {
+    float: left;
+    position: relative;
+    height: 28px;
+    z-index: 11;
+    cursor: pointer;
+    border: 1px solid #e4e4e5;
+    padding: 0 5px;
+}
+.input-w-76 {
+    width: 66px;
+}
+.m-r-16 {
+    margin-right: 16px;
+}
+.order-main-wrap .simple .simple-main .font-color-666 {
+    color: #666;
+}
+.order-main-wrap .simple .simple-main input {
+    width: 70%;
+    cursor: pointer;
+}
+.order-main-wrap .simple input {
+    float: left;
+    background: #fff;
+    width: 128px;
+    height: 28px;
+    border: 0;
+    line-height: 28px;
+    font-family: Tahoma;
+}
+.simple .icon-list {
+    background-position: 0 -43px;
+    width: 7px;
+    height: 5px;
+    margin-top: 12px;
+}
+.simple i {
+    float: right;
+    background: url(http://simg1.qunarzz.com/order/iconpic.png) no-repeat;
+    overflow: hidden;
+    margin-right: 6px;
+    cursor: pointer;
+}
+.order-main-wrap .simple .list {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #e4e4e5;
+    width: 75px;
+    overflow: auto;
+    line-height: 26px;
+    left: 0;
+    top: 27px;
+    z-index: 200;
+    display: none;
+    padding-left: 0px;
+}
+.order-main-wrap .simple .list li {
+    _height: 26px;
+}
+
+.order-main-wrap .simple .list li a:hover, .order-main-wrap .simple .list li a.cur {
+    background: #e4e4e5;
+}
+.order-main-wrap .simple .list li a {
+    display: block;
+    padding: 0 5px;
+    color: #333;
+}
+.order-main-wrap .searchbar .hotel-dp {
+    float: left;
+    width: 116px;
+    height: 28px;
+    border: solid 1px #e4e4e5;
+    padding-left: 8px;
+}
+.hotel-dp {
+    position: relative;
+    border: 1px solid #abadb3;
+    width: 173px;
+    font: normal 12px/1.5 tahoma,Geneva,sans-serif;
+    background-color: #fff;
+    color: #555;
+}
+.order-main-wrap .searchbar .hotel-dp .dp-info {
+    top: 7px;
+    right: 8px;
+}
+.hotel-dp .dp-info {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    padding: 0 0 0 4px;
+    height: 15px;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: right;
+    cursor: pointer;
+}
+.order-main-wrap .searchbar .hotel-dp .textbox {
+    margin: 0;
+    padding: 0;
+    width: 95px;
+    height: 28px;
+    line-height: 28px;
+    color: #666;
+}
+.order-main-wrap .simple input {
+    float: left;
+    background: #fff;
+    width: 128px;
+    height: 28px;
+    border: 0;
+    line-height: 28px;
+    font-family: Tahoma;
+}
+.hotel-dp .textbox {
+    padding: 2px 4px 1px;
+    border: 0;
+    width: 165px;
+    height: 16px;
+    height: 14px\9;
+    font: normal 12px/14px arial,sans-serif;
+    _line-height: 16px;
+    background-color: #fff;
+}
+.order-main-wrap .simple .list li {
+    _height: 26px;
+}
+user agent stylesheet
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+.order-main-wrap .searchbar .hotel-dp .dp-info b {
+    width: 13px;
+    height: 14px;
+    background: url(../images/iconpic.png) 0 -58px no-repeat;
+}
+.hotel-dp .dp-info b {
+    float: right;
+    display: inline;
+    width: 20px;
+    height: 15px;
+    background: url(http://simg1.qunarzz.com/site/images/2011/QN1CS1.gif) 2px 1px no-repeat;
+}
+.order-main-wrap .simple .order-time-list {
+    float: left;
+}
+.order-main-wrap .simple .order-time-list li {
+    font: 12px/22px 'SimSun';
+    background: #fff;
+    float: left;
+    margin: 3px 0 0 0;
+    padding-left: 16px;
+}
+.order-main-wrap .simple .order-time-list li a {
+    color: #9e9e9e;
+    padding: 0 8px;
+    display: inline-block;
+}
+.order-main-wrap a {
+    text-decoration: none;
+    color: #616161;
+    cursor: pointer;
+}
+.order-main-wrap .simple .order-time-list li.cur a {
+    background: #2cabc4;
+    color: #fff;
+}
+
+.order-main-wrap .simple .order-time-list li a {
+    color: #9e9e9e;
+    padding: 0 8px;
+    display: inline-block;
+}
+.order-main-wrap a {
+    text-decoration: none;
+    color: #616161;
+    cursor: pointer;
+}
+.order-main-wrap .simple .order-search-btn {
+    float: left;
+    display: block;
+    margin: 0 auto;
+    background: #ff5722;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color: #fff;
+    text-align: center;
+    height: 22px;
+    line-height: 22px;
+    margin: 3px 0 0 32px;
+    width: 60px;
+    display: none;
+}
+.order-main-wrap .order-bought {
+    position: relative;
+}
+.order-pay {
+    border: 1px solid #e7ecef;
+}
+.mainorder {
+    margin-top: 20px;
+    background: #fff;
+}
+.order-pay .mainorder-hd {
+    background: #f7f9fa;
+    border-bottom: 1px solid #e7ecef;
+}
+.mainorder .mainorder-hd {
+    height: 34px;
+    padding: 0 16px;
+    background: #f7f9fa;
+    border-bottom: 1px solid #e7ecef;
+}
+.mainorder .mainorder-hd .column {
+    font-weight: bold;
+    color: #212121;
+}
+.mainorder .mainorder-hd span {
+    float: left;
+    color: #757575;
+    font: 12px/32px SimSun;
+}
+.mainorder .mainorder-hd .first {
+    margin: 0 50px 0 16px;
+}
+
+.mainorder .mainorder-hd span {
+    float: left;
+    color: #757575;
+    font: 12px/32px SimSun;
+}
+.mainorder .mainorder-hd .mechanism {
+    float: left;
+    position: relative;
+    color: #212121;
+    font: 12px/32px SimSun;
+}
+.mainorder .mainorder-hd span {
+    float: left;
+    color: #757575;
+    font: 12px/32px SimSun;
+}
+.mainorder .mechanism {
+    position: relative;
+}
+.order-pay .mainorder-hd .last {
+    float: right;
+}
+.mainorder .mainorder-hd .funcs {
+    display: none;
+}
+.mainorder .mainorder-hd .last {
+    line-height: 34px;
+    _line-height: 38px;
+}
+.mainorder .mainorder-hd span {
+    float: left;
+    color: #757575;
+    font: 12px/32px SimSun;
+}
+.mainorder .order-bd {
+    width: 100%;
+}
+
+.mainorder .order-bd .product {
+    width: 46%;
+    padding-top: 16px;
+}
+.mainorder .order-bd td {
+    vertical-align: top;
+    padding: 16px 0;
+    color: #616161;
+    border-right: 1px solid #f2f5f5;
+    width: 13%;
+}
+.mainorder .order-bd td .product-fist {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.piao-pic, .tuan-pic, .hotel-pic {
+    float: left;
+    width: 88px;
+    margin-right: 18px;
+}
+.piao-pic img, .tuan-pic img, .hotel-pic img {
+    width: 88px;
+}
+.mainorder .order-bd .product .all-title {
+    color: #666;
+    float: left;
+    width: 68%;
+}
+
+.mainorder .order-bd .product .all-title dd {
+    margin-top: 8px;
+}
+.mainorder .order-bd .qunatity {
+    width: 108px;
+    font: 14px/14px Tahoma;
+    text-align: center;
+    color: #616161;
+}
+.mainorder .order-bd td {
+    vertical-align: top;
+    padding: 16px 0;
+    color: #616161;
+    border-right: 1px solid #f2f5f5;
+    width: 13%;
+}
+.mainorder .order-bd .price {
+    font: 14px/14px Tahoma;
+    font-weight: bold;
+    text-align: center;
+}
+.mainorder .order-bd td {
+    vertical-align: top;
+    padding: 16px 0;
+    color: #616161;
+    border-right: 1px solid #f2f5f5;
+    width: 13%;
+}
+.mainorder .order-bd .orderbd-list li {
+    margin-bottom: 8px;
+}
+.mainorder .order-bd .state {
+    text-align: center;
+    color: #9e9e9e;
+}
+.mainorder .order-bd td {
+    vertical-align: top;
+    padding: 16px 0;
+    color: #616161;
+    border-right: 1px solid #f2f5f5;
+    width: 13%;
+}
+.mainorder .order-bd .state p {
+    padding-left: 4px;
+}
+.mainorder .order-bd .remarks {
+    border-right: 0;
+    text-align: center;
+}
+
+.mainorder .order-bd td {
+    vertical-align: top;
+    padding: 16px 0;
+    color: #616161;
+    border-right: 1px solid #f2f5f5;
+    width: 13%;
+}
+.order-main-wrap .order-bd .order-btn {
+    display: block;
+    width: 70px;
+    height: 26px;
+    margin: 5px auto;
+    background: #ff5722;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color: #fff;
+    line-height: 24px;
+}
+.order-main-wrap a {
+    text-decoration: none;
+    color: #616161;
+    cursor: pointer;
+}
+.icon-zhu {
+    background-position: 0 -30px;
+}
+.icon-li {
+    background-position: -15px -30px;
+}
+.name-icon {
+    float: left;
+    width: 14px;
+    height: 14px;
+    overflow: hidden;
+    background: url(http://simg1.qunarzz.com/order/icon-title.png) no-repeat 0 0;
+    margin: 2px 4px 0 0;
+}
+a.order-btn {
+    font-size: 0.8em;
+}
+select.font-color-666 {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
