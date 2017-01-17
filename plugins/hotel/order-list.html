@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="dist/jquery-ui-1.12.1.custom/jquery-ui.css">
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="dist/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script type="text/javascript" src="dist/jquery-ui-1.12.1.custom/datepicker-zh-CN.js"></script>
 </head>
 <body>
 	<div class="main">
@@ -27,22 +28,18 @@
 		<!-- 订单选项 -->
 		<!-- 订单筛选 -->
 			<div class="searchbar">
-				<form>
-					<input type="hidden" name="category" value="NaN">
-					<input type="hidden" name="range" value="12">
-					<input type="hidden" name="businessType" value="">
-					<input type="hidden" name="start" value="0">
-					<input type="hidden" id="judge-isRecycle" value="false">
+				<form id="search-form">
+                    <input type="hidden" name="cId" value="">
+					<input type="hidden" name="category" value="0">
 					<div class="simple clearfix">
 						<!-- 订单类型 -->
 						<span class="title">订单类型</span>
 						<div class="simple-main input-w-76 m-r-16" id="order-type-sel-wrapper">
-                        <input type="hidden" name="orderType" value="">
                      
-                        <select class="font-color-666" >
-                        	<option>全部</option>
-                        	<option>酒店式</option>
-                        	<option>休闲式</option>
+                        <select class="font-color-666" name="type" id="s-type">
+                        	<option selected="true" value="0">全部</option>
+                        	<option value = "1">酒店式</option>
+                        	<option value = "2">休闲式</option>
                         </select>
                      
                     </div>
@@ -50,22 +47,23 @@
                     <!-- 订单时间 退款订单暂时不显示-->
                     <span class="title">订单时间</span>
                     <div class="hotel-dp">
-                    	<div class="dp-info"><b></b><span class="dp-text"></span></div>
-                    	<input id="startDate" name="startDate" value="2016-01-16" maxlength="10" class="textbox">
+                    	<div class="dp-info"><b id="startDateIcon"></b><span class="dp-text"></span></div>
+                    	<input id="startDate" name="startDate" value="2016-01-16" maxlength="10" class="textbox" readonly="true">
                     </div>
                     <div class="hotel-dp">
-                    	<div class="dp-info"><b></b><span class="dp-text"></span></div>
-                    	<input id="endDate" name="endDate" value="2017-01-16" maxlength="10" class="textbox">
+                    	<div class="dp-info"><b id="endDateIcon"></b><span class="dp-text"></span></div>
+                    	<input id="endDate" name="endDate" value="2017-01-16" maxlength="10" class="textbox" readonly="true">
                     </div>
+                    <input type="hidden" name="range" value="12" id="range">
                       <ul class="order-time-list" id="order-time-list">
                         <li>
-                          <a class=" " href="javascript:;" data-range="1" data-beacon="时间范围-最近一个月">最近一个月</a>
+                          <a class="range" href="javascript:;" data-range="1" data-beacon="时间范围-最近一个月">最近一个月</a>
                         </li>
                         <li>
-                          <a class=" " href="javascript:;" data-range="3" data-beacon="时间范围-三个月">三个月</a>
+                          <a class="range" href="javascript:;" data-range="3" data-beacon="时间范围-三个月">三个月</a>
                         </li>
                         <li class="cur">
-                          <a class=" " href="javascript:;" data-range="12" data-beacon="时间范围-一年">一年</a>
+                          <a class="range" href="javascript:;" data-range="12" data-beacon="时间范围-一年">一年</a>
                         </li>
                     </ul>
                     <a href="javascript:" class="order-search-btn" id="order-search-btn" data-beacon="订单查询按钮">查询</a>
@@ -152,12 +150,54 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+        function search(){
+            var form = $('#search-form').serialize();
+            var url = 'ajax/data_success.json';
+            $.ajax({
+                type : "GET",
+                url : url,
+                data : '',
+                async : false,
+                error : function(request) {
+                    alert("连接异常！");
+                },
+                success : function(data) {
+                    console.log(data);
+                    if (data.statusCode == 0) {
+
+                    } else {
+                       
+                    }
+
+                }
+            });
+        }
+
 		$(document).ready(function(){
 			$('#order-type-sel-wrapper').click(function(){
 				$('#order-type-sel-list').show();
 			});
 
-			$('#startDate').datePicker();
+			$('#startDate').datepicker();
+            $('#endDate').datepicker();
+
+            $('#order-time-list').click(function(e){
+                var target = e.target;
+                if ($(target).hasClass("range")) {
+                     var parent = $(target).parent();
+                     parent.parent().find('li').each(function(index,li){
+                        $(li).attr('class','');
+                     });
+                     parent.attr('class','cur'); 
+                     $('#range').val($(target).attr('data-range'));
+                     search();
+                };
+               
+            });
+            $('.searchbar').change(function(e){
+               // var target = e.target;
+                search();
+            });
 		});
 
 	</script>

@@ -159,7 +159,6 @@
     font-size: 12px;
     line-height: 15px;
     text-align: right;
-    cursor: pointer;
 }
 .order-main-wrap .searchbar .hotel-dp .textbox {
     margin: 0;
@@ -168,6 +167,7 @@
     height: 28px;
     line-height: 28px;
     color: #666;
+    cursor: pointer;
 }
 .order-main-wrap .simple input {
     float: left;

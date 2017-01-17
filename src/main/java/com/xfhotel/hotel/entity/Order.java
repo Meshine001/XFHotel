@@ -16,7 +16,11 @@ import com.xfhotel.hotel.support.DateUtil;
 @Entity
 @Table(name = "t_order")
 public class Order {
-
+	public final static int CATEGOTY_ALL = 0;
+	public final static int CATEGOTY_AVAILABLE = 1;
+	public final static int CATEGOTY_CHARGEBACK = 2;
+	
+	
 	public final static int STATUS_NOT_COMPLETE = 0;
 	public final static int STATUS_ON_PAY = 1;
 	public final static int STATUS_COMPLETE = 2;

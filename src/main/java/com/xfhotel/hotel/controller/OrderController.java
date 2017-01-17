@@ -1,7 +1,9 @@
 package com.xfhotel.hotel.controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -43,6 +45,22 @@ public class OrderController {
 	
 	@Autowired
 	HttpSession session;
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public @ResponseBody Message search(Long cId,int category,int type,String startDate,String endDate,int range){
+		 try {
+			List<Order> orders = orderservice.getCustomerOrders(cId, type);
+			List<Map> maps = new ArrayList<Map>();
+			for(Order o:orders){
+				maps.add(o.toMap());
+			}
+			 return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");
+	}
 	
 	/**
 	 * 跳转到订单评价页面

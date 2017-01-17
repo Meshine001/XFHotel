@@ -1,0 +1,26 @@
+{
+  "statusCode": 1,
+  "content": [
+    {
+      "cusName": "明帅",
+      "totalPrice": "2000.0",
+      "description": "华尔兹花园 12/32 null",
+      "personal": "吹风机",
+      "timeStr": "2017-01-04 16:11:08",
+      "needFapiao": true,
+      "cusTel": "18710579465",
+      "type": 0,
+      "roomId": 1,
+      "totalDay": 2,
+      "preferential": null,
+      "cusIdCard": "3213112312312",
+      "cusId": 1,
+      "price": "1000",
+      "startTime": "2017-01-04",
+      "id": 1,
+      "endTime": "2017-01-06",
+      "time": 1483519268969,
+      "status": "已完成"
+    }
+  ]
+}
