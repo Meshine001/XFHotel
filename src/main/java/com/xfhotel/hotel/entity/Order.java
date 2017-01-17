@@ -217,10 +217,23 @@ public class Order {
 		info.put("price", price);
 		info.put("totalPrice",totalPrice);
 		info.put("preferential", preferential);
-		info.put("type", type);
+		info.put("type", getType(type));
 		info.put("status", getStatusString(status));
-		info.put("needFapiao", needFapiao);
+		info.put("needFapiao", needFapiao?"有发票":"无发票");
 		return info;
+	}
+	
+	String getType(int type){
+		switch (type) {
+		case Apartment.TYPE_APARTMENT:
+			return "公寓式";
+		case Apartment.TYPE_HOTEL:
+			return "酒店式";
+		case Apartment.TYPE_PLAY_ROOM:
+			return "休闲式";
+		default:
+			return "全部";
+		}
 	}
 
 	String getStatusString(int status) {

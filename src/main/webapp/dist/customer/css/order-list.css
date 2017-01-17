@@ -1,8 +1,3 @@
-.main{
-    float: right;
-    width: 820px;
-    padding: 39px 20px;
-}
 
 .order-main-wrap .order-remind-list {
     position: relative;
@@ -65,7 +60,7 @@
 .order-main-wrap .simple .simple-main {
     float: left;
     position: relative;
-    height: 28px;
+    height: 30px;
     z-index: 11;
     cursor: pointer;
     border: 1px solid #e4e4e5;
@@ -134,7 +129,7 @@
 .order-main-wrap .searchbar .hotel-dp {
     float: left;
     width: 116px;
-    height: 28px;
+    height: 30px;
     border: solid 1px #e4e4e5;
     padding-left: 8px;
 }
@@ -198,8 +193,8 @@ li {
 }
 .order-main-wrap .searchbar .hotel-dp .dp-info b {
     width: 13px;
-    height: 14px;
-    background: url(../images/iconpic.png) 0 -58px no-repeat;
+    height: 15px;
+    background: url(../img/iconpic.png) 0 -58px no-repeat;
 }
 .hotel-dp .dp-info b {
     float: right;
@@ -444,7 +439,7 @@ li {
     width: 14px;
     height: 14px;
     overflow: hidden;
-    background: url(http://simg1.qunarzz.com/order/icon-title.png) no-repeat 0 0;
+    background: url(../img/icon-title.png) no-repeat 0 0;
     margin: 2px 4px 0 0;
 }
 a.order-btn {

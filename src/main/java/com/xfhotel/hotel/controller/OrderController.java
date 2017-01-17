@@ -52,7 +52,11 @@ public class OrderController {
 			List<Order> orders = orderservice.getCustomerOrders(cId, type);
 			List<Map> maps = new ArrayList<Map>();
 			for(Order o:orders){
-				maps.add(o.toMap());
+				Map m = o.toMap();
+				Map room = roomService.getRoomInfo(o.getRoomId());
+				Map apartment = apartmentService.getApartmentInfo((Long)room.get("apartment"));
+				m.put("apartment", apartment);
+				maps.add(m);
 			}
 			 return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {
