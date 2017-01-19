@@ -27,7 +27,7 @@ public class RoomStatus {
 	public static List<RoomStatus> getStatusArray() {
 		if(statusArray == null){
 			statusArray = new ArrayList<RoomStatus>();
-			statusArray.add(new RoomStatus(0, "全部"));
+			statusArray.add(new RoomStatus(0, "不限"));
 			statusArray.add(new RoomStatus(1, "立即入住"));
 			statusArray.add(new RoomStatus(2, "一周内入住"));
 			statusArray.add(new RoomStatus(3, "两周内入住"));

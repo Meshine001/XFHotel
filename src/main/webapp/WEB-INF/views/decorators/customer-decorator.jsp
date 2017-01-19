@@ -32,6 +32,10 @@
 
 <script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
 <script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
+
+<link href="<%=basePath%>/dist/commons/colorbox/colorbox.css"
+	rel="stylesheet">
+<script src="<%=basePath%>/dist/commons/colorbox/jquery.colorbox-min.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
@@ -41,20 +45,62 @@
 <sitemesh:write property='my_header' />
 </head>
 <body>
-	<header class="ty">
+	<header>
 		<div class="main">
-			<div class="logo" onclick="location.href='/'"></div>
-			<div class="nav">
-				<ul class="nav_ul" id="nav_ul">
-					<li class="nav_on"><a title="" href="<%=basePath%>/">首页</a></li>
-					<li><a title="" href="<%=basePath%>/">酒店式公寓</a></li>
-					<li><a title="" href="<%=basePath%>/">休闲式公寓</a></li>
-					<li><a title="" href="<%=basePath%>">青客生活</a></li>
-					<li><a title="" href="<%=basePath%>">服务中心</a></li>
-					<li><a title="" href="<%=basePath%>">在线管家</a></li>
+			<a href="/" title="青舍首页" class="logo"></a>
+			<div class="nav clearfix">
+				<ul class="nav_ul">
+					<li><a href="<%=basePath%>/" title="">首页</a></li>
+					<li><a href="<%=basePath%>/list?type=酒店式公寓" title="">酒店式公寓</a></li>
+					<li><a href="<%=basePath%>/list?type=休闲式公寓" title="">休闲式公寓</a></li>
+					<li><a href="<%=basePath%>/story" title="">青客生活</a></li>
+					<li><a href="<%=basePath%>/serviceCenter" target="_blank"
+						title="">服务中心</a></li>
+					<li><a href="" target="_blank" title="">在线管家</a></li>
 				</ul>
+				<div class="lgorrg" onmouseover="showHomeMenu()"
+					onmouseout="hideHomeMenu()">
+					<c:choose>
+						<c:when test="${c != null }">
+							<a href="<%=basePath%>/customer/details"
+								title="${c.details.nick}">
+								<div class="name">
+									<img src="<%=basePath%>/images/${c.details.avatar}" width="40"
+										height="40"><span>${c.details.nick}</span>
+								</div>
+							</a>
+							<ul class="name_ul" id="home-menu" style="display: none;">
+								<li><a href="<%=basePath%>/customer/details">个人资料</a></li>
+								<li><a href="<%=basePath%>/customer/logout">退出</a></li>
+							</ul>
+						</c:when>
+						<c:otherwise>
+							<a class="lg" href="<%=basePath%>/customer?forword=login"
+								title="登录">登录</a>&nbsp;&nbsp;<span><img alt=""
+								src="dist/public/v1/images/phone.jpg"></span>&nbsp;&nbsp;<a
+								class="rg" href="<%=basePath%>/customer?forword=reg"
+								title="注册青舍用户">注册</a>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<a target="_blank" title="下载APP" href="/down/"
+					style="display: none;">
+					<div class="download">
+						<i></i>下载APP
+					</div>
+				</a>
 			</div>
 		</div>
+		<script type="text/javascript">
+		function showHomeMenu()
+		{		
+			$("#home-menu").css('display','');
+		}
+		function hideHomeMenu()
+		{				
+			$("#home-menu").hide();
+		}
+		</script>
 	</header>
 	<article>
 		<div class="main">
@@ -105,7 +151,7 @@
 						<li id="myDetails" class="">
 							<p>个人资料</p> <i></i>
 						</li>
-						<li id="" class="">
+						<li id="" class="" style="display: none;">
 							<p>帐号设置</p> <i></i>
 						</li>
 						<li id="" class="">
@@ -133,6 +179,7 @@
 			</div>
 		</div>
 	</article>
+	
 	<!--  
 	<div class="container-fluid">
 		<div class="row">

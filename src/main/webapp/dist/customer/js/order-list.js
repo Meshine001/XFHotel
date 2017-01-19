@@ -24,7 +24,7 @@
             $('<p/>').text(item.status).appendTo($('<td/>').addClass('state').appendTo(tr));
             var remarks = $('<td/>').addClass('remarks').appendTo(tr);
             $('<a/>').addClass('order-action').text('查看详情').appendTo($('<p/>').appendTo(remarks));
-            $('<a/>').addClass('order-btn').text('我要点评').appendTo($('<p/>').appendTo(remarks));
+            $('<a/>').attr('href','../order/comment/'+item.id).addClass('order-btn').text('我要点评').appendTo($('<p/>').appendTo(remarks));
         }
 
         function search(){

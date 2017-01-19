@@ -36,6 +36,7 @@ import com.xfhotel.hotel.support.LeasePrice;
 import com.xfhotel.hotel.support.LeaseType;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.RoomStatus;
+import com.xfhotel.hotel.support.SearchForm;
 import com.xfhotel.hotel.support.Subway;
 
 /**
@@ -115,35 +116,50 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public String list(String type,String checkinday,String checkoutday,String city) {
-		session.setAttribute("areas", Area.getAreas());
-		session.setAttribute("subways", Subway.getSubways());
-		session.setAttribute("leasePrices", LeasePrice.getPrices());
-		session.setAttribute("leaseTypes", LeaseType.getLeaseTypes());
-		session.setAttribute("layoutTypes", LayoutType.getLayouts());
+	public String list(SearchForm searchData) {
+		System.out.println(searchData);
+		Map<String, Object> info = new HashMap<String, Object>();
+		info.put("searchData", searchData);
+		info.put("areas", Area.getAreas());
+//		info.put("subways", Subway.getSubways());
+		info.put("priceRanges", LeasePrice.getPrices());
+		info.put("layoutTypes", LayoutType.getLayouts());
 		List<Feature> fs = featrueService.listFeatures();
 		List<com.xfhotel.hotel.support.Feature> features = new ArrayList<com.xfhotel.hotel.support.Feature>();
 		for(Feature f:fs){
 			features.add(new com.xfhotel.hotel.support.Feature((int)f.getId(), f.getDescription()));
 		}
 		com.xfhotel.hotel.support.Feature.setFeatures(features);
-		session.setAttribute("features",com.xfhotel.hotel.support.Feature.getFeatures());
-		session.setAttribute("roomStatus", RoomStatus.getStatusArray());
-		if(type.equals(Constants.TYPE_PLAY_ROOM)){
-			session.setAttribute("searchType", Constants.TYPE_PLAY_ROOM);
-		}else if(type.equals(Constants.TYPE_HOTEL)){
-			session.setAttribute("searchType", Constants.TYPE_HOTEL);
-		}else{
-			session.setAttribute("searchType", Constants.TYPE_ALL);
-		}
+		info.put("features",com.xfhotel.hotel.support.Feature.getFeatures());
+		info.put("enterTimes", RoomStatus.getStatusArray());
+		info.put("leaseTypes", LeaseType.getLeaseTypes());
+		
+		//TODO
+
+		info.put("list",  apartmentService.list());
+		System.out.println(info.get("list"));
+		session.setAttribute("info", info);
 		return "/customer/list";
 	}
 	
 	@RequestMapping(value = "homeSearch", method = RequestMethod.GET)
 	public String homeSearch(String checkinday,String checkoutday,String city){
 		//TODO
-		
-		return "redirect:list?checkinday="+checkinday+"&checkoutday="+checkoutday+"&city="+city+"&type="+Constants.TYPE_ALL;
+		StringBuffer sb = new StringBuffer("redirect:list?");
+		SearchForm searchData = new SearchForm();
+		searchData.setStartTime(checkinday);
+		searchData.setEndTime(checkoutday);
+		searchData.setArea(0);
+		searchData.setPriceRange(0);
+		searchData.setLayout(0);
+		Long[] f = {0L};
+		searchData.setFeatures(f);
+		searchData.setEnterTime(0);
+		searchData.setLeaseType(Apartment.TYPE_ALL);
+		searchData.setMoreStr(" ");
+		searchData.setSortType(0);
+		sb.append(searchData.toHttpGetPram());
+		return sb.toString();
 	}
 	
 	@RequestMapping(value = "search", method = RequestMethod.GET)

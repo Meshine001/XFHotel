@@ -49,7 +49,7 @@ public class Area {
 	public static List<Area> getAreas(){
 		if(areas == null){
 			areas = new ArrayList<Area>();
-			areas.add(new Area(0,"全部"));
+			areas.add(new Area(0,"不限"));
 			areas.add(new Area(1,"莲湖区"));
 			areas.add(new Area(2,"新城区"));
 			areas.add(new Area(3,"碑林区"));

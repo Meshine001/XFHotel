@@ -27,7 +27,7 @@ public class LeasePrice {
 	public static List<LeasePrice> getPrices() {
 		if( prices == null){
 			prices = new ArrayList<LeasePrice>();
-			prices.add(new LeasePrice(0, "全部"));
+			prices.add(new LeasePrice(0, "不限"));
 			prices.add(new LeasePrice(1, "800元以下"));
 			prices.add(new LeasePrice(2, "801-1000元"));
 			prices.add(new LeasePrice(3, "1001-1500元"));

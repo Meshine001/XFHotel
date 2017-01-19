@@ -333,8 +333,8 @@
 						<div class="two">
 							<a onmouseover="showMask(1,0)" onmouseout="hideMask(1,0)" href=""
 								title="青舍“绘”生活零基础绘画活动" target="_blank"> <img
-								class="readyload" src="/hotel/dist/public/images/blank.gif"
-								data-original="dist/public/v1/images/f22a9fb377dd061dcd3f790136511a4e.jpg"
+								class="readyload" src=""
+								data-original=""
 								width="425" height="265">
 								<div class="mask" style="display: none;" id="mask_1_0">
 									<span>青舍“绘”生活零基础绘画活动</span><input class="mask_btn" value="点击查看">
@@ -342,7 +342,7 @@
 							</a> <a onmouseover="showMask(1,1)" onmouseout="hideMask(1,1)"
 								href="" title="明星同款火锅，爆辣来袭" target="_blank"> <img
 								class="readyload" src="/hotel/dist/public/images/blank.gif"
-								data-original="dist/public/v1/images/345e225babe35559b8960b8fc009cf59.jpg"
+								data-original=""
 								width="425" height="265">
 								<div class="mask" style="display: none;" id="mask_1_1">
 									<span>明星同款火锅，爆辣来袭</span><input class="mask_btn" value="点击查看">
@@ -354,7 +354,7 @@
 								href="http://www.monph.com/shenghuo/info-390.html" title="青舍嗨歌会"
 								target="_blank"> <img class="readyload"
 								src="/hotel/dist/public/images/blank.gif"
-								data-original="dist/public/v1/images/b428c6e726bf717402d4ffecb012414c.jpg"
+								data-original=""
 								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_0">
 									<span>青舍嗨歌会</span><input class="mask_btn" value="点击查看">
@@ -363,7 +363,7 @@
 								href="http://www.monph.com/shenghuo/info-455.html?app=1"
 								title="2016/17青舍跨年音乐节" target="_blank"> <img
 								class="readyload" src="/hotel/dist/public/images/blank.gif"
-								data-original="/hotel/dist/upload/home/20161216/38afeb5a645e898f80febadaa66ed5f3.png"
+								data-original=""
 								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_1">
 									<span>2016/17青舍跨年音乐节</span><input class="mask_btn" value="点击查看">
@@ -372,7 +372,7 @@
 								href="http://www.monph.com/shenghuo/info-442.html"
 								title="青舍公寓首届脱单趴" target="_blank"> <img class="readyload"
 								src="/hotel/dist/public/images/blank.gif"
-								data-original="dist/public/v1/images/143f7acc3e0699e26b178dc8aaaeb64a.jpg"
+								data-original=""
 								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_2">
 									<span>青舍公寓首届脱单趴</span><input class="mask_btn" value="点击查看">
@@ -399,7 +399,7 @@
 										<a href="/gushi/info-82.html" target="_blank"
 											title="速度与激情，青舍风云">
 											<h3>速度与激情，青舍风云</h3>
-											<p>我叫程龙，2012年底退伍，我感受着这座城市带给我的美好和快乐，和青舍的邂逅就始于那时。还记得搬进青舍之前，我和女…...</p>
+											<p></p>
 										</a><a href="/gushi/info-82.html" target="_blank"
 											title="速度与激情，青舍风云" class="all_text">阅读全文</a>
 									</dt>
@@ -459,7 +459,7 @@
 										<a href="/gushi/info-79.html" target="_blank"
 											title="初次见到，便决定就是这里">
 											<h3>初次见到，便决定就是这里</h3>
-											<p>从信阳到郑州，338.5公里。数字是与家相隔的距离，可是我却从未在这里失去家的舒适与温馨。第一次听到青舍公寓，是朋…...</p>
+											<p></p>
 										</a><a href="/gushi/info-79.html" target="_blank"
 											title="初次见到，便决定就是这里" class="all_text">阅读全文</a>
 									</dt>

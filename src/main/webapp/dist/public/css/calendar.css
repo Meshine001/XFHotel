@@ -65,7 +65,7 @@
 .calendar-month .cal_select span, .calendar-month .show-date span:hover
 	{
 	color: #fff;
-	background-color: #da2f2f;
+	background-color: #ff4b5e;
 	display: inline-block;
 	width: 100%;
 	height: 32px;
@@ -78,7 +78,7 @@
 }
 
 .calendar-week .pink {
-	color: #da2f2f;
+	color: #ff4b5e;
 }
 
 .calendar-month .line3 em {
