@@ -141,14 +141,6 @@ public class CustomerController {
 
 	@RequestMapping(value = "/myOrder", method = RequestMethod.GET)
 	public String myOrderPage() {
-		Customer c = (Customer) session.getAttribute("c"); 
-		List<Order> list = orderService.getCustomerOrders(c.getId(), Apartment.TYPE_ALL);
-		List<Map> orders = new ArrayList<Map>();
-		for (Order o : list) {
-			orders.add(o.toMap());
-		}
-		session.setAttribute("orders", orders);
-		session.setAttribute("orders", orders);
 		return "/customer/myOrder";
 	}
 

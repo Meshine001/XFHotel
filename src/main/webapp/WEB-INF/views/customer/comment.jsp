@@ -27,10 +27,10 @@
 </head>
 <body>
 	<my_body>
-	<div class="row">
-		<div class="col-md-12">
-			<h3>用户评价</h3>
-			<ul class="media-list">
+		<h1 class="e_tit">用户评价</h1>
+		<div class="summary">
+		订单号：${order.id}
+		<ul class="media-list">
 				<li class="media">
 					<div class="media-body">
 						<div class="media">
@@ -38,52 +38,87 @@
 								width="140px" src="<%=basePath%>/images/${apartment.pic2[0]}">
 							</a>
 							<div class="media-body">
-								${order.description}<br> <small class="text-muted">Alex
-									Deo | 23rd June at 5:00pm</small>
+								${order.description}<br> <small class="text-muted">${order.startTime}至${order.endTime}</small>
 								<hr>
 							</div>
 						</div>
 					</div>
 				</li>
 			</ul>
+		
 		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-12">
 			<form action="<%=basePath%>/order/comment/post" id="comment-form"
 				method="post">
 				<input type="hidden" name="roomId" value="${room.id}"> 
 					<!-- 默认三星 -->
 					<input
-						type="hidden" name="c_score" value="3" id="score"> <input
+						type="hidden" name="c_score" value="3" id="scoreWeiSheng">
+						<input
+						type="hidden" name="c_score" value="3" id="scoreJiaoTong">
+						<input
+						type="hidden" name="c_score" value="3" id="scoreAnQuan"> <input
 						type="hidden" name="from" value="${order.cusId}" id="from"> <input
 						type="hidden" name="to" value="0"> 
-				<div class="row">
-					<span>整体评价：</span>
-					<div id="stars" class="block"></div>
-					<p id="starHint"></p>
+				<div class="stars">
+					<span>卫生：</span>
+					<div id="starsWeiSheng" class="block"></div>
+					<p id="starHintWeiSheng"></p>
 					<script type="text/javascript">
-						$('#stars').raty({
+						$('#starsWeiSheng').raty({
 							hints : [ '一般', '还行', '好', '很好', '非常好' ],
 							score : 3,
-							target : '#starHint',
+							target : '#starHintWeiSheng',
 							targetKeep : true,
 							click : function(score, evt) {
-								$('#score').val(score);
+								$('#scoreWeiSheng').val(score);
 								//alert('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt);
 							}
 						});
 					</script>
 				</div>
-				<div class="row">入住时间:${order.startTime}</div>
-				<div class="row">
+				<div class="stars">
+					<span>交通：</span>
+					<div id="starsJiaoTong" class="block"></div>
+					<p id="starHintJiaoTong"></p>
+					<script type="text/javascript">
+						$('#starsJiaoTong').raty({
+							hints : [ '一般', '还行', '好', '很好', '非常好' ],
+							score : 3,
+							target : '#starHintJiaoTong',
+							targetKeep : true,
+							click : function(score, evt) {
+								$('#scoreJiaoTong').val(score);
+								//alert('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt);
+							}
+						});
+					</script>
+				</div>
+					<div class="stars">
+					<span>安全：</span>
+					<div id="starsAnQuan" class="block"></div>
+					<p id="starHintAnQuan"></p>
+					<script type="text/javascript">
+						$('#starsAnQuan').raty({
+							hints : [ '一般', '还行', '好', '很好', '非常好' ],
+							score : 3,
+							target : '#starHintAnQuan',
+							targetKeep : true,
+							click : function(score, evt) {
+								$('#scoreAnQuan').val(score);
+								//alert('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt);
+							}
+						});
+					</script>
+				</div>
+				<div>入住时间:${order.startTime}</div>
+				<div >
 					入住感受:
 					<textarea rows="5" cols="20" name="feel"></textarea>
 				</div>
-
 			</form>
-			<div class="row">
+
+
+			<div class="details">
 				<span class="btn btn-success fileinput-button"> <i
 					class="glyphicon glyphicon-plus"></i> <span>添加图片</span> <!-- The file input field used as target for the file upload widget -->
 					<input id="fileupload" type="file" name="files[]"
@@ -148,8 +183,6 @@
 					});
 				});
 			</script>
-		</div>
-	</div>
 	</my_body>
 	<my_script> </my_script>
 </body>

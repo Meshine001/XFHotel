@@ -27,11 +27,11 @@ public class LayoutType {
 	public static List<LayoutType> getLayouts() {
 		if(layouts == null){
 			layouts = new ArrayList<LayoutType>();
-			layouts.add(new LayoutType(0, "全部"));
+			layouts.add(new LayoutType(0, "不限"));
 			layouts.add(new LayoutType(1, "一居室"));
-			layouts.add(new LayoutType(1, "二居室"));
-			layouts.add(new LayoutType(1, "三居室"));
-			layouts.add(new LayoutType(1, "四居室"));
+			layouts.add(new LayoutType(2, "二居室"));
+			layouts.add(new LayoutType(3, "三居室"));
+			layouts.add(new LayoutType(4, "四居室"));
 		}
 		return layouts;
 	}

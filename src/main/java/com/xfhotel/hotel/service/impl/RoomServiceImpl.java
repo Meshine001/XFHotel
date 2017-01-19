@@ -114,4 +114,12 @@ public class RoomServiceImpl implements RoomService {
 		roomDAO.delete(room);
 	}
 
+	@Transactional
+	@Override
+	public List<Room> getHomeRooms() {
+		String hql = "from Room where showHome=?";
+		Object[] value = {true};
+		return roomDAO.getListByHQL(hql, value);
+	}
+
 }

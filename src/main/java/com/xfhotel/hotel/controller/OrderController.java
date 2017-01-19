@@ -1,7 +1,9 @@
 package com.xfhotel.hotel.controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -44,6 +46,26 @@ public class OrderController {
 	@Autowired
 	HttpSession session;
 	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public @ResponseBody Message search(Long cId,int category,int type,String startDate,String endDate,int range){
+		 try {
+			List<Order> orders = orderservice.getCustomerOrders(cId, type);
+			List<Map> maps = new ArrayList<Map>();
+			for(Order o:orders){
+				Map m = o.toMap();
+				Map room = roomService.getRoomInfo(o.getRoomId());
+				Map apartment = apartmentService.getApartmentInfo((Long)room.get("apartment"));
+				m.put("apartment", apartment);
+				maps.add(m);
+			}
+			 return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");
+	}
+	
 	/**
 	 * 跳转到订单评价页面
 	 * @param id
@@ -61,13 +83,13 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/comment/post", method = RequestMethod.POST)
-	public @ResponseBody Message postComment(Long roomId,Long from,Long to,String c_score,String feel,String[] pics){
+	public @ResponseBody Message postComment(Long roomId,Long from,Long to,String[] c_score,String feel,String[] pics){
 		try {
 			Comment comment = new Comment();
 			comment.setFromWho(from);
 			comment.setToWho(to);
 			comment.setRoomId(roomId);
-			comment.setScore(c_score);
+			comment.setScore(StringSplitUtil.buildStrGroup(c_score));
 			comment.setFeel(feel);
 			comment.setPics(StringSplitUtil.buildStrGroup(pics));
 			comment.setTime(new Date().getTime());

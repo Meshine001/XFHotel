@@ -56,6 +56,8 @@ public class Room implements Serializable {
 	private String direction;//
 	private String capacity;//
 	private String description;//
+	
+	private boolean showHome;
 
 	private String pics;
 
@@ -167,6 +169,15 @@ public class Room implements Serializable {
 		this.facilities = str;
 	}
 
+	
+	public boolean isShowHome() {
+		return showHome;
+	}
+
+	public void setShowHome(boolean showHome) {
+		this.showHome = showHome;
+	}
+
 	public Map toMap() {
 		// TODO Auto-generated method stub
 		Map map = new HashMap();
@@ -182,6 +193,7 @@ public class Room implements Serializable {
 		map.put("apartment", apartment.getId());
 		map.put("prices", prices.split("@"));
 		map.put("status", getStatusString(status));
+		map.put("showHome", showHome);
 		return map;
 	}
 

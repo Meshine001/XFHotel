@@ -16,7 +16,11 @@ import com.xfhotel.hotel.support.DateUtil;
 @Entity
 @Table(name = "t_order")
 public class Order {
-
+	public final static int CATEGOTY_ALL = 0;
+	public final static int CATEGOTY_AVAILABLE = 1;
+	public final static int CATEGOTY_CHARGEBACK = 2;
+	
+	
 	public final static int STATUS_NOT_COMPLETE = 0;
 	public final static int STATUS_ON_PAY = 1;
 	public final static int STATUS_COMPLETE = 2;
@@ -213,10 +217,23 @@ public class Order {
 		info.put("price", price);
 		info.put("totalPrice",totalPrice);
 		info.put("preferential", preferential);
-		info.put("type", type);
+		info.put("type", getType(type));
 		info.put("status", getStatusString(status));
-		info.put("needFapiao", needFapiao);
+		info.put("needFapiao", needFapiao?"有发票":"无发票");
 		return info;
+	}
+	
+	String getType(int type){
+		switch (type) {
+		case Apartment.TYPE_APARTMENT:
+			return "公寓式";
+		case Apartment.TYPE_HOTEL:
+			return "酒店式";
+		case Apartment.TYPE_PLAY_ROOM:
+			return "休闲式";
+		default:
+			return "全部";
+		}
 	}
 
 	String getStatusString(int status) {

@@ -3,6 +3,8 @@ package com.xfhotel.hotel.support;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.xfhotel.hotel.entity.Apartment;
+
 public class LeaseType {
 	private int typeId;
 	private String type;
@@ -27,9 +29,9 @@ public class LeaseType {
 	public static List<LeaseType> getLeaseTypes() {
 		if(leaseTypes == null){
 			leaseTypes = new ArrayList<LeaseType>();
-			leaseTypes.add(new LeaseType(0, "全部"));
-			leaseTypes.add(new LeaseType(1, "整租"));
-			leaseTypes.add(new LeaseType(2, "合租"));
+			leaseTypes.add(new LeaseType(Apartment.TYPE_ALL, "不限"));
+			leaseTypes.add(new LeaseType(Apartment.TYPE_HOTEL, "酒店式"));
+			leaseTypes.add(new LeaseType(Apartment.TYPE_PLAY_ROOM, "休闲式"));
 		}
 		return leaseTypes;
 	}

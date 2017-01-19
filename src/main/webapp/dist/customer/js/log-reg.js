@@ -34,7 +34,7 @@ $(function() {
 				if (data.statusCode == 0) {
 
 				} else {
-					window.location.href = "./customer/reservation";
+					window.location.href = "./customer/myOrder";
 				}
 
 			}
