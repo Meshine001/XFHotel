@@ -108,4 +108,12 @@ public class BlogServiceImpl implements BlogService{
 		blogDAO.deleteById(id);
 	}
 
+	@Override
+	@Transactional
+	public int change(Blog blog) {
+		// TODO Auto-generated method stub
+		blogDAO.update(blog);
+		return 0;
+	}
+
 }
