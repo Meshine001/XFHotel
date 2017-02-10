@@ -623,3 +623,126 @@ div#index_list_calendar-box {
 	color: #999999;
 	font-size: 20px;
 }
+
+.x_l {
+    width: 850px;
+    float: left;
+}
+.x_t {
+    background: #fff;
+    padding: 20px;
+}
+.x_t h1 {
+    font-size: 24px;
+    color: #333;
+}
+.x_t h1 span {
+    font-size: 14px;
+    color: #999;
+}
+.x_add {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.x_dizhi {
+    font-size: 14px;
+    color: #999;
+}
+.x_dizhi i {
+    background: url(../images/icon.png) no-repeat -137px 0;
+    width: 12px;
+    height: 14px;
+    display: inline-block;
+    float: left;
+    margin: 5px 5px 0 0;
+}
+.f_map {
+    color: #448ed8;
+    display: inline-block;
+    margin-left: 10px;
+}
+.f_map i {
+    background: url(../images/icon.png) no-repeat -56px 0;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    float: left;
+    margin-top: 1px;
+    margin-right: 5px;
+}
+.b_ewm {
+    display: inline-block;
+    color: #999;
+    position: relative;
+    margin-left: 5px;
+    z-index: 99;
+    cursor: pointer;
+    float: right;
+}
+
+
+.b_ewm .ewm_i {
+    background: url(../images/ewm.jpg) no-repeat;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    float: left;
+    margin-top: 4px;
+    margin-right: 5px;
+}
+.b_sc {
+    margin-right: 20px;
+    color: #ccc;
+    display: inline-block;
+    float: right;
+}
+.b_sc i {
+    background: url(../images/icon.png) no-repeat -77px 0;
+    width: 12px;
+    height: 10px;
+    display: inline-block;
+    float: left;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.f_img {
+    cursor: pointer;
+    position: relative;
+}
+.f_img_list {
+    margin: 10px 0;
+    overflow: hidden;
+    zoom: 1;
+}
+.f_img_list .bt_left {
+    float: left;
+}
+.f_img_list i {
+    background: url(../images/icon.png) no-repeat -160px -898px;
+    width: 20px;
+    height: 84px;
+    display: inline-block;
+}
+.f_img_list .w00 {
+    width: 760px;
+    overflow: hidden;
+    zoom: 1;
+    float: left;
+}
+.f_img_list ul {
+    float: left;
+    padding: 0px 10px;
+    width: 120%;
+}
+.x_r {
+    float: right;
+    width: 330px;
+}
+
+.x_tiao_kuan {
+    background: #fff;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+

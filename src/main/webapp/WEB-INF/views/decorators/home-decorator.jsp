@@ -20,6 +20,8 @@
 
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/public/v1/css/base.css?r=3">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/public/css/layout.css">
 
 <sitemesh:write property='my_header' />
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -29,7 +31,7 @@
     <![endif]-->
 
 </head>
-<body>
+<body style="background-color: rgb(244, 244, 245);">
 	<header>
 		<div class="main">
 			<a href="/" title="青舍首页" class="logo"></a>

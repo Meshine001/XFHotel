@@ -266,6 +266,7 @@ header {
 
 /*通用底部*/
 footer {
+	clear: both;
 	background: #f4f4f5;
 	display: block;
 	overflow: hidden;
@@ -541,7 +542,11 @@ to {
 
 100%{
 opacity
+
+
 :
+
+
 1;
 }
 }
@@ -552,7 +557,11 @@ keyframes opacity { 0%{
 
 100%{
 opacity
+
+
 :
+
+
 1;
 }
 }
@@ -563,7 +572,11 @@ opacity
 
 100%{
 opacity
+
+
 :
+
+
 1;
 }
 }

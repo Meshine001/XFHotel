@@ -188,13 +188,34 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/json", method = RequestMethod.GET)
-	public @ResponseBody User jsonTest() {
-		User u = new User();
-		u.setId(1);
-		u.setUsername("user");
-		u.setPassword("123456");
-		u.setAuthority(1);
-		return u;
+	public @ResponseBody List jsonTest() {
+		
+		List<Map> list = new ArrayList<Map>();
+		for(int i=1;i<10;i++){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("houseprice", 2103);
+			map.put("state", "available");
+			map.put("start", "2017-02-0"+i);
+			map.put("pricetype", "normal");
+			list.add(map);
+		}
+		for(int i=0;i<10;i++){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("houseprice", 2103);
+			map.put("state", "available");
+			map.put("start", "2017-02-1"+i);
+			map.put("pricetype", "normal");
+			list.add(map);
+		}
+		for(int i=0;i<9;i++){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("houseprice", 2103);
+			map.put("state", "available");
+			map.put("start", "2017-02-2"+i);
+			map.put("pricetype", "normal");
+			list.add(map);
+		}
+		return list;
 	}
 	
 	@RequestMapping(value = "info/{roomId}", method = RequestMethod.GET)
