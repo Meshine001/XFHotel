@@ -87,10 +87,9 @@
 			}
 		</script>
 	</header>
+	<sitemesh:write property='my_banner' />
 	<div class="main">
-		<div class="crumbs">
-			<a href="/" title="首页">青舍首页</a> > <a href="/list/" title="西安租房">西安租房</a>
-		</div>
+		
 		<sitemesh:write property='my_body' />
 	</div>
 	<footer>

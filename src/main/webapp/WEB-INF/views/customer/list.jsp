@@ -22,6 +22,9 @@
 </head>
 <body>
 	<my_body>
+	<div class="crumbs">
+			<a href="/" title="首页">青舍首页</a> > <a href="/list/" title="西安租房">西安租房</a>
+	</div>
 	<article>
 		<div class="ser_box">
 			<div class="b_seach">

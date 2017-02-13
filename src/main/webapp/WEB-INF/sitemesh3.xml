@@ -8,6 +8,7 @@
 	
 
 	<mapping path="/list" decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
+	<mapping path="/story" decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
 	<mapping path="/info/*" decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
 	<mapping path="/order/*" decorator="/WEB-INF/views/decorators/customer-decorator.jsp" />
 
