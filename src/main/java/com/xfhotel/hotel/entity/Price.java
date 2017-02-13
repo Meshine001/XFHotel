@@ -1,5 +1,8 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.xfhotel.hotel.support.TimeUtil;
 
 @Entity
 @Table(name = "t_price")
@@ -23,6 +28,12 @@ public class Price {
 	private long date;
 	private float price;
 	
+	
+	public Price() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Price(Apartment apartment, long date, float price) {
 		super();
 		this.apartment = apartment;
@@ -53,6 +64,13 @@ public class Price {
 	}
 	public void setPrice(float price) {
 		this.price = price;
+	}
+	
+	public Map<String, Object> toMap(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("date", TimeUtil.getDateStr(date));
+		map.put("price", price);
+		return map;
 	}
 	
 	

@@ -35,6 +35,7 @@ import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.entity.Feature;
+import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.FacilityService;
@@ -42,8 +43,10 @@ import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.FileService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.service.impl.ApartmentServiceImpl;
+import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.StringSplitUtil;
+import com.xfhotel.hotel.support.TimeUtil;
 
 @Controller
 @RequestMapping("/admin/apartment")
@@ -289,6 +292,31 @@ public class ApartmentController {
 	public @ResponseBody Map getApartment(String apartmentid) {
 		Map map = apartmentService.getApartmentInfo(Long.valueOf(apartmentid));
 		return map;
+	}
+	
+	@RequestMapping(value = "/price/set", method = RequestMethod.POST)
+	public String priceSet(Long apartmentId,String date,String price){
+		Apartment apartment = apartmentService.findById(apartmentId);
+		Price sp = apartmentService.getSpPrice(apartment,TimeUtil.getDateLong(date));
+		if(sp != null){
+			sp.setPrice(Float.valueOf(price));
+		}else{
+			sp = new Price(apartment, TimeUtil.getDateLong(date),Float.valueOf(price));
+		}
+		apartmentService.setSpPrice(sp);
+		
+		return "redirect:/admin/apartment/price/"+apartmentId;
+	}
+	
+	@RequestMapping(value = "/price/{id}", method = RequestMethod.GET)
+	public String price(@PathVariable("id")Long id){
+		Apartment apartment = apartmentService.findById(id);
+		Long start = TimeUtil.getCurrentDateLong();
+		Long end = start + 1000*60*60*25*60;//60天
+		List<Map> prices = apartmentService.getSpPrices(start, end, apartment);
+		session.setAttribute("apartment", apartmentService.getApartmentInfo(apartment.getId()));
+		session.setAttribute("spPrices", prices);
+		return "admin/apartment/price";
 	}
 
 //	@RequestMapping(value = "/editroom", method = RequestMethod.POST)

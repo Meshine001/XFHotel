@@ -22,9 +22,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfhotel.hotel.dao.FacilityDAO;
 import com.xfhotel.hotel.dao.impl.ApartmentDAOImpl;
 import com.xfhotel.hotel.dao.impl.FacilityDAOImpl;
+import com.xfhotel.hotel.dao.impl.PriceDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.entity.Feature;
+import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 
@@ -35,6 +37,9 @@ public class ApartmentServiceImpl implements ApartmentService {
 
 	@Autowired
 	FacilityDAOImpl facilityDAO;
+	
+	@Autowired
+	PriceDAOImpl priceDAO;
 
 	@Override
 	@Transactional
@@ -105,6 +110,33 @@ public class ApartmentServiceImpl implements ApartmentService {
 	@Override
 	public void delete(Apartment apartment) {
 		apartmentDAO.delete(apartment);
+	}
+
+	@Transactional
+	@Override
+	public void setSpPrice(Price price) {
+		priceDAO.saveOrUpdate(price);
+	}
+	
+	@Transactional
+	@Override
+	public List<Map> getSpPrices(Long start, Long end,Apartment apartment) {
+		String hqlString = "from Price where apartment=? and date >=? and date <=?";
+		Object[] values = {apartment,start,end};
+		List<Price> prices = priceDAO.getListByHQL(hqlString, values);
+		List<Map> ps = new ArrayList<Map>();
+		for(Price p:prices){
+			ps.add(p.toMap());
+		}
+		return ps;
+	}
+
+	@Transactional
+	@Override
+	public Price getSpPrice(Apartment apartment,Long date) {
+		String hqlString = "from Price where apartment=? and date =?";
+		Object[] values = {apartment,date};
+		return priceDAO.getByHQL(hqlString, values);
 	}
 
 }
