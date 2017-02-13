@@ -41,6 +41,7 @@ public class BlogController {
 		String basepath = request.getSession().getServletContext().getRealPath("/");
 		Blog blog = new Blog();
 		blog.setTitle(title);
+		blog.setStatus("0");
 		int status = blogService.publish(blog, content, basepath);
 		return blog.getId();
 	}
@@ -103,6 +104,14 @@ public class BlogController {
 	@RequestMapping(value = "delete_blog", method = RequestMethod.POST)
 	public @ResponseBody String deleteBlog (long id){
 		blogService.delete(id);
+		return "/";
+	}
+	
+	@RequestMapping(value = "change_status", method = RequestMethod.POST)
+	public @ResponseBody String change_Blog (long id, String status){
+		Blog blog = blogService.find(id);
+		blog.setStatus(status);
+		blogService.change(blog);
 		return "/";
 	}
 }

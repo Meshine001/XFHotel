@@ -25,16 +25,23 @@ public class Blog {
 	private String path;
 	private long authorid;
 	private String author;
+	private String status;
 	
 	
-	public Blog(long id, String title, Long date, String path, long authorid, String author) {
+	public Blog(String title, Long date, String path, long authorid, String author, String status) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.date = date;
 		this.path = path;
 		this.authorid = authorid;
 		this.author = author;
+		this.status = status;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public Blog() {
 		// TODO Auto-generated constructor stub
@@ -83,6 +90,7 @@ public class Blog {
 		map.put("title", title);
 		map.put("date", DateUtil.format(d));
 		map.put("path", path);
+		map.put("status", status);
 		map.put("authorid", authorid);
 		map.put("author", author);
 		return map;

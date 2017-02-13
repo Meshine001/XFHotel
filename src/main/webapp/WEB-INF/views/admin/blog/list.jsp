@@ -13,23 +13,35 @@
 </head>
 <body>
 	<my_body>
-	<h3>
-		公告列表<small><a href="<%=basePath%>/admin/blog/create">添加</a></small>
-	</h3>
-	<table class="table" id="list">
-		<thead>
-			<tr>
-				<th width="20%" >发布日期</th>
-				<th width="60%" >标题</th>
-				<th width="20%" ></th>
-			</tr>
-		</thead>
-		<tbody id="t_body">
-		</tbody>
-	</table>
-	<ul id="pagecontroller"  class="pagination">
-	</ul>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-mini">
+				<div class="card-header">
+					<div class="card-title">
+						<h3>公告列表</h3>
+					</div>
+					<ul class="card-action">
+						<a  class="btn " href="<%=basePath%>/admin/blog/create">添加</a>
+					</ul>
+				</div>
+				<table class="table" id="list">
+					<thead>
+						<tr>
+							<th width="20%">发布日期</th>
+							<th width="50%">标题</th>
+							<th width="15%">状态</th>
+							<th width="15%"></th>
+						</tr>
+					</thead>
+					<tbody id="t_body">
+					</tbody>
+				</table>
+				<ul id="pagecontroller" class="pagination">
+				</ul>
+			</div>
+		</div>
+	</div>
 	</my_body>
-	<my_script> <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/list-blog.js"></script>
-	</my_script>
+	<my_script> <script type="text/javascript"
+		src="<%=basePath%>/dist/admin/assets/js/list-blog.js"></script> </my_script>
 </body>
