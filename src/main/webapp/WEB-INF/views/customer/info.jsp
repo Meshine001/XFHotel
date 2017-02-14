@@ -10,6 +10,10 @@
 <title>title-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
 <my_header>
+<script src="<%=basePath%>/dist/public/js/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/public/css/colorbox.css">
+<script src="<%=basePath%>/dist/public/js/jquery.colorbox-min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/customer/css/info.css">
 </my_header>
@@ -35,9 +39,11 @@
 					<div class="f_img_list">
 						<i id="pre" class="bt_left"></i>
 						<div class="w00" style="width: 770px">
-							<ul style="width: 2190px; margin-left: -10px; position: relative;">
+							<ul
+								style="width: 2190px; margin-left: -10px; position: relative;">
 								<c:forEach items="${apartment.picShow}" var="pic" varStatus="p">
-									<li index="${p.index }"><img src="../images/${pic}" width="138" height="84" /></li>
+									<li index="${p.index }"><img src="../images/${pic}"
+										width="138" height="84" /></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -186,7 +192,7 @@
 										</div>
 									</div>
 									<div class="order_btn_container">
-										<a class="order_btn" href="#ongo" id="day_yuding">立即预订<span
+										<a class="order_btn" href="../story" id="day_yuding">立即预订<span
 											class="f14"></span></a>
 									</div>
 								</div>
@@ -421,6 +427,6 @@
 	</div>
 	</my_body>
 	<my_script> <script
-		src="<%=basePath%>/dist/customer/js/info.js"></script></my_script>
+		src="<%=basePath%>/dist/customer/js/info.js"></script> </my_script>
 </body>
 </html>

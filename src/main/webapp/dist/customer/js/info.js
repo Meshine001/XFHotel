@@ -952,4 +952,10 @@ $(document).ready(function(){
     $('#next').click(function(){
     	changePic('next');
     });
+    
+    $('#day_yuding').colorbox({
+    	maxWidth:'600px',
+    	maxHeight:'300px',
+    	overlayClose:true
+    });
 });
