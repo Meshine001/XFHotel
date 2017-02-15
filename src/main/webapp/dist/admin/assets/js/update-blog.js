@@ -12,6 +12,16 @@ $(document).ready(function() {
 		},
 		success : function(data) {
 			var editor = new wangEditor('div_editor');
+			
+			editor.config.uploadImgUrl = './upload_blog_pic';
+			editor.config.uploadParams = {
+			};
+			editor.config.uploadHeaders = {
+			    'Accept' : 'text/x-json'
+			};
+			editor.config.hideLinkImg = true;
+			editor.config.uploadImgFileName = 'myFileName';
+			
 			editor.create();
 			$('#submit').click(function() {
 				$.ajax({

@@ -1,35 +1,49 @@
 package com.xfhotel.hotel.controller;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.service.BlogService;
+import com.xfhotel.hotel.service.FileService;
 import com.xfhotel.hotel.support.BlogUploadUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
-import com.xfhotel.hotel.support.UploadFileUtils;
 
 @Controller
 @RequestMapping("/admin/blog")
 public class BlogController {
 	@Autowired
 	BlogService blogService;
+	@Autowired
+	FileService fileService;
 	
 	@RequestMapping(value = "/create")
 	public String createBlog() {
@@ -113,5 +127,20 @@ public class BlogController {
 		blog.setStatus(status);
 		blogService.change(blog);
 		return "/";
+	}
+	
+	
+
+	
+	@RequestMapping(value = "upload_blog_pic", method = RequestMethod.POST)
+	public @ResponseBody String upload_pic (MultipartFile myFileName, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+		if (myFileName != null) {
+			StringBuffer sb = new StringBuffer();
+			sb.append(request.getSession().getServletContext().getRealPath("/"));
+			String fullPath = fileService.saveFile(myFileName, sb.toString());
+			return Constants.Host_Address+"images/"+fullPath;
+		}
+		return "";
 	}
 }
