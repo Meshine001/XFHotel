@@ -954,8 +954,13 @@ $(document).ready(function(){
     });
     
     $('#day_yuding').colorbox({
-    	maxWidth:'600px',
-    	maxHeight:'300px',
-    	overlayClose:true
+    	
+    	width:'900px',
+    	height:'900px',
+    	initialWidth:'900px',
+    	initialHeight:'900px',
+    	overlayClose:true,
+    	closeButton:true
+    	
     });
 });

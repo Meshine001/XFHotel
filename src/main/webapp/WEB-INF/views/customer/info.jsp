@@ -24,7 +24,7 @@
 		<div class="x">
 			<div class="x_l">
 				<div class="x_t">
-					<h1>${apartment.community}-${apartment.capacity }居室</h1>
+					<h1>${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间</h1>
 					<div class="x_add">
 						<span class="x_dizhi"> <i></i>${apartment.address}
 						</span> <a class="f_map"> <i></i> 导航
@@ -192,7 +192,7 @@
 										</div>
 									</div>
 									<div class="order_btn_container">
-										<a class="order_btn" href="../story" id="day_yuding">立即预订<span
+										<a class="order_btn" href="../order/module" id="day_yuding">立即预订<span
 											class="f14"></span></a>
 									</div>
 								</div>
