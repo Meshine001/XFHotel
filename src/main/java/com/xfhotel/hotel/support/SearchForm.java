@@ -1,7 +1,11 @@
 package com.xfhotel.hotel.support;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+
+import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Apartment;
 /**
  * 搜索参数类
  * @author Ming
@@ -105,23 +109,68 @@ public class SearchForm {
 				+ enterTime + ", leaseType=" + leaseType + ", moreStr=" + moreStr + ", sortType=" + sortType + "]";
 	}
 	
-	
-	public int cmp(Map item1, Map item2){
+	public double rate(Map map){
 		/**
-		 * 依据搜索条件比较两房源符合度
-		 * 仅当前者更合适 输出>1
+		 * 对map对应apartment进行评分
 		 */
+		double r = 0;
 //		private String startTime;
 //		private String endTime;
-//		private Integer area;
-//		private Integer priceRange;
-//		private Integer layout;
-//		private Long[] features;
-//		private Integer enterTime;
-//		private Integer leaseType;
-//		
+		String location = (String) map.get("location");
+		if( area==0 || Area.getAreaById(area).equals(location.split(",")[2])){
+			r += 1;
+		}
+		if( priceRange.intValue() == 0 )
+			r += 1;
+		else{
+			String[] prices = (String[]) map.get("prices");
+			int price = Integer.valueOf(prices[0]);
+			if( priceRange.intValue() == 1 ){
+				if( price < Constants.price_scope[0])
+					r +=1;
+			}
+			else if( priceRange.intValue() == Constants.price_scope.length+1 ){
+				if( price > Constants.price_scope[Constants.price_scope.length-1])
+					r +=1;
+			}
+			else{
+				if( price > Constants.price_scope[priceRange-2] && price <= Constants.price_scope[priceRange-1])
+					r +=1;
+			}
+		}
+		int num_room = Integer.valueOf((String) map.get("bedroom"));
+		if( layout.intValue()==0 )
+			r += 1;
+		else if( num_room>=layout.intValue() ){
+			r += 1-(num_room-layout.intValue())/10.0;
+		}
+		if( features[0]==0)
+			r +=1;
+		else{
+			double rt = 1;
+			for(long id: features){
+				List<Map> fea = (List<Map>) map.get("facilityEntity");
+				int check = 0;
+				for( Map f : fea){
+					if( ((Long)f.get("id")).doubleValue() == id ){
+						check = 1;
+						break;
+					}
+				}
+				if( check==0 ){
+					rt /=2.0;
+				}
+			}
+			r += rt;
+		}
+		String lt = (String) map.get("apartmentType");
+		if( leaseType.intValue() == 0 )
+			r += 1;
+		else{
+			if( lt.equals(Apartment.getTypeDescription(leaseType)) )
+				r += 1;
+		}
 //		private String moreStr;//模糊字段
-//		private Integer sortType;//0 推荐，1价格，2面积
-		return 0;
+		return r;
 	}
 }

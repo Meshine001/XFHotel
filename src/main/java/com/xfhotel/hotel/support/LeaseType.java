@@ -29,9 +29,9 @@ public class LeaseType {
 	public static List<LeaseType> getLeaseTypes() {
 		if(leaseTypes == null){
 			leaseTypes = new ArrayList<LeaseType>();
-			leaseTypes.add(new LeaseType(Apartment.TYPE_ALL, "不限"));
-			leaseTypes.add(new LeaseType(Apartment.TYPE_HOTEL, "酒店式"));
-			leaseTypes.add(new LeaseType(Apartment.TYPE_PLAY_ROOM, "休闲式"));
+			for(int i=0; i<Apartment.TYPE_NUM;i++){
+				leaseTypes.add(new LeaseType(i, Apartment.getTypeDescription(i)));
+			}
 		}
 		return leaseTypes;
 	}

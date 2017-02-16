@@ -136,7 +136,7 @@ public class HomeController {
 		
 		//TODO
 
-		info.put("list",  apartmentService.list());
+		info.put("list",  sort(apartmentService.list(),searchData));
 		System.out.println(info.get("list"));
 		session.setAttribute("info", info);
 		return "/customer/list";
@@ -161,17 +161,23 @@ public class HomeController {
 		sb.append(searchData.toHttpGetPram());
 		return sb.toString();
 	}
-	public int cmp(Object obj1, Object obj2, SearchForm searchData) {
-		return searchData.cmp((Map)obj1, (Map)obj2);
-	}
 	
 	public List sort(List list, SearchForm searchData) {
+		double rates[] = new double[list.size()];
+		for(int i=0; i<list.size(); i++){ 
+			Object obj = list.get(i);
+			rates[i] = searchData.rate((Map) obj);
+		}
+		
 		for(int i=0; i<list.size(); i++){
-			for(int j=i+1; i<list.size(); j++){
-				if(cmp(list.get(i),list.get(j),searchData)>0){
+			for(int j=i+1; j<list.size(); j++){
+				if( rates[i] < rates[j] ){
 					Object tmp = list.get(i);
 					list.set(i, list.get(j));
 					list.set(j, tmp);
+					double t = rates[i];
+					rates[i] = rates[j];
+					rates[j] = t;
 				}
 			}
 		}
