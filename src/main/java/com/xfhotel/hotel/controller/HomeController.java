@@ -161,30 +161,21 @@ public class HomeController {
 		sb.append(searchData.toHttpGetPram());
 		return sb.toString();
 	}
+	public int cmp(Object obj1, Object obj2, SearchForm searchData) {
+		return searchData.cmp((Map)obj1, (Map)obj2);
+	}
 	
-	@RequestMapping(value = "search", method = RequestMethod.GET)
-	public @ResponseBody Message search() {
-		try {
-			List<Map>  rooms = roomService.getAllRooms();
-			Apartment apartment = new Apartment();
-			apartment.setLayout("2@2@1@1");
-			apartment.setType("单租型");
-			String fs = "";
-			apartment.setFeatures(null);
-			apartment.setPrice_scope("1");
-			Room room = new Room();
-			String content = "";
-			String subways[] = new String[]{"1"};
-			for(int i=0;i<subways.length;i++){
-				fs = fs + "@" + subways[i];
+	public List sort(List list, SearchForm searchData) {
+		for(int i=0; i<list.size(); i++){
+			for(int j=i+1; i<list.size(); j++){
+				if(cmp(list.get(i),list.get(j),searchData)>0){
+					Object tmp = list.get(i);
+					list.set(i, list.get(j));
+					list.set(j, tmp);
+				}
 			}
-			apartmentService.findApartment(content, apartment);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, rooms);
-		} catch (Exception e) {
-			// TODO Auto-generated catch blockp/0;'+
-			e.printStackTrace();
 		}
-		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");
+		return list;
 	}
 
 	@RequestMapping(value = "/json", method = RequestMethod.GET)

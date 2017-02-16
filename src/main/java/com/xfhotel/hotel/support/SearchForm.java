@@ -1,6 +1,7 @@
 package com.xfhotel.hotel.support;
 
 import java.util.Arrays;
+import java.util.Map;
 /**
  * 搜索参数类
  * @author Ming
@@ -105,5 +106,22 @@ public class SearchForm {
 	}
 	
 	
-	
+	public int cmp(Map item1, Map item2){
+		/**
+		 * 依据搜索条件比较两房源符合度
+		 * 仅当前者更合适 输出>1
+		 */
+//		private String startTime;
+//		private String endTime;
+//		private Integer area;
+//		private Integer priceRange;
+//		private Integer layout;
+//		private Long[] features;
+//		private Integer enterTime;
+//		private Integer leaseType;
+//		
+//		private String moreStr;//模糊字段
+//		private Integer sortType;//0 推荐，1价格，2面积
+		return 0;
+	}
 }
