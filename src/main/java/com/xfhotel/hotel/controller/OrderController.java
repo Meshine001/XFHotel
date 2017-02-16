@@ -26,8 +26,10 @@ import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
+import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.StringSplitUtil;
+import com.xfhotel.hotel.support.TimeUtil;
 
 @Controller
 @RequestMapping("/order")
@@ -41,49 +43,93 @@ public class OrderController {
 	ApartmentService apartmentService;
 	@Autowired
 	CommentService commentService;
-	
-	
+
 	@Autowired
 	HttpSession session;
-	
+
+	@RequestMapping(value = "/module", method = RequestMethod.GET)
+	public String orderModule(String startTime, String endTime, Integer totalDay, String price,
+			String totalPrice, String preferential) {
+		session.setAttribute("oStart", startTime);
+		session.setAttribute("oEnd", endTime);
+		session.setAttribute("oTotalDay", totalDay);
+		session.setAttribute("oPrice", price);
+		session.setAttribute("oTotalPrice", totalPrice);
+		session.setAttribute("oPreferential", preferential);
+		return "customer/orderModule";
+	}
+
+	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
+	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
+			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
+			String totalPrice, String preferential, boolean needFapiao, Integer apartmentType) {
+		Order o = new Order();
+		o.setCusId(cusId);
+		o.setDescription(description);
+		o.setRoomId(roomId);
+		o.setCusName(cusName);
+		o.setCusTel(cusTel);
+		o.setCusIdCard(cusIdCard);
+		o.setPersonal(personal);
+		try {
+			o.setStartTime(DateUtil.parse(startTime, "yyyy-MM-dd").getTime());
+			o.setEndTime(DateUtil.parse(endTime, "yyyy-MM-dd").getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		o.setTime(new Date().getTime());
+		o.setTotalDay(totalDay);
+		o.setPrice(price);
+		o.setTotalPrice(totalPrice);
+		o.setPreferential(preferential);
+		o.setType(apartmentType);
+		o.setStatus(Order.STATUS_ON_PAY);
+		o.setNeedFapiao(needFapiao);
+		orderservice.add(o);
+		return "redirect:customer/pay/"+o.getId()+"?status="+o.getStatus();
+	}
+
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody Message search(Long cId,int category,int type,String startDate,String endDate,int range){
-		 try {
+	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range) {
+		try {
 			List<Order> orders = orderservice.getCustomerOrders(cId, type);
 			List<Map> maps = new ArrayList<Map>();
-			for(Order o:orders){
+			for (Order o : orders) {
 				Map m = o.toMap();
 				Map room = roomService.getRoomInfo(o.getRoomId());
-				Map apartment = apartmentService.getApartmentInfo((Long)room.get("apartment"));
+				Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
 				m.put("apartment", apartment);
 				maps.add(m);
 			}
-			 return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");
 	}
-	
+
 	/**
 	 * 跳转到订单评价页面
+	 * 
 	 * @param id
 	 * @return
 	 */
 	@RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
-	public String comment(@PathVariable("id")Long id){
+	public String comment(@PathVariable("id") Long id) {
 		Map<String, Object> order = orderservice.get(id).toMap();
-		Map<String, Object> room = roomService.getRoomInfo((Long)order.get("roomId"));
+		Map<String, Object> room = roomService.getRoomInfo((Long) order.get("roomId"));
 		session.setAttribute("order", order);
 		session.setAttribute("room", room);
-		Map<String, Object> apartment = apartmentService.getApartmentInfo((Long)room.get("apartment"));
+		Map<String, Object> apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
 		session.setAttribute("apartment", apartment);
 		return "customer/comment";
 	}
-	
+
 	@RequestMapping(value = "/comment/post", method = RequestMethod.POST)
-	public @ResponseBody Message postComment(Long roomId,Long from,Long to,String[] c_score,String feel,String[] pics){
+	public @ResponseBody Message postComment(Long roomId, Long from, Long to, String[] c_score, String feel,
+			String[] pics) {
 		try {
 			Comment comment = new Comment();
 			comment.setFromWho(from);
@@ -93,7 +139,7 @@ public class OrderController {
 			comment.setFeel(feel);
 			comment.setPics(StringSplitUtil.buildStrGroup(pics));
 			comment.setTime(new Date().getTime());
-			
+
 			commentService.add(comment);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "评论成功");
 		} catch (Exception e) {
@@ -109,39 +155,37 @@ public class OrderController {
 		session.setAttribute("order", order.toMap());
 		return "customer/order";
 	}
-	
+
 	@RequestMapping(value = "/payOver/{id}", method = RequestMethod.GET)
-	public String payOver(@PathVariable("id")Long id,int status){
+	public String payOver(@PathVariable("id") Long id, int status) {
 		Order order = orderservice.get(id);
-		if(status == Order.STATUS_TIME_OUT){
+		if (status == Order.STATUS_TIME_OUT) {
 			order.setStatus(status);
 			session.setAttribute("err", "支付超时");
 			return "/customer/err";
 		}
 		order.setStatus(status);
 		orderservice.update(order);
-		
+
 		Room room = roomService.findById(order.getRoomId());
 		room.setStatus(Room.STATUS_LEASED);
 		roomService.update(room);
-		
+
 		return "/customer/success";
 	}
-	
-	
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(Long cusId, Long roomId, Long apartmentId, String cusName, String cusTel, String cusPersonal,
 			String startTime, String endTime, int type, String cusIdCard, boolean needFapiao) {
 		Order order = null;
 		try {
-			
+
 			Room room = roomService.findById(roomId);
-			if(room.getStatus() == Room.STATUS_LEASED || room.getStatus() == Room.STATUS_ON_PAY ){
+			if (room.getStatus() == Room.STATUS_LEASED || room.getStatus() == Room.STATUS_ON_PAY) {
 				session.setAttribute("err", "房间已租出");
 				return "/customer/err";
 			}
-			
+
 			Map roomInfo = roomService.getRoomInfo(roomId);
 			Map apartmentInfo = apartmentService.getApartmentInfo(apartmentId);
 
@@ -179,13 +223,13 @@ public class OrderController {
 			order.setTime(new Date().getTime());
 			order.setNeedFapiao(needFapiao);
 			orderservice.add(order);
-			
+
 			room.setStatus(Room.STATUS_ON_PAY);
 			roomService.update(room);
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
+			// e.printStackTrace();
 			session.setAttribute("err", "无法生成订单");
 			return "/customer/err";
 		}

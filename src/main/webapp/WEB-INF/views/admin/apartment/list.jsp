@@ -21,6 +21,7 @@
 					</div>
 					<ul class="card-action">
 						<a class="btn " href="<%=basePath%>/admin/apartment/add">添加</a>
+
 					</ul>
 				</div>
 				<table class="table">
@@ -52,8 +53,10 @@
 								<td>${apartment.floor}/${apartment.totalfloor}</td>
 								<td>${apartment.direction}</td>
 								<td>${apartment.square}</td>
-								<th><a
-									href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a>&nbsp;&nbsp;<a>删除</a></th>
+								<th><a class="btn"
+									href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a>&nbsp;&nbsp;<br>
+									<a class="btn" href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格</a>&nbsp;&nbsp;<br>
+									<a class="btn">删除</a></th>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -33,9 +33,18 @@ public class CustomerDetails {
 	private String avatar;
 	private String idCard;
 	private String tel;
+	private String name;
 	
 	@OneToOne(mappedBy = "details")
 	private Customer customer;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public Long getId() {
 		return id;

@@ -308,6 +308,14 @@ public class Apartment {
 		map.put("pic2", pic2.split("@"));
 		map.put("pic3", pic3.split("@"));
 		map.put("pic4", pic4.split("@"));
+		List<String> picShow = new ArrayList<String>();
+		for(String p:pic2.split("@")){
+			picShow.add(p);
+		}
+		for(String p:pic3.split("@")){
+			picShow.add(p);
+		}
+		map.put("picShow", picShow);
 		map.put("dayPrice", prices);
 
 		ArrayList rooms = new ArrayList();

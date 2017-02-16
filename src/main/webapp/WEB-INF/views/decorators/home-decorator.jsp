@@ -20,6 +20,8 @@
 
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/public/v1/css/base.css?r=3">
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/public/css/layout.css">
 
 <sitemesh:write property='my_header' />
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -29,7 +31,7 @@
     <![endif]-->
 
 </head>
-<body>
+<body style="background-color: rgb(244, 244, 245);">
 	<header>
 		<div class="main">
 			<a href="/" title="青舍首页" class="logo"></a>
@@ -85,10 +87,9 @@
 			}
 		</script>
 	</header>
+	<sitemesh:write property='my_banner' />
 	<div class="main">
-		<div class="crumbs">
-			<a href="/" title="首页">青舍首页</a> > <a href="/list/" title="西安租房">西安租房</a>
-		</div>
+		
 		<sitemesh:write property='my_body' />
 	</div>
 	<footer>
