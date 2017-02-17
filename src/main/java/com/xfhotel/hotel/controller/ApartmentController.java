@@ -308,6 +308,17 @@ public class ApartmentController {
 		return "redirect:/admin/apartment/price/"+apartmentId;
 	}
 	
+	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.GET)
+	public @ResponseBody List<Map> getRangePrices(@PathVariable("id")Long id,@PathVariable("startDate")String startDate){
+		List<Map> prices = new ArrayList<Map>();
+		Apartment apartment = apartmentService.findById(id);
+		Long start = TimeUtil.getDateLong(startDate);
+		Long end = start + 1000*60*60*25*60;//60天
+		List<Map> sp= apartmentService.getSpPrices(start, end, apartment);
+		
+		return prices;
+	}
+	
 	@RequestMapping(value = "/price/{id}", method = RequestMethod.GET)
 	public String price(@PathVariable("id")Long id){
 		Apartment apartment = apartmentService.findById(id);
