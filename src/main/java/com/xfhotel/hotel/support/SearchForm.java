@@ -117,14 +117,14 @@ public class SearchForm {
 //		private String startTime;
 //		private String endTime;
 		String location = (String) map.get("location");
-		if( area==0 || Area.getAreaById(area).equals(location.split(",")[2])){
+		if( area==0 || Area.getAreaById(area).equals(location.split(",")[2].replaceFirst(" ", ""))){
 			r += 1;
 		}
 		if( priceRange.intValue() == 0 )
 			r += 1;
 		else{
 			String[] prices = (String[]) map.get("prices");
-			int price = Integer.valueOf(prices[0]);
+			double price = Double.valueOf(prices[0]);
 			if( priceRange.intValue() == 1 ){
 				if( price < Constants.price_scope[0])
 					r +=1;
@@ -149,10 +149,10 @@ public class SearchForm {
 		else{
 			double rt = 1;
 			for(long id: features){
-				List<Map> fea = (List<Map>) map.get("facilityEntity");
+				String[] fea = (String[]) map.get("features");
 				int check = 0;
-				for( Map f : fea){
-					if( ((Long)f.get("id")).doubleValue() == id ){
+				for( String f : fea){
+					if( Long.valueOf(f) == id ){
 						check = 1;
 						break;
 					}
@@ -163,7 +163,7 @@ public class SearchForm {
 			}
 			r += rt;
 		}
-		String lt = (String) map.get("apartmentType");
+		String lt = (String) map.get("apartmenttype");
 		if( leaseType.intValue() == 0 )
 			r += 1;
 		else{
