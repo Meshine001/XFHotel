@@ -16,7 +16,7 @@
     <div class="ol_info">
       <p>请如实填写以下信息。</p>
       <h4>${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间</h4>
-      <h4>${oStart}入住-${oEnd}离开&nbsp;&nbsp;共${oTotalDay}晚&nbsp;&nbsp;${oTotalPrice}</h4>
+      <h4>${oStart}入住-${oEnd}离开&nbsp;&nbsp;共${oTotalDay}晚&nbsp;&nbsp;¥${oTotalPrice}</h4>
       <form action="<%=basePath%>/order/modulePost" method="post" name="" id="">
       <input type="hidden" name="cusId" value="${c.id}">
       <input type="hidden" name="description" value="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间">

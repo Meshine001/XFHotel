@@ -7532,3 +7532,8 @@ span.gj_chat {
 .reply_box h5 {
 	color: #959ea7;
 }
+.ol_info h4 {
+    font-size: 14px;
+    color: #1c1a1a;
+    margin-left: 30px;
+}

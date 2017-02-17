@@ -26,7 +26,7 @@ public class Price {
 	private Apartment apartment;
 	
 	private long date;
-	private float price;
+	private Double price;
 	
 	
 	public Price() {
@@ -34,7 +34,7 @@ public class Price {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Price(Apartment apartment, long date, float price) {
+	public Price(Apartment apartment, long date, Double price) {
 		super();
 		this.apartment = apartment;
 		this.date = date;
@@ -59,10 +59,10 @@ public class Price {
 	public void setDate(long date) {
 		this.date = date;
 	}
-	public float getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(float price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	

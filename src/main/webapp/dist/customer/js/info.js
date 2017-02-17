@@ -167,13 +167,14 @@
 	           var checkDay = '';
 	           var isToday = this.getYmd(writeDay) == this.getYmd(this.today) ? 1 : 0;
 	           var attributeStr = '';
+	           var dayText = '';
 	           if(writeDay < this.today) {
-	                   var dayText = isToday && !this.isAbroad ? '今天' : day.d;
+	                    dayText = isToday && !this.isAbroad ? '今天' : day.d;
 	           } else {
 	               if(i.state == 'available') {
-	                   var dayText = isToday && !this.isAbroad ? '今天<br/><span class="col_gray">&yen;'+i.houseprice+'</span>' : day.d+'<br/><span class="col_gray">&yen;'+i.houseprice+'</span>';
+	                    dayText = isToday && !this.isAbroad ? '今天<br/><span class="col_gray">&yen;'+i.houseprice+'</span>' : day.d+'<br/><span class="col_gray">&yen;'+i.houseprice+'</span>';
 	               } else {
-	                   var dayText = isToday && !this.isAbroad ? '今天<br/><span class="col_gray">已租</span>' : day.d+'<br/><span class="col_gray">已租</span>';
+	                    dayText = isToday && !this.isAbroad ? '今天<br/><span class="col_gray">已租</span>' : day.d+'<br/><span class="col_gray">已租</span>';
 	               }
 	           }
 	           if (writeDay < this.today) old = this.classDayPass;
@@ -183,7 +184,7 @@
 	                   (this.checkIn && this.getYmd(writeDay) == this.getYmd(this.checkIn))
 	              ){
 	                  checkDay = this.classDaySelect;
-	                  dayText = dayText.replace(/gray/,'');
+	                 // dayText = dayText.replace(/gray/,'');
 	           } 
 	           if (this.checkIn && this.getYmd(writeDay) == this.getYmd(this.checkIn)){
 	               if(i.state == 'available'){
@@ -298,7 +299,7 @@
 	           if(storageData) {
 	               var data = storageData;
 	           } else {
-	               var url = './ajax/data_price.php?m='+(this.monthArray[0].m+1);
+	               var url = '../price/'+$('#apartmentId').val()+'/'+this.monthArray[0].y+'-'+(this.monthArray[0].m+1)+'-'+this.monthArray[0].d;
 	                $.ajax({
 	                   type : "GET",
 	                   url : url,
@@ -894,7 +895,23 @@
 
 	   function calTotalPrice(){
 	       // TODO
-	       console.log('计算总价');
+		   var s = $('#startdate').val();
+           var e = $('#enddate').val();
+           var url = '../price?id='+$('#apartmentId').val()+'&start='+s+'&end='+e;
+           $.ajax({ 
+        	   url: url,
+        	   dataType:'json',
+        	   success: function(data){
+        		   
+        		   console.log(data);
+        		   $('#sameRoomNum').val(data['totalDay']+'日');
+        		   var h = '../order/module?startTime='
+        			   +data['start']+"&endTime="+data['end']
+        		   +'&totalDay='+data['totalDay']+'&totalPrice='+data['totalPrice']
+        		   +'&price='+data['price'];
+        		   $('#day_yuding').attr('href',h);
+        	   }
+           });
 	   }
 	   
 	   /**
