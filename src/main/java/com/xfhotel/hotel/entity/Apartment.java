@@ -27,10 +27,26 @@ import com.xfhotel.hotel.common.Constants;
 @Table(name = "t_apartment")
 public class Apartment {
 	
+	public final static int TYPE_NUM = 4;
 	public final static int TYPE_ALL = 0;
 	public final static int TYPE_HOTEL = 1;
 	public final static int TYPE_APARTMENT = 2;
 	public final static int TYPE_PLAY_ROOM = 3;
+	
+	public final static String getTypeDescription(int type){
+		switch(type){
+		case 0:
+			return "不限";
+		case 1:
+			return "酒店型";
+		case 2:
+			return "公寓型";
+		case 3:
+			return "休闲型";
+		default:
+			return "不限";
+		}
+	}
 
 	// Position
 	// facilities

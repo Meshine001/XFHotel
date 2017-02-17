@@ -36,7 +36,7 @@ public class Feature {
 	public static void setFeatures(List<Feature> features) {
 		if(Feature.features == null){
 			Feature.features = new ArrayList<Feature>();
-			Feature.features.add(new Feature(0, "全部"));
+			Feature.features.add(new Feature(0, "不限"));
 		}else{
 			for (Iterator iterator = features.iterator(); iterator.hasNext();) {
 				Feature f = (Feature) iterator.next();

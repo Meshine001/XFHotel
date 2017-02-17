@@ -136,8 +136,8 @@ public class HomeController {
 		
 		//TODO
 
-		info.put("list",  apartmentService.list());
-		System.out.println(info.get("list"));
+		info.put("list",  sort(apartmentService.list(),searchData));
+		System.out.println(searchData);
 		session.setAttribute("info", info);
 		return "/customer/list";
 	}
@@ -161,17 +161,54 @@ public class HomeController {
 		sb.append(searchData.toHttpGetPram());
 		return sb.toString();
 	}
-	public int cmp(Object obj1, Object obj2, SearchForm searchData) {
-		return searchData.cmp((Map)obj1, (Map)obj2);
-	}
 	
 	public List sort(List list, SearchForm searchData) {
+		double rates[] = new double[list.size()];
+		for(int i=0; i<list.size(); i++){ 
+			Object obj = list.get(i);
+			rates[i] = searchData.rate((Map) obj);
+		}
+		
 		for(int i=0; i<list.size(); i++){
-			for(int j=i+1; i<list.size(); j++){
-				if(cmp(list.get(i),list.get(j),searchData)>0){
+			for(int j=i+1; j<list.size(); j++){
+				int check=0;
+				if( rates[i] == rates[j] ){
+					switch(searchData.getSortType()){
+					case 0:{
+						Map obj1 = (Map) list.get(i);
+						Map obj2 = (Map) list.get(j);
+						//compare
+						break;
+					}
+					case 1:{
+						Map obj1 = (Map) list.get(i);
+						Map obj2 = (Map) list.get(j);
+						//compare
+						double price1 = Double.valueOf(((String[])obj1.get("prices"))[0]);
+						double price2 = Double.valueOf(((String[])obj2.get("prices"))[0]);
+						if( price1>price2 )
+							check=1;
+						break;
+					}
+					case 2:{
+						Map obj1 = (Map) list.get(i);
+						Map obj2 = (Map) list.get(j);
+						//compare
+						double square1 = (Double)obj1.get("square");
+						double square2 = (Double)obj2.get("square");
+						if( square1<square2 )
+							check=1;
+						break;
+					}
+					}
+				}
+				if( rates[i] < rates[j] || rates[i] == rates[j] && check==1){
 					Object tmp = list.get(i);
 					list.set(i, list.get(j));
 					list.set(j, tmp);
+					double t = rates[i];
+					rates[i] = rates[j];
+					rates[j] = t;
 				}
 			}
 		}

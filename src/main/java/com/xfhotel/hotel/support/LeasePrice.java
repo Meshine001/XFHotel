@@ -3,6 +3,8 @@ package com.xfhotel.hotel.support;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.xfhotel.hotel.common.Constants;
+
 public class LeasePrice {
 	private int priceId;
 	private String price;
@@ -28,11 +30,12 @@ public class LeasePrice {
 		if( prices == null){
 			prices = new ArrayList<LeasePrice>();
 			prices.add(new LeasePrice(0, "不限"));
-			prices.add(new LeasePrice(1, "800元以下"));
-			prices.add(new LeasePrice(2, "801-1000元"));
-			prices.add(new LeasePrice(3, "1001-1500元"));
-			prices.add(new LeasePrice(4, "1501-2000元"));
-			prices.add(new LeasePrice(5, "2000元以上"));
+			int len = Constants.price_scope.length;
+			prices.add(new LeasePrice(1, Constants.price_scope[0]+"元以下"));
+			for(int i=1;i<len;i++){
+				prices.add(new LeasePrice(i+1, (Constants.price_scope[i-1]+1) + "-" + Constants.price_scope[i] + "元"));
+			}
+			prices.add(new LeasePrice(len+1, Constants.price_scope[len-1]+"元以上"));
 		}
 		return prices;
 	}
