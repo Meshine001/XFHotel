@@ -312,6 +312,7 @@ public class HomeController {
 		Map apartment = apartmentService.getApartmentInfo((Long)room.get("apartment"));
 		session.setAttribute("room", room);
 		session.setAttribute("apartment", apartment);
+		System.out.println(apartment);
 		String start = TimeUtil.getDateStr(new Date().getTime());
 		session.setAttribute("startDate", start);
 		List<Map> priceMaps = get2MonthPrices((Long)room.get("apartment"), start);

@@ -62,7 +62,8 @@ public class OrderController {
 	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
 	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
 			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
-			String totalPrice, String preferential, boolean needFapiao, Integer apartmentType) {
+			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
+		
 		Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
@@ -71,6 +72,7 @@ public class OrderController {
 		o.setCusTel(cusTel);
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
+		System.out.println(startTime);
 		try {
 			o.setStartTime(DateUtil.parse(startTime, "yyyy-MM-dd").getTime());
 			o.setEndTime(DateUtil.parse(endTime, "yyyy-MM-dd").getTime());
@@ -83,11 +85,11 @@ public class OrderController {
 		o.setPrice(price);
 		o.setTotalPrice(totalPrice);
 		o.setPreferential(preferential);
-		o.setType(apartmentType);
+		o.setType(Apartment.getTypeNum(apartmentType));
 		o.setStatus(Order.STATUS_ON_PAY);
 		o.setNeedFapiao(needFapiao);
 		orderservice.add(o);
-		return "redirect:customer/pay/"+o.getId()+"?status="+o.getStatus();
+		return "redirect:pay/"+o.getId();
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -153,6 +155,7 @@ public class OrderController {
 	public String pay(@PathVariable("id") Long id) {
 		Order order = orderservice.get(id);
 		session.setAttribute("order", order.toMap());
+		System.out.println(order.toMap());
 		return "customer/order";
 	}
 

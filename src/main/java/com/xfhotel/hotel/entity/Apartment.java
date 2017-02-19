@@ -346,5 +346,14 @@ public class Apartment {
 		map.put("prices", prices.split("@"));
 		return map;
 	}
+	
+	public static int getTypeNum(String s){
+		if(s.equals("酒店型")){
+			return Apartment.TYPE_HOTEL;
+		}else{
+			return Apartment.TYPE_PLAY_ROOM;
+		}
+		
+	}
 
 }

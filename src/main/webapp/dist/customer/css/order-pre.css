@@ -1,0 +1,238 @@
+.order-wrapper {
+    width: 880px;
+    margin: 10px auto 0;
+}
+.order_infos {
+    background: #e4f3fb;
+    padding: 18px 0 12px 30px;
+    position: relative;
+}
+.order_briefs {
+    font-weight: bold;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    padding-right: 100px;
+}
+.briefs_item.price {
+    width: 258px;
+    margin-top: -10px;
+    color: #424242;
+}
+.briefs_item {
+    display: inline-block;
+}
+.briefs_item .price_aera, .mo .price_aera {
+    color: #ff6600;
+}
+.briefs_item dfn, .mo dfn {
+    margin: 0 3px 0 4px;
+}
+dfn {
+    font-family: Arial;
+}
+.briefs_item .num_b, .mo .num_b {
+    font-size: 24px;
+}
+b {
+    font-weight: bold;
+}
+.briefs_item .num_s, .mo .num_s {
+    font-size: 18px;
+}
+.briefs_item.title {
+    vertical-align: top;
+    max-width: 585px;
+    _width: 585px;
+}
+.briefs_item {
+    display: inline-block;
+}
+.briefs_item.title em {
+    font-weight: normal;
+    display: block;
+    margin-top: 5px;
+}
+.order_detail {
+    -webkit-transition: height 0.4s ease-in;
+    -ms-transition: height 0.4s ease-in;
+    -moz-transition: height 0.4s ease-in;
+    transition: height 0.4s ease-in;
+}
+.detail_list {
+    line-height: 1.2;
+    margin-top: 15px;
+    color: #333;
+}
+.detail_list dt {
+    color: #999;
+    width: 72px;
+    float: left;
+}
+.detail_list dd {
+    padding-left: 72px;
+    padding-bottom: 8px;
+}
+.detail_list dd .ti {
+    display: inline-block;
+    width: 210px;
+}
+.detail_list {
+    line-height: 1.2;
+    margin-top: 15px;
+    color: #333;
+}
+.order_infos .flex_btn {
+    position: absolute;
+    right: 10px;
+    bottom: 12px;
+    margin: 0 auto;
+    width: 90px;
+    text-align: center;
+}
+.icon_arrow_up {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    border: 5px solid transparent;
+    border-bottom-color: #0088cc;
+    position: relative;
+    right: -5px;
+    top: -2px;
+    _display: none;
+}
+.hotel_tip {
+    padding: 0 30px;
+    background: #eef7fc;
+}
+.hotel_tip .tip_info {
+    font-size: 12px;
+    color: #666;
+    line-height: 16px;
+    padding: 20px 0;
+}
+.mo {
+    width: 880px;
+    border: 1px solid #e1e1e1;
+    border-bottom: none;
+    padding: 18px 30px 43px 30px;
+    margin-bottom: -22px;
+}
+.mo .pay_price {
+    line-height: 72px;
+    border-top: 1px solid #e1e1e1;
+}
+.briefs_item .price_aera, .mo .price_aera {
+    color: #ff6600;
+}
+.mo .num_b {
+    font-size: 24px;
+}
+.tabs {
+    margin: 20px 0 -20px 0;
+}
+.tab_nav_nt1 {
+    margin-top: -80px;
+    position: relative;
+}
+.tab_nav_nt1 ul {
+    width: 956px;
+    padding: 12px 12px 0 12px;
+    overflow: hidden;
+}
+.tab_nav_nt1 ul li { font-size: 14px; height: 47px; line-height: 47px; width: 78px; text-align: center; border: 1px solid #dce7ff;  color: #666; float: left; margin-left: -1px; background-color: #F9FBFF; cursor: pointer; border-bottom-color: #B1D0FF;}
+.tab_nav_nt1 ul li.tabnav_special { width: 138px; font-size: 16px; color: #333;}
+.tab_nav_nt1 ul li i { display: inline-block; width: 23px; height: 16px; line-height: 0px; font-size: 0px; overflow: hidden; vertical-align: middle; background: url(../img/tab_icon.png) left top no-repeat; margin: -4px 5px 0 0;}
+.tab_nav_nt1 ul li i.tab_icon_WechatScanCode { background-position: left -21px;}
+.tab_nav_nt1 ul li i.tab_icon_CreditCard { background-position: left -41px;}
+.tab_nav_nt1 ul li i.tab_icon_DepositCard { background-position: left -61px;}
+.tab_nav_nt1 ul li.curr { border-color: #B1D0FF; border-bottom-color:#FFF; z-index: 10; box-shadow: 0px 0px 4px #B0D0FF; background-color: #FFF; color: #579AFE; position: relative;}
+.tab_nav_nt1 ul li.curr i { background-position: -27px top;}
+.tab_nav_nt1 ul li.curr i.tab_icon_WechatScanCode { background-position: -27px -21px;}
+.tab_nav_nt1 ul li.curr i.tab_icon_CreditCard { background-position: -27px -41px;}
+.tab_nav_nt1 ul li.curr i.tab_icon_DepositCard { background-position: -27px -61px;}
+.mark { position:relative; padding: 2px 4px; line-height: 13px; border-radius: 3px; background-color: #F57403; font-size: 12px; color: #FFF; z-index: 11; white-space:nowrap; word-break:break-all; text-align: left; float: left; margin: -58px 0 0 60px;}
+.mark b { background: url(../img/tab_icon.png) left -83px no-repeat; width: 6px; height: 4px; position: absolute; left: 6px; bottom: -4px;}
+.tab_aera {
+    border: 2px solid #bedded;
+    padding: 10px 0 30px 0;
+    margin: -2px 0 0 0;
+    height: auto!important;
+    min-height: 100px;
+    height: 100px;
+}
+.tab_aera {
+    border: 1px solid #B1D0FF;
+    box-shadow: 0px 0px 4px #B0D0FF;
+    margin-top: -1px;
+}
+.tab_aera.weixin {
+    color: #999;
+    text-align: center;
+}
+.order_step {
+    padding: 20px 0 0 30px;
+    margin: 20px 0 0 0;
+}
+.order_step .btn_sub {
+    display: block;
+}
+
+.btn_sub {
+    display: inline-block;
+    width: 159px;
+    line-height: 40px;
+    text-align: center;
+    background: #f57403;
+    color: #fff;
+    font-size: 14px;
+}
+.bank_list {
+    border-top: 1px solid #e1e1e1;
+    margin: 0 25px 6px;
+    font-size: 0;
+}
+.bank_list.noti {
+    border: none;
+    margin: 20px 25px -5px 27px;
+}
+.cardinfo_list, .bank_items, .clearfix {
+    zoom: 1;
+}
+.bank_list .bank_items {
+    margin: 0 0 0 -30px;
+}
+.bank_items li.act {
+    width: 203px;
+    height: 46px;
+    border: 2px solid #f57403;
+}
+.bank_items li {
+    width: 205px;
+    height: 48px;
+    border: 1px solid #dbdbdb;
+    cursor: pointer;
+    margin: 0 0 20px 30px;
+    position: relative;
+    font-size: 12px;
+}
+
+.bank_items li {
+    float: left;
+    _display: inline;
+}
+.bank_items li.act i {
+    margin: 6px 0 0 8px;
+}
+.bank_items li i {
+    display: inline-block;
+    width: 158px;
+    height: 34px;
+    background-color: #fff;
+    margin: 7px 0 0 10px;
+}
+
+.more_alipay {
+    background-image: url(../img/bank/alipay.png);
+    background-repeat: no-repeat;
+}
