@@ -18,7 +18,8 @@ $('#submit').click(function() {
 		dataType : 'json',
 		data : {
 			'title' : $('#title').val(),
-			'content' : editor.$txt.html()
+			'content' : editor.$txt.html(),
+			'txt' : editor.$txt.formatText()
 		},
 		url : "./publish",//请求的action路径
 		error : function() {//请求失败处理函数

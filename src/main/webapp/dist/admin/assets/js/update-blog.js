@@ -32,7 +32,8 @@ $(document).ready(function() {
 					data : {
 						'id' : data.id,
 						'title' : $('#title').val(),
-						'content' : editor.$txt.html()
+						'content' : editor.$txt.html(),
+						'txt' : editor.$txt.formatText()
 					},
 					url : "./update",// 请求的action路径
 					error : function() {// 请求失败处理函数

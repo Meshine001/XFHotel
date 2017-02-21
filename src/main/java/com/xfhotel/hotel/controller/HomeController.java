@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -23,11 +24,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Banner;
+import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BannerService;
+import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Area;
@@ -35,6 +38,7 @@ import com.xfhotel.hotel.support.LayoutType;
 import com.xfhotel.hotel.support.LeasePrice;
 import com.xfhotel.hotel.support.LeaseType;
 import com.xfhotel.hotel.support.Message;
+import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.RoomStatus;
 import com.xfhotel.hotel.support.SearchForm;
 import com.xfhotel.hotel.support.Subway;
@@ -56,6 +60,8 @@ public class HomeController {
 	ApartmentService apartmentService;
 	@Autowired
 	BannerService bannerService;
+	@Autowired
+	BlogService blogService;
 	
 	@Autowired
 	HttpSession session;
@@ -90,8 +96,27 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/story",method = RequestMethod.GET)
-	public String storyPage(){
-		
+	public String storyPage(HttpServletRequest request, int page){
+		PageResults<Blog> pr = blogService.show_blog(page);
+		int sp = pr.getCurrentPage();
+		int ep = pr.getPageCount();
+		if ( (sp-Constants.pagesize/2) > 0){
+			sp = sp-Constants.pagesize/2;
+		}
+		else{
+			sp=1;
+		}
+		if( (sp+Constants.pagesize-1) < ep ){
+			ep = sp+Constants.pagesize-1;
+		}
+		if( (ep-Constants.pagesize+1) < ep ){
+			sp = ep-Constants.pagesize+1;
+			if( sp<1 )
+				sp=1;
+		}
+		request.getSession().setAttribute("blogs",pr);
+		request.getSession().setAttribute("sp",sp);
+		request.getSession().setAttribute("ep",ep);
 		return "/customer/story";
 	}
 	

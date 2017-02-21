@@ -112,6 +112,12 @@ public class AdminController {
 		}
 		int sp = pr.getCurrentPage();
 		int ep = pr.getPageCount();
+		if ( (sp-Constants.pagesize/2) > 0){
+			sp = sp-Constants.pagesize/2;
+		}
+		else{
+			sp=1;
+		}
 		if( (sp+Constants.pagesize-1) < ep ){
 			ep = sp+Constants.pagesize-1;
 		}

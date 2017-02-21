@@ -181,7 +181,7 @@
 					<li><a href="<%=basePath%>/" title="">首页</a></li>
 					<li><a href="<%=basePath%>/list?type=酒店式公寓" title="">酒店式公寓</a></li>
 					<li><a href="<%=basePath%>/list?type=休闲式公寓" title="">休闲式公寓</a></li>
-					<li><a href="<%=basePath%>/story" title="">青客生活</a></li>
+					<li><a href="<%=basePath%>/story?page=1" title="">青客生活</a></li>
 					<li><a href="<%=basePath%>/serviceCenter" target="_blank"
 						title="">服务中心</a></li>
 					<li><a href="" target="_blank" title="">在线管家</a></li>
