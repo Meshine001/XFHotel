@@ -299,14 +299,15 @@ public class ApartmentController {
 		Apartment apartment = apartmentService.findById(apartmentId);
 		Price sp = apartmentService.getSpPrice(apartment,TimeUtil.getDateLong(date));
 		if(sp != null){
-			sp.setPrice(Float.valueOf(price));
+			sp.setPrice(Double.valueOf(price));
 		}else{
-			sp = new Price(apartment, TimeUtil.getDateLong(date),Float.valueOf(price));
+			sp = new Price(apartment, TimeUtil.getDateLong(date),Double.valueOf(price));
 		}
 		apartmentService.setSpPrice(sp);
 		
 		return "redirect:/admin/apartment/price/"+apartmentId;
 	}
+	
 	
 	@RequestMapping(value = "/price/{id}", method = RequestMethod.GET)
 	public String price(@PathVariable("id")Long id){

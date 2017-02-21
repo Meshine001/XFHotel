@@ -184,7 +184,7 @@ public class Apartment {
 
 	public void setPrices(String prices) {
 		this.prices = prices;
-		int tmp = Integer.valueOf(prices.split("@")[0]);
+		Double tmp = Double.valueOf(prices.split("@")[0]);
 		for (int i = 0; i < Constants.price_scope.length; i++) {
 			if (tmp < Constants.price_scope[i]) {
 				this.price_scope = i + "";
@@ -345,6 +345,15 @@ public class Apartment {
 		map.put("features", this.getFeatures());
 		map.put("prices", prices.split("@"));
 		return map;
+	}
+	
+	public static int getTypeNum(String s){
+		if(s.equals("酒店型")){
+			return Apartment.TYPE_HOTEL;
+		}else{
+			return Apartment.TYPE_PLAY_ROOM;
+		}
+		
 	}
 
 }

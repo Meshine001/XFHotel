@@ -2,6 +2,7 @@ package com.xfhotel.hotel.controller;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +35,7 @@ import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Area;
+import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
 import com.xfhotel.hotel.support.LeasePrice;
 import com.xfhotel.hotel.support.LeaseType;
@@ -42,6 +44,7 @@ import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.RoomStatus;
 import com.xfhotel.hotel.support.SearchForm;
 import com.xfhotel.hotel.support.Subway;
+import com.xfhotel.hotel.support.TimeUtil;
 
 /**
  * Handles requests for the application home page.
@@ -240,35 +243,92 @@ public class HomeController {
 		return list;
 	}
 
-	@RequestMapping(value = "/json", method = RequestMethod.GET)
-	public @ResponseBody List jsonTest() {
+	public List<Map> get2MonthPrices(Long id,String startDate){
+		List<Map> prices = new ArrayList<Map>();
+		Apartment apartment = apartmentService.findById(id);
+		Long start = TimeUtil.getDateLong(startDate);
+		Long end = TimeUtil.getDatePlusMonth(new Date(start), 2).getTime();
+		//未来两个月特殊价格
+		List<Map> sp= apartmentService.getSpPrices(start, end, apartment);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date(start));
+		int curM = calendar.get(Calendar.MONTH);
+		int curY = calendar.get(Calendar.YEAR);
+		List<Date> allDates = TimeUtil.getAllDateInMonth(curY,curM);
+		if(curM == 12){
+			allDates.addAll(TimeUtil.getAllDateInMonth(curY+1,0));
+		}else{
+			allDates.addAll(TimeUtil.getAllDateInMonth(curY,curM+1));
+		}
 		
-		List<Map> list = new ArrayList<Map>();
-		for(int i=1;i<10;i++){
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("houseprice", 2103);
-			map.put("state", "available");
-			map.put("start", "2017-02-0"+i);
-			map.put("pricetype", "normal");
-			list.add(map);
+		for(Date d:allDates){
+			Map<String, Object> info = new HashMap<String, Object>();
+			info.put("houseprice", apartment.getPrices());
+			info.put("start", DateUtil.format(d, "yyyy-MM-dd"));
+			info.put("pricetype", "normal");
+			info.put("state", "available");
+			for(Map m:sp){
+				String t = (String) m.get("date");
+				if(DateUtil.format(d, "yyyy-MM-dd").equals(t)){
+					info.put("houseprice",((Double)m.get("price")));
+				}
+			}
+			prices.add(info);
 		}
-		for(int i=0;i<10;i++){
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("houseprice", 2103);
-			map.put("state", "available");
-			map.put("start", "2017-02-1"+i);
-			map.put("pricetype", "normal");
-			list.add(map);
+		return prices;
+	}
+	
+	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.GET)
+	public @ResponseBody List<Map> getRangePrices(@PathVariable("id")Long id,@PathVariable("startDate")String startDate){
+		return get2MonthPrices(id, startDate);
+	}
+	
+	/**
+	 * 计算价钱
+	 * @param id
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	@RequestMapping(value = "/price", method = RequestMethod.GET)
+	public @ResponseBody Map calcuPrice(Long id,String start,String end){
+		Map<String, Object> p = new HashMap<String, Object>();
+		List<Map> prices = get2MonthPrices(id, start);
+		Double sum = 0D;
+		boolean f = false;
+		int day = 0;
+		List<Double> sb = new ArrayList<Double>();
+		for(Map m:prices){
+			String d = (String) m.get("start");
+			if(d.equals(start))f=true;
+			if(f){
+				String prStr = String.valueOf(m.get("houseprice"));
+				Double pr = Double.valueOf(prStr);
+				sum += pr;
+				day++;
+				sb.add(pr);
+				if(d.equals(end)){
+					day -= 1;
+					sum -= pr;
+					sb.remove(sb.size()-1);
+					break;
+				}
+			}
 		}
-		for(int i=0;i<9;i++){
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("houseprice", 2103);
-			map.put("state", "available");
-			map.put("start", "2017-02-2"+i);
-			map.put("pricetype", "normal");
-			list.add(map);
+		StringBuffer sbb = new StringBuffer();
+		for(int i=0;i<sb.size();i++){
+			sbb.append(sb.get(i));
+			if(i!=(sb.size()-1)){
+				sbb.append("@");
+			}
 		}
-		return list;
+		
+		p.put("start", start);
+		p.put("end", end);
+		p.put("totalPrice", sum);
+		p.put("totalDay", day);
+		p.put("price", sbb.toString());
+		return p;
 	}
 	
 	@RequestMapping(value = "info/{roomId}", method = RequestMethod.GET)
@@ -277,6 +337,23 @@ public class HomeController {
 		Map apartment = apartmentService.getApartmentInfo((Long)room.get("apartment"));
 		session.setAttribute("room", room);
 		session.setAttribute("apartment", apartment);
+		System.out.println(apartment);
+		String start = TimeUtil.getDateStr(new Date().getTime());
+		session.setAttribute("startDate", start);
+		List<Map> priceMaps = get2MonthPrices((Long)room.get("apartment"), start);
+		List<Map> prices = new ArrayList<Map>();
+		int s = Integer.parseInt(start.substring(start.length()-2, start.length()))-1;
+		for(int i= s;i<priceMaps.size();i++){
+			if(i == s+6){
+				break;
+			}
+			Map<String, Object> m = new HashMap<String, Object>();
+			String dStr = (String) priceMaps.get(i).get("start");
+			m.put("date", dStr.substring(dStr.length()-2, dStr.length()));
+			m.put("price", priceMaps.get(i).get("houseprice"));
+			prices.add(m);
+		}
+		session.setAttribute("prices", prices);
 		return "/customer/info";
 	}
 	

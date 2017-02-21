@@ -9,13 +9,17 @@
 <head>
 <title>title-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
+
+<my_header>
+<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/customer/css/order-pre.css">
+</my_header>
 </head>
 <body>
-
 	<my_body>
-	<div style="margin-top: 50px;">
-		<ul>
-			<li>订单有效时间:
+	<div class="order-wrapper" id="order_wrapper">
+		<div class="order_infos">
+				<div class="order_avalaibel_time">
 				<div>
 					<span id="day"></span> <span id="hour"></span> <span id="minute"></span>
 					<span id="second"></span>
@@ -54,21 +58,88 @@
 					timer(intDiff);
 				});
 			</script>
+				</div>
+			<div class="order_briefs">
+				<span class="briefs_item price">订单金额： <span
+					class="price_aera"> <dfn>¥</dfn> <b class="num_b">${order.totalPrice }<i
+							class="num_s" style="display: none;">.00</i></b>
+				</span>
+				</span> <span class="briefs_item title"> ${order.description}<em>${order.type}1间&nbsp;&nbsp;&nbsp;&nbsp;入住：${order.startTime }&nbsp;&nbsp;&nbsp;&nbsp;退房：${order.endTime}&nbsp;&nbsp;&nbsp;&nbsp;入住${order.totalDay}晚</em>
+				</span>
+			</div>
+			<div class="order_detail" style="display: block;"
+				>
+				<dl class="detail_list">
+					<dt>费用明细</dt>
+					<dd>
+						<span class="ti">房费</span><span class="list_ite"><dfn>¥</dfn>${order.totalPrice }</span>
+					</dd>
+				</dl>
+			</div>
+			<a href="javascript:;" class="flex_btn" ng-click="details.toggle()"
+				style="display: none;"> <span ng-bind="details.action_get()"
+				class="ng-binding">订单详情</span> <i class="icon_arrow_up"
+				></i>
+			</a>
+		</div>
+		<div class="hotel_tip">
+			<dl class="tip_info">
+				<dd>...............一些说明.......</dd>
+			</dl>
+		</div>
+		<div class="mo ng-scope" ng-controller="CmoneyCtrl">
+			<p class="pay_price" ng-show="others.amount">
+				需支付： <span class="price_aera"> <dfn>¥</dfn> <b
+					class="num_b ng-binding" >${order.totalPrice}<i
+						class="num_s" style="display: none">.00</i></b> <span style="display: none;"
+					> + <b class="num_b ng-binding"
+						ng-bind-html="others.fee|amount">0<i class="num_s">.00</i></b>
+				</span>
+				</span> <em style="display: none;" pay-show="others.fee" class="ng-binding">（外卡需加收%服务费）</em>
+			</p>
+		</div>
+		<div class="tabs">
+			<div class="tab_nav_nt1">
+				<ul class="clearfix">
+					<li class="tabnav_special  ng-isolate-scope curr"
+						ng-class="{curr:Pay.Others[0].selected}" pay-catalog="Pay.Others"
+						show-notice="1" notice="" ubt="09c"><i
+						class="tab_icon_onlinePay"></i> 在线支付</li>
+				</ul>
+			</div>
+			<div class="tab_aera" style="">
+				<div class="bank_list noti">
+					<ul class="bank_items">
+						<li class="ng-isolate-scope act"><i class="more_wecatpay"></i><em
+							class="hint ng-hide" title=""></em></li>
+						<li class="ng-isolate-scope "><i class="more_alipay"></i><em
+							class="hint ng-hide" title=""></em></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="order_step">
+			<a href="javascript:;" class="btn_sub ng-binding">下一步</a>
+		</div>
+	</div>
+	<div style="margin-top: 50px;">
+		<ul>
+			<li>订单有效时间:
+				
 			</li>
 			<li>编号：${order.id}</li>
-			<li>${order.description}</li>
+			<li></li>
 			<li>${order.cusName}</li>
 			<li>${order.cusTel}</li>
 			<li>${order.cusIdCard}</li>
 			<li>${order.personal}</li>
-			<li>${order.startTime}至${order.endTime}共${order.totalDay}天</li>
+			<li></li>
 			<li><c:choose>
 					<c:when test="${order.needFapiao == true }">需要发票</c:when>
 					<c:otherwise>
 					不需要发票
 				</c:otherwise>
-			</c:choose>
-			</li>
+				</c:choose></li>
 		</ul>
 		<ul>
 			<li><a href="">微信支付</a></li>

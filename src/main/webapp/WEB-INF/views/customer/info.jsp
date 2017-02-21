@@ -161,6 +161,7 @@
 						<span class="m_jiage"><em>￥</em><span id="zujin">${room.prices[0]}</span><font>起</font></span>
 					</div>
 					<div class="">
+					   <input type="hidden" id="apartmentId" value="${apartment.id}">
 						<div id="detailBookArea">
 							<div class="reserve_box">
 								<div class="reserve_space">
@@ -168,10 +169,10 @@
 										<div class="reserve_date">
 											<div class="reserve_ico" id="detailCalendarIco"></div>
 											<input type="text" class="date_input" id="startenddate"
-												readonly="" value="2017-02-13至2017-20-20"> <input
+												readonly="" value="请选择入离时间"> <input
 												type="hidden" name="startdate" id="startdate"
-												value="2017-02-13" class="hasDatepicker"> <input
-												type="hidden" name="enddate" id="enddate" value="2017-02-20"
+												value="${startDate}" class="hasDatepicker"> <input
+												type="hidden" name="enddate" id="enddate" value="${endDate}"
 												class="hasDatepicker">
 											<div id="calendar-box" style="display: none"
 												class="calendar_box clearfix"></div>
@@ -179,7 +180,7 @@
 										<div class="select_box">
 											<div class="select_arrow"></div>
 											<input id="sameRoomNum" readonly="readOnly"
-												data-bookroomnum="" type="text" value="1日">
+												data-bookroomnum="" type="text" value="日">
 											<ul class="select_con room_num_select"
 												id="detailRoomNumSelect">
 												<li data-num="1">1间</li>
@@ -192,7 +193,7 @@
 										</div>
 									</div>
 									<div class="order_btn_container">
-										<a class="order_btn" href="../order/module" id="day_yuding">立即预订<span
+										<a class="order_btn" href="../order/module?" id="day_yuding">立即预订<span
 											class="f14"></span></a>
 									</div>
 								</div>
@@ -200,17 +201,20 @@
 									<input type="hidden" id="avgprice" value="100"> <input
 										type="hidden" id="priceTip" value="">
 									<ul class="cal_box clearfix">
-										<li>今天 <br>¥100
-										</li>
-										<li>14 <br>¥100
-										</li>
-										<li>15 <br>¥100
-										</li>
-										<li>16 <br>¥100
-										</li>
-										<li>1 <br>¥100
-										</li>
-										<li class="line_none_r"><a id="showMoreCalendar" href="#">全部<br>日历
+									<c:forEach items="${prices}" var="p" varStatus="pp">
+										<c:choose>
+											<c:when test="${pp.index == 0}">
+											<li>今天 <br>¥${p.price}
+											</li>		
+											</c:when>
+											<c:otherwise>
+												<li>${p.date}<br>¥${p.price}
+												</li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+										
+										<li class="line_none_r" style="display: none;"><a id="showMoreCalendar" href="#">全部<br>日历
 										</a></li>
 									</ul>
 								</div>

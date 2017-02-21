@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
@@ -16,6 +16,7 @@
 	</my_banner>
 	<my_body>
 	<div class="story_tittle"></div>
+<<<<<<< HEAD
 	<c:forEach items="${blogs.getResults()}" var="blog" varStatus="p">
 		<div class="sty_list">
 			<img src="${blog.getPic()}" />
@@ -34,7 +35,7 @@
 			</div>
 		</div>
 	</c:forEach>
-	<ul id="pagecontroller" class="pagination">
+	<ul id="pagecontroller" class="page">
 		<li><a href="<%=basePath%>/story?page=1">&laquo;</a></li>
 		<c:forEach varStatus="p" begin="${sp}" end="${ep }" step="1">
 			<c:if test="${p.current==blogs.getCurrentPage()}">
@@ -48,6 +49,21 @@
 		</c:forEach>
 		<li><a href="<%=basePath%>/story?page=${blogs.getPageCount()}">&raquo;</a></li>
 	</ul>
+	<div class="page">
+		<a class="up none" title="首页">&lt;&lt;</a><a class="up none"
+			title="上一页">&lt;</a> <a class="page_on" href="javascript:void(0)"
+			title="第1页">1</a> <a href="javascript:getAjaxpages(2);" title="第2页">2</a><a
+			href="javascript:getAjaxpages(3);" title="第3页">3</a><a
+			href="javascript:getAjaxpages(4);" title="第4页">4</a><a
+			href="javascript:getAjaxpages(5);" title="第5页">5</a><a
+			href="javascript:getAjaxpages(6);" title="第6页">6</a><a
+			href="javascript:getAjaxpages(7);" title="第7页">7</a><a
+			href="javascript:getAjaxpages(8);" title="第8页">8</a><a
+			href="javascript:getAjaxpages(9);" title="第9页">9</a><a
+			href="javascript:getAjaxpages(10);" title="第10页">10</a><a
+			class="pgdn" title="下一页" href="javascript:getAjaxpages(2);">&gt;</a><a
+			href="javascript:getAjaxpages(68);" title="最后一页">&gt;&gt;</a>
+	</div>
 	</my_body>
 </body>
 </html>

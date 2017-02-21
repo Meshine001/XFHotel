@@ -525,7 +525,7 @@
 					target="_blank"><img
 						src="<%=basePath%>/dist/public/v1/images/app.png" width="60"
 						height="60"></a></span> <span class="customer2"><a
-					href="javascript:;"><img
+					href="http://wpa.qq.com/msgrd?v=3&uin=790101285&site=qq&menu=yes"><img
 						src="<%=basePath%>/dist/public/v1/images/kf.png" width="60"
 						height="60"></a></span> <span><a href="javascript:goTop();"
 					title="返回顶部"><img
