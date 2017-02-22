@@ -58,12 +58,25 @@ public class OrderController {
 		session.setAttribute("oPreferential", preferential);
 		return "customer/orderModule";
 	}
-
+	
+	
+	@RequestMapping(value = "/checkAvailable", method = RequestMethod.GET)
+	public Message checkAvailable(Long roomId,String startTime,String endTime){
+		try {
+			List<Order> availableOders = orderservice.checkAvailable(roomId, startTime, endTime);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, availableOders);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "查询失败");
+		}
+		
+	}
+	
 	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
 	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
 			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
 			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
-		
 		Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);

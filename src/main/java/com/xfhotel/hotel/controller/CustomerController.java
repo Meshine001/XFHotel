@@ -162,6 +162,25 @@ public class CustomerController {
 		return "/customer/details";
 	}
 
+	@RequestMapping(value = "/serviceCenter", method = RequestMethod.GET)
+	public String serviceCenterPage() {
+
+		return "/customer/serviceCenter";
+	}
+	
+	@RequestMapping(value = "/preferential", method = RequestMethod.GET)
+	public String preferentialPage() {
+
+		return "/customer/preferential";
+	}
+	
+	@RequestMapping(value = "/feedback", method = RequestMethod.GET)
+	public String feedbackPage() {
+
+		return "/customer/feedback";
+	}
+	
+	
 	@RequestMapping(value = "/setting", method = RequestMethod.GET)
 	public String changePasswordPage() {
 
