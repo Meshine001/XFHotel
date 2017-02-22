@@ -61,7 +61,7 @@ public class OrderController {
 	
 	
 	@RequestMapping(value = "/checkAvailable", method = RequestMethod.GET)
-	public Message checkAvailable(Long roomId,String startTime,String endTime){
+	public @ResponseBody Message checkAvailable(Long roomId,String startTime,String endTime){
 		try {
 			List<Order> availableOders = orderservice.checkAvailable(roomId, startTime, endTime);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, availableOders);

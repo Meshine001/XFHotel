@@ -101,7 +101,8 @@ public class OrderServiceImpl implements OrderService {
 
 		return orderDAO.getListByHQL(hql, values);
 	}
-
+	
+	@Transactional
 	@Override
 	public List<Order> checkAvailable(Long roomId, String startTime, String endTime) {
 		String hql = "from Order where (status =? or status=?) and (startTime >? and endTime <?)";

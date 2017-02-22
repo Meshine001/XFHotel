@@ -25,11 +25,13 @@ import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Banner;
 import com.xfhotel.hotel.entity.Feature;
+import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BannerService;
 import com.xfhotel.hotel.service.FeatureService;
+import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
@@ -59,7 +61,8 @@ public class HomeController {
 	ApartmentService apartmentService;
 	@Autowired
 	BannerService bannerService;
-	
+	@Autowired
+	OrderService orderService;
 	@Autowired
 	HttpSession session;
 	/**
@@ -236,12 +239,19 @@ public class HomeController {
 			allDates.addAll(TimeUtil.getAllDateInMonth(curY,curM+1));
 		}
 		
+	
 		for(Date d:allDates){
 			Map<String, Object> info = new HashMap<String, Object>();
 			info.put("houseprice", apartment.getPrices());
 			info.put("start", DateUtil.format(d, "yyyy-MM-dd"));
 			info.put("pricetype", "normal");
-			info.put("state", "available");
+			long oneDay = 1000*60*60*24;
+			List<Order> unavailables = orderService.checkAvailable(id, DateUtil.format(d, "yyyy-MM-dd"), TimeUtil.getDateStr(d.getTime()+oneDay));
+			if(unavailables.isEmpty()){
+				info.put("state", "available");
+			}else{
+				info.put("state", "unavailable");
+			}
 			for(Map m:sp){
 				String t = (String) m.get("date");
 				if(DateUtil.format(d, "yyyy-MM-dd").equals(t)){
