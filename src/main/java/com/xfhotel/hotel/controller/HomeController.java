@@ -1,5 +1,7 @@
 package com.xfhotel.hotel.controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -112,10 +114,8 @@ public class HomeController {
 		if( (sp+Constants.pagesize-1) < ep ){
 			ep = sp+Constants.pagesize-1;
 		}
-		if( (ep-Constants.pagesize+1) < ep ){
+		if( (ep-Constants.pagesize+1) > 0 ){
 			sp = ep-Constants.pagesize+1;
-			if( sp<1 )
-				sp=1;
 		}
 		request.getSession().setAttribute("blogs",pr);
 		request.getSession().setAttribute("sp",sp);
@@ -363,4 +363,34 @@ public class HomeController {
 		return "/customer/reservation1";
 	}
 	
+
+	@RequestMapping(value = "story/blog_content", method = RequestMethod.GET)
+	public String initBlog(HttpServletRequest request,Long id){
+		request.setAttribute("id", id);
+		return "/customer/story_content";
+	}
+	
+	@RequestMapping(value = "story/load_content", method = RequestMethod.POST)
+	public @ResponseBody Map loadBlog(HttpServletRequest request,Long id) {
+		String path = request.getSession().getServletContext().getRealPath("/");
+		Blog blog = blogService.find(id);
+		path += "blog\\" + blog.getPath();
+		Map map = blog.toMap();
+		StringBuffer content = new StringBuffer();
+		FileReader fr;
+		try {
+			fr = new FileReader(path);
+			BufferedReader br=new BufferedReader(fr);
+			String str;
+			while( ( str=br.readLine())!=null){
+				content.append(str);
+			}
+			br.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		map.put("content", content.toString());
+		return map;
+	}
 }
