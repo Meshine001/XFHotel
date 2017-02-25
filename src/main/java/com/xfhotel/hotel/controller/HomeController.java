@@ -1,5 +1,7 @@
 package com.xfhotel.hotel.controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -24,14 +27,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Banner;
+import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Feature;
-import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BannerService;
+import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.FeatureService;
-import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
@@ -39,6 +42,7 @@ import com.xfhotel.hotel.support.LayoutType;
 import com.xfhotel.hotel.support.LeasePrice;
 import com.xfhotel.hotel.support.LeaseType;
 import com.xfhotel.hotel.support.Message;
+import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.RoomStatus;
 import com.xfhotel.hotel.support.SearchForm;
 import com.xfhotel.hotel.support.Subway;
@@ -62,7 +66,8 @@ public class HomeController {
 	@Autowired
 	BannerService bannerService;
 	@Autowired
-	OrderService orderService;
+	BlogService blogService;
+	
 	@Autowired
 	HttpSession session;
 	/**
@@ -96,8 +101,25 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/story",method = RequestMethod.GET)
-	public String storyPage(){
-		
+	public String storyPage(HttpServletRequest request, int page){
+		PageResults<Blog> pr = blogService.show_blog(page);
+		int sp = pr.getCurrentPage();
+		int ep = pr.getPageCount();
+		if ( (sp-Constants.pagesize/2) > 0){
+			sp = sp-Constants.pagesize/2;
+		}
+		else{
+			sp=1;
+		}
+		if( (sp+Constants.pagesize-1) < ep ){
+			ep = sp+Constants.pagesize-1;
+		}
+		if( (ep-Constants.pagesize+1) > 0 ){
+			sp = ep-Constants.pagesize+1;
+		}
+		request.getSession().setAttribute("blogs",pr);
+		request.getSession().setAttribute("sp",sp);
+		request.getSession().setAttribute("ep",ep);
 		return "/customer/story";
 	}
 	
@@ -239,19 +261,12 @@ public class HomeController {
 			allDates.addAll(TimeUtil.getAllDateInMonth(curY,curM+1));
 		}
 		
-	
 		for(Date d:allDates){
 			Map<String, Object> info = new HashMap<String, Object>();
 			info.put("houseprice", apartment.getPrices());
 			info.put("start", DateUtil.format(d, "yyyy-MM-dd"));
 			info.put("pricetype", "normal");
-			long oneDay = 1000*60*60*24;
-			List<Order> unavailables = orderService.checkAvailable(id, DateUtil.format(d, "yyyy-MM-dd"), TimeUtil.getDateStr(d.getTime()+oneDay));
-			if(unavailables.isEmpty()){
-				info.put("state", "available");
-			}else{
-				info.put("state", "unavailable");
-			}
+			info.put("state", "available");
 			for(Map m:sp){
 				String t = (String) m.get("date");
 				if(DateUtil.format(d, "yyyy-MM-dd").equals(t)){
@@ -348,4 +363,34 @@ public class HomeController {
 		return "/customer/reservation1";
 	}
 	
+
+	@RequestMapping(value = "story/blog_content", method = RequestMethod.GET)
+	public String initBlog(HttpServletRequest request,Long id){
+		request.setAttribute("id", id);
+		return "/customer/story_content";
+	}
+	
+	@RequestMapping(value = "story/load_content", method = RequestMethod.POST)
+	public @ResponseBody Map loadBlog(HttpServletRequest request,Long id) {
+		String path = request.getSession().getServletContext().getRealPath("/");
+		Blog blog = blogService.find(id);
+		path += "blog\\" + blog.getPath();
+		Map map = blog.toMap();
+		StringBuffer content = new StringBuffer();
+		FileReader fr;
+		try {
+			fr = new FileReader(path);
+			BufferedReader br=new BufferedReader(fr);
+			String str;
+			while( ( str=br.readLine())!=null){
+				content.append(str);
+			}
+			br.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		map.put("content", content.toString());
+		return map;
+	}
 }

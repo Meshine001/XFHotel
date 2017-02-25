@@ -51,11 +51,22 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value = "/publish")
-	public @ResponseBody long publishBlog(HttpServletRequest request, String title, String content) {
+	public @ResponseBody long publishBlog(HttpServletRequest request, String title, String content, String txt) {
 		String basepath = request.getSession().getServletContext().getRealPath("/");
 		Blog blog = new Blog();
 		blog.setTitle(title);
+		if(txt.length()>60)
+			blog.setAbs_text(txt.substring(0,60));
+		else
+			blog.setAbs_text(txt);
 		blog.setStatus("0");
+		blog.setReadtime(0);
+		if(content.indexOf("<img")>=0){
+			String tmp = content.substring(content.indexOf("<img"));
+			tmp = tmp.substring(tmp.indexOf("src")+5);
+			tmp = tmp.substring(0, tmp.indexOf("\""));
+			blog.setPic(tmp);
+		}
 		int status = blogService.publish(blog, content, basepath);
 		return blog.getId();
 	}
@@ -92,10 +103,20 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value = "/update")
-	public @ResponseBody int update(HttpServletRequest request,Long id, String title, String content) {
+	public @ResponseBody int update(HttpServletRequest request,Long id, String title, String content, String txt) {
 		String basepath = request.getSession().getServletContext().getRealPath("/");
 		Blog blog = blogService.find(id);
 		blog.setTitle(title);
+		if(txt.length()>60)
+			blog.setAbs_text(txt.substring(0,60));
+		else
+			blog.setAbs_text(txt);
+		if(content.indexOf("<img")>=0){
+			String tmp = content.substring(content.indexOf("<img"));
+			tmp = tmp.substring(tmp.indexOf("src")+5);
+			tmp = tmp.substring(0, tmp.indexOf("\""));
+			blog.setPic(tmp);
+		}
 		int status = blogService.update(blog, content, basepath);
 		return status;
 	}

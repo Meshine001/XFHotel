@@ -34,6 +34,12 @@ function list(page) {
 		success : function(data) {
 			var sp = data.currentPage;
 			var ep = data.pageCount;
+			if ((sp-4)>0){
+				sp=sp-4;
+			}
+			else{
+				sp=1;
+			}
 			if ((sp + 9) < ep) {
 				ep = sp + 9;
 			}
@@ -82,11 +88,11 @@ function list(page) {
 						.attr('href', 'javascript:void(0);');
 				if (value.status == '0'){
 					td_status.append('显示');
-					a_change.append('显示');
+					a_change.append('隐藏');
 				}
 				else{
 					td_status.append('隐藏');
-					a_change.append('隐藏');
+					a_change.append('显示');
 				}
 				var td_op = $('<td></td>').append(a_change).append(
 						'&nbsp;&nbsp;').append(a_del);

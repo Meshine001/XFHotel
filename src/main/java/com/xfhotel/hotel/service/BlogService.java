@@ -11,4 +11,5 @@ public interface BlogService extends BaseService<Blog>{
 	public int change(Blog blog);
 	public PageResults<Blog> list(int page);
 	public void delete(long id);
+	public PageResults<Blog> show_blog(int page);
 }

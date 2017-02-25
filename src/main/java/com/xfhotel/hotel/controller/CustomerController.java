@@ -1,10 +1,13 @@
 package com.xfhotel.hotel.controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.support.Message;
@@ -35,6 +40,7 @@ public class CustomerController {
 	
 	@Autowired
 	OrderService orderService;
+	
 
 	/**
 	 * 修改密码
@@ -208,5 +214,5 @@ public class CustomerController {
 		model.addAttribute("title", title);
 		session.setAttribute(Constants.PAGE, page);
 	}
-
+	
 }
