@@ -23,7 +23,7 @@ $(function() {
 		$.ajax({
 			cache : true,
 			type : "POST",
-			url : "./customer/reg",
+			url : "./reg",
 			data : $('#register-form').serialize(),
 			async : false,
 			error : function(request) {
@@ -34,7 +34,7 @@ $(function() {
 				if (data.statusCode == 0) {
 
 				} else {
-					window.location.href = "./customer/myOrder";
+					window.location.href = "./myOrder";
 				}
 
 			}
@@ -48,7 +48,7 @@ $(function() {
 		$.ajax({
 			cache : true,
 			type : "POST",
-			url : "./customer/login",
+			url : "./login",
 			data : $('#login-form').serialize(),
 			async : false,
 			error : function(request) {
@@ -58,7 +58,7 @@ $(function() {
 				if (data.statusCode == 0) {
 					alert(data.content);
 				} else {
-					window.location.href = "./customer/myOrder";
+					window.location.href = "./myOrder";
 				}
 			}
 		});

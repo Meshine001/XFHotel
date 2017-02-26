@@ -19,13 +19,14 @@
 	<my_body>
 	<div class="order-wrapper" id="order_wrapper">
 		<div class="order_infos">
-				<div class="order_avalaibel_time">
+			<div class="order_avalaibel_time">
 				<div>
 					<span id="day"></span> <span id="hour"></span> <span id="minute"></span>
 					<span id="second"></span>
 				</div>
-				<h3>${order.status}</h3> <input type="hidden" id="order-time"
-				value="${order.time}"> <script type="text/javascript">
+				<h3>${order.status}</h3>
+				<input type="hidden" id="order-time" value="${order.time}">
+				<script type="text/javascript">
 			 var orderTime = $('#order-time').val();
 			 var nowTime = Date.parse(new Date());
 				var intDiff = parseInt((orderTime-nowTime)/1000); //倒计时总秒数量
@@ -58,7 +59,7 @@
 					timer(intDiff);
 				});
 			</script>
-				</div>
+			</div>
 			<div class="order_briefs">
 				<span class="briefs_item price">订单金额： <span
 					class="price_aera"> <dfn>¥</dfn> <b class="num_b">${order.totalPrice }<i
@@ -67,8 +68,7 @@
 				</span> <span class="briefs_item title"> ${order.description}<em>${order.type}1间&nbsp;&nbsp;&nbsp;&nbsp;入住：${order.startTime }&nbsp;&nbsp;&nbsp;&nbsp;退房：${order.endTime}&nbsp;&nbsp;&nbsp;&nbsp;入住${order.totalDay}晚</em>
 				</span>
 			</div>
-			<div class="order_detail" style="display: block;"
-				>
+			<div class="order_detail" style="display: block;">
 				<dl class="detail_list">
 					<dt>费用明细</dt>
 					<dd>
@@ -78,8 +78,7 @@
 			</div>
 			<a href="javascript:;" class="flex_btn" ng-click="details.toggle()"
 				style="display: none;"> <span ng-bind="details.action_get()"
-				class="ng-binding">订单详情</span> <i class="icon_arrow_up"
-				></i>
+				class="ng-binding">订单详情</span> <i class="icon_arrow_up"></i>
 			</a>
 		</div>
 		<div class="hotel_tip">
@@ -90,10 +89,10 @@
 		<div class="mo ng-scope" ng-controller="CmoneyCtrl">
 			<p class="pay_price" ng-show="others.amount">
 				需支付： <span class="price_aera"> <dfn>¥</dfn> <b
-					class="num_b ng-binding" >${order.totalPrice}<i
-						class="num_s" style="display: none">.00</i></b> <span style="display: none;"
-					> + <b class="num_b ng-binding"
-						ng-bind-html="others.fee|amount">0<i class="num_s">.00</i></b>
+					class="num_b ng-binding">${order.totalPrice}<i class="num_s"
+						style="display: none">.00</i></b> <span style="display: none;">
+						+ <b class="num_b ng-binding" ng-bind-html="others.fee|amount">0<i
+							class="num_s">.00</i></b>
 				</span>
 				</span> <em style="display: none;" pay-show="others.fee" class="ng-binding">（外卡需加收%服务费）</em>
 			</p>
@@ -101,51 +100,40 @@
 		<div class="tabs">
 			<div class="tab_nav_nt1">
 				<ul class="clearfix">
-					<li class="tabnav_special  ng-isolate-scope curr"
-						ng-class="{curr:Pay.Others[0].selected}" pay-catalog="Pay.Others"
-						show-notice="1" notice="" ubt="09c"><i
-						class="tab_icon_onlinePay"></i> 在线支付</li>
+					<li class="tabnav_special  ng-isolate-scope curr pay_tab" payType="weixin"><i
+						class="tab_icon_WechatScanCode" ></i> 微信支付</li>
+					<li class="ng-isolate-scope pay_tab" payType="other">其他支付</li>
 				</ul>
 			</div>
-			<div class="tab_aera" style="">
+			<div class="tab_aera weixin_tab weixin" style="display:">
+				<p class="ng-isolate-scope">提示：点击“下一步”后，请打开手机微信的“扫一扫”，扫描二维码</p>
+			</div>
+			<div class="tab_aera other_tab" style="display:none;">
 				<div class="bank_list noti">
 					<ul class="bank_items">
-						<li class="ng-isolate-scope act"><i class="more_wecatpay"></i><em
-							class="hint ng-hide" title=""></em></li>
-						<li class="ng-isolate-scope "><i class="more_alipay"></i><em
-							class="hint ng-hide" title=""></em></li>
+						<li class="ng-isolate-scope act"><i
+							class="more_alipay"></i><em class="hint ng-hide" title=""></em></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="order_step">
-			<a href="javascript:;" class="btn_sub ng-binding">下一步</a>
+			<a href="<%=basePath%>/order/payOver/${order.id}?status=2"
+				class="btn_sub ng-binding">下一步</a>
 		</div>
-	</div>
-	<div style="margin-top: 50px;">
-		<ul>
-			<li>订单有效时间:
-				
-			</li>
-			<li>编号：${order.id}</li>
-			<li></li>
-			<li>${order.cusName}</li>
-			<li>${order.cusTel}</li>
-			<li>${order.cusIdCard}</li>
-			<li>${order.personal}</li>
-			<li></li>
-			<li><c:choose>
-					<c:when test="${order.needFapiao == true }">需要发票</c:when>
-					<c:otherwise>
-					不需要发票
-				</c:otherwise>
-				</c:choose></li>
-		</ul>
-		<ul>
-			<li><a href="">微信支付</a></li>
-			<li><a href="">支付宝</a></li>
-		</ul>
-		<a href="<%=basePath%>/order/payOver/${order.id}?status=2">支付完成</a>
+		<script type="text/javascript">
+			$('.pay_tab').click(function(e){
+				var target = $(e.target);
+				$('.tab_nav_nt1 ul li').removeClass('curr');
+				$(target).addClass('curr');
+				$('.tab_aera').hide();
+				if($(target).attr('payType')=='weixin'){
+					$('.weixin_tab').show();
+				}else if($(target).attr('payType')=='other'){
+					$('.other_tab').show();
+				}
+			});
+		</script>
 	</div>
 	</my_body>
 </body>

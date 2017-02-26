@@ -1,6 +1,6 @@
 .order-wrapper {
     width: 880px;
-    margin: 10px auto 0;
+    margin: -18px auto 0;
 }
 .order_infos {
     background: #e4f3fb;
@@ -233,6 +233,12 @@ b {
 }
 
 .more_alipay {
-    background-image: url(../img/bank/alipay.png);
+    background-image: url(../img/alipay.png);
     background-repeat: no-repeat;
+}
+
+.tab_aera.weixin p {
+    padding-top: 230px;
+    background: url(../img/wechat.png) no-repeat center top;
+    margin: 50px 0;
 }

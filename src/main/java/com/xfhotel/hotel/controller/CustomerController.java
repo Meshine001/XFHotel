@@ -150,17 +150,12 @@ public class CustomerController {
 		return "/customer/myOrder";
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginRegPage(String forword, Model model) {
 		model.addAttribute("forword", forword);
 		return "/customer/login-reg";
 	}
 
-	@RequestMapping(value = "/reservation", method = RequestMethod.GET)
-	public String reservationPage(Model model) {
-		setPage(model, "我的预约", Constants.PAGE_RESERVATION);
-		return "/customer/reservation";
-	}
 
 	@RequestMapping(value = "/details", method = RequestMethod.GET)
 	public String detailsPage(Model model) {

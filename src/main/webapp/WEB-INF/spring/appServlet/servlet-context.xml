@@ -36,7 +36,7 @@
 	<task:annotation-driven scheduler="myScheduler"/>
 	<!-- 推荐配置线程池，若不配置多任务下会有问题。后面会详细说明单线程的问题。 -->
 	<task:scheduler id="myScheduler" pool-size="5"/>  
-<!-- 
+
 	<interceptors>
 		<beans:bean
 			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
@@ -49,8 +49,14 @@
 			<exclude-mapping path="/admin/login"/>
 			<beans:bean class="com.xfhotel.hotel.interceptor.AdminLoginInterceptor"/>
 		</interceptor>
+		<interceptor>
+			<mapping path="/customer/**" />
+			<exclude-mapping path="/customer/login"/>
+			<exclude-mapping path="/customer/reg"/>
+			<beans:bean class="com.xfhotel.hotel.interceptor.CustomerInterceptor"/>
+		</interceptor>
 	</interceptors>
- -->
+
  
 	<!-- JDBC Data Source. It is assumed you have MySQL running on server port 
 		3306 with username root and password. Change below if it's not the case -->

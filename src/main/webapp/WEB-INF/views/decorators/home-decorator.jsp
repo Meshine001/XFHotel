@@ -64,7 +64,7 @@
 						<c:otherwise>
 							<a class="lg" href="<%=basePath%>/customer?forword=login"
 								title="登录">登录</a>&nbsp;&nbsp;<span><img alt=""
-								src="dist/public/v1/images/phone.jpg"></span>&nbsp;&nbsp;<a
+								src="<%=basePath%>/dist/public/v1/images/phone.jpg"></span>&nbsp;&nbsp;<a
 								class="rg" href="<%=basePath%>/customer?forword=reg"
 								title="注册青舍用户">注册</a>
 						</c:otherwise>

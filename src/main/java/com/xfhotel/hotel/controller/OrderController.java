@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -85,7 +86,6 @@ public class OrderController {
 		o.setCusTel(cusTel);
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
-		System.out.println(startTime);
 		try {
 			o.setStartTime(DateUtil.parse(startTime, "yyyy-MM-dd").getTime());
 			o.setEndTime(DateUtil.parse(endTime, "yyyy-MM-dd").getTime());
@@ -168,7 +168,7 @@ public class OrderController {
 	public String pay(@PathVariable("id") Long id) {
 		Order order = orderservice.get(id);
 		session.setAttribute("order", order.toMap());
-		System.out.println(order.toMap());
+		System.out.println(JSONObject.wrap(order.toMap()).toString());
 		return "customer/order";
 	}
 

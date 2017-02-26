@@ -52,11 +52,11 @@
 									style="display: block;">
 									<div class="form-group">
 										<input type="text" name="tel" id="username" tabindex="1"
-											class="form-control" placeholder="请输入手机号" value="">
+											class="form-control" placeholder="请输入手机号" value="18710579465">
 									</div>
 									<div class="form-group">
 										<input type="password" name="password" id="password"
-											tabindex="2" class="form-control" placeholder="请输入密码">
+											tabindex="2" class="form-control" placeholder="请输入密码" value="123123">
 									</div>
 									<div class="form-group text-center">
 										<input type="checkbox" tabindex="3" class="" name="remember"

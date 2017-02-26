@@ -4,7 +4,8 @@
 	<mapping path="/customer/*"
 		decorator="/WEB-INF/views/decorators/customer-decorator.jsp" />
 	<!-- 指明满足“/exclude.jsp*”的页面，将被排除，不被装饰 -->
-	<mapping path="/exclude.jsp*" exclue="true" />
+	<mapping path="/customer/login" exclue="true" />
+	<mapping path="/customer/reg" exclue="true" />
 	<mapping path="/order/module" exclue="true" />
 
 	<mapping path="/list" decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
