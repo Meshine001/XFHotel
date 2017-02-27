@@ -46,6 +46,7 @@
 			</interceptor>
 		<interceptor>
 			<mapping path="/admin/**" />
+			<exclude-mapping path="/admin"/>
 			<exclude-mapping path="/admin/login"/>
 			<beans:bean class="com.xfhotel.hotel.interceptor.AdminLoginInterceptor"/>
 		</interceptor>

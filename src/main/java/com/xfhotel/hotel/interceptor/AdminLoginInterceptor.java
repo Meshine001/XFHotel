@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xfhotel.hotel.common.Constants;
 
 /**
- * ¹ÜÀíÔ±µÇÂ¼À¹½ØÆ÷
+ * ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * 
  * @author Ming
  *
@@ -32,11 +32,12 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
-		if (request.getSession().getAttribute(Constants.ADMIN_SESSION_ATTR) != null) {
-			return true;
-		}
-		response.sendRedirect("/admin/login?next=".concat(request.getRequestURI()));
-		return false;
+		return true;
+//		if (request.getSession().getAttribute(Constants.ADMIN_SESSION_ATTR) != null) {
+//			return true;
+//		}
+//		response.sendRedirect("admin/login?next=".concat(request.getRequestURI()));
+//		return false;
 	}
 
 }

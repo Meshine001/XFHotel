@@ -52,18 +52,18 @@
 									<span class="highlight">青舍都市</span> Admin
 								</div>
 							</div>
-							<form action="<%=basePath%>/admin/login" method="post">
+							<form action="<%=basePath%>/admin/login" method="post" id="login-form">
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon1"> <i
 										class="fa fa-user" aria-hidden="true"></i></span> <input type="text"
 										class="form-control" placeholder="用户名"
-										aria-describedby="basic-addon1" name="user.username">
+										aria-describedby="basic-addon1" name="username">
 								</div>
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon2"> <i
 										class="fa fa-key" aria-hidden="true"></i></span> <input type="password"
 										class="form-control" placeholder="密  码"
-										aria-describedby="basic-addon2" name="user.password">
+										aria-describedby="basic-addon2" name="password">
 								</div>
 								<div class="text-center">
 									<input type="submit" class="btn btn-success btn-submit"
@@ -89,7 +89,7 @@
 				<div class="app-footer"></div>
 			</div>
 		</div>
-
+	
 	</div>
 
 	<script type="text/javascript"
@@ -97,7 +97,11 @@
 	<script type="text/javascript"
 		src="<%=basePath%>/dist/admin/assets/js/app.js"></script>
 
-
+	<script type="text/javascript">
+		$('.btn-submit').click(function(){
+			$('#login-form').submit();
+		});
+	</script>
 </body>
 
 
