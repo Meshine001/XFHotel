@@ -23,9 +23,10 @@ public class Order {
 	
 	public final static int STATUS_NOT_COMPLETE = 0;
 	public final static int STATUS_ON_PAY = 1;
-	public final static int STATUS_COMPLETE = 2;
-	public final static int STATUS_CANCEL = 3;
-	public final static int STATUS_TIME_OUT = 4;
+	public final static int STATUS_ON_LEASE = 2;//正在住
+	public final static int STATUS_COMPLETE = 3;//
+	public final static int STATUS_CANCEL = 4;
+	public final static int STATUS_TIME_OUT = 5;
 
 
 

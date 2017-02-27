@@ -12,6 +12,7 @@ import com.xfhotel.hotel.dao.impl.OrderDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.support.TimeUtil;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -98,6 +99,14 @@ public class OrderServiceImpl implements OrderService {
 			values[1] = Apartment.TYPE_HOTEL;
 		}
 
+		return orderDAO.getListByHQL(hql, values);
+	}
+	
+	@Transactional
+	@Override
+	public List<Order> checkAvailable(Long roomId, String startTime, String endTime) {
+		String hql = "from Order where (status =? or status=?) and (startTime >? and endTime <?)";
+		Object[] values = {Order.STATUS_ON_PAY,Order.STATUS_ON_LEASE,(TimeUtil.getDateLong(startTime)-1),(TimeUtil.getDateLong(endTime)+1)};
 		return orderDAO.getListByHQL(hql, values);
 	}
 

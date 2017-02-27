@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,12 +59,25 @@ public class OrderController {
 		session.setAttribute("oPreferential", preferential);
 		return "customer/orderModule";
 	}
-
+	
+	
+	@RequestMapping(value = "/checkAvailable", method = RequestMethod.GET)
+	public @ResponseBody Message checkAvailable(Long roomId,String startTime,String endTime){
+		try {
+			List<Order> availableOders = orderservice.checkAvailable(roomId, startTime, endTime);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, availableOders);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "查询失败");
+		}
+		
+	}
+	
 	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
 	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
 			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
 			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
-		
 		Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
@@ -72,7 +86,6 @@ public class OrderController {
 		o.setCusTel(cusTel);
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
-		System.out.println(startTime);
 		try {
 			o.setStartTime(DateUtil.parse(startTime, "yyyy-MM-dd").getTime());
 			o.setEndTime(DateUtil.parse(endTime, "yyyy-MM-dd").getTime());
@@ -155,7 +168,7 @@ public class OrderController {
 	public String pay(@PathVariable("id") Long id) {
 		Order order = orderservice.get(id);
 		session.setAttribute("order", order.toMap());
-		System.out.println(order.toMap());
+		System.out.println(JSONObject.wrap(order.toMap()).toString());
 		return "customer/order";
 	}
 

@@ -5,6 +5,7 @@ public class Constants {
 	public static final String Host_Address = "http://localhost:8080/hotel/";
 	
 	public static final String ADMIN_SESSION_ATTR = "admin-session";
+	public static final String CUSTOMER_SESSION_ATTR = "c";
 	
 	
 	public static final String DEFAULT_AVATAR = "avatar_default.jpg";

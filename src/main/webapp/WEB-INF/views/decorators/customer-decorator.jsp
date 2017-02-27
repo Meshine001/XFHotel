@@ -75,10 +75,10 @@
 							</ul>
 						</c:when>
 						<c:otherwise>
-							<a class="lg" href="<%=basePath%>/customer?forword=login"
+							<a class="lg" href="<%=basePath%>/customer/login?forword=login"
 								title="登录">登录</a>&nbsp;&nbsp;<span><img alt=""
-								src="dist/public/v1/images/phone.jpg"></span>&nbsp;&nbsp;<a
-								class="rg" href="<%=basePath%>/customer?forword=reg"
+								src="<%=basePath%>/dist/public/v1/images/phone.jpg"></span>&nbsp;&nbsp;<a
+								class="rg" href="<%=basePath%>/customer/login?forword=reg"
 								title="注册青舍用户">注册</a>
 						</c:otherwise>
 					</c:choose>
@@ -113,10 +113,18 @@
 								$('#myOrder').click(function(){
 									location.href='/hotel/customer/myOrder';
 								});
+								$('#serviceCenter').click(function(){
+									location.href='/hotel/customer/serviceCenter';
+								});
+								$('#preferential').click(function(){
+									location.href='/hotel/customer/preferential';
+								});
 								$('#myDetails').click(function(){
 									location.href='/hotel/customer/details';
 								});
-								
+								$('#feedback').click(function(){
+									location.href='/hotel/customer/feedback';
+								});
 							});
 						
 						</script>
@@ -142,10 +150,10 @@
 						<li id="myOrder" class="">
 							<p>我的订单</p> <i></i>
 						</li>
-						<li>
-							<p>我的退款</p> <i></i>
+						<li id="serviceCenter">
+							<p>服务中心</p> <i></i>
 						</li>
-						<li>
+						<li id="preferential">
 							<p>我的优惠</p> <i></i>
 						</li>
 						<li id="myDetails" class="">
@@ -154,7 +162,7 @@
 						<li id="" class="" style="display: none;">
 							<p>帐号设置</p> <i></i>
 						</li>
-						<li id="" class="">
+						<li id="feedback" class="">
 							<p>意见反馈</p> <i></i>
 						</li>
 					</ul>

@@ -59,7 +59,7 @@
       <input type="hidden" value="${oEnd}" name="endTime">
       <input type="hidden" name="totalDay" value="${oTotalDay}">
       <input type="hidden" name="price" value="${oPrice}">
-      <input type="hidden" name="price" value="${oTotalPrice}">
+      <input type="hidden" name="totalPrice" value="${oTotalPrice}">
       <input type="hidden" name="preferential" value="${oPreferential}">
       <input type="hidden" name="apartmentType" value="${apartment.apartmenttype}">
       <input id="submit" type="submit" class="tijiao" value="提&nbsp;&nbsp;交" name="">

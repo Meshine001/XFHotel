@@ -193,8 +193,17 @@
 										</div>
 									</div>
 									<div class="order_btn_container">
-										<a class="order_btn" href="../order/module?" id="day_yuding">立即预订<span
+										<c:choose>
+											<c:when test="${c != null }">
+											<a class="order_btn" href="../order/module?" id="day_yuding">立即预订<span
 											class="f14"></span></a>
+											</c:when>
+											<c:otherwise>
+												<a class="order_btn" href="../customer/login?forwad=login" id="need_login">立即预订<span
+											class="f14"></span></a>
+											</c:otherwise>
+										</c:choose>
+										
 									</div>
 								</div>
 								<div class="white_bg">
