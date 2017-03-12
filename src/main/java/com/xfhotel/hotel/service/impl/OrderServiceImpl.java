@@ -105,9 +105,19 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	@Override
 	public List<Order> checkAvailable(Long roomId, String startTime, String endTime) {
-		String hql = "from Order where (status =? or status=?) and (startTime >? and endTime <?)";
-		Object[] values = {Order.STATUS_ON_PAY,Order.STATUS_ON_LEASE,(TimeUtil.getDateLong(startTime)-1),(TimeUtil.getDateLong(endTime)+1)};
+		String hql = "from Order where roomId = ? and (status =? or status=?) and (startTime >? and endTime <?)";
+		Object[] values = {roomId,Order.STATUS_ON_PAY,Order.STATUS_ON_LEASE,(TimeUtil.getDateLong(startTime)-1),(TimeUtil.getDateLong(endTime)+1)};
 		return orderDAO.getListByHQL(hql, values);
 	}
+
+	@Override
+	public boolean isTimeOut(Order o) {
+		Long time = o.getTime();
+		Long deadLine = time + Constants.EFFECTIVE_ORDER_TIME_DURING;
+		Long now = new Date().getTime();
+		if(now > deadLine)return true;
+		return false;
+	}
+
 
 }

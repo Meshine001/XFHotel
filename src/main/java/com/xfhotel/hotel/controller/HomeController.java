@@ -29,12 +29,14 @@ import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Banner;
 import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Feature;
+import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BannerService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.FeatureService;
+import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
@@ -67,6 +69,9 @@ public class HomeController {
 	BannerService bannerService;
 	@Autowired
 	BlogService blogService;
+	
+	@Autowired
+	OrderService orderService;
 	
 	@Autowired
 	HttpSession session;
@@ -246,6 +251,8 @@ public class HomeController {
 	public List<Map> get2MonthPrices(Long id,String startDate){
 		List<Map> prices = new ArrayList<Map>();
 		Apartment apartment = apartmentService.findById(id);
+		Map aInfo = apartmentService.getApartmentInfo(id);
+		Map room = ((ArrayList<Map>)aInfo.get("rooms")).get(0);
 		Long start = TimeUtil.getDateLong(startDate);
 		Long end = TimeUtil.getDatePlusMonth(new Date(start), 2).getTime();
 		//未来两个月特殊价格
@@ -261,6 +268,11 @@ public class HomeController {
 			allDates.addAll(TimeUtil.getAllDateInMonth(curY,curM+1));
 		}
 		
+		List<Order> availableOrders = orderService.checkAvailable(
+				(Long)room.get("id"), 
+				TimeUtil.getDateStr(start), 
+				TimeUtil.getDateStr(end));
+		
 		for(Date d:allDates){
 			Map<String, Object> info = new HashMap<String, Object>();
 			info.put("houseprice", apartment.getPrices());
@@ -271,6 +283,11 @@ public class HomeController {
 				String t = (String) m.get("date");
 				if(DateUtil.format(d, "yyyy-MM-dd").equals(t)){
 					info.put("houseprice",((Double)m.get("price")));
+				}
+			}
+			for(Order o:availableOrders){
+				if( d.getTime()>=o.getStartTime() && d.getTime() <=o.getEndTime()){
+					info.put("state", "unavailable");
 				}
 			}
 			prices.add(info);

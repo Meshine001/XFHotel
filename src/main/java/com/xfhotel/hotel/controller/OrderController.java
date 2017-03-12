@@ -252,4 +252,26 @@ public class OrderController {
 
 		return "redirect:/order/pay/" + order.getId();
 	}
+	
+	@RequestMapping(value = "/msg", method = RequestMethod.GET)
+	public String msg(int msg){
+		StringBuffer sb = new StringBuffer();
+		
+		switch (msg) {
+			
+		case Order.STATUS_TIME_OUT:
+			sb.append("订单超时");
+			break;
+		case Order.STATUS_COMPLETE:
+			sb.append("订单已完成");
+			break;
+		case Order.STATUS_CANCEL:
+			sb.append("订单已取消");
+			break;
+		default:
+			break;
+		}
+		session.setAttribute("orderMsg", sb.toString());
+		return "customer/orderMessage";
+	}
 }

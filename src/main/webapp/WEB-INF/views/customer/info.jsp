@@ -16,6 +16,7 @@
 <script src="<%=basePath%>/dist/public/js/jquery.colorbox-min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/customer/css/info.css">
+<script src="http://yui.yahooapis.com/3.5.1/build/yui/yui-min.js"></script>
 </my_header>
 </head>
 <body>
