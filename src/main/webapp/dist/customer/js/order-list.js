@@ -29,6 +29,7 @@
 
         function search(){
             var form = $('#search-form').serialize();
+            console.log(form);
             var url = '../order/search';
             $.ajax({
                 type : "GET",
@@ -52,6 +53,11 @@
                 }
             });
         }
+        
+        //更换订单选项
+        function changeCategory(){
+        	
+        }
 
 		$(document).ready(function(){
 			$('#order-type-sel-wrapper').click(function(){
@@ -74,10 +80,13 @@
                 };
                
             });
+            
             $('.searchbar').change(function(e){
                // var target = e.target;
                 search();
             });
+            
+            
             
             search();
             
