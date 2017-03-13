@@ -16,7 +16,14 @@
 
 <title>青舍都市公寓-西安租房_西安合租</title>
 
-<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
+
+	
+<!-- ZUI 标准版压缩后的 CSS 文件 -->
+<link rel="stylesheet" href="<%=basePath%>/dist/zui/css/zui.min.css">
+<!-- ZUI Javascript 依赖 jQuery -->
+<script src="<%=basePath%>/dist/zui/lib/jquery/jquery.js"></script>
+<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+<script src="<%=basePath%>/dist/zui/js/zui.min.js"></script>
 
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/public/v1/css/base.css?r=3">

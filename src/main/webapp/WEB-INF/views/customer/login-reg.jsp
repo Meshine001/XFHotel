@@ -16,9 +16,16 @@
 
 <title>青舍都市公寓-西安租房_西安合租</title>
 
-<!-- Bootstrap core CSS -->
-<link href="<%=basePath%>/dist/commons/bootstrap/css/bootstrap.min.css"
+<!-- ZUI 标准版压缩后的 CSS 文件 -->
+<link rel="stylesheet" href="<%=basePath%>/dist/zui/css/zui.min.css">
+
+<link href="<%=basePath%>/dist/customer/css/log-reg.css"
 	rel="stylesheet">
+
+<!-- ZUI Javascript 依赖 jQuery -->
+<script src="<%=basePath%>/dist/zui/lib/jquery/jquery.js"></script>
+<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+<script src="<%=basePath%>/dist/zui/js/zui.min.js"></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -26,8 +33,6 @@
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<link href="<%=basePath%>/dist/customer/css/log-reg.css"
-	rel="stylesheet">
 </head>
 <body>
 	<div class="container">
@@ -56,7 +61,8 @@
 									</div>
 									<div class="form-group">
 										<input type="password" name="password" id="password"
-											tabindex="2" class="form-control" placeholder="请输入密码" value="123123">
+											tabindex="2" class="form-control" placeholder="请输入密码"
+											value="123123">
 									</div>
 									<div class="form-group text-center">
 										<input type="checkbox" tabindex="3" class="" name="remember"
@@ -88,12 +94,14 @@
 									</div>
 									<div class="form-group">
 										<div class="input-group">
-
 											<input type="text" name="validateCode" id="validate-code"
 												tabindex="1" class="form-control" placeholder="请输入验证码"
 												value="">
-											<div class="input-group-addon" style="background-color: rgba(238, 238, 238, 0);border: none;">
-												<button type="button" class="btn btn-info">获取验证码</button>
+											<div class="input-group-addon"
+												style="background-color: rgba(238, 238, 238, 0); border: none;">
+												<button type="button" class="btn btn-primary btn-imageCode"
+													data-position="fit" data-toggle="modal"
+													data-target="#imgCodeModal">获取验证码</button>
 											</div>
 										</div>
 									</div>
@@ -118,12 +126,104 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
-	<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"></script>
+	<div class="modal fade" id="imgCodeModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="panel">
+					<div class="panel-body">
+						<form action="<%=basePath%>/validator/checkImgCode"
+							id="imgCode-form">
+							<div class="alert alert-info">请输入图片验证码</div>
+							<div class="imgCode-input">
+								<input type="text" name="code" id="imgCode" class="form-control"
+									placeholder="" value="">
+							</div>
+							<div class="row">
+								<div class="col-md-8" style="margin-top: 10px;">
+									<img id="imgObj" alt="验证码" width="100%"
+										src="<%=basePath%>/validator/image?timestamp=21312213131"
+										onclick="changeImg()" />
+								</div>
+								<div class="col-md-4" style="margin-top: 10px;">
+									<a href="javascript:return false;" onclick="changeImg()">换一张</a>
+								</div>
+							</div>
+							<button type="button" class="btn btn-primary imgCode"
+								style="margin-top: 10px;">确定提交</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			// 刷新图片  
+			function changeImg() {
+				var imgSrc = $("#imgObj");
+				var src = imgSrc.attr("src");
+				imgSrc.attr("src", changeUrl(src));
+			}
+			//为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳  
+			function changeUrl(url) {
+				var base = url.split('=')[0];
+				var timestamp = (new Date()).valueOf();
+				url = base + '=' + timestamp;
+				return url;
+			}
+
+			var timer = 60;
+			//倒计时
+			function Countdown() {
+				$('.btn-imageCode').text(timer + 's后重试');
+				if (timer >= 1) {
+					timer -= 1;
+					setTimeout(function() {
+						Countdown();
+					}, 1000);
+				}
+				if(timer == 0){
+					$('.btn-imageCode').removeClass('disabled');
+					$('.btn-imageCode').text('获取验证码');
+				}
+				
+			}
+
+			function getTelValiateCode() {
+				//在这里插入服务器请求函数
+				//....TODO
+
+				$('.btn-imageCode').addClass('disabled');
+				timer = 60;
+				Countdown();
+			}
+
+			$('.imgCode').click(function() {
+				var url = $('#imgCode-form').attr('action');
+				$.ajax({
+					type : "GET",
+					dataType : "json",
+					url : url,
+					data : $('#imgCode-form').serialize(),
+					success : function(msg) {
+						console.log(msg);
+						//验证成功
+						if (msg.statusCode == 1) {
+							$('#imgCodeModal').modal('hide');
+							//请求手机短信验证码
+							getTelValiateCode();
+
+						} else {//失败
+							$('.imgCode-input').addClass('has-error');
+							$('#imgCode').val("");
+							$('#imgCode').attr('placeholder', '验证错误，请重新输入');
+						}
+					}
+				});
+			});
+		</script>
+	</div>
+
 	<script src="<%=basePath%>/dist/customer/js/log-reg.js"></script>
 	<c:if test="${forword == 'login' }">
 		<script type="text/javascript">

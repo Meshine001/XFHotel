@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -275,30 +277,49 @@ public class HomeController {
 		
 		for(Date d:allDates){
 			Map<String, Object> info = new HashMap<String, Object>();
-			info.put("houseprice", apartment.getPrices());
-			info.put("start", DateUtil.format(d, "yyyy-MM-dd"));
-			info.put("pricetype", "normal");
-			info.put("state", "available");
+			Map<String, Object> details = new HashMap<String, Object>();
+			details.put("price", apartment.getPrices());
+			details.put("start", DateUtil.format(d, "yyyy-MM-dd"));
+			details.put("pricetype", "normal");
+			details.put("roomNum", "1");
+			
+			
 			for(Map m:sp){
 				String t = (String) m.get("date");
 				if(DateUtil.format(d, "yyyy-MM-dd").equals(t)){
-					info.put("houseprice",((Double)m.get("price")));
+					details.put("price",((Double)m.get("price")));
 				}
 			}
 			for(Order o:availableOrders){
 				if( d.getTime()>=o.getStartTime() && d.getTime() <=o.getEndTime()){
-					info.put("state", "unavailable");
+					details.put("roomNum", "0");
 				}
 			}
+			info.put(DateUtil.format(d, "yyyy-MM-dd"), details);
 			prices.add(info);
 		}
 		return prices;
 	}
 	
 	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.GET)
-	public @ResponseBody List<Map> getRangePrices(@PathVariable("id")Long id,@PathVariable("startDate")String startDate){
-		return get2MonthPrices(id, startDate);
+	public @ResponseBody Map getRangePrices(@PathVariable("id")Long id,@PathVariable("startDate")String startDate){
+		List<Map> prices = get2MonthPrices(id, startDate);
+		Iterator<Map> iterator = prices.iterator();
+		Map data = new HashMap<String, Object>();
+		while(iterator.hasNext()){
+			Map m = iterator.next();
+			String date = (String) m.keySet().iterator().next();
+			data.put(date, m.get(date));
+		}
+		
+		return data;
 	}
+	
+	@RequestMapping(value="/price/script")
+	public String calendarScript(){
+		return "customer/priceCalendarScript";
+	}
+	
 	
 	/**
 	 * 计算价钱
@@ -357,19 +378,29 @@ public class HomeController {
 		System.out.println(apartment);
 		String start = TimeUtil.getDateStr(new Date().getTime());
 		session.setAttribute("startDate", start);
+		//获得两个月的价格
 		List<Map> priceMaps = get2MonthPrices((Long)room.get("apartment"), start);
 		List<Map> prices = new ArrayList<Map>();
 		int s = Integer.parseInt(start.substring(start.length()-2, start.length()))-1;
-		for(int i= s;i<priceMaps.size();i++){
-			if(i == s+6){
-				break;
+		System.out.println(s);
+		Iterator<Map> iterator = priceMaps.iterator();
+		int i = 0;
+		while(iterator.hasNext()&&i<(s+6)){
+			if(i<s){
+				iterator.next();
+				i++;
+				continue;
 			}
+			Map<String, Object> info = iterator.next();
+			String date = info.keySet().iterator().next();
 			Map<String, Object> m = new HashMap<String, Object>();
-			String dStr = (String) priceMaps.get(i).get("start");
-			m.put("date", dStr.substring(dStr.length()-2, dStr.length()));
-			m.put("price", priceMaps.get(i).get("houseprice"));
+			m.put("date", date.substring(date.length()-2, date.length()));
+			Map<String, Object> details = (Map<String, Object>) info.get(date);
+			m.put("price", details.get("price"));
 			prices.add(m);
+			i++;
 		}
+
 		session.setAttribute("prices", prices);
 		return "/customer/info";
 	}

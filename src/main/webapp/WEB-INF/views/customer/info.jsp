@@ -9,14 +9,14 @@
 <head>
 <title>title-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
-<my_header>
-<script src="<%=basePath%>/dist/public/js/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="<%=basePath%>/dist/public/css/colorbox.css">
-<script src="<%=basePath%>/dist/public/js/jquery.colorbox-min.js"></script>
+<my_header> 
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/customer/css/info.css">
-<script src="http://yui.yahooapis.com/3.5.1/build/yui/yui-min.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>/dist/zui/lib/price-calendar/js/yui-min.js"></script>
+<script type="text/javascript">
+	
+</script>
 </my_header>
 </head>
 <body>
@@ -162,7 +162,7 @@
 						<span class="m_jiage"><em>￥</em><span id="zujin">${room.prices[0]}</span><font>起</font></span>
 					</div>
 					<div class="">
-					   <input type="hidden" id="apartmentId" value="${apartment.id}">
+						<input type="hidden" id="apartmentId" value="${apartment.id}">
 						<div id="detailBookArea">
 							<div class="reserve_box">
 								<div class="reserve_space">
@@ -170,10 +170,10 @@
 										<div class="reserve_date">
 											<div class="reserve_ico" id="detailCalendarIco"></div>
 											<input type="text" class="date_input" id="startenddate"
-												readonly="" value="请选择入离时间"> <input
-												type="hidden" name="startdate" id="startdate"
-												value="${startDate}" class="hasDatepicker"> <input
-												type="hidden" name="enddate" id="enddate" value="${endDate}"
+												readonly="" value="请选择入离时间" > <input type="hidden"
+												name="startdate" id="startdate" value="${startDate}"
+												class="hasDatepicker"> <input type="hidden"
+												name="enddate" id="enddate" value="${endDate}"
 												class="hasDatepicker">
 											<div id="calendar-box" style="display: none"
 												class="calendar_box clearfix"></div>
@@ -196,35 +196,36 @@
 									<div class="order_btn_container">
 										<c:choose>
 											<c:when test="${c != null }">
-											<a class="order_btn" href="../order/module?" id="day_yuding">立即预订<span
-											class="f14"></span></a>
+												<a class="order_btn" href="../order/module?" id="day_yuding">立即预订<span
+													class="f14"></span></a>
 											</c:when>
 											<c:otherwise>
-												<a class="order_btn" href="../customer/login?forwad=login" id="need_login">立即预订<span
-											class="f14"></span></a>
+												<a class="order_btn" href="../customer/login?forwad=login"
+													id="need_login">立即预订<span class="f14"></span></a>
 											</c:otherwise>
 										</c:choose>
-										
+
 									</div>
 								</div>
 								<div class="white_bg">
 									<input type="hidden" id="avgprice" value="100"> <input
 										type="hidden" id="priceTip" value="">
 									<ul class="cal_box clearfix">
-									<c:forEach items="${prices}" var="p" varStatus="pp">
-										<c:choose>
-											<c:when test="${pp.index == 0}">
-											<li>今天 <br>¥${p.price}
-											</li>		
-											</c:when>
-											<c:otherwise>
-												<li>${p.date}<br>¥${p.price}
-												</li>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-										
-										<li class="line_none_r" style="display: none;"><a id="showMoreCalendar" href="#">全部<br>日历
+										<c:forEach items="${prices}" var="p" varStatus="pp">
+											<c:choose>
+												<c:when test="${pp.index == 0}">
+													<li>今天 <br>¥${p.price}
+													</li>
+												</c:when>
+												<c:otherwise>
+													<li>${p.date}<br>¥${p.price}
+													</li>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+
+										<li class="line_none_r" style="display: none;"><a
+											id="showMoreCalendar" href="#">全部<br>日历
 										</a></li>
 									</ul>
 								</div>
@@ -440,7 +441,8 @@
 		</div>
 	</div>
 	</my_body>
-	<my_script> <script
+	<my_script> 
+	<script
 		src="<%=basePath%>/dist/customer/js/info.js"></script> </my_script>
 </body>
 </html>
