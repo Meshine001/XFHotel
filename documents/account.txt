@@ -7,8 +7,14 @@ hsm19781984
 root
 Yiyun3237
 
+#ip
 118.190.44.185
 
+#tomcat
+yiyun
+yiyun3237
+
+#mysql
 root
 yiyunmsql
 
