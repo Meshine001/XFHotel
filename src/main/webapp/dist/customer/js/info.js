@@ -147,11 +147,18 @@
 			    //初始化日历
 			    //点击确定按钮
 			    oCalendar.on('confirm',function(){
-			        alert('入住时间：'+this.get('depDate')+',离店时间:  '+this.get('endDate'));
+			       // alert('入住时间：'+this.get('depDate')+',离店时间:  '+this.get('endDate'));
+			        $('#startenddate').val(this.get('depDate')+'至'+this.get('endDate'));
+			        $('#sameRoomNum').val(DateDiff(this.get('depDate'), this.get('endDate'))+'日')
+			    	$('#startdate').val(this.get('depDate'));
+			        $('#enddate').val(this.get('endDate'));
+			        $('.price-calendar-bounding-box').remove();
+			        
 			    });
 			    //点击取消按钮
 			    oCalendar.on('cancel',function(){
 			        this.set('depDate','').set('endDate','').render();
+			        $('.price-calendar-bounding-box').remove();
 			    });
 			    
 			    oCalendar.set('data',null)
@@ -179,7 +186,7 @@
 //			    		$.each(data,function(index,item){
 //			    			pData[index] = item;
 //			    		});
-			    		console.log(data);
+			    		//console.log(data);
 			    		oCalendar.set('data',data);
 			    		oCalendar.render();
 			    	},

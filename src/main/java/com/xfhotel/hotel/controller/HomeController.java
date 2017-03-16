@@ -91,7 +91,7 @@ public class HomeController {
 			Long apartmentId = (Long) roomService.getRoomInfo(room.getId()).get("apartment");
 			homeRooms.add(apartmentService.getApartmentInfo(apartmentId));
 		}
-		System.out.println(homeRooms);
+//		System.out.println(homeRooms);
 		session.setAttribute("homeRoom", homeRooms);
 		return "/customer/home";
 	}
