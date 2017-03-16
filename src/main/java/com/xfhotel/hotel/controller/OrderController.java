@@ -3,6 +3,7 @@ package com.xfhotel.hotel.controller;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CommentService;
@@ -48,21 +50,59 @@ public class OrderController {
 	@Autowired
 	HttpSession session;
 
+	/**
+	 * 返回订单模板，在房间信息页，点击‘立即预定’触发
+	 * 
+	 * @param startTime
+	 * @param endTime
+	 * @param totalDay
+	 * @param price
+	 * @param totalPrice
+	 * @param preferential
+	 * @return
+	 */
 	@RequestMapping(value = "/module", method = RequestMethod.GET)
-	public String orderModule(String startTime, String endTime, Integer totalDay, String price,
-			String totalPrice, String preferential) {
+	public String orderModule(String startTime, String endTime, Long apartmentId) throws Exception {
 		session.setAttribute("oStart", startTime);
 		session.setAttribute("oEnd", endTime);
-		session.setAttribute("oTotalDay", totalDay);
-		session.setAttribute("oPrice", price);
-		session.setAttribute("oTotalPrice", totalPrice);
-		session.setAttribute("oPreferential", preferential);
+
+		Map<String, Object> priceInfo = caculatePrice(startTime, endTime, apartmentId);
+
+		session.setAttribute("oTotalDay", TimeUtil.daysBetween(startTime, endTime));
+		session.setAttribute("oPrice", priceInfo.get("price"));
+		session.setAttribute("oTotalPrice", priceInfo.get("totalPrice"));
+		session.setAttribute("oPreferential", "");
 		return "customer/orderModule";
 	}
-	
-	
+
+	public Map<String, Object> caculatePrice(String startTime, String endTime, Long apartmentId) {
+		Map<String, Object> info = new HashMap<String, Object>();
+		StringBuffer sb = new StringBuffer();
+		Double sum = 0.00D;
+		Apartment apartment = apartmentService.findById(apartmentId);
+		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
+		for (int i = 0; i < days.size()-1; i++) {
+			Price p = apartmentService.getSpPrice(apartment, TimeUtil.getDateLong(days.get(i)));
+			Double pp = null;
+			if (p != null) {// 有特殊价格
+				pp = p.getPrice();
+			} else {
+				pp = Double.valueOf(apartment.getPrices());
+			}
+			if (i == 0) {
+				sb.append(pp);
+			} else {
+				sb.append("@" + pp);
+			}
+			sum += pp;
+		}
+		info.put("price", sb.toString());
+		info.put("totalPrice", sum);
+		return info;
+	}
+
 	@RequestMapping(value = "/checkAvailable", method = RequestMethod.GET)
-	public @ResponseBody Message checkAvailable(Long roomId,String startTime,String endTime){
+	public @ResponseBody Message checkAvailable(Long roomId, String startTime, String endTime) {
 		try {
 			List<Order> availableOders = orderservice.checkAvailable(roomId, startTime, endTime);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, availableOders);
@@ -71,9 +111,29 @@ public class OrderController {
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "查询失败");
 		}
-		
+
 	}
-	
+
+	/**
+	 * 用户提交订单 房间详细信息页，确认订单触发
+	 * 
+	 * @param cusId
+	 * @param description
+	 * @param roomId
+	 * @param cusName
+	 * @param cusTel
+	 * @param cusIdCard
+	 * @param personal
+	 * @param startTime
+	 * @param endTime
+	 * @param totalDay
+	 * @param price
+	 * @param totalPrice
+	 * @param preferential
+	 * @param needFapiao
+	 * @param apartmentType
+	 * @return
+	 */
 	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
 	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
 			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
@@ -102,7 +162,7 @@ public class OrderController {
 		o.setStatus(Order.STATUS_ON_PAY);
 		o.setNeedFapiao(needFapiao);
 		orderservice.add(o);
-		return "redirect:pay/"+o.getId();
+		return "redirect:pay/" + o.getId();
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -252,13 +312,13 @@ public class OrderController {
 
 		return "redirect:/order/pay/" + order.getId();
 	}
-	
+
 	@RequestMapping(value = "/msg", method = RequestMethod.GET)
-	public String msg(int msg){
+	public String msg(int msg) {
 		StringBuffer sb = new StringBuffer();
-		
+
 		switch (msg) {
-			
+
 		case Order.STATUS_TIME_OUT:
 			sb.append("订单超时");
 			break;

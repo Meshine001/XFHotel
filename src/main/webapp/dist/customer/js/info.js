@@ -147,9 +147,19 @@
 			    //初始化日历
 			    //点击确定按钮
 			    oCalendar.on('confirm',function(){
+			    	 var s = this.get('depDate');
+				     var d = this.get('endDate');
 			       // alert('入住时间：'+this.get('depDate')+',离店时间:  '+this.get('endDate'));
-			        $('#startenddate').val(this.get('depDate')+'至'+this.get('endDate'));
-			        $('#sameRoomNum').val(DateDiff(this.get('depDate'), this.get('endDate'))+'日')
+			        $('#startenddate').val(s+'至'+d);
+			        $('#sameRoomNum').val(DateDiff(s, d)+'日');
+			        
+			        
+			        
+			        var param = $('#day_yuding').attr('data-remote').split('?')[0]+'?'
+			        +'startTime='+s	+'&endTime='+d+'&apartmentId='+$('#apartmentId').val();
+			        
+			        $('#day_yuding').attr('data-remote',param);
+			        
 			    	$('#startdate').val(this.get('depDate'));
 			        $('#enddate').val(this.get('endDate'));
 			        $('.price-calendar-bounding-box').remove();
@@ -212,8 +222,6 @@ $(document).ready(function(){
         
     });
     
-    
-    
 
     $('#pre').click(function(){
     	changePic('pre');
@@ -222,14 +230,4 @@ $(document).ready(function(){
     	changePic('next');
     });
     
-    $('#day_yuding').colorbox({
-    	
-    	width:'900px',
-    	height:'900px',
-    	initialWidth:'900px',
-    	initialHeight:'900px',
-    	overlayClose:true,
-    	closeButton:true
-    	
-    });
 });

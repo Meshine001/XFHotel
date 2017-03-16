@@ -989,7 +989,7 @@
 }
 
 .ol_info dl dt .ol_input {
-	width: 568px;
+	width: 500px;
 	padding: 0 10px;
 	border: 1px solid #ddd;
 	font-family: "微软雅黑";
@@ -1006,7 +1006,7 @@
 }
 
 .ol_info dl dt textarea {
-	width: 568px;
+	width: 500px;
 	height: 90px;
 	resize: none;
 	border: 1px solid #ddd;
@@ -1049,7 +1049,7 @@
 	font-family: "微软雅黑";
 	border: none;
 	cursor: pointer;
-	margin-left: 100px;
+	margin-left: 160px;
 	margin-top: 20px;
 }
 
