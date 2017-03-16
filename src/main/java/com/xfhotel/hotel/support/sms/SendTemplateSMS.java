@@ -11,7 +11,7 @@ public class SendTemplateSMS {
 	/**
 	 * @param args
 	 */
-	public void sendSMS(String type, String phone_num, String[] args) {
+	public static void sendSMS(String type, String phone_num, String[] args) {
 		HashMap<String, Object> result = null;
 
 		//初始化SDK
