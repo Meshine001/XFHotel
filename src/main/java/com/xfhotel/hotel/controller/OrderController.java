@@ -165,6 +165,16 @@ public class OrderController {
 		return "redirect:pay/" + o.getId();
 	}
 
+	/**
+	 * 查询订单
+	 * @param cId
+	 * @param category
+	 * @param type
+	 * @param startDate
+	 * @param endDate
+	 * @param range
+	 * @return
+	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range) {
 		try {
@@ -202,6 +212,16 @@ public class OrderController {
 		return "customer/comment";
 	}
 
+	/**
+	 * 提交评论
+	 * @param roomId
+	 * @param from
+	 * @param to
+	 * @param c_score
+	 * @param feel
+	 * @param pics
+	 * @return
+	 */
 	@RequestMapping(value = "/comment/post", method = RequestMethod.POST)
 	public @ResponseBody Message postComment(Long roomId, Long from, Long to, String[] c_score, String feel,
 			String[] pics) {

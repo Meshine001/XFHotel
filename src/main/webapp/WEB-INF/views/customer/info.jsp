@@ -196,8 +196,8 @@
 									<div class="order_btn_container">
 										<c:choose>
 											<c:when test="${c != null }">
-												<a class="order_btn" id="day_yuding"  data-show-header="false" data-remote="<%=basePath%>/order/module?" data-toggle="modal">立即预订<span
-													class="f14"></span></a>
+												<a class="order_btn" id="day_yuding"  data-show-header="false"  data-baseurl="<%=basePath%>/order/module" data-remote="<%=basePath%>/order/module?" data-toggle="modal">立即预订<span
+													class="f14" ></span></a>
 											</c:when>
 											<c:otherwise>
 												<a class="order_btn" href="../customer/login?forwad=login"

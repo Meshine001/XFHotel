@@ -47,9 +47,9 @@
 					<div class="ftr_tel">
 
 						<a href="" target="_blank" title="Android下载" class="android"><img
-							src="dist/public/v1/images/em.png" width="100" height="100"></a><a
+							src="<%=basePath%>/dist/public/v1/images/em.png" width="100" height="100"></a><a
 							href="" target="_blank" title="IOS下载" class="ios"><img
-							src="dist/public/v1/images/em.png" width="100" height="100"></a>
+							src="<%=basePath%>/dist/public/v1/images/em.png" width="100" height="100"></a>
 					</div>
 				</div>
 

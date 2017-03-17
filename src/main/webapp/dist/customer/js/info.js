@@ -154,8 +154,8 @@
 			        $('#sameRoomNum').val(DateDiff(s, d)+'日');
 			        
 			        
-			        
-			        var param = $('#day_yuding').attr('data-remote').split('?')[0]+'?'
+		
+			        var param = $('#day_yuding').attr('data-baseurl')+'?'
 			        +'startTime='+s	+'&endTime='+d+'&apartmentId='+$('#apartmentId').val();
 			        
 			        $('#day_yuding').attr('data-remote',param);

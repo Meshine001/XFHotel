@@ -16,7 +16,8 @@
             $('<i/>').addClass('name-icon icon-zhu').appendTo($('dd').text(item.startTime).appendTo(allTitle));
             $('<i/>').addClass('name-icon icon-li').appendTo($('dd').text(item.endTime).appendTo(allTitle));
             var qunatity = $('<td/>').addClass('qunatity').appendTo(tr);
-            var qHtml = "<em style='font-family:arial;'>¥</em>" + item.price + 'x'+item.totalDay+'天'
+            var qHtml = "<em style='font-family:arial;'></em>" //+ item.price 
+            + '共'+item.totalDay+'天'
             + '<br><br><br>'+ item.needFapiao;
             qunatity.html(qHtml);
             var pHtml =  "<em style='font-family:arial;'>¥</em>" + item.totalPrice;
@@ -54,12 +55,20 @@
             });
         }
         
-        //更换订单选项
-        function changeCategory(){
-        	
-        }
+      
 
 		$(document).ready(function(){
+			$('.category-a').click(function(e){
+				var target = e.target;
+				$('#category-input').val($(target).attr('data-category'));
+				  var parent = $(target).parent();
+	              parent.parent().find('li').each(function(index,li){
+	                 $(li).attr('class','');
+	              });
+	              parent.attr('class','cur'); 
+	              search();
+			});
+			
 			$('#order-type-sel-wrapper').click(function(){
 				$('#order-type-sel-list').show();
 			});

@@ -27,11 +27,11 @@
 		<!-- 订单选项 -->
 		<div id="js-category-panel">
 			<ul class="order-remind-list" id="category-list">
-				<li class="cur"><a class="" href="/?category=all"
-					data-category="all" title="" data-beacon="tab-全部订单">全部订单<em></em></a></li>
-				<li><a class="" href="/?category=7" data-category="7"
+				<li class="cur "><a class="category-a" href="javascript:"
+					data-category="0" title="" data-beacon="tab-全部订单">全部订单<em></em></a></li>
+				<li><a class="category-a" href="javascript:" data-category="1"
 					title="" data-beacon="tab-有效订单">有效订单<em></em></a></li>
-				<li><a class="" href="/?category=3" data-category="3"
+				<li><a class="category-a" href="javascript:" data-category="2"
 					title="" data-beacon="tab-退款订单">退款订单<em></em></a></li>
 				<li style="display: none;"><a class="link" href="/?category=4"
 					data-category="4" title="" data-beacon="tab-待绑定订单">待绑定订单<em></em></a></li>
@@ -47,7 +47,7 @@
 		<div class="searchbar">
 			<form id="search-form">
 				<input type="hidden" name="cId" value="${c.id}"> <input
-					type="hidden" name="category" value="0">
+					type="hidden" name="category" value="0" id="category-input">
 				<div class="simple clearfix">
 					<!-- 订单类型 -->
 					<span class="title">订单类型</span>
