@@ -79,4 +79,9 @@ public class MessageController {
 	public void lockFail(String business_id, String lock_no, Integer pwd_no, String pwd_user_mobile){
 		lockService.deletePassword(pwd_user_mobile, lock_no);
 	}
+	
+	public static void main(String[] args) {
+	
+		System.out.println("");
+	}
 }
