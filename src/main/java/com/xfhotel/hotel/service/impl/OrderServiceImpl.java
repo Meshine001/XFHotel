@@ -93,8 +93,10 @@ public class OrderServiceImpl implements OrderService {
 		switch (type) {
 		case Apartment.TYPE_APARTMENT:
 			values[1] = Apartment.TYPE_APARTMENT;
+			break;
 		case Apartment.TYPE_PLAY_ROOM:
 			values[1] = Apartment.TYPE_PLAY_ROOM;
+			break;
 		default:
 			values[1] = Apartment.TYPE_HOTEL;
 		}
