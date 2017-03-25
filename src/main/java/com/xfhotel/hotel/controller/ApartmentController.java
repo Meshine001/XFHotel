@@ -308,7 +308,7 @@ public class ApartmentController {
 		return "redirect:/admin/apartment/price/"+apartmentId;
 	}
 	
-	
+
 	@RequestMapping(value = "/price/{id}", method = RequestMethod.GET)
 	public String price(@PathVariable("id")Long id){
 		Apartment apartment = apartmentService.findById(id);

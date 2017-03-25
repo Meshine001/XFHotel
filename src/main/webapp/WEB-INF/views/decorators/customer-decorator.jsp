@@ -16,10 +16,12 @@
 
 <title>青舍都市公寓-西安租房_西安合租</title>
 
-<!-- Bootstrap core CSS -->
-<link href="<%=basePath%>/dist/commons/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-
+<!-- ZUI 标准版压缩后的 CSS 文件 -->
+<link rel="stylesheet" href="<%=basePath%>/dist/zui/css/zui.min.css">
+<!-- ZUI Javascript 依赖 jQuery -->
+<script src="<%=basePath%>/dist/zui/lib/jquery/jquery.js"></script>
+<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+<script src="<%=basePath%>/dist/zui/js/zui.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/public/v1/css/base.css">
 <link rel="stylesheet" type="text/css"
@@ -36,6 +38,9 @@
 <link href="<%=basePath%>/dist/commons/colorbox/colorbox.css"
 	rel="stylesheet">
 <script src="<%=basePath%>/dist/commons/colorbox/jquery.colorbox-min.js"></script>
+
+
+
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
@@ -47,7 +52,7 @@
 <body>
 	<header>
 		<div class="main">
-			<a href="/" title="青舍首页" class="logo"></a>
+			<a href="<%=basePath%>" title="青舍首页" class="logo"></a>
 			<div class="nav clearfix">
 				<ul class="nav_ul">
 					<li><a href="<%=basePath%>/" title="">首页</a></li>

@@ -1,5 +1,7 @@
 package com.xfhotel.hotel.controller;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -7,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.service.LockService;
+import com.xfhotel.hotel.support.QRCode;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 
 @Controller
@@ -78,5 +83,20 @@ public class MessageController {
 	
 	public void lockFail(String business_id, String lock_no, Integer pwd_no, String pwd_user_mobile){
 		lockService.deletePassword(pwd_user_mobile, lock_no);
+	}
+	
+	@RequestMapping(value="QRCode",method=RequestMethod.GET)
+	void responseQRCode(String url,HttpServletResponse response){
+		try {
+			OutputStream out = response.getOutputStream();
+			QRCode.pushQRCode(url, out);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+	
 	}
 }

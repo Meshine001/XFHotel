@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.impl.CommentDAOImpl;
 import com.xfhotel.hotel.entity.Comment;
+import com.xfhotel.hotel.support.PageResults;
 
 @Service
 public class CommentService implements com.xfhotel.hotel.service.CommentService {
@@ -45,6 +46,17 @@ public class CommentService implements com.xfhotel.hotel.service.CommentService 
 		String hql = "from Comment where roomId=?";
 		Object[] v = {roomId};
 		return commentDAO.getListByHQL(hql, v);
+	}
+
+	@Transactional
+	@Override
+	public PageResults<Comment> getComments(Long roomId, int page) {
+		StringBuffer s = new StringBuffer();
+		s.append("from Comment comment where comment.roomId=");
+		s.append(roomId).append("order by comment.time desc");
+		StringBuffer s1 = new StringBuffer();
+		s1.append("select count(*) from Comment comment where comment.roomId=").append(roomId);
+		return commentDAO.findPageByFetchedHql(s.toString(), s1.toString(), page, 5,null);
 	}
 
 }

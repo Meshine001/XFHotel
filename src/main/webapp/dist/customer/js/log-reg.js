@@ -65,7 +65,7 @@ $(function() {
 	});
 
 	/**
-	 * 验证手机
+	 * 验证手机是否注册
 	 */
 	$("#reg-tel").blur(function() {
 		var tel = $("#reg-tel").val();
@@ -80,13 +80,28 @@ $(function() {
 			},
 			success : function(data) {
 				if (data) {
-					
+
 				} else {
-					
+
 				}
 			}
 		});
 
+	});
+
+	/**
+	 * 显示图片验证码
+	 * 
+	 */
+	$('#btn-validate').click(function() {
+		/* 使用Javascript方法绑定在按钮上触发 */
+		$('#btn-validate').modalTrigger({
+			custom : '#imageVCode'
+		});
+		/* 使用触发器对象直接显示 */
+		(new $.zui.ModalTrigger({
+			custom : '#imageVCode'
+		})).show();
 	});
 
 });

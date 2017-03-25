@@ -95,7 +95,7 @@ public class AdminController {
 		User u = userService.getUser(user.getUsername(),user.getPassword());
 		if(null == u) return "/admin/login";
 		session.setAttribute(Constants.ADMIN_SESSION_ATTR, u);
-		return "/admin/dashboard";
+		return "redirect:/admin/dashboard";
 	}
 	
 	@RequestMapping(value = "customer_list")

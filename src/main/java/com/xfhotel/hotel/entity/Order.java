@@ -247,6 +247,8 @@ public class Order {
 			return "已取消";
 		case STATUS_TIME_OUT:
 			return "订单超时";
+		case STATUS_ON_LEASE:
+			return "进行中";
 		}
 		return "已完成";
 	}

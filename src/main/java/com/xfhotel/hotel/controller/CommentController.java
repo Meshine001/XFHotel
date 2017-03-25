@@ -12,6 +12,7 @@ import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.support.Message;
+import com.xfhotel.hotel.support.PageResults;
 
 @Controller
 @RequestMapping("/comment")
@@ -20,14 +21,7 @@ public class CommentController {
 	CommentService commentService;
 	
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public @ResponseBody Message getRoomComments(Long roomId){
-		try {
-			List<Comment> comments = commentService.getCommentsByRoom(roomId);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, comments);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return new Message(Constants.MESSAGE_ERR_CODE, "服务器错误");
-		}
+	public @ResponseBody PageResults<Comment> getRoomComments(Long roomId,Integer page){
+		return commentService.getComments(roomId, page);
 	}
 }

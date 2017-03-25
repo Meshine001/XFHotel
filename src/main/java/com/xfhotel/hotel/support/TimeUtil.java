@@ -9,6 +9,37 @@ import java.util.Date;
 import java.util.List;
 
 public class TimeUtil {
+	
+	/**
+	 * 获取某两日期之间的日期
+	 * @param stime
+	 * @param etime
+	 * @return
+	 */
+	public static  List<String> getBetweenDays(String stime,String etime){
+        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
+        Date sdate=null;
+        Date eDate=null;
+        try {
+             sdate=df.parse(stime);
+             eDate=df.parse(etime);
+        } catch (ParseException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+        }
+
+   long betweendays=(long) ((eDate.getTime()-sdate.getTime())/(1000 * 60 * 60 *24)+0.5);//天数间隔
+        Calendar c = Calendar.getInstance();
+        List<String> list=new ArrayList<String>();
+        while (sdate.getTime()<=eDate.getTime()) {
+              list.add(df.format(sdate));
+//              System.out.println(df.format(sdate));
+              c.setTime(sdate);
+              c.add(Calendar.DATE, 1); // 日期加1天
+              sdate = c.getTime();
+              }
+        return list;
+  }
 
 	/**
 	 * 计算两个日期之间相差的天数
@@ -171,12 +202,13 @@ public class TimeUtil {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Date d = new Date();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		for (Date dd : TimeUtil.getAllDateInMonth(2017, d.getMonth())) {
-			System.out.println(df.format(dd));
-		}
+//		// TODO Auto-generated method stub
+//		Date d = new Date();
+//		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//		for (Date dd : TimeUtil.getAllDateInMonth(2017, d.getMonth())) {
+//			System.out.println(df.format(dd));
+//		}
+		System.out.println(getBetweenDays("2017-03-16", "2017-03-30"));
 
 	}
 }
