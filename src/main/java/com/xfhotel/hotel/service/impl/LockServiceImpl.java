@@ -10,8 +10,8 @@ import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.dao.impl.LockDAOImpl;
 import com.xfhotel.hotel.entity.Lock;
 import com.xfhotel.hotel.service.LockService;
-import com.xfhotel.hotel.supprot.lock.DES;
-import com.xfhotel.hotel.supprot.lock.LockOperater;
+import com.xfhotel.hotel.support.lock.DES;
+import com.xfhotel.hotel.support.lock.LockOperater;
 
 @Service
 public class LockServiceImpl implements LockService {

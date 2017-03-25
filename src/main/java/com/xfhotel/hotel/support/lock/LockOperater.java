@@ -1,4 +1,4 @@
-package com.xfhotel.hotel.supprot.lock;
+package com.xfhotel.hotel.support.lock;
 
 import java.io.BufferedReader;
 import java.io.IOException;
