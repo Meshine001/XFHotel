@@ -67,14 +67,14 @@
 								</div>
 								<div class="text-center">
 									<input type="submit" class="btn btn-success btn-submit"
-										value="普通登录">
+										value="登录">
 								</div>
 							</form>
 
-							<div class="form-line">
+							<div class="form-line" style="display: none;">
 								<div class="title">或者</div>
 							</div>
-							<div class="form-footer">
+							<div class="form-footer" style="display: none;">
 								<button type="button"
 									class="btn btn-default btn-sm btn-social __facebook">
 									<div class="info">
