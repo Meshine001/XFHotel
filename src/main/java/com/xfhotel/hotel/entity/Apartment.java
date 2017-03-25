@@ -55,7 +55,7 @@ public class Apartment {
 	@GeneratedValue(generator = "apartmentgenerator")
 	@GenericGenerator(name = "apartmentgenerator", strategy = "increment")
 	private long id;
-	// coordinate 鍦板潃缁忕含搴�
+	// coordinate 经纬度
 	private double latitude; // for map
 	private double longitude;
 
@@ -83,7 +83,7 @@ public class Apartment {
 	private String layout;// bedroom : livingroom : bathroom : balcony
 
 	private String description;// enviroment,transportation,etc.
-
+	private String lockAddress;
 	private String pic1;// layoutPic
 	private String pic2;// ke ting, can ting
 	private String pic3;// bathroom chufang
@@ -94,6 +94,20 @@ public class Apartment {
 	public Apartment() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public String getLockAddress() {
+		return lockAddress;
+	}
+
+
+
+	public void setLockAddress(String lockAddress) {
+		this.lockAddress = lockAddress;
+	}
+
+
 
 	public String getPrice_scope() {
 		return price_scope;
@@ -315,6 +329,7 @@ public class Apartment {
 		map.put("direction", this.getDirection());
 		map.put("square", this.getSquare());
 		map.put("capacity", this.getCapacity());
+		map.put("lock_address", this.lockAddress);
 		map.put("bedroom", this.getLayout().split("@")[0]);
 		map.put("livingroom", this.getLayout().split("@")[1]);
 		map.put("bathroom", this.getLayout().split("@")[2]);

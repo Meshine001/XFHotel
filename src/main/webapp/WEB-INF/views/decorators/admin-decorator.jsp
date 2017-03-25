@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>title-青舍都市公寓-西安租房_西安合租</title>
+<title><sitemesh:write property='title' />-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -47,31 +47,6 @@
 							<div class="title">控制面板</div>
 					</a></li>
 
-					<li><a href="<%=basePath%>/admin/apartment">
-							<div class="icon">
-								<i class="fa fa-bed" aria-hidden="true"></i>
-							</div>
-							<div class="title">房源管理</div>
-					</a></li>
-
-					<li><a href="<%=basePath%>/admin/order">
-							<div class="icon">
-								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-							</div>
-							<div class="title">订单管理</div>
-					</a></li>
-					<li><a href="<%=basePath%>/admin/customer_list">
-							<div class="icon">
-								<i class="fa fa-users" aria-hidden="true"></i>
-							</div>
-							<div class="title">用户管理</div>
-					</a></li>
-					<li><a href="<%=basePath%>/admin/blog/list">
-							<div class="icon">
-								<i class="fa fa-users" aria-hidden="true"></i>
-							</div>
-							<div class="title">公告管理</div>
-					</a></li>
 					<li><a href="<%=basePath%>/admin/system">
 							<div class="icon">
 								<i class="fa fa-cog" aria-hidden="true"></i>

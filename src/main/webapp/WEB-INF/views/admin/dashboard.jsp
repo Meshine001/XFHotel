@@ -90,11 +90,11 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-			<a class="card card-banner card-orange-light">
+			<a class="card card-banner card-orange-light" href="<%=basePath%>/admin/apartment">
 				<div class="card-body">
 					<i class="icon fa fa-bed fa-4x"></i>
 					<div class="content">
-						<div class="title">New Registration</div>
+						<div class="title">房源管理</div>
 						<div class="value">
 							<span class="sign"></span>50
 						</div>
@@ -104,11 +104,11 @@
 
 		</div>
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-			<a class="card card-banner card-yellow-light">
+			<a class="card card-banner card-green-light" href="<%=basePath%>/admin/order">
 				<div class="card-body">
-					<i class="icon fa fa-user-plus fa-4x"></i>
+					<i class="icon fa fa-shopping-cart fa-4x"></i>
 					<div class="content">
-						<div class="title">New Registration</div>
+						<div class="title">订单管理</div>
 						<div class="value">
 							<span class="sign"></span>50
 						</div>
@@ -118,11 +118,11 @@
 
 		</div>
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-			<a class="card card-banner card-yellow-light">
+			<a class="card card-banner card-yellow-light" href="<%=basePath%>/admin/customer_list">
 				<div class="card-body">
-					<i class="icon fa fa-user-plus fa-4x"></i>
+					<i class="icon fa fa-users fa-4x"></i>
 					<div class="content">
-						<div class="title">New Registration</div>
+						<div class="title">用户管理</div>
 						<div class="value">
 							<span class="sign"></span>50
 						</div>
@@ -132,11 +132,11 @@
 
 		</div>
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-			<a class="card card-banner card-yellow-light">
+			<a class="card card-banner card-blue-light" href="<%=basePath%>/admin/blog/list">
 				<div class="card-body">
-					<i class="icon fa fa-user-plus fa-4x"></i>
+					<i class="icon fa fa-tags fa-4x"></i>
 					<div class="content">
-						<div class="title">New Registration</div>
+						<div class="title">青舍生活</div>
 						<div class="value">
 							<span class="sign"></span>50
 						</div>
