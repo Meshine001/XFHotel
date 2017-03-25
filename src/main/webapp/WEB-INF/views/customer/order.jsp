@@ -100,28 +100,42 @@
 		<div class="tabs">
 			<div class="tab_nav_nt1">
 				<ul class="clearfix">
-					<li class="tabnav_special  ng-isolate-scope curr pay_tab" payType="weixin"><i
-						class="tab_icon_WechatScanCode" ></i> 微信支付</li>
+					<li class="tabnav_special  ng-isolate-scope curr pay_tab"
+						payType="weixin"><i class="tab_icon_WechatScanCode"></i> 微信支付</li>
 					<li class="ng-isolate-scope pay_tab" payType="other">其他支付</li>
 				</ul>
 			</div>
-			<div class="tab_aera weixin_tab weixin" style="display:">
-				<p class="ng-isolate-scope">提示：点击“下一步”后，请打开手机微信的“扫一扫”，扫描二维码</p>
+			<div class="tab_aera weixin_tab weixin" style="">
+				<div id="wechatQR" style="display: none;">
+					<img id="wechatQRCode" src="">
+					<p class="ng-isolate-scope"
+						style="padding-top: 10px; background: none;">提示：请打开手机微信的“扫一扫”，扫描二维码完成支付</p>
+				</div>
+				<p class="ng-isolate-scope" id="wechatTip">提示：点击“下一步”后，请打开手机微信的“扫一扫”，扫描二维码</p>
 			</div>
-			<div class="tab_aera other_tab" style="display:none;">
+			<div class="tab_aera other_tab" style="display: none;">
 				<div class="bank_list noti">
 					<ul class="bank_items">
-						<li class="ng-isolate-scope act"><i
-							class="more_alipay"></i><em class="hint ng-hide" title=""></em></li>
+						<li class="ng-isolate-scope act"><i class="more_alipay"></i><em
+							class="hint ng-hide" title=""></em></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="order_step">
-			<a href="<%=basePath%>/order/payOver/${order.id}?status=2"
-				class="btn_sub ng-binding">下一步</a>
+			<a type="button" class="btn_sub ng-binding" data-payType="wechat">下一步</a>
+			<!-- <a href="<%=basePath%>/order/payOver/${order.id}?status=2"
+				class="btn_sub ng-binding">下一步</a> -->
 		</div>
+
 		<script type="text/javascript">
+			$('.btn_sub').click(function(){
+				
+				$('#wechatTip').hide();
+				$('#wechatQRCode').attr('src','../../QRCode?url=baidu.com');
+				$('#wechatQR').show();
+			});
+			
 			$('.pay_tab').click(function(e){
 				var target = $(e.target);
 				$('.tab_nav_nt1 ul li').removeClass('curr');
