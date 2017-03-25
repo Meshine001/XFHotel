@@ -57,25 +57,33 @@
 						<select class="font-color-666" name="type" id="s-type">
 							<option selected="true" value="0">全部</option>
 							<option value="1">酒店式</option>
-							<option value="2">休闲式</option>
+							<option value="3">休闲式</option>
 						</select>
 
 					</div>
 					<!-- 订单类型 -->
 					<!-- 订单时间 退款订单暂时不显示-->
 					<span class="title">订单时间</span>
+					<%
+					java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");  
+					  
+					java.util.Date currentTime = new java.util.Date();//得到当前系统时间 
+					String now = formatter.format(currentTime); //将日期时间格式化  
+					Integer lastYear = Integer.parseInt(now.split("-")[0])-1;
+					String lastYearStr = String.valueOf(lastYear) + "-"+now.split("-")[1]+"-"+now.split("-")[2];
+					%>
 					<div class="hotel-dp">
 						<div class="dp-info">
 							<b id="startDateIcon"></b><span class="dp-text"></span>
 						</div>
-						<input id="startDate" name="startDate" value="2016-01-16"
+						<input id="startDate" name="startDate" value="<%=lastYearStr%>"
 							maxlength="10" class="textbox" readonly="true">
 					</div>
 					<div class="hotel-dp">
 						<div class="dp-info">
 							<b id="endDateIcon"></b><span class="dp-text"></span>
 						</div>
-						<input id="endDate" name="endDate" value="2017-01-16"
+						<input id="endDate" name="endDate" value="<%=now%>"
 							maxlength="10" class="textbox" readonly="true">
 					</div>
 					<input type="hidden" name="range" value="12" id="range">
