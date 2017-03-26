@@ -39,7 +39,15 @@
 	rel="stylesheet">
 <script src="<%=basePath%>/dist/commons/colorbox/jquery.colorbox-min.js"></script>
 
-
+<style type="text/css">
+.b_txt p {
+    font-size: 14px;
+    color: #666;
+    height: 28px;
+    line-height: 28px;
+    margin: 0px;
+}
+</style>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>

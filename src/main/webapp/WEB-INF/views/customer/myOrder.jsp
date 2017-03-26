@@ -87,7 +87,7 @@
 							maxlength="10" class="textbox" readonly="true">
 					</div>
 					<input type="hidden" name="range" value="12" id="range">
-					<ul class="order-time-list" id="order-time-list">
+					<ul class="order-time-list" id="order-time-list" style="display: none;">
 						<li><a class="range" href="javascript:;" data-range="1"
 							data-beacon="时间范围-最近一个月">最近一个月</a></li>
 						<li><a class="range" href="javascript:;" data-range="3"

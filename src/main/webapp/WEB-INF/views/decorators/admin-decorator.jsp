@@ -40,7 +40,7 @@
 			</div>
 			<div class="sidebar-menu">
 				<ul class="sidebar-nav">
-					<li class="active"><a href="./index.html">
+					<li class="active"><a href="<%=basePath%>/admin/dashboard">
 							<div class="icon">
 								<i class="fa fa-tasks" aria-hidden="true"></i>
 							</div>

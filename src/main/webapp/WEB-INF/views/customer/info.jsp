@@ -9,15 +9,14 @@
 <head>
 <title>title-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
-<my_header> 
+<my_header>
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/customer/css/info.css">
 <script type="text/javascript"
 	src="<%=basePath%>/dist/zui/lib/price-calendar/js/yui-min.js"></script>
 <script type="text/javascript">
 	
-</script>
-</my_header>
+</script> </my_header>
 </head>
 <body>
 	<my_body>
@@ -87,18 +86,47 @@
 					</div>
 				</div>
 				<div class="x_tiao_kuan">
-					<div>
+					<div class="tiao_kuan_meta">
 						<h1>押金及其他费用</h1>
-						<p>描述</p>
+						<p>
+
+							在线收取押金：100元 <br> 是否允许加客：允许<br>
+						</p>
+						<div class="clearfix">其他额外费用：无</div>
 					</div>
-					<div>
+					<div class="tiao_kuan_meta">
 						<h1>预定条款</h1>
 						<p>描述</p>
 					</div>
-					<div>
+					<div class="tiao_kuan_meta">
 						<h1>退订政策</h1>
 						<div class="tui_ding">
-							<img alt="" src="">
+							<div class="order_h">
+								<div class="order_bar">
+									<ul class="clearfix">
+										<li></li>
+									</ul>
+									<div class="order_tip1 pos_1">如取消订单，订金全部退还</div>
+									<div class="order_tip2 pos_2">如取消订单，扣除前1天的订金。</div>
+									<div class="order_tip2 pos_3">如提前退房，扣除之后1天的订金。</div>
+									<div class="day_tip">
+										<span class="point1"></span>
+										<p id="pos_n_1">预订成功</p>
+									</div>
+									<div class="day_tip pos_4">
+										<span class="point1"></span>
+										<p id="pos_n_2">入住前1天14：00前</p>
+									</div>
+									<div class="day_tip pos_5">
+										<span class="point2"></span>
+										<p id="pos_n_3">入住当天 14：00前</p>
+									</div>
+									<div class="day_tip pos_6">
+										<span class="point3"></span>
+										<p id="pos_n_4">退房当天 12：00前</p>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -170,7 +198,7 @@
 										<div class="reserve_date">
 											<div class="reserve_ico" id="detailCalendarIco"></div>
 											<input type="text" class="date_input" id="startenddate"
-												readonly="" value="请选择入离时间" > <input type="hidden"
+												readonly="" value="请选择入离时间"> <input type="hidden"
 												name="startdate" id="startdate" value="${startDate}"
 												class="hasDatepicker"> <input type="hidden"
 												name="enddate" id="enddate" value="${endDate}"
@@ -196,8 +224,11 @@
 									<div class="order_btn_container">
 										<c:choose>
 											<c:when test="${c != null }">
-												<a class="order_btn" id="day_yuding"  data-show-header="false"  data-baseurl="<%=basePath%>/order/module" data-remote="<%=basePath%>/order/module?" data-toggle="modal">立即预订<span
-													class="f14" ></span></a>
+												<a class="order_btn" id="day_yuding"
+													data-show-header="false"
+													data-baseurl="<%=basePath%>/order/module"
+													data-remote="<%=basePath%>/order/module?"
+													data-toggle="modal">立即预订<span class="f14"></span></a>
 											</c:when>
 											<c:otherwise>
 												<a class="order_btn" href="../customer/login?forwad=login"
@@ -441,8 +472,7 @@
 		</div>
 	</div>
 	</my_body>
-	<my_script> 
-	<script
+	<my_script> <script
 		src="<%=basePath%>/dist/customer/js/info.js"></script> </my_script>
 </body>
 </html>

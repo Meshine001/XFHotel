@@ -27,6 +27,7 @@ public class Order {
 	public final static int STATUS_COMPLETE = 3;//
 	public final static int STATUS_CANCEL = 4;
 	public final static int STATUS_TIME_OUT = 5;
+	public final static int STATUS_CHARGEBACK = 6;
 
 
 
@@ -44,7 +45,7 @@ public class Order {
 	private Long endTime;
 	private Long time;// 下单时间
 	private int totalDay;
-	private String price;
+	private String price; //
 	private String totalPrice;
 	private String preferential;// 优惠
 	private int type;// 订单种类

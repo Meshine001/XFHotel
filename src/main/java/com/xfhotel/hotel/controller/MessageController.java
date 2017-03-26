@@ -23,7 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.LockService;
+import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 
@@ -33,9 +36,16 @@ public class MessageController {
 	
 	@Autowired
 	LockService lockService;
+	@Autowired
+	OrderService orderService;
 	
+	/**
+	 * 设置锁的推送
+	 * @param map
+	 * @return
+	 */
 	@RequestMapping(value="/smartLock/push", method = RequestMethod.POST)
-	public @ResponseBody Map push(@RequestBody Map map){
+	public @ResponseBody Map lockPush(@RequestBody Map map){
 	//		String validate_code, String factor, String business_id, String lock_no, Integer pwd_no, String pwd_user_mobile, String event){
 	//public @ResponseBody String push(@RequestBody Map map){
 		//System.out.println(map);
@@ -85,8 +95,13 @@ public class MessageController {
 		lockService.deletePassword(pwd_user_mobile, lock_no);
 	}
 	
+	/**
+	 * 获取二维码
+	 * @param url
+	 * @param response
+	 */
 	@RequestMapping(value="QRCode",method=RequestMethod.GET)
-	void responseQRCode(String url,HttpServletResponse response){
+	public void responseQRCode(String url,HttpServletResponse response){
 		try {
 			OutputStream out = response.getOutputStream();
 			QRCode.pushQRCode(url, out);
@@ -94,6 +109,31 @@ public class MessageController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 轮询订单是否支付，用于更新支付页面自动跳转
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="askWechatPay",method=RequestMethod.POST)
+	public Message askWechatPay(Long id){
+		try {
+			Order order = orderService.get(id);
+			if(order.getStatus() == Order.STATUS_ON_LEASE){
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE,"系统错误");
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "");
+	}
+	
+	@RequestMapping(value="wechatPay/push",method=RequestMethod.POST)
+	public void wechatPush(){
+		
 	}
 	
 	public static void main(String[] args) {

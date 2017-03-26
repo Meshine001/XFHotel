@@ -178,7 +178,7 @@ public class OrderController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range) {
 		try {
-			List<Order> orders = orderservice.getCustomerOrders(cId, type);
+			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
 			for (Order o : orders) {
 				Map m = o.toMap();
@@ -250,9 +250,24 @@ public class OrderController {
 	public String pay(@PathVariable("id") Long id) {
 		Order order = orderservice.get(id);
 		session.setAttribute("order", order.toMap());
-		System.out.println(JSONObject.wrap(order.toMap()).toString());
+//		System.out.println(JSONObject.wrap(order.toMap()).toString());
 		return "customer/order";
 	}
+	
+	/**
+	 * 给微信下订单
+	 * @param id 订单id
+	 * @return 微信扫一扫地址，需要将此地址转为二维码
+	 */
+	@RequestMapping(value = "/pay/wechat/{id}", method = RequestMethod.POST)
+	public @ResponseBody String wechatPay(Long id){
+		Order order = orderservice.get(id);
+		//TODO  向微信下订单,获取扫一扫地址
+		String url = "wechat.pay";
+		
+		return url;
+	}
+	
 
 	@RequestMapping(value = "/payOver/{id}", method = RequestMethod.GET)
 	public String payOver(@PathVariable("id") Long id, int status) {

@@ -199,12 +199,12 @@
 					name="searchForm" id="searchForm">
 					<div class="search clearfix">
 						<div class="search_input">
-							<span><i class="icon-calendar"></i></span><input
+							<span style="display: none;"><i class="icon-calendar"
+								style="display: none;"></i></span><input style="display: none;"
 								readonly="readonly" id="search-input-time" placeholder="入住时间"
 								type="text" class="search-input-item"><span><i
-								class="icon-search"></i></span><input id="search-input-location"
-								readonly="readonly" placeholder="西安" type="text" value="西安"
-								class="search-input-item">
+								class="icon-search"></i></span><input id="search-input-txt"
+								placeholder="" type="text" value="" class="search-input-item">
 						</div>
 						<input type="hidden" name="checkinday" id="checkinday" value="">
 						<input type="hidden" name="checkoutday" id="checkoutday" value="">
@@ -225,10 +225,10 @@
 				</div>
 				<ul class="apt_ul" id="fj_1" style="display: block;">
 					<c:forEach items="${homeRoom}" var="room">
-						<li><a href="<%=basePath%>/info/${room.id}" title="${room.square}"> <img
-								class="readyload" src="<%=basePath%>/images/${room.pic2[0]}"
-								data-original="" width="378" height="251"
-								style="display: inline;">
+						<li><a href="<%=basePath%>/info/${room.id}"
+							title="${room.square}"> <img class="readyload"
+								src="<%=basePath%>/images/${room.pic2[0]}" data-original=""
+								width="378" height="251" style="display: inline;">
 								<p class="apt_jg">
 									<span>${room.dayPrice}</span>元/天
 								</p>
@@ -288,17 +288,15 @@
 						<div class="two">
 							<a onmouseover="showMask(1,0)" onmouseout="hideMask(1,0)" href=""
 								title="青舍“绘”生活零基础绘画活动" target="_blank"> <img
-								class="readyload" src=""
-								data-original=""
-								width="425" height="265">
+								class="readyload" src="" data-original="" width="425"
+								height="265">
 								<div class="mask" style="display: none;" id="mask_1_0">
 									<span>青舍“绘”生活零基础绘画活动</span><input class="mask_btn" value="点击查看">
 								</div>
 							</a> <a onmouseover="showMask(1,1)" onmouseout="hideMask(1,1)"
 								href="" title="明星同款火锅，爆辣来袭" target="_blank"> <img
 								class="readyload" src="/hotel/dist/public/images/blank.gif"
-								data-original=""
-								width="425" height="265">
+								data-original="" width="425" height="265">
 								<div class="mask" style="display: none;" id="mask_1_1">
 									<span>明星同款火锅，爆辣来袭</span><input class="mask_btn" value="点击查看">
 								</div>
@@ -308,8 +306,7 @@
 							<a onmouseover="showMask(2,0)" onmouseout="hideMask(2,0)"
 								href="http://www.monph.com/shenghuo/info-390.html" title="青舍嗨歌会"
 								target="_blank"> <img class="readyload"
-								src="/hotel/dist/public/images/blank.gif"
-								data-original=""
+								src="/hotel/dist/public/images/blank.gif" data-original=""
 								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_0">
 									<span>青舍嗨歌会</span><input class="mask_btn" value="点击查看">
@@ -318,16 +315,14 @@
 								href="http://www.monph.com/shenghuo/info-455.html?app=1"
 								title="2016/17青舍跨年音乐节" target="_blank"> <img
 								class="readyload" src="/hotel/dist/public/images/blank.gif"
-								data-original=""
-								width="278" height="257">
+								data-original="" width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_1">
 									<span>2016/17青舍跨年音乐节</span><input class="mask_btn" value="点击查看">
 								</div>
 							</a> <a onmouseover="showMask(2,2)" onmouseout="hideMask(2,2)"
 								href="http://www.monph.com/shenghuo/info-442.html"
 								title="青舍公寓首届脱单趴" target="_blank"> <img class="readyload"
-								src="/hotel/dist/public/images/blank.gif"
-								data-original=""
+								src="/hotel/dist/public/images/blank.gif" data-original=""
 								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_2">
 									<span>青舍公寓首届脱单趴</span><input class="mask_btn" value="点击查看">

@@ -3,6 +3,10 @@ package com.xfhotel.hotel.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +23,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	OrderDAOImpl orderDAO;
+
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	@Transactional
 	@Override
@@ -103,12 +110,13 @@ public class OrderServiceImpl implements OrderService {
 
 		return orderDAO.getListByHQL(hql, values);
 	}
-	
+
 	@Transactional
 	@Override
 	public List<Order> checkAvailable(Long roomId, String startTime, String endTime) {
 		String hql = "from Order where roomId = ? and (status =? or status=?) and (startTime >? and endTime <?)";
-		Object[] values = {roomId,Order.STATUS_ON_PAY,Order.STATUS_ON_LEASE,(TimeUtil.getDateLong(startTime)-1),(TimeUtil.getDateLong(endTime)+1)};
+		Object[] values = { roomId, Order.STATUS_ON_PAY, Order.STATUS_ON_LEASE, (TimeUtil.getDateLong(startTime) - 1),
+				(TimeUtil.getDateLong(endTime) + 1) };
 		return orderDAO.getListByHQL(hql, values);
 	}
 
@@ -117,9 +125,37 @@ public class OrderServiceImpl implements OrderService {
 		Long time = o.getTime();
 		Long deadLine = time + Constants.EFFECTIVE_ORDER_TIME_DURING;
 		Long now = new Date().getTime();
-		if(now > deadLine)return true;
+		if (now > deadLine)
+			return true;
 		return false;
 	}
 
+	@Transactional
+	@Override
+	public List<Order> search(Long cId, int category, int type, String startDate, String endDate, int range) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria c = session.createCriteria(Order.class);
+		c.add(Restrictions.eq("cusId", cId));
+
+		if (type != 0) {// 不是 全部
+			c.add(Restrictions.eq("type", type));
+		}
+
+		switch (category) {
+		case 1:// 有效订单
+			c.add(Restrictions.or(Restrictions.eq("status", Order.STATUS_COMPLETE),
+					Restrictions.eq("status", Order.STATUS_ON_LEASE), Restrictions.eq("status", Order.STATUS_ON_PAY)));
+			break;
+		case 2:// 退款订单
+			c.add(Restrictions.eq("status", Order.STATUS_CHARGEBACK));
+			break;
+		default:
+
+		}
+		c.add(Restrictions.between("time", TimeUtil.getDateLong(startDate),
+				TimeUtil.getDateLong(endDate) + 1000 * 60 * 60 * 24));
+		return c.list();
+
+	}
 
 }
