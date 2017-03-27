@@ -574,7 +574,7 @@
 }
 
 .search-input-item {
-	width: 200px;
+	width: 527px;
 	border: none;
 	padding: 10px;
 	color: #959595;
@@ -746,3 +746,10 @@ div#index_list_calendar-box {
 }
 
 
+.search-input-item {
+    outline: none;
+    width: 527px;
+    border: none;
+    padding: 10px;
+    color: #959595;
+}

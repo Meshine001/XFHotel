@@ -23,8 +23,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.LockService;
+import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.RoomService;
+import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
+import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 
 @Controller
@@ -33,9 +39,19 @@ public class MessageController {
 	
 	@Autowired
 	LockService lockService;
-	
+	@Autowired
+	OrderService orderService;
+	@Autowired
+	RoomService roomService;
+	@Autowired
+	ApartmentService apartmentService;
+	/**
+	 * 设置锁的推送
+	 * @param map
+	 * @return
+	 */
 	@RequestMapping(value="/smartLock/push", method = RequestMethod.POST)
-	public @ResponseBody Map push(@RequestBody Map map){
+	public @ResponseBody Map lockPush(@RequestBody Map map){
 	//		String validate_code, String factor, String business_id, String lock_no, Integer pwd_no, String pwd_user_mobile, String event){
 	//public @ResponseBody String push(@RequestBody Map map){
 		//System.out.println(map);
@@ -85,8 +101,13 @@ public class MessageController {
 		lockService.deletePassword(pwd_user_mobile, lock_no);
 	}
 	
+	/**
+	 * 获取二维码
+	 * @param url
+	 * @param response
+	 */
 	@RequestMapping(value="QRCode",method=RequestMethod.GET)
-	void responseQRCode(String url,HttpServletResponse response){
+	public void responseQRCode(String url,HttpServletResponse response){
 		try {
 			OutputStream out = response.getOutputStream();
 			QRCode.pushQRCode(url, out);
@@ -95,6 +116,47 @@ public class MessageController {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 轮询订单是否支付，用于更新支付页面自动跳转
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="askWechatPay",method=RequestMethod.POST)
+	public @ResponseBody Message askWechatPay(Long id){
+		try {
+			Order order = orderService.get(id);
+			if(order.getStatus() == Order.STATUS_ON_LEASE){
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE,"系统错误");
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "");
+	}
+	/**
+	 * 接收微信支付的push消息
+	 * @param id
+	 */
+	@RequestMapping(value="wechatPay/push",method=RequestMethod.POST)
+	public void wechatPush(Long id){
+		//TODO
+		Order order = orderService.get(id); 
+		order.setStatus(Order.STATUS_ON_LEASE);
+		orderService.update(order);
+		
+		//TODO 若用户扫码支付成功，设置门锁密码
+		Long roomId = order.getRoomId();
+		Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
+		String lock_no = (String) apartmentService.getApartmentInfo(apartment).get("lock_address");
+		lockService.addPassword(order.getCusTel(), lock_no, TimeUtil.getDateStr(order.getStartTime()), TimeUtil.getDateStr(order.getEndTime()));
+		
+		//TODO 返回微信相关信息
+	}
+	
+	
 	
 	public static void main(String[] args) {
 	

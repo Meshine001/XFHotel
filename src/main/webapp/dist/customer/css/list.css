@@ -252,7 +252,7 @@ span.srh_all.srh_all_on {
     display: inline-block;
 }
 .b_list_tit .shoucang i {
-    background: url(../images/icon.png) no-repeat -77px 0;
+    background: url(../../public/images/icon.png) no-repeat -77px 0;
     width: 12px;
     height: 10px;
     display: inline-block;
@@ -276,6 +276,7 @@ span.srh_all.srh_all_on {
     color: #666;
     height: 28px;
     line-height: 28px;
+    margin: 0px;
 }
 .b_txt ul {
     overflow: hidden;
@@ -355,4 +356,7 @@ em#allcount {
     color: #5bcfcc;
     display: inline-block;
     margin-left: 20px;
+}
+dt {
+    font-weight: normal;
 }

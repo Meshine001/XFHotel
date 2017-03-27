@@ -6,3 +6,4 @@ src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml
 .settings/org.eclipse.jdt.core.prefs
 src/main/webapp/WEB-INF/views/customer/story.jsp
 src/main/webapp/WEB-INF/views/customer/story.jsp
+src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml

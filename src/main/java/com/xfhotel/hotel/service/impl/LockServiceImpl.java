@@ -1,5 +1,9 @@
 package com.xfhotel.hotel.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +14,8 @@ import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.dao.impl.LockDAOImpl;
 import com.xfhotel.hotel.entity.Lock;
 import com.xfhotel.hotel.service.LockService;
-import com.xfhotel.hotel.supprot.lock.DES;
-import com.xfhotel.hotel.supprot.lock.LockOperater;
+import com.xfhotel.hotel.support.lock.DES;
+import com.xfhotel.hotel.support.lock.LockOperater;
 
 @Service
 public class LockServiceImpl implements LockService {
@@ -45,6 +49,8 @@ public class LockServiceImpl implements LockService {
 		}
 	}
 
+	
+	
 	@Override
 	@Transactional
 	public String addPassword(Lock lock) throws  Exception {
@@ -116,6 +122,39 @@ public class LockServiceImpl implements LockService {
 			lockDAOImpl.update(lock);
 			return 1;
 		}
+	}
+
+
+	@Transactional
+	@Override
+	public void addPassword(String phone, String lock_no, String time_start, String time_end) {
+		Calendar start = Calendar.getInstance();
+		try {
+			start.setTime(new SimpleDateFormat("yyyyMMddHHmmss").parse(time_start));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Calendar end = Calendar.getInstance();
+		try {
+			end.setTime(new SimpleDateFormat("yyyyMMddHHmmss").parse(time_end));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Lock lock = new Lock();
+		lock.setPwd_user_mobile(phone);
+		lock.setLock_no(lock_no);
+		lock.setValid_time_end(end.getTimeInMillis());
+		lock.setValid_time_start(start.getTimeInMillis());
+		String ostr="";
+		try {
+			ostr = this.addPassword(lock);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

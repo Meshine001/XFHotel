@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
@@ -32,9 +32,8 @@
 
 	<context:component-scan base-package="com.xfhotel.hotel" />
 	
-	<!-- 定时器 -->
 	<task:annotation-driven scheduler="myScheduler"/>
-	<!-- 推荐配置线程池，若不配置多任务下会有问题。后面会详细说明单线程的问题。 -->
+	
 	<task:scheduler id="myScheduler" pool-size="5"/>  
 
 	<interceptors>
@@ -71,9 +70,8 @@
 		<!--<beans:property name="url"
 			value="jdbc:mysql://118.190.44.185:3306/hotel_db?useUnicode=true&amp;characterEncoding=UTF-8" />-->
 		<beans:property name="url"
-			value="jdbc:mysql://127.0.0.1:3306/hotel_db?useUnicode=true&amp;characterEncoding=UTF-8" />
+			value="jdbc:mysql://localhost:3306/hotel_db?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<beans:property name="username" value="root" />
-		<!-- <beans:property name="password" value="yiyunmysql" /> -->
 		<beans:property name="password" value="" />
 		<beans:property name="validationQuery" value="SELECT 1" />
 	</beans:bean>
@@ -108,7 +106,7 @@
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="defaultEncoding" value="UTF-8" />
-		<!-- 指定所上传文件的总大小,单位字节。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+		<!-- ָ�����ϴ��ļ����ܴ�С,��λ�ֽڡ�ע��maxUploadSize���Ե����Ʋ�����Ե����ļ������������ļ�������֮�� -->
 		<beans:property name="maxUploadSize" value="10240000" />
 	</beans:bean>
 </beans:beans>

@@ -99,29 +99,82 @@
 		</div>
 		<div class="tabs">
 			<div class="tab_nav_nt1">
-				<ul class="clearfix">
-					<li class="tabnav_special  ng-isolate-scope curr pay_tab" payType="weixin"><i
-						class="tab_icon_WechatScanCode" ></i> 微信支付</li>
+				<ul class="clearfix pay-type" data-id="${order.id}">
+					<li class="tabnav_special  ng-isolate-scope curr pay_tab"
+						payType="weixin"><i class="tab_icon_WechatScanCode"></i> 微信支付</li>
 					<li class="ng-isolate-scope pay_tab" payType="other">其他支付</li>
 				</ul>
 			</div>
-			<div class="tab_aera weixin_tab weixin" style="display:">
-				<p class="ng-isolate-scope">提示：点击“下一步”后，请打开手机微信的“扫一扫”，扫描二维码</p>
+			<div class="tab_aera weixin_tab weixin" style="">
+				<div id="wechatQR" style="display: none;">
+					<img id="wechatQRCode" src="">
+					<p class="ng-isolate-scope"
+						style="padding-top: 10px; background: none;">提示：请打开手机微信的“扫一扫”，扫描二维码完成支付</p>
+				</div>
+				<p class="ng-isolate-scope" id="wechatTip">提示：点击“下一步”后，请打开手机微信的“扫一扫”，扫描二维码</p>
 			</div>
-			<div class="tab_aera other_tab" style="display:none;">
+			<div class="tab_aera other_tab" style="display: none;">
 				<div class="bank_list noti">
 					<ul class="bank_items">
-						<li class="ng-isolate-scope act"><i
-							class="more_alipay"></i><em class="hint ng-hide" title=""></em></li>
+						<li class="ng-isolate-scope act"><i class="more_alipay"></i><em
+							class="hint ng-hide" title=""></em></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="order_step">
-			<a href="<%=basePath%>/order/payOver/${order.id}?status=2"
-				class="btn_sub ng-binding">下一步</a>
+			<a type="button" class="btn_sub ng-binding" data-payType="wechat">下一步</a>
+			<a type="button" class="btn_sub ng-binding" data-payType="pay-over">支付完成</a>
+			<!-- <a href="<%=basePath%>/order/payOver/${order.id}?status=2"
+				class="btn_sub ng-binding">下一步</a> -->
 		</div>
+
 		<script type="text/javascript">
+			var getting = {
+				url:'../../wechatPay/push',
+				method:'POST',
+				data:{
+					id:$('.pay-type').attr('data-id')
+				},
+				dataType:'json',
+				success:function(data){
+					if(data.statusCode == 1){
+						window.location.href = '../payOver/'+$('.pay-type').attr('data-id');
+					}
+				}
+			};
+		
+			$('.btn_sub').click(function(){
+				$('.pay-type li').each(function(index,e){
+					if($(e).hasClass('curr')){
+						//微信支付
+						if($(e).attr('payType')=='weixin'){
+							$.ajax({
+								url:'../payWechat',
+								method:'POST',
+								async:true,
+								data:{
+									id:$('.pay-type').attr('data-id')
+								},
+								success:function(data){
+									$('#wechatQRCode').attr('src','../../QRCode?url='+data);
+									$('#wechatTip').hide();
+									$('#wechatQR').show();
+									//关键在这里，Ajax定时访问服务端，不断获取数据 ，这里是1秒请求一次。
+									window.setInterval(function(){$.ajax(getting)},2000);
+								},
+								error:function(){
+									alert('系统错误，请重试！！');
+								}
+							});
+						}
+						
+					}
+				});
+				
+				
+			});
+			
 			$('.pay_tab').click(function(e){
 				var target = $(e.target);
 				$('.tab_nav_nt1 ul li').removeClass('curr');

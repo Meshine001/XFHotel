@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>title-青舍都市公寓-西安租房_西安合租</title>
+<title>公寓列表-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
 </head>
 <body>
@@ -20,9 +20,10 @@
 						<h3>公寓列表</h3>
 					</div>
 					<ul class="card-action">
-						<a class="btn " href="<%=basePath%>/admin/apartment/add">添加</a>
-
+						<li><a class="btn btn-success " href="<%=basePath%>/admin/apartment/add">添加</a>
+						</li>
 					</ul>
+
 				</div>
 				<table class="table">
 					<thead>
@@ -55,7 +56,8 @@
 								<td>${apartment.square}</td>
 								<th><a class="btn"
 									href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a>&nbsp;&nbsp;<br>
-									<a class="btn" href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格</a>&nbsp;&nbsp;<br>
+									<a class="btn"
+									href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格</a>&nbsp;&nbsp;<br>
 									<a class="btn">删除</a></th>
 							</tr>
 						</c:forEach>

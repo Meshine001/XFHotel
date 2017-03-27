@@ -133,6 +133,10 @@ public class ApartmentController {
 		return new Message(Constants.MESSAGE_ERR_CODE, "暂时没有特色信息");
 	}
 
+	/**
+	 * 跳转添加公寓页面
+	 * @return
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add() {
 		List<Facility> l_facility = facilityService.listFacilities();
@@ -144,13 +148,44 @@ public class ApartmentController {
 		return "/admin/apartment/add";
 	}
 
+	/**
+	 * 提交添加公寓请求
+	 * @param address
+	 * @param location
+	 * @param lng
+	 * @param lat
+	 * @param community
+	 * @param num_building
+	 * @param num_unit
+	 * @param num_door
+	 * @param floor
+	 * @param totalfloor
+	 * @param direction
+	 * @param square
+	 * @param bedroom
+	 * @param livingroom
+	 * @param bathroom
+	 * @param capacity
+	 * @param balcony
+	 * @param descriptionAround
+	 * @param descriptionPersonal
+	 * @param facility
+	 * @param feature
+	 * @param apartmenttype
+	 * @param dayPrice
+	 * @param pic1
+	 * @param pic2
+	 * @param pic3
+	 * @param lock_address
+	 * @return
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(String address, String location, String lng, String lat,
 			String community, String num_building,String num_unit,String num_door,
 			String floor, String totalfloor, String direction, Double square, String bedroom, String livingroom,
 			String bathroom, String capacity, String balcony, String descriptionAround, String descriptionPersonal,
 			String[] facility, String[] feature, String apartmenttype, String dayPrice, String pic1, String[] pic2,
-			String[] pic3) {
+			String[] pic3,String lock_address) {
 
 		Apartment apartment = new Apartment();
 		apartment.setAddress(address + "@" + community + "@" + num_building + "@" + location);
@@ -170,6 +205,7 @@ public class ApartmentController {
 		apartment.setFeatures(feature);
 		apartment.setApartmentType(apartmenttype);
 		apartment.setCreateTime(new Date().getTime());
+		apartment.setLockAddress(lock_address);
 		
 		//TODO 
 		if(apartmenttype.equals("酒店型")){
