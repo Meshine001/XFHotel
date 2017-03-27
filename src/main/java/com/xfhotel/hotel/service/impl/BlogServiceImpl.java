@@ -40,11 +40,11 @@ public class BlogServiceImpl implements BlogService{
 		// TODO Auto-generated method stub
 		
 	}
-
+	@Transactional
 	@Override
 	public List<Blog> list() {
 		// TODO Auto-generated method stub
-		return null;
+		return blogDAO.getListByHQL("from Blog", null);
 	}
 
 	@Override

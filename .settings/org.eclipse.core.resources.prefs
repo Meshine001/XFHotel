@@ -5,4 +5,5 @@ encoding//src/main/java/com/xfhotel/hotel/entity/Apartment.java=UTF-8
 encoding//src/main/java/com/xfhotel/hotel/service/impl/FileServiceImpl.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/admin.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/customer/map.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/customer/viewLockPsd.jsp=UTF-8
 encoding//src/main/webapp/dist/admin/assets/js/list-blog.js=UTF-8

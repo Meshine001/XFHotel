@@ -26,10 +26,10 @@
             var stateTd = $('<td/>').addClass('state').appendTo(tr);
             $('<p/>').text(item.status).appendTo(stateTd);
             if(item.status == '进行中'){
-                $('<a/>').attr('href','../order/comment/'+item.id).addClass('order-btn').text('查看密码').appendTo($('<p/>').appendTo(stateTd));
+                $('<a/>').attr('data-type','ajax').attr('data-toggle','modal').attr('data-url','../order/viewLockPsd?orderId='+item.id).addClass('order-btn').text('查看密码').appendTo($('<p/>').appendTo(stateTd));
             }
             var remarks = $('<td/>').addClass('remarks').appendTo(tr);
-            $('<a/>').addClass('order-action').text('查看详情').appendTo($('<p/>').appendTo(remarks));
+            $('<a/>').attr('href','../order/details?orderId='+item.id).addClass('order-action').text('查看详情').appendTo($('<p/>').appendTo(remarks));
             if(item.status == '已完成'){
             	$('<a/>').attr('href','../order/comment/'+item.id).addClass('order-btn').text('我要点评').appendTo($('<p/>').appendTo(remarks));
             }

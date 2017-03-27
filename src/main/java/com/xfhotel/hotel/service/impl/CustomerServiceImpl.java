@@ -111,5 +111,12 @@ public class CustomerServiceImpl implements CustomerService {
 		// TODO Auto-generated method stub
 		return customerDAO.get(id);
 	}
+	
+	@Transactional
+	@Override
+	public List<Customer> list() {
+		// TODO Auto-generated method stub
+		return customerDAO.getListByHQL("from Customer", null);
+	}
 
 }

@@ -44,7 +44,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row"  style="display: none;">
 		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 			<a class="card card-banner card-green-light">
 				<div class="card-body">
@@ -96,7 +96,7 @@
 					<div class="content">
 						<div class="title">房源管理</div>
 						<div class="value">
-							<span class="sign"></span>50
+							<span class="sign"></span>${apartmentCount}
 						</div>
 					</div>
 				</div>
@@ -110,7 +110,7 @@
 					<div class="content">
 						<div class="title">订单管理</div>
 						<div class="value">
-							<span class="sign"></span>50
+							<span class="sign"></span>${orderCount}
 						</div>
 					</div>
 				</div>
@@ -124,7 +124,7 @@
 					<div class="content">
 						<div class="title">用户管理</div>
 						<div class="value">
-							<span class="sign"></span>50
+							<span class="sign"></span>${customerCount}
 						</div>
 					</div>
 				</div>
@@ -138,7 +138,7 @@
 					<div class="content">
 						<div class="title">青舍生活</div>
 						<div class="value">
-							<span class="sign"></span>50
+							<span class="sign"></span>${blogCount}
 						</div>
 					</div>
 				</div>

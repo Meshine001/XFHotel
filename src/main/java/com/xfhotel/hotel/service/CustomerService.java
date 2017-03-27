@@ -13,6 +13,8 @@ public interface CustomerService {
 	public boolean checkTel(String tel);
 	public void logout();
 	
+	public List<Customer> list();
+	
 	public String changePsd(String oldPsd,String psd,long id);
 	public PageResults<Customer> list(int page);
 	public void changeStatus(long id, int status);

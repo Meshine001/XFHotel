@@ -164,6 +164,28 @@ public class OrderController {
 		orderservice.add(o);
 		return "redirect:pay/" + o.getId();
 	}
+	
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public String orderDetails(Long orderId){
+		//TODO
+		Order o = orderservice.get(orderId);
+		session.setAttribute("order", o);
+		return "customer/orderDetails";
+	}
+	
+	/**
+	 * 用户查看房间密码
+	 * @param orderId
+	 * @return
+	 */
+	@RequestMapping(value = "/viewLockPsd", method = RequestMethod.GET)
+	public String viewLockPsd(Long orderId){
+		//TODO 还需要加入一些权限限制
+		Order o = orderservice.get(orderId);
+		
+		session.setAttribute("lockPsd", "123213");
+		return "customer/viewLockPsd";
+	}
 
 	/**
 	 * 查询订单

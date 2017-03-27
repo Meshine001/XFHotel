@@ -30,6 +30,7 @@ import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
+import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 
 @Controller
@@ -44,7 +45,6 @@ public class MessageController {
 	RoomService roomService;
 	@Autowired
 	ApartmentService apartmentService;
-	
 	/**
 	 * 设置锁的推送
 	 * @param map
@@ -150,8 +150,13 @@ public class MessageController {
 		//TODO 若用户扫码支付成功，设置门锁密码
 		Long roomId = order.getRoomId();
 		Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
+		String lock_no = (String) apartmentService.getApartmentInfo(apartment).get("lock_address");
+		lockService.addPassword(order.getCusTel(), lock_no, TimeUtil.getDateStr(order.getStartTime()), TimeUtil.getDateStr(order.getEndTime()));
 		
+		//TODO 返回微信相关信息
 	}
+	
+	
 	
 	public static void main(String[] args) {
 	
