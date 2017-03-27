@@ -61,5 +61,6 @@ public class Constants {
 	public static final String LOCK_MSG_TOKEN_INVALIDATE = "OPS04100";
 	public static final String LOCK_MSG_TOKEN_NOT_EXIST = "OPS00003";
 	
-	
+	//支付宝签约账号
+	public static final String ALIPAY_PARTNER = "";
 }
