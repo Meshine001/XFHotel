@@ -259,7 +259,7 @@ public class OrderController {
 	 * @param id 订单id
 	 * @return 微信扫一扫地址，需要将此地址转为二维码
 	 */
-	@RequestMapping(value = "/pay/wechat/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/payWechat", method = RequestMethod.POST)
 	public @ResponseBody String wechatPay(Long id){
 		Order order = orderservice.get(id);
 		//TODO  向微信下订单,获取扫一扫地址
@@ -268,17 +268,18 @@ public class OrderController {
 		return url;
 	}
 	
-
+	/**
+	 * 交易完成
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/payOver/{id}", method = RequestMethod.GET)
-	public String payOver(@PathVariable("id") Long id, int status) {
+	public String payOver(@PathVariable("id") Long id) {
 		Order order = orderservice.get(id);
-		if (status == Order.STATUS_TIME_OUT) {
-			order.setStatus(status);
+		if (order.getStatus() == Order.STATUS_TIME_OUT) {
 			session.setAttribute("err", "支付超时");
 			return "/customer/err";
 		}
-		order.setStatus(status);
-		orderservice.update(order);
 
 		Room room = roomService.findById(order.getRoomId());
 		room.setStatus(Room.STATUS_LEASED);

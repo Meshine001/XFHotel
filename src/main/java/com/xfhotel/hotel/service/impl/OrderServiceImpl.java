@@ -130,6 +130,9 @@ public class OrderServiceImpl implements OrderService {
 		return false;
 	}
 
+	/**
+	 * 条件查询订单
+	 */
 	@Transactional
 	@Override
 	public List<Order> search(Long cId, int category, int type, String startDate, String endDate, int range) {

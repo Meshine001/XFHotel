@@ -99,7 +99,7 @@
 		</div>
 		<div class="tabs">
 			<div class="tab_nav_nt1">
-				<ul class="clearfix">
+				<ul class="clearfix pay-type" data-id="${order.id}">
 					<li class="tabnav_special  ng-isolate-scope curr pay_tab"
 						payType="weixin"><i class="tab_icon_WechatScanCode"></i> 微信支付</li>
 					<li class="ng-isolate-scope pay_tab" payType="other">其他支付</li>
@@ -124,16 +124,55 @@
 		</div>
 		<div class="order_step">
 			<a type="button" class="btn_sub ng-binding" data-payType="wechat">下一步</a>
+			<a type="button" class="btn_sub ng-binding" data-payType="pay-over">支付完成</a>
 			<!-- <a href="<%=basePath%>/order/payOver/${order.id}?status=2"
 				class="btn_sub ng-binding">下一步</a> -->
 		</div>
 
 		<script type="text/javascript">
+			var getting = {
+				url:'../../wechatPay/push',
+				method:'POST',
+				data:{
+					id:$('.pay-type').attr('data-id')
+				},
+				dataType:'json',
+				success:function(data){
+					if(data.statusCode == 1){
+						window.location.href = '../payOver/'+$('.pay-type').attr('data-id');
+					}
+				}
+			};
+		
 			$('.btn_sub').click(function(){
+				$('.pay-type li').each(function(index,e){
+					if($(e).hasClass('curr')){
+						//微信支付
+						if($(e).attr('payType')=='weixin'){
+							$.ajax({
+								url:'../payWechat',
+								method:'POST',
+								async:true,
+								data:{
+									id:$('.pay-type').attr('data-id')
+								},
+								success:function(data){
+									$('#wechatQRCode').attr('src','../../QRCode?url='+data);
+									$('#wechatTip').hide();
+									$('#wechatQR').show();
+									//关键在这里，Ajax定时访问服务端，不断获取数据 ，这里是1秒请求一次。
+									window.setInterval(function(){$.ajax(getting)},2000);
+								},
+								error:function(){
+									alert('系统错误，请重试！！');
+								}
+							});
+						}
+						
+					}
+				});
 				
-				$('#wechatTip').hide();
-				$('#wechatQRCode').attr('src','../../QRCode?url=baidu.com');
-				$('#wechatQR').show();
+				
 			});
 			
 			$('.pay_tab').click(function(e){

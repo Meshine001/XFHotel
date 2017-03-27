@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
@@ -38,6 +40,10 @@ public class MessageController {
 	LockService lockService;
 	@Autowired
 	OrderService orderService;
+	@Autowired
+	RoomService roomService;
+	@Autowired
+	ApartmentService apartmentService;
 	
 	/**
 	 * 设置锁的推送
@@ -117,7 +123,7 @@ public class MessageController {
 	 * @return
 	 */
 	@RequestMapping(value="askWechatPay",method=RequestMethod.POST)
-	public Message askWechatPay(Long id){
+	public @ResponseBody Message askWechatPay(Long id){
 		try {
 			Order order = orderService.get(id);
 			if(order.getStatus() == Order.STATUS_ON_LEASE){
@@ -130,9 +136,20 @@ public class MessageController {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "");
 	}
-	
+	/**
+	 * 接收微信支付的push消息
+	 * @param id
+	 */
 	@RequestMapping(value="wechatPay/push",method=RequestMethod.POST)
-	public void wechatPush(){
+	public void wechatPush(Long id){
+		//TODO
+		Order order = orderService.get(id); 
+		order.setStatus(Order.STATUS_ON_LEASE);
+		orderService.update(order);
+		
+		//TODO 若用户扫码支付成功，设置门锁密码
+		Long roomId = order.getRoomId();
+		Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
 		
 	}
 	
