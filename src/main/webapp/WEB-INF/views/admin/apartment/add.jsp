@@ -86,7 +86,13 @@
 									name="num_door">
 							</div>
 						</div>
-
+						<div class="form-group">
+							<label class="col-md-3 control-label">锁地址</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder=""
+									name="lock_address">
+							</div>
+						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">朝向</label>
 							<div class="col-md-9">
@@ -301,8 +307,9 @@
 		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
 		type="text/javascript"></script> </my_body>
 
-	<my_script> <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script>
-	<script src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1" type="text/javascript"></script>
-	</my_script>
+	<my_script> <script type="text/javascript"
+		src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script> <script
+		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
+		type="text/javascript"></script> </my_script>
 </body>
 </html>

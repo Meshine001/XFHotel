@@ -164,6 +164,28 @@ public class OrderController {
 		orderservice.add(o);
 		return "redirect:pay/" + o.getId();
 	}
+	
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public String orderDetails(Long orderId){
+		//TODO
+		Order o = orderservice.get(orderId);
+		session.setAttribute("order", o);
+		return "customer/orderDetails";
+	}
+	
+	/**
+	 * 用户查看房间密码
+	 * @param orderId
+	 * @return
+	 */
+	@RequestMapping(value = "/viewLockPsd", method = RequestMethod.GET)
+	public String viewLockPsd(Long orderId){
+		//TODO 还需要加入一些权限限制
+		Order o = orderservice.get(orderId);
+		
+		session.setAttribute("lockPsd", "123213");
+		return "customer/viewLockPsd";
+	}
 
 	/**
 	 * 查询订单
@@ -178,7 +200,7 @@ public class OrderController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range) {
 		try {
-			List<Order> orders = orderservice.getCustomerOrders(cId, type);
+			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
 			for (Order o : orders) {
 				Map m = o.toMap();
@@ -194,6 +216,8 @@ public class OrderController {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");
 	}
+	
+	
 
 	/**
 	 * 跳转到订单评价页面
@@ -248,20 +272,36 @@ public class OrderController {
 	public String pay(@PathVariable("id") Long id) {
 		Order order = orderservice.get(id);
 		session.setAttribute("order", order.toMap());
-		System.out.println(JSONObject.wrap(order.toMap()).toString());
+//		System.out.println(JSONObject.wrap(order.toMap()).toString());
 		return "customer/order";
 	}
-
-	@RequestMapping(value = "/payOver/{id}", method = RequestMethod.GET)
-	public String payOver(@PathVariable("id") Long id, int status) {
+	
+	/**
+	 * 给微信下订单
+	 * @param id 订单id
+	 * @return 微信扫一扫地址，需要将此地址转为二维码
+	 */
+	@RequestMapping(value = "/payWechat", method = RequestMethod.POST)
+	public @ResponseBody String wechatPay(Long id){
 		Order order = orderservice.get(id);
-		if (status == Order.STATUS_TIME_OUT) {
-			order.setStatus(status);
+		//TODO  向微信下订单,获取扫一扫地址
+		String url = "wechat.pay";
+		
+		return url;
+	}
+	
+	/**
+	 * 交易完成
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/payOver/{id}", method = RequestMethod.GET)
+	public String payOver(@PathVariable("id") Long id) {
+		Order order = orderservice.get(id);
+		if (order.getStatus() == Order.STATUS_TIME_OUT) {
 			session.setAttribute("err", "支付超时");
 			return "/customer/err";
 		}
-		order.setStatus(status);
-		orderservice.update(order);
 
 		Room room = roomService.findById(order.getRoomId());
 		room.setStatus(Room.STATUS_LEASED);

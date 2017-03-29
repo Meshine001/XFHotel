@@ -90,7 +90,13 @@
 									name="num_door" value="${apartment.num_door}">
 							</div>
 						</div>
-
+						<div class="form-group">
+							<label class="col-md-3 control-label">锁地址</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder=""
+									name="lock_address" value="${apartment.lock_address}">
+							</div>
+						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">朝向</label>
 							<div class="col-md-9">
@@ -297,7 +303,7 @@
 
 						<div class="form-group">
 							<label class="col-md-3 control-label">出租类型</label>
-							
+
 							<div class="col-md-9">
 								<select name="apartmenttype" id="apartment-type">
 									<c:forEach items="${l_apartmenttype}" var="type">

@@ -22,6 +22,8 @@ import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.User;
+import com.xfhotel.hotel.service.ApartmentService;
+import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.User;
@@ -51,6 +53,11 @@ public class AdminController {
 	FacilityService facilityService;
 	@Autowired
 	OrderService orderservice;
+	@Autowired
+	ApartmentService apartmentService;
+	@Autowired
+	BlogService blogService;
+	
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String homePage() {
@@ -64,6 +71,10 @@ public class AdminController {
 
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardPage() {
+		session.setAttribute("apartmentCount", apartmentService.list().size());
+		session.setAttribute("orderCount", orderservice.list(Order.CATEGOTY_ALL).size());
+		session.setAttribute("customerCount", customerService.list().size());
+		session.setAttribute("blogCount", blogService.list().size());
 		return "/admin/dashboard";
 	}
 

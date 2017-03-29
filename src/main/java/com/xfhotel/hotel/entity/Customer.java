@@ -22,6 +22,10 @@ import com.xfhotel.hotel.support.DateUtil;
 @Entity
 @Table(name = "t_customer")
 public class Customer implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

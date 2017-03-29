@@ -15,4 +15,5 @@ public interface OrderService {
 	public List<Order> getCustomerOrders(Long cId,int type);
 	public List<Order> checkAvailable(Long roomId,String startTime,String endTime);
 	public boolean isTimeOut(Order o);
+	public List<Order> search(Long cId, int category, int type, String startDate, String endDate, int range);
 }

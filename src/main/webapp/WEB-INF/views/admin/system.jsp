@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>title-青舍都市公寓-西安租房_西安合租</title>
+<title>系统设置-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
 </head>
 <body>
@@ -18,7 +18,7 @@
 				<div class="card-header">
 					<div class="card-title">公寓特色列表</div>
 					<ul class="card-action">
-						<li><a class="btn " data-toggle="modal"
+						<li><a class="btn btn-success" data-toggle="modal"
 							data-target="#featuresModal"> 添加 </a></li>
 					</ul>
 				</div>
@@ -82,7 +82,7 @@
 				<div class="card-header">
 					<div class="card-title">公寓设施列表</div>
 					<ul class="card-action">
-						<li><a class="btn " data-toggle="modal"
+						<li><a class="btn btn-success" data-toggle="modal"
 							data-target="#facilityModal"> 添加 </a></li>
 					</ul>
 				</div>

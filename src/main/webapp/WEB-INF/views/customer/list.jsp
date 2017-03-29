@@ -74,7 +74,7 @@
 			<div class="ser_con">
 				<div class="srh_box">
 					<!--全部的选中样式及后面的选中样式为class="srh_all_on"-->
-					<dl class="srh_list">
+					<dl class="srh_list" style="display: none;">
 						<dd>时间：</dd>
 						<dt>
 							<ul class="srh_time">
