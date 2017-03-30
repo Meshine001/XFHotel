@@ -148,6 +148,8 @@ public class CustomerController {
 
 	@RequestMapping(value = "/myOrder", method = RequestMethod.GET)
 	public String myOrderPage() {
+		Customer c = (Customer) session.getAttribute("c");
+		orderService.refresh(c.getId());
 		return "/customer/myOrder";
 	}
 

@@ -1,6 +1,7 @@
 package com.xfhotel.hotel.support.sms;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Set;
 
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
@@ -9,7 +10,10 @@ import com.xfhotel.hotel.common.Constants;
 public class SendTemplateSMS {
 
 	/**
-	 * @param args
+	 * 
+	 * @param type  验证码类型，sms平台模板编号
+	 * @param phone_num 电话
+	 * @param args 短信模板参数
 	 */
 	public static void sendSMS(String type, String phone_num, String[] args) {
 		HashMap<String, Object> result = null;
@@ -52,6 +56,23 @@ public class SendTemplateSMS {
 			//异常返回输出错误码和错误信息
 			System.out.println("错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
 		}
+	}
+	
+	/**
+	 * 生成短信验证码随机数
+	 * @return
+	 */
+	public static String generateValidateCode(){
+		StringBuffer sb = new StringBuffer();
+		Random random = new Random();
+		for(int i=0;i<6;i++){
+			sb.append(random.nextInt(10));
+		}
+		return sb.toString();
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(generateValidateCode());
 	}
 
 }
