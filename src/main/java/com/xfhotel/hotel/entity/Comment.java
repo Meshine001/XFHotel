@@ -1,10 +1,16 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.xfhotel.hotel.support.DateUtil;
+import com.xfhotel.hotel.support.TimeUtil;
 
 /**
  * 用户评价
@@ -26,6 +32,17 @@ public class Comment {
 	private String score;
 	private String feel;
 	private String pics;
+	private Long entryTime;
+	private boolean hasRead;
+	
+	
+	public boolean isHasRead() {
+		return hasRead;
+	}
+
+	public void setHasRead(boolean hasRead) {
+		this.hasRead = hasRead;
+	}
 
 	public Long getId() {
 		return id;
@@ -61,16 +78,16 @@ public class Comment {
 		this.fromWho = fromWho;
 	}
 
-	public Long getTime() {
-		return time;
+	public String getTime() {
+		return DateUtil.format(new Date(time), "yyyy-MM-dd hh:mm:ss");
 	}
 
 	public void setTime(Long time) {
 		this.time = time;
 	}
 
-	public String getScore() {
-		return score;
+	public String[] getScore() {
+		return score.split("@");
 	}
 
 	public void setScore(String score) {
@@ -85,8 +102,8 @@ public class Comment {
 		this.feel = feel;
 	}
 
-	public String getPics() {
-		return pics;
+	public String[] getPics() {
+		return pics.split("@");
 	}
 
 	public void setPics(String pics) {
@@ -98,11 +115,16 @@ public class Comment {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public String toString() {
-		return "Comment [id=" + id + ", roomId=" + roomId + ", toWho=" + toWho + ", fromWho=" + fromWho + ", time="
-				+ time + ", score=" + score + ", feel=" + feel + ", pics=" + pics + "]";
+	public String getEntryTime() {
+		return  TimeUtil.getDateStr(entryTime);
 	}
+
+	public void setEntryTime(Long entryTime) {
+		this.entryTime = entryTime;
+	}
+
+	
+	
 
 
 	

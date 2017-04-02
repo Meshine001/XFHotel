@@ -16,8 +16,8 @@ yiyun
 yiyun3237
 
 #mysql
-root
-yiyunmsql
+yiyun
+yiyunmysql
 
 yiyunzhineng@sina.com
 yiyun3237

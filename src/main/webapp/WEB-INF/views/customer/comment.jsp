@@ -136,7 +136,7 @@
 				$('#starsXinJiaBi').raty({
 					hints : [ '一般', '还行', '好', '很好', '非常好' ],
 					score : 3,
-					target : '#starsXinJiaBi',
+					target : '#starHintXinJiaBi',
 					targetKeep : true,
 					click : function(score, evt) {
 						$('#scoreXinJiaBi').val(score);
