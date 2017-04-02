@@ -1,4 +1,4 @@
-package com.xfhotel.hotel.support.alipay.util;
+package com.xfhotel.hotel.support.pay.alipay.util;
 
 import java.util.Date;
 import java.util.Random;

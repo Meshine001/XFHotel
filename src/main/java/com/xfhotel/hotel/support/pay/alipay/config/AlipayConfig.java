@@ -1,4 +1,4 @@
-package com.xfhotel.hotel.support.alipay.config;
+package com.xfhotel.hotel.support.pay.alipay.config;
 
 /* *
  *类名：AlipayConfig

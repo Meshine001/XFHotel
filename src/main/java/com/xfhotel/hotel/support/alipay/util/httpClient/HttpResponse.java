@@ -2,7 +2,7 @@ package com.xfhotel.hotel.support.alipay.util.httpClient;
 
 import org.apache.commons.httpclient.Header;
 
-import com.xfhotel.hotel.support.alipay.config.AlipayConfig;
+import com.xfhotel.hotel.support.pay.alipay.config.AlipayConfig;
 
 import java.io.UnsupportedEncodingException;
 
