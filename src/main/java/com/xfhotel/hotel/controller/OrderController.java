@@ -206,7 +206,7 @@ public class OrderController {
 				Map m = o.toMap();
 				Map room = roomService.getRoomInfo(o.getRoomId());
 				Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
-				m.put("apartment", apartment);
+				m.put("apartment",apartment );
 				maps.add(m);
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
@@ -273,7 +273,7 @@ public class OrderController {
 		Order order = orderservice.get(id);
 		session.setAttribute("order", order.toMap());
 //		System.out.println(JSONObject.wrap(order.toMap()).toString());
-		return "customer/order";
+		return "customer/order" ;
 	}
 	
 	/**
