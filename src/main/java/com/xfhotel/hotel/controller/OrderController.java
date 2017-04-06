@@ -247,7 +247,7 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/comment/post", method = RequestMethod.POST)
-	public @ResponseBody Message postComment(Long roomId, Long from, Long to, String[] c_score, String feel,
+	public @ResponseBody Message postComment(Long roomId,Long orderId, Long from, Long to, String[] c_score, String feel,
 			String[] pics) {
 		try {
 			Comment comment = new Comment();
@@ -258,7 +258,11 @@ public class OrderController {
 			comment.setFeel(feel);
 			comment.setPics(StringSplitUtil.buildStrGroup(pics));
 			comment.setTime(new Date().getTime());
-
+			comment.setHasRead(false);
+			
+			Order o = orderservice.get(orderId);
+			comment.setEntryTime(o.getStartTime());
+			
 			commentService.add(comment);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "评论成功");
 		} catch (Exception e) {

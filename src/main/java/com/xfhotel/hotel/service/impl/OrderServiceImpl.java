@@ -161,4 +161,34 @@ public class OrderServiceImpl implements OrderService {
 
 	}
 
+	/**
+	 * 更新所有订单
+	 */
+	@Transactional
+	@Override
+	public void refreshAll() {
+		// TODO Auto-generated method stub
+		 orderDAO.getListByHQL("from Order", null);
+	}
+	/**
+	 * 
+	 */
+	@Transactional
+	@Override
+	public void refresh(Long cId) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria c = session.createCriteria(Order.class);
+		c.add(Restrictions.eq("cusId", cId));
+		c.add(Restrictions.eq("status", Order.STATUS_ON_LEASE));
+		List<Order> orders = c.list();
+		long now = new Date().getTime();
+		for(Order o:orders){
+			//订单已完成
+			if(o.getEndTime()<now){
+				o.setStatus(Order.STATUS_COMPLETE);
+				update(o);
+			}
+		}
+	}
+
 }
