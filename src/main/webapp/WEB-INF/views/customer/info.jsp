@@ -231,7 +231,7 @@
 													data-toggle="modal">立即预订<span class="f14"></span></a>
 											</c:when>
 											<c:otherwise>
-												<a class="order_btn" href="../customer/login?forwad=login"
+												<a class="order_btn" data-toggle="modal" data-target="#loginModal"
 													id="need_login">立即预订<span class="f14"></span></a>
 											</c:otherwise>
 										</c:choose>

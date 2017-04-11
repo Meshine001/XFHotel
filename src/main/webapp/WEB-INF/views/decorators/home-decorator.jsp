@@ -45,7 +45,9 @@
 		<sitemesh:write property='my_body' />
 	</div>
 	<jsp:include page="home-footer.jsp"></jsp:include>
-
+	<c:if test="${c == null}">
+		<jsp:include page="login-dialog.jsp"></jsp:include>
+	</c:if>
 	<script
 		src="<%=basePath%>/dist/commons/gallery/js/jquery.timers-1.2.js"></script>
 	<script
