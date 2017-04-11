@@ -1,4 +1,4 @@
-package com.xfhotel.hotel.support.alipay.util;
+package com.xfhotel.hotel.support.pay.alipay.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -6,8 +6,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
-import com.xfhotel.hotel.support.alipay.config.AlipayConfig;
-import com.xfhotel.hotel.support.alipay.sign.RSA;
+import com.xfhotel.hotel.support.pay.alipay.sign.RSA;
+import com.xfhotel.hotel.support.pay.alipay.config.AlipayConfig;
 
 
 /* *

@@ -302,14 +302,11 @@
 				style="display: none;">
 		</form>
 
-	</div>
-	<script
-		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
-		type="text/javascript"></script> </my_body>
+	</div> </my_body>
 
-	<my_script> <script type="text/javascript"
-		src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script> <script
+	<my_script> <script
 		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
-		type="text/javascript"></script> </my_script>
+		type="text/javascript"></script> <script type="text/javascript"
+		src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script>  </my_script>
 </body>
 </html>

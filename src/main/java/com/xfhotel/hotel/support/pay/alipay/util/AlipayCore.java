@@ -1,4 +1,4 @@
-package com.xfhotel.hotel.support.alipay.util;
+package com.xfhotel.hotel.support.pay.alipay.util;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,7 +12,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.httpclient.methods.multipart.FilePartSource;
 import org.apache.commons.httpclient.methods.multipart.PartSource;
 
-import com.xfhotel.hotel.support.alipay.config.AlipayConfig;
+import com.xfhotel.hotel.support.pay.alipay.config.AlipayConfig;
 
 
 /* *
