@@ -165,6 +165,16 @@ public class CustomerController {
 		setPage(model, "我的资料", Constants.PAGE_DETAILS);
 		return "/customer/details";
 	}
+	
+	/**
+	 * 获取用户详细信息
+	 * @param id
+	 * @return json数据
+	 */
+	@RequestMapping(value = "/detailsData", method = RequestMethod.GET)
+	public @ResponseBody Customer getCustomerDetails(Long id){
+		return customerService.getCustomer(id);
+	}
 
 	@RequestMapping(value = "/serviceCenter", method = RequestMethod.GET)
 	public String serviceCenterPage() {

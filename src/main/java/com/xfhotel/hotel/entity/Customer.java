@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.support.DateUtil;
 
@@ -30,6 +32,7 @@ public class Customer implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String tel;
+	@JsonIgnore
 	private String password;
 	private int level;
 	private int status;

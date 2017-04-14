@@ -33,7 +33,15 @@
 					$.ajax({
 						url:$('#login-form').attr('action'),
 						type:'POST',
-						dataType:'json'
+						dataType:'json',
+						data:$('#login-form').serialize(),
+						success:function(data){
+							if(data.statusCode == 1){
+								 location.reload();
+							}else{
+								alert('账号或密码错误！');
+							}
+						}
 					});
 				});
 			</script>

@@ -70,4 +70,7 @@ public class Constants {
 	public static final String ALIPAY_PARTNER = "";
 	
 	
+	//微信订单描述
+	public static final String WECAT_ORDER_BODY = "青舍都市-房间预订";
+	
 }

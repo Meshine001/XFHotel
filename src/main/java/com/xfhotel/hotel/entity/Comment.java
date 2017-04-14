@@ -34,7 +34,7 @@ public class Comment {
 	private String pics;
 	private Long entryTime;
 	private boolean hasRead;
-	
+	private String reply;
 	
 	public boolean isHasRead() {
 		return hasRead;
@@ -123,10 +123,16 @@ public class Comment {
 		this.entryTime = entryTime;
 	}
 
+	public String getReply() {
+		return reply;
+	}
+
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+
 	
 	
-
-
 	
 
 }
