@@ -135,52 +135,19 @@
 					<div id="comment_box">
 						<div class="comment_box clearfix">
 							<div class="score_l">
-								<span class="x_textscore">4.9<em class="f_24">/5分</em></span>
+								<span class="x_textscore">${roomRates.pingjun}<em
+									class="f_24">/5分</em></span>
 							</div>
 							<ul class="score_r clearfix">
-								<li><span>整洁卫生</span>4.9分</li>
-								<li><span>描述相符</span>4.9分</li>
-								<li><span>交通位置</span>4.9分</li>
-								<li><span>安全程度</span>4.9分</li>
-								<li><span>性价比</span>4.8分</li>
+								<li><span>整洁卫生</span>${roomRates.weisheng}分</li>
+								<li><span>描述相符</span>${roomRates.miaoshu}分</li>
+								<li><span>交通位置</span>${roomRates.jiaotong}分</li>
+								<li><span>安全程度</span>${roomRates.anquan}分</li>
+								<li><span>性价比</span>${roomRates.xingjiabi}分</li>
 							</ul>
 						</div>
-						<div class="comment_list">
-							<div class="dp_box clearfix mt_10">
-								<img alt="" class="dp_pic72"
-									src="http://image.xiaozhustatic1.com/22/8,0,19,8755,260,260,976ffdd9.jpg">
-								<div class="dp_con">
-									<h6 data-id="7961541214">
-										<a href="http://www.xiaozhu.com/fangke/6779940515/"
-											target="_blank"><span class="col_pink">leafstar</span></a>入住时间：
-										<i>2017年01月</i>
-									</h6>
-
-									两家人一起出行，中间出现许多小插曲，差点来不了…很早就预定了这间，与房东沟通了很多次，感觉是很直率的人，比较热情~~~房间有桶装水，很方便，床品质量不错。沙发有些旧，其他设施健全…不过有蚊子，宝宝第一天就被咬了三个包，有一个还在眼睛上…不得不说小区周边环境真的非常好！！！
-									<ul class="pic_show clearfix">
-										<li><a href="javascript:void(0);"
-											class="thumbimg detail_comment_thumbimg" imgid="1"
-											commentid="7961541214"><img lazy_src="finish" alt=""
-												src="http://image.xiaozhustatic2.com/00,65,87/8,0,17,11608,1500,2000,ded58d3c.jpg"></a></li>
-										<li><a href="javascript:void(0);"
-											class="thumbimg detail_comment_thumbimg" imgid="2"
-											commentid="7961541214"><img lazy_src="finish" alt=""
-												src="http://image.xiaozhustatic3.com/00,65,87/8,0,84,11646,1500,2000,760edd13.jpg"></a></li>
-										<li><a href="javascript:void(0);"
-											class="thumbimg detail_comment_thumbimg" imgid="3"
-											commentid="7961541214"><img lazy_src="finish" alt=""
-												src="http://image.xiaozhustatic1.com/00,65,87/8,0,49,11824,1500,2000,9f923b86.jpg"></a></li>
-
-									</ul>
-									<div class="reply_box">
-										<div class="arrow_top"></div>
-										<h5>管家回复:</h5>
-										<p>谢谢您的选择。祝您生活愉快！</p>
-									</div>
-								</div>
-							</div>
-
-						</div>
+						<div class="comment_list" data-url="<%=basePath%>"
+							data-room="${room.id}" data-page="1"></div>
 					</div>
 				</div>
 			</div>
@@ -231,8 +198,9 @@
 													data-toggle="modal">立即预订<span class="f14"></span></a>
 											</c:when>
 											<c:otherwise>
-												<a class="order_btn" href="../customer/login?forwad=login"
-													id="need_login">立即预订<span class="f14"></span></a>
+												<a class="order_btn" data-toggle="modal"
+													data-target="#loginModal" id="need_login">立即预订<span
+													class="f14"></span></a>
 											</c:otherwise>
 										</c:choose>
 
@@ -473,6 +441,7 @@
 	</div>
 	</my_body>
 	<my_script> <script
-		src="<%=basePath%>/dist/customer/js/info.js"></script> </my_script>
+		src="<%=basePath%>/dist/customer/js/info.js"></script> <script
+		src="<%=basePath%>/dist/customer/js/comment-list.js"></script> </my_script>
 </body>
 </html>

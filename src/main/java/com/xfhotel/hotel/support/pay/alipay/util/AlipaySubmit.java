@@ -1,4 +1,4 @@
-package com.xfhotel.hotel.support.alipay.util;
+package com.xfhotel.hotel.support.pay.alipay.util;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -12,8 +12,8 @@ import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
-import com.xfhotel.hotel.support.alipay.config.AlipayConfig;
-import com.xfhotel.hotel.support.alipay.sign.RSA;
+import com.xfhotel.hotel.support.pay.alipay.sign.RSA;
+import com.xfhotel.hotel.support.pay.alipay.config.AlipayConfig;
 
 
 

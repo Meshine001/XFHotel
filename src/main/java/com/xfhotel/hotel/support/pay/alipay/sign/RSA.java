@@ -1,5 +1,5 @@
 
-package com.xfhotel.hotel.support.alipay.sign;
+package com.xfhotel.hotel.support.pay.alipay.sign;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

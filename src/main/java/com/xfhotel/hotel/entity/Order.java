@@ -29,6 +29,8 @@ public class Order {
 	public final static int STATUS_TIME_OUT = 5;
 	public final static int STATUS_CHARGEBACK = 6;
 
+	public final static int PAY_PLATFORM_WECHAT = 1;
+	public final static int PAY_PLATFORM_ALIPAY = 2;
 
 
 	@Id
@@ -51,6 +53,7 @@ public class Order {
 	private int type;// 订单种类
 	private int status;// 订单状态
 	private boolean needFapiao;
+	private int payPlatform;
 
 	public Order() {
 		super();
@@ -201,6 +204,15 @@ public class Order {
 		this.needFapiao = needFapiao;
 	}
 
+	
+	public int getPayPlatform() {
+		return payPlatform;
+	}
+
+	public void setPayPlatform(int payPlatform) {
+		this.payPlatform = payPlatform;
+	}
+
 	public Map toMap(){
 		Map info = new HashMap();
 		info.put("id", id);
@@ -222,6 +234,7 @@ public class Order {
 		info.put("type", getType(type));
 		info.put("status", getStatusString(status));
 		info.put("needFapiao", needFapiao?"有发票":"无发票");
+		info.put("payPlatform", payPlatform);
 		return info;
 	}
 	

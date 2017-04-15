@@ -7,12 +7,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +36,7 @@ import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
+import com.xfhotel.hotel.support.pay.WechatPaySDK;
 
 @Controller
 @RequestMapping("/order")
@@ -81,7 +85,7 @@ public class OrderController {
 		Double sum = 0.00D;
 		Apartment apartment = apartmentService.findById(apartmentId);
 		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
-		for (int i = 0; i < days.size()-1; i++) {
+		for (int i = 0; i < days.size() - 1; i++) {
 			Price p = apartmentService.getSpPrice(apartment, TimeUtil.getDateLong(days.get(i)));
 			Double pp = null;
 			if (p != null) {// 有特殊价格
@@ -164,31 +168,33 @@ public class OrderController {
 		orderservice.add(o);
 		return "redirect:pay/" + o.getId();
 	}
-	
+
 	@RequestMapping(value = "/details", method = RequestMethod.GET)
-	public String orderDetails(Long orderId){
-		//TODO
+	public String orderDetails(Long orderId) {
+		// TODO
 		Order o = orderservice.get(orderId);
 		session.setAttribute("order", o);
 		return "customer/orderDetails";
 	}
-	
+
 	/**
 	 * 用户查看房间密码
+	 * 
 	 * @param orderId
 	 * @return
 	 */
 	@RequestMapping(value = "/viewLockPsd", method = RequestMethod.GET)
-	public String viewLockPsd(Long orderId){
-		//TODO 还需要加入一些权限限制
+	public String viewLockPsd(Long orderId) {
+		// TODO 还需要加入一些权限限制
 		Order o = orderservice.get(orderId);
-		
+
 		session.setAttribute("lockPsd", "123213");
 		return "customer/viewLockPsd";
 	}
 
 	/**
 	 * 查询订单
+	 * 
 	 * @param cId
 	 * @param category
 	 * @param type
@@ -206,7 +212,7 @@ public class OrderController {
 				Map m = o.toMap();
 				Map room = roomService.getRoomInfo(o.getRoomId());
 				Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
-				m.put("apartment",apartment );
+				m.put("apartment", apartment);
 				maps.add(m);
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
@@ -216,8 +222,6 @@ public class OrderController {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");
 	}
-	
-	
 
 	/**
 	 * 跳转到订单评价页面
@@ -238,6 +242,7 @@ public class OrderController {
 
 	/**
 	 * 提交评论
+	 * 
 	 * @param roomId
 	 * @param from
 	 * @param to
@@ -247,8 +252,8 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/comment/post", method = RequestMethod.POST)
-	public @ResponseBody Message postComment(Long roomId,Long orderId, Long from, Long to, String[] c_score, String feel,
-			String[] pics) {
+	public @ResponseBody Message postComment(Long roomId, Long orderId, Long from, Long to, String[] c_score,
+			String feel, String[] pics) {
 		try {
 			Comment comment = new Comment();
 			comment.setFromWho(from);
@@ -259,10 +264,10 @@ public class OrderController {
 			comment.setPics(StringSplitUtil.buildStrGroup(pics));
 			comment.setTime(new Date().getTime());
 			comment.setHasRead(false);
-			
+
 			Order o = orderservice.get(orderId);
 			comment.setEntryTime(o.getStartTime());
-			
+
 			commentService.add(comment);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "评论成功");
 		} catch (Exception e) {
@@ -276,26 +281,66 @@ public class OrderController {
 	public String pay(@PathVariable("id") Long id) {
 		Order order = orderservice.get(id);
 		session.setAttribute("order", order.toMap());
-//		System.out.println(JSONObject.wrap(order.toMap()).toString());
-		return "customer/order" ;
+		// System.out.println(JSONObject.wrap(order.toMap()).toString());
+		return "customer/order";
 	}
-	
+
 	/**
 	 * 给微信下订单
-	 * @param id 订单id
+	 * 
+	 * @param id
+	 *            订单id
 	 * @return 微信扫一扫地址，需要将此地址转为二维码
 	 */
 	@RequestMapping(value = "/payWechat", method = RequestMethod.POST)
-	public @ResponseBody String wechatPay(Long id){
+	public @ResponseBody Message wechatPay(Long id, HttpServletRequest request) {
 		Order order = orderservice.get(id);
-		//TODO  向微信下订单,获取扫一扫地址
-		String url = "wechat.pay";
+		int total_fee = (int) (Double.valueOf(order.getTotalPrice()) * 10 * 10);
+		String spbill_create_ip = WechatPaySDK.getClientIp(request);
+		String pattern = "yyyyMMddHHmmss";
+		String time_start = DateUtil.format(new Date(order.getTime()), pattern);
+		String time_expire = DateUtil.format(new Date(order.getTime() + Constants.EFFECTIVE_ORDER_TIME_DURING),
+				pattern);
+		String product_id = "" + order.getRoomId();
 		
-		return url;
+		// TODO 向微信下订单,获取扫一扫地址
+		Map response = WechatPaySDK.unifiedOrder("", Constants.WECAT_ORDER_BODY, order.getDescription(), "",
+				""+order.getId(), ""+total_fee, spbill_create_ip, time_start, time_expire, "",
+				WechatPaySDK.TRADE_TYPE_NATIVE, product_id, "");
+		String return_code = (String) response.get("return_code");
+		
+		if(return_code.equals("SUCCESS")){
+			String appid = (String) response.get("appid");
+			String mch_id = (String) response.get("mch_id");
+			String device_info = (String) response.get("device_info");
+			String nonce_str = (String) response.get("nonce_str");
+			String sign = (String) response.get("sign");
+			String result_code = (String) response.get("result_code");
+			if(result_code.equals("SUCCESS")){
+				String trade_type = (String) response.get("trade_type");
+				String prepay_id = (String) response.get("prepay_id");
+				String code_url = (String) response.get("code_url");
+				
+				order.setPayPlatform(Order.PAY_PLATFORM_WECHAT);
+				orderservice.update(order);
+				
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, code_url);
+			}else{
+				String err_code = (String) response.get("err_code");
+				String err_code_des = (String) response.get("err_code_des");
+				return new Message(Constants.MESSAGE_ERR_CODE, err_code_des);
+			}
+		
+		}else{
+			
+		}
+
+		return new Message(Constants.MESSAGE_ERR_CODE, "");
 	}
-	
+
 	/**
 	 * 交易完成
+	 * 
 	 * @param id
 	 * @return
 	 */

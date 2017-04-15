@@ -32,6 +32,7 @@ import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BannerService;
 import com.xfhotel.hotel.service.BlogService;
+import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
@@ -67,6 +68,9 @@ public class HomeController {
 	
 	@Autowired
 	OrderService orderService;
+	
+	@Autowired
+	CommentService commentService;
 	
 	@Autowired
 	HttpSession session;
@@ -398,6 +402,9 @@ public class HomeController {
 		}
 
 		session.setAttribute("prices", prices);
+		
+		session.setAttribute("roomRates", commentService.getRoomRates(roomId));
+		
 		return "/customer/info";
 	}
 	

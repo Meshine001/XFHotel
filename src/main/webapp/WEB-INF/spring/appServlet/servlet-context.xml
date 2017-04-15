@@ -33,7 +33,7 @@
 	<context:component-scan base-package="com.xfhotel.hotel" />
 	
 	<task:annotation-driven scheduler="myScheduler"/>
-	
+
 	<task:scheduler id="myScheduler" pool-size="5"/>  
 
 	<interceptors>
@@ -106,11 +106,11 @@
 
 	<!-- Activates annotation based transaction management -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
-
+	
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="defaultEncoding" value="UTF-8" />
-		<!-- ָ�����ϴ��ļ����ܴ�С,��λ�ֽڡ�ע��maxUploadSize���Ե����Ʋ�����Ե����ļ������������ļ�������֮�� -->
 		<beans:property name="maxUploadSize" value="10240000" />
 	</beans:bean>
+	
 </beans:beans>

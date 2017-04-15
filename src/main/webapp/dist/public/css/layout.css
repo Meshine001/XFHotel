@@ -7561,3 +7561,27 @@ span.gj_chat {
     text-align: center;
     padding: 20px 0;
 }
+
+.pagination_v2 {
+    height: 22px;
+    line-height: 22px;
+    padding: 16px 0 55px 0;
+    text-align: center;
+    clear: both;
+    font-size: 14px;
+}
+
+.pagination_v2 .active_link {
+    background-color: #F05B72;
+    text-decoration: none;
+    color: #fff;
+    height: 22px;
+    padding: 0 12px;
+    display: inline-block;
+    margin: 0 3px;
+}
+.pagination_v2 a:link, .pagination_v2 a:visited {
+    color: #2c3e50;
+    padding: 0 12px;
+    margin: 0 3px;
+}

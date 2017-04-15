@@ -4,7 +4,7 @@
  * author: shiqun.shi@alipay.com
  */
 
-package com.xfhotel.hotel.support.alipay.sign;
+package com.xfhotel.hotel.support.pay.alipay.sign;
 
 public final class Base64 {
 

@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * @author Ming
  *
@@ -36,6 +38,7 @@ public class CustomerDetails {
 	private String name;
 	
 	@OneToOne(mappedBy = "details")
+	@JsonIgnore
 	private Customer customer;
 
 	public String getName() {

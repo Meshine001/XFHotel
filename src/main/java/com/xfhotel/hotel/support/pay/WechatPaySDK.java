@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -28,16 +30,20 @@ public class WechatPaySDK {
 	/**
 	 * 微信支付分配的公众账号ID（企业号corpid即为此appId）
 	 */
-	public static final String APP_ID = "wxd678efh567hg6787";
+	public static final String APP_ID = "wxfa31f9e4951f95df";
+	
+	public static final String API_KEY = "q7w8e9r4t5y6s6a5a2s5x2d8d1d6s3x9";
+	
+	public static final String APP_SECRET = "8e6258fafb17861f4d5878060afc6a33";
 	/**
 	 * 微信支付分配的商户号
 	 */
-	public static final String MCH_ID = "1230000109";
+	public static final String MCH_ID = "1458293002";
 
 	/**
 	 * 用户标识 trade_type=JSAPI时（即公众号支付），此参数必传， 此参数为微信用户在商户对应appid下的唯一标识。
 	 */
-	public static final String OPEN_ID = "localhost:8080/sd";
+	public static final String OPEN_ID = "";
 	/**
 	 * 签名类型
 	 */
@@ -46,7 +52,7 @@ public class WechatPaySDK {
 	/**
 	 * 异步接收微信支付结果通知的回调地址，通知url必须为外网可访问的url，不能携带参数
 	 */
-	public static final String NOTIFY_URL = "";
+	public static final String NOTIFY_URL = "http://www.yiyunzn.com/wecat/pay/push";
 	/**
 	 * 交易类型
 	 */
@@ -77,17 +83,17 @@ public class WechatPaySDK {
 	 * @param product_id
 	 * @param limit_pay
 	 */
-	public static void unifiedOrder(String device_info, String body, String detail, String attach, String out_trade_no,
+	public static Map unifiedOrder(String device_info, String body, String detail, String attach, String out_trade_no,
 			String total_fee, String spbill_create_ip, String time_start, String time_expire, String goods_tag,
 			String trade_type, String product_id, String limit_pay) {
 		// 构建请求xml
 		String xml = getUnifiedOrderXML(device_info, body, detail, attach, out_trade_no, total_fee, spbill_create_ip,
 				time_start, time_expire, goods_tag, trade_type, product_id, limit_pay);
-
+		
+		System.out.println(readStringXml(xml));
 		String response = HttpsPost.post(UNIFIED_ORDER, xml);
 		
-		//TODO
-		System.out.println(readStringXml(response));
+		return readStringXml(response);
 
 	}
 
@@ -289,24 +295,44 @@ public class WechatPaySDK {
 		}
 		return sb.toString();
 	}
+	
+	/**
+	 * 获得客户端IP
+	 * @param request
+	 * @return
+	 */
+	public static String getClientIp(HttpServletRequest  request) {
+
+        String remoteAddr = "";
+
+        if (request != null) {
+            remoteAddr = request.getHeader("X-FORWARDED-FOR");
+            if (remoteAddr == null || "".equals(remoteAddr)) {
+                remoteAddr = request.getRemoteAddr();
+            }
+        }
+
+        return remoteAddr;
+    }
 
 	public static void main(String[] args) {
-		String device_info = "013467007045764";
-		String body = "JSAPI支付测试";
+		String device_info = "";
+		String body = "支付测试";
 		String detail = "";
-		String attach = "支付测试";
+		String attach = "";
 		String out_trade_no = "1415659990";
 		String total_fee = "1";
 		String spbill_create_ip = "14.23.150.211";
-		String time_start = "";
-		String time_expire = "";
+		String time_start = "20091225091010";
+		String time_expire = "20091227091010";
 		String goods_tag = null;
 		String trade_type = "NATIVE";
-		String product_id = "12235413214070356458058";
+		String product_id = "1";
 		String limit_pay = "";
 
-		unifiedOrder(device_info, body, detail, attach, out_trade_no, total_fee, spbill_create_ip, time_start,
+		Map map = unifiedOrder(device_info, body, detail, attach, out_trade_no, total_fee, spbill_create_ip, time_start,
 				time_expire, goods_tag, trade_type, product_id, limit_pay);
+		System.out.println(map);
 	}
 
 }
