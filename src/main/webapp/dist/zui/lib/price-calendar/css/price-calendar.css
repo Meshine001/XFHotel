@@ -4,7 +4,8 @@
  * Author: Angtian
  * E-mail: Angtian.fgm@taobao.com
  */
-.price-calendar-bounding-box{position: absolute;font:12px/1.5 Arial;z-index: 999;top: 190px;left: 400px;}
+.price-calendar-bounding-box{min-width:975px; !important }
+.price-calendar-bounding-box{position: absolute;font:12px/1.5 Arial;z-index: 999;top: 190px;left: 400px;box-shadow: 0 0 5px #333;background: #fff;!important}
 .price-calendar-bounding-box .disabled{cursor:not-allowed;}
 .price-calendar-bounding-box .hidden{display:none;}
 .price-calendar-bounding-box .blue{background-color:#03F;}
@@ -18,13 +19,17 @@
 .price-calendar-bounding-box .container .arrow .prev-btn{left:12px; background-position:0 0;}
 .price-calendar-bounding-box .container .arrow .next-btn{right:12px; background-position:right 0;}
 .price-calendar-bounding-box .content-box{position:relative;border: 1px solid rgb(255, 255, 255);letter-spacing: -2.31em; *letter-spacing:normal;word-spacing:-0.43em;}
-.price-calendar-bounding-box .content-box .inner{position:relative;background-color:#FFF;border: 3px solid #ffffff;display:inline-block;zoom:1;*display:inline;letter-spacing:normal;word-spacing:normal;vertical-align:top;}
+.price-calendar-bounding-box .content-box .inner{float:left;position:relative;background-color:#FFF;border:1px solid #ccc;display:inline-block;zoom:1;*display:inline;letter-spacing:normal;word-spacing:normal;vertical-align:top;}
+.price-calendar-bounding-box .content-box .inner:first-child{margin-right:10px;}
 .price-calendar-bounding-box .content-box .inner h4{color:#0E5788; width:100%; height:25px; font-size:14px; line-height:25px; text-align:center;}
+
+.price-calendar-bounding-box .content-box .date-box{min-width:975px;}
+
 .price-calendar-bounding-box table{border-spacing:0; border-collapse:collapse;}
 .price-calendar-bounding-box table th{height:30px; font-weight:400; border-bottom:1px solid #E5E5E5;}
 .price-calendar-bounding-box table td{width:67px; height:50px; cursor:pointer; border:1px solid #E5E5E5; border-width:0 1px 1px 0;}
 .price-calendar-bounding-box table td.bor-r-0{border-width:0 0 1px 0;}
-.price-calendar-bounding-box table td.selected-range{background-color:#F0F0F0;}
+.price-calendar-bounding-box table td.selected-range{background-color:#dad2d2;}
 .price-calendar-bounding-box table td.dep-date{background-color:#FF9;}
 .price-calendar-bounding-box table td.end-date{background-color:#DBE1E8;}
 .price-calendar-bounding-box table td .mark{text-align:center;}
@@ -48,12 +53,12 @@
 .price-calendar-bounding-box table td .status{color:#498B05; text-align:right; padding-right:3px;}
 .price-calendar-bounding-box table td .date{color:#AAA; display:block; font-size:18px; text-align:right; line-height:20px; padding-right:3px;}
 .price-calendar-bounding-box table td.disabled .date{color:#E8E8E8;}
-.price-calendar-bounding-box .bottom{margin: 0px;padding: 10px;color:#555;overflow:hidden;zoom:1;background-color:#FFF;}
+.price-calendar-bounding-box .bottom{clear:both;margin: 0px;padding: 10px;color:#555;overflow:hidden;zoom:1;background-color:#FFF;}
 .price-calendar-bounding-box .bottom p{height:30px; line-height:30px;}
 .price-calendar-bounding-box .bottom .tips{float:left;}
 .price-calendar-bounding-box .bottom .tips em{float:left; width:10px; height:10px; margin:10px 10px 0; _margin-top:8px; border:1px solid #CCC; overflow:hidden;}
 .price-calendar-bounding-box .bottom .tips em s{float:left; width:8px; height:8px; margin:1px; overflow:hidden;}
 .price-calendar-bounding-box .bottom .tips span{float:left;}
 .price-calendar-bounding-box .bottom .btns{float:right;}
-.price-calendar-bounding-box .bottom .btns input{border:0; color:#FFF; width:70px; height:22px; cursor:pointer; overflow:hidden; border-radius:4px; *line-height:25px; margin:5px 0 0 8px; background-color:#0F62F0;}
+.price-calendar-bounding-box .bottom .btns input{border:0; color:#FFF; width:70px; height:22px; line-height:22px;cursor:pointer; overflow:hidden; border-radius:4px; *line-height:25px; margin:5px 0 0 8px; background-color:#0F62F0;}
 .price-calendar-bounding-box .bottom .btns input.disabled{margin: 4px;cursor:not-allowed;background-color:#999;padding-bottom: 3px;}
