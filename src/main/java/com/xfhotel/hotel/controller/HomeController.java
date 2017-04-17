@@ -83,7 +83,6 @@ public class HomeController {
 	public String home() {
 		List<Banner> homeBanner = bannerService.getHomeBanner();
 		session.setAttribute("homeBanner", homeBanner);
-		
 		List<Room> rooms = roomService.getHomeRooms();
 		List<Map> homeRooms = new ArrayList<Map>();
 		for(Room room :rooms){
@@ -91,6 +90,7 @@ public class HomeController {
 			homeRooms.add(apartmentService.getApartmentInfo(apartmentId));
 		}
 		System.out.println(homeRooms);
+		
 		session.setAttribute("homeRoom", homeRooms);
 		return "/customer/home";
 	}
