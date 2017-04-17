@@ -13,7 +13,6 @@ YUI.add('price-calendar', function(Y) {
  *
  * @module price-calendar
  */
-
 var L      = Y.Lang,
     each   = Y.each,
     toHTML = L.sub,

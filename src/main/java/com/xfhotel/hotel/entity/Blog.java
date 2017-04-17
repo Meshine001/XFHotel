@@ -29,6 +29,7 @@ public class Blog {
 	private String author;
 	private String status;
 	private String abs_text;
+	private boolean show_home;
 	
 	public Blog(String title, Long date, String path, long authorid, String author, String status, String pic) {
 		super();
@@ -41,6 +42,18 @@ public class Blog {
 		this.status = status;
 		this.pic = pic;
 	}
+	
+	
+	public boolean isShow_home() {
+		return show_home;
+	}
+
+
+	public void setShow_home(boolean show_home) {
+		this.show_home = show_home;
+	}
+
+
 	public String getStatus() {
 		return status;
 	}

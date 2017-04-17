@@ -65,7 +65,7 @@
 					</div>
 					<div>
 						<div class="i_z">房间特色</div>
-
+						
 					</div>
 					<div>
 						<div class="i_z">配套设施</div>

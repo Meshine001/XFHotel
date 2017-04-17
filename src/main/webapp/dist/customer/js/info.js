@@ -68,6 +68,7 @@
 		    var lastPicIndex = $('.w00 ul').children('li:last-child').attr('index');
 	    	var curIndex = $('#datu').attr('index');
 	    	var changeToWhere = parseInt(curIndex);
+	 
 	    	if(target == 'pre'){
 	    		if(curIndex==0){
 	    			changeToWhere = lastPicIndex;
@@ -81,10 +82,15 @@
 	    			changeToWhere = changeToWhere+1;
 	    		}
 	    	}
+	    	
+	    	
+	    	
+	    	
 	    	var curPic;
 	    	$('.w00 ul li').each(function(index,li){
 	    		if($(li).attr('index')==changeToWhere){
 	    			curPic = $(li).find('img').attr('src');
+
 	    		}
 	    	});
 	    	var aniWidth = (changeToWhere-curIndex)*138;
@@ -222,12 +228,33 @@ $(document).ready(function(){
         
     });
     
+    
+    var s=0;
+	var stalength=$('.w00 ul li').size();
 
     $('#pre').click(function(){
+    	s--;
+    	move();
     	changePic('pre');
     });
     $('#next').click(function(){
+    	s++;
+    	move();
     	changePic('next');
     });
+	function move(){
+        if (s == stalength) {
+            $(".w00 ul").css({left: 0})
+            s = 0;
+        }
+        if (s == -1) {
+            $(".w00 ul").css({left: -(stalength - 1) * 140})
+            s = stalength - 1;
+        }
+
+        $(".w00 ul").stop().animate({left: -s * 140}, 500)
+
+    }
+
     
 });
