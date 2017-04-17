@@ -46,18 +46,17 @@ public class MobileController {
 		return info;
 		
 	}
-	@RequestMapping(value = "/info",method = RequestMethod.GET)
+	@RequestMapping(value = "/info",method = RequestMethod.POST)
 	public @ResponseBody Map info(Long roomId){
 		Map room = roomService.getRoomInfo(roomId);
 		Map apartment = apartmentService.getApartmentInfo((Long)room.get("apartment"));
 		Map<String,Object> info = new HashMap<String, Object>();
 		info.put("room", room);
 		info.put("apartment", apartment);
-		
 		return info;
 		
 	}
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public @ResponseBody Map login(String tel, String password) {
 		Customer c = customerService.login(tel, password);
 		Map<String,Object> info = new HashMap<String, Object>();
@@ -66,6 +65,6 @@ public class MobileController {
 	}
 	
 
-	
+
 	
 }
