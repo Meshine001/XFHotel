@@ -33,7 +33,7 @@ public class MobileController {
 	@Autowired
 	CustomerService customerService;
 	
-	@RequestMapping(value = "/home",method = RequestMethod.GET)
+	@RequestMapping(value = "/home",method = RequestMethod.POST)
 	public @ResponseBody Map home(){
 		List<Room> rooms = roomService.getHomeRooms();
 		List<Map> homeRooms = new ArrayList<Map>();
