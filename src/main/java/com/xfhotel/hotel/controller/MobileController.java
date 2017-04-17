@@ -19,4 +19,15 @@ public class MobileController {
 		return info;
 		
 	}
+	
+	
+	
+	@RequestMapping(value = "/croTest",method = RequestMethod.POST)
+	public @ResponseBody Map croTest(String data){
+		Map< String, Object> info = new HashMap<String, Object>();
+		System.out.println(data);
+		info.put("banner", "sdsadsad.jpg");
+		return info;
+		
+	}
 }
