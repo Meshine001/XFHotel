@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>立即预定</title>
+    <link rel="shortcut icon" href="images/bitbug_favicon.ico" />
+    <link href="css/doubleDate.css" rel="stylesheet" type="text/css">
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/order.css" />
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/doubleDate2.0.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+
+    <script>
+        $(function(){
+            $('.doubledate').kuiDate({
+                className:'doubledate',
+                isDisabled: "0"  // isDisabled为可选参数，“0”表示今日之前不可选，“1”标志今日之前可选
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="header">
+    <header class="header-mobile">
+        <a href="#" onclick="javascript:history.back();" class="cell link-home"><img src="images/black-1.png" class="img-home"></a>
+        <span class="cell">填写订单</span>
+        <a href="personalCenter.html" class="cell link-btn"><img src="images/my_h.png" class="img-btn"></a>
+    </header>
+</div>
+
+
+<div id="Myscroll-body">
+    <div class="main">
+        <div class="order_info">
+            <h1 class="r_name">福邸铭门(22楼)</h1>
+            <ul class="h_date">
+                <li>入住时间：</li>
+                <li><input type="text" placeholder="入住日期" readonly="readonly" class="doubledate ipticon"></li>
+                <li>离开时间：</li>
+                <li><input type="text" placeholder="离开日期" readonly="readonly" class="doubledate ipticon"></li>
+            </ul>
+            <h1 class="o_pay">订单总额：<span class="money">￥598</span></h1>
+        </div>
+
+        <ul class="price_info">
+            <li><span>姓名</span><input class="fl" type="text" placeholder="入住人姓名"></li>
+            <li><span>联系电话</span><input class="fl" type="text" placeholder="用于接收房门密码"></li>
+        </ul>
+
+        <div class="prompt_info">
+            <h1>* 预定提示</h1>
+            <p class="form_ctrl "> 1、本酒店最晚保留到18点,超过18点请在特殊要求内注明具体到达时间及原因</p>
+            <p class="form_ctrl "> 2、本酒店最晚保留到18点,超过18点请在特殊要求内注明具体到达时间及原因</p>
+            <p class="form_ctrl "> 1、本酒店最晚保留到18点,超过18点请在特殊要求内注明具体到达时间及原因</p>
+
+        </div>
+
+
+    </div>
+    <div class="navbar">
+        <a href="payment.html">提交订单</a>
+    </div>
+</div>
+
+
+</body>
+</html>

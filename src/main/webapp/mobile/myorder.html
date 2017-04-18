@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>我的订单</title>
+    <link rel="shortcut icon" href="images/bitbug_favicon.ico" />
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/myorder.css" />
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script type="text/javascript" src="js/myorder.js"></script>
+</head>
+<body>
+<div class="header">
+    <header class="header-mobile">
+        <a href="#" onclick="javascript:history.back();" class="cell link-home"><img src="images/black-1.png" class="img-home"></a>
+        <span class="cell">我的订单</span>
+        <span class="cell link-btn">
+        </span>
+    </header>
+</div>
+
+<div id="nav">
+    <a href="javascript:void(0)" class="active">全部</a>
+    <a href="javascript:void(0)">已支付</a>
+    <a href="javascript:void(0)">待支付</a>
+</div>
+<div id="Myscroll-body">
+    <!--没有订单 -->
+    <div class="geterror" style="display: none">
+        <h1>没有订单，赶快行动吧</h1>
+        <a href="" class="resiger">现在预订</a>
+    </div>
+    <!-- 有订单数据-->
+    <ul class="orderlist" >
+        <li>
+            <p class="p_title success">已支付</p>
+            <div class="pay_content">
+                <p class="list_bigsize">幸福中路福邸铭门小区</p>
+                <p class="p_list">酒店式公寓<span>支付2880元</span></p>
+                <p class="p_list">2017年5月21-2017年6月1日<span>10天</span></p>
+            </div>
+            <p class="total">
+                <span class="fl cancel">退房</span>
+                <span class="fl evaluate">评价</span>
+                <span class="fl reserve">再次预定</span>
+
+            </p>
+        </li>
+        <li>
+            <p class="p_title">待支付</p>
+            <div class="pay_content">
+                <p class="list_bigsize">幸福中路福邸铭门小区</p>
+                <p class="p_list">酒店式公寓<span>支付2880元</span></p>
+                <p class="p_list">2017年5月21-2017年6月1日<span>10天</span></p>
+            </div>
+            <p class="total"><span class="fl payment">支付</span></p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

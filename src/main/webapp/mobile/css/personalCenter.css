@@ -1,0 +1,80 @@
+html,body{background: #fff}
+#Myscroll-body{background: #FFF}
+.vip_info{overflow: hidden;padding: 0.3rem 0;
+    background: url("../images/personal-bg.jpg") no-repeat;background-size: 100% 100%;
+    background:#fff;
+    text-align: center;
+}
+.vip_info img{width: 0.7rem;;border-radius: 50%;border: 2px solid #fff}
+.vip_info span{display: block;text-align: center;font-size: 0.14rem;height: 0.2rem;margin-top: 0.05rem;color: #666}
+.vip_info_list{margin-bottom: 0.15rem;width: 100%;overflow: hidden;background: #fff;padding: 0 0.1rem;border-bottom: 1px solid #ddd}
+.vip_info_list li{line-height: 0.45rem;border-bottom: 1px solid #ddd;font-size: 0.14rem;background: url("../images/add_right_c.png") no-repeat center right 0.1rem;background-size: 0.1rem}
+.vip_info_list li:last-child{border: 0}
+.vip_info_list li a{display: block;}
+
+.vip_info_list li .per-order-status{width: 100%}
+.vip_info_list li .per-order-status a{float: left;display:block;width: 50%;position: relative;
+    height: 0.8rem;
+    line-height: 0.35rem;
+    text-align: center;
+    font-size: 0.14rem;
+    margin: 0px ;
+    border-left: 1px solid #ddd ;
+}
+.vip_info_list li .per-order-status a:first-child{border: 0}
+.vip_info_list li .per-order-status .tip-size{
+    display: inline;
+    position: absolute;
+    width: 0.18rem;
+    height: 0.18rem;
+    line-height: 0.14rem;
+    border: 2px solid #dd3d95;
+    color: #dd3d95;
+    top: 0.08rem;
+    right: 0.65rem;
+    font-size: 0.10rem;
+    border-radius: 50%;
+    background-color: #FFF;
+    overflow: hidden;
+}
+.logout{
+    display: block;
+    width: 80%;
+    heigth: 0.4rem;
+    background: #1fc8a1;
+    border-radius: 0.05rem;
+    text-align: center;
+    font-size: 0.16rem;
+    line-height: 0.4rem;
+    margin: 8% auto 0;
+    color: #fff;
+    box-shadow: 0 0.01rem 0.01rem #ccbcd3;
+}
+.per-order-status .icon{
+    width: 0.3rem;
+    height: 0.3rem;
+    float: none;
+    display: block;
+    margin: 0.15rem auto 0.05rem auto;
+}
+.per-order-status .payment_icon{background: url("../images/nomor.png") no-repeat center bottom;background-size: 100% }
+.per-order-status .delivery_icon{background: url("../images/yesmor.png") no-repeat center bottom;background-size: 100% }
+
+/*&&&&&&&&&&&&&&&&&&&&&&& Òâ¼û·´À¡ &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
+
+#comment{
+    width: 100%;
+    min-height: 2.6rem;
+    border-bottom: 1px solid #999;
+    font-size: 0.16rem;
+    padding: 0.1rem;
+    color: #666666;
+    line-height: 0.22rem;
+}
+._p{
+    line-height: 0.2rem;font-size: 0.16rem;
+    position: relative;
+    top:-0.3rem;
+    text-align: right;
+    padding-right: 0.1rem;
+    color: #666666}

@@ -67,6 +67,7 @@ public class ValidatorController {
 	@RequestMapping(value="/checkVCode")  
 	public @ResponseBody Message validateTelVCode(String tel,String vCode){
 		try {
+			
 			Map<String, Object> sVCode = (Map<String, Object>) session.getAttribute("vCode");
 			String sTel = (String) sVCode.get("tel");
 			long diedLine = (Long) sVCode.get("diedLine");

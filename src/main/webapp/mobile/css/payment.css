@@ -1,0 +1,15 @@
+html,body{background: #fff}
+.header-mobile .img-home {width: 0.12rem;margin-top: 0.04rem;}
+
+#Myscroll-body{background: #fff}
+.p_msg{width: 100%; border-bottom: 1px solid #e1e1e1;}
+.p_msg li{margin: 0 0.2rem;padding: 0.2rem 0;border-bottom: 1px solid #e1e1e1;font-size: 0.14rem;
+    color: #282828;line-height: 0.3rem;}
+.p_msg li:last-child,.p_Settel li:last-child{border: 0}
+.p_msg li em{color: #ea0a5b;}
+
+.p_Settel{width: 100%;padding: 0 0.1rem;border-bottom: 1px solid #e1e1e1;}
+.p_Settel li{line-height: 0.6rem;height: 0.6rem;border-bottom: 1px solid #e1e1e1;background: url("../images/add_right_c.png") no-repeat center right 0.1rem;background-size: 0.12rem}
+.p_Settel li a{display: block;padding-left: 0.7rem;font-size: 0.16rem;color: #282828;}
+.p_Settel li .wx_p{background: url("../images/wx.png") no-repeat center left 0.1rem;background-size: 0.5rem}
+.p_Settel li .zfb_p{background: url("../images/zfb.png") no-repeat center left 0.1rem;background-size: 0.5rem}
