@@ -118,8 +118,8 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public List<Room> getHomeRooms() {
 		String hql = "from Room where showHome=?";
-		
-		return roomDAO.getListByHQL(hql, true);
+		Object[] value = {true};
+		return roomDAO.getListByHQL(hql, value);
 	}
 
 }
