@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>青舍公寓</title>
+    <!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="shortcut icon" href="images/bitbug_favicon.ico" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/swiper-3.3.1.min.css" />
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script charset="UTF-8" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+    <script type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/autoZoomLoadImage.js"></script>
+    <script charset="UTF-8" language="javascript" type="text/javascript" src="js/index.js"></script>
+    <script  type="text/javascript" src="js/fastclick.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('.header-mobile .input-search').focus(function(){
+            window.location.href="search.html";
+        });
+    })
+    </script>
+
+
+</head>
+<body>
+<!--蒙版-->
+    <div class="menuBar">
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="myorder.html">我的订单</a></li>
+            <li><a href="#">服务中心</a></li>
+            <li><a href="personalCenter.html">个人中心</a></li>
+            <li><a href="#">青舍生活</a></li>
+            <li><a href="editprofileinfo.html">设置</a></li>
+            <li><a href="login.html">登陆|注册</a></li>
+        </ul>
+        <h3 class="_logo"><img src="images/logo1.png"></h3>
+    </div>
+    <div class="Masking-out"></div>
+<!--Address-search-->
+
+
+
+
+<!--头部-->
+    <div class="header">
+        <header class="header-mobile">
+            <a href="javascript:;" class="cell link-home"><img src="images/home.png" class="img-home"></a>
+            <span class="cell group-search">
+                <input type="text" placeholder="您想住哪呢？" class="input-search">
+            </span>
+            <a href="personalCenter.html" class="cell link-btn"><img src="images/my_h.png" class="img-btn"></a>
+        </header>
+    </div>
+<!--内容区域-->
+    <div id="Myscroll-body">
+        <!-- 轮播-->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/bg1.jpg"/></a></div>
+                <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/bg1.jpg"/></a></div>
+                <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/bg1.jpg"/></a></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <!--主页内容 酒店型公寓 | 短租型公寓 | 在线找房 | 青客生活 -->
+        <div class="hot-issue">
+            <a href="houseType.html">
+                <div class="img-wrapper"><img src="images/icnet1.jpg"></div>
+                <div>酒店型公寓</div>
+            </a>
+            <a href="">
+                <div class="img-wrapper"><img src="images/icnet1.jpg"></div>
+                <div>休闲型公寓</div>
+            </a>
+            <a href="">
+                <div class="img-wrapper"><img src="images/icnet1.jpg"></div>
+                <div>服务中心</div>
+            </a>
+            <a href="">
+                <div class="img-wrapper"><img src="images/icnet1.jpg"></div>
+                <div>青客生活</div>
+            </a>
+        </div>
+        <!-- service-->
+        <div class="service">
+            <h2 class="title-serce">热门房源<a href="">更多</a></h2>
+            <ul class="goodlist">
+                <li>
+                    <div class="item-room">
+                        <a class="img-wrapper"><img src="images/listimg1.png"></a>
+                        <h1 class="text-ellipsis"><a href="">新城区-福邸铭门</a></h1>
+                        <h2 class="text-ellipsis">三居室-南卧-25.0㎡</h2>
+                        <p class="text-ellipsis address">万寿路地铁附近</p>
+                        <p class="label-group"><i class="label-type1">酒店公寓</i></p>
+                        <span class="label-price">299<small>/天</small></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-room">
+                        <a class="img-wrapper"><img src="images/listimg1.png"></a>
+                        <h1 class="text-ellipsis"><a href="">新城区-福邸铭门</a></h1>
+                        <h2 class="text-ellipsis">三居室-南卧-25.0㎡</h2>
+                        <p class="text-ellipsis address">1号地铁 万寿路站 右转600米</p>
+                        <p class="label-group"><i class="label-type2">休闲公寓</i></p>
+                        <span class="label-price">375<small>/天</small></span>
+                    </div>
+                </li>
+
+                <!--<li proID="'+data.info[i].id+'" offer="'+data.info[i].isoffers+'">-->
+                    <!--<div class="item-room">-->
+                        <!--<a class="subpic"><img src="'+data.info[i].attach_ids[0]+'"/></a>-->
+                        <!--<h1 class="text-ellipsis"><a href="javascript:void(0)">'+data.info[i].name+'</a></h1>-->
+                        <!--<h2 class="text-ellipsis">'+data.info[i].type_Name+"-"+data.info[i].type_aspect+"-"+data.info[i].type_area+"㎡"'</h2>-->
+                        <!--<p class="text-ellipsis address">'+data.info[i].nearby+'</p>-->
+                        <!--<p class="label-group"><i class="label-type2">'+data.info[i].mold+'</i></p>-->
+                        <!--<span class="label-price">'+data.info[i].date+'<small>/天</small></span>-->
+                    <!--</div>-->
+                <!--</li>-->
+
+
+                <li>
+                    <div class="item-room">
+                        <a class="img-wrapper"><img src="images/listimg1.png"></a>
+                        <h1 class="text-ellipsis"><a href="">新城区-福邸铭门</a></h1>
+                        <h2 class="text-ellipsis">三居室-南卧-25.0㎡</h2>
+                        <p class="text-ellipsis address">1号地铁 万寿路站 右转600米</p>
+                        <p class="label-group"><i class="label-type2">休闲公寓</i></p>
+                        <span class="label-price">375<small>/天</small></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-room">
+                        <a class="img-wrapper"><img src="images/listimg1.png"></a>
+                        <h1 class="text-ellipsis"><a href="">新城区-福邸铭门</a></h1>
+                        <h2 class="text-ellipsis">三居室-南卧-25.0㎡</h2>
+                        <p class="text-ellipsis address">1号地铁 万寿路站 右转600米</p>
+                        <p class="label-group"><i class="label-type2">休闲公寓</i></p>
+                        <span class="label-price">375<small>/天</small></span>
+                    </div>
+                </li>
+            </ul>
+            <div id="zanwu"></div>
+
+        </div>
+
+        <!-- qingshe生活-->
+        <div class="service service-image">
+            <h2 class="title-serce">青舍生活<a href="">更多</a></h2>
+            <a href=""><img src="images/listimg2.png"></a>
+            <a href=""><img src="images/listimg3.png"></a>
+            <a href=""><img src="images/listimg4.png"></a>
+        </div>
+
+        <!--<div class="service service-image">-->
+            <!--<h2 class="title-serce">青舍生活<a href="">更多</a></h2>-->
+            <!--<a href="+data.info.indexPush[i].url+"><img src="'+data.info.indexPush[i].attach+'"></a>-->
+        <!--</div>-->
+
+        <!-- my-footer-->
+        <div class="my-footer">
+            <p>全国服务热线：400-060-6868</p>
+            <p>Copyright ©西安易云智能科技有限公司</p>
+            <p><img src="images/beianbgss.png">青舍都市公寓</p>
+        </div>
+    </div>
+
+
+</body>
+</html>

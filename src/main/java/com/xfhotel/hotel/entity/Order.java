@@ -21,13 +21,13 @@ public class Order {
 	public final static int CATEGOTY_CHARGEBACK = 2;
 	
 	
-	public final static int STATUS_NOT_COMPLETE = 0;
-	public final static int STATUS_ON_PAY = 1;
+	public final static int STATUS_NOT_COMPLETE = 0;//未完成
+	public final static int STATUS_ON_PAY = 1;//未支付
 	public final static int STATUS_ON_LEASE = 2;//正在住
-	public final static int STATUS_COMPLETE = 3;//
-	public final static int STATUS_CANCEL = 4;
-	public final static int STATUS_TIME_OUT = 5;
-	public final static int STATUS_CHARGEBACK = 6;
+	public final static int STATUS_COMPLETE = 3;//完成订单
+	public final static int STATUS_CANCEL = 4;//删除订单
+	public final static int STATUS_TIME_OUT = 5;//超时
+	public final static int STATUS_CHARGEBACK = 6;//退款
 
 	public final static int PAY_PLATFORM_WECHAT = 1;
 	public final static int PAY_PLATFORM_ALIPAY = 2;

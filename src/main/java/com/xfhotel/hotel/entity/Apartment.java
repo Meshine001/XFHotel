@@ -1,4 +1,4 @@
-﻿package com.xfhotel.hotel.entity;
+﻿ package com.xfhotel.hotel.entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

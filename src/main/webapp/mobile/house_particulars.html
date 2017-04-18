@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>青舍公寓(详情particulars)</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="shortcut icon" href="images/bitbug_favicon.ico" />
+
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/particulars.css" />
+    <link rel="stylesheet" href="css/swiper-3.3.1.min.css" />
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
+    <script type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/autoZoomLoadImage.js"></script>
+    <!--<script type="text/javascript" src="js/index.js"></script>-->
+    <script type="text/javascript" src="js/fastclick.js"></script>
+    <script charset="gb2312" language="javascript" type="text/javascript" src="js/house_particulars.js"></script>
+
+
+</head>
+<body>
+<!--头部-->
+    <div class="header">
+        <header class="header-mobile">
+            <a href="#" onclick="javascript:history.back();" class="cell link-home"><img src="images/black-1.png" class="img-home"></a>
+            <span class="cell">房屋详情</span>
+            <a href="personalCenter.html" class="cell link-btn"><img src="images/my_h.png" class="img-btn"></a>
+        </header>
+    </div>
+<!--内容区域-->
+    <div id="Myscroll-body">
+
+        <div class="main">
+            <!-- 轮播-->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <!--<div class="swiper-slide"><img src="images/atl1.jpg"/></div>-->
+                    <!--<div class="swiper-slide"><img src="images/bg1.jpg"/></div>-->
+                    <!--<div class="swiper-slide"><img src="images/atl1.jpg"/></div>-->
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+
+            <section class="panel information">
+                <!--<h1 class="ic_house">'+data.info.address+'</h1>-->
+                <!--<p class="info_L24">'+data.info.alyout+'</p>-->
+                <!--<p class="info_L24 label-adders">'+data.info.address+'</p>-->
+                <!--<p class="info_L24 label-group">-->
+                    <!--<i class="label-type1">'+data.info.apartmentType+'</i>-->
+                <!--</p>-->
+                <!--<span class="label-price">'+data.info.price+'<small>/天</small></span>-->
+            </section>
+
+            <section class="panel housing">
+                <h1 class="ic_house">房源信息</h1>
+                <div class="i_inf">
+                    <ul>
+                        <!--<li>-->
+                            <!--<span class="inf_sp">小区</span>-->
+                            <!--<span>'+data.info.address+'</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<span class="inf_sp">单元</span>-->
+                            <!--<span>'+data.info.fearures+'</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<span class="inf_sp">面积</span>-->
+                            <!--<span>'+data.info.square+data.info.direction+'</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<span class="inf_sp">楼层</span>-->
+                            <!--<span>'+data.info.price_scope+'</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<span class="inf_sp">可住</span>-->
+                            <!--<span>'+data.info.capacity+"人"+'</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<span class="inf_sp">户型</span>-->
+                            <!--<span>'+data.info.alyout+'</span>-->
+                        <!--</li>-->
+
+                    </ul>
+                </div>
+            </section>
+            <section class="panel allocation">
+                <h1 class="ic_house">房源配置</h1>
+                <div class="i_inf deploy">
+                    <ul>
+                        <!--<li><i>空调</i></li>-->
+                        <!--<li><i>无线网络</i></li>-->
+                        <!--<li><i>茶室</i></li>-->
+                        <!--<li><i>麻将桌</i></li>-->
+                        <!--<li><i>大床房</i></li>-->
+                        <!--<li><i>卫生间</i></li>-->
+                        <!--<li><i>衣柜</i></li>-->
+                        <!--<li><i>热水淋浴</i></li>-->
+                        <!--<li><i>允许聚会</i></li>-->
+                    </ul>
+                </div>
+            </section>
+            <section class="panel describe">
+                <h1 class="ic_house">房间描述</h1>
+                <p id="serviceIntro2"></p>
+            </section>
+            <section class="panel criticism">
+                <h1 class="ic_house">消费者评论</h1>
+                <ul class="appraise">
+                    <!--<li>-->
+                        <!--<p class="appInfo"><span class="appName">'+data.info[i].user_nickname+'</span><i>5星</i></p>-->
+                        <!--<p class="appText">' + data.info[i].content + '</p>-->
+                        <!--<p class="appDate">'+data.info[i].ctime+'</p>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<p class="appInfo"><span class="appName">武大郎他</span><i>5星</i></p>-->
+                        <!--<p class="appText">陪老婆出来玩，发现有这么好玩的短租公寓，真是太好了，老婆很喜欢，</p>-->
+                        <!--<p class="appDate">2017-03-21</p>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<p class="appInfo"><span class="appName">阿卡丽</span><i>5星</i></p>-->
+                        <!--<p class="appText">陪老婆出来玩，发现有这么好玩的短租公寓，真是太好了，老婆很喜欢，</p>-->
+                        <!--<p class="appDate">2017-03-21</p>-->
+                    <!--</li>-->
+                </ul>
+            </section>
+        </div>
+
+        <div class="navbar">
+            <a href="javascript:;"><img src="images/icon-bottom-book.png">立即预约</a>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

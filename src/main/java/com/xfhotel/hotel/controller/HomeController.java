@@ -2,16 +2,13 @@ package com.xfhotel.hotel.controller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,7 +29,6 @@ import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Room;
-import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BannerService;
 import com.xfhotel.hotel.service.BlogService;
@@ -46,11 +41,9 @@ import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
 import com.xfhotel.hotel.support.LeasePrice;
 import com.xfhotel.hotel.support.LeaseType;
-import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.RoomStatus;
 import com.xfhotel.hotel.support.SearchForm;
-import com.xfhotel.hotel.support.Subway;
 import com.xfhotel.hotel.support.TimeUtil;
 
 /**
@@ -81,6 +74,8 @@ public class HomeController {
 	
 	@Autowired
 	HttpSession session;
+	
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -88,17 +83,18 @@ public class HomeController {
 	public String home() {
 		List<Banner> homeBanner = bannerService.getHomeBanner();
 		session.setAttribute("homeBanner", homeBanner);
-		
 		List<Room> rooms = roomService.getHomeRooms();
 		List<Map> homeRooms = new ArrayList<Map>();
 		for(Room room :rooms){
 			Long apartmentId = (Long) roomService.getRoomInfo(room.getId()).get("apartment");
 			homeRooms.add(apartmentService.getApartmentInfo(apartmentId));
 		}
-//		System.out.println(homeRooms);
+		System.out.println(homeRooms);
+		
 		session.setAttribute("homeRoom", homeRooms);
 		return "/customer/home";
 	}
+
 	
 	@RequestMapping(value = "/test/upload",method = RequestMethod.GET)
 	public String uploadTest(){
