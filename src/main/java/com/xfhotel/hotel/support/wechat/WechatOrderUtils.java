@@ -15,8 +15,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by seanid on 2016/1/15.
  * 微信统一下单工具类
+ * @author Ming
+ *
  */
 public class WechatOrderUtils {
 

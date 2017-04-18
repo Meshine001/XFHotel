@@ -18,6 +18,11 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
+/**
+ * Http工具
+ * @author Ming
+ *
+ */
 public class HttpUtils {
 	public static HttpClient client;
 	static {

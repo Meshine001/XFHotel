@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import com.xfhotel.hotel.support.wechat.EnumMessage.Message;
 
 /**
- * ͨ����־�����
+ *
  * @author Sean
  *
  */

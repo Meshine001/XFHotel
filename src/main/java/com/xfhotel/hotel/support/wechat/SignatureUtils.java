@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 public class SignatureUtils {
 
 	/**
-	 * 微信支付加密工具
+	 * 微信支付加密
 	 */
 	public static String signature(Map<String, String> map, String key) {
 		Set<String> keySet = map.keySet();

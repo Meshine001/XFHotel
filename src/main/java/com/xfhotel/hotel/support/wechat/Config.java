@@ -1,6 +1,10 @@
 package com.xfhotel.hotel.support.wechat;
 
-
+/**
+ * 微信相关配置
+ * @author Ming
+ *
+ */
 public class Config {
 	
 	

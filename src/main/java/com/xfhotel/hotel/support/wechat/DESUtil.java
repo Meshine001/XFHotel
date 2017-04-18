@@ -7,7 +7,11 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
-/*des加密工具*/
+/**
+ * des加密工具
+ * @author Ming
+ *
+ */
 public class DESUtil {
 
 

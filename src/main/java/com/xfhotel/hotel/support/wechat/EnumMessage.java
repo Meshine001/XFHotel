@@ -1,10 +1,9 @@
 package com.xfhotel.hotel.support.wechat;
 
 /**
- * ö����Ϣͨ����
- * 
- * @author Sean
- * 
+ * Logger 消息
+ * @author Ming
+ *
  */
 public class EnumMessage {
 
