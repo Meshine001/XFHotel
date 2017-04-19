@@ -111,8 +111,7 @@ public class MobileController  {
 			String sTel = (String) sVCode.get("tel");
 			long diedLine = (Long) sVCode.get("diedLine");
 			String code = (String) sVCode.get("code");
-			System.out.println(sTel);
-			System.out.println(tel);
+
 			if(sTel.equals(tel) && code.equals(vCode)){
 				if(diedLine < new Date().getTime()){
 					return new Message(Constants.MESSAGE_ERR_CODE, "验证超时");
