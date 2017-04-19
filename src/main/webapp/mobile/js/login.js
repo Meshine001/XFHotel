@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     login.Entry();
 });
@@ -7,17 +8,17 @@ var login={
         $("#login_submit").click(function(){
             var phoneNumber=$("#login-username").val();
             if(phoneNumber==""){
-                fnBase.myalert("ÇëÌîĞ´ÊÖ»úºÅÂë");
+                fnBase.myalert("ï¿½ï¿½ï¿½ï¿½Ğ´ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½");
                 return;
             }
             var myreg = /^0?1[3|4|5|6|7|8][0-9]\d{8}$/;
             if(!myreg.test(phoneNumber)){
-                fnBase.myalert("ÊÖ»úºÅÂëÓĞÎó£¡ ÇëÊäÈë11Î»Êı×Ö");
+                fnBase.myalert("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½11Î»ï¿½ï¿½ï¿½ï¿½");
                 return;
             }
             var passwordNumber=$("#login-password").val();
             if(passwordNumber=="" || passwordNumber.length<6){
-                fnBase.myalert("ÇëÌîĞ´ÖÁÉÙ6Î»ÊıµÇÂ¼ÃÜÂë");
+                fnBase.myalert("ï¿½ï¿½ï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½6Î»ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½");
                 return;
             }
             var frontURL=Constant.URL+"/mobile/login";

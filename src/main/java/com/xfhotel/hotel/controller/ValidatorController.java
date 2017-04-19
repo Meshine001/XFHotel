@@ -48,7 +48,7 @@ public class ValidatorController {
 	    response.setHeader("Pragma", "no-cache");  
 	    response.setHeader("Cache-Control", "no-cache");  
 	    response.setDateHeader("Expires", 0);  
-	    ImageValidateCode vCode = new ImageValidateCode(120,40,4,100);  
+	    ImageValidateCode vCode = new ImageValidateCode(120,40,6,100);  
 	    session.setAttribute("imageValidateCode", vCode.getCode());  
 	    vCode.write(response.getOutputStream());  
 	    return null;  
