@@ -27,6 +27,10 @@ public class Config {
 	 */
 	public static final String WX_REFUND_URL = "https://api.mch.weixin.qq.com/secapi/pay/refund";
 	/**
+	 * 微信查询订单地址
+	 */
+	public static final String WX_QUERY_URL = "https://api.mch.weixin.qq.com/pay/orderquery";
+	/**
 	 * 微信公众号APPID
 	 */
 	public static final String MCH_APPID = "wxfa31f9e4951f95df";

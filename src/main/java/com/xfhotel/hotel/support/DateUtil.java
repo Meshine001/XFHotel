@@ -14,6 +14,32 @@ import org.apache.commons.lang3.StringUtils;
 
 public class DateUtil {
 	private static String defaultDatePattern = "yyyy-MM-dd ";
+	
+	/**
+	 * 获取当天开始时间
+	 * @return
+	 */
+	public static Long getStartTime(){  
+        Calendar todayStart = Calendar.getInstance();  
+        todayStart.set(Calendar.HOUR, 0);  
+        todayStart.set(Calendar.MINUTE, 0);  
+        todayStart.set(Calendar.SECOND, 0);  
+        todayStart.set(Calendar.MILLISECOND, 0);  
+        return todayStart.getTime().getTime();  
+    }  
+      
+	/**
+	 * 获取当天结束时间
+	 * @return
+	 */
+    public static Long getEndTime(){  
+        Calendar todayEnd = Calendar.getInstance();  
+        todayEnd.set(Calendar.HOUR, 23);  
+        todayEnd.set(Calendar.MINUTE, 59);  
+        todayEnd.set(Calendar.SECOND, 59);  
+        todayEnd.set(Calendar.MILLISECOND, 999);  
+        return todayEnd.getTime().getTime();  
+    } 
 
 	/**
 	 * 获得默认的 date pattern
