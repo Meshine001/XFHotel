@@ -21,7 +21,11 @@ public class Config {
 	/**
 	 * 微信统一下单地址
 	 */
-	public static final String WX_ORDER_UR = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+	public static final String WX_ORDER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+	/**
+	 * 微信申请退款地址
+	 */
+	public static final String WX_REFUND_URL = "https://api.mch.weixin.qq.com/secapi/pay/refund";
 	/**
 	 * 微信公众号APPID
 	 */
