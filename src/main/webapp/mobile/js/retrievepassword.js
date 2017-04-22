@@ -25,17 +25,6 @@ var resiger={
             }
             var frontURL=Constant.URL+"/mobile/sendVCode";
             var postData={"tel":phoneNumber};
-
-            //$.ajax({
-            //    type: 'get',
-            //    url:'http://192.168.1.109:8080/hotel/mobile/sendVCode',
-            //    dataType:'json',
-            //    data:{"tel":phoneNumber},
-            //    success:function(data){
-            //        console.log(data);
-            //        fnBase.myalert("短信发送成功")
-            //    }
-            //});
             fnBase.commonAjax(frontURL,postData,function(data){
                 console.log(data);
                 if(data.statusCode=="1"){
@@ -48,11 +37,6 @@ var resiger={
         });
 
 
-
-
-
-
-        //注册就是这个，手机连wifi没。微信来语音 听不到信号不好
         resiger.inputList[3].blur(function(){
             var phoneNumber=resiger.inputList[0].val();
             var _yzm=resiger.inputList[3].val();
@@ -70,19 +54,6 @@ var resiger={
                     resiger.inputList[3].val(data.content);
                 }
             });
-            //$.ajax({
-            //    type: 'get',
-            //    url:'http://192.168.1.109:8080/hotel/mobile/checkVCode',
-            //    dataType:'json',
-            //    data:{"tel":phoneNumber,"vCode":_yzm},
-            //    success:function(data){
-            //        console.log(data);
-            //        resiger.inputList[3].val(data.content);
-            //    },
-            //    error:function(){
-            //        resiger.inputList[3].val(data.content);
-            //    }
-            //});
         });
         resiger.btnList[1].click(function(){
             var phoneNumber=resiger.inputList[0].val();
@@ -127,11 +98,10 @@ var resiger={
             fnBase.commonAjax(frontURL,postDatat,function(data){
                 console.log(data);
                 if(data.statusCode=="1"){
-                    fnBase.myalert("恭喜您注册成功");
                     sessionStorage.clear();
                     localStorage.clear();
                     fnBase.keep(0,"uid",data.info.m_id);
-                    window.location.href="index.html";
+                    window.location.href="login.html";
                 }else{
                     fnBase.myalert(data.content)
                 }
@@ -159,3 +129,4 @@ var resiger={
         },1000)
     }
 };
+

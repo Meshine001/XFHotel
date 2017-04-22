@@ -29,7 +29,7 @@ $(document).ready(function(){
         var postData={"uid":_uid,"pass":_originalPassword,"newpass":_newPassword}
         postData=JSON.stringify(postData);
         fnBase.commonAjax(frontURL,{'param':postData},function(data){
-            console.log(data)
+            console.log(data);
             if(data.status=='1'){
                 fnBase.keep(0,"uid","");
                 window.location.href="login.html";
