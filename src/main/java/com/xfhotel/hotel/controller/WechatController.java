@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.swetake.util.Qrcode;
+import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.support.Message;
+import com.xfhotel.hotel.support.QRCode;
 import com.xfhotel.hotel.support.wechat.Config;
 import com.xfhotel.hotel.support.wechat.HttpUtils;
 import com.xfhotel.hotel.support.wechat.Log;
@@ -39,29 +45,95 @@ import net.sf.json.JSONObject;
 public class WechatController {
 	@Autowired
 	HttpSession session;
-	
-	
-	
-	
+
+	@Autowired
+	OrderService orderService;
+
+	/**
+	 * 判断订单是否已经支付
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/isPayed")
+	@ResponseBody
+	public Message isPayed(Long id) {
+		Order o = orderService.get(id);
+		if (o.getStatus() == Order.STATUS_ON_LEASE) {
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "已支付");
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "未支付");
+	}
+
+	/**
+	 * 获取二维码
+	 * 
+	 * @param url
+	 * @param response
+	 */
+	@RequestMapping(value = "QRCode", method = RequestMethod.GET)
+	public void QRCode(String url, HttpServletResponse response) throws Exception {
+		// 调用框架生成二维码
+		Qrcode handler = new Qrcode();
+		handler.setQrcodeErrorCorrect('M');
+		handler.setQrcodeEncodeMode('B');
+		handler.setQrcodeVersion(7);
+
+		byte[] contentBytes = url.getBytes("UTF-8");
+
+		BufferedImage bufImg = new BufferedImage(140, 140, BufferedImage.TYPE_INT_RGB);
+
+		Graphics2D gs = bufImg.createGraphics();
+
+		gs.setBackground(Color.WHITE);
+		gs.clearRect(0, 0, 140, 140);
+
+		// 设定图像颜色：BLACK
+		gs.setColor(Color.BLACK);
+
+		// 设置偏移量 不设置肯能导致解析出错
+		int pixoff = 2;
+		// 输出内容：二维码
+		if (contentBytes.length > 0 && contentBytes.length < 124) {
+			boolean[][] codeOut = handler.calQrcode(contentBytes);
+			for (int i = 0; i < codeOut.length; i++) {
+				for (int j = 0; j < codeOut.length; j++) {
+					if (codeOut[j][i]) {
+						gs.fillRect(j * 3 + pixoff, i * 3 + pixoff, 3, 3);
+					}
+				}
+			}
+		} else {
+			Log.error("QRCode content bytes length = " + contentBytes.length + " not in [ 0,120 ]. ", null);
+		}
+
+		gs.dispose();
+		bufImg.flush();
+
+		// 生成二维码QRCode图片
+		ImageIO.write(bufImg, "jpg", response.getOutputStream());
+	}
+
 	/**
 	 * 用户授权后重定向的URL
+	 * 
 	 * @param code
 	 * @param state
 	 * @return
 	 */
 	@RequestMapping("/auth/openId")
-	public String wechatOpenId(String code,String state){
-		if(StringUtils.isBlank(code)){//用户拒绝授权
-			//跳转某URL
-		}else{//用户授权通过
+	public String wechatOpenId(String code, String state) {
+		if (StringUtils.isBlank(code)) {// 用户拒绝授权
+			// 跳转某URL
+		} else {// 用户授权通过
 			try {
 				String authUrl = Config.AUTH_OPENID_URL.replace("CODE", code);
 				JSONObject result = JSONObject.fromObject(HttpUtils.get(authUrl));
-				if(result.containsKey("errcode")){//错误返回
+				if (result.containsKey("errcode")) {// 错误返回
 					System.out.println(result);
-				}else{
+				} else {
 					session.setAttribute("wechatAuth", result);
-					return "redirect:"+state;
+					return "redirect:" + state;
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -116,54 +188,26 @@ public class WechatController {
 	 * @param response
 	 * @throws IOException
 	 */
-	@RequestMapping("/pay/nativeOrder")
-	public void nativeOrder(String detail, String desc, String goodSn, String orderSn, String amount,
-			HttpServletResponse response) throws IOException {
+	@RequestMapping(value = "/pay/nativeOrder", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject nativeOrder(Long id, String ip, HttpServletRequest request) throws IOException {
+		Order order = orderService.get(id);
+		if (order == null)
+			return null;
 
-		// 调用框架生成二维码
-		Qrcode handler = new Qrcode();
-		handler.setQrcodeErrorCorrect('M');
-		handler.setQrcodeEncodeMode('B');
-		handler.setQrcodeVersion(7);
-
-		JSONObject jsonObject = WechatOrderUtils.createOrder(detail, desc, "", "10.0.0.1", goodSn, orderSn, amount,
-				"NATIVE");
-
-		String tmp = jsonObject.getJSONObject("obj").getString("url");
-		byte[] contentBytes = tmp.getBytes("UTF-8");
-
-		BufferedImage bufImg = new BufferedImage(140, 140, BufferedImage.TYPE_INT_RGB);
-
-		Graphics2D gs = bufImg.createGraphics();
-
-		gs.setBackground(Color.WHITE);
-		gs.clearRect(0, 0, 140, 140);
-
-		// 设定图像颜色：BLACK
-		gs.setColor(Color.BLACK);
-
-		// 设置偏移量 不设置肯能导致解析出错
-		int pixoff = 2;
-		// 输出内容：二维码
-		if (contentBytes.length > 0 && contentBytes.length < 124) {
-			boolean[][] codeOut = handler.calQrcode(contentBytes);
-			for (int i = 0; i < codeOut.length; i++) {
-				for (int j = 0; j < codeOut.length; j++) {
-					if (codeOut[j][i]) {
-						gs.fillRect(j * 3 + pixoff, i * 3 + pixoff, 3, 3);
-					}
-				}
-			}
-		} else {
-			Log.error("QRCode content bytes length = " + contentBytes.length + " not in [ 0,120 ]. ", null);
-		}
-
-		gs.dispose();
-		bufImg.flush();
-
-		// 生成二维码QRCode图片
-		ImageIO.write(bufImg, "jpg", response.getOutputStream());
-
+		// TODO 向微信下订单,并获取扫一扫地址
+		String detail = "房间预订";
+		String desc = order.getDescription();
+		String goodSn = "" + order.getRoomId();
+		// String orderSn = ""+order.getId();
+		String orderSn = order.getPayNo();
+		String amount = order.getTotalPrice();
+		String type = "NATIVE";
+		JSONObject response = WechatOrderUtils.createOrder(detail, desc, "", ip, goodSn, orderSn, amount, type);
+		order.setPayPlatform("wx");
+		orderService.update(order);
+		
+		return response;
 	}
 
 	/**
@@ -269,7 +313,6 @@ public class WechatController {
 		out.print(result);
 		out.flush();
 		out.close();
-
 	}
 
 }

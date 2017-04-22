@@ -53,7 +53,20 @@ public class Order {
 	private int type;// 订单种类
 	private int status;// 订单状态
 	private boolean needFapiao;
-	private int payPlatform;
+	private String payPlatform;
+	private String payNo;//订单号
+
+	public String getPayNo() {
+		return payNo;
+	}
+
+	public void setPayNo(String payNo) {
+		this.payNo = payNo;
+	}
+
+	public void setPayPlatform(String payPlatform) {
+		this.payPlatform = payPlatform;
+	}
 
 	public Order() {
 		super();
@@ -202,15 +215,6 @@ public class Order {
 
 	public void setNeedFapiao(boolean needFapiao) {
 		this.needFapiao = needFapiao;
-	}
-
-	
-	public int getPayPlatform() {
-		return payPlatform;
-	}
-
-	public void setPayPlatform(int payPlatform) {
-		this.payPlatform = payPlatform;
 	}
 
 	public Map toMap(){

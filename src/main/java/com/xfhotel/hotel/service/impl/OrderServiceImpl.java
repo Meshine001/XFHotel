@@ -16,6 +16,7 @@ import com.xfhotel.hotel.dao.impl.OrderDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 
 @Service
@@ -30,6 +31,21 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	@Override
 	public void add(Order o) {
+		//构造订单号
+		Long start = DateUtil.getStartTime();
+		Long end = DateUtil.getEndTime();
+		String hql = "from Order where time>? and time<?";
+		Object[] values = {start,end};
+		List<Order> list = orderDAO.getListByHQL(hql, values);
+		String payNo = ""+(list.size()+1);
+		int len = payNo.length();
+		StringBuffer sb = new StringBuffer();
+		for(int i=len;i<5;i++){
+			sb.append("0");
+		}
+		sb.append(payNo);
+		
+		o.setPayNo(DateUtil.format(new Date(), "yyyyMMdd")+sb.toString());
 		orderDAO.saveOrUpdate(o);
 	}
 
@@ -189,6 +205,18 @@ public class OrderServiceImpl implements OrderService {
 				update(o);
 			}
 		}
+	}
+	
+	
+	public static void main(String[] args) {
+		String str= "1";
+		int len = str.length();
+		StringBuffer sb = new StringBuffer();
+		for(int i=len;i<5;i++){
+			sb.append("0");
+		}
+		sb.append(str);
+		System.out.println(sb.toString());
 	}
 
 }
