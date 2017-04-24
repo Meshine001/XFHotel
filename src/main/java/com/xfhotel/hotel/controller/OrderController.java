@@ -218,7 +218,6 @@ public class OrderController {
 				Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
 				m.put("apartment", apartment);
 				maps.add(m);
-				System.out.println(maps+"sS");
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {

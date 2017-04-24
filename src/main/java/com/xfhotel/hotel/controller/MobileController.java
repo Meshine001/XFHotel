@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.Order;
@@ -24,10 +25,12 @@ import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BannerService;
+import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Message;
+import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 
@@ -56,6 +59,9 @@ public class MobileController  {
 	
 	@Autowired
 	HttpSession session;
+	
+	@Autowired
+	CommentService commentService;
 	
 
 	
@@ -91,7 +97,7 @@ public class MobileController  {
 		System.out.println(list);
 		if (c != null) {
 			session.setAttribute("c", c);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, "登录成功");
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, c.getId());
 		} else {
 			return new Message(Constants.MESSAGE_ERR_CODE, "账号或密码错误");
 		}
@@ -202,6 +208,12 @@ public class MobileController  {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range)
 	{
+		System.out.println(startDate);
+		System.out.println(cId);
+		System.out.println(category);
+		System.out.println(type);
+		System.out.println(endDate);
+		System.out.println(range);
 		try {
 			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
@@ -220,6 +232,51 @@ public class MobileController  {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");
 	}
+	/*
+	 * 获取用户资料
+	 */
+	@RequestMapping(value = "/detailsData", method = RequestMethod.POST)
+	public @ResponseBody Customer getCustomerDetails(Long id){
+		return customerService.getCustomer(id);
+	}
+	/**
+	 * 评论
+	 * 
+	 * @param roomId
+	 * @param orderId
+	 * @param from
+	 * @param to
+	 * @param c_score
+	 * @param feel
+	 * @param pics
+	 * @return
+	 */
+	@RequestMapping(value = "/comment", method = RequestMethod.POST)
+	public @ResponseBody Message postComment(Long roomId, Long orderId, Long from, Long to, String[] c_score,
+			String feel, String[] pics) {
+		try {
+			Comment comment = new Comment();
+			comment.setFromWho(from);
+			comment.setToWho(to);
+			comment.setRoomId(roomId);
+			comment.setScore(StringSplitUtil.buildStrGroup(c_score));
+			comment.setFeel(feel);
+			comment.setPics(StringSplitUtil.buildStrGroup(pics));
+			comment.setTime(new Date().getTime());
+			comment.setHasRead(false);
+
+			Order o = orderservice.get(orderId);
+			comment.setEntryTime(o.getStartTime());
+
+			commentService.add(comment);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "评论成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "评论失败");
+		}
+	}
+	
 	
 	public Map<String, Object> caculatePrice(String startTime, String endTime, Long apartmentId) {
 		Map<String, Object> info = new HashMap<String, Object>();
