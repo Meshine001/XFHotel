@@ -354,7 +354,7 @@ function kui_mouseout_(obj){
 	$(obj).removeClass('td_hover');
 }
 
-//点击事件
+
 function kui_click_(obj,now_date,kui_y,kui_m,kui_d){
 	var cla = obj.className;
 	if(cla.indexOf('kui_td_hui') < 0){

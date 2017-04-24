@@ -1,4 +1,4 @@
-var Constant = {
+﻿var Constant = {
     URL: "http://192.168.1.109:8080/hotel"
 };
 $(document).ready(function(){

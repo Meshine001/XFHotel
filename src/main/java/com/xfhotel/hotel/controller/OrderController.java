@@ -71,9 +71,9 @@ public class OrderController {
 	public String orderModule(String startTime, String endTime, Long apartmentId) throws Exception {
 		session.setAttribute("oStart", startTime);
 		session.setAttribute("oEnd", endTime);
-
+		System.out.println(startTime+endTime);
 		Map<String, Object> priceInfo = caculatePrice(startTime, endTime, apartmentId);
-
+		System.out.println(priceInfo);
 		session.setAttribute("oTotalDay", TimeUtil.daysBetween(startTime, endTime));
 		session.setAttribute("oPrice", priceInfo.get("price"));
 		session.setAttribute("oTotalPrice", priceInfo.get("totalPrice"));
@@ -206,16 +206,19 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range) {
+	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range)
+	{
 		try {
 			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
+			System.out.println(maps);
 			for (Order o : orders) {
 				Map m = o.toMap();
 				Map room = roomService.getRoomInfo(o.getRoomId());
 				Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
 				m.put("apartment", apartment);
 				maps.add(m);
+				System.out.println(maps+"sS");
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {

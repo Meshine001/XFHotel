@@ -84,6 +84,7 @@ public class CustomerController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public @ResponseBody Message login(String tel, String password, Model model) {
+		
 		Customer c = customerService.login(tel, password);
 		if (c != null) {
 			session.setAttribute("c", c);

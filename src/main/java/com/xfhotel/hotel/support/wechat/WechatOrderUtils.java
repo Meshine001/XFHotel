@@ -24,71 +24,71 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class WechatOrderUtils {
 
-	public static synchronized JSONObject query(String out_trade_no){
-		JSONObject result = new JSONObject();
-		if(StringUtils.isBlank(out_trade_no)){
-			Log.error("微信支查询订单请求错误：请求参数不足", null);
-			result.put("status", "error");
-			result.put("msg", "请求参数不足");
-			result.put("obj", null);
-			return result;
-		}
-		
-		String wx_query = Config.WX_QUERY_URL;
-		String appid = Config.MCH_APPID;// 应用ID
-		String mchid = Config.MCHID;// 商户ID
-		String wx_key = Config.WX_KEY;// 微信商户后台设置的key
-		
-		if (StringUtils.isBlank(mchid)||StringUtils.isBlank(appid)||StringUtils.isBlank(wx_key)) {
-			Log.error("微信支申请退款请求错误：系统配置信息缺失", null);
-			result.put("status", "error");
-			result.put("msg", "系统配置信息缺失");
-			result.put("obj", null);
-			return result;
-		}
-		
-		String xml = "<xml>"+
-					   "<appid>APPID</appid>"+
-					   "<mch_id>MERCHANT</mch_id>"+
-					   "<nonce_str>NONCE_STR</nonce_str>"+
-					   "<out_trade_no>OUT_TRADE_NO</out_trade_no>"+
-					   "<sign>SIGN</sign>"+
-			   		"</xml>";
-
-		String nonceStr = getRandomString(32);
-
-		xml = xml.replace("APPID", appid);
-		xml = xml.replace("MERCHANT", mchid);
-		xml = xml.replace("NONCE_STR", nonceStr);
-		xml = xml.replace("OUT_TRADE_NO", out_trade_no);
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("appid", appid);
-		map.put("mch_id", mchid);
-		map.put("nonce_str", nonceStr);
-		map.put("out_trade_no", out_trade_no);
-
-		String sign = SignatureUtils.signature(map, wx_key);
-		xml = xml.replace("SIGN", sign);
-		
-		String response = "";
-		try {// 注意，此处的httputil一定发送请求的时候一定要注意中文乱码问题，中文乱码问题会导致在客户端加密是正确的，可是微信端返回的是加密错误
-			response = HttpUtils.post(wx_query, xml);
-		} catch (Exception e) {
-			Log.error("微信支申请退款请求错误:http请求失败", e);
-			result.put("status", "error");
-			result.put("msg", "http请求失败");
-			result.put("obj", null);
-			return result;
-		}
-
-		XStream s = new XStream(new DomDriver());
-		s.alias("xml", WechatQuery.class);
-		WechatQuery order = (WechatQuery) s.fromXML(response);
-		
-	}
-	
-	
+//	public static synchronized JSONObject query(String out_trade_no){
+//		JSONObject result = new JSONObject();
+//		if(StringUtils.isBlank(out_trade_no)){
+//			Log.error("微信支查询订单请求错误：请求参数不足", null);
+//			result.put("status", "error");
+//			result.put("msg", "请求参数不足");
+//			result.put("obj", null);
+//			return result;
+//		}
+//		
+//		String wx_query = Config.WX_QUERY_URL;
+//		String appid = Config.MCH_APPID;// 应用ID
+//		String mchid = Config.MCHID;// 商户ID
+//		String wx_key = Config.WX_KEY;// 微信商户后台设置的key
+//		
+//		if (StringUtils.isBlank(mchid)||StringUtils.isBlank(appid)||StringUtils.isBlank(wx_key)) {
+//			Log.error("微信支申请退款请求错误：系统配置信息缺失", null);
+//			result.put("status", "error");
+//			result.put("msg", "系统配置信息缺失");
+//			result.put("obj", null);
+//			return result;
+//		}
+//		
+//		String xml = "<xml>"+
+//					   "<appid>APPID</appid>"+
+//					   "<mch_id>MERCHANT</mch_id>"+
+//					   "<nonce_str>NONCE_STR</nonce_str>"+
+//					   "<out_trade_no>OUT_TRADE_NO</out_trade_no>"+
+//					   "<sign>SIGN</sign>"+
+//			   		"</xml>";
+//
+//		String nonceStr = getRandomString(32);
+//
+//		xml = xml.replace("APPID", appid);
+//		xml = xml.replace("MERCHANT", mchid);
+//		xml = xml.replace("NONCE_STR", nonceStr);
+//		xml = xml.replace("OUT_TRADE_NO", out_trade_no);
+//		
+//		Map<String, String> map = new HashMap<String, String>();
+//		map.put("appid", appid);
+//		map.put("mch_id", mchid);
+//		map.put("nonce_str", nonceStr);
+//		map.put("out_trade_no", out_trade_no);
+//
+//		String sign = SignatureUtils.signature(map, wx_key);
+//		xml = xml.replace("SIGN", sign);
+//		
+//		String response = "";
+//		try {// 注意，此处的httputil一定发送请求的时候一定要注意中文乱码问题，中文乱码问题会导致在客户端加密是正确的，可是微信端返回的是加密错误
+//			response = HttpUtils.post(wx_query, xml);
+//		} catch (Exception e) {
+//			Log.error("微信支申请退款请求错误:http请求失败", e);
+//			result.put("status", "error");
+//			result.put("msg", "http请求失败");
+//			result.put("obj", null);
+//			return result;
+//		}
+//
+//		XStream s = new XStream(new DomDriver());
+//		s.alias("xml", WechatQuery.class);
+//		WechatQuery order = (WechatQuery) s.fromXML(response);
+//		
+//	}
+//	
+//	
 	/**
 	 * 申请退款
 	 * @param out_trade_no
