@@ -216,6 +216,12 @@ public class Order {
 	public void setNeedFapiao(boolean needFapiao) {
 		this.needFapiao = needFapiao;
 	}
+	
+	
+
+	public String getPayPlatform() {
+		return payPlatform;
+	}
 
 	public Map toMap(){
 		Map info = new HashMap();

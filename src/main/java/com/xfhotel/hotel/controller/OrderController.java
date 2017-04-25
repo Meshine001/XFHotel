@@ -69,14 +69,21 @@ public class OrderController {
 			//TODO 退押金
 			String[] prices = o.getPrice().split("@");
 			String refundFee = prices[prices.length-1];
-			JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), refundFee);
-			if("success".equals(result.getString("status"))){
+			if(Order.PAY_PLATFORM_WECHAT.equals(o.getPayPlatform())){
+				JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), refundFee);
+				if("success".equals(result.getString("status"))){
+					o.setStatus(Order.STATUS_COMPLETE);
+					orderservice.update(o);
+					return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
+				}else{
+					return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
+				}
+			}else{
 				o.setStatus(Order.STATUS_COMPLETE);
 				orderservice.update(o);
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
-			}else{
-				return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
 			}
+			
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

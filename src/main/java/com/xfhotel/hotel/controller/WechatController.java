@@ -208,6 +208,8 @@ public class WechatController {
 		Order order = orderService.get(id);
 		if (order == null)
 			return null;
+		order.setPayPlatform(Order.PAY_PLATFORM_WECHAT);
+		orderService.update(order);
 
 		String detail = order.getDescription();
 		String desc = "青舍都市";
@@ -245,7 +247,7 @@ public class WechatController {
 		String amount = order.getTotalPrice();
 		String type = "NATIVE";
 		JSONObject response = WechatOrderUtils.createOrder(detail, desc, "", ip, goodSn, orderSn, amount, type);
-		order.setPayPlatform("wx");
+		order.setPayPlatform(Order.PAY_PLATFORM_WECHAT);
 		orderService.update(order);
 		
 		return response;
