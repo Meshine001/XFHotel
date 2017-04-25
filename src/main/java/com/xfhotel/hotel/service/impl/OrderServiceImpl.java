@@ -47,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
 		
 		o.setPayNo(DateUtil.format(new Date(), "yyyyMMdd")+sb.toString());
 		orderDAO.saveOrUpdate(o);
+		
 	}
 
 	@Transactional
