@@ -10,8 +10,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,7 @@ import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
+import com.xfhotel.hotel.support.pay.WechatPaySDK;
 import com.xfhotel.hotel.support.wechat.WechatOrderUtils;
 
 import net.sf.json.JSONObject;
@@ -62,9 +66,25 @@ public class OrderController {
 	public Message outLease(Long orderId){
 		try {
 			Order o = orderservice.get(orderId);
-			o.setStatus(Order.STATUS_COMPLETE);
-			orderservice.update(o);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
+			//TODO 退押金
+			String[] prices = o.getPrice().split("@");
+			String refundFee = prices[prices.length-1];
+			if(Order.PAY_PLATFORM_WECHAT.equals(o.getPayPlatform())){
+				JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), refundFee);
+				if("success".equals(result.getString("status"))){
+					o.setStatus(Order.STATUS_COMPLETE);
+					orderservice.update(o);
+					return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
+				}else{
+					return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
+				}
+			}else{
+				o.setStatus(Order.STATUS_COMPLETE);
+				orderservice.update(o);
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
+			}
+			
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -93,6 +113,7 @@ public class OrderController {
 		session.setAttribute("oTotalDay", TimeUtil.daysBetween(startTime, endTime));
 		session.setAttribute("oPrice", priceInfo.get("price"));
 		session.setAttribute("oTotalPrice", priceInfo.get("totalPrice"));
+		session.setAttribute("oCashPledge", priceInfo.get("cashPledge"));
 		session.setAttribute("oPreferential", "");
 		return "customer/orderModule";
 	}
@@ -101,6 +122,7 @@ public class OrderController {
 		Map<String, Object> info = new HashMap<String, Object>();
 		StringBuffer sb = new StringBuffer();
 		Double sum = 0.00D;
+		Double cashPledge = 1500D;
 		Apartment apartment = apartmentService.findById(apartmentId);
 		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
 		for (int i = 0; i < days.size() - 1; i++) {
@@ -118,7 +140,9 @@ public class OrderController {
 			}
 			sum += pp;
 		}
+		sum += cashPledge;
 		info.put("price", sb.toString());
+		info.put("cashPledge", cashPledge);
 		info.put("totalPrice", sum);
 		return info;
 	}
@@ -160,8 +184,10 @@ public class OrderController {
 	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
 			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
 			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
-		
-		Order o = new Order();
+//		System.out.println(startTime);
+//		System.out.println(startTime+" 12:00");
+		System.out.println(description+"sda"+preferential+"大大adsas"+personal+needFapiao);
+				Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
 		o.setRoomId(roomId);
@@ -169,16 +195,13 @@ public class OrderController {
 		o.setCusTel(cusTel);
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
-		
 		try {
-			o.setStartTime(DateUtil.parse(startTime, "yyyy-MM-dd").getTime());
-			o.setEndTime(DateUtil.parse(endTime, "yyyy-MM-dd").getTime());
+			o.setStartTime(DateUtil.parse(startTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
+			o.setEndTime(DateUtil.parse(endTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			
 			e.printStackTrace();
 		}
-		
 		o.setTime(new Date().getTime());
 		o.setTotalDay(totalDay);
 		o.setPrice(price);
@@ -187,11 +210,32 @@ public class OrderController {
 		o.setType(Apartment.getTypeNum(apartmentType));
 		o.setStatus(Order.STATUS_ON_PAY);
 		o.setNeedFapiao(needFapiao);
-		System.out.println("打死");
 		orderservice.add(o);
-		System.out.println("表个白");
-		System.out.println("dasda");
+		
 		return "redirect:pay/" + o.getId();
+	}
+
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public String orderDetails(Long orderId) {
+		// TODO
+		Order o = orderservice.get(orderId);
+		session.setAttribute("order", o);
+		return "customer/orderDetails";
+	}
+
+	/**
+	 * 用户查看房间密码
+	 * 
+	 * @param orderId
+	 * @return
+	 */
+	@RequestMapping(value = "/viewLockPsd", method = RequestMethod.GET)
+	public String viewLockPsd(Long orderId) {
+		// TODO 还需要加入一些权限限制
+		Order o = orderservice.get(orderId);
+
+		session.setAttribute("lockPsd", "123213");
+		return "customer/viewLockPsd";
 	}
 
 	/**
@@ -218,6 +262,7 @@ public class OrderController {
 				Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
 				m.put("apartment", apartment);
 				maps.add(m);
+				System.out.println(maps+"sS");
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {
@@ -258,11 +303,6 @@ public class OrderController {
 	@RequestMapping(value = "/comment/post", method = RequestMethod.POST)
 	public @ResponseBody Message postComment(Long roomId, Long orderId, Long from, Long to, String[] c_score,
 			String feel, String[] pics) {
-		System.out.println(roomId);
-		System.out.println(orderId);
-		System.out.println(from);
-		System.out.println(to);
-		System.out.println(c_score);
 		try {
 			Comment comment = new Comment();
 			comment.setFromWho(from);
@@ -289,10 +329,9 @@ public class OrderController {
 	@RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
 	public String pay(@PathVariable("id") Long id) {
 		Order order = orderservice.get(id);
-		System.out.println(order);
-		
-//		System.out.println(JSONObject.wrap(order.toMap()).toString());
-		return "customer/order" ;
+		session.setAttribute("order", order.toMap());
+		// System.out.println(JSONObject.wrap(order.toMap()).toString());
+		return "customer/order";
 	}
 
 	/**

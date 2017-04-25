@@ -1,5 +1,6 @@
 package com.xfhotel.hotel.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,6 +30,7 @@ import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
+import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
@@ -179,16 +181,20 @@ public class MobileController  {
 		}
 		
 	}
+	
 	@RequestMapping(value = "/module", method = RequestMethod.POST)
 	public  @ResponseBody Map orderModule(String startTime, String endTime, Long apartmentId) throws Exception {
 		Map<String,Object> info = new HashMap<String, Object>();
 		info.put("oStart", startTime);
 		info.put("oEnd", endTime);
 		Map<String, Object> priceInfo = caculatePrice(startTime, endTime, apartmentId);
+		
 		info.put("oTotalDay",TimeUtil.daysBetween(startTime, endTime));
 		info.put("oPrice", priceInfo.get("price"));
 		info.put("oTotalPrice", priceInfo.get("totalPrice"));
+		info.put("oCashPledge", priceInfo.get("cashPledge"));
 		info.put("oPreferential", "");
+		System.out.println();
 		return info;
 	}
 	
@@ -261,15 +267,6 @@ public class MobileController  {
 			comment.setPics(StringSplitUtil.buildStrGroup(pics));
 			comment.setTime(new Date().getTime());
 			comment.setHasRead(false);
-			System.out.println(roomId+"  123");
-			System.out.println(orderId+"  13");
-			System.out.println(from+"  8");
-			System.out.println(to+"   19");
-			System.out.println(c_score+"     3");
-			System.out.println(feel+"  6");
-			System.out.println(pics+"  1999923");
-			
-
 			Order o = orderservice.get(orderId);
 			comment.setEntryTime(o.getStartTime());
 
@@ -280,6 +277,62 @@ public class MobileController  {
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "评论失败");
 		}
+	}
+	/**
+	 * 用户提交订单 房间详细信息页，确认订单触发
+	 * 
+	 * @param cusId
+	 * @param description
+	 * @param roomId
+	 * @param cusName
+	 * @param cusTel
+	 * @param cusIdCard
+	 * @param personal
+	 * @param startTime
+	 * @param endTime
+	 * @param totalDay
+	 * @param price
+	 * @param totalPrice
+	 * @param preferential
+	 * @param needFapiao
+	 * @param apartmentType
+	 * @return
+	 */
+	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
+	public @ResponseBody Map orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
+			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
+			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
+//		System.out.println(startTime);
+//		System.out.println(startTime+" 12:00");
+		System.out.println(cusId+description+roomId+cusName+cusTel+cusIdCard+personal+startTime+endTime+totalDay+price+totalPrice+preferential+needFapiao+apartmentType);
+				Order o = new Order();
+		o.setCusId(cusId);
+		o.setDescription(description);
+		o.setRoomId(roomId);
+		o.setCusName(cusName);
+		o.setCusTel(cusTel);
+		o.setCusIdCard(cusIdCard);
+		o.setPersonal(personal);
+		try {
+			o.setStartTime(DateUtil.parse(startTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
+			o.setEndTime(DateUtil.parse(endTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		o.setTime(new Date().getTime());
+		o.setTotalDay(totalDay);
+		o.setPrice(price);
+		o.setTotalPrice(totalPrice);
+		o.setPreferential(preferential);
+		o.setType(Apartment.getTypeNum(apartmentType));
+		o.setStatus(Order.STATUS_ON_PAY);
+		o.setNeedFapiao(needFapiao);
+		orderservice.add(o);
+		Order order = orderservice.get(o.getId());
+		Map<String, Object> info = new HashMap<String, Object>();
+		info.put("order", order.toMap());
+		return info;
 	}
 	
 	@RequestMapping(value = "/changePsd", method = RequestMethod.POST)
@@ -315,6 +368,7 @@ public class MobileController  {
 		Map<String, Object> info = new HashMap<String, Object>();
 		StringBuffer sb = new StringBuffer();
 		Double sum = 0.00D;
+		Double cashPledge = 1922D;
 		Apartment apartment = apartmentService.findById(apartmentId);
 		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
 		for (int i = 0; i < days.size() - 1; i++) {
@@ -331,8 +385,11 @@ public class MobileController  {
 				sb.append("@" + pp);
 			}
 			sum += pp;
+			
 		}
+		sum=sum+cashPledge;
 		info.put("price", sb.toString());
+		info.put("cashPledge", cashPledge);
 		info.put("totalPrice", sum);
 		return info;
 	}

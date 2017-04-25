@@ -128,7 +128,8 @@ public class ClientCustomSSL {
 	private static void init() throws Exception{
 		if(keyStore == null){
 			keyStore = KeyStore.getInstance("PKCS12");
-			FileInputStream instream = new FileInputStream(new File("C:/Users/Ming/apiclient_cert.p12"));
+			String filePath = ClientCustomSSL.class.getClassLoader().getResource("apiclient_cert.p12").getPath();
+			FileInputStream instream = new FileInputStream(new File(filePath));
 			try {
 				keyStore.load(instream, Config.MCHID.toCharArray());
 			} finally {

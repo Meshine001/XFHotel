@@ -123,8 +123,8 @@
 			</div>
 		</div>
 		<div class="order_step">
-			<a type="button" class="btn_sub ng-binding btn_sub_only" data-payType="wechat">下一步</a>
-			<a type="button" class="btn_sub ng-binding btn_sub_over" data-payType="pay-over" style="none;">已完成支付</a>
+			<a href="javascript:void(0);" type="button" class="btn_sub ng-binding btn_sub_only" data-payType="wechat"  style="cursor: pointer;">下一步</a>
+			<a href="javascript:void(0);" type="button" class="btn_sub ng-binding btn_sub_over" data-payType="pay-over" style="display: none;cursor: pointer;">已完成支付</a>
 			<!-- <a href="<%=basePath%>/order/payOver/${order.id}?status=2"
 				class="btn_sub ng-binding">下一步</a> -->
 		</div>
@@ -151,40 +151,46 @@
 			};
 		
 			//支付
-			$('.btn_sub .btn_sub_only').click(function(){
-				$('.pay-type li').each(function(index,e){
-					if($(e).hasClass('curr')){
-						
-						//微信支付
-						if($(e).attr('payType')=='weixin'){
-							$.ajax({
-								url:'../../wechat/pay/nativeOrder',
-								method:'POST',
-								async:true,
-								data:{
-									id:$('.pay-type').attr('data-id'),
-									ip:clientIp
-								},
-								success:function(data){
-									if(data.status=='success'){
-										$('#wechatQRCode').attr('src','../../wechat/QRCode?url='+data.obj.url);
-										$('#wechatTip').hide();
-										$('#wechatQR').show();
-										$('.btn_sub_only').hide();
-										$('.btn_sub_over').show();
+			$('.btn_sub').click(function(sub){
+				//支付
+				if($(sub.target).hasClass('btn_sub_only')){
+					$('.pay-type li').each(function(index,e){
+						if($(e).hasClass('curr')){
+							//微信支付
+							if($(e).attr('payType')=='weixin'){
+								$.ajax({
+									url:'../../wechat/pay/nativeOrder',
+									method:'POST',
+									async:true,
+									data:{
+										id:$('.pay-type').attr('data-id'),
+										ip:clientIp
+									},
+									success:function(data){
+										if(data.status=='success'){
+											$('#wechatQRCode').attr('src','../../wechat/QRCode?url='+data.obj.url);
+											$('#wechatTip').hide();
+											$('#wechatQR').show();
+											$('.btn_sub_only').hide();
+											$('.btn_sub_over').show();
+										}
+										
+										//关键在这里，Ajax定时访问服务端，不断获取数据 ，这里是1秒请求一次。
+										window.setInterval(function(){$.ajax(getting)},2000);
+									},
+									error:function(){
+										alert('系统错误，请重试！！');
 									}
-									
-									//关键在这里，Ajax定时访问服务端，不断获取数据 ，这里是1秒请求一次。
-									window.setInterval(function(){$.ajax(getting)},2000);
-								},
-								error:function(){
-									alert('系统错误，请重试！！');
-								}
-							});
+								});
+							}
+							
 						}
-						
-					}
-				});
+					});
+				}else{
+					//支付完成点击
+					
+				}
+			
 				
 			});
 			

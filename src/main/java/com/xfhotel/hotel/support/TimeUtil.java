@@ -150,6 +150,18 @@ public class TimeUtil {
 		}
 		return l;
 	}
+	public static Long getDateLong(String date,String pattern) {
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		Long l = 0L;
+		try {
+			l = sdf.parse(date).getTime();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return l;
+	}
+
 
 	@SuppressWarnings("deprecation")
 	public static Long getCurrentDateLong() {
