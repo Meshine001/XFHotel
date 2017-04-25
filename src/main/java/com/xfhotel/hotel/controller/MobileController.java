@@ -369,6 +369,7 @@ public class MobileController  {
 		StringBuffer sb = new StringBuffer();
 		Double sum = 0.00D;
 		Double cashPledge = 1922D;
+		
 		Apartment apartment = apartmentService.findById(apartmentId);
 		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
 		for (int i = 0; i < days.size() - 1; i++) {
