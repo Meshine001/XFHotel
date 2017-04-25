@@ -11,16 +11,16 @@ var resiger={
         resiger.inputList.push($("#login-phone"),$("#login-password"),$("#repwd"),$("#yzcode"));
         resiger.btnList.push($("#fetch-cmd"),$("#login_submit"));
 
-        //¶ÌÐÅÑéÖ¤Âë
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½
         resiger.btnList[0].click(function(){
             var phoneNumber=resiger.inputList[0].val();
             if(phoneNumber==""){
-                fnBase.myalert("ÇëÌîÐ´ÊÖ»úºÅÂë");
+                fnBase.myalert("ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½");
                 return;
             }
             var myreg = /^0?1[3|4|5|6|7|8][0-9]\d{8}$/;
             if (!myreg.test(phoneNumber)) {
-                fnBase.myalert("ÊÖ»úºÅÂëÓÐÎó£¡ ÇëÊäÈë11Î»Êý×Ö");
+                fnBase.myalert("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½11Î»ï¿½ï¿½ï¿½ï¿½");
                 return;
             }
             var frontURL=Constant.URL+"/mobile/sendVCode";
@@ -28,20 +28,20 @@ var resiger={
 
             $.ajax({
                 type: 'get',
-                url:'http://192.168.1.109:8080/hotel/mobile/sendVCode',
+                url:'http://localhost:8080/hotel/mobile/sendVCode',
                 dataType:'json',
                 data:{"tel":phoneNumber},
                 success:function(data){
                     console.log(data);
-                    fnBase.myalert("¶ÌÐÅ·¢ËÍ³É¹¦")
+                    fnBase.myalert("ï¿½ï¿½ï¿½Å·ï¿½ï¿½Í³É¹ï¿½")
                 }
             });
             //fnBase.commonAjax(frontURL,postData,function(data){
             //    console.log(data);
             //    if(data.statusCode=="1"){
-            //        fnBase.myalert("¶ÌÐÅ·¢ËÍ³É¹¦");
+            //        fnBase.myalert("ï¿½ï¿½ï¿½Å·ï¿½ï¿½Í³É¹ï¿½");
             //    }else{
-            //        fnBase.myalert("¶ÌÐÅ·¢ËÍÊ§°Ü")
+            //        fnBase.myalert("ï¿½ï¿½ï¿½Å·ï¿½ï¿½ï¿½Ê§ï¿½ï¿½")
             //    }
             //});
             resiger.timePrompt();
@@ -52,12 +52,12 @@ var resiger={
 
 
 
-        //×¢²á¾ÍÊÇÕâ¸ö£¬ÊÖ»úÁ¬wifiÃ»¡£Î¢ÐÅÀ´ÓïÒô Ìý²»µ½ÐÅºÅ²»ºÃ
+        //×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½wifiÃ»ï¿½ï¿½Î¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅºÅ²ï¿½ï¿½ï¿½
         resiger.inputList[3].blur(function(){
             var phoneNumber=resiger.inputList[0].val();
             var _yzm=resiger.inputList[3].val();
             if(_yzm==""){
-                fnBase.myalert("ÇëÌîÐ´ÑéÖ¤Âë");
+                fnBase.myalert("ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½Ö¤ï¿½ï¿½");
                 return;
             }
             var frontURL=Constant.URL+"/mobile/checkVCode";
@@ -72,7 +72,11 @@ var resiger={
             //});
             $.ajax({
                 type: 'get',
-                url:'http://192.168.1.109:8080/hotel/mobile/checkVCode',
+                url:'http://localhost:8080/hotel/mobile/checkVCode',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
                 dataType:'json',
                 data:{"tel":phoneNumber,"vCode":_yzm},
                 success:function(data){
@@ -92,35 +96,35 @@ var resiger={
         resiger.btnList[1].click(function(){
             var phoneNumber=resiger.inputList[0].val();
             if(phoneNumber==""){
-                fnBase.myalert("ÇëÌîÐ´ÊÖ»úºÅÂë");
+                fnBase.myalert("ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½");
                 return;
             }
             var myreg = /^0?1[3|4|5|6|7|8][0-9]\d{8}$/;
             if (!myreg.test(phoneNumber)) {
-                fnBase.myalert("ÊÖ»úºÅÂëÓÐÎó£¡ ÇëÊäÈë11Î»Êý×Ö");
+                fnBase.myalert("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½11Î»ï¿½ï¿½ï¿½ï¿½");
                 return;
             }
             var _yzm=resiger.inputList[3].val();
             if(_yzm==""){
-                fnBase.myalert("ÇëÌîÐ´ÑéÖ¤Âë");
+                fnBase.myalert("ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½Ö¤ï¿½ï¿½");
                 return;
             }
             var password=resiger.inputList[1].val();
             if(password==""){
-                fnBase.myalert("ÇëÌîÐ´ÃÜÂë");
+                fnBase.myalert("ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½");
                 return;
             }
             if(password.length<6){
-                fnBase.myalert("ÃÜÂëÖÁÉÙÊÇ6Î»");
+                fnBase.myalert("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½6Î»");
                 return;
             }
             var repwd=resiger.inputList[2].val();
             if(repwd==""){
-                fnBase.myalert("ÇëÔÙ´ÎÌîÐ´ÃÜÂë");
+                fnBase.myalert("ï¿½ï¿½ï¿½Ù´ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½");
                 return;
             }
             if(repwd!=password){
-                fnBase.myalert("Á½´ÎÊäÈëµÄÃÜÂë²»Ò»ÖÂ");
+                fnBase.myalert("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²»Ò»ï¿½ï¿½");
                 return;
             }
 
@@ -132,7 +136,7 @@ var resiger={
             fnBase.commonAjax(frontURL,postDatat,function(data){
                 console.log(data);
                 if(data.statusCode=="1"){
-                    fnBase.myalert("¹§Ï²Äú×¢²á³É¹¦");
+                    fnBase.myalert("ï¿½ï¿½Ï²ï¿½ï¿½×¢ï¿½ï¿½É¹ï¿½");
                     sessionStorage.clear();
                     localStorage.clear();
                     fnBase.keep(0,"uid",data.info.m_id);
@@ -150,16 +154,16 @@ var resiger={
     timePrompt:function(){
         var total=60;
         var mytimecont;
-        resiger.btnList[0].text("60ÃëºóÖØ·¢");
+        resiger.btnList[0].text("60ï¿½ï¿½ï¿½ï¿½Ø·ï¿½");
         clearInterval(mytimecont);
         mytimecont=setInterval(function(){
             total=total-1;
-            var str=total+"ÃëºóÖØ·¢";
+            var str=total+"ï¿½ï¿½ï¿½ï¿½Ø·ï¿½";
             resiger.btnList[0].text(str);
             if(total<=0){
                 clearInterval(mytimecont);
                 resiger.sendCoded=false;
-                resiger.btnList[0].text("¶ÌÐÅÑéÖ¤Âë");
+                resiger.btnList[0].text("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½");
             }
         },1000)
     }
