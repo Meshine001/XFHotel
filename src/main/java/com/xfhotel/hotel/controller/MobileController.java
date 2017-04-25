@@ -126,6 +126,7 @@ public class MobileController  {
 
 	@RequestMapping(value="/checkVCode")  
 	public @ResponseBody Message checkVCode(String tel,String vCode){
+		System.out.println(session.getId());
 		try {
 			Map<String, Object> sVCode = (Map<String, Object>) session.getAttribute("vCode");
 			String sTel = (String) sVCode.get("tel");
@@ -156,6 +157,7 @@ public class MobileController  {
 	 */
 	@RequestMapping(value="/sendVCode")  
 	public @ResponseBody Message sendTelValidateCode(String tel){
+		System.out.println(session.getId());
 		try {
 			String vCodeStr= SendTemplateSMS.generateValidateCode();
 			String[] args = {vCodeStr,Constants.SMS_AVAILBEL_TIME_STR};

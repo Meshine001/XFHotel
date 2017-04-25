@@ -53,6 +53,26 @@ public class OrderController {
 	HttpSession session;
 
 	/**
+	 * 退租
+	 * @param orderId
+	 * @return
+	 */
+	@RequestMapping(value = "/outLease", method = RequestMethod.POST)
+	@ResponseBody
+	public Message outLease(Long orderId){
+		try {
+			Order o = orderservice.get(orderId);
+			o.setStatus(Order.STATUS_COMPLETE);
+			orderservice.update(o);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
+		}
+	}
+	
+	/**
 	 * 返回订单模板，在房间信息页，点击‘立即预定’触发
 	 * 
 	 * @param startTime

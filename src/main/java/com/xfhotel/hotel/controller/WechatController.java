@@ -28,10 +28,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.swetake.util.Qrcode;
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.service.ApartmentService;
+import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
+import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.wechat.Config;
 import com.xfhotel.hotel.support.wechat.HttpUtils;
 import com.xfhotel.hotel.support.wechat.Log;
@@ -47,7 +53,15 @@ public class WechatController {
 	HttpSession session;
 
 	@Autowired
+	LockService lockService;
+	@Autowired
 	OrderService orderService;
+	@Autowired
+	RoomService roomService;
+	@Autowired
+	ApartmentService apartmentService;
+	@Autowired
+	CustomerService customerService;
 
 	/**
 	 * 判断订单是否已经支付
@@ -144,60 +158,49 @@ public class WechatController {
 	}
 
 	/**
-	 * 微信公众号调起
-	 * 
-	 * @param detail
-	 *            商品描述
-	 * @param desc
-	 *            商品详情
-	 * @param goodSn
-	 *            商品编号
-	 * @param openId
-	 *            用户openid
-	 * @param orderSn
-	 *            订单号
-	 * @param amount
-	 *            金额
-	 * @return 返回包装了调起jssdk所需要的函数
+	 * 公共号支付
+	 * @param id
+	 * @param ip
+	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/pay/jsOrder")
+	@RequestMapping(value="/pay/jsOrder",method = RequestMethod.POST)
 	@ResponseBody
-	public String jsOrder(HttpServletRequest request, String detail, String desc, String goodSn, String orderSn,
-			String amount) throws Exception {
-		JSONObject auth = (JSONObject) session.getAttribute("wechatAuth");
-		String openId = auth.getString("openid");
-		String ip = WechatOrderUtils.getClientIp(request);
-		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, "JSAPI");
-		return result.toString();
+	public JSONObject jsOrder(Long id, String ip) throws Exception {
+		Order order = orderService.get(id);
+		if (order == null)
+			return null;
+
+		String detail = order.getDescription();
+		String desc = "青舍都市";
+		Customer c = customerService.getCustomer(order.getCusId());
+		String openId = c.getWechatOpenId();
+		String goodSn = "" + order.getRoomId();
+		String orderSn = order.getPayNo();
+		String amount = order.getTotalPrice();
+		String type = "JSAPI";
+		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, type);
+		
+		return result;
 	}
 
 	/**
-	 * 获取PC端网页支付二维码
-	 * 
-	 * @param detail
-	 *            商品描述
-	 * @param desc
-	 *            商品详情
-	 * @param goodSn
-	 *            商品编号
-	 * @param orderSn
-	 *            订单号
-	 * @param amount
-	 *            金额
-	 * @param response
+	 * 二维码支付
+	 * @param id
+	 * @param ip
+	 * @return
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/pay/nativeOrder", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject nativeOrder(Long id, String ip, HttpServletRequest request) throws IOException {
+	public JSONObject nativeOrder(Long id, String ip) throws IOException {
 		Order order = orderService.get(id);
 		if (order == null)
 			return null;
 
 		// TODO 向微信下订单,并获取扫一扫地址
-		String detail = "房间预订";
-		String desc = order.getDescription();
+		String detail = order.getDescription();
+		String desc = "青舍都市";
 		String goodSn = "" + order.getRoomId();
 		// String orderSn = ""+order.getId();
 		String orderSn = order.getPayNo();
@@ -290,9 +293,20 @@ public class WechatController {
 			if ("SUCCESS".equals(result_code)) {
 				// 由于微信后台会同时回调多次，所以需要做防止重复提交操作的判断
 				// 此处放防止重复提交操作
-
+				String out_trade_no = map.get("out_trade_no");
+				Order o = orderService.getByPayNo(out_trade_no);
+				//发送门锁密码
+				Long roomId = o.getRoomId();
+				Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
+				String lock_no = (String) apartmentService.getApartmentInfo(apartment).get("lock_address");
+				lockService.addPassword(o.getCusTel(), lock_no, TimeUtil.getDateStr(o.getStartTime()),
+						TimeUtil.getDateStr(o.getEndTime()));
+				//更改订单状态
+				o.setStatus(Order.STATUS_ON_LEASE);
+				orderService.update(o);
+					
 			} else if ("FAIL".equals(result_code)) {
-
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -10,6 +10,7 @@ public interface OrderService {
 	public void update(Order o);
 	public void delete(Order o);
 	public Order get(Long id);
+	public Order getByPayNo(String payNo);
 	public List<Order> list(int type);
 	public List<Order> listDiedOrders(int type);
 	public List<Order> getCustomerOrders(Long cId,int type);
