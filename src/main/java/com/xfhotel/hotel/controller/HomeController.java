@@ -250,12 +250,18 @@ public class HomeController {
 		return list;
 	}
 
+	/**
+	 * 获取两个月内的价格
+	 * @param id
+	 * @param startDate
+	 * @return
+	 */
 	public List<Map> get2MonthPrices(Long id,String startDate){
 		List<Map> prices = new ArrayList<Map>();
 		Apartment apartment = apartmentService.findById(id);
 		Map aInfo = apartmentService.getApartmentInfo(id);
 		Map room = ((ArrayList<Map>)aInfo.get("rooms")).get(0);
-		Long start = TimeUtil.getDateLong(startDate);
+		Long start = TimeUtil.getDateLong(startDate+" 12:00","yyyy-MM-dd hh:mm");
 		Long end = TimeUtil.getDatePlusMonth(new Date(start), 2).getTime();
 		//未来两个月特殊价格
 		List<Map> sp= apartmentService.getSpPrices(start, end, apartment);
@@ -291,7 +297,8 @@ public class HomeController {
 				}
 			}
 			for(Order o:availableOrders){
-				if( d.getTime()>=o.getStartTime() && d.getTime() <=o.getEndTime()){
+				Long tt = d.getTime()+1000*60*60*12;
+				if( tt>o.getStartTime() && tt<o.getEndTime()){
 					details.put("roomNum", "0");
 				}
 			}
@@ -301,6 +308,12 @@ public class HomeController {
 		return prices;
 	}
 	
+	/**
+	 * 价格日历数据源
+	 * @param id
+	 * @param startDate
+	 * @return
+	 */
 	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.GET)
 	public @ResponseBody Map getRangePrices(@PathVariable("id")Long id,@PathVariable("startDate")String startDate){
 		List<Map> prices = get2MonthPrices(id, startDate);

@@ -201,6 +201,8 @@ public class CustomerController {
 
 		return "/customer/setting";
 	}
+	
+	
 
 	/**
 	 * 检查手机是否被注册

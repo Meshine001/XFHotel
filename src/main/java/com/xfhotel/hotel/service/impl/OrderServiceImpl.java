@@ -219,4 +219,11 @@ public class OrderServiceImpl implements OrderService {
 		System.out.println(sb.toString());
 	}
 
+	@Transactional
+	@Override
+	public Order getByPayNo(String payNo) {
+		// TODO Auto-generated method stub
+		return orderDAO.getByHQL("from Order where payNo="+payNo, null);
+	}
+
 }
