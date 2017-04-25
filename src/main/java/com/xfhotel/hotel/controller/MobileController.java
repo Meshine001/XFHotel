@@ -6,26 +6,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BannerService;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
-import com.xfhotel.hotel.support.ImageValidateCode;
 import com.xfhotel.hotel.support.Message;
+import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 
 
@@ -33,6 +36,10 @@ import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 @Controller
 @RequestMapping("mobile")
 public class MobileController  {
+	private static final int String = 0;
+
+	private static final int HashMap = 0;
+
 	@Autowired
 	RoomService roomService;
 	
@@ -43,8 +50,14 @@ public class MobileController  {
 	@Autowired
 	CustomerService customerService;
 	
+	
+	@Autowired
+	OrderService orderservice;
+	
 	@Autowired
 	HttpSession session;
+	
+
 	
 	
 	@RequestMapping(value = "/home",method = RequestMethod.POST)
@@ -71,20 +84,21 @@ public class MobileController  {
 		
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public @ResponseBody Message login(String tel, String password ) {
-		System.out.println(tel);
-		Customer c = customerService.login(tel, password);
+	public @ResponseBody  Message login(String tel, String password) {
 		
+		Customer c = customerService.login(tel, password);
+		List<Customer>  list = customerService.list();
+		System.out.println(list);
 		if (c != null) {
 			session.setAttribute("c", c);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "登录成功");
 		} else {
 			return new Message(Constants.MESSAGE_ERR_CODE, "账号或密码错误");
 		}
-	
+
 	}
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-	public @ResponseBody Message reg (String tel, String password) {
+	public @ResponseBody Message reg(String tel, String password,Model model) {
 		if (customerService.checkTel(tel)) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "手机号已使用");
 		}
@@ -112,8 +126,7 @@ public class MobileController  {
 			String sTel = (String) sVCode.get("tel");
 			long diedLine = (Long) sVCode.get("diedLine");
 			String code = (String) sVCode.get("code");
-			System.out.println(sTel);
-			System.out.println(tel);
+
 			if(sTel.equals(tel) && code.equals(vCode)){
 				if(diedLine < new Date().getTime()){
 					return new Message(Constants.MESSAGE_ERR_CODE, "验证超时");
@@ -160,4 +173,80 @@ public class MobileController  {
 		}
 		
 	}
+	@RequestMapping(value = "/module", method = RequestMethod.POST)
+	public  @ResponseBody Map orderModule(String startTime, String endTime, Long apartmentId) throws Exception {
+		Map<String,Object> info = new HashMap<String, Object>();
+		info.put("oStart", startTime);
+		info.put("oEnd", endTime);
+		Map<String, Object> priceInfo = caculatePrice(startTime, endTime, apartmentId);
+		info.put("oTotalDay",TimeUtil.daysBetween(startTime, endTime));
+		info.put("oPrice", priceInfo.get("price"));
+		info.put("oTotalPrice", priceInfo.get("totalPrice"));
+		info.put("oPreferential", "");
+		return info;
+	}
+	
+	@RequestMapping(value = "/checkAvailable", method = RequestMethod.POST)
+	public @ResponseBody Message checkAvailable(Long roomId, String startTime, String endTime) {
+		System.out.println(startTime);
+		System.out.println(roomId);
+		System.out.println(endTime);
+		try {
+			List<Order> availableOders = orderservice.checkAvailable(roomId, startTime, endTime);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, availableOders);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "查询失败");
+		}
+
+	}
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range)
+	{
+		try {
+			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
+			List<Map> maps = new ArrayList<Map>();
+			for (Order o : orders) {
+				Map m = o.toMap();
+				Map room = roomService.getRoomInfo(o.getRoomId());
+				Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
+				m.put("apartment", apartment);
+				maps.add(m);
+				
+			}
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");
+	}
+	
+	public Map<String, Object> caculatePrice(String startTime, String endTime, Long apartmentId) {
+		Map<String, Object> info = new HashMap<String, Object>();
+		StringBuffer sb = new StringBuffer();
+		Double sum = 0.00D;
+		Apartment apartment = apartmentService.findById(apartmentId);
+		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
+		for (int i = 0; i < days.size() - 1; i++) {
+			Price p = apartmentService.getSpPrice(apartment, TimeUtil.getDateLong(days.get(i)));
+			Double pp = null;
+			if (p != null) {// 有特殊价格
+				pp = p.getPrice();
+			} else {
+				pp = Double.valueOf(apartment.getPrices());
+			}
+			if (i == 0) {
+				sb.append(pp);
+			} else {
+				sb.append("@" + pp);
+			}
+			sum += pp;
+		}
+		info.put("price", sb.toString());
+		info.put("totalPrice", sum);
+		return info;
+	}
+
 }

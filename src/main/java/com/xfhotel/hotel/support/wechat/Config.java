@@ -1,6 +1,10 @@
 package com.xfhotel.hotel.support.wechat;
 
-
+/**
+ * 微信相关配置
+ * @author Ming
+ *
+ */
 public class Config {
 	
 	
@@ -17,7 +21,15 @@ public class Config {
 	/**
 	 * 微信统一下单地址
 	 */
-	public static final String WX_ORDER_UR = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+	public static final String WX_ORDER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+	/**
+	 * 微信申请退款地址
+	 */
+	public static final String WX_REFUND_URL = "https://api.mch.weixin.qq.com/secapi/pay/refund";
+	/**
+	 * 微信查询订单地址
+	 */
+	public static final String WX_QUERY_URL = "https://api.mch.weixin.qq.com/pay/orderquery";
 	/**
 	 * 微信公众号APPID
 	 */

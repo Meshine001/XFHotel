@@ -14,7 +14,7 @@
     <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
     <script type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
     <script type="text/javascript" src="js/autoZoomLoadImage.js"></script>
-    <!--<script type="text/javascript" src="js/index.js"></script>-->
+    <script charset="gb2312" language="javascript" type="text/javascript" src="js/houseType.js"></script>
     <script type="text/javascript" src="js/fastclick.js"></script>
     <style>
         #Myscroll-body{top: 0.4rem}
@@ -42,35 +42,7 @@
     </div>
 <!--内容区域-->
     <div id="Myscroll-body">
-        <!-- 轮播-->
-        <!--<div class="swiper-container">-->
-            <!--<div class="swiper-wrapper">-->
-                <!--<div class="swiper-slide"><img src="images/bg1.jpg"/></div>-->
-                <!--<div class="swiper-slide"><img src="images/bg1.jpg"/></div>-->
-                <!--<div class="swiper-slide"><img src="images/bg1.jpg"/></div>-->
-            <!--</div>-->
-            <!--<div class="swiper-pagination"></div>-->
-        <!--</div>-->
-        <!--主页内容 酒店型公寓 | 短租型公寓 | 在线找房 | 青客生活 -->
-        <!--<div class="hot-issue">-->
-            <!--<a href="">-->
-                <!--<div class="img-wrapper"><img src="images/icnet1.jpg"></div>-->
-                <!--<div>酒店型公寓</div>-->
-            <!--</a>-->
-            <!--<a href="">-->
-                <!--<div class="img-wrapper"><img src="images/icnet1.jpg"></div>-->
-                <!--<div>休闲型公寓</div>-->
-            <!--</a>-->
-            <!--<a href="">-->
-                <!--<div class="img-wrapper"><img src="images/icnet1.jpg"></div>-->
-                <!--<div>服务中心</div>-->
-            <!--</a>-->
-            <!--<a href="">-->
-                <!--<div class="img-wrapper"><img src="images/icnet1.jpg"></div>-->
-                <!--<div>青客生活</div>-->
-            <!--</a>-->
-        <!--</div>-->
-        <!-- service-->
+
         <div class="service">
             <!--<h2 class="title-serce">热门房源<a href="">更多</a></h2>-->
             <ul class="goodlist">
@@ -137,12 +109,6 @@
             </ul>
             <!--<p style="text-align: center;font-size: 0.12rem;line-height: 0.33rem">嗷 嗷 只有这么多了</p>-->
         </div>
-        <!--<div class="service service-image">-->
-            <!--<h2 class="title-serce">青舍生活<a href="">更多</a></h2>-->
-            <!--<a href=""><img src="images/listimg2.png"></a>-->
-            <!--<a href=""><img src="images/listimg3.png"></a>-->
-            <!--<a href=""><img src="images/listimg4.png"></a>-->
-        <!--</div>-->
 
         <!-- 排序-->
         <input type="button" value="筛选与排序" id="filterbtn">
@@ -272,55 +238,6 @@
 
     <script>
         $("document").ready(function(){
-            addres();
-//           页面1 点击筛选与排序弹出页面2
-            $("#filterbtn").click(function(){
-                $(".sx_filter").hide();
-                $("#filter").show();
-            });
-//           页面2 {点击 返回按钮 and  确定按钮 返回页面1}；
-            $(" #back_main,#confirm").click(function(){
-                $("#filter").hide();
-                $(".sx_filter").show();
-            });
-
-//           页面2 筛选条件 加选中样式；
-            $(".px-list  li").click(function(){
-                $(this).addClass("p_list_on").siblings().removeClass("p_list_on");
-            });
-            $(".r-list ul li").click(function(){
-                $(this).addClass("active").siblings().removeClass("active");
-            });
-//          页面2 点击 区域查询 弹出页面3 ；
-            $(".quyu").click(function(){
-                $("#filter").hide();
-                $(".qy_filter ").show();
-            });
-//            页面3 点击返回,跳到页面2；
-            $("#back_filter").click(function(){
-                $(".qy_filter ").hide();
-                $("#filter").show();
-            });
-
-            function addres(){
-                //           区域选择；
-                $(".qy_choose .q_right li").click(function(){
-                    var ensure=$(this).text();
-                    $(this).addClass("on").siblings().removeClass("on");
-                    $(".qy_filter").hide();
-                    $("#filter").show();
-                    $("#area").html( ensure+"&or;");
-                });
-                //            清空
-                $("#filter .empty").click(function(){
-                    if($(".r-list ul li").hasClass("active")==true){
-                        $(".r-list ul li").removeClass("active");
-                    }
-                    $(".px-list li").removeClass("p_list_on");
-                    $("#area").html("全城&or;");
-                })
-            }
-
 
         })
     </script>

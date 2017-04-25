@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.swetake.util.Qrcode;
+import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Customer;
+import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.support.Message;
+import com.xfhotel.hotel.support.QRCode;
 import com.xfhotel.hotel.support.wechat.Config;
 import com.xfhotel.hotel.support.wechat.HttpUtils;
 import com.xfhotel.hotel.support.wechat.Log;
@@ -39,98 +47,43 @@ import net.sf.json.JSONObject;
 public class WechatController {
 	@Autowired
 	HttpSession session;
-	
-	
-	
-	
+
+	@Autowired
+	OrderService orderService;
+	@Autowired
+	CustomerService customerService;
+
 	/**
-	 * 用户授权后重定向的URL
-	 * @param code
-	 * @param state
+	 * 判断订单是否已经支付
+	 * 
+	 * @param id
 	 * @return
 	 */
-	@RequestMapping("/auth/openId")
-	public String wechatOpenId(String code,String state){
-		if(StringUtils.isBlank(code)){//用户拒绝授权
-			//跳转某URL
-		}else{//用户授权通过
-			try {
-				String authUrl = Config.AUTH_OPENID_URL.replace("CODE", code);
-				JSONObject result = JSONObject.fromObject(HttpUtils.get(authUrl));
-				if(result.containsKey("errcode")){//错误返回
-					System.out.println(result);
-				}else{
-					session.setAttribute("wechatAuth", result);
-					return "redirect:"+state;
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return "redirect:home";
-	}
-
-	/**
-	 * 微信公众号调起
-	 * 
-	 * @param detail
-	 *            商品描述
-	 * @param desc
-	 *            商品详情
-	 * @param goodSn
-	 *            商品编号
-	 * @param openId
-	 *            用户openid
-	 * @param orderSn
-	 *            订单号
-	 * @param amount
-	 *            金额
-	 * @return 返回包装了调起jssdk所需要的函数
-	 * @throws Exception
-	 */
-	@RequestMapping("/pay/jsOrder")
+	@RequestMapping("/isPayed")
 	@ResponseBody
-	public String jsOrder(HttpServletRequest request, String detail, String desc, String goodSn, String orderSn,
-			String amount) throws Exception {
-		JSONObject auth = (JSONObject) session.getAttribute("wechatAuth");
-		String openId = auth.getString("openid");
-		String ip = WechatOrderUtils.getClientIp(request);
-		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, "JSAPI");
-		return result.toString();
+	public Message isPayed(Long id) {
+		Order o = orderService.get(id);
+		if (o.getStatus() == Order.STATUS_ON_LEASE) {
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "已支付");
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "未支付");
 	}
 
 	/**
-	 * 获取PC端网页支付二维码
+	 * 获取二维码
 	 * 
-	 * @param detail
-	 *            商品描述
-	 * @param desc
-	 *            商品详情
-	 * @param goodSn
-	 *            商品编号
-	 * @param orderSn
-	 *            订单号
-	 * @param amount
-	 *            金额
+	 * @param url
 	 * @param response
-	 * @throws IOException
 	 */
-	@RequestMapping("/pay/nativeOrder")
-	public void nativeOrder(String detail, String desc, String goodSn, String orderSn, String amount,
-			HttpServletResponse response) throws IOException {
-
+	@RequestMapping(value = "QRCode", method = RequestMethod.GET)
+	public void QRCode(String url, HttpServletResponse response) throws Exception {
 		// 调用框架生成二维码
 		Qrcode handler = new Qrcode();
 		handler.setQrcodeErrorCorrect('M');
 		handler.setQrcodeEncodeMode('B');
 		handler.setQrcodeVersion(7);
 
-		JSONObject jsonObject = WechatOrderUtils.createOrder(detail, desc, "", "10.0.0.1", goodSn, orderSn, amount,
-				"NATIVE");
-
-		String tmp = jsonObject.getJSONObject("obj").getString("url");
-		byte[] contentBytes = tmp.getBytes("UTF-8");
+		byte[] contentBytes = url.getBytes("UTF-8");
 
 		BufferedImage bufImg = new BufferedImage(140, 140, BufferedImage.TYPE_INT_RGB);
 
@@ -163,7 +116,112 @@ public class WechatController {
 
 		// 生成二维码QRCode图片
 		ImageIO.write(bufImg, "jpg", response.getOutputStream());
+	}
 
+	/**
+	 * 用户授权后重定向的URL
+	 * 
+	 * @param code
+	 * @param state
+	 * @return
+	 */
+	@RequestMapping("/auth/openId")
+	public String wechatOpenId(String code, String state) {
+		if (StringUtils.isBlank(code)) {// 用户拒绝授权
+			// 跳转某URL
+		} else {// 用户授权通过
+			try {
+				String authUrl = Config.AUTH_OPENID_URL.replace("CODE", code);
+				JSONObject result = JSONObject.fromObject(HttpUtils.get(authUrl));
+				if (result.containsKey("errcode")) {// 错误返回
+					System.out.println(result);
+				} else {
+					session.setAttribute("wechatAuth", result);
+					return "redirect:" + state;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return "redirect:home";
+	}
+
+	/**
+	 * 微信公众号调起
+	 * @param id 
+	 * 
+	 * @param detail
+	 *            商品描述
+	 * @param desc
+	 *            商品详情
+	 * @param goodSn
+	 *            商品编号
+	 * @param openId
+	 *            用户openid
+	 * @param orderSn
+	 *            订单号
+	 * @param amount
+	 *            金额
+	 * @return 返回包装了调起jssdk所需要的函数
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/pay/jsOrder",method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject jsOrder(Long id, String ip) throws Exception {
+		Order order = orderService.get(id);
+		if (order == null)
+			return null;
+
+		String detail = order.getDescription();
+		String desc = "青舍都市";
+		Customer c = customerService.getCustomer(order.getCusId());
+		String openId = c.getWechatOpenId();
+		String goodSn = "" + order.getRoomId();
+		String orderSn = order.getPayNo();
+		String amount = order.getTotalPrice();
+		String type = "JSAPI";
+		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, type);
+		
+		return result;
+	}
+
+	/**
+	 * 获取PC端网页支付二维码
+	 * 
+	 * @param detail
+	 *            商品描述
+	 * @param desc
+	 *            商品详情
+	 * @param goodSn
+	 *            商品编号
+	 * @param orderSn
+	 *            订单号
+	 * @param amount
+	 *            金额
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/pay/nativeOrder", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject nativeOrder(Long id, String ip) throws IOException {
+		Order order = orderService.get(id);
+		if (order == null)
+			return null;
+
+		// TODO 向微信下订单,并获取扫一扫地址
+		String detail = order.getDescription();
+		String desc = "青舍都市";
+		String goodSn = "" + order.getRoomId();
+		// String orderSn = ""+order.getId();
+		String orderSn = order.getPayNo();
+		String amount = order.getTotalPrice();
+		String type = "NATIVE";
+		JSONObject response = WechatOrderUtils.createOrder(detail, desc, "", ip, goodSn, orderSn, amount, type);
+		order.setPayPlatform("wx");
+		orderService.update(order);
+		
+		return response;
 	}
 
 	/**
@@ -269,7 +327,6 @@ public class WechatController {
 		out.print(result);
 		out.flush();
 		out.close();
-
 	}
 
 }

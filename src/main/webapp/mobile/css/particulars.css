@@ -63,6 +63,13 @@
     padding-left: 0.24rem;
 
 }
+.panel .info_L24,.ic_house{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
 .label-adders{
     background: url("../images/laber-adders.png") no-repeat center left 0.24rem;
     text-indent: 0.18rem;!important;
@@ -101,3 +108,33 @@
 .deploy ul li i{display: block;font-size: 0.14rem;color: #50ccc9;overflow: hidden}
 /*房间描述*/
 #serviceIntro2{line-height: 0.23rem}
+
+
+
+/*选择起止日期*/
+.alert-content{
+    position: fixed;
+    width: 100%;
+    height:3.5rem;
+    background: #fff;
+    z-index: 1003;
+    bottom: -3.7rem;
+    box-shadow: 0 0 0.2rem #333;
+}
+.alert-content header{
+    width: 100%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    padding: 0;
+    border-bottom: 1px solid #dddddd;
+    font-size:0.16rem;
+    color: #353535;
+    text-align: center;
+    font-weight: normal;
+}
+.alert-content ul{width: 100%;margin: 0 auto;}
+.alert-content ul li{width: 50%;float: left;font-size: 0.2rem;line-height: 0.45rem;border-right: 1px solid #e6e6e6;border-bottom: 1px solid #dddddd }
+.alert-content ul li input{width: 100%;text-align: center;color: #333;font-weight: bold;}
+.alert-content .hint{clear: both;font-size: 0.16rem;line-height: 0.6rem;padding: 0 0.1rem}
+.alert-content .hint i{padding-right: 0.1rem;font-weight: bold;color: red}
+.alert-content .but-success{width: 66%;height: 0.4rem;color: #FFF;border-radius: 0.2rem;box-shadow: 0 0.025rem 0.1rem #5f0d0d;position: absolute;bottom: 0.2rem;background: #ea644a;left: 50%;margin-left: -33%}

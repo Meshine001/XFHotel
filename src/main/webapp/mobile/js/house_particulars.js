@@ -1,29 +1,34 @@
 
 $(document).ready(function(){
+
+
+
     ////轮播
-    var mySwiper = new Swiper ('.swiper-container',{
-        loop: true,
-        autoplay: 1800,
-        pagination: '.swiper-pagination',
-        autoplayDisableOnInteraction: false
-    });
+
 
     var _uid = fnBase.huoqu(0, "uid");
-    //var _id = decodeURIComponent(fnBase.request("roomId"));
+    var _id = decodeURIComponent(fnBase.request("id"));
     var frontURL="http://192.168.1.109:8080/hotel/mobile/info";
-    var postData={"roomId":1};
+    var postData={"roomId":_id};
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
+        fnBase.keep(1,"community",data.apartment.community);
+        fnBase.keep(1,"dayPrice",data.apartment.dayPrice);
         //if(data.success){
             //轮播图
-            //$(".swiper-container .swiper-wrapper").html("");
-            //var lunbo_str = '';
-            //var lunbo_length = data.length;
-            //console.log(lunbo_length);
-            //for (var i = 0; i < lunbo_length; i++){
-            //    lunbo_str += '<div class="swiper-slide"><img src="' + data.apartment.pic3[i] + '"/></div>';
-            //}
-            //$(".swiper-container .swiper-wrapper").append(lunbo_str);
+            $(".swiper-container .swiper-wrapper").html("");
+            var lunbo_str = '';
+            var lunbo_length = data.apartment.pic3.length;
+            for (var i = 0; i < lunbo_length; i++){
+                lunbo_str += '<div class="swiper-slide"><img src="'+"http://192.168.1.109:8080/hotel/images/"+data.apartment.pic2[i]+'"/></div>';
+            }
+            $(".swiper-container .swiper-wrapper").append(lunbo_str);
+            var mySwiper = new Swiper ('.swiper-container',{
+                loop: true,
+                autoplay: 1800,
+                pagination: '.swiper-pagination',
+                autoplayDisableOnInteraction: false
+            });
             //房源概况
 
             $(".information").html("");
@@ -39,22 +44,24 @@ $(document).ready(function(){
                 +'</span></li><li><span class="inf_sp">可住</span><span>'+data.apartment.capacity+"人"+'</span></li><li><span class="inf_sp">户型</span><span>'+data.apartment.balcony+"室"+data.apartment.bathroom+"厅"+
                 data.apartment.bedroom+"卫"+'</span></li>';
             $(".housing .i_inf ul").append(massage);
+
         //    房源配置
             $(".allocation .deploy ul").html("");
-            var facility=data.info.facilities;
-            for(var i=0;i<facility.length;i++){
-                var str='<li><i>'+data.info.facilities[i]+'</i></li>';
+            var str='';
+            for(var i=0;i<data.apartment.facilityEntity.length;i++){
+                str+='<li><i>'+data.apartment.facilityEntity[i].description+'</i></li>';
             }
             $(".allocation .deploy ul").append(str);
         //    房源描述
-            $(".describe #serviceIntro2").text('+data.info.description+');
+            $(".describe #serviceIntro2").text(data.room.descriptionPersonal);
+
         //}else{
         //    fnBase.myalert(data.room.descriptionPersonal)
         //}
     });
 
 
-    //    评价
+    //    评价列表显示
     var frontURL='';
     fnBase.commonAjax(frontURL,{'param':93},function(data){
         console.log(data);
@@ -70,31 +77,86 @@ $(document).ready(function(){
     //    评价
 
    //  立即预约
-    var _uid='';
-    $(".navbar a").live('click',function(){
-        ////判断uid
-        if (_uid == null || _uid == "undefined" || _uid == "") {
-            window.location.href = "login.html";
+    $(".navbar a").live('click',function() {
+        $("#masking").show(10, function () {
+            $(".alert-content").animate({bottom: 0}, 300);
+        });
+    });
+
+    //判断有房没房
+    $("#appDate2").on('change',function(){
+
+        var checkIn= $("#appDate").val();
+        var leave= $("#appDate2").val();
+        if(checkIn>=leave){
+            fnBase.myalert("请重新选择时间");
+            $("#appDate").val("");
+            $("#appDate2").val("");
             return;
+        }else{
+            var frontURL=Constant.URL+'/mobile/checkAvailable';
+            var postData={"startTime":checkIn,"endTime":leave,"roomId":_id};
+            fnBase.commonAjax(frontURL,postData,function(data){
+                console.log(data);
+                if(data.statusCode=="1"){
+                    fnBase.myalert("OK")
+                }else{
+                    $(".alert-content .hint").html("<i>!</i>您所选时间内没有空房,请重新选择日期").css("color","red").show();
+                    return;
+                }
+            })
         }
-        var attr_Str = attrList.join(",");
-        var postData = {
-            "sid": _id,
-            "uid": _uid,
-            "attr": attr_Str,
-            "shopid": _shopid
-        };
-       var frontURL=Constant.URL+"/";
+
+    });
+
+
+
+    //确定时间段；
+    $(".alert-content .but-success").click(function(){
+        $("#masking").hide(10,function(){
+            $(".alert-content").animate({bottom:'-3.7rem'},300);
+        });
+        var checkIn= $("#appDate").val();
+        var leave= $("#appDate2").val();
+        var _id = decodeURIComponent(fnBase.request("id"));
+        var frontURL=Constant.URL+'/mobile/module';
+        var postData={"startTime":checkIn,"endTime":leave,"apartmentId":_id};
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
-            if(data.status=="1"){
-                window.location.href=""
-            }
+            fnBase.keep(1,'startTime',data.oStart);
+            fnBase.keep(1,'endTime',data.oEnd);
+            fnBase.keep(1,'oTotalDay',data.oTotalDay);
+            fnBase.keep(1,'oTotalPrice',data.oTotalPrice);
+            window.location.href="order.html?id="+encodeURIComponent(_id);
+
         })
+    });
+    //Click anywhere to close #masking;
+    $("#masking").click(function(){
+        $(this).hide(10,function(){
+            $(".alert-content").animate({bottom:'-3.7rem'},300);
+        });
+    });
+
+        //window.location.href="order.html";
+        ////判断uid
+        //if (_uid == null || _uid == "undefined" || _uid == "") {
+        //    window.location.href = "login.html";
+        //    return;
+        //}
+        //var postData = {
+        //    "roomId": _id
+        //    //"uid": _uid
+        //};
+       //var frontURL=Constant.URL+"/";
+       // fnBase.commonAjax(frontURL,postData,function(data){
+       //     console.log(data);
+       //     window.location.href="order.html"
+       // })
 
 
 
-    })
+
 
 
 });

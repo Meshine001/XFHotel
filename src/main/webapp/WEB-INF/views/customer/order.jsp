@@ -123,15 +123,21 @@
 			</div>
 		</div>
 		<div class="order_step">
-			<a type="button" class="btn_sub ng-binding" data-payType="wechat">下一步</a>
-			<a type="button" class="btn_sub ng-binding" data-payType="pay-over">支付完成</a>
+			<a type="button" class="btn_sub ng-binding btn_sub_only" data-payType="wechat">下一步</a>
+			<a type="button" class="btn_sub ng-binding btn_sub_over" data-payType="pay-over" style="none;">已完成支付</a>
 			<!-- <a href="<%=basePath%>/order/payOver/${order.id}?status=2"
 				class="btn_sub ng-binding">下一步</a> -->
 		</div>
 
 		<script type="text/javascript">
+			var clientIp;
+			$.get('https://ipinfo.io/json',function(data){
+				clientIp = data.ip;	
+			//	console.log(data);
+			});
+		
 			var getting = {
-				url:'../../wechatPay/push',
+				url:'../../wechat/isPayed',
 				method:'POST',
 				data:{
 					id:$('.pay-type').attr('data-id')
@@ -144,22 +150,30 @@
 				}
 			};
 		
-			$('.btn_sub').click(function(){
+			//支付
+			$('.btn_sub .btn_sub_only').click(function(){
 				$('.pay-type li').each(function(index,e){
 					if($(e).hasClass('curr')){
+						
 						//微信支付
 						if($(e).attr('payType')=='weixin'){
 							$.ajax({
-								url:'../payWechat',
+								url:'../../wechat/pay/nativeOrder',
 								method:'POST',
 								async:true,
 								data:{
-									id:$('.pay-type').attr('data-id')
+									id:$('.pay-type').attr('data-id'),
+									ip:clientIp
 								},
 								success:function(data){
-									$('#wechatQRCode').attr('src','../../QRCode?url='+data);
-									$('#wechatTip').hide();
-									$('#wechatQR').show();
+									if(data.status=='success'){
+										$('#wechatQRCode').attr('src','../../wechat/QRCode?url='+data.obj.url);
+										$('#wechatTip').hide();
+										$('#wechatQR').show();
+										$('.btn_sub_only').hide();
+										$('.btn_sub_over').show();
+									}
+									
 									//关键在这里，Ajax定时访问服务端，不断获取数据 ，这里是1秒请求一次。
 									window.setInterval(function(){$.ajax(getting)},2000);
 								},
@@ -172,8 +186,21 @@
 					}
 				});
 				
-				
 			});
+			
+			//已完成支付
+			$('.btn_sub .btn_sub_over').click(function(){
+				getting['success']=function(data){
+					if(data.statusCode == 1){
+						window.location.href = '../payOver/'+$('.pay-type').attr('data-id');
+					}else{
+						alert('您的支付还未完成！');
+					}
+				}
+				$.get(getting);
+			});
+			
+			
 			
 			$('.pay_tab').click(function(e){
 				var target = $(e.target);

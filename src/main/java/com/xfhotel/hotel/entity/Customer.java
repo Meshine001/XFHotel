@@ -51,6 +51,8 @@ public class Customer implements Serializable{
 	 */
 	private Float consumptionCount;
 	
+	private String wechatOpenId;
+	
 	@OneToOne
 	@JoinColumn(name = "details_id",unique = true)
 	private CustomerDetails details;
@@ -61,6 +63,19 @@ public class Customer implements Serializable{
 	}
 	
 	
+	
+	public String getWechatOpenId() {
+		return wechatOpenId;
+	}
+
+
+
+	public void setWechatOpenId(String wechatOpenId) {
+		this.wechatOpenId = wechatOpenId;
+	}
+
+
+
 	public Customer(String tel, String password) {
 		super();
 		this.tel = tel;

@@ -106,22 +106,7 @@ public class MessageController {
 		lockService.deletePassword(pwd_user_mobile, lock_no);
 	}
 
-	/**
-	 * 获取二维码
-	 * 
-	 * @param url
-	 * @param response
-	 */
-	@RequestMapping(value = "QRCode", method = RequestMethod.GET)
-	public void responseQRCode(String url, HttpServletResponse response) {
-		try {
-			OutputStream out = response.getOutputStream();
-			QRCode.pushQRCode(url, out);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * 轮询订单是否支付，用于更新支付页面自动跳转
