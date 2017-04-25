@@ -187,7 +187,9 @@ public class OrderController {
 		o.setType(Apartment.getTypeNum(apartmentType));
 		o.setStatus(Order.STATUS_ON_PAY);
 		o.setNeedFapiao(needFapiao);
+		System.out.println("打死");
 		orderservice.add(o);
+		System.out.println("表个白");
 		System.out.println("dasda");
 		return "redirect:pay/" + o.getId();
 	}
@@ -288,7 +290,7 @@ public class OrderController {
 	public String pay(@PathVariable("id") Long id) {
 		Order order = orderservice.get(id);
 		System.out.println(order);
-		session.setAttribute("order", order.toMap());
+		
 //		System.out.println(JSONObject.wrap(order.toMap()).toString());
 		return "customer/order" ;
 	}

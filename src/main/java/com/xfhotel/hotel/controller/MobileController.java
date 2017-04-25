@@ -261,6 +261,13 @@ public class MobileController  {
 			comment.setPics(StringSplitUtil.buildStrGroup(pics));
 			comment.setTime(new Date().getTime());
 			comment.setHasRead(false);
+			System.out.println(roomId+"  123");
+			System.out.println(orderId+"  13");
+			System.out.println(from+"  8");
+			System.out.println(to+"   19");
+			System.out.println(c_score+"     3");
+			System.out.println(feel+"  6");
+			System.out.println(pics+"  1999923");
 			
 
 			Order o = orderservice.get(orderId);
