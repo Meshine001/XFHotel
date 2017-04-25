@@ -30,10 +30,14 @@ import com.swetake.util.Qrcode;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
+import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.wechat.Config;
 import com.xfhotel.hotel.support.wechat.HttpUtils;
 import com.xfhotel.hotel.support.wechat.Log;
@@ -49,7 +53,13 @@ public class WechatController {
 	HttpSession session;
 
 	@Autowired
+	LockService lockService;
+	@Autowired
 	OrderService orderService;
+	@Autowired
+	RoomService roomService;
+	@Autowired
+	ApartmentService apartmentService;
 	@Autowired
 	CustomerService customerService;
 
@@ -148,22 +158,10 @@ public class WechatController {
 	}
 
 	/**
-	 * 微信公众号调起
-	 * @param id 
-	 * 
-	 * @param detail
-	 *            商品描述
-	 * @param desc
-	 *            商品详情
-	 * @param goodSn
-	 *            商品编号
-	 * @param openId
-	 *            用户openid
-	 * @param orderSn
-	 *            订单号
-	 * @param amount
-	 *            金额
-	 * @return 返回包装了调起jssdk所需要的函数
+	 * 公共号支付
+	 * @param id
+	 * @param ip
+	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/pay/jsOrder",method = RequestMethod.POST)
@@ -187,19 +185,10 @@ public class WechatController {
 	}
 
 	/**
-	 * 获取PC端网页支付二维码
-	 * 
-	 * @param detail
-	 *            商品描述
-	 * @param desc
-	 *            商品详情
-	 * @param goodSn
-	 *            商品编号
-	 * @param orderSn
-	 *            订单号
-	 * @param amount
-	 *            金额
-	 * @param response
+	 * 二维码支付
+	 * @param id
+	 * @param ip
+	 * @return
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/pay/nativeOrder", method = RequestMethod.POST)
@@ -304,9 +293,20 @@ public class WechatController {
 			if ("SUCCESS".equals(result_code)) {
 				// 由于微信后台会同时回调多次，所以需要做防止重复提交操作的判断
 				// 此处放防止重复提交操作
-
+				String out_trade_no = map.get("out_trade_no");
+				Order o = orderService.getByPayNo(out_trade_no);
+				//发送门锁密码
+				Long roomId = o.getRoomId();
+				Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
+				String lock_no = (String) apartmentService.getApartmentInfo(apartment).get("lock_address");
+				lockService.addPassword(o.getCusTel(), lock_no, TimeUtil.getDateStr(o.getStartTime()),
+						TimeUtil.getDateStr(o.getEndTime()));
+				//更改订单状态
+				o.setStatus(Order.STATUS_ON_LEASE);
+				orderService.update(o);
+					
 			} else if ("FAIL".equals(result_code)) {
-
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
