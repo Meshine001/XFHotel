@@ -99,7 +99,7 @@ public class WechatOrderUtils {
 			return result;
 		}
 		
-		Log.error("微信支查询订单请求成功", null);
+		Log.info("微信支查询订单请求成功", null);
 		result.put("status", "success");
 		result.put("msg", "查询成功");
 		JSONObject back = new JSONObject();
@@ -112,6 +112,7 @@ public class WechatOrderUtils {
 			back.put("time_end", order.getTime_end());
 			back.put("out_trade_no", order.getOut_trade_no());
 			back.put("trade_state_desc", order.getTrade_state_desc());
+			result.put("obj", back);
 			return result;
 		}else{
 			back.put("out_trade_no", order.getOut_trade_no());
@@ -228,14 +229,13 @@ public class WechatOrderUtils {
 		XStream s = new XStream(new DomDriver());
 		s.alias("xml", WechatRefund.class);
 		WechatRefund refund = (WechatRefund) s.fromXML(response);
-
+		System.out.println(refund);
 		if ("SUCCESS".equals(refund.getReturn_code()) && "SUCCESS".equals(refund.getResult_code())) {
-			Log.error("微信支申请退款请求成功：" + refund.getRefund_id(), null);
+			Log.info("微信支申请退款请求成功：" + refund.getRefund_id(), null);
 		} else {
-			Log.error("微信支申请退款请求错误：" + refund.getReturn_msg() + refund.getErr_code(), null);
+			Log.error("微信支申请退款请求错误：" + refund.getErr_code()+","+refund.getErr_code_des(), null);
 			result.put("status", "error");
-			result.put("msg", "http请求失败");
-			result.put("obj", null);
+			result.put("msg", refund.getErr_code_des());
 			return result;
 		}
 
@@ -455,7 +455,7 @@ public class WechatOrderUtils {
 		WechatOrder order = (WechatOrder) s.fromXML(response);
 
 		if ("SUCCESS".equals(order.getReturn_code()) && "SUCCESS".equals(order.getResult_code())) {
-			Log.error("微信支付统一下单请求成功：" + order.getPrepay_id(), null);
+			Log.info("微信支付统一下单请求成功：" + order.getPrepay_id(), null);
 		} else {
 			Log.error("微信支付统一下单请求错误：" + order.getReturn_msg() + order.getErr_code(), null);
 			result.put("status", "error");
@@ -587,7 +587,10 @@ public class WechatOrderUtils {
 		// openid, ip, goodSn, orderSn, amount, type);
 		// System.out.println(result);
 		
-		JSONObject result = WechatOrderUtils.refund("123213", "21323", "322.11", "22.2");
+//		JSONObject result = WechatOrderUtils.refund("123213", "21323", "322.11", "22.2");
+//		JSONObject result1 = WechatOrderUtils.query("2017042500002");
+		JSONObject result = WechatOrderUtils.refund("2017042500002", "2017042500001", "0.01", "0.01");
+//		System.out.println(result1);
 		System.out.println(result);
 	}
 

@@ -66,9 +66,18 @@ public class OrderController {
 	public Message outLease(Long orderId){
 		try {
 			Order o = orderservice.get(orderId);
-			o.setStatus(Order.STATUS_COMPLETE);
-			orderservice.update(o);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
+			//TODO 退押金
+			String[] prices = o.getPrice().split("@");
+			String refundFee = prices[prices.length-1];
+			JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), refundFee);
+			if("success".equals(result.getString("status"))){
+				o.setStatus(Order.STATUS_COMPLETE);
+				orderservice.update(o);
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
+			}else{
+				return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
+			}
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -164,7 +173,9 @@ public class OrderController {
 	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
 			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
 			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
-		Order o = new Order();
+//		System.out.println(startTime);
+//		System.out.println(startTime+" 12:00");
+				Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
 		o.setRoomId(roomId);
@@ -173,8 +184,8 @@ public class OrderController {
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
 		try {
-			o.setStartTime(DateUtil.parse(startTime, "yyyy-MM-dd").getTime());
-			o.setEndTime(DateUtil.parse(endTime, "yyyy-MM-dd").getTime());
+			o.setStartTime(DateUtil.parse(startTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
+			o.setEndTime(DateUtil.parse(endTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -187,6 +198,7 @@ public class OrderController {
 		o.setType(Apartment.getTypeNum(apartmentType));
 		o.setStatus(Order.STATUS_ON_PAY);
 		o.setNeedFapiao(needFapiao);
+		
 		orderservice.add(o);
 		return "redirect:pay/" + o.getId();
 	}

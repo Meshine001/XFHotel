@@ -29,8 +29,8 @@ public class Order {
 	public final static int STATUS_TIME_OUT = 5;//超时
 	public final static int STATUS_CHARGEBACK = 6;//退款
 
-	public final static int PAY_PLATFORM_WECHAT = 1;
-	public final static int PAY_PLATFORM_ALIPAY = 2;
+	public final static String PAY_PLATFORM_WECHAT = "微信";
+	public final static String PAY_PLATFORM_ALIPAY = "支付宝";
 
 
 	@Id

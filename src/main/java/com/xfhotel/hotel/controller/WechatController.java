@@ -64,7 +64,7 @@ public class WechatController {
 	CustomerService customerService;
 
 	/**
-	 * 判断订单是否已经支付
+	 * 查询订单是否已经支付
 	 * 
 	 * @param id
 	 * @return
@@ -75,10 +75,48 @@ public class WechatController {
 		Order o = orderService.get(id);
 		if (o.getStatus() == Order.STATUS_ON_LEASE) {
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "已支付");
+		}else{
+//			JSONObject result = WechatOrderUtils.query(o.getPayNo());
+//			try {
+//				if("success".equals(result.getString("status")) && null!=result.getString("trade_state")){
+//					return new Message(Constants.MESSAGE_SUCCESS_CODE, "已支付");
+//				}
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				//e.printStackTrace();
+//			}
 		}
+		
 		return new Message(Constants.MESSAGE_ERR_CODE, "未支付");
 	}
 
+	/**
+	 * 查询订单
+	 * @param id 业务系统订单id
+	 * @return
+	 */
+	@RequestMapping("/query")
+	@ResponseBody
+	public JSONObject query(Long id){
+		Order o = orderService.get(id);
+		JSONObject result = WechatOrderUtils.query(o.getPayNo());
+		return result;
+	}
+	
+	/**
+	 * 退款
+	 * @param id
+	 * @param refundFee
+	 * @return
+	 */
+	@RequestMapping(value = "/refund",method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject refund(Long id,String refundFee){
+		Order o = orderService.get(id);
+		JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), refundFee);
+		return result;
+	}
+	
 	/**
 	 * 获取二维码
 	 * 
