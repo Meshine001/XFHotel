@@ -39,9 +39,7 @@ import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 @Controller
 @RequestMapping("mobile")
 public class MobileController  {
-	private static final int String = 0;
 
-	private static final int HashMap = 0;
 
 	@Autowired
 	RoomService roomService;
@@ -63,6 +61,8 @@ public class MobileController  {
 	@Autowired
 	CommentService commentService;
 	
+	@Autowired
+	OrderService orderService;
 
 	
 	
@@ -208,12 +208,7 @@ public class MobileController  {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range)
 	{
-		System.out.println(startDate);
-		System.out.println(cId);
-		System.out.println(category);
-		System.out.println(type);
-		System.out.println(endDate);
-		System.out.println(range);
+		
 		try {
 			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
@@ -264,6 +259,7 @@ public class MobileController  {
 			comment.setPics(StringSplitUtil.buildStrGroup(pics));
 			comment.setTime(new Date().getTime());
 			comment.setHasRead(false);
+			
 
 			Order o = orderservice.get(orderId);
 			comment.setEntryTime(o.getStartTime());
@@ -277,6 +273,34 @@ public class MobileController  {
 		}
 	}
 	
+	@RequestMapping(value = "/changePsd", method = RequestMethod.POST)
+	public @ResponseBody Message changePsd(String oldPsd, String psd, int id) {
+		String content = customerService.changePsd(oldPsd, psd, id);
+		if ("修改成功".equals(content)) {
+			customerService.logout();
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, content);
+		} else {
+			return new Message(Constants.MESSAGE_ERR_CODE, content);
+		}
+
+	}
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public @ResponseBody Message modify(CustomerDetails c, long customerId ,String nick,String tel,String idCard,String sex
+			,String birthday,String job,String education,String declaration,String hobby) {
+		
+		try {
+			Customer c1 = customerService.modify(c, customerId);
+			session.setAttribute("c", c1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return new Message(Constants.MESSAGE_ERR_CODE, "内部错误");
+		}
+		session.setAttribute(Constants.PAGE, Constants.PAGE_DETAILS);
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
+	}
+
 	
 	public Map<String, Object> caculatePrice(String startTime, String endTime, Long apartmentId) {
 		Map<String, Object> info = new HashMap<String, Object>();

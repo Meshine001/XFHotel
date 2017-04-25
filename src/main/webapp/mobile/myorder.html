@@ -24,8 +24,8 @@
 
 <div id="nav">
     <a href="javascript:void(0)" class="active">全部</a>
-    <a href="javascript:void(0)">已支付</a>
-    <a href="javascript:void(0)">待支付</a>
+    <a href="javascript:void(0)">有效订单</a>
+    <a href="javascript:void(0)">退款订单</a>
 </div>
 <div id="Myscroll-body">
     <!--没有订单 -->
@@ -35,28 +35,34 @@
     </div>
     <!-- 有订单数据-->
     <ul class="orderlist" >
-        <li>
-            <p class="p_title success">已支付</p>
-            <div class="pay_content">
-                <p class="list_bigsize">幸福中路福邸铭门小区</p>
-                <p class="p_list">酒店式公寓<span>支付2880元</span></p>
-                <p class="p_list">2017年5月21-2017年6月1日<span>10天</span></p>
-            </div>
-            <p class="total">
-                <span class="fl cancel">退房</span>
-                <span class="fl evaluate">评价</span>
-                <!--<span class="fl reserve">再次预定</span>-->
-            </p>
-        </li>
-        <li>
-            <p class="p_title">待支付</p>
-            <div class="pay_content">
-                <p class="list_bigsize">幸福中路福邸铭门小区</p>
-                <p class="p_list">酒店式公寓<span>支付2880元</span></p>
-                <p class="p_list">2017年5月21-2017年6月1日<span>10天</span></p>
-            </div>
-            <p class="total"><span class="fl payment">支付</span></p>
-        </li>
+        <!--<li>-->
+            <!--<p class="p_title success">'+data.content[i].status+'</p>-->
+            <!--<div class="pay_content">-->
+                <!--<p class="list_bigsize">'+data.content[i].description+'</p>-->
+                <!--<p class="p_list">'+data.content[i].type+'<span>'"共"+data.content[i].totalPrice+'</span></p>-->
+                <!--<p class="p_list">'+data.centent[i].startTime+"&#45;&#45;"+data.centent[i].endTime+'<span>'+data.content[i].totalDay+"天"'</span></p>-->
+            <!--</div>-->
+            <!--<p class="total">-->
+                <!--<span class="fl cancel">退房</span>-->
+                <!--<span class="fl evaluate">评价</span>-->
+                <!--<span class="fl payment">支付</span>-->
+                <!--&lt;!&ndash;<span class="fl reserve">再次预定</span>&ndash;&gt;-->
+            <!--</p>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<p class="p_title">待支付</p>-->
+            <!--<div class="pay_content">-->
+                <!--<p class="list_bigsize">幸福中路福邸铭门小区</p>-->
+                <!--<p class="p_list">酒店式公寓<span>支付2880元</span></p>-->
+                <!--<p class="p_list">2017年5月21-2017年6月1日<span>10天</span></p>-->
+            <!--</div>-->
+        <!--<p class="total">-->
+            <!--<span class="fl cancel">退房</span>-->
+            <!--<span class="fl evaluate">评价</span>-->
+            <!--<span class="fl payment">支付</span>-->
+            <!--&lt;!&ndash;<span class="fl reserve">再次预定</span>&ndash;&gt;-->
+        <!--</p>-->
+        <!--</li>-->
     </ul>
 </div>
 </body>

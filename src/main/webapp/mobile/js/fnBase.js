@@ -4,11 +4,7 @@
 $(document).ready(function(){
     menuStudent()
     function menuStudent(){
-        //try {
-        //    throw new Date(); // 抛出当前时间对象
-        //} catch (e) {
-        //    alert(e.toLocaleString()); // 使用本地格式显示当前时间
-        //}
+
         $(".header-mobile .link-home").click(function(){
             $(".menuBar").addClass("menuOpen");
             $(".Masking-out").show();
@@ -22,14 +18,8 @@ $(document).ready(function(){
             setTimeout(function(){$(".Masking-out").hide()},500)
         });
     }
-    ////轮播
-    //var mySwiper = new Swiper ('.swiper-container',{
-    //    loop: true,
-    //    autoplay: 1800,
-    //    pagination: '.swiper-pagination',
-    //    autoplayDisableOnInteraction: false
-    //});
-})
+
+});
 
     //var shebei_type=0;//0网页 1安卓 2ios
     //var load_flag = false; // 数据记载标识 数据未加载

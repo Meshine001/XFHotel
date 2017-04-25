@@ -10,11 +10,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +32,6 @@ import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
-import com.xfhotel.hotel.support.pay.WechatPaySDK;
 import com.xfhotel.hotel.support.wechat.WechatOrderUtils;
 
 import net.sf.json.JSONObject;
@@ -144,6 +140,7 @@ public class OrderController {
 	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
 			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
 			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
+		
 		Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
@@ -152,13 +149,16 @@ public class OrderController {
 		o.setCusTel(cusTel);
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
+		
 		try {
 			o.setStartTime(DateUtil.parse(startTime, "yyyy-MM-dd").getTime());
 			o.setEndTime(DateUtil.parse(endTime, "yyyy-MM-dd").getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
+		
 		o.setTime(new Date().getTime());
 		o.setTotalDay(totalDay);
 		o.setPrice(price);
@@ -168,30 +168,8 @@ public class OrderController {
 		o.setStatus(Order.STATUS_ON_PAY);
 		o.setNeedFapiao(needFapiao);
 		orderservice.add(o);
+		System.out.println("dasda");
 		return "redirect:pay/" + o.getId();
-	}
-
-	@RequestMapping(value = "/details", method = RequestMethod.GET)
-	public String orderDetails(Long orderId) {
-		// TODO
-		Order o = orderservice.get(orderId);
-		session.setAttribute("order", o);
-		return "customer/orderDetails";
-	}
-
-	/**
-	 * 用户查看房间密码
-	 * 
-	 * @param orderId
-	 * @return
-	 */
-	@RequestMapping(value = "/viewLockPsd", method = RequestMethod.GET)
-	public String viewLockPsd(Long orderId) {
-		// TODO 还需要加入一些权限限制
-		Order o = orderservice.get(orderId);
-
-		session.setAttribute("lockPsd", "123213");
-		return "customer/viewLockPsd";
 	}
 
 	/**
@@ -258,6 +236,11 @@ public class OrderController {
 	@RequestMapping(value = "/comment/post", method = RequestMethod.POST)
 	public @ResponseBody Message postComment(Long roomId, Long orderId, Long from, Long to, String[] c_score,
 			String feel, String[] pics) {
+		System.out.println(roomId);
+		System.out.println(orderId);
+		System.out.println(from);
+		System.out.println(to);
+		System.out.println(c_score);
 		try {
 			Comment comment = new Comment();
 			comment.setFromWho(from);
@@ -284,9 +267,10 @@ public class OrderController {
 	@RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
 	public String pay(@PathVariable("id") Long id) {
 		Order order = orderservice.get(id);
+		System.out.println(order);
 		session.setAttribute("order", order.toMap());
-		// System.out.println(JSONObject.wrap(order.toMap()).toString());
-		return "customer/order";
+//		System.out.println(JSONObject.wrap(order.toMap()).toString());
+		return "customer/order" ;
 	}
 
 	/**

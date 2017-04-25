@@ -68,7 +68,15 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
+.panel .info_L24 .label-yj{
+    float: right;
+    font-size: 0.14rem;
+    color: #d1d1d1;
+    height: 0.18rem;
+    line-height: 0.18rem;
+    margin: 0.1rem 0 0 0;
+    display: inline-block;
+}
 
 .label-adders{
     background: url("../images/laber-adders.png") no-repeat center left 0.24rem;
@@ -86,7 +94,7 @@
     line-height: 0.18rem;
     border-radius: 0.2rem;
     padding: 0 0.1rem;
-    font-size: 0.1rem;
+    font-size: 0.14rem;
     margin: 0.1rem 0.08rem 0 0;
     display: inline-block;
     background-color: #ffeacc;

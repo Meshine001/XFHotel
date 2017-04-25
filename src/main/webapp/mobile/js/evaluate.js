@@ -14,21 +14,21 @@ $(document).ready(function(){
     });
     $(".navbar a").click(function(){
         var _uid=fnBase.huoqu(0,"uid");
-        var frontURL=Constant.URL+'/api/user/login';
+        var frontURL=Constant.URL+"/mobile/comment";
         var postData ={
             "uid":_uid,
             "uname":uname,
-            "uphoneNamube":uphoneNamube,
             "evaluate":evaluate,
-            "unm":num
+            "unm":num,
+            "form":_uid,
+            "to":0
         };
-        postData=JSON.stringify(postData);
-        fnBase.commonAjax(frontURL,{"param":postData},function(data){
+        fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
-            if(data.status=="1"){
-                window.location.href="myorder.html";
+            if(data.statusCode=="1"){
+                fnBase.myalert(data.content)
             }else{
-                fnBase.myalert(data.msg);
+                fnBase.myalert(data.content);
             }
         })
     })

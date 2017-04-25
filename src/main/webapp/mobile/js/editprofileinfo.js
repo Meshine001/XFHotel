@@ -18,27 +18,80 @@ $(document).ready(function(){
         sexbtn.find('.fl').text(sexVal);
         return sexVal;
     });
+    //个人资料
     function getData(){
-        //var _uid = fnBase.huoqu(0, "uid");
-        //if (_uid == null || _uid == "undefined" || _uid == "") {
-        //    window.location.href = "login.html";
-        //    return;
-        //}
-        var _nickName = decodeURIComponent(fnBase.request("nickName"));
-        $("#fillNick").val(_nickName);
 
         $(".infobtn").click(function(){
+
+            var _uid = fnBase.huoqu(0, "uid");
             var _nickNameInput=$("#fillNick").val();
-            var frontURL='';
-            var postData={"name":_nickNameInput,"sex":sexVal};
+            var frontURL=Constant.URL+'/mobile/modify';
+            var postData={
+                "customerId":_uid,
+                "nick":_nickNameInput,
+                "sex":sexVal,
+                "tel":$("#tel").val(),
+                "idCard":$("#idCard").val(),
+                "job":$("#job").val(),
+                "education":$("#education").val(),
+                "declaration":$("#declaration").val(),
+                "hobby":$("#hobby").val()
+            };
             fnBase.commonAjax(frontURL,postData,function(data){
                 console.log(data);
-                if(data.status=="1"){
-                    $("#fillNick").val(data.info.name);
-                    $("#Myscroll-body section .sex").find('.fl').text(data.info.sex);
-                    fnBase.myalert(data.msg)
+                if(data.customerId=="1"){
+                    fnBase.myalert(data.content)
                 }else{
-                    fnBase.myalert(data.msg)
+                    fnBase.myalert(data.content)
+                }
+            })
+        })
+
+
+        var _uid = fnBase.huoqu(0, "uid");
+        if (_uid == null || _uid == "undefined" || _uid == "") {
+            window.location.href = "login.html";
+            return;
+        }
+        var frontURL=Constant.URL+'/mobile/detailsData?id='+_uid;
+        var postData={};
+        fnBase.commonAjax(frontURL,postData,function(data){
+            console.log(data);
+            $("#avatar").attr('src','http://192.168.1.109:8080/hotel/images/'+data.details.avatar);
+            $("#fillNick").val(data.details.nick);
+            $("#Sex").text(data.details.sex);
+            $("#tel").val(data.details.tel);
+            $("#idCard").val(data.details.idCard);
+            $("#job").val(data.details.job);
+            $("#education").val(data.details.education);
+            $("#declaration").val(data.details.declaration);
+            $("#hobby").val(data.details.hobby);
+        });
+
+
+
+        $(".infobtn").click(function(){
+
+            var _uid = fnBase.huoqu(0, "uid");
+            var _nickNameInput=$("#fillNick").val();
+            var frontURL=Constant.URL+'/mobile/modify';
+            var postData={
+                "customerId":_uid,
+                "nick":_nickNameInput,
+                "sex":sexVal,
+                "tel":$("#tel").val(),
+                "idCard":$("#idCard").val(),
+                "job":$("#job").val(),
+                "education":$("#education").val(),
+                "declaration":$("#declaration").val(),
+                "hobby":$("#hobby").val()
+            };
+            fnBase.commonAjax(frontURL,postData,function(data){
+                console.log(data);
+                if(data.customerId=="1"){
+                    fnBase.myalert(data.content)
+                }else{
+                    fnBase.myalert(data.content)
                 }
             })
         })

@@ -8,12 +8,14 @@ $(document).ready(function(){
 
     var _uid = fnBase.huoqu(0, "uid");
     var _id = decodeURIComponent(fnBase.request("id"));
-    var frontURL="http://192.168.1.109:8080/hotel/mobile/info";
+    var frontURL=Constant.URL+'/mobile/info';
     var postData={"roomId":_id};
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
         fnBase.keep(1,"community",data.apartment.community);
         fnBase.keep(1,"dayPrice",data.apartment.dayPrice);
+        fnBase.keep(1,"roomType",data.apartment.apartmenttype);
+
         //if(data.success){
             //轮播图
             $(".swiper-container .swiper-wrapper").html("");
@@ -35,8 +37,9 @@ $(document).ready(function(){
             var priceStr ='<h1 class="ic_house">'+data.apartment.community+'</h1><p class="info_L24">'+data.apartment.balcony+"室"+data.apartment.bathroom+"厅"+
                 data.apartment.bedroom+"卫"+"-"+data.room.direction+'</p>' +
                 '<p class="info_L24 label-adders">'+data.apartment.location+data.apartment.address+'</p><p class="info_L24 label-group"><i class="label-type1">'
-                +data.apartment.apartmenttype+'</i></p><span class="label-price">'+data.apartment.dayPrice+'<small>/天</small></span>'
+                +data.apartment.apartmenttype+'</i> <span class="label-yj">押金：200</span></p><span class="label-price">'+data.apartment.dayPrice+'<small>/天</small></span>'
             $(".information").append(priceStr);
+
             //房源信息
             $(".housing .i_inf ul").html("");
             var massage='<li><span class="inf_sp">小区</span><span>'+data.apartment.community+'</span></li><li><span class="inf_sp">单元</span><span>'+data.apartment.num_building
@@ -62,8 +65,9 @@ $(document).ready(function(){
 
 
     //    评价列表显示
-    var frontURL='';
-    fnBase.commonAjax(frontURL,{'param':93},function(data){
+    var frontURL=Constant.URL+'/mobile/comment';
+    var postData={};
+    fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
         if(data.status=="1"){
             $(".criticism ul").html("");
@@ -98,11 +102,12 @@ $(document).ready(function(){
             var postData={"startTime":checkIn,"endTime":leave,"roomId":_id};
             fnBase.commonAjax(frontURL,postData,function(data){
                 console.log(data);
-                if(data.statusCode=="1"){
-                    fnBase.myalert("OK")
-                }else{
+                if(data.content.length>0){
                     $(".alert-content .hint").html("<i>!</i>您所选时间内没有空房,请重新选择日期").css("color","red").show();
-                    return;
+                    $(".but-success").hide();
+                }else{
+                    $(".alert-content .hint").html("")
+                    $(".but-success").show();
                 }
             })
         }
@@ -110,8 +115,6 @@ $(document).ready(function(){
     });
 
 
-
-    //确定时间段；
     $(".alert-content .but-success").click(function(){
         $("#masking").hide(10,function(){
             $(".alert-content").animate({bottom:'-3.7rem'},300);

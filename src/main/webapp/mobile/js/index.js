@@ -9,6 +9,7 @@ $(document).ready(function(){
 
 var alertSearch={
     info:function(){
+        var _uid = fnBase.huoqu(0, "uid");
         var openDoc=$(".Address-search");
         $(".group-search").click(function(){
             openDoc.show();
@@ -16,7 +17,11 @@ var alertSearch={
         });
 
         $(".header-mobile .link-btn").click(function(){
-            window.location.href="login.html";
+            if (_uid == null || _uid == "undefined" || _uid == "") {
+                window.location.href = "login.html";
+                return;
+            }
+
         })
     }
 
@@ -93,6 +98,12 @@ function getData(){
                 window.location.href="house_particulars.html?id="+encodeURIComponent(id)+"&offer="+encodeURIComponent(isoff);
             }
         );
+        $('.title-serce').unbind('click').click(
+            function(){
+                window.location.href="houseType.html";
+            }
+        );
+
        //«‡…·…˙ªÓ
        // $(".service-image").html("");
        // var ad_str='';
@@ -102,7 +113,7 @@ function getData(){
        // }
        // $(".service-image").append(ad_str);
 
-        $('.title-serce').unbind('click').click(
+        $('.service-image .title-serce').unbind('click').click(
             function(){
                 //var id=$(this).attr('proID');
                 window.location.href="Life.html";

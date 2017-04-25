@@ -6,10 +6,15 @@ $(document).ready(function(){
     var _oTotalDay=fnBase.huoqu(1,"oTotalDay");
     var _oTotalPrice=fnBase.huoqu(1,"oTotalPrice");
     var _id = decodeURIComponent(fnBase.request("id"));
+    var _price=fnBase.huoqu(1,"dayPrice");
+    var _apartmenttype=fnBase.huoqu(1,"roomType");
+
 
     $(".order_info .roomName").text(_community);
     $(".order_info .roomTime").html(_startTime+"入住"+_endTime+"离开"+"<i class='date'>共（"+_oTotalDay+"）天</i>");
+    $(".order_info .roompYJ").html("押金:<span style='color: #666'>￥280</span>");
     $(".order_info .roompPic").html("订单总额:<span class='money'>￥"+_oTotalPrice+"</span>");
+
 
 //    提交订单
     $(".navbar a").click(function(){
@@ -41,9 +46,10 @@ $(document).ready(function(){
             "oTotalDay":_oTotalDay,//总天数
             "oTotalPrice":_oTotalPrice,//总价格
             "cusName":_userName,//入住人姓名
-            "cusTel":_tel,//...电话
-            "cusIdCard":_identity,//...身份证号
-            "dayPrice":fnBase.huoqu(1,"dayPrice"),//单价
+            "cusTel":_tel,//入住人电话
+            "cusIdCard":_identity,//入住人身份证号
+            "dayPrice":_price,//当天单价
+            "apartmentType":_apartmenttype//房源类型
         };
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);

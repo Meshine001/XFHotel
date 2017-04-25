@@ -22,10 +22,10 @@ var login={
             }
             var frontURL=Constant.URL+"/mobile/login";
             var postData ={"tel":phoneNumber,"password":passwordNumber};
-            //postData=JSON.stringify(postData);
             fnBase.commonAjax(frontURL,postData ,function(data) {
                 console.log(data);
                 if (data.statusCode == "1") {
+                    fnBase.keep( 0,"uid",data.content);
                     window.location.href = "index.html";
                 } else {
                     fnBase.myalert(data.content);

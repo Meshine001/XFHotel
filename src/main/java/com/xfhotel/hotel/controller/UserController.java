@@ -1,4 +1,4 @@
-package com.xfhotel.hotel.controller;
+                                   package com.xfhotel.hotel.controller;
 
 import java.util.List;
 

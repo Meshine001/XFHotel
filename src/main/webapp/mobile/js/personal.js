@@ -1,11 +1,13 @@
 
 $(document).ready(function(){
-   //var _uid=fnBase.huoqu(0,"id");
-   // if(_uid==null || _uid=="undefined" || _uid==""){
-   //     window.location.href="login.html";
-   //     return;
-   // }
-    var frontURL=Constant.URL+'/mobile/detailsData?id=3';
+    $(".vip_info_list li .per-order-status .tip-size").hide();
+    var _uid=fnBase.huoqu(0,"uid");
+    if(_uid==null || _uid=="undefined" || _uid==""){
+        window.location.href="login.html";
+        return;
+    }
+    var frontURL=Constant.URL+'/mobile/detailsData?id='+_uid;
+    //var frontURL=Constant.URL+'/mobile/myOrder';
     var postData={};
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
@@ -21,13 +23,19 @@ $(document).ready(function(){
             $(".vip_info img").attr("src",'http://192.168.1.109:8080/hotel/images/'+data.details.avatar);
         }
         //未支付的订单数
-        if(data.info.fkcount=="0"){
+        var toPaid=fnBase.huoqu(0,"toPaid");
+        if(toPaid=="0"){
             $(".vip_info_list li .per-order-status .tip-size").hide();
         }else{
-            $(".vip_info_list li .per-order-status .tip-size").text(data.info.fkcount).show();
+            $(".vip_info_list li .per-order-status .tip-size").html(toPaid).show();
         }
 
     });
+    $(".vip_info_list li").eq(0).click(function(){
+
+    });
+
+
 
 
     //退出登录
