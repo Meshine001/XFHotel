@@ -1,4 +1,4 @@
-
+ï»¿
 var menuBar=0;
 $(document).ready(function(){
 
@@ -75,21 +75,21 @@ $(document).ready(function(){
                 $(".orderlist").html("");
                 for(var i=0;i<data.content.length;i++){
 
-                    if(data.content[i].status=="µÈ´ıÖ§¸¶"){
+                    if(data.content[i].status=="ç­‰å¾…æ”¯ä»˜"){
                         _str+='<li roomid="'+data.content[i].roomId+'" orderId="'+data.content[i].id+'"><p class="p_title" style="color: red">'+data.content[i].status+'</p>';
                     }else{
                         _str+='<li roomid="'+data.content[i].roomId+'" orderId="'+data.content[i].id+'"><p class="p_title" style="color: #00b38a">'+data.content[i].status+'</p>';
                     }
-                    _str+='<div class="pay_content"><p class="list_bigsize">'+data.content[i].description+'</p><p class="p_list">'+data.content[i].type+'<span>Ö§¸¶<i style="color: orange">'+data.content[i].totalPrice+'</i>Ôª</span></p><p class="p_list">'+data.content[i].startTime+"--"+data.content[i].endTime+'<span>¹²'+data.content[i].totalDay+'Ìì</span></p></div>';
+                    _str+='<div class="pay_content"><p class="list_bigsize">'+data.content[i].description+'</p><p class="p_list">'+data.content[i].type+'<span>æ”¯ä»˜<i style="color: orange">'+data.content[i].totalPrice+'</i>å…ƒ</span></p><p class="p_list">'+data.content[i].startTime+"--"+data.content[i].endTime+'<span>å…±'+data.content[i].totalDay+'å¤©</span></p></div>';
 
-                    if(data.content[i].status=="µÈ´ıÖ§¸¶"){
-                        _str+='<p class="total"><span class="fl payment">Ö§¸¶</span></p>'
-                    }else if(data.content[i].status=="ÍË¿î¶©µ¥"){
-                        _str+='<p class="total"><span class="fl evaluate">ÆÀ¼Û</span></p>'
-                    }else if(data.content[i].status=="½øĞĞÖĞ"){
-                        _str+='<p class="total"><span class="fl cancel">ÍË·¿</span><span class="fl evaluate">ÆÀ¼Û</span></p>'
+                    if(data.content[i].status=="ç­‰å¾…æ”¯ä»˜"){
+                        _str+='<p class="total"><span class="fl payment">æ”¯ä»˜</span></p>'
+                    }else if(data.content[i].status=="é€€æ¬¾è®¢å•"){
+                        _str+='<p class="total"><span class="fl evaluate">è¯„ä»·</span></p>'
+                    }else if(data.content[i].status=="è¿›è¡Œä¸­"){
+                        _str+='<p class="total"><span class="fl cancel">é€€æˆ¿</span><span class="fl evaluate">è¯„ä»·</span></p>'
                     }else{
-                        _str+='<p class="total"><span class="fl evaluate">ÆÀ¼Û</span></p>'
+                        _str+='<p class="total"><span class="fl evaluate">è¯„ä»·</span></p>'
                     }
                     _str+='</li>';
 

@@ -1,10 +1,7 @@
-
+ï»¿
 $(document).ready(function(){
 
-
-
-    ////ÂÖ²¥
-
+    ////è½®æ’­
 
     var _uid = fnBase.huoqu(0, "uid");
     var _id = decodeURIComponent(fnBase.request("id"));
@@ -19,12 +16,12 @@ $(document).ready(function(){
         fnBase.keep(1,"roomCX",data.room.direction);
         fnBase.keep(1,"num_door",data.apartment.num_door);
         //if(data.success){
-            //ÂÖ²¥Í¼
+            //è½®æ’­å›¾
             $(".swiper-container .swiper-wrapper").html("");
             var lunbo_str = '';
             var lunbo_length = data.apartment.pic3.length;
             for (var i = 0; i < lunbo_length; i++){
-                lunbo_str += '<div class="swiper-slide"><img src="'+"http://192.168.1.109:8080/hotel/images/"+data.apartment.pic2[i]+'"/></div>';
+                lunbo_str += '<div class="swiper-slide"><img src="'+Constant.URL+"/images/"+data.apartment.pic2[i]+'"/></div>';
             }
             $(".swiper-container .swiper-wrapper").append(lunbo_str);
             var mySwiper = new Swiper ('.swiper-container',{
@@ -33,31 +30,31 @@ $(document).ready(function(){
                 pagination: '.swiper-pagination',
                 autoplayDisableOnInteraction: false
             });
-            //·¿Ô´¸Å¿ö
+            //æˆ¿æºæ¦‚å†µ
 
             $(".information").html("");
-            var priceStr ='<h1 class="ic_house">'+data.apartment.community+'</h1><p class="info_L24">'+data.apartment.balcony+"ÊÒ"+data.apartment.bathroom+"Ìü"+
-                data.apartment.bedroom+"ÎÀ"+"-"+data.room.direction+'</p>' +
+            var priceStr ='<h1 class="ic_house">'+data.apartment.community+'</h1><p class="info_L24">'+data.apartment.balcony+"å®¤"+data.apartment.bathroom+"å…"+
+                data.apartment.bedroom+"å«"+"-"+data.room.direction+'</p>' +
                 '<p class="info_L24 label-adders">'+data.apartment.location+data.apartment.address+'</p><p class="info_L24 label-group"><i class="label-type1">'
-                +data.apartment.apartmenttype+'</i></p><span class="label-price">'+data.apartment.dayPrice+'<small>/Ìì</small></span>'
+                +data.apartment.apartmenttype+'</i></p><span class="label-price">'+data.apartment.dayPrice+'<small>/å¤©</small></span>'
             $(".information").append(priceStr);
 
-            //·¿Ô´ĞÅÏ¢
+            //æˆ¿æºä¿¡æ¯
             $(".housing .i_inf ul").html("");
-            var massage='<li><span class="inf_sp">Ğ¡Çø</span><span>'+data.apartment.community+'</span></li><li><span class="inf_sp">µ¥Ôª</span><span>'+data.apartment.num_building
-                +'</span></li><li><span class="inf_sp">Ãæ»ı</span><span>'+data.apartment.square+"©O"+'</span></li><li><span class="inf_sp">Â¥²ã</span><span>'+data.apartment.totalfloor
-                +'</span></li><li><span class="inf_sp">¿É×¡</span><span>'+data.apartment.capacity+"ÈË"+'</span></li><li><span class="inf_sp">»§ĞÍ</span><span>'+data.apartment.balcony+"ÊÒ"+data.apartment.bathroom+"Ìü"+
-                data.apartment.bedroom+"ÎÀ"+'</span></li>';
+            var massage='<li><span class="inf_sp">å°åŒº</span><span>'+data.apartment.community+'</span></li><li><span class="inf_sp">å•å…ƒ</span><span>'+data.apartment.num_building
+                +'</span></li><li><span class="inf_sp">é¢ç§¯</span><span>'+data.apartment.square+"ã¡"+'</span></li><li><span class="inf_sp">æ¥¼å±‚</span><span>'+data.apartment.totalfloor
+                +'</span></li><li><span class="inf_sp">å¯ä½</span><span>'+data.apartment.capacity+"äºº"+'</span></li><li><span class="inf_sp">æˆ·å‹</span><span>'+data.apartment.balcony+"å®¤"+data.apartment.bathroom+"å…"+
+                data.apartment.bedroom+"å«"+'</span></li>';
             $(".housing .i_inf ul").append(massage);
 
-        //    ·¿Ô´ÅäÖÃ
+        //    æˆ¿æºé…ç½®
             $(".allocation .deploy ul").html("");
             var str='';
             for(var i=0;i<data.apartment.facilityEntity.length;i++){
                 str+='<li><i>'+data.apartment.facilityEntity[i].description+'</i></li>';
             }
             $(".allocation .deploy ul").append(str);
-        //    ·¿Ô´ÃèÊö
+        //    æˆ¿æºæè¿°
             $(".describe #serviceIntro2").text(data.room.descriptionPersonal);
 
         //}else{
@@ -66,7 +63,7 @@ $(document).ready(function(){
     });
 
 
-    //    ÆÀ¼ÛÁĞ±íÏÔÊ¾
+    //    è¯„ä»·åˆ—è¡¨æ˜¾ç¤º
     var frontURL=Constant.URL+'/mobile/comment';
     var postData={};
     fnBase.commonAjax(frontURL,postData,function(data){
@@ -75,27 +72,27 @@ $(document).ready(function(){
             $(".criticism ul").html("");
             var plStr = '';
             for(var i=0;i<data.info.length;i++){
-                plStr+='<li><p class="appInfo"><span class="appName">'+data.info[i].user_nickname+'</span><i>5ĞÇ</i></p><p class="appText">' + data.info[i].content + '</p><p class="appDate">'+data.info[i].ctime+'</p></li>'
+                plStr+='<li><p class="appInfo"><span class="appName">'+data.info[i].user_nickname+'</span><i>5æ˜Ÿ</i></p><p class="appText">' + data.info[i].content + '</p><p class="appDate">'+data.info[i].ctime+'</p></li>'
             }
             $(".criticism ul").append(plStr)
         }
     });
-    //    ÆÀ¼Û
+    //    è¯„ä»·
 
-   //  Á¢¼´Ô¤Ô¼
+   //  ç«‹å³é¢„çº¦
     $(".navbar a").live('click',function() {
         $("#masking").show(10, function () {
             $(".alert-content").animate({bottom: 0}, 300);
         });
     });
 
-    //ÅĞ¶ÏÓĞ·¿Ã»·¿
+    //åˆ¤æ–­æœ‰æˆ¿æ²¡æˆ¿
     $("#appDate2").on('change',function(){
 
         var checkIn= $("#appDate").val();
         var leave= $("#appDate2").val();
         if(checkIn>=leave){
-            fnBase.myalert("ÇëÖØĞÂÑ¡ÔñÊ±¼ä");
+            fnBase.myalert("è¯·é‡æ–°é€‰æ‹©æ—¶é—´");
             $("#appDate").val("");
             $("#appDate2").val("");
             return;
@@ -105,7 +102,7 @@ $(document).ready(function(){
             fnBase.commonAjax(frontURL,postData,function(data){
                 console.log(data);
                 if(data.content.length>0){
-                    $(".alert-content .hint").html("<i>!</i>ÄúËùÑ¡Ê±¼äÄÚÃ»ÓĞ¿Õ·¿,ÇëÖØĞÂÑ¡ÔñÈÕÆÚ").css("color","red").show();
+                    $(".alert-content .hint").html("<i>!</i>æ‚¨æ‰€é€‰æ—¶é—´å†…æ²¡æœ‰ç©ºæˆ¿,è¯·é‡æ–°é€‰æ‹©æ—¥æœŸ").css("color","red").show();
                     $(".but-success").hide();
                 }else{
                     $(".alert-content .hint").html("")
@@ -144,7 +141,7 @@ $(document).ready(function(){
     });
 
         //window.location.href="order.html";
-        ////ÅĞ¶Ïuid
+        ////åˆ¤æ–­uid
         //if (_uid == null || _uid == "undefined" || _uid == "") {
         //    window.location.href = "login.html";
         //    return;
