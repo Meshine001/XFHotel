@@ -28,6 +28,10 @@
 		<filter-name>CharacterFilter</filter-name>
 		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CharacterFilter</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
 	<!-- 跨域 -->
 	<filter>
 		<filter-name>cors</filter-name>
