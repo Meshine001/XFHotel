@@ -126,4 +126,12 @@ public class Blog {
 		String dstr = d.toGMTString();
 		return dstr;
 	}
+	@Override
+	public String toString() {
+		return "Blog [id=" + id + ", title=" + title + ", date=" + date + ", path=" + path + ", authorid=" + authorid
+				+ ", pic=" + pic + ", readtime=" + readtime + ", author=" + author + ", status=" + status
+				+ ", abs_text=" + abs_text + "]";
+	}
+	
+	
 }

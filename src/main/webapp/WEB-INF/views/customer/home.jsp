@@ -286,46 +286,47 @@
 				<div class="hai_list" id="jx_div">
 					<div class="hai_lf">
 						<div class="two">
-							<a onmouseover="showMask(1,0)" onmouseout="hideMask(1,0)" href=""
-								title="青舍“绘”生活零基础绘画活动" target="_blank"> <img
-								class="readyload" src="" data-original="" width="425"
+							<a onmouseover="showMask(1,0)" onmouseout="hideMask(1,0)" href="<%=basePath%>/story/blog_content?id=${homeBlog[0].id}"
+								title="${homeBlog[0].title}" target="_blank"> <img
+								class="readyload" src="${homeBlog[0].pic}" data-original="" width="425"
 								height="265">
 								<div class="mask" style="display: none;" id="mask_1_0">
-									<span>青舍“绘”生活零基础绘画活动</span><input class="mask_btn" value="点击查看">
+									<span>${homeBlog[0].title}</span><input class="mask_btn" value="点击查看">
 								</div>
-							</a> <a onmouseover="showMask(1,1)" onmouseout="hideMask(1,1)"
-								href="" title="明星同款火锅，爆辣来袭" target="_blank"> <img
-								class="readyload" src="/hotel/dist/public/images/blank.gif"
-								data-original="" width="425" height="265">
+							</a> <a onmouseover="showMask(1,1)" onmouseout="hideMask(1,1)" href="<%=basePath%>/story/blog_content?id=${homeBlog[1].id}"
+								title="${homeBlog[1].title}" target="_blank"> <img
+								class="readyload" src="${homeBlog[1].pic}" data-original="" width="425"
+								height="265">
 								<div class="mask" style="display: none;" id="mask_1_1">
-									<span>明星同款火锅，爆辣来袭</span><input class="mask_btn" value="点击查看">
+									<span>${homeBlog[1].title}</span><input class="mask_btn" value="点击查看">
 								</div>
 							</a>
 						</div>
 						<div class="three">
+						
 							<a onmouseover="showMask(2,0)" onmouseout="hideMask(2,0)"
-								href="http://www.monph.com/shenghuo/info-390.html" title="青舍嗨歌会"
+								href="<%=basePath%>/story/blog_content?id=${homeBlog[2].id}" title="${homeBlog[2].title}"
 								target="_blank"> <img class="readyload"
-								src="/hotel/dist/public/images/blank.gif" data-original=""
+								src="${homeBlog[2].pic}" data-original=""
 								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_0">
-									<span>青舍嗨歌会</span><input class="mask_btn" value="点击查看">
+									<span>${homeBlog[2].title}</span><input class="mask_btn" value="点击查看">
 								</div>
 							</a> <a onmouseover="showMask(2,1)" onmouseout="hideMask(2,1)"
-								href="http://www.monph.com/shenghuo/info-455.html?app=1"
-								title="2016/17青舍跨年音乐节" target="_blank"> <img
-								class="readyload" src="/hotel/dist/public/images/blank.gif"
+								href="<%=basePath%>/story/blog_content?id=${homeBlog[3].id}"
+								title="${homeBlog[3].title}" target="_blank"> <img
+								class="readyload" src="${homeBlog[3].pic}"
 								data-original="" width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_1">
-									<span>2016/17青舍跨年音乐节</span><input class="mask_btn" value="点击查看">
+									<span>${homeBlog[3].title}</span><input class="mask_btn" value="点击查看">
 								</div>
 							</a> <a onmouseover="showMask(2,2)" onmouseout="hideMask(2,2)"
-								href="http://www.monph.com/shenghuo/info-442.html"
-								title="青舍公寓首届脱单趴" target="_blank"> <img class="readyload"
-								src="/hotel/dist/public/images/blank.gif" data-original=""
+								href="<%=basePath%>/story/blog_content?id=${homeBlog[4].id}"
+								title="${homeBlog[4].title}" target="_blank"> <img class="readyload"
+								src="${homeBlog[4].pic}" data-original=""
 								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_2">
-									<span>青舍公寓首届脱单趴</span><input class="mask_btn" value="点击查看">
+									<span>${homeBlog[4].title}</span><input class="mask_btn" value="点击查看">
 								</div>
 							</a>
 
@@ -334,102 +335,52 @@
 					<div class="hai_rg">
 						<div id="jxfocus">
 							<div class="hua_d" style="left: -960px; width: 1280px;">
-								<a href="/gushi/info-82.html" target="_blank" title="速度与激情，青舍风云">
+								<a href="<%=basePath%>/story/blog_content?id=${homeBlog[5].id}" target="_blank" title="${homeBlog[5].title}">
 								</a>
 								<dl class="hai_dl">
-									<a href="/gushi/info-82.html" target="_blank"
-										title="速度与激情，青舍风云">
+									<a href="<%=basePath%>/story/blog_content?id=${homeBlog[5].id}" target="_blank"
+										title="${homeBlog[5].title}">
 										<dd>
 											<img
-												src="/hotel/dist/thumb/dress_155x155/gushi/20150706/2180504d1853f6c725bec581a03eb26c.jpg"
+												src="${homeBlog[5].pic}"
 												width="155" height="155">
 										</dd>
 									</a>
 									<dt>
-										<a href="/gushi/info-82.html" target="_blank"
-											title="速度与激情，青舍风云">
-											<h3>速度与激情，青舍风云</h3>
-											<p></p>
-										</a><a href="/gushi/info-82.html" target="_blank"
-											title="速度与激情，青舍风云" class="all_text">阅读全文</a>
+										<a href="<%=basePath%>/story/blog_content?id=${homeBlog[5].id}" target="_blank"
+											title="${homeBlog[5].title}">
+											<h3>${homeBlog[5].title}</h3>
+											<p>${homeBlog[5].abs_text}</p>
+										</a><a href="<%=basePath%>/story/blog_content?id=${homeBlog[5].id}" target="_blank"
+											title="${homeBlog[5].title}" class="all_text">阅读全文</a>
 									</dt>
 								</dl>
-
-								<a href="/gushi/info-81.html" target="_blank" title="萌妹纸的青舍小生活">
+								<a href="<%=basePath%>/story/blog_content?id=${homeBlog[6].id}" target="_blank" title="${homeBlog[5].title}">
 								</a>
 								<dl class="hai_dl">
-									<a href="/gushi/info-81.html" target="_blank" title="萌妹纸的青舍小生活">
+									<a href="<%=basePath%>/story/blog_content?id=${homeBlog[6].id}" target="_blank"
+										title="${homeBlog[6].title}">
 										<dd>
 											<img
-												src="/hotel/dist/thumb/dress_155x155/gushi/20150629/f3edcb5920aa0daa90e924e549618660.jpg"
+												src="${homeBlog[6].pic}"
 												width="155" height="155">
 										</dd>
 									</a>
 									<dt>
-										<a href="/gushi/info-81.html" target="_blank"
-											title="萌妹纸的青舍小生活">
-											<h3>萌妹纸的青舍小生活</h3>
-											<p>一位小学英语老师，孩子给我很多的快乐，他们简单善良，有时会在教师节出其不意的送我礼物。平时除了工作，就是喜欢和大家…...</p>
-										</a><a href="/gushi/info-81.html" target="_blank"
-											title="萌妹纸的青舍小生活" class="all_text">阅读全文</a>
+										<a href="<%=basePath%>/story/blog_content?id=${homeBlog[6].id}" target="_blank"
+											title="${homeBlog[6].title}">
+											<h3>${homeBlog[6].title}</h3>
+											<p>${homeBlog[6].abs_text}</p>
+										</a><a href="<%=basePath%>/story/blog_content?id=${homeBlog[6].id}" target="_blank"
+											title="${homeBlog[6].title}" class="all_text">阅读全文</a>
 									</dt>
 								</dl>
-
-								<a href="/gushi/info-80.html" target="_blank" title="青舍，我在这里">
-								</a>
-								<dl class="hai_dl">
-									<a href="/gushi/info-80.html" target="_blank" title="青舍，我在这里">
-										<dd>
-											<img
-												src="/hotel/dist/thumb/dress_155x155/gushi/20150629/9dcd063a56672b52d8ebee7a26c985b6.jpg"
-												width="155" height="155">
-										</dd>
-									</a>
-									<dt>
-										<a href="/gushi/info-80.html" target="_blank" title="青舍，我在这里">
-											<h3>青舍，我在这里</h3>
-											<p>毕业工作两年了，从来到青舍公寓，第一感觉就是服务非常的不错，管家们也非常积极负责。之前有过类似的这样公寓居住的经历…...</p>
-										</a><a href="/gushi/info-80.html" target="_blank" title="青舍，我在这里"
-											class="all_text">阅读全文</a>
-									</dt>
-								</dl>
-
-								<a href="/gushi/info-79.html" target="_blank"
-									title="初次见到，便决定就是这里"> </a>
-								<dl class="hai_dl">
-									<a href="/gushi/info-79.html" target="_blank"
-										title="初次见到，便决定就是这里">
-										<dd>
-											<img
-												src="/hotel/dist/thumb/dress_155x155/gushi/20150629/5fa2351558c479857e2fd51aec7681df.jpg"
-												width="155" height="155">
-										</dd>
-									</a>
-									<dt>
-										<a href="/gushi/info-79.html" target="_blank"
-											title="初次见到，便决定就是这里">
-											<h3>初次见到，便决定就是这里</h3>
-											<p></p>
-										</a><a href="/gushi/info-79.html" target="_blank"
-											title="初次见到，便决定就是这里" class="all_text">阅读全文</a>
-									</dt>
-								</dl>
-
+						
 							</div>
 						</div>
 						<ul class="hai_ul">
-							<li class=""></li>
-							<li class=""></li>
-							<li class=""></li>
 							<li class="hai_on"></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
+							<li class=""></li>
 						</ul>
 					</div>
 				</div>
@@ -484,7 +435,7 @@
 			</div>
 			<div class="em" style="display: none;">
 				<div class="em_pr">
-					<img src="<%=basePath%>/dist/public/v1/images/em.png" width="149"
+					<img src="<%=basePath%>/dist/public/v1/images/em.jpg" width="149"
 						height="149"> <i></i>
 				</div>
 			</div>

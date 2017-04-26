@@ -174,7 +174,16 @@ public class OrderServiceImpl implements OrderService {
 		}
 		c.add(Restrictions.between("time", TimeUtil.getDateLong(startDate),
 				TimeUtil.getDateLong(endDate) + 1000 * 60 * 60 * 24));
-		return c.list();
+		List<Order> list = c.list();
+		for(Order o:list){
+			Long current = new Date().getTime();
+			Long die = o.getTime()+Constants.EFFECTIVE_ORDER_TIME_DURING;
+			if(die < current){
+				o.setStatus(Order.STATUS_TIME_OUT);
+				orderDAO.update(o);
+			}
+		}
+		return list;
 
 	}
 

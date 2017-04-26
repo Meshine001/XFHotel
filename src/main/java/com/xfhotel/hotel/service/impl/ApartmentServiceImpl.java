@@ -29,6 +29,7 @@ import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
+import com.xfhotel.hotel.support.PageResults;
 
 @Service
 public class ApartmentServiceImpl implements ApartmentService {
@@ -137,6 +138,25 @@ public class ApartmentServiceImpl implements ApartmentService {
 		String hqlString = "from Price where apartment=? and date =?";
 		Object[] values = {apartment,date};
 		return priceDAO.getByHQL(hqlString, values);
+	}
+	
+	@Transactional
+	@Override
+	public PageResults<Map> getPage(int page) {
+		PageResults<Apartment> results = apartmentDAO.findPageByFetchedHql("from Apartment", "select count(*) from Apartment", page, 5, null);
+		PageResults<Map> infos = new PageResults<Map>();
+		List<Map> m = new ArrayList<Map>();
+		for(Apartment a:results.getResults()){
+			m.add(a.toMap());
+		}
+		infos.setCurrentPage(results.getCurrentPage());
+		infos.setPageCount(results.getPageCount());
+		infos.setPageNo(results.getPageNo());
+		infos.setResults(m);
+		infos.setPageSize(results.getPageSize());
+		infos.setTotalCount(results.getTotalCount());
+		
+		return infos;
 	}
 
 }
