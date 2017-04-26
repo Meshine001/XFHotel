@@ -8,7 +8,6 @@ $(document).ready(function(){
     function scrollNav(){
         $(window).scroll(function(){
             var stop=$(window).scrollTop();
-            console.log(stop)
             if(stop>40){
                 $(".header-mobile").fadeIn().addClass("scro")
             }else{
