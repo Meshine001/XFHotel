@@ -1,4 +1,4 @@
-$(document).ready(function(){
+ï»¿$(document).ready(function(){
     login.Entry();
 });
 var login={
@@ -7,17 +7,17 @@ var login={
         $("#login_submit").click(function(){
             var phoneNumber=$("#login-username").val();
             if(phoneNumber==""){
-                fnBase.myalert("ÇëÌîĞ´ÊÖ»úºÅÂë");
+                fnBase.myalert("è¯·å¡«å†™æ‰‹æœºå·ç ");
                 return;
             }
             var myreg = /^0?1[3|4|5|6|7|8][0-9]\d{8}$/;
             if(!myreg.test(phoneNumber)){
-                fnBase.myalert("ÊÖ»úºÅÂëÓĞÎó£¡ ÇëÊäÈë11Î»Êı×Ö");
+                fnBase.myalert("æ‰‹æœºå·ç æœ‰è¯¯ï¼ è¯·è¾“å…¥11ä½æ•°å­—");
                 return;
             }
             var passwordNumber=$("#login-password").val();
             if(passwordNumber=="" || passwordNumber.length<6){
-                fnBase.myalert("ÇëÌîĞ´ÖÁÉÙ6Î»ÊıµÇÂ¼ÃÜÂë");
+                fnBase.myalert("è¯·å¡«å†™è‡³å°‘6ä½æ•°ç™»å½•å¯†ç ");
                 return;
             }
             var frontURL=Constant.URL+"/mobile/login";

@@ -1,4 +1,4 @@
-
+ï»¿
 
 $(document).ready(function(){
     scrollNav();
@@ -45,7 +45,7 @@ function getData(){
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
         //if(data.status==1){
-        //   ÂÖ²¥
+        //   è½®æ’­
 
             var lunboStr='';
             var lunbo_length=data.homeRooms[0].pic3.length;
@@ -53,7 +53,7 @@ function getData(){
             $(".swiper-container .swiper-wrapper").html("");
             if(lunbo_length>0){
                 for (var i = 0; i < lunbo_length; i++) {
-                    lunboStr += '<div class="swiper-slide"> <a href="javascript:void(0)"><img src="'+"http://192.168.1.109:8080/hotel/images/"+data.homeRooms[0].pic3[i]+'"/></a></div>';
+                    lunboStr += '<div class="swiper-slide"> <a href="javascript:void(0)"><img src="'+Constant.URL+"/images/"+data.homeRooms[0].pic3[i]+'"/></a></div>';
                 }
                 $(".swiper-container .swiper-wrapper").append(lunboStr);
                 var mySwiper = new Swiper ('.swiper-container',{
@@ -66,7 +66,7 @@ function getData(){
         //}else{
         //    fnBase.myalert(data.msg)
         //}
-     //·¿¼ä·ÖÀà
+     //æˆ¿é—´åˆ†ç±»
      //   $(".hot-issue").html("");
         var category_str='';
         //var categoryLength=data.info.category.length;
@@ -86,13 +86,13 @@ function getData(){
         );
 
 
-    // ÈÈÃÅ·¿Ô´
+    // çƒ­é—¨æˆ¿æº
         var str='';
         var isoffers;
         $('.plCon .goodlist').html("");
         for(var i=0;i<data.homeRooms.length;i++){
-            str+='<li proID='+data.homeRooms[i].id+'><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="'+"http://192.168.1.109:8080/hotel/images/"+data.homeRooms[i].pic3[1]+'"></a><h1 class="text-ellipsis"><a href="">'+data.homeRooms[i].community+'</a></h1><h2 class="text-ellipsis">'+data.homeRooms[i].balcony+"ÊÒ"+data.homeRooms[i].bathroom+"Ìü"+
-                data.homeRooms[i].bedroom+"ÎÀ"+"-"+data.homeRooms[i].direction+'</h2><p class="text-ellipsis address">'+data.homeRooms[i].location+data.homeRooms[i].address+'</p><p class="label-group"><i class="label-type1">'+data.homeRooms[i].apartmenttype+'</i></p><span class="label-price">'+data.homeRooms[i].dayPrice+'<small>/Ìì</small></span></div></li>';
+            str+='<li proID='+data.homeRooms[i].id+'><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="'+Constant.URL+"/images/"+data.homeRooms[i].pic3[1]+'"></a><h1 class="text-ellipsis"><a href="">'+data.homeRooms[i].community+'</a></h1><h2 class="text-ellipsis">'+data.homeRooms[i].balcony+"å®¤"+data.homeRooms[i].bathroom+"å…"+
+                data.homeRooms[i].bedroom+"å«"+"-"+data.homeRooms[i].direction+'</h2><p class="text-ellipsis address">'+data.homeRooms[i].location+data.homeRooms[i].address+'</p><p class="label-group"><i class="label-type1">'+data.homeRooms[i].apartmenttype+'</i></p><span class="label-price">'+data.homeRooms[i].dayPrice+'<small>/å¤©</small></span></div></li>';
         }
         $('.plCon .goodlist').append(str);
 
@@ -115,12 +115,12 @@ function getData(){
             }
         );
 
-       //ÇàÉáÉú»î
+       //é’èˆç”Ÿæ´»
        // $(".service-image").html("");
        // var ad_str='';
        // var ad_length=data.info.indexPush.length;
        // for(var i=0;i<ad_length;i++){
-       //     ad_str+='<div class="service service-image"><h2 class="title-serce">ÇàÉáÉú»î<a href="">¸ü¶à</a></h2><a href="+data.info.indexPush[i].url+"><img src="'+data.info.indexPush[i].attach+'"></a></div>';
+       //     ad_str+='<div class="service service-image"><h2 class="title-serce">é’èˆç”Ÿæ´»<a href="">æ›´å¤š</a></h2><a href="+data.info.indexPush[i].url+"><img src="'+data.info.indexPush[i].attach+'"></a></div>';
        // }
        // $(".service-image").append(ad_str);
 
