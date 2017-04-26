@@ -51,6 +51,7 @@
 	</div>
 	<form action="<%=basePath%>/order/comment/post" id="comment-form"
 		method="post">
+		<input type="hidden" name = "orderId" value="${order.id}"/>
 		<input type="hidden" name="roomId" value="${room.id}">
 		<!-- 默认三星 -->
 		<input type="hidden" name="c_score" value="3" id="scoreWeiSheng">

@@ -113,6 +113,7 @@ public class OrderController {
 		session.setAttribute("oTotalDay", TimeUtil.daysBetween(startTime, endTime));
 		session.setAttribute("oPrice", priceInfo.get("price"));
 		session.setAttribute("oTotalPrice", priceInfo.get("totalPrice"));
+		session.setAttribute("oCashPledge", priceInfo.get("cashPledge"));
 		session.setAttribute("oPreferential", "");
 		return "customer/orderModule";
 	}
@@ -121,6 +122,7 @@ public class OrderController {
 		Map<String, Object> info = new HashMap<String, Object>();
 		StringBuffer sb = new StringBuffer();
 		Double sum = 0.00D;
+		Double cashPledge = 1500D;
 		Apartment apartment = apartmentService.findById(apartmentId);
 		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
 		for (int i = 0; i < days.size() - 1; i++) {
@@ -138,7 +140,9 @@ public class OrderController {
 			}
 			sum += pp;
 		}
+		sum += cashPledge;
 		info.put("price", sb.toString());
+		info.put("cashPledge", cashPledge);
 		info.put("totalPrice", sum);
 		return info;
 	}
@@ -182,6 +186,7 @@ public class OrderController {
 			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
 //		System.out.println(startTime);
 //		System.out.println(startTime+" 12:00");
+		System.out.println(description+"sda"+preferential+"大大adsas"+personal+needFapiao);
 				Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
@@ -205,8 +210,8 @@ public class OrderController {
 		o.setType(Apartment.getTypeNum(apartmentType));
 		o.setStatus(Order.STATUS_ON_PAY);
 		o.setNeedFapiao(needFapiao);
-		
 		orderservice.add(o);
+		
 		return "redirect:pay/" + o.getId();
 	}
 
