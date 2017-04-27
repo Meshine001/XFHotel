@@ -54,6 +54,9 @@ $(document).ready(function(){
         }
 
     });
-
+    $(".content-ul li").live('click',function(){
+        var _page=$(this).attr("link");
+        window.location.href='Life.html?id='+encodeURIComponent(_page);
+    });
 
 });
