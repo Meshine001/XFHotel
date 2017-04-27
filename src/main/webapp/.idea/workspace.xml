@@ -50,9 +50,9 @@
                 <element signature="e#12826#12832#0#HTML" expanded="true" />
                 <element signature="e#12855#12861#0#HTML" expanded="true" />
                 <element signature="e#12861#12867#0#HTML" expanded="true" />
-                <element signature="e#14058#14062#0#HTML" expanded="true" />
-                <element signature="e#14062#14066#0#HTML" expanded="true" />
-                <element signature="e#14113#14117#1#HTML" expanded="true" />
+                <element signature="e#14068#14072#0#HTML" expanded="true" />
+                <element signature="e#14072#14076#0#HTML" expanded="true" />
+                <element signature="e#14123#14127#1#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -126,9 +126,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="432" />
-    <option name="y" value="84" />
-    <option name="width" value="2426" />
+    <option name="x" value="-551" />
+    <option name="y" value="1015" />
+    <option name="width" value="1932" />
     <option name="height" value="1007" />
   </component>
   <component name="ProjectView">
@@ -319,7 +319,6 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -430,18 +429,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491719563706</updated>
-      <workItem from="1493170472612" duration="9794000" />
+      <workItem from="1493170472612" duration="10379000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9794000" />
+    <option name="totallyTimeSpent" value="10379000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="432" y="84" width="2426" height="1007" extended-state="0" />
-    <editor active="true" />
+    <frame x="-551" y="1015" width="1932" height="1007" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13190955" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16631468" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -672,9 +670,9 @@
             <element signature="e#12826#12832#0#HTML" expanded="true" />
             <element signature="e#12855#12861#0#HTML" expanded="true" />
             <element signature="e#12861#12867#0#HTML" expanded="true" />
-            <element signature="e#14058#14062#0#HTML" expanded="true" />
-            <element signature="e#14062#14066#0#HTML" expanded="true" />
-            <element signature="e#14113#14117#1#HTML" expanded="true" />
+            <element signature="e#14068#14072#0#HTML" expanded="true" />
+            <element signature="e#14072#14076#0#HTML" expanded="true" />
+            <element signature="e#14123#14127#1#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
