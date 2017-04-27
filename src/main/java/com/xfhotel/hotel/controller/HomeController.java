@@ -109,6 +109,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/story",method = RequestMethod.GET)
 	public String storyPage(HttpServletRequest request, int page){
+
 		PageResults<Blog> pr = blogService.show_blog(page);
 		int sp = pr.getCurrentPage();
 		int ep = pr.getPageCount();
@@ -431,6 +432,7 @@ public class HomeController {
 	@RequestMapping(value = "story/blog_content", method = RequestMethod.GET)
 	public String initBlog(HttpServletRequest request,Long id){
 		request.setAttribute("id", id);
+		System.out.println("啦啦1");
 		return "/customer/story_content";
 	}
 	
@@ -455,6 +457,7 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		map.put("content", content.toString());
+		System.out.println("大伯");
 		return map;
 	}
 }
