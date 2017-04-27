@@ -98,7 +98,7 @@ public class BlogServiceImpl implements BlogService{
 	@Transactional
 	public PageResults<Blog> list(int page) {
 		// TODO Auto-generated method stub
-		return blogDAO.findPageByFetchedHql("from Blog blog order by blog.date desc", "select count(*) from Blog", page, 2, null);
+		return blogDAO.findPageByFetchedHql("from Blog blog order by blog.date desc", "select count(*) from Blog", page, 5, null);
 	}
 
 	@Override

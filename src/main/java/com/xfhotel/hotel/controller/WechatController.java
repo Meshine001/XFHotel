@@ -181,6 +181,7 @@ public class WechatController {
 			try {
 				String authUrl = Config.AUTH_OPENID_URL.replace("CODE", code);
 				JSONObject result = JSONObject.fromObject(HttpUtils.get(authUrl));
+				System.out.println(result);
 				if (result.containsKey("errcode")) {// 错误返回
 					System.out.println(result);
 				} else {

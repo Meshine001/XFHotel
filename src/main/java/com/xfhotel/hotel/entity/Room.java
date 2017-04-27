@@ -58,12 +58,15 @@ public class Room implements Serializable {
 	private String description;//
 	
 	private boolean showHome;
+	
 
 	private String pics;
 
 	public Room() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	public int getStatus() {
 		return status;

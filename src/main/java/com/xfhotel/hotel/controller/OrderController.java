@@ -122,7 +122,7 @@ public class OrderController {
 		Map<String, Object> info = new HashMap<String, Object>();
 		StringBuffer sb = new StringBuffer();
 		Double sum = 0.00D;
-		Double cashPledge = 1500D;
+		Double cashPledge = 1D;
 		Apartment apartment = apartmentService.findById(apartmentId);
 		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
 		for (int i = 0; i < days.size() - 1; i++) {
@@ -141,6 +141,7 @@ public class OrderController {
 			sum += pp;
 		}
 		sum += cashPledge;
+		sb.append("@"+cashPledge);
 		info.put("price", sb.toString());
 		info.put("cashPledge", cashPledge);
 		info.put("totalPrice", sum);

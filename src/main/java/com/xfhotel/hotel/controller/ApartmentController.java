@@ -355,6 +355,16 @@ public class ApartmentController {
 		session.setAttribute("spPrices", prices);
 		return "admin/apartment/price";
 	}
+	
+	@RequestMapping(value = "/showHome/{id}", method = RequestMethod.GET)
+	public String showHome(@PathVariable("id")Long id){
+		Map info = apartmentService.getApartmentInfo(id);
+		List<Map> rooms = (List<Map>) info.get("rooms");
+		Room room = roomService.findById((Long)rooms.get(0).get("id"));
+		room.setShowHome(room.isShowHome()?false:true);
+		roomService.update(room);
+		return "redirect:/admin/apartment";
+	}
 
 //	@RequestMapping(value = "/editroom", method = RequestMethod.POST)
 //	public String editroom(Long roomid, String apartmentid) {
