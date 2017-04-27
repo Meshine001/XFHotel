@@ -130,7 +130,7 @@ var resiger={
                     fnBase.myalert("恭喜您注册成功");
                     sessionStorage.clear();
                     localStorage.clear();
-                    fnBase.keep(0,"uid",data.info.m_id);
+                    fnBase.keep(0,"uid",data.content);
                     window.location.href="index.html";
                 }else{
                     fnBase.myalert(data.content)
