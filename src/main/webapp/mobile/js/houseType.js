@@ -1,36 +1,36 @@
-
+ï»¿
 $(document).ready(function(){
     addres();
-//           Ò³Ãæ1 µã»÷É¸Ñ¡ÓëÅÅĞòµ¯³öÒ³Ãæ2
+//           é¡µé¢1 ç‚¹å‡»ç­›é€‰ä¸æ’åºå¼¹å‡ºé¡µé¢2
     $("#filterbtn").click(function(){
         //$(".sx_filter").hide();
         //$("#filter").show();
     });
-//           Ò³Ãæ2 {µã»÷ ·µ»Ø°´Å¥ and  È·¶¨°´Å¥ ·µ»ØÒ³Ãæ1}£»
+//           é¡µé¢2 {ç‚¹å‡» è¿”å›æŒ‰é’® and  ç¡®å®šæŒ‰é’® è¿”å›é¡µé¢1}ï¼›
     $(" #back_main,#confirm").click(function(){
         $("#filter").hide();
         $(".sx_filter").show();
     });
 
-//           Ò³Ãæ2 É¸Ñ¡Ìõ¼ş ¼ÓÑ¡ÖĞÑùÊ½£»
+//           é¡µé¢2 ç­›é€‰æ¡ä»¶ åŠ é€‰ä¸­æ ·å¼ï¼›
     $(".px-list  li").click(function(){
         $(this).addClass("p_list_on").siblings().removeClass("p_list_on");
     });
     $(".r-list ul li").click(function(){
         $(this).addClass("active").siblings().removeClass("active");
     });
-//          Ò³Ãæ2 µã»÷ ÇøÓò²éÑ¯ µ¯³öÒ³Ãæ3 £»
+//          é¡µé¢2 ç‚¹å‡» åŒºåŸŸæŸ¥è¯¢ å¼¹å‡ºé¡µé¢3 ï¼›
     $(".quyu").click(function(){
         $("#filter").hide();
         $(".qy_filter ").show();
     });
-//            Ò³Ãæ3 µã»÷·µ»Ø,Ìøµ½Ò³Ãæ2£»
+//            é¡µé¢3 ç‚¹å‡»è¿”å›,è·³åˆ°é¡µé¢2ï¼›
     $("#back_filter").click(function(){
         $(".qy_filter ").hide();
         $("#filter").show();
     });
     function addres(){
-        //           ÇøÓòÑ¡Ôñ£»
+        //           åŒºåŸŸé€‰æ‹©ï¼›
         $(".qy_choose .q_right li").click(function(){
             var ensure=$(this).text();
             $(this).addClass("on").siblings().removeClass("on");
@@ -38,13 +38,13 @@ $(document).ready(function(){
             $("#filter").show();
             $("#area").html( ensure+"&or;");
         });
-        //            Çå¿Õ
+        //            æ¸…ç©º
         $("#filter .empty").click(function(){
             if($(".r-list ul li").hasClass("active")==true){
                 $(".r-list ul li").removeClass("active");
             }
             $(".px-list li").removeClass("p_list_on");
-            $("#area").html("È«³Ç&or;");
+            $("#area").html("å…¨åŸ&or;");
         })
     }
 
@@ -57,8 +57,8 @@ $(document).ready(function(){
         var isoffers;
         $('.goodlist').html("");
         for(var i=0;i<data.homeRooms.length;i++){
-            str+='<li proID='+data.homeRooms[i].id+'><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="'+"http://192.168.1.109:8080/hotel/images/"+data.homeRooms[i].pic3[1]+'"></a><h1 class="text-ellipsis"><a href="">'+data.homeRooms[i].community+'</a></h1><h2 class="text-ellipsis">'+data.homeRooms[i].balcony+"ÊÒ"+data.homeRooms[i].bathroom+"Ìü"+
-                data.homeRooms[i].bedroom+"ÎÀ"+"-"+data.homeRooms[i].direction+'</h2><p class="text-ellipsis address">'+data.homeRooms[i].location+data.homeRooms[i].address+'</p><p class="label-group"><i class="label-type1">'+data.homeRooms[i].apartmenttype+'</i></p><span class="label-price">'+data.homeRooms[i].dayPrice+'<small>/Ìì</small></span></div></li>';
+            str+='<li proID='+data.homeRooms[i].id+'><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="'+"http://192.168.1.109:8080/hotel/images/"+data.homeRooms[i].pic3[1]+'"></a><h1 class="text-ellipsis"><a href="">'+data.homeRooms[i].community+'</a></h1><h2 class="text-ellipsis">'+data.homeRooms[i].balcony+"å®¤"+data.homeRooms[i].bathroom+"å…"+
+                data.homeRooms[i].bedroom+"å«"+"-"+data.homeRooms[i].direction+'</h2><p class="text-ellipsis address">'+data.homeRooms[i].location+data.homeRooms[i].address+'</p><p class="label-group"><i class="label-type1">'+data.homeRooms[i].apartmenttype+'</i></p><span class="label-price">'+data.homeRooms[i].dayPrice+'<small>/å¤©</small></span></div></li>';
         }
         $('.goodlist').append(str);
 

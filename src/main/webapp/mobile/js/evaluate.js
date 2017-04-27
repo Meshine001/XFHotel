@@ -1,4 +1,4 @@
-$(document).ready(function(){
+﻿$(document).ready(function(){
     var num='';
     var uname=$("#uname").val();
     var uphoneNamube=$("#uphoneNamube").val();

@@ -1,4 +1,4 @@
-$(document).ready(function(){
+ï»¿$(document).ready(function(){
     resiger.addEvent();
 });
 
@@ -11,16 +11,16 @@ var resiger={
         resiger.inputList.push($("#login-phone"),$("#login-password"),$("#repwd"),$("#yzcode"));
         resiger.btnList.push($("#fetch-cmd"),$("#login_submit"));
 
-        //¶ÌĞÅÑéÖ¤Âë
+        //çŸ­ä¿¡éªŒè¯ç 
         resiger.btnList[0].click(function(){
             var phoneNumber=resiger.inputList[0].val();
             if(phoneNumber==""){
-                fnBase.myalert("ÇëÌîĞ´ÊÖ»úºÅÂë");
+                fnBase.myalert("è¯·å¡«å†™æ‰‹æœºå·ç ");
                 return;
             }
             var myreg = /^0?1[3|4|5|6|7|8][0-9]\d{8}$/;
             if (!myreg.test(phoneNumber)) {
-                fnBase.myalert("ÊÖ»úºÅÂëÓĞÎó£¡ ÇëÊäÈë11Î»Êı×Ö");
+                fnBase.myalert("æ‰‹æœºå·ç æœ‰è¯¯ï¼ è¯·è¾“å…¥11ä½æ•°å­—");
                 return;
             }
             var frontURL=Constant.URL+"/mobile/sendVCode";
@@ -28,9 +28,9 @@ var resiger={
             fnBase.commonAjax(frontURL,postData,function(data){
                 console.log(data);
                 if(data.statusCode=="1"){
-                    fnBase.myalert("¶ÌĞÅ·¢ËÍ³É¹¦");
+                    fnBase.myalert("çŸ­ä¿¡å‘é€æˆåŠŸ");
                 }else{
-                    fnBase.myalert("¶ÌĞÅ·¢ËÍÊ§°Ü")
+                    fnBase.myalert("çŸ­ä¿¡å‘é€å¤±è´¥")
                 }
             });
             resiger.timePrompt();
@@ -41,7 +41,7 @@ var resiger={
             var phoneNumber=resiger.inputList[0].val();
             var _yzm=resiger.inputList[3].val();
             if(_yzm==""){
-                fnBase.myalert("ÇëÌîĞ´ÑéÖ¤Âë");
+                fnBase.myalert("è¯·å¡«å†™éªŒè¯ç ");
                 return;
             }
             var frontURL=Constant.URL+"/mobile/checkVCode";
@@ -58,35 +58,35 @@ var resiger={
         resiger.btnList[1].click(function(){
             var phoneNumber=resiger.inputList[0].val();
             if(phoneNumber==""){
-                fnBase.myalert("ÇëÌîĞ´ÊÖ»úºÅÂë");
+                fnBase.myalert("è¯·å¡«å†™æ‰‹æœºå·ç ");
                 return;
             }
             var myreg = /^0?1[3|4|5|6|7|8][0-9]\d{8}$/;
             if (!myreg.test(phoneNumber)) {
-                fnBase.myalert("ÊÖ»úºÅÂëÓĞÎó£¡ ÇëÊäÈë11Î»Êı×Ö");
+                fnBase.myalert("æ‰‹æœºå·ç æœ‰è¯¯ï¼ è¯·è¾“å…¥11ä½æ•°å­—");
                 return;
             }
             var _yzm=resiger.inputList[3].val();
             if(_yzm==""){
-                fnBase.myalert("ÇëÌîĞ´ÑéÖ¤Âë");
+                fnBase.myalert("è¯·å¡«å†™éªŒè¯ç ");
                 return;
             }
             var password=resiger.inputList[1].val();
             if(password==""){
-                fnBase.myalert("ÇëÌîĞ´ÃÜÂë");
+                fnBase.myalert("è¯·å¡«å†™å¯†ç ");
                 return;
             }
             if(password.length<6){
-                fnBase.myalert("ÃÜÂëÖÁÉÙÊÇ6Î»");
+                fnBase.myalert("å¯†ç è‡³å°‘æ˜¯6ä½");
                 return;
             }
             var repwd=resiger.inputList[2].val();
             if(repwd==""){
-                fnBase.myalert("ÇëÔÙ´ÎÌîĞ´ÃÜÂë");
+                fnBase.myalert("è¯·å†æ¬¡å¡«å†™å¯†ç ");
                 return;
             }
             if(repwd!=password){
-                fnBase.myalert("Á½´ÎÊäÈëµÄÃÜÂë²»Ò»ÖÂ");
+                fnBase.myalert("ä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ä¸€è‡´");
                 return;
             }
 
@@ -115,16 +115,16 @@ var resiger={
     timePrompt:function(){
         var total=60;
         var mytimecont;
-        resiger.btnList[0].text("60ÃëºóÖØ·¢");
+        resiger.btnList[0].text("60ç§’åé‡å‘");
         clearInterval(mytimecont);
         mytimecont=setInterval(function(){
             total=total-1;
-            var str=total+"ÃëºóÖØ·¢";
+            var str=total+"ç§’åé‡å‘";
             resiger.btnList[0].text(str);
             if(total<=0){
                 clearInterval(mytimecont);
                 resiger.sendCoded=false;
-                resiger.btnList[0].text("¶ÌĞÅÑéÖ¤Âë");
+                resiger.btnList[0].text("çŸ­ä¿¡éªŒè¯ç ");
             }
         },1000)
     }
