@@ -1,7 +1,10 @@
 ﻿
 $(document).ready(function(){
 
+
+
     ////轮播
+
 
     var _uid = fnBase.huoqu(0, "uid");
     var _id = decodeURIComponent(fnBase.request("id"));
@@ -21,7 +24,7 @@ $(document).ready(function(){
             var lunbo_str = '';
             var lunbo_length = data.apartment.pic3.length;
             for (var i = 0; i < lunbo_length; i++){
-                lunbo_str += '<div class="swiper-slide"><img src="'+Constant.URL+"/images/"+data.apartment.pic2[i]+'"/></div>';
+                lunbo_str += '<div class="swiper-slide"><img src="'+"http://192.168.1.109:8080/hotel/images/"+data.apartment.pic2[i]+'"/></div>';
             }
             $(".swiper-container .swiper-wrapper").append(lunbo_str);
             var mySwiper = new Swiper ('.swiper-container',{

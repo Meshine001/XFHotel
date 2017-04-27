@@ -89,16 +89,9 @@ public class HomeController {
 			Long apartmentId = (Long) roomService.getRoomInfo(room.getId()).get("apartment");
 			homeRooms.add(apartmentService.getApartmentInfo(apartmentId));
 		}
-		session.setAttribute("homeRoom", homeRooms);
+		System.out.println(homeRooms);
 		
-		//TODO 青舍生活
-		List<Blog> blogs = new ArrayList<Blog>();
-		PageResults<Blog> page1 = blogService.list(1);
-		blogs.addAll(page1.getResults());
-		PageResults<Blog> page2 = blogService.list(2);
-		blogs.addAll(page2.getResults());
-		session.setAttribute("homeBlog", blogs);
-		System.out.println(blogs);
+		session.setAttribute("homeRoom", homeRooms);
 		return "/customer/home";
 	}
 
@@ -159,7 +152,8 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public String list(SearchForm searchData,int currentPage) {
+	public String list(SearchForm searchData) {
+		System.out.println(searchData);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("searchData", searchData);
 		info.put("areas", Area.getAreas());
@@ -177,36 +171,10 @@ public class HomeController {
 		info.put("leaseTypes", LeaseType.getLeaseTypes());
 		
 		//TODO
-		List list = apartmentService.list();
-		//排序
-		sort(list,searchData);
-		
-		
-		//分页
-		int pageSize = 5;
-		int totalCount = list.size();
-		int t = totalCount/pageSize;
-		int pageCount = t*pageSize < totalCount?t+1:t;
-		int pageNo = (currentPage + 1)>pageCount?currentPage:currentPage+1;
-		PageResults<Map> page = new PageResults<Map>();
-		page.setCurrentPage(currentPage);
-		page.setPageCount(pageCount);
-		page.setPageNo(pageNo);
-		page.setPageSize(pageSize);
-		page.setTotalCount(totalCount);
-		List<Map> r = new ArrayList<Map>();
-		int n = (currentPage-1)*pageSize;
-		int j = (currentPage-1)*pageSize+pageSize;
-		System.out.println(n+","+j);
-		for(int i = n;i<totalCount && i<j;i++){
-			System.out.println(i);
-			r.add((Map)list.get(i));
-		}
-		page.setResults(r);
-		info.put("page",  page);
-		
+
+		info.put("list",  sort(apartmentService.list(),searchData));
+		System.out.println(searchData);
 		session.setAttribute("info", info);
-		
 		return "/customer/list";
 	}
 	
@@ -227,7 +195,6 @@ public class HomeController {
 		searchData.setMoreStr(" ");
 		searchData.setSortType(0);
 		sb.append(searchData.toHttpGetPram());
-		sb.append("&currentPage=1");
 		return sb.toString();
 	}
 	
@@ -490,7 +457,7 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		map.put("content", content.toString());
-		System.out.println("大伯");
+		
 		return map;
 	}
 }

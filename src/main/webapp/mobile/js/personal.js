@@ -1,4 +1,4 @@
-
+ï»¿
 $(document).ready(function(){
     //$(".vip_info_list li .per-order-status .tip-size").css("display","none");
     var _uid=fnBase.huoqu(0,"uid");
@@ -22,7 +22,7 @@ $(document).ready(function(){
         }else{
             $(".vip_info img").attr("src",'http://192.168.1.109:8080/hotel/images/'+data.details.avatar);
         }
-        //Î´Ö§¸¶µÄ¶©µ¥Êı
+        //æœªæ”¯ä»˜çš„è®¢å•æ•°
         var toPaid=fnBase.huoqu(0,"toPaid");
         if(toPaid=="0"){
             $(".vip_info_list li .per-order-status .tip-size").hide();
@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 
 
-    //ÍË³öµÇÂ¼
+    //é€€å‡ºç™»å½•
     $(".logout").click(
         function(){
             sessionStorage.clear();

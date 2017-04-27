@@ -1,4 +1,4 @@
-$(document).ready(function(){
+﻿$(document).ready(function(){
     $("#closebtn").click(function(){
         window.location.href="javascript:history.back(-1);";
     });
