@@ -4,8 +4,8 @@ $(document).ready(function(){
 var payment={
     Entry:function(){
         //微信支付
-        $(".wx_p").click(function () {
-
+        $(".p_Settel li .wx_p").click(function () {
+            alert(123)
             var url = Constant.URL + '/wechat/pay/jsOrder';
             var data = {
                 id:'11',//订单id
