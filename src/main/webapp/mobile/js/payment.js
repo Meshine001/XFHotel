@@ -1,11 +1,25 @@
 $(document).ready(function(){
     payment.Entry();
+    var _uid = fnBase.huoqu(0, "uid");
+    var _community=fnBase.huoqu(1,"community");
+    var _startTime = fnBase.huoqu(1, "startTime");
+    var _endTime=fnBase.huoqu(1,"endTime");
+    var _oTotalDay=fnBase.huoqu(1,"oTotalDay");
+    var _oTotalPrice=fnBase.huoqu(1,"oTotalPrice");
+    var _id = decodeURIComponent(fnBase.request("id"));
+    var _price=fnBase.huoqu(1,"dayPrice");
+    var _apartmenttype=fnBase.huoqu(1,"roomType");
+    var _YJpic=fnBase.huoqu(1,"YJpic");
+
+    $(".p_msg li .addres").text(_community);
+    $(".p_msg li ._date").html(_startTime+"入住"+_endTime+"离开"+"<i class='date'>共（"+_oTotalDay+"）天</i>");
+    $(".p_msg li ._cash").html("押金:<span style='color: #666'>"+_YJpic+"</span>");
+    $(".p_msg li .toal").html("订单总额:<span class='money'>￥"+_oTotalPrice+"</span>");
 });
 var payment={
     Entry:function(){
         //微信支付
         $(".p_Settel li .wx_p").click(function () {
-            alert(123)
             var url = Constant.URL + '/wechat/pay/jsOrder';
             var data = {
                 id:'11',//订单id

@@ -4,6 +4,13 @@ $(document).ready(function(){
     scrollNav();
     getData();
 
+    $("#_fw").click(function(){
+       fnBase.myalert('正在开发，敬请期待！')
+    });
+    $('.header-mobile .input-search').focus(function(){
+        fnBase.keep(1,"mode",0);
+        window.location.href="houseType.html";
+    });
     alertSearch.info();
     life();
     function scrollNav(){
@@ -24,7 +31,7 @@ var alertSearch={
         var _uid = fnBase.huoqu(0, "uid");
         var openDoc=$(".Address-search");
         $(".group-search").click(function(){
-            openDoc.show();
+
             $(".Address-search .searInput").find(".serchText").val("").focus();
         });
 
@@ -48,22 +55,22 @@ function getData(){
         //if(data.status==1){
         //   轮播
 
-            var lunboStr='';
-            var lunbo_length=data.homeRooms[0].pic3.length;
-
-            $(".swiper-container .swiper-wrapper").html("");
-            if(lunbo_length>0){
-                for (var i = 0; i < lunbo_length; i++) {
-                    lunboStr += '<div class="swiper-slide"> <a href="javascript:void(0)"><img src="'+"http://192.168.1.109:8080/hotel/images/"+data.homeRooms[0].pic3[i]+'"/></a></div>';
-                }
-                $(".swiper-container .swiper-wrapper").append(lunboStr);
+            //var lunboStr='';
+            //var lunbo_length=data.homeRooms[0].pic3.length;
+            //
+            //$(".swiper-container .swiper-wrapper").html("");
+            //if(lunbo_length>0){
+            //    for (var i = 0; i < lunbo_length; i++) {
+            //        lunboStr += '<div class="swiper-slide"> <a href="javascript:void(0)"><img src="'+Constant.URL+data.homeRooms[0].pic3[i]+'"/></a></div>';
+            //    }
+            //    $(".swiper-container .swiper-wrapper").append(lunboStr);
                 var mySwiper = new Swiper ('.swiper-container',{
                     loop: true,
                     autoplay: 1800,
                     pagination: '.swiper-pagination',
                     autoplayDisableOnInteraction: false
                 });
-            }
+            //}
         //}else{
         //    fnBase.myalert(data.msg)
         //}
@@ -92,7 +99,7 @@ function getData(){
         var isoffers;
         $('.plCon .goodlist').html("");
         for(var i=0;i<data.homeRooms.length;i++){
-            str+='<li proID='+data.homeRooms[i].id+'><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="'+"http://192.168.1.109:8080/hotel/images/"+data.homeRooms[i].pic3[1]+'"></a><h1 class="text-ellipsis"><a href="">'+data.homeRooms[i].community+'</a></h1><h2 class="text-ellipsis">'+data.homeRooms[i].balcony+"室"+data.homeRooms[i].bathroom+"厅"+
+            str+='<li proID='+data.homeRooms[i].id+'><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="'+Constant.URL+data.homeRooms[i].pic3[1]+'"></a><h1 class="text-ellipsis"><a href="">'+data.homeRooms[i].community+'</a></h1><h2 class="text-ellipsis">'+data.homeRooms[i].balcony+"室"+data.homeRooms[i].bathroom+"厅"+
                 data.homeRooms[i].bedroom+"卫"+"-"+data.homeRooms[i].direction+'</h2><p class="text-ellipsis address">'+data.homeRooms[i].location+data.homeRooms[i].address+'</p><p class="label-group"><i class="label-type1">'+data.homeRooms[i].apartmenttype+'</i></p><span class="label-price">'+data.homeRooms[i].dayPrice+'<small>/天</small></span></div></li>';
         }
         $('.plCon .goodlist').append(str);
@@ -110,7 +117,7 @@ function getData(){
                 window.location.href="house_particulars.html?id="+encodeURIComponent(id)+"&offer="+encodeURIComponent(isoff);
             }
         );
-        $('.title-serce').unbind('click').click(
+        $('.title-serce ').unbind('click').click(
             function(){
                 window.location.href="houseType.html";
             }
@@ -127,10 +134,7 @@ function getData(){
 
     });
 
-    $('.header-mobile .input-search').focus(function(){
-        fnBase.keep(1,"mode",0);
-        window.location.href="search.html";
-    });
+
 
 }
 //青舍生活

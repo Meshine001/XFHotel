@@ -2,7 +2,9 @@
     $("#closebtn").click(function(){
         window.location.href="javascript:history.back(-1);";
     });
-
+    $("#searchTo").click(function(){
+        window.location.href='houseType.html'
+    });
     var frontURL=Constant.URL+'api/util?code=204';
     fnBase.commonAjax(frontURL,{'param':''},function(data){
         console.log(data);
