@@ -18,9 +18,9 @@ $(document).ready(function(){
             $("#nickname").text(data.details.name);
         }
         if(data.details.avatar==""||data.details.avatar==null){
-            $(".vip_info img").attr("src","http://192.168.1.109:8080/hotel/images/face-90x90.png");
+            $(".vip_info img").attr("src",Constant.URL+"/images/face-90x90.png");
         }else{
-            $(".vip_info img").attr("src",'http://192.168.1.109:8080/hotel/images/'+data.details.avatar);
+            $(".vip_info img").attr("src",Constant.URL+'/images/'+data.details.avatar);
         }
         //未支付的订单数
         var toPaid=fnBase.huoqu(0,"toPaid");

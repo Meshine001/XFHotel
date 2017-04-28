@@ -108,7 +108,7 @@ public class OrderController {
 		session.setAttribute("oStart", startTime);
 		session.setAttribute("oEnd", endTime);
 		System.out.println(startTime+endTime);
-		Map<String, Object> priceInfo = caculatePrice(startTime, endTime, apartmentId);
+		Map<String, Object> priceInfo = apartmentService.caculatePrice(startTime, endTime, apartmentId);
 		System.out.println(priceInfo);
 		session.setAttribute("oTotalDay", TimeUtil.daysBetween(startTime, endTime));
 		session.setAttribute("oPrice", priceInfo.get("price"));
@@ -118,35 +118,6 @@ public class OrderController {
 		return "customer/orderModule";
 	}
 
-	public Map<String, Object> caculatePrice(String startTime, String endTime, Long apartmentId) {
-		Map<String, Object> info = new HashMap<String, Object>();
-		StringBuffer sb = new StringBuffer();
-		Double sum = 0.00D;
-		Double cashPledge = 1D;
-		Apartment apartment = apartmentService.findById(apartmentId);
-		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
-		for (int i = 0; i < days.size() - 1; i++) {
-			Price p = apartmentService.getSpPrice(apartment, TimeUtil.getDateLong(days.get(i)));
-			Double pp = null;
-			if (p != null) {// 有特殊价格
-				pp = p.getPrice();
-			} else {
-				pp = Double.valueOf(apartment.getPrices());
-			}
-			if (i == 0) {
-				sb.append(pp);
-			} else {
-				sb.append("@" + pp);
-			}
-			sum += pp;
-		}
-		sum += cashPledge;
-		sb.append("@"+cashPledge);
-		info.put("price", sb.toString());
-		info.put("cashPledge", cashPledge);
-		info.put("totalPrice", sum);
-		return info;
-	}
 
 	@RequestMapping(value = "/checkAvailable", method = RequestMethod.GET)
 	public @ResponseBody Message checkAvailable(Long roomId, String startTime, String endTime) {

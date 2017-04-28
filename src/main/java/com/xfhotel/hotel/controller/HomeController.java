@@ -92,6 +92,7 @@ public class HomeController {
 		System.out.println(homeRooms);
 		
 		session.setAttribute("homeRoom", homeRooms);
+		session.setAttribute("homeBlog", blogService.list(1,10).getResults()); 
 		return "/customer/home";
 	}
 
@@ -152,7 +153,10 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public String list(SearchForm searchData) {
+	public String list(SearchForm searchData,Integer currentPage) {
+		if(null == currentPage){
+			currentPage = 1;
+		}
 		System.out.println(searchData);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("searchData", searchData);
@@ -170,12 +174,37 @@ public class HomeController {
 		info.put("enterTimes", RoomStatus.getStatusArray());
 		info.put("leaseTypes", LeaseType.getLeaseTypes());
 		
-		//TODO
-
-		info.put("list",  sort(apartmentService.list(),searchData));
-		System.out.println(searchData);
+		info.put("page",  getApartmentPage(sort(apartmentService.list(),searchData), currentPage));
 		session.setAttribute("info", info);
 		return "/customer/list";
+	}
+	
+	/**
+	 * 构造分页信息
+	 * @param list
+	 * @param currentPage
+	 * @return
+	 */
+	private PageResults<Map> getApartmentPage(List<Map> list,int currentPage){
+		PageResults<Map> page = new PageResults<Map>();
+		int totalCount = list.size();
+		int pageSize = 5;
+		int t = totalCount/pageSize;
+		int pageCount = t*pageSize < totalCount ?t+1:t;
+		int pageNo = currentPage<pageCount?currentPage+1:currentPage;
+		page.setTotalCount(totalCount);
+		page.setPageSize(pageSize);
+		page.setPageCount(pageCount);
+		page.setPageNo(pageNo);
+		page.setCurrentPage(currentPage);
+		int m = (currentPage-1)*pageSize;
+		int n = m+pageSize;
+		List<Map> results = new ArrayList<Map>();
+		for(int i = m;i<totalCount && i<n;i++){
+			results.add(list.get(i));
+		}
+		page.setResults(results);
+		return page;
 	}
 	
 	@RequestMapping(value = "homeSearch", method = RequestMethod.GET)
@@ -195,6 +224,7 @@ public class HomeController {
 		searchData.setMoreStr(" ");
 		searchData.setSortType(0);
 		sb.append(searchData.toHttpGetPram());
+		sb.append("&currentPage=1");
 		return sb.toString();
 	}
 	
@@ -418,7 +448,7 @@ public class HomeController {
 		session.setAttribute("prices", prices);
 		
 		session.setAttribute("roomRates", commentService.getRoomRates(roomId));
-		
+		session.setAttribute("yajin", Constants.YA_JIN);
 		return "/customer/info";
 	}
 	

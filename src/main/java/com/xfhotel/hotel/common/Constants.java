@@ -26,6 +26,7 @@ public class Constants {
 	public static final String TYPE_PLAY_ROOM = "休闲式公寓";
 	public static final String TYPE_ALL = "不限";
 	
+	public static final Double YA_JIN = 100D;
 	
 	
 	public static final int pagesize = 10;

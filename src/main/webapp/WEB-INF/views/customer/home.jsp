@@ -286,47 +286,54 @@
 				<div class="hai_list" id="jx_div">
 					<div class="hai_lf">
 						<div class="two">
-							<a onmouseover="showMask(1,0)" onmouseout="hideMask(1,0)" href="<%=basePath%>/story/blog_content?id=${homeBlog[0].id}"
+							<a onmouseover="showMask(1,0)" onmouseout="hideMask(1,0)"
+								href="<%=basePath%>/story/blog_content?id=${homeBlog[0].id}"
 								title="${homeBlog[0].title}" target="_blank"> <img
-								class="readyload" src="${homeBlog[0].pic}" data-original="" width="425"
-								height="265">
+								class="readyload" src="${homeBlog[0].pic}" data-original=""
+								width="425" height="265">
 								<div class="mask" style="display: none;" id="mask_1_0">
-									<span>${homeBlog[0].title}</span><input class="mask_btn" value="点击查看">
+									<span>${homeBlog[0].title}</span><input class="mask_btn"
+										value="点击查看">
 								</div>
-							</a> <a onmouseover="showMask(1,1)" onmouseout="hideMask(1,1)" href="<%=basePath%>/story/blog_content?id=${homeBlog[1].id}"
+							</a> <a onmouseover="showMask(1,1)" onmouseout="hideMask(1,1)"
+								href="<%=basePath%>/story/blog_content?id=${homeBlog[1].id}"
 								title="${homeBlog[1].title}" target="_blank"> <img
-								class="readyload" src="${homeBlog[1].pic}" data-original="" width="425"
-								height="265">
+								class="readyload" src="${homeBlog[1].pic}" data-original=""
+								width="425" height="265">
 								<div class="mask" style="display: none;" id="mask_1_1">
-									<span>${homeBlog[1].title}</span><input class="mask_btn" value="点击查看">
+									<span>${homeBlog[1].title}</span><input class="mask_btn"
+										value="点击查看">
 								</div>
 							</a>
 						</div>
 						<div class="three">
-						
+
 							<a onmouseover="showMask(2,0)" onmouseout="hideMask(2,0)"
-								href="<%=basePath%>/story/blog_content?id=${homeBlog[2].id}" title="${homeBlog[2].title}"
-								target="_blank"> <img class="readyload"
-								src="${homeBlog[2].pic}" data-original=""
+								href="<%=basePath%>/story/blog_content?id=${homeBlog[2].id}"
+								title="${homeBlog[2].title}" target="_blank"> <img
+								class="readyload" src="${homeBlog[2].pic}" data-original=""
 								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_0">
-									<span>${homeBlog[2].title}</span><input class="mask_btn" value="点击查看">
+									<span>${homeBlog[2].title}</span><input class="mask_btn"
+										value="点击查看">
 								</div>
 							</a> <a onmouseover="showMask(2,1)" onmouseout="hideMask(2,1)"
 								href="<%=basePath%>/story/blog_content?id=${homeBlog[3].id}"
 								title="${homeBlog[3].title}" target="_blank"> <img
-								class="readyload" src="${homeBlog[3].pic}"
-								data-original="" width="278" height="257">
+								class="readyload" src="${homeBlog[3].pic}" data-original=""
+								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_1">
-									<span>${homeBlog[3].title}</span><input class="mask_btn" value="点击查看">
+									<span>${homeBlog[3].title}</span><input class="mask_btn"
+										value="点击查看">
 								</div>
 							</a> <a onmouseover="showMask(2,2)" onmouseout="hideMask(2,2)"
 								href="<%=basePath%>/story/blog_content?id=${homeBlog[4].id}"
-								title="${homeBlog[4].title}" target="_blank"> <img class="readyload"
-								src="${homeBlog[4].pic}" data-original=""
+								title="${homeBlog[4].title}" target="_blank"> <img
+								class="readyload" src="${homeBlog[4].pic}" data-original=""
 								width="278" height="257">
 								<div class="mask" style="display: none;" id="mask_2_2">
-									<span>${homeBlog[4].title}</span><input class="mask_btn" value="点击查看">
+									<span>${homeBlog[4].title}</span><input class="mask_btn"
+										value="点击查看">
 								</div>
 							</a>
 
@@ -335,47 +342,47 @@
 					<div class="hai_rg">
 						<div id="jxfocus">
 							<div class="hua_d" style="left: -960px; width: 1280px;">
-								<a href="<%=basePath%>/story/blog_content?id=${homeBlog[5].id}" target="_blank" title="${homeBlog[5].title}">
-								</a>
+								<a href="<%=basePath%>/story/blog_content?id=${homeBlog[5].id}"
+									target="_blank" title="${homeBlog[5].title}"> </a>
 								<dl class="hai_dl">
-									<a href="<%=basePath%>/story/blog_content?id=${homeBlog[5].id}" target="_blank"
-										title="${homeBlog[5].title}">
+									<a href="<%=basePath%>/story/blog_content?id=${homeBlog[5].id}"
+										target="_blank" title="${homeBlog[5].title}">
 										<dd>
-											<img
-												src="${homeBlog[5].pic}"
-												width="155" height="155">
+											<img src="${homeBlog[5].pic}" width="155" height="155">
 										</dd>
 									</a>
 									<dt>
-										<a href="<%=basePath%>/story/blog_content?id=${homeBlog[5].id}" target="_blank"
-											title="${homeBlog[5].title}">
+										<a
+											href="<%=basePath%>/story/blog_content?id=${homeBlog[5].id}"
+											target="_blank" title="${homeBlog[5].title}">
 											<h3>${homeBlog[5].title}</h3>
 											<p>${homeBlog[5].abs_text}</p>
-										</a><a href="<%=basePath%>/story/blog_content?id=${homeBlog[5].id}" target="_blank"
-											title="${homeBlog[5].title}" class="all_text">阅读全文</a>
+										</a><a
+											href="<%=basePath%>/story/blog_content?id=${homeBlog[5].id}"
+											target="_blank" title="${homeBlog[5].title}" class="all_text">阅读全文</a>
 									</dt>
 								</dl>
-								<a href="<%=basePath%>/story/blog_content?id=${homeBlog[6].id}" target="_blank" title="${homeBlog[5].title}">
-								</a>
+								<a href="<%=basePath%>/story/blog_content?id=${homeBlog[6].id}"
+									target="_blank" title="${homeBlog[5].title}"> </a>
 								<dl class="hai_dl">
-									<a href="<%=basePath%>/story/blog_content?id=${homeBlog[6].id}" target="_blank"
-										title="${homeBlog[6].title}">
+									<a href="<%=basePath%>/story/blog_content?id=${homeBlog[6].id}"
+										target="_blank" title="${homeBlog[6].title}">
 										<dd>
-											<img
-												src="${homeBlog[6].pic}"
-												width="155" height="155">
+											<img src="${homeBlog[6].pic}" width="155" height="155">
 										</dd>
 									</a>
 									<dt>
-										<a href="<%=basePath%>/story/blog_content?id=${homeBlog[6].id}" target="_blank"
-											title="${homeBlog[6].title}">
+										<a
+											href="<%=basePath%>/story/blog_content?id=${homeBlog[6].id}"
+											target="_blank" title="${homeBlog[6].title}">
 											<h3>${homeBlog[6].title}</h3>
 											<p>${homeBlog[6].abs_text}</p>
-										</a><a href="<%=basePath%>/story/blog_content?id=${homeBlog[6].id}" target="_blank"
-											title="${homeBlog[6].title}" class="all_text">阅读全文</a>
+										</a><a
+											href="<%=basePath%>/story/blog_content?id=${homeBlog[6].id}"
+											target="_blank" title="${homeBlog[6].title}" class="all_text">阅读全文</a>
 									</dt>
 								</dl>
-						
+
 							</div>
 						</div>
 						<ul class="hai_ul">
@@ -442,7 +449,17 @@
 		</div>
 
 	</article>
+
 	<jsp:include page="../decorators/home-footer.jsp"></jsp:include>
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?0ae180f0ab390bef5531565759c084a7";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
 	<script type="text/javascript"
 		src="<%=basePath%>/dist/public/js/calendar.js"></script>
 	<script type="text/javascript"

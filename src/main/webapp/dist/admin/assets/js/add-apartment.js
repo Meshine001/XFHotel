@@ -8,7 +8,7 @@ $(document).ready(function() {
 	var pos=curWwwPath.indexOf(pathName); 
 
 	//获取主机地址，如： http://localhost:8080 
-	var localhostPaht=curWwwPath.substring(0,pos); 
+	var localhostPath=curWwwPath.substring(0,pos); 
 
 	//获取带"/"的项目名，如：/Tmall 
 	var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1); 
@@ -16,8 +16,9 @@ $(document).ready(function() {
 	// 上传图片
 	// ======================================================>
 	var uploadForm = $('#upload-image-form');
-	var uploadUrl = localhostPaht+'/'+projectName+'/file/upload';
-
+//	var uploadUrl = localhostPath+'/'+projectName+'/file/upload';
+	var uploadUrl = localhostPath+'/file/upload';
+	console.log(uploadUrl);
 	function uploadFile(data) {
 		var result;
 		$.ajax(uploadUrl, {
@@ -61,7 +62,7 @@ $(document).ready(function() {
 		var imgUrl = uploadFile(data);
 		if (imgUrl != false) {
 			$('#' + uploadId).val(imgUrl);
-			$('#' + uploadPre).attr('src', localhostPaht+'/'+projectName+'/images/' + imgUrl);
+			$('#' + uploadPre).attr('src', localhostPath+'/images/' + imgUrl);
 		}
 	});
 

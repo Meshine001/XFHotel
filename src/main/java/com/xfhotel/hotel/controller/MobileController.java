@@ -174,14 +174,14 @@ public class MobileController  {
 			String[] args = {vCodeStr,Constants.SMS_AVAILBEL_TIME_STR};
 			//调试时可注释掉下面
 			//发送短信
-//			SendTemplateSMS.sendSMS(Constants.SMS_TEMPLATE_REG, tel, args);
+			SendTemplateSMS.sendSMS(Constants.SMS_TEMPLATE_REG, tel, args);
 			//利用session进行验证
 			Map<String, Object> vCode = new HashMap<String, Object>();
 			vCode.put("tel", tel);
 			vCode.put("diedLine", new Date().getTime()+Constants.SMS_AVAILBEL_TIME);
 			vCode.put("code", vCodeStr);
 			session.setAttribute("vCode", vCode);
-			System.out.println("send vcode==>"+vCode);
+//			System.out.println("send vcode==>"+vCode);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -196,8 +196,7 @@ public class MobileController  {
 		Map<String,Object> info = new HashMap<String, Object>();
 		info.put("oStart", startTime);
 		info.put("oEnd", endTime);
-		Map<String, Object> priceInfo = caculatePrice(startTime, endTime, apartmentId);
-		
+		Map<String, Object> priceInfo = apartmentService.caculatePrice(startTime, endTime, apartmentId);
 		info.put("oTotalDay",TimeUtil.daysBetween(startTime, endTime));
 		info.put("oPrice", priceInfo.get("price"));
 		info.put("oTotalPrice", priceInfo.get("totalPrice"));
@@ -426,35 +425,4 @@ public class MobileController  {
 	}
 
 	
-	public Map<String, Object> caculatePrice(String startTime, String endTime, Long apartmentId) {
-		Map<String, Object> info = new HashMap<String, Object>();
-		StringBuffer sb = new StringBuffer();
-		Double sum = 0.00D;
-		Double cashPledge = 1922D;
-		
-		Apartment apartment = apartmentService.findById(apartmentId);
-		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
-		for (int i = 0; i < days.size() - 1; i++) {
-			Price p = apartmentService.getSpPrice(apartment, TimeUtil.getDateLong(days.get(i)));
-			Double pp = null;
-			if (p != null) {// 有特殊价格
-				pp = p.getPrice();
-			} else {
-				pp = Double.valueOf(apartment.getPrices());
-			}
-			if (i == 0) {
-				sb.append(pp);
-			} else {
-				sb.append("@" + pp);
-			}
-			sum += pp;
-			
-		}
-		sum=sum+cashPledge;
-		info.put("price", sb.toString());
-		info.put("cashPledge", cashPledge);
-		info.put("totalPrice", sum);
-		return info;
-	}
-
 }

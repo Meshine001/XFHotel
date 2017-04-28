@@ -22,7 +22,7 @@
 </head>
 <body>
 	<my_body>
-	<div id="search">
+	<div id="search" data-lng ="${lng}" data-lat="${lat}">
 		<div id="search_type">
 			<a class="on" href="#void();" onclick="walk();">步行</a>
 			<a class="btn" href="#void();" onclick="bus();">公交</a>
@@ -34,13 +34,13 @@
 	</my_body>
 	<my_script>
 		<script src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1" type="text/javascript"></script>
-	
+		<script src="<%=basePath%>/dist/zui/lib/jquery/jquery.js"></script>
 		<script type="text/javascript">
 			var map = new BMap.Map("map");
 			var geolocation = new BMap.Geolocation();
-			var point = new BMap.Point(116.331398, 39.897445);
-			var p1 = new BMap.Point(116.301934, 39.977552);
-			var p2 = new BMap.Point(109.208317, 34.310408);
+			var point = new BMap.Point($('#search').attr('data-lng'), $('#search').attr('data-lat'));
+			var p1 = new BMap.Point($('#search').attr('data-lng'), $('#search').attr('data-lat'));
+			var p2 = new BMap.Point($('#search').attr('data-lng'), $('#search').attr('data-lat'));
 			map.centerAndZoom(point, 16);
 			map.enableScrollWheelZoom(true);
 			var wr = new BMap.WalkingRoute(map, {

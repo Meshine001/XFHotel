@@ -9,6 +9,7 @@
 	<mapping path="/order/module" exclue="true" />
 	<mapping path="/price/script" exclue="true" />
 	<mapping path="/order/viewLockPsd" exclue="true" />
+	<mapping path="/wx/*" exclue="true" />
 
 	<mapping path="/list" decorator="/WEB-INF/views/decorators/home-decorator.jsp" />
 	<mapping path="/story*" decorator="/WEB-INF/views/decorators/home-decorator.jsp" />

@@ -20,4 +20,5 @@ public interface ApartmentService {
 	public Price getSpPrice(Apartment apartment,Long date);
 	public void setSpPrice(Price price);
 	public List<Map> getSpPrices(Long start,Long end,Apartment apartment);
+	public Map<String, Object> caculatePrice(String startTime, String endTime, Long apartmentId);
 }

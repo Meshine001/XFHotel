@@ -68,6 +68,9 @@
         };
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
+            if(data.order.id != '' && data.order.id != undefined){
+                location.href = Constant.URL + '/wx/payment.html?id='+data.order.id;
+            }
         })
     })
 
