@@ -1,18 +1,18 @@
 html,body{background: #fff}
 /*.header-mobile{position: relative}*/
 #Myscroll-body{background: #FFF;font-size: 0.14rem;line-height: 0.25rem}
-#Myscroll-body .my-title{font-size: 0.2rem;text-align: center;padding: 0.3rem 0.2rem 0.1rem 0.2rem;color: #333}
+#Myscroll-body .my-title{font-size: 0.3rem;text-align: center;padding: 0.3rem 0.2rem 0.1rem 0.2rem;color: #333}
 #Myscroll-body .f12{font-size: 0.12rem;color: #666;padding-bottom: 0.2rem}
 #Myscroll-body .f12 i{color: #000000}
-#Myscroll-body .ptxt{text-indent: 0.25rem;margin-bottom: 0.3rem}
+#Myscroll-body .ptxt{text-indent: 0.25rem;margin-bottom: 0.3rem;min-height: 4rem}
 #Myscroll-body .ptxt img{width: 100%;padding: 0.1rem 0}
 #Myscroll-body p{padding: 0 0.2rem}
 
 
 
-/*åˆ—è¡¨*/
+/*ÁÐ±í*/
 .content-ul{min-height: 5.5rem;padding: 0}
-.content-ul li{padding: 0.1rem;border-top:#48484c;border-bottom: #48484c}
+.content-ul li{padding: 0.1rem;border-top:#48484c;border-bottom: #48484c;overflow: hidden}
 .content-ul li .pic{width: 100%;height:2.3rem;overflow: hidden;}
 .content-ul li .pic img{width: 100%}
 .content-ul li ._title{font-size: 0.15rem;text-align: center;padding-top:0.1rem;text-overflow: ellipsis;white-space: nowrap;overflow: hidden}
