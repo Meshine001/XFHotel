@@ -160,7 +160,7 @@ public class BlogController {
 			StringBuffer sb = new StringBuffer();
 			sb.append(request.getSession().getServletContext().getRealPath("/"));
 			String fullPath = fileService.saveFile(myFileName, sb.toString());
-			return Constants.Host_Address+"images/"+fullPath;
+			return "/images/"+fullPath;
 		}
 		return "";
 	}

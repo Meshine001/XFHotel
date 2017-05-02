@@ -1,5 +1,5 @@
-﻿// var baseUrl = getRootPath();//调试环境用这个
-var baseUrl = 'http://118.190.44.185';//生成环境下用这个
+﻿//var baseUrl = getRootPath();//调试环境用这个
+ var baseUrl = 'http://118.190.44.185';//生成环境下用这个
 var clientIp;
 $.get('https://ipinfo.io/json',function(data){
     clientIp = data.ip;

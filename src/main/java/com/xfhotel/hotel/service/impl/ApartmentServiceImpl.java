@@ -88,13 +88,14 @@ public class ApartmentServiceImpl implements ApartmentService {
 		String[] ids1 = (String[]) map.get("features");
 		for (String i : ids1) {
 			Map f = null;
-			Feature fa = featureDAO.findById(id);
+			Feature fa = featureDAO.findById(Long.valueOf(i));
 			if (fa == null)
 				continue;
 			f = fa.toMap();
 			features.add(f);
 		}
 		map.put("featureEntity", features);
+		System.out.println(features);
 		
 		return map;
 	}
