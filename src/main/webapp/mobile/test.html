@@ -4,9 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-<title>好让</title>
+<title>微信授权</title>
 </head>
 <body>
-	<p>好说的骚动撒</p>
+	<p>微信授权</p>
+<script type="text/javascript">
+	var redirect = 'https://open.weixin.qq.com/connect/oauth2/authorize?'+
+	'appid=wxfa31f9e4951f95df'+
+	'&redirect_uri=http%3a%2f%2fwww.yiyunzn.xyz%2fwx%2fauth%2fopenId'+
+	'&response_type=code&scope=snsapi_base&'+
+		'state=http://www.yiyunzn.xyz/wx/index.html#wechat_redirect ';
+	window.location.href = redirect;
+
+</script>
 </body>
 </html>

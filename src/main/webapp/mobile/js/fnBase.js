@@ -1,5 +1,5 @@
 ﻿//var baseUrl = getRootPath();//调试环境用这个
- var baseUrl = 'http://118.190.44.185';//生成环境下用这个
+ var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 var clientIp;
 $.get('https://ipinfo.io/json',function(data){
     clientIp = data.ip;
@@ -24,7 +24,8 @@ function getRootPath() {
     var localhostPath = curWwwPath.substring(0, pos);
     //获取带"/"的项目名，如：/ems
     var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
-    return(localhostPath + projectName);
+//    return(localhostPath + projectName);
+    return(localhostPath);
 }
 
 $(document).ready(function(){

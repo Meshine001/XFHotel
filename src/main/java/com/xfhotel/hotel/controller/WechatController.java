@@ -47,7 +47,7 @@ import com.xfhotel.hotel.support.wechat.WechatOrderUtils;
 import net.sf.json.JSONObject;
 
 @Controller
-@RequestMapping("/wechat")
+@RequestMapping("/wx")
 public class WechatController {
 	@Autowired
 	HttpSession session;
@@ -175,6 +175,7 @@ public class WechatController {
 	 */
 	@RequestMapping("/auth/openId")
 	public String wechatOpenId(String code, String state) {
+		System.out.println("auth:============>"+code+","+state);
 		if (StringUtils.isBlank(code)) {// 用户拒绝授权
 			// 跳转某URL
 		} else {// 用户授权通过
@@ -193,7 +194,7 @@ public class WechatController {
 				e.printStackTrace();
 			}
 		}
-		return "redirect:home";
+		return "redirect:index.html";
 	}
 
 	/**

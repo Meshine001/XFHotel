@@ -34,19 +34,57 @@
         <entry file="file://$PROJECT_DIR$/mobile/js/fnBase.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="27" selection-end-column="1" />
+              <caret line="12" column="0" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="28" selection-end-column="1" />
               <folding>
-                <marker date="1493472145317" expanded="true" signature="1997:2011" ph="..." />
+                <marker date="1493724097489" expanded="true" signature="906:910" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="940:1841" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="986:1625" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="996:1140" ph="//..." />
+                <marker date="1493724097489" expanded="true" signature="1196:1293" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="1345:1445" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="1490:1617" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="1630:1839" ph="//..." />
+                <marker date="1493724097489" expanded="true" signature="1848:1927" ph="//..." />
+                <marker date="1493724097489" expanded="true" signature="1972:2154" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="2027:2041" ph="..." />
+                <marker date="1493724097489" expanded="true" signature="2183:2240" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="2285:2848" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="2339:2836" ph="{&quot;data&quot;: data...}" />
+                <marker date="1493724097489" expanded="true" signature="2595:2683" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="2718:2822" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="2880:3053" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="3092:3287" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="3117:3188" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="3204:3277" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="3321:3520" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="3346:3419" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="3435:3510" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="3553:4123" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="3618:4113" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="3720:4099" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="3827:4081" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="3873:4059" ph="{...}" />
+                <marker date="1493724097489" expanded="true" signature="3938:4033" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="servlet-context.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="servlet-context.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WEB-INF/spring/appServlet/servlet-context.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
               <caret line="74" column="54" lean-forward="false" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mobile/test.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="13" column="63" lean-forward="false" selection-start-line="13" selection-start-column="63" selection-end-line="13" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -87,16 +125,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="8160">
               <caret line="272" column="75" lean-forward="false" selection-start-line="272" selection-start-column="75" selection-end-line="272" selection-end-column="75" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="resiger.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobile/resiger.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="13" column="87" lean-forward="false" selection-start-line="13" selection-start-column="87" selection-end-line="13" selection-end-column="87" />
               <folding />
             </state>
           </provider>
@@ -184,6 +212,7 @@
         <option value="$PROJECT_DIR$/mobile/js/fnBase.js" />
         <option value="$PROJECT_DIR$/dist/admin/assets/js/add-blog.js" />
         <option value="$PROJECT_DIR$/WEB-INF/spring/appServlet/servlet-context.xml" />
+        <option value="$PROJECT_DIR$/mobile/test.html" />
       </list>
     </option>
   </component>
@@ -194,8 +223,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="206" />
-    <option name="y" value="223" />
+    <option name="x" value="316" />
+    <option name="y" value="22" />
     <option name="width" value="1613" />
     <option name="height" value="1056" />
   </component>
@@ -214,6 +243,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -240,99 +271,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Green apartment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Green apartment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Green apartment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spring" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Green apartment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spring" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appServlet" />
+              <option name="myItemId" value="mobile" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -358,82 +297,14 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="dist" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Green apartment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Green apartment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Green apartment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wangEditor.less" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NestingTreeNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../cordova/tuijian" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
@@ -553,16 +424,17 @@
       <workItem from="1493340123580" duration="12000000" />
       <workItem from="1493472000224" duration="1431000" />
       <workItem from="1493539386916" duration="230000" />
+      <workItem from="1493728766325" duration="2538000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24040000" />
+    <option name="totallyTimeSpent" value="26578000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="206" y="223" width="1613" height="1056" extended-state="0" />
+    <frame x="316" y="22" width="1613" height="1056" extended-state="0" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21567398" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2783699" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -600,7 +472,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://H:/resiger.js" />
     <entry file="file://$PROJECT_DIR$/css/index.css" />
     <entry file="file://H:/以前项目/炳旭/resiger.html" />
     <entry file="file://$PROJECT_DIR$/css/common.css" />
@@ -858,9 +729,37 @@
     <entry file="file://$PROJECT_DIR$/mobile/js/fnBase.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="27" selection-end-column="1" />
+          <caret line="12" column="0" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="28" selection-end-column="1" />
           <folding>
-            <marker date="1493472145317" expanded="true" signature="1997:2011" ph="..." />
+            <marker date="1493724097489" expanded="true" signature="906:910" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="940:1841" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="986:1625" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="996:1140" ph="//..." />
+            <marker date="1493724097489" expanded="true" signature="1196:1293" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="1345:1445" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="1490:1617" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="1630:1839" ph="//..." />
+            <marker date="1493724097489" expanded="true" signature="1848:1927" ph="//..." />
+            <marker date="1493724097489" expanded="true" signature="1972:2154" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="2027:2041" ph="..." />
+            <marker date="1493724097489" expanded="true" signature="2183:2240" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="2285:2848" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="2339:2836" ph="{&quot;data&quot;: data...}" />
+            <marker date="1493724097489" expanded="true" signature="2595:2683" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="2718:2822" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="2880:3053" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="3092:3287" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="3117:3188" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="3204:3277" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="3321:3520" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="3346:3419" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="3435:3510" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="3553:4123" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="3618:4113" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="3720:4099" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="3827:4081" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="3873:4059" ph="{...}" />
+            <marker date="1493724097489" expanded="true" signature="3938:4033" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -869,6 +768,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="74" column="54" lean-forward="false" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="13" column="63" lean-forward="false" selection-start-line="13" selection-start-column="63" selection-end-line="13" selection-end-column="63" />
           <folding />
         </state>
       </provider>
