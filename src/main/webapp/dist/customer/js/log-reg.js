@@ -17,11 +17,11 @@ $(function() {
 	});
 
 	/**
-	 * 注册
+	 * 正式注册
 	 */
-	$("#register-submit").click(function() {
+	var regPost = function(){
+
 		$.ajax({
-			cache : true,
 			type : "POST",
 			url : "./reg",
 			data : $('#register-form').serialize(),
@@ -30,15 +30,56 @@ $(function() {
 				alert("连接异常！");
 			},
 			success : function(data) {
-				alert(data.content);
-				if (data.statusCode == 0) {
-
-				} else {
+//				alert(data.content);
+				if (data.statusCode == 1) {
 					window.location.href = "./myOrder";
+				} else {
+					$('.reg-tel-group').addClass('has-error');
+					$('#reg-tel').val('');
+					$('#reg-tel').attr('placeholder',data.content);
+					$('#reg-tel').focus();
 				}
 
 			}
 		});
+	}
+	
+	/**
+	 * 验证码
+	 */
+	var checkVCode = function(){
+		$.ajax({
+			type : "GET",
+			url : $('.btn-imageCode').attr('data-vcodecheck'),
+			data : {
+				tel:$('#reg-tel').val(),
+				vCode:$('#validate-code').val()
+			},
+			error : function(request) {
+				alert("连接异常！");
+			},
+			success : function(data) {
+//				console.log(data);
+				if (data.statusCode == 1) {
+					regPost();
+				} else {
+					//验证失败
+					$('.vcode-group').addClass('has-error');
+					$('#validate-code').val('');
+					$('#validate-code').attr('placeholder','验证码错误，请重新输入');
+					$('#validate-code').focus();
+				}
+
+			}
+		});
+	};
+	
+	/**
+	 * 注册
+	 */
+	$("#register-submit").click(function() {
+		
+		checkVCode();
 	});
 
 	/**

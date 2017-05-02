@@ -57,12 +57,12 @@
 									style="display: block;">
 									<div class="form-group">
 										<input type="text" name="tel" id="username" tabindex="1"
-											class="form-control" placeholder="请输入手机号" value="18710579465">
+											class="form-control" placeholder="请输入手机号" value="">
 									</div>
 									<div class="form-group">
 										<input type="password" name="password" id="password"
 											tabindex="2" class="form-control" placeholder="请输入密码"
-											value="123123">
+											value="">
 									</div>
 									<div class="form-group text-center">
 										<input type="checkbox" tabindex="3" class="" name="remember"
@@ -88,18 +88,20 @@
 								</form>
 								<form id="register-form" action="" method="post" role="form"
 									style="display: none;">
-									<div class="form-group">
+									<div class="form-group reg-tel-group">
 										<input type="text" name="tel" id="reg-tel" tabindex="1"
 											class="form-control" placeholder="请输入手机号" value="">
 									</div>
 									<div class="form-group">
-										<div class="input-group">
+										<div class="input-group vcode-group">
 											<input type="text" name="validateCode" id="validate-code"
 												tabindex="1" class="form-control" placeholder="请输入验证码"
 												value="">
 											<div class="input-group-addon"
 												style="background-color: rgba(238, 238, 238, 0); border: none;">
 												<button type="button" class="btn btn-primary btn-imageCode"
+													data-vcodeurl="<%=basePath%>/validator/sendVCode"
+													data-vcodecheck = "<%=basePath%>/validator/checkVCode"
 													data-position="fit" data-toggle="modal"
 													data-target="#imgCodeModal">获取验证码</button>
 											</div>
@@ -192,10 +194,27 @@
 			function getTelValiateCode() {
 				//在这里插入服务器请求函数
 				//....TODO
-
-				$('.btn-imageCode').addClass('disabled');
-				timer = 60;
-				Countdown();
+				
+				$.ajax({
+					url:$('.btn-imageCode').attr('data-vcodeurl'),
+					type:'GET',
+					data:{
+						tel:$('#reg-tel').val(),
+					},
+					dataType : "json",
+					success:function(data){
+						
+						if(data.statusCode == 1){
+							$('.btn-imageCode').addClass('disabled');
+							timer = 60;
+							Countdown();
+						}else{
+							
+						}
+						
+					}
+				});
+							
 			}
 
 			$('.imgCode').click(function() {
@@ -206,7 +225,7 @@
 					url : url,
 					data : $('#imgCode-form').serialize(),
 					success : function(msg) {
-						console.log(msg);
+						
 						//验证成功
 						if (msg.statusCode == 1) {
 							$('#imgCodeModal').modal('hide');

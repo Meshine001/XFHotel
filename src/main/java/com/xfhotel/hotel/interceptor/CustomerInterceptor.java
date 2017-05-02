@@ -34,7 +34,7 @@ public class CustomerInterceptor implements HandlerInterceptor{
 		if (request.getSession().getAttribute(Constants.CUSTOMER_SESSION_ATTR) != null) {
 			return true;
 		}
-		response.sendRedirect("/hotel/customer?forword=login");
+		response.sendRedirect("/hotel/customer/login?forword=login");
 		return false;
 	}
 
