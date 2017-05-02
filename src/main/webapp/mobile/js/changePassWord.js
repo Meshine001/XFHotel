@@ -1,4 +1,4 @@
-charset="UTF-8"
+ï»¿charset="UTF-8"
 $(document).ready(function(){
     var _uid=fnBase.huoqu(0,"uid");
     //if(_uid==null||_uid=="undefined"||_uid==""){
@@ -10,19 +10,19 @@ $(document).ready(function(){
        var _newPassword=$("#newpw").val();
        var _confirmPassword=$("#confirmPassword").val();
        if(_originalPassword==''){
-           fnBase.myalert("ÇëÊäÈë¾ÉÃÜÂë")
+           fnBase.myalert("è¯·è¾“å…¥æ—§å¯†ç ")
            return
        }
         if(_newPassword==''){
-            fnBase.myalert("ÇëÊäÈëĞÂÃÜÂë");
+            fnBase.myalert("è¯·è¾“å…¥æ–°å¯†ç ");
             return
         }
         if(_confirmPassword==''){
-            fnBase.myalert("ÇëÊäÈ·ÈÏÃÜÂë");
+            fnBase.myalert("è¯·è¾“ç¡®è®¤å¯†ç ");
             return
         }
         if(_confirmPassword!=_newPassword){
-            fnBase.myalert("Á½´ÎÊäÈëµÄÃÜÂë²»Ò»ÖÂ£¬ÇëÖØĞÂÊäÈë");
+            fnBase.myalert("ä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ä¸€è‡´ï¼Œè¯·é‡æ–°è¾“å…¥");
             return
         }
         var frontURL=Constant.URL+'/mobile/changePsd';

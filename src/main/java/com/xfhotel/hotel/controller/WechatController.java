@@ -207,21 +207,26 @@ public class WechatController {
 	@ResponseBody
 	public JSONObject jsOrder(Long id, String ip) throws Exception {
 		Order order = orderService.get(id);
-		if (order == null)
-			return null;
+		if (order == null){
+			JSONObject jo = new JSONObject();
+			jo.put("status", "error");
+			jo.put("msg", "订单不存在");
+			jo.put("obj", null);
+			return jo;
+		}
 		order.setPayPlatform(Order.PAY_PLATFORM_WECHAT);
 		orderService.update(order);
 
 		String detail = order.getDescription();
-		String desc = "青舍都市";
+		String desc = "房间预定";
 		Customer c = customerService.getCustomer(order.getCusId());
 		String openId = c.getWechatOpenId();
 		String goodSn = "" + order.getRoomId();
 		String orderSn = order.getPayNo();
 		String amount = order.getTotalPrice();
 		String type = "JSAPI";
-		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, type);
 		
+		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, type);
 		return result;
 	}
 

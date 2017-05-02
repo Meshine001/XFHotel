@@ -27,9 +27,12 @@
 					<h1>${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间</h1>
 					<div class="x_add">
 						<span class="x_dizhi"> <i></i>${apartment.address}
-						</span> <a class="f_map"> <i></i> 导航
-						</a> <span class="b_ewm"> <i class="ewm_i"></i> 在线分享
-						</span> <span class="b_sc" style="cursor: pointer;"> <i></i> 加入收藏
+						</span> <a href="javascrip:;" id="call-gps" class="f_map" data-iframeUrl = "<%=basePath%>/utils/roomGps?lng=${apartment.longitude}&lat=${apartment.latitude}" data-target="#gpsModal"
+							data-toggle="modal"> <i></i> 导航
+						</a> <span class="b_ewm" style="display: none;"> <i
+							class="ewm_i"></i> 在线分享
+						</span> <span class="b_sc" style="display: none; cursor: pointer;">
+							<i></i> 加入收藏
 						</span>
 					</div>
 					<div class="f_img">
@@ -65,11 +68,20 @@
 					</div>
 					<div>
 						<div class="i_z">房间特色</div>
+						<p class="i_span">
+							<c:forEach items="${apartment.featureEntity}" var="f">
+								<span>${f.description}</span>
+							</c:forEach>
+						</p>
 
 					</div>
 					<div>
 						<div class="i_z">配套设施</div>
-
+						<p class="i_span">
+							<c:forEach items="${room.facilityEntity}" var="f">
+								<span>${f.description}</span>
+							</c:forEach>
+						</p>
 					</div>
 					<div>
 						<div class="i_z">位置周边</div>
@@ -90,7 +102,7 @@
 						<h1>押金及其他费用</h1>
 						<p>
 
-							在线收取押金：100元 <br> 是否允许加客：允许<br>
+							在线收取押金：${yajin}元 <br> 是否允许加客：允许<br>
 						</p>
 						<div class="clearfix">其他额外费用：无</div>
 					</div>
@@ -191,14 +203,14 @@
 									<div class="order_btn_container">
 										<c:choose>
 											<c:when test="${c != null }">
-												<a class="order_btn" id="day_yuding"
+												<a style="cursor: pointer;" class="order_btn" id="day_yuding"
 													data-show-header="false"
 													data-baseurl="<%=basePath%>/order/module"
 													data-remote="<%=basePath%>/order/module?"
 													data-toggle="modal">立即预订<span class="f14"></span></a>
 											</c:when>
 											<c:otherwise>
-												<a class="order_btn" data-toggle="modal"
+												<a style="cursor: pointer;" class="order_btn" data-toggle="modal"
 													data-target="#loginModal" id="need_login">立即预订<span
 													class="f14"></span></a>
 											</c:otherwise>
@@ -258,10 +270,11 @@
 				<div class="x_gj">
 					<h5>管家信息</h5>
 					<div class="gj_info">
-						<img src="" width="110" height="110">
+						<img src="<%=basePath%>/dist/public/images/kefu.jpg" width="110"
+							height="110">
 						<div class="gj_mz">
 							<span class="gj_name">在线管家</span><span class="gj_tel"></span>周一至周日
-							07:00 - 23:00 <span class="gj_chat"><i></i>在线聊天</span>
+							07:00 - 23:00 <span class="gj_chat" style="cursor: pointer;"><i></i>在线聊天</span>
 						</div>
 					</div>
 					<p></p>
@@ -439,6 +452,26 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="gpsModal">
+		<div class="modal-dialog modal-fullscreen">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span><span class="sr-only">关闭</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<iframe id="map-iframe" width="100%" height="100%" style="border: none;" 
+					src="">
+				</iframe>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#call-gps').click(function(){
+			$('#map-iframe').attr('src',$(this).attr('data-iframeUrl'));
+		});
+	</script>
+
 	</my_body>
 	<my_script> <script
 		src="<%=basePath%>/dist/customer/js/info.js"></script> <script

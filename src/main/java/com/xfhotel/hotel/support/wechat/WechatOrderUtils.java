@@ -279,7 +279,6 @@ public class WechatOrderUtils {
 			String goodSn, String orderSn, String amount, String type) {
 
 		JSONObject result = new JSONObject();
-
 		// 1、参数校验
 		if (StringUtils.isBlank(detail) || StringUtils.isBlank(desc) || StringUtils.isBlank(ip)
 				|| StringUtils.isBlank(goodSn) || StringUtils.isBlank(orderSn) || StringUtils.isBlank(amount)

@@ -1,5 +1,7 @@
 package com.xfhotel.hotel.controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
@@ -26,12 +30,14 @@ import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BannerService;
+import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
+import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
@@ -65,6 +71,9 @@ public class MobileController  {
 	
 	@Autowired
 	OrderService orderService;
+	
+	@Autowired
+	BlogService blogService;
 
 	
 	
@@ -120,7 +129,7 @@ public class MobileController  {
 
 		if (customerService.register(c, details) == true) {
 			session.setAttribute("c", c);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, "注册成功");
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, c.getId());
 		}
 
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
@@ -165,14 +174,14 @@ public class MobileController  {
 			String[] args = {vCodeStr,Constants.SMS_AVAILBEL_TIME_STR};
 			//调试时可注释掉下面
 			//发送短信
-//			SendTemplateSMS.sendSMS(Constants.SMS_TEMPLATE_REG, tel, args);
+			SendTemplateSMS.sendSMS(Constants.SMS_TEMPLATE_REG, tel, args);
 			//利用session进行验证
 			Map<String, Object> vCode = new HashMap<String, Object>();
 			vCode.put("tel", tel);
 			vCode.put("diedLine", new Date().getTime()+Constants.SMS_AVAILBEL_TIME);
 			vCode.put("code", vCodeStr);
 			session.setAttribute("vCode", vCode);
-			System.out.println("send vcode==>"+vCode);
+//			System.out.println("send vcode==>"+vCode);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -187,8 +196,7 @@ public class MobileController  {
 		Map<String,Object> info = new HashMap<String, Object>();
 		info.put("oStart", startTime);
 		info.put("oEnd", endTime);
-		Map<String, Object> priceInfo = caculatePrice(startTime, endTime, apartmentId);
-		
+		Map<String, Object> priceInfo = apartmentService.caculatePrice(startTime, endTime, apartmentId);
 		info.put("oTotalDay",TimeUtil.daysBetween(startTime, endTime));
 		info.put("oPrice", priceInfo.get("price"));
 		info.put("oTotalPrice", priceInfo.get("totalPrice"));
@@ -362,37 +370,59 @@ public class MobileController  {
 		session.setAttribute(Constants.PAGE, Constants.PAGE_DETAILS);
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
 	}
-
 	
-	public Map<String, Object> caculatePrice(String startTime, String endTime, Long apartmentId) {
-		Map<String, Object> info = new HashMap<String, Object>();
-		StringBuffer sb = new StringBuffer();
-		Double sum = 0.00D;
-		Double cashPledge = 1922D;
-		
-		Apartment apartment = apartmentService.findById(apartmentId);
-		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
-		for (int i = 0; i < days.size() - 1; i++) {
-			Price p = apartmentService.getSpPrice(apartment, TimeUtil.getDateLong(days.get(i)));
-			Double pp = null;
-			if (p != null) {// 有特殊价格
-				pp = p.getPrice();
-			} else {
-				pp = Double.valueOf(apartment.getPrices());
-			}
-			if (i == 0) {
-				sb.append(pp);
-			} else {
-				sb.append("@" + pp);
-			}
-			sum += pp;
-			
+	/*
+	 * 青舍生活
+	 */
+	@RequestMapping(value = "/story",method = RequestMethod.POST)
+	public @ResponseBody Map storyPage(HttpServletRequest request, int page){
+		System.out.println(page);
+		PageResults<Blog> pr = blogService.show_blog(page);
+		int sp = pr.getCurrentPage();
+		int ep = pr.getPageCount();
+		if ( (sp-Constants.pagesize/2) > 0){
+			sp = sp-Constants.pagesize/2;
 		}
-		sum=sum+cashPledge;
-		info.put("price", sb.toString());
-		info.put("cashPledge", cashPledge);
-		info.put("totalPrice", sum);
+		else{
+			sp=1;
+		}
+		if( (sp+Constants.pagesize-1) < ep ){
+			ep = sp+Constants.pagesize-1;
+		}
+		if( (ep-Constants.pagesize+1) > 0 ){
+			sp = ep-Constants.pagesize+1;
+		}
+		Map<String, Object> info = new HashMap<String, Object>();
+		
+		info.put("blogs",pr);
+		info.put("sp",sp);
+		info.put("ep",ep);
+		
 		return info;
 	}
+	@RequestMapping(value = "blog_content", method = RequestMethod.POST)
+	public @ResponseBody Map  initBlog(HttpServletRequest request,Long id){
+		String path = request.getSession().getServletContext().getRealPath("/");
+		Blog blog = blogService.find(id);
+		path += "blog\\" + blog.getPath();
+		Map map = blog.toMap();
+		StringBuffer content = new StringBuffer();
+		FileReader fr;
+		try {
+			fr = new FileReader(path);
+			BufferedReader br=new BufferedReader(fr);
+			String str;
+			while( ( str=br.readLine())!=null){
+				content.append(str);
+			}
+			br.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		map.put("content", content.toString());
+		return map;
+	}
 
+	
 }

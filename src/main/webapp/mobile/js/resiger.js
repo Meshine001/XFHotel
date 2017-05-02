@@ -121,7 +121,7 @@ var resiger={
 
 
 
-
+            //
             var frontURL=Constant.URL+"/mobile/reg";
             var postDatat={"tel":phoneNumber,"password":password};
             fnBase.commonAjax(frontURL,postDatat,function(data){
@@ -130,13 +130,8 @@ var resiger={
                     fnBase.myalert("恭喜您注册成功");
                     sessionStorage.clear();
                     localStorage.clear();
-                  //  fnBase.keep(0,"uid",data.info.m_id);
-                    //先通过微信授权获得微信用户openid
-                    var REDIRECT_URI = Constant.URL +　'/wechat/auth/openId';
-                    var STATE =  Constant.URL + '/wx/index.html';
-                    var wechatAuth = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfa31f9e4951f95df&redirect_uri='+REDIRECT_URI+'&response_type=code&scope=snsapi_base&state='+STATE+'#wechat_redirect';
-                    window.location.href = wechatAuth;
-                    // window.location.href="index.html";
+                    fnBase.keep(0,"uid",data.content);
+                    window.location.href="index.html";
                 }else{
                     fnBase.myalert(data.content)
                 }

@@ -10,6 +10,7 @@ public interface BlogService extends BaseService<Blog>{
 	public int update(Blog blog, String content, String basepath);
 	public int change(Blog blog);
 	public PageResults<Blog> list(int page);
+	public PageResults<Blog> list(int page,int pageSize);
 	public void delete(long id);
 	public PageResults<Blog> show_blog(int page);
 }

@@ -1,4 +1,4 @@
-
+﻿
 $(document).ready(function(){
     getdata();
     var PageUp=$("#page a").eq(0);
@@ -17,7 +17,7 @@ $(document).ready(function(){
             var str='';
             $(".content-ul").html('');
             for(var i=0;i<data.blogs.results.length;i++){
-                str+='<li link="'+data.blogs.results[i].path+'"><div class="pic"><img src="'+data.blogs.results[i].pic+'"></div><h3 class="_title">'+data.blogs.results[i].title+'</h3></li>';
+                str+='<li link="'+data.blogs.results[i].id+'"><div class="pic"><img src="'+data.blogs.results[i].pic+'"></div><h3 class="_title">'+data.blogs.results[i].title+'</h3></li>';
             }
             $(".content-ul").append(str);
         });
@@ -32,10 +32,11 @@ $(document).ready(function(){
             var str='';
             $(".content-ul").html('');
             for(var i=0;i<data.blogs.results.length;i++){
-                str+='<li link="'+data.blogs.results[i].path+'"><div class="pic"><img src="'+data.blogs.results[i].pic+'"></div><h3 class="_title">'+data.blogs.results[i].title+'</h3></li>';
+                str+='<li link="'+data.blogs.results[i].id+'"><div class="pic"><img src="'+data.blogs.results[i].pic+'"></div><h3 class="_title">'+data.blogs.results[i].title+'</h3></li>';
             }
             $(".content-ul").append(str);
         });
+        fnBase.keep(0,"id",data.blogs.results[i].id)
     }
 
     PageUp.click(function(){
@@ -54,9 +55,11 @@ $(document).ready(function(){
         }
 
     });
+
     $(".content-ul li").live('click',function(){
         var _page=$(this).attr("link");
         window.location.href='Life.html?id='+encodeURIComponent(_page);
     });
+
 
 });

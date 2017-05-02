@@ -88,7 +88,9 @@ $(document).ready(function(){
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
                     }else if(data.content[i].status=="进行中"){
                         _str+='<p class="total"><span class="fl cancel">退房</span><span class="fl evaluate">评价</span></p>'
-                    }else{
+                    }else if(data.content[i].status=="订单超时"){
+                       // _str+='<p class="total"><span class="fl evaluate"></span></p>'
+                    }else if(data.content[i].status=="已完成"){
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
                     }
                     _str+='</li>';
@@ -112,7 +114,8 @@ $(document).ready(function(){
         window.location.href="order.html"
     });
     $(".payment").live('click',function(){
-        window.location.href="payment.html";
+        var _orderID=$(this).parent().parent().attr('orderid');
+        window.location.href="payment.html?id="+_orderID;
     });
     $(".evaluate").live('click',function(){
         var _orderID=$(this).parent().parent().attr('orderid');

@@ -1,4 +1,4 @@
-$(document).ready(function(){
+ï»¿$(document).ready(function(){
     var cood='';
     var span='';
     var _uid = fnBase.huoqu(0, "uid");
@@ -13,9 +13,9 @@ $(document).ready(function(){
     var _YJpic=fnBase.huoqu(1,"YJpic");
 
     $(".order_info .roomName").text(_community);
-    $(".order_info .roomTime").html(_startTime+"Èë×¡"+_endTime+"Àë¿ª"+"<i class='date'>¹²£¨"+_oTotalDay+"£©Ìì</i>");
-    $(".order_info .roompYJ").html("Ñº½ğ:<span style='color: #666'>"+_YJpic+"</span>");
-    $(".order_info .roompPic").html("¶©µ¥×Ü¶î:<span class='money'>£¤"+_oTotalPrice+"</span>");
+    $(".order_info .roomTime").html(_startTime+"å…¥ä½"+_endTime+"ç¦»å¼€"+"<i class='date'>å…±ï¼ˆ"+_oTotalDay+"ï¼‰å¤©</i>");
+    $(".order_info .roompYJ").html("æŠ¼é‡‘:<span style='color: #666'>"+_YJpic+"</span>");
+    $(".order_info .roompPic").html("è®¢å•æ€»é¢:<span class='money'>ï¿¥"+_oTotalPrice+"</span>");
 
     $("#needpic i").click(function(){
        if($(this).hasClass('active')==true){
@@ -27,7 +27,7 @@ $(document).ready(function(){
        }
     });
 
-//    Ìá½»¶©µ¥
+//    æäº¤è®¢å•
     $(".navbar a").click(function(){
         var _userName=$("#userName").val();
         var _tel=$("#tel").val();
@@ -37,37 +37,40 @@ $(document).ready(function(){
         var num_door=fnBase.huoqu(1,'num_door');
         var _description=_community+"-"+roonWz+"-"+roomCX+"-"+num_door+'';
         if(_userName==''){
-            fnBase.myalert("ÇëÊäÈëÈë×¡ÈËĞÕÃû");
+            fnBase.myalert("è¯·è¾“å…¥å…¥ä½äººå§“å");
             return;
         }
         if(_tel==''){
-            fnBase.myalert("ÇëÊäÈëÈë×¡ÈËµç»°ºÅÂë");
+            fnBase.myalert("è¯·è¾“å…¥å…¥ä½äººç”µè¯å·ç ");
             return;
         }
         if(_identity==''){
-            fnBase.myalert("ÇëÊäÄúµÄÉí·İÖ¤ºÅ");
+            fnBase.myalert("è¯·è¾“æ‚¨çš„èº«ä»½è¯å·");
             return;
         }
         var frontURL=Constant.URL+'/mobile/modulePost';
         var postData={
-            "roomId":_id,//·¿ÎİID
-            "cusId":_uid,//ÓÃ»§ID
-            "startTime":_startTime,//Èë×¡Ê±¼ä
-            "endTime":_endTime,//Àë¿ªÊ±¼ä
-            "totalDay":_oTotalDay,//×ÜÌìÊı
-            "totalPrice":_oTotalPrice,//×Ü¼Û¸ñ
-            "cusName":_userName,//Èë×¡ÈËĞÕÃû
-            "cusTel":_tel,//Èë×¡ÈËµç»°
-            "cusIdCard":_identity,//Èë×¡ÈËÉí·İÖ¤ºÅ
-            "price":_price,//µ±Ììµ¥¼Û
-            "apartmentType":_apartmenttype,//·¿Ô´ÀàĞÍ
-            "needFapiiao":cood,//Ğè²»ĞèÒª·¢Æ±
+            "roomId":_id,//æˆ¿å±‹ID
+            "cusId":_uid,//ç”¨æˆ·ID
+            "startTime":_startTime,//å…¥ä½æ—¶é—´
+            "endTime":_endTime,//ç¦»å¼€æ—¶é—´
+            "totalDay":_oTotalDay,//æ€»å¤©æ•°
+            "totalPrice":_oTotalPrice,//æ€»ä»·æ ¼
+            "cusName":_userName,//å…¥ä½äººå§“å
+            "cusTel":_tel,//å…¥ä½äººç”µè¯
+            "cusIdCard":_identity,//å…¥ä½äººèº«ä»½è¯å·
+            "price":_price,//å½“å¤©å•ä»·
+            "apartmentType":_apartmenttype,//æˆ¿æºç±»å‹
+            "needFapiiao":cood,//éœ€ä¸éœ€è¦å‘ç¥¨
             "preferential":span,
             "personal":$("#presonal").val(),
             "description":_description
         };
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
+            if(data.order.id != '' && data.order.id != undefined){
+                location.href = Constant.URL + '/wx/payment.html?id='+data.order.id;
+            }
         })
     })
 

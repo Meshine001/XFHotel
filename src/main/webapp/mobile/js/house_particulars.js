@@ -1,7 +1,10 @@
 ﻿
 $(document).ready(function(){
 
+
+
     ////轮播
+
 
     var _uid = fnBase.huoqu(0, "uid");
     var _id = decodeURIComponent(fnBase.request("id"));

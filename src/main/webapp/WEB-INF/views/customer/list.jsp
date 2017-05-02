@@ -1,3 +1,5 @@
+<%@page import="com.xfhotel.hotel.support.PageResults"%>
+<%@page import="com.google.zxing.Result"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -23,12 +25,13 @@
 <body>
 	<my_body>
 	<div class="crumbs">
-			<a href="/" title="首页">青舍首页</a> > <a href="/list/" title="西安租房">西安租房</a>
+		<a href="/" title="首页">青舍首页</a> > <a href="/list/" title="西安租房">西安租房</a>
 	</div>
 	<article>
 		<div class="ser_box">
 			<div class="b_seach">
 				<form action="<%=basePath%>/list" method="get" id="search-box-form">
+					<input name = "currentPage" value="${info.page.currentPage}" type="hidden"/>
 					<input id="searchtxt" class="b_srh ui-autocomplete-input"
 						type="text" value="${info.searchData.moreStr}" name="moreStr"
 						placeholder="我想住..." autocomplete="off"> <input
@@ -56,13 +59,14 @@
 						id="search-submit" class="btn_sh" type="submit"
 						value="搜&nbsp;&nbsp;索" name="">
 				</form>
-				<span style="font-size: 14px; margin-left: 10px; color: #3a5067;">热门搜索：</span><a
+				<span
+					style="display: none; font-size: 14px; margin-left: 10px; color: #3a5067;">热门搜索：</span><a
 					href="/dibiao/bishagang/" title="碧沙岗" target="_blank"
 					style="margin-left: 0px;"></a><a href="/dibiao/haiyangguan/"
 					title="海洋馆" target="_blank"></a><a
 					href="/dibiao/ZhengDongXinQuHuiZhanZhongXin/" title="会展中心"
-					target="_blank">xxx</a> <a href="/baojie.html" target="_blank"
-					style="color: #ff7e7e; float: right;">tips....</a>
+					target="_blank"></a> <a href="/baojie.html" target="_blank"
+					style="display: none; color: #ff7e7e; float: right;">tips....</a>
 			</div>
 			<div class="ser_cg" style="height: 0px;">
 				<!--<dl>
@@ -78,9 +82,9 @@
 						<dd>时间：</dd>
 						<dt>
 							<ul class="srh_time">
-								<li style="width: auto;"><span> <input id="startDateInput"
-										value="${info.searchData.startTime}" readonly="readonly"><b
-										class="time_icon"></b>
+								<li style="width: auto;"><span> <input
+										id="startDateInput" value="${info.searchData.startTime}"
+										readonly="readonly"><b class="time_icon"></b>
 								</span> <span>至</span> <span> <input id="endDateInput"
 										value="${info.searchData.endTime}" readonly="readonly"><b
 										class="time_icon"></b>
@@ -293,7 +297,7 @@
 			</div>
 		</div>
 		<div class="b_tit">
-			<span class="fr">共<em id="allcount">673</em>个合适房源
+			<span class="fr">共<em id="allcount">${info.page.totalCount}</em>个合适房源
 			</span>
 			<ul id="sort_ul">
 				<li><a href="javascript:void(0);" title="推荐" rel="nofollow"
@@ -308,82 +312,90 @@
 		</div>
 		<div id="list">
 			<div class="b_list">
-				<c:forEach items="${info.list}" var="apartment">
+				<c:forEach items="${info.page.results}" var="apartment">
 					<div class="list_box">
-					<dl class="b_dl">
-						<dd>
-							<a href="info/${apartment.rooms[0].id}" title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
-								target="_blank"><img class="readyload"
-								src="<%=basePath%>/images/${apartment.pic2[0]}"
-								width="450" height="276" style="display: inline;"></a>
-							<!---->
-						</dd>
-						<dt>
-							<!--对比和收藏为鼠标经过时显示，对比的图标选中样式为<i class="duibi_on">，收藏的图标选中样式为<i class="shoucang_on">-->
-							<div class="b_list_tit">
-								<span title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
-									class="duibi"><i></i>加入对比</span><span
-									 class="shoucang"
-									style="cursor: pointer;"><i></i>加入收藏</span>
-								<h3>
-									<a href="info/${apartment.rooms[0].id}" title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
-										target="_blank" rel="nofollow">${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间</a>
-								</h3>
-							</div>
-							<div class="b_txt">
-								<p>类型：${apartment.apartmenttype}&nbsp;&nbsp;&nbsp;&nbsp;评价：</p>
-								<p>楼层：第${apartment.floor}层/共${apartment.totalfloor}层&nbsp;&nbsp;面积：${apartment.square}㎡&nbsp;&nbsp;朝向：${apartment.direction}</p>
-								<p>
-									地址：${apartment.location}${apartment.address}<a class="f_map" data-longitude="${apartment.longitude}" data-latitude="${apartment.latitude}"
-										href="javascript:void(0);" title="导航"><i></i>导航</a>
-								</p>
-								<ul>
-									<c:forEach items="${apartment.facilityEntity}" var="f">
-									<li>${f.description}</li>
-									</c:forEach>
-								</ul>
-								<div class="money">
-									<em>${apartment.dayPrice}</em>元/天
+						<dl class="b_dl">
+							<dd>
+								<a href="info/${apartment.rooms[0].id}"
+									title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
+									target="_blank"><img class="readyload"
+									src="<%=basePath%>/images/${apartment.pic2[0]}" width="450"
+									height="276" style="display: inline;"></a>
+								<!---->
+							</dd>
+							<dt>
+								<!--对比和收藏为鼠标经过时显示，对比的图标选中样式为<i class="duibi_on">，收藏的图标选中样式为<i class="shoucang_on">-->
+								<div class="b_list_tit">
+									<span
+										title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
+										class="duibi" style="display: none;"><i></i>加入对比</span><span
+										class="shoucang" style="display: none; cursor: pointer;"><i></i>加入收藏</span>
+									<h3>
+										<a href="info/${apartment.rooms[0].id}"
+											title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
+											target="_blank" rel="nofollow">${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间</a>
+									</h3>
 								</div>
-							</div>
-							<div class="jieshao">
-								<a href="info/${apartment.rooms[0].id}" title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
-									target="_blank" rel="nofollow"> <i class="quotes"></i> <i
-									class="quotes1"></i> <span
-									title="${apartment.rooms[0].descriptionPersonal}">[房间特色]<br>${apartment.rooms[0].descriptionPersonal}
-								</span></a>
-							</div>
-						</dt>
-					</dl>
-				</div>
+								<div class="b_txt">
+									<p>类型：${apartment.apartmenttype}&nbsp;&nbsp;&nbsp;&nbsp;评价：</p>
+									<p>楼层：第${apartment.floor}层/共${apartment.totalfloor}层&nbsp;&nbsp;面积：${apartment.square}㎡&nbsp;&nbsp;朝向：${apartment.direction}</p>
+									<p>
+										地址：${apartment.location}${apartment.address}<a class="f_map"
+											data-longitude="${apartment.longitude}"
+											data-latitude="${apartment.latitude}"
+											href="javascript:void(0);" title="导航"><i></i>导航</a>
+									</p>
+									<ul>
+										<c:forEach items="${apartment.facilityEntity}" var="f">
+											<li>${f.description}</li>
+										</c:forEach>
+									</ul>
+									<div class="money">
+										<em>${apartment.dayPrice}</em>元/天
+									</div>
+								</div>
+								<div class="jieshao">
+									<a href="info/${apartment.rooms[0].id}"
+										title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
+										target="_blank" rel="nofollow"> <i class="quotes"></i> <i
+										class="quotes1"></i> <span
+										title="${apartment.rooms[0].descriptionPersonal}">[房间特色]<br>${apartment.rooms[0].descriptionPersonal}
+									</span></a>
+								</div>
+							</dt>
+						</dl>
+					</div>
 				</c:forEach>
-			
-				
-				<div class="page">
-					<a class="up none" title="首页">&lt;&lt;</a><a class="up none"
-						title="上一页">&lt;</a> <a class="page_on" href="javascript:void(0)"
-						title="第1页">1</a> <a href="javascript:getAjaxpages(2);"
-						title="第2页">2</a><a href="javascript:getAjaxpages(3);" title="第3页">3</a><a
-						href="javascript:getAjaxpages(4);" title="第4页">4</a><a
-						href="javascript:getAjaxpages(5);" title="第5页">5</a><a
-						href="javascript:getAjaxpages(6);" title="第6页">6</a><a
-						href="javascript:getAjaxpages(7);" title="第7页">7</a><a
-						href="javascript:getAjaxpages(8);" title="第8页">8</a><a
-						href="javascript:getAjaxpages(9);" title="第9页">9</a><a
-						href="javascript:getAjaxpages(10);" title="第10页">10</a><a
-						class="pgdn" title="下一页" href="javascript:getAjaxpages(2);">&gt;</a><a
-						href="javascript:getAjaxpages(68);" title="最后一页">&gt;&gt;</a>
+
+
+				<div class="page" data-pageCount="${info.page.pageCount}"
+					data-currentPage="${info.page.currentPage}">
+					<a class="up none" title="首页">&lt;&lt;</a>
+					<a class="up none"
+						title="上一页">&lt;</a> 
+					
 				</div>
+				<script type="text/javascript">
+					var pageCount = $('.page').attr('data-pageCount');
+					var currentPage = $('.page').attr('data-currentPage');
+					for(var i=1;i<=pageCount;i++){
+						var a = $('<a/>').attr('title','第'+i+'页').text(i);
+						if(currentPage == i){
+							$(a).addClass('page_on');
+						}
+						$('.page').append(a);
+					}
+					var html = "<a class='pgdn' title='下一页' href=''>&gt;</a><a"+
+					"href='' title='最后一页'>&gt;&gt;</a>";
+					$('.page').append(html);
+				</script>
 			</div>
 		</div>
 	</article>
-	<div id="color-box">
-		
-	</div>
+	<div id="color-box"></div>
 	</my_body>
 	<my_script> <script
-		src="<%=basePath%>/dist/customer/js/list.js"></script> 
-	</my_script>
+		src="<%=basePath%>/dist/customer/js/list.js"></script> </my_script>
 </body>
 
 </html>

@@ -30,7 +30,7 @@
 						<tr>
 							<th>编号</th>
 							<th>类型</th>
-							<th>状态</th>
+							<th>房号</th>
 							<th>地址</th>
 							<th>位置</th>
 							<th>小区</th>
@@ -46,7 +46,7 @@
 							<tr>
 								<td>${apartment.id}</td>
 								<td>${apartment.apartmenttype}</td>
-								<td>${apartment.rooms[0].status}</td>
+								<td>${apartment.num_door}</td>
 								<td>${apartment.location}</td>
 								<td>${apartment.address}</td>
 								<td>${apartment.community}</td>
@@ -58,7 +58,17 @@
 									href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a>&nbsp;&nbsp;<br>
 									<a class="btn"
 									href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格</a>&nbsp;&nbsp;<br>
-									<a class="btn">删除</a></th>
+									
+									<a href="<%=basePath %>/admin/apartment/showHome/${apartment.id}" class="btn" >
+									<c:if test="${apartment.rooms[0].showHome == true }">
+									首页隐藏
+									</c:if>
+									
+									<c:if test="${apartment.rooms[0].showHome == false }">
+									首页显示
+									</c:if>
+									</a><br>
+									<a href="<%=basePath %>/admin/apartment/delete/${apartment.id}" class="btn">删除</a></th>
 							</tr>
 						</c:forEach>
 					</tbody>

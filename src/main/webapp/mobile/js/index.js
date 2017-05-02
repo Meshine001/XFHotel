@@ -1,17 +1,22 @@
-﻿
-
-$(document).ready(function(){
+﻿$(document).ready(function () {
     scrollNav();
     getData();
 
+    $("#_fw").click(function () {
+        fnBase.myalert('正在开发，敬请期待！')
+    });
+    $('.header-mobile .input-search').focus(function () {
+        fnBase.keep(1, "mode", 0);
+        window.location.href = "houseType.html";
+    });
     alertSearch.info();
     life();
-    function scrollNav(){
-        $(window).scroll(function(){
-            var stop=$(window).scrollTop();
-            if(stop>40){
+    function scrollNav() {
+        $(window).scroll(function () {
+            var stop = $(window).scrollTop();
+            if (stop > 40) {
                 $(".header-mobile").fadeIn().addClass("scro")
-            }else{
+            } else {
                 $(".header-mobile").removeClass("scro");
             }
         })
@@ -19,16 +24,16 @@ $(document).ready(function(){
 
 });
 
-var alertSearch={
-    info:function(){
+var alertSearch = {
+    info: function () {
         var _uid = fnBase.huoqu(0, "uid");
-        var openDoc=$(".Address-search");
-        $(".group-search").click(function(){
-            openDoc.show();
+        var openDoc = $(".Address-search");
+        $(".group-search").click(function () {
+
             $(".Address-search .searInput").find(".serchText").val("").focus();
         });
 
-        $(".header-mobile .link-btn").click(function(){
+        $(".header-mobile .link-btn").click(function () {
             if (_uid == null || _uid == "undefined" || _uid == "") {
                 window.location.href = "login.html";
                 return;
@@ -40,36 +45,36 @@ var alertSearch={
 };
 
 
-function getData(){
-    var frontURL=Constant.URL+'/mobile/home';
-    var postData ={};
-    fnBase.commonAjax(frontURL,postData,function(data){
+function getData() {
+    var frontURL = Constant.URL + '/mobile/home';
+    var postData = {};
+    fnBase.commonAjax(frontURL, postData, function (data) {
         console.log(data);
         //if(data.status==1){
         //   轮播
 
-            var lunboStr='';
-            var lunbo_length=data.homeRooms[0].pic3.length;
-
-            $(".swiper-container .swiper-wrapper").html("");
-            if(lunbo_length>0){
-                for (var i = 0; i < lunbo_length; i++) {
-                    lunboStr += '<div class="swiper-slide"> <a href="javascript:void(0)"><img src="'+"http://192.168.1.109:8080/hotel/images/"+data.homeRooms[0].pic3[i]+'"/></a></div>';
-                }
-                $(".swiper-container .swiper-wrapper").append(lunboStr);
-                var mySwiper = new Swiper ('.swiper-container',{
-                    loop: true,
-                    autoplay: 1800,
-                    pagination: '.swiper-pagination',
-                    autoplayDisableOnInteraction: false
-                });
-            }
+        //var lunboStr='';
+        //var lunbo_length=data.homeRooms[0].pic3.length;
+        //
+        //$(".swiper-container .swiper-wrapper").html("");
+        //if(lunbo_length>0){
+        //    for (var i = 0; i < lunbo_length; i++) {
+        //        lunboStr += '<div class="swiper-slide"> <a href="javascript:void(0)"><img src="'+Constant.URL+data.homeRooms[0].pic3[i]+'"/></a></div>';
+        //    }
+        //    $(".swiper-container .swiper-wrapper").append(lunboStr);
+        var mySwiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: 1800,
+            pagination: '.swiper-pagination',
+            autoplayDisableOnInteraction: false
+        });
+        //}
         //}else{
         //    fnBase.myalert(data.msg)
         //}
-     //房间分类
-     //   $(".hot-issue").html("");
-        var category_str='';
+        //房间分类
+        //   $(".hot-issue").html("");
+        var category_str = '';
         //var categoryLength=data.info.category.length;
         //if(categoryLength>4){
         //    categoryLength=4;
@@ -79,77 +84,72 @@ function getData(){
         //}
         //$(".hot-issue").append(category_str);
         $('.goodlist li').unbind('click').click(
-            function(){
-                var id=$(this).attr('proID');
-                var isoff= $(this).attr('offer');
-                window.location.href="house_particulars.html?id="+encodeURIComponent(id)+"&offer="+encodeURIComponent(isoff);
+            function () {
+                var id = $(this).attr('proID');
+                var isoff = $(this).attr('offer');
+                window.location.href = "house_particulars.html?id=" + encodeURIComponent(id) + "&offer=" + encodeURIComponent(isoff);
             }
         );
 
 
-    // 热门房源
-        var str='';
+        // 热门房源
+        var str = '';
         var isoffers;
         $('.plCon .goodlist').html("");
-        for(var i=0;i<data.homeRooms.length;i++){
-            str+='<li proID='+data.homeRooms[i].id+'><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="'+"http://192.168.1.109:8080/hotel/images/"+data.homeRooms[i].pic3[1]+'"></a><h1 class="text-ellipsis"><a href="">'+data.homeRooms[i].community+'</a></h1><h2 class="text-ellipsis">'+data.homeRooms[i].balcony+"室"+data.homeRooms[i].bathroom+"厅"+
-                data.homeRooms[i].bedroom+"卫"+"-"+data.homeRooms[i].direction+'</h2><p class="text-ellipsis address">'+data.homeRooms[i].location+data.homeRooms[i].address+'</p><p class="label-group"><i class="label-type1">'+data.homeRooms[i].apartmenttype+'</i></p><span class="label-price">'+data.homeRooms[i].dayPrice+'<small>/天</small></span></div></li>';
+        for (var i = 0; i < data.homeRooms.length; i++) {
+            str += '<li proID=' + data.homeRooms[i].id + '><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="' + Constant.URL+'/images/' + data.homeRooms[i].pic3[1] + '"></a><h1 class="text-ellipsis"><a href="">' + data.homeRooms[i].community + '</a></h1><h2 class="text-ellipsis">' + data.homeRooms[i].balcony + "室" + data.homeRooms[i].bathroom + "厅" +
+                data.homeRooms[i].bedroom + "卫" + "-" + data.homeRooms[i].direction + '</h2><p class="text-ellipsis address">' + data.homeRooms[i].location + data.homeRooms[i].address + '</p><p class="label-group"><i class="label-type1">' + data.homeRooms[i].apartmenttype + '</i></p><span class="label-price">' + data.homeRooms[i].dayPrice + '<small>/天</small></span></div></li>';
         }
         $('.plCon .goodlist').append(str);
 
 
         var len = $('.goodlist li').length;
-        if(len==0){
+        if (len == 0) {
             $('#zanwu').show();
             $('body').addClass('wingBg');
         }
         $('.goodlist li').unbind('click').click(
-            function(){
-                var id=$(this).attr('proID');
-                var isoff= $(this).attr('offer');
-                window.location.href="house_particulars.html?id="+encodeURIComponent(id)+"&offer="+encodeURIComponent(isoff);
+            function () {
+                var id = $(this).attr('proID');
+                var isoff = $(this).attr('offer');
+                window.location.href = "house_particulars.html?id=" + encodeURIComponent(id) + "&offer=" + encodeURIComponent(isoff);
             }
         );
-        $('.title-serce').unbind('click').click(
-            function(){
-                window.location.href="houseType.html";
+        $('.title-serce ').unbind('click').click(
+            function () {
+                window.location.href = "houseType.html";
             }
         );
-
 
 
         $('.service-image .title-serce').unbind('click').click(
-            function(){
+            function () {
                 //var id=$(this).attr('proID');
-                window.location.href="Life.html";
+                window.location.href = "Life.html";
             }
         );
 
     });
 
-    $('.header-mobile .input-search').focus(function(){
-        fnBase.keep(1,"mode",0);
-        window.location.href="search.html";
-    });
 
 }
 //青舍生活
-function life(){
-    var frontURL=Constant.URL+'/mobile/story';
-    var postData={"page":1};
-    fnBase.commonAjax(frontURL,postData,function(data){
+function life() {
+    var frontURL = Constant.URL + '/mobile/story';
+    var postData = {"page": 1};
+    fnBase.commonAjax(frontURL, postData, function (data) {
         console.log(data);
         //$(".service-image").html("");
-        var ad_str='';
-        var ad_length=data.blogs.results.length;
-        for(var i=0;i<ad_length;i++){
-            ad_str+='<a pId="'+data.blogs.results[i].id+'"><img src="'+data.blogs.results[i].pic+'"></a>';
+        var ad_str = '';
+        var ad_length = data.blogs.results.length;
+        for (var i = 0; i < ad_length; i++) {
+            ad_str += '<a pId="' + data.blogs.results[i].id + '"><img src="' + data.blogs.results[i].pic + '"></a>';
         }
         $(".service-image").append(ad_str);
     });
-    $(".service-image a").live('click',function(){
-        var _page=$(this).attr("pId");
-        window.location.href='Life.html?id='+encodeURIComponent(_page);
+    $(".service-image a").live('click', function () {
+        var _page = $(this).attr("pId");
+        window.location.href = 'Life.html?id=' + encodeURIComponent(_page);
     });
 
 }

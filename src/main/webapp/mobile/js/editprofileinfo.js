@@ -1,4 +1,4 @@
-
+ï»¿
 $(document).ready(function(){
     getData();
     var sexVal='';
@@ -18,7 +18,7 @@ $(document).ready(function(){
         sexbtn.find('.fl').text(sexVal);
         return sexVal;
     });
-    //¸öÈË×ÊÁÏ
+    //
     function getData(){
 
         $(".infobtn").click(function(){

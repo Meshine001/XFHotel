@@ -44,12 +44,14 @@ public class FileServiceImpl implements FileService {
 				UUID uuid = UUID.randomUUID();
 				StringBuffer sb = new StringBuffer();
 				sb.append(uuid).append(".").append(type);
-				File dir = new File(path + "images/");
+				System.out.println(new File(path).getParent());
+				String rPath = new File(path).getParent();
+				File dir = new File(path + "/images/");
 				if (!dir.exists()) {
 					dir.mkdir();
 				}
 				try {
-					file.transferTo(new File(path+"images/" + sb.toString()));
+					file.transferTo(new File(path + "/images/" + sb.toString()));
 					return new StringBuffer(sb.toString()).toString();
 				} catch (IllegalStateException e) {
 					// TODO Auto-generated catch block
