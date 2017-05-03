@@ -182,13 +182,14 @@ public class ApartmentServiceImpl implements ApartmentService {
 	/**
 	 * 计算价格
 	 */
+	@Transactional
 	@Override
 	public Map<String, Object> caculatePrice(String startTime, String endTime, Long apartmentId) {
 		Map<String, Object> info = new HashMap<String, Object>();
 		StringBuffer sb = new StringBuffer();
+		Apartment apartment = apartmentDAO.get(apartmentId);
 		Double sum = 0.00D;
-		Double cashPledge = Constants.YA_JIN;
-		Apartment apartment = findById(apartmentId);
+		Double cashPledge = apartment.getYajin();
 		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
 		for (int i = 0; i < days.size() - 1; i++) {
 			Price p = getSpPrice(apartment, TimeUtil.getDateLong(days.get(i)));

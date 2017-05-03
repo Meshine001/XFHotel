@@ -88,9 +88,12 @@ public class Apartment {
 	private String pic2;// ke ting, can ting
 	private String pic3;// bathroom chufang
 	private String pic4;// xiao qu
+	
 
 	private Long createTime;
 
+	private Double yajin;
+	
 	public Apartment() {
 		// TODO Auto-generated constructor stub
 	}
@@ -311,6 +314,18 @@ public class Apartment {
 		this.pic4 = pic4;
 	}
 
+	public Double getYajin() {
+		return yajin;
+	}
+
+
+
+	public void setYajin(Double yajin) {
+		this.yajin = yajin;
+	}
+
+
+
 	public Map toMap() {
 		Map map = new HashMap();
 		map.put("id", this.getId());
@@ -359,6 +374,7 @@ public class Apartment {
 		map.put("facilities", this.getFacilities());
 		map.put("features", this.getFeatures());
 		map.put("prices", prices.split("@"));
+		map.put("yajin", yajin);
 		return map;
 	}
 	
