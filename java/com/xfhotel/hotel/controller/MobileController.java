@@ -114,42 +114,25 @@ public class MobileController  {
 		}
 
 	}
-	@RequestMapping(value = "/ddd", method = RequestMethod.GET)
-	public @ResponseBody  Message ddd(String tel) {
+	@RequestMapping(value = "/find", method = RequestMethod.POST)
+	public @ResponseBody  Message find(String tel ,String psd) {
 		
 		if (customerService.checkTel(tel)) {
+			Customer c = customerService.getFind(tel);
+			String content = customerService.changePsd(c.getPassword(), psd, c.getId());
+			if ("修改成功".equals(content)) {
+				customerService.logout();
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, content);
+			} else {
+				return new Message(Constants.MESSAGE_ERR_CODE, content);
+			}
 			
-			
-			return new Message(Constants.MESSAGE_SUCCESS_CODE,"" );
-		} else {
-			return new Message(Constants.MESSAGE_ERR_CODE, "找回失败");
 		}
+			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
+		
 
 	}
-	@RequestMapping(value="/Code")  
-	public @ResponseBody Message Code(String tel){
-		System.out.println(session.getId());
-		try {
-			String vCodeStr= SendTemplateSMS.generateValidateCode();
-			String[] args = {vCodeStr,Constants.SMS_AVAILBEL_TIME_STR};
-			//调试时可注释掉下面
-			//发送短信
-			SendTemplateSMS.sendSMS(Constants.SMS_TEMPLATE_REG, tel, args);
-			//利用session进行验证
-			Map<String, Object> vCode = new HashMap<String, Object>();
-			vCode.put("tel", tel);
-			vCode.put("diedLine", new Date().getTime()+Constants.SMS_AVAILBEL_TIME);
-			vCode.put("code", vCodeStr);
-			session.setAttribute("vCode", vCode);
-//			System.out.println("send vcode==>"+vCode);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return new Message(Constants.MESSAGE_ERR_CODE, "获取验证码失败");
-		}
-		
-	}
+
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	public @ResponseBody Message reg(String tel, String password,Model model) {
 		if (customerService.checkTel(tel)) {

@@ -2,6 +2,8 @@ package com.xfhotel.hotel.service;
 
 import java.util.List;
 
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
+
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.support.PageResults;
@@ -19,4 +21,6 @@ public interface CustomerService {
 	public PageResults<Customer> list(int page);
 	public void changeStatus(long id, int status);
 	public Customer getCustomer(long id);
+	public Customer  getFind(String tel);
+	
 }
