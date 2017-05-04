@@ -22,23 +22,32 @@ var payment={
     Entry:function(){
         //微信支付
         $(".p_Settel li .wx_p").click(function () {
-            fnBase.myalert('支付系统未开启！')
-            // var url = Constant.URL + '/wechat/pay/jsOrder';
-            // var data = {
-            //     id:_id,//订单id
-            //     ip:Constant.CLIENT_IP//客户端ip
-            // }
-            // fnBase.commonAjax(url,data,function (data) {
-            //     if(data.status == 'success'){
-            //         callPay(
-            //             data.obj.appId,
-            //             data.obj.timeStamp,
-            //             data.obj.nonceStr,
-            //             data.obj.package,
-            //             data.obj.signType,
-            //             data.obj.paySign);
-            //     }
-            // });
+            //fnBase.myalert('支付系统未开启！')
+            if(Constant.CLIENT_IP == undefined){
+                Constant.CLIENT_IP = getIp();
+            }
+            var url = Constant.URL + '/wx/pay/jsOrder';
+            var data = {
+                id:_id,//订单id
+                ip:Constant.CLIENT_IP//客户端ip
+            };
+            console.log(data);
+            fnBase.commonAjax(url,data,function (data) {
+                if(data.status == 'success'){
+                    console.log(data);
+                    var payData = {
+                      appId: data.obj.appId,
+                        timeStamp:  data.obj.timeStamp,
+                        nonceStr: data.obj.nonceStr,
+                        package:data.obj.package,
+                        signType: data.obj.signType,
+                        paySign:data.obj.paySign
+                    };
+                    callPay(payData);
+                }else {
+                    fnBase.myalert('支付失败');
+                }
+            });
         });
     }
 };
@@ -52,7 +61,7 @@ var payment={
  * @param signType
  * @param paySign
  */
-function callPay(appId,timeStamp,nonceStr,package,signType,paySign) {
+function callPay(payData) {
     if (typeof WeixinJSBridge == "undefined"){
         if( document.addEventListener ){
             document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
@@ -61,33 +70,56 @@ function callPay(appId,timeStamp,nonceStr,package,signType,paySign) {
             document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
         }
     }else{
-        onBridgeReady();
+        onBridgeReady(payData);
     }
 }
 
 /**
  * jssdk
  */
-function onBridgeReady(appId,timeStamp,nonceStr,package,signType,paySign){
+function onBridgeReady(payData){
+    fnBase.myalert(payData);
     WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
-            "appId":appId,
-            "timeStamp":timeStamp,
-            "nonceStr":nonceStr,
-            "package":package,
-            "signType":signType,
-            "paySign":paySign
+            "appId":payData.appId,
+            "timeStamp":payData.timeStamp,
+            "nonceStr":payData.nonceStr,
+            "package":payData.package,
+            "signType":payData.signType,
+            "paySign":payData.paySign
         },
         function(res){
             WeixinJSBridge.log(res.err_msg);
             if(res.err_msg == "get_brand_wcpay_request:ok" ) {
-                console.log('支付成功');
-                //TODO 跳转支付成功页面
+                var checkCount = 0;
+                //TODO 再次查询是否支付成功
+                var checkWechatPay = function () {
+                    var url = fnBase.URL + '/mobile/checkWechatPay';
+                    var data = {
+                        id:_id
+                    };
+                    fnBase.commonAjax(url,data,function (data) {
+                        console.log('查询回调：'+data);
+                        if(data.status == 1 ){
+                            window.location.href = fnBase.URL + '/wx/myorder.html';
+                        }else{
+                            //查询3次
+                            if (checkCount < 3){
+                                checkCount++;
+                                checkWechatPay();
+                            }
+                        }
+                    });
+                    fnBase.myalert('支付失败');
+
+                };
+                checkWechatPay();
+                fnBase.myalert('支付成功');
 
             }else if(res.err_msg == "get_brand_wcpay_request:cancel"){//支付取消
-
+                fnBase.myalert('取消支付');
             }else {//支付失败
-
+                fnBase.myalert('支付失败');
             }
         }
     );

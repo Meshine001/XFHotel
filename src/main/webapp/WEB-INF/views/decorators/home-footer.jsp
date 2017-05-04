@@ -14,7 +14,7 @@
 							title="青舍微信" class="wx">
 							<div class="btm_em" style="display: none;">
 								<div class="em_pr">
-									<img src="/hotel/dist/public/v1/images/em.png" width="149"
+									<img src="/hotel/dist/public/v1/images/em.jpg" width="149"
 										height="149"> <i></i>
 								</div>
 							</div>

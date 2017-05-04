@@ -19,4 +19,5 @@ public interface CustomerService {
 	public PageResults<Customer> list(int page);
 	public void changeStatus(long id, int status);
 	public Customer getCustomer(long id);
+	public void updateBaseInfo(Customer c);
 }

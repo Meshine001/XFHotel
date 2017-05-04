@@ -82,7 +82,7 @@ public class BlogController {
 	public @ResponseBody Map loadBlog(HttpServletRequest request,Long id) {
 		String path = request.getSession().getServletContext().getRealPath("/");
 		Blog blog = blogService.find(id);
-		path += "blog\\" + blog.getPath();
+		path += "blog/" + blog.getPath();
 		Map map = blog.toMap();
 		StringBuffer content = new StringBuffer();
 		FileReader fr;
@@ -160,7 +160,7 @@ public class BlogController {
 			StringBuffer sb = new StringBuffer();
 			sb.append(request.getSession().getServletContext().getRealPath("/"));
 			String fullPath = fileService.saveFile(myFileName, sb.toString());
-			return Constants.Host_Address+"images/"+fullPath;
+			return "/images/"+fullPath;
 		}
 		return "";
 	}

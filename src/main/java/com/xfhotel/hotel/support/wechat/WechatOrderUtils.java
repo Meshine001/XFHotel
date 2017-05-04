@@ -434,7 +434,7 @@ public class WechatOrderUtils {
 		String sign = SignatureUtils.signature(map, wx_key);
 		xml = xml.replace("SIGN", sign);
 		
-		System.out.println(xml);
+//		System.out.println(xml);
 		
 		// 5、请求
 		String response = "";
@@ -487,6 +487,7 @@ public class WechatOrderUtils {
 			result.put("status", "success");
 			result.put("msg", "下单成功");
 			result.put("obj", jsonObject);
+			System.out.println("公共号下单成功:"+result);
 			return result;
 
 		} else if ("NATIVE".equalsIgnoreCase(type)) {
