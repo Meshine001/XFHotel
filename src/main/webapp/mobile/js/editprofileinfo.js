@@ -18,36 +18,35 @@ $(document).ready(function(){
         sexbtn.find('.fl').text(sexVal);
         return sexVal;
     });
+    
+    $(".infobtn").click(function(){
+
+        var _uid = fnBase.huoqu(0, "uid");
+        var _nickNameInput=$("#fillNick").val();
+        var frontURL=Constant.URL+'/mobile/modify';
+        var postData={
+            "customerId":_uid,
+            "nick":_nickNameInput,
+            "sex":sexVal,
+            "tel":$("#tel").val(),
+            "idCard":$("#idCard").val(),
+            "job":$("#job").val(),
+            "education":$("#education").val(),
+            "declaration":$("#declaration").val(),
+            "hobby":$("#hobby").val()
+        };
+        fnBase.commonAjax(frontURL,postData,function(data){
+            console.log(data);
+            if(data.customerId=="1"){
+                fnBase.myalert(data.content)
+            }else{
+                fnBase.myalert(data.content)
+            }
+        })
+    })
+    
     //
     function getData(){
-
-        $(".infobtn").click(function(){
-
-            var _uid = fnBase.huoqu(0, "uid");
-            var _nickNameInput=$("#fillNick").val();
-            var frontURL=Constant.URL+'/mobile/modify';
-            var postData={
-                "customerId":_uid,
-                "nick":_nickNameInput,
-                "sex":sexVal,
-                "tel":$("#tel").val(),
-                "idCard":$("#idCard").val(),
-                "job":$("#job").val(),
-                "education":$("#education").val(),
-                "declaration":$("#declaration").val(),
-                "hobby":$("#hobby").val()
-            };
-            fnBase.commonAjax(frontURL,postData,function(data){
-                console.log(data);
-                if(data.customerId=="1"){
-                    fnBase.myalert(data.content)
-                }else{
-                    fnBase.myalert(data.content)
-                }
-            })
-        })
-
-
         var _uid = fnBase.huoqu(0, "uid");
         if (_uid == null || _uid == "undefined" || _uid == "") {
             window.location.href = "login.html";
@@ -68,34 +67,10 @@ $(document).ready(function(){
             $("#hobby").val(data.details.hobby);
         });
 
-
-
-        $(".infobtn").click(function(){
-
-            var _uid = fnBase.huoqu(0, "uid");
-            var _nickNameInput=$("#fillNick").val();
-            var frontURL=Constant.URL+'/mobile/modify';
-            var postData={
-                "customerId":_uid,
-                "nick":_nickNameInput,
-                "sex":sexVal,
-                "tel":$("#tel").val(),
-                "idCard":$("#idCard").val(),
-                "job":$("#job").val(),
-                "education":$("#education").val(),
-                "declaration":$("#declaration").val(),
-                "hobby":$("#hobby").val()
-            };
-            fnBase.commonAjax(frontURL,postData,function(data){
-                console.log(data);
-                if(data.customerId=="1"){
-                    fnBase.myalert(data.content)
-                }else{
-                    fnBase.myalert(data.content)
-                }
-            })
-        })
     }
+    
+    
+    
 
 });
 
