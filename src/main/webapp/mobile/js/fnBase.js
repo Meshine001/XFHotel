@@ -6,9 +6,9 @@ $.get('https://ipinfo.io/json',function(data){
     //	console.log(data);
 });
 var Constant = {
-//    URL: "http://192.168.1.109:8080/hotel"
-		URL: baseUrl,
-        CLIENT_IP:clientIp
+    URL: "http://192.168.1.109"
+//		URL: baseUrl,
+//        CLIENT_IP:clientIp
 };
 /**
  * 获取根目录
