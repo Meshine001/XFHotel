@@ -16,7 +16,7 @@ $(document).ready(function() {
 	// 上传图片
 	// ======================================================>
 	var uploadForm = $('#upload-image-form');
-//	var uploadUrl = localhostPath+'/'+projectName+'/file/upload';
+	//var uploadUrl = localhostPath+'/'+projectName+'/file/upload';
 	var uploadUrl = localhostPath+'/file/upload';
 	console.log(uploadUrl);
 	function uploadFile(data) {

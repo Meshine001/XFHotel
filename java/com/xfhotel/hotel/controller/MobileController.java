@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.dao.impl.CustomerDAOImpl;
+import com.xfhotel.hotel.dao.impl.CustomerDetailsDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Comment;
@@ -75,6 +77,7 @@ public class MobileController  {
 	@Autowired
 	BlogService blogService;
 
+
 	
 	
 	@RequestMapping(value = "/home",method = RequestMethod.POST)
@@ -102,10 +105,7 @@ public class MobileController  {
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public @ResponseBody  Message login(String tel, String password) {
-		
 		Customer c = customerService.login(tel, password);
-		List<Customer>  list = customerService.list();
-		System.out.println(list);
 		if (c != null) {
 			session.setAttribute("c", c);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c.getId());
@@ -113,6 +113,42 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "账号或密码错误");
 		}
 
+	}
+	@RequestMapping(value = "/ddd", method = RequestMethod.GET)
+	public @ResponseBody  Message ddd(String tel) {
+		
+		if (customerService.checkTel(tel)) {
+			
+			
+			return new Message(Constants.MESSAGE_SUCCESS_CODE,"" );
+		} else {
+			return new Message(Constants.MESSAGE_ERR_CODE, "找回失败");
+		}
+
+	}
+	@RequestMapping(value="/Code")  
+	public @ResponseBody Message Code(String tel){
+		System.out.println(session.getId());
+		try {
+			String vCodeStr= SendTemplateSMS.generateValidateCode();
+			String[] args = {vCodeStr,Constants.SMS_AVAILBEL_TIME_STR};
+			//调试时可注释掉下面
+			//发送短信
+			SendTemplateSMS.sendSMS(Constants.SMS_TEMPLATE_REG, tel, args);
+			//利用session进行验证
+			Map<String, Object> vCode = new HashMap<String, Object>();
+			vCode.put("tel", tel);
+			vCode.put("diedLine", new Date().getTime()+Constants.SMS_AVAILBEL_TIME);
+			vCode.put("code", vCodeStr);
+			session.setAttribute("vCode", vCode);
+//			System.out.println("send vcode==>"+vCode);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "获取验证码失败");
+		}
+		
 	}
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	public @ResponseBody Message reg(String tel, String password,Model model) {
@@ -234,7 +270,7 @@ public class MobileController  {
 				Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
 				m.put("apartment", apartment);
 				maps.add(m);
-				
+				 
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {
@@ -355,9 +391,20 @@ public class MobileController  {
 
 	}
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public @ResponseBody Message modify(CustomerDetails c, long customerId ,String nick,String tel,String idCard,String sex
-			,String birthday,String job,String education,String declaration,String hobby) {
-		
+	public @ResponseBody Message modify(
+			long customerId ,String nick,String tel,String idCard,
+			String sex,String birthday,String job,
+			String education,String declaration,String hobby) {
+		CustomerDetails c = new CustomerDetails(); 
+		c.setNick(nick);
+		c.setTel(tel);
+		c.setIdCard(idCard);
+		c.setBirthday(birthday);
+		c.setJob(job);
+		c.setDeclaration(declaration);
+		c.setHobby(hobby); 
+		c.setEducation(education);
+		System.out.println(c);
 		try {
 			Customer c1 = customerService.modify(c, customerId);
 			session.setAttribute("c", c1);

@@ -4,7 +4,7 @@
 #Myscroll-body .my-title{font-size: 0.2rem;text-align: center;padding: 0.3rem 0.2rem 0.1rem 0.2rem;color: #333}
 #Myscroll-body .f12{font-size: 0.12rem;color: #666;padding-bottom: 0.2rem}
 #Myscroll-body .f12 i{color: #000000}
-#Myscroll-body .ptxt{text-indent: 0.25rem;margin-bottom: 0.3rem}
+#Myscroll-body .ptxt{text-indent: 0.25rem;margin-bottom: 0.3rem;min-height: 4rem}
 #Myscroll-body .ptxt img{width: 100%;padding: 0.1rem 0}
 #Myscroll-body p{padding: 0 0.2rem}
 
