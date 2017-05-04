@@ -52,7 +52,7 @@ public class BlogServiceImpl implements BlogService{
 	public int publish(Blog blog, String content, String basepath) {
 		// TODO Auto-generated method stub
 		UUID uuid = UUID.randomUUID();
-		String path = basepath + "blog\\";
+		String path = basepath + "blog/";
 		String filename = uuid.toString() + ".html";
 		InputStream in = new ByteArrayInputStream(content.getBytes());
 		try {
