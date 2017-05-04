@@ -89,7 +89,7 @@ $(document).ready(function(){
                     }else if(data.content[i].status=="进行中"){
                         _str+='<p class="total"><span class="fl cancel">退房</span><span class="fl evaluate">评价</span></p>'
                     }else if(data.content[i].status=="订单超时"){
-                       // _str+='<p class="total"><span class="fl evaluate"></span></p>'
+                        _str+='<p class="total"><span class="fl removeLi">删除</span></p>'
                     }else if(data.content[i].status=="已完成"){
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
                     }
