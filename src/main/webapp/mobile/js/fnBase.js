@@ -1,16 +1,30 @@
 ﻿var baseUrl = getRootPath();//调试环境用这个
 console.log(baseUrl);
 //  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
-var clientIp;
-$.get('https://ipinfo.io/json',function(data){
-    clientIp = data.ip;
-    //	console.log(data);
-});
+var clientIp = getIp();
+
 var Constant = {
 //    URL: "http://192.168.1.109:8080/hotel"
 		URL: baseUrl,
         CLIENT_IP:clientIp
 };
+
+/**
+ * 获取ip
+ */
+function getIp() {
+    var ip;
+    var ipInfoUrl = 'https://ipinfo.io/json';
+    $.ajax({
+        url:ipInfoUrl,
+        async:false,
+        success:function (data) {
+            ip = data.ip;
+        }
+    });
+    return ip;
+}
+
 /**
  * 获取根目录
  * @returns {string}

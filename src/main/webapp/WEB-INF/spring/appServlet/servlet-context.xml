@@ -93,7 +93,7 @@
 			<beans:value>
 				hibernate.dialect=org.hibernate.dialect.MySQLDialect
 				hibernate.query.substitutions=true
-				hibernate.show_sql=true
+				hibernate.show_sql=false
 				hibernate.hbm2ddl.auto=update
 			</beans:value>
 		</beans:property>

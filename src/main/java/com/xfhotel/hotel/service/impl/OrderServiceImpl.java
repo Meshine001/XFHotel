@@ -178,7 +178,7 @@ public class OrderServiceImpl implements OrderService {
 		for(Order o:list){
 			Long current = new Date().getTime();
 			Long die = o.getTime()+Constants.EFFECTIVE_ORDER_TIME_DURING;
-			if(die < current){
+			if(die < current && o.getStatus() == Order.STATUS_ON_PAY){
 				o.setStatus(Order.STATUS_TIME_OUT);
 				orderDAO.update(o);
 			}
