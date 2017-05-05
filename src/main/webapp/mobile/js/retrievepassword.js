@@ -1,4 +1,5 @@
-﻿$(document).ready(function(){
+﻿
+$(document).ready(function(){
     resiger.addEvent();
 });
 
@@ -55,6 +56,7 @@ var resiger={
                 }
             });
         });
+
         resiger.btnList[1].click(function(){
             var phoneNumber=resiger.inputList[0].val();
             if(phoneNumber==""){
@@ -93,14 +95,14 @@ var resiger={
 
 
             //
-            var frontURL=Constant.URL+"/mobile/reg";
-            var postDatat={"tel":phoneNumber,"password":password};
+            var frontURL=Constant.URL+"/mobile/find";
+            var postDatat={"tel":phoneNumber,"psd":password};
             fnBase.commonAjax(frontURL,postDatat,function(data){
                 console.log(data);
                 if(data.statusCode=="1"){
                     sessionStorage.clear();
                     localStorage.clear();
-                    fnBase.keep(0,"uid",data.info.m_id);
+                    //fnBase.keep(0,"uid",data.info.m_id);
                     window.location.href="login.html";
                 }else{
                     fnBase.myalert(data.content)

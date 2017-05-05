@@ -52,6 +52,8 @@
 .total .reserve{background: #1fc8a1;color: #fff}
 /*支付*/
 .total .payment{background: #0cbb08;color: #FFF}
+/*超时 删除订单*/
+.total .removeLi{background: red;color: #fff}
 
     /*没有订单数据*/
 .geterror{width: 100%;text-align: center;

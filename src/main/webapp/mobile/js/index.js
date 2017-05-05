@@ -1,15 +1,15 @@
 ﻿$(document).ready(function () {
     scrollNav();
     getData();
-
+    alertSearch.info();
     $("#_fw").click(function () {
         fnBase.myalert('正在开发，敬请期待！')
     });
     $('.header-mobile .input-search').focus(function () {
         fnBase.keep(1, "mode", 0);
-        window.location.href = "houseType.html";
+        window.location.href="houseType.html";
     });
-    alertSearch.info();
+
     life();
     function scrollNav() {
         $(window).scroll(function () {
@@ -29,7 +29,6 @@ var alertSearch = {
         var _uid = fnBase.huoqu(0, "uid");
         var openDoc = $(".Address-search");
         $(".group-search").click(function () {
-
             $(".Address-search .searInput").find(".serchText").val("").focus();
         });
 

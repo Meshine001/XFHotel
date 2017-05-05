@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>title-青舍都市公寓-西安租房_西安合租</title>
+<title>收银台-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
 
 <my_header>
@@ -137,7 +137,7 @@
 			});
 		
 			var getting = {
-				url:'../../wechat/isPayed',
+				url:'../../wx/isPayed',
 				method:'POST',
 				data:{
 					id:$('.pay-type').attr('data-id')
@@ -159,7 +159,7 @@
 							//微信支付
 							if($(e).attr('payType')=='weixin'){
 								$.ajax({
-									url:'../../wechat/pay/nativeOrder',
+									url:'../../wx/pay/nativeOrder',
 									method:'POST',
 									async:true,
 									data:{
@@ -168,15 +168,17 @@
 									},
 									success:function(data){
 										if(data.status=='success'){
-											$('#wechatQRCode').attr('src','../../wechat/QRCode?url='+data.obj.url);
+											$('#wechatQRCode').attr('src','../../wx/QRCode?url='+data.obj.url);
 											$('#wechatTip').hide();
 											$('#wechatQR').show();
 											$('.btn_sub_only').hide();
 											$('.btn_sub_over').show();
+											//关键在这里，Ajax定时访问服务端，不断获取数据 ，这里是1秒请求一次。
+											window.setInterval(function(){$.ajax(getting)},2000);
+										}else{
+											alert('发起订单失败!');
 										}
 										
-										//关键在这里，Ajax定时访问服务端，不断获取数据 ，这里是1秒请求一次。
-										window.setInterval(function(){$.ajax(getting)},2000);
 									},
 									error:function(){
 										alert('系统错误，请重试！！');
@@ -204,6 +206,41 @@
 					}
 				}
 				$.get(getting);
+			});
+			
+			//手动查询是否支付
+			$('.pay-over').click(function(){
+                var checkCount = 0;
+                //TODO 再次查询是否支付成功
+                var checkWechatPay = function () {
+                    var url =  '../../mobile/checkWechatPay';
+                    var data = {
+                        id:$('.pay-type').attr('data-id')
+                    };
+                    
+                    $.ajax({
+                    	url:url,
+                    	data:data,
+                    	type:'GET',
+                    	async:true,
+                    	dataType:'json',
+                    	success:function (data) {
+                           
+                            if(data.status == 1 ){
+                            	window.location.href = '../payOver/'+$('.pay-type').attr('data-id');
+                            }else{
+                                //查询3次
+                                if (checkCount < 3){
+                                    checkCount++;
+                                    checkWechatPay();
+                                }
+                                
+                            }
+                        }	
+                    });
+                };
+                checkWechatPay();
+                alert('您还未支付');
 			});
 			
 			

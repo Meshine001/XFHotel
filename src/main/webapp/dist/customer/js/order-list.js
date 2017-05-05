@@ -29,6 +29,10 @@
                 $('<a/>').attr('data-type','ajax').attr('data-toggle','modal').attr('data-url','../order/viewLockPsd?orderId='+item.id).addClass('order-btn').text('查看密码').appendTo($('<p/>').appendTo(stateTd));
                 
             }
+            if(item.status == '等待支付'){
+                $('<a/>').attr('href','../order/pay/'+item.id).addClass('order-btn').text('继续支付').appendTo($('<p/>').appendTo(stateTd));
+                
+            }
             var remarks = $('<td/>').addClass('remarks').appendTo(tr);
             $('<a/>').attr('href','../order/details?orderId='+item.id).addClass('order-action').text('查看详情').appendTo($('<p/>').appendTo(remarks));
             if(item.status == '已完成'){
