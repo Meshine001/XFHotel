@@ -119,4 +119,20 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDAO.getListByHQL("from Customer", null);
 	}
 
+	@Transactional
+	@Override
+	public Customer getFind(String tel) {
+		// TODO Auto-generated method stub
+		String hqlString = "from Customer where tel=? ";
+		Object[] values = {tel};
+		return customerDAO.getByHQL(hqlString, values);
+	}
+	
+	@Transactional
+	@Override
+	public void updateBaseInfo(Customer c) {
+		// TODO Auto-generated method stub
+		customerDAO.update(c);
+	}
+
 }
