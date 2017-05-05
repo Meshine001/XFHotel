@@ -208,7 +208,8 @@
 			    });
 	   }
 $(document).ready(function(){	
-
+	var i=0;
+	var size=$('.f_img_list ul li').size();
     $(document).click(function(ev){
         ev = ev || window.event || arguments.callee.caller.arguments[0]; 
         var target = ev.target || ev.srcElement;
@@ -224,10 +225,35 @@ $(document).ready(function(){
     
 
     $('#pre').click(function(){
-    	changePic('pre');
+    	
+    	i++;
+    	move();
+    	changePic('pre')
     });
     $('#next').click(function(){
+    	
+    	i--;
+    	move();
     	changePic('next');
     });
     
+    $(".f_img_list ul li").mouseover(function(){
+    	 var index = $(this).find('img').attr('src');
+         $('.f_img img').attr('src',index)
+    })
+ 
+    function move(){
+    	 if (i == size) {
+             $(".f_img_list ul").css({left: 0})
+             i = 1;
+         }
+         if (i == -1) {
+             $(".f_img_list ul").css({left: -(size - 1) * 140})
+             i = size - 1;
+         }
+
+         $(".f_img_list ul").stop().animate({left: -i * 140}, 500)
+    }
+    
+    $("#price-calendar-1493797734364").width();
 });

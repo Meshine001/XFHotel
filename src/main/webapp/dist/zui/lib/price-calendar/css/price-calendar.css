@@ -4,7 +4,7 @@
  * Author: Angtian
  * E-mail: Angtian.fgm@taobao.com
  */
-.price-calendar-bounding-box{position: absolute;font:12px/1.5 Arial;z-index: 999;top: 190px;left: 400px;}
+.price-calendar-bounding-box{position: absolute;font:12px/1.5 Arial;z-index: 999;top: 190px;left: 400px;box-shadow: 0 0 10px 1px #333;min-width:975px;background:#FFF;}
 .price-calendar-bounding-box .disabled{cursor:not-allowed;}
 .price-calendar-bounding-box .hidden{display:none;}
 .price-calendar-bounding-box .blue{background-color:#03F;}
@@ -12,12 +12,12 @@
 .price-calendar-bounding-box .red{background-color:#F30;}
 .price-calendar-bounding-box .weekend{color:red;}
 .price-calendar-bounding-box h4, .price-calendar-bounding-box p{margin:0; padding:0;}
-.price-calendar-bounding-box .container{position:relative;}
+.price-calendar-bounding-box .container{position:relative;min-width:960px;}
 .price-calendar-bounding-box .container .arrow{position:relative; z-index:2;}
 .price-calendar-bounding-box .container .arrow span{position:absolute; top:12px; width:8px; height:13px; cursor:pointer; overflow:hidden; text-indent:-99999px; background:#FFF url(http://img02.taobaocdn.com/tps/i2/T1QGPIXa0aXXb.Pazc-26-13.png) 0 0 no-repeat;}
 .price-calendar-bounding-box .container .arrow .prev-btn{left:12px; background-position:0 0;}
 .price-calendar-bounding-box .container .arrow .next-btn{right:12px; background-position:right 0;}
-.price-calendar-bounding-box .content-box{position:relative;border: 1px solid rgb(255, 255, 255);letter-spacing: -2.31em; *letter-spacing:normal;word-spacing:-0.43em;}
+.price-calendar-bounding-box .content-box{position:relative;border: 1px solid rgb(255, 255, 255);letter-spacing: -2.31em; *letter-spacing:normal;word-spacing:-0.43em;min-width:940px;}
 .price-calendar-bounding-box .content-box .inner{position:relative;background-color:#FFF;border: 3px solid #ffffff;display:inline-block;zoom:1;*display:inline;letter-spacing:normal;word-spacing:normal;vertical-align:top;}
 .price-calendar-bounding-box .content-box .inner h4{color:#0E5788; width:100%; height:25px; font-size:14px; line-height:25px; text-align:center;}
 .price-calendar-bounding-box table{border-spacing:0; border-collapse:collapse;}
@@ -55,5 +55,5 @@
 .price-calendar-bounding-box .bottom .tips em s{float:left; width:8px; height:8px; margin:1px; overflow:hidden;}
 .price-calendar-bounding-box .bottom .tips span{float:left;}
 .price-calendar-bounding-box .bottom .btns{float:right;}
-.price-calendar-bounding-box .bottom .btns input{border:0; color:#FFF; width:70px; height:22px; cursor:pointer; overflow:hidden; border-radius:4px; *line-height:25px; margin:5px 0 0 8px; background-color:#0F62F0;}
+.price-calendar-bounding-box .bottom .btns input{border:0; color:#FFF; width:70px; height:22px; line-height:22px;cursor:pointer; overflow:hidden; border-radius:4px; *line-height:25px; margin:5px 0 0 8px; background-color:#0F62F0;}
 .price-calendar-bounding-box .bottom .btns input.disabled{margin: 4px;cursor:not-allowed;background-color:#999;padding-bottom: 3px;}

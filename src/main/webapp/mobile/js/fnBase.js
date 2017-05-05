@@ -4,9 +4,9 @@ console.log(baseUrl);
 var clientIp = getIp();
 
 var Constant = {
-//    URL: "http://192.168.1.109:8080/hotel"
-		URL: baseUrl,
-        CLIENT_IP:clientIp
+       URL: "http://192.168.1.109"
+//		URL: baseUrl,
+//        CLIENT_IP:clientIp
 };
 
 /**

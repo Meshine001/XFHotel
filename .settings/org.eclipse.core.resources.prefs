@@ -1,8 +1,8 @@
 eclipse.preferences.version=1
-encoding//src/main/java/com/xfhotel/hotel/controller/ApartmentController.java=UTF-8
-encoding//src/main/java/com/xfhotel/hotel/dao/impl/UserDAOImpl.java=UTF-8
-encoding//src/main/java/com/xfhotel/hotel/entity/Apartment.java=UTF-8
-encoding//src/main/java/com/xfhotel/hotel/service/impl/FileServiceImpl.java=UTF-8
+encoding//java/com/xfhotel/hotel/controller/ApartmentController.java=UTF-8
+encoding//java/com/xfhotel/hotel/dao/impl/UserDAOImpl.java=UTF-8
+encoding//java/com/xfhotel/hotel/entity/Apartment.java=UTF-8
+encoding//java/com/xfhotel/hotel/service/impl/FileServiceImpl.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/admin.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/customer/map.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/customer/viewLockPsd.jsp=UTF-8
