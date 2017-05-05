@@ -78,7 +78,6 @@ function callPay(payData) {
  * jssdk
  */
 function onBridgeReady(payData){
-    fnBase.myalert(payData);
     WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
             "appId":payData.appId,
@@ -99,7 +98,6 @@ function onBridgeReady(payData){
                         id:_id
                     };
                     fnBase.commonAjax(url,data,function (data) {
-                        console.log('查询回调：'+data);
                         if(data.status == 1 ){
                             window.location.href = fnBase.URL + '/wx/myorder.html';
                         }else{

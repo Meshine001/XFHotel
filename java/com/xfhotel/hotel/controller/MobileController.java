@@ -462,7 +462,7 @@ public class MobileController  {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "checkWechatPay", method = RequestMethod.GET)
+	@RequestMapping(value = "checkWechatPay", method = RequestMethod.POST)
 	public Message checkWechatOrder(Long id){
 		Order o = orderService.get(id);
 		JSONObject result = WechatOrderUtils.query(o.getPayNo());

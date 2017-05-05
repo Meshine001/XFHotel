@@ -221,7 +221,7 @@
                     $.ajax({
                     	url:url,
                     	data:data,
-                    	type:'GET',
+                    	type:'POST',
                     	async:true,
                     	dataType:'json',
                     	success:function (data) {

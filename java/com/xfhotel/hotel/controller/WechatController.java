@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,6 +36,7 @@ import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
+import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
 import com.xfhotel.hotel.support.TimeUtil;
@@ -357,8 +359,8 @@ public class WechatController {
 				Long roomId = o.getRoomId();
 				Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
 				String lock_no = (String) apartmentService.getApartmentInfo(apartment).get("lock_address");
-				lockService.addPassword(o.getCusTel(), lock_no, TimeUtil.getDateStr(o.getStartTime()),
-						TimeUtil.getDateStr(o.getEndTime()));
+				lockService.addPassword(o.getCusTel(), lock_no, DateUtil.format(new Date(o.getStartTime()), "yyyyMMddhhmmss"),
+						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddhhmmss"));
 				//更改订单状态
 				o.setStatus(Order.STATUS_ON_LEASE);
 				orderService.update(o);
