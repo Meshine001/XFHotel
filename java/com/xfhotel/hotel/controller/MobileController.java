@@ -43,6 +43,9 @@ import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
+import com.xfhotel.hotel.support.wechat.WechatOrderUtils;
+
+import net.sf.json.JSONObject;
 
 
 
@@ -108,7 +111,7 @@ public class MobileController  {
 		Customer c = customerService.login(tel, password);
 		if (c != null) {
 			session.setAttribute("c", c);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, c.getId());
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, c);
 		} else {
 			return new Message(Constants.MESSAGE_ERR_CODE, "账号或密码错误");
 		}
@@ -434,7 +437,7 @@ public class MobileController  {
 	public @ResponseBody Map  initBlog(HttpServletRequest request,Long id){
 		String path = request.getSession().getServletContext().getRealPath("/");
 		Blog blog = blogService.find(id);
-		path += "blog\\" + blog.getPath();
+		path += "blog/" + blog.getPath();
 		Map map = blog.toMap();
 		StringBuffer content = new StringBuffer();
 		FileReader fr;
@@ -453,6 +456,24 @@ public class MobileController  {
 		map.put("content", content.toString());
 		return map;
 	}
-
+	
+	/**
+	 * 查询微信支付的状态
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "checkWechatPay", method = RequestMethod.GET)
+	public Message checkWechatOrder(Long id){
+		Order o = orderService.get(id);
+		JSONObject result = WechatOrderUtils.query(o.getPayNo());
+		if("success".equals(result.getString("status")) 
+				&& "SUCCESS".equals(result.getString("trade_state"))){
+			o.setStatus(Order.STATUS_ON_LEASE);
+			orderservice.update(o);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "支付成功");
+		}else{
+			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
+		}
+	}
 	
 }

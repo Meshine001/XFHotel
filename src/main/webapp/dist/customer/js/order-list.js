@@ -27,12 +27,21 @@
             $('<p/>').text(item.status).appendTo(stateTd);
             if(item.status == '进行中'){
                 $('<a/>').attr('data-type','ajax').attr('data-toggle','modal').attr('data-url','../order/viewLockPsd?orderId='+item.id).addClass('order-btn').text('查看密码').appendTo($('<p/>').appendTo(stateTd));
+                
+            }
+            if(item.status == '等待支付'){
+                $('<a/>').attr('href','../order/pay/'+item.id).addClass('order-btn').text('继续支付').appendTo($('<p/>').appendTo(stateTd));
+                
             }
             var remarks = $('<td/>').addClass('remarks').appendTo(tr);
             $('<a/>').attr('href','../order/details?orderId='+item.id).addClass('order-action').text('查看详情').appendTo($('<p/>').appendTo(remarks));
             if(item.status == '已完成'){
             	$('<a/>').attr('href','../order/comment/'+item.id).addClass('order-btn').text('我要点评').appendTo($('<p/>').appendTo(remarks));
             }
+            if(item.status == '进行中'){
+            	$('<a/>').attr('onclick','javascript:outLease(this)').attr('href','javascript:;').attr('data-url','../order/outLease').attr('data-id',item.id).addClass('order-btn out-lease-btn').text('退租').appendTo($('<p/>').appendTo(remarks));
+            }
+            
         }
 
         function search(){
@@ -62,7 +71,24 @@
             });
         }
         
-      
+      function outLease(obj){
+    	  console.log('退租');
+      	$.ajax({
+      		url:$(obj).attr('data-url'),
+      		type:'POST',
+      		data:{
+      			orderId:$(obj).attr('data-id')
+      		},
+      		dataType:'json',
+      		success:function(data){
+      			if(data.statusCode == 1){
+      				window.location.reload();
+      			}else{
+      				alert('退租失败');
+      			}
+      		}
+      	});
+      }
 
 		$(document).ready(function(){
 			$('.category-a').click(function(e){
@@ -105,5 +131,6 @@
             
             
             search();
+            
             
 		});

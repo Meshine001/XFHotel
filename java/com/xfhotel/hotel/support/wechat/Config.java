@@ -49,7 +49,7 @@ public class Config {
 	/**
 	 * 业务系统支付回调网址
 	 */
-	public static final String WX_CALLBACK = "http://www.yiyunzn.com";
+	public static final String WX_CALLBACK = "http://www.yiyunzn.xyz/wx/pay/callback";
 	/**
 	 * 微信商户后台设置的Key
 	 */

@@ -25,8 +25,18 @@ var login={
             fnBase.commonAjax(frontURL,postData ,function(data) {
                 console.log(data);
                 if (data.statusCode == "1") {
-                    fnBase.keep( 0,"uid",data.content);
-                    window.location.href = "index.html";
+                    fnBase.keep( 0,"uid",data.content.id);
+                    //若还未经过微信授权
+                    if(data.wechatOpenId == null || data.wechatOpenId == undefined){
+                        var redirect = 'https://open.weixin.qq.com/connect/oauth2/authorize?'+
+                            'appid=wxfa31f9e4951f95df'+
+                            '&redirect_uri=http%3a%2f%2fwww.yiyunzn.xyz%2fwx%2fauth%2fopenId%3fid%3d'+data.content.id+
+                            '&response_type=code&scope=snsapi_base&'+
+                            'state=index.html#wechat_redirect ';
+                        window.location.href = redirect;
+                    }else{
+                        window.location.href = "index.html";
+                    }
                 } else {
                     fnBase.myalert(data.content);
                 }

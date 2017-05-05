@@ -434,7 +434,7 @@ public class WechatOrderUtils {
 		String sign = SignatureUtils.signature(map, wx_key);
 		xml = xml.replace("SIGN", sign);
 		
-		System.out.println(xml);
+//		System.out.println(xml);
 		
 		// 5、请求
 		String response = "";
@@ -487,6 +487,7 @@ public class WechatOrderUtils {
 			result.put("status", "success");
 			result.put("msg", "下单成功");
 			result.put("obj", jsonObject);
+			System.out.println("公共号下单成功:"+result);
 			return result;
 
 		} else if ("NATIVE".equalsIgnoreCase(type)) {
@@ -588,7 +589,7 @@ public class WechatOrderUtils {
 		
 //		JSONObject result = WechatOrderUtils.refund("123213", "21323", "322.11", "22.2");
 //		JSONObject result1 = WechatOrderUtils.query("2017042500002");
-		JSONObject result = WechatOrderUtils.refund("2017042500002", "2017042500001", "0.01", "0.01");
+		JSONObject result = WechatOrderUtils.refund("2017050400004", "2017050400004", "1", "1");
 //		System.out.println(result1);
 		System.out.println(result);
 	}

@@ -30,8 +30,6 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/public/css/colorbox.css?r=2">
 <link rel="stylesheet" type="text/css"
-	href="<%=basePath%>/dist/commons/boostrap/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/commons/awesome/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/public/css/calendar.css">
@@ -39,8 +37,7 @@
 	type="text/javascript"></script>
 <script src="<%=basePath%>/dist/public/js/swipe.js"
 	type="text/javascript"></script>
-<script src="<%=basePath%>/dist/commons/bootstrap/js/bootstrap.min.js"
-	type="text/javascript"></script>
+
 
 <style type="text/css">
 #jxfocus {
@@ -451,7 +448,7 @@
 	</article>
 
 	<jsp:include page="../decorators/home-footer.jsp"></jsp:include>
-	<script>
+	<script type="text/javascript">
 		var _hmt = _hmt || [];
 		(function() {
 			var hm = document.createElement("script");

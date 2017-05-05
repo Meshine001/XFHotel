@@ -31,7 +31,7 @@ public class OrderInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		String uri =  request.getRequestURI();
-		Long orderId = Long.valueOf(uri.split("/")[4]);
+		Long orderId = Long.valueOf(uri.split("/")[3]);
 //		System.out.println(orderId);
 		Order o = orderService.get(orderId);
 		int status = o.getStatus();
