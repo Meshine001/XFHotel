@@ -25,7 +25,7 @@ public class DateUtil {
         todayStart.set(Calendar.MINUTE, 0);  
         todayStart.set(Calendar.SECOND, 0);  
         todayStart.set(Calendar.MILLISECOND, 0);  
-        return todayStart.getTime().getTime();  
+        return todayStart.getTime().getTime()-12*60*60*1000;  
     }  
       
 	/**
@@ -38,7 +38,7 @@ public class DateUtil {
         todayEnd.set(Calendar.MINUTE, 59);  
         todayEnd.set(Calendar.SECOND, 59);  
         todayEnd.set(Calendar.MILLISECOND, 999);  
-        return todayEnd.getTime().getTime();  
+        return todayEnd.getTime().getTime()-12*60*60*1000;  
     } 
 
 	/**
