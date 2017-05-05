@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.dao.impl.CustomerDAOImpl;
+import com.xfhotel.hotel.dao.impl.CustomerDetailsDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Comment;
@@ -75,6 +77,7 @@ public class MobileController  {
 	@Autowired
 	BlogService blogService;
 
+
 	
 	
 	@RequestMapping(value = "/home",method = RequestMethod.POST)
@@ -102,10 +105,7 @@ public class MobileController  {
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public @ResponseBody  Message login(String tel, String password) {
-		
 		Customer c = customerService.login(tel, password);
-		List<Customer>  list = customerService.list();
-		System.out.println(list);
 		if (c != null) {
 			session.setAttribute("c", c);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c.getId());
@@ -114,6 +114,25 @@ public class MobileController  {
 		}
 
 	}
+	@RequestMapping(value = "/find", method = RequestMethod.POST)
+	public @ResponseBody  Message find(String tel ,String psd) {
+		
+		if (customerService.checkTel(tel)) {
+			Customer c = customerService.getFind(tel);
+			String content = customerService.changePsd(c.getPassword(), psd, c.getId());
+			if ("修改成功".equals(content)) {
+				customerService.logout();
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, content);
+			} else {
+				return new Message(Constants.MESSAGE_ERR_CODE, content);
+			}
+			
+		}
+			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
+		
+
+	}
+
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	public @ResponseBody Message reg(String tel, String password,Model model) {
 		if (customerService.checkTel(tel)) {
@@ -234,7 +253,7 @@ public class MobileController  {
 				Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
 				m.put("apartment", apartment);
 				maps.add(m);
-				
+				 
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {
@@ -355,9 +374,20 @@ public class MobileController  {
 
 	}
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public @ResponseBody Message modify(CustomerDetails c, long customerId ,String nick,String tel,String idCard,String sex
-			,String birthday,String job,String education,String declaration,String hobby) {
-		
+	public @ResponseBody Message modify(
+			long customerId ,String nick,String tel,String idCard,
+			String sex,String birthday,String job,
+			String education,String declaration,String hobby) {
+		CustomerDetails c = new CustomerDetails(); 
+		c.setNick(nick);
+		c.setTel(tel);
+		c.setIdCard(idCard);
+		c.setBirthday(birthday);
+		c.setJob(job);
+		c.setDeclaration(declaration);
+		c.setHobby(hobby); 
+		c.setEducation(education);
+		System.out.println(c);
 		try {
 			Customer c1 = customerService.modify(c, customerId);
 			session.setAttribute("c", c1);

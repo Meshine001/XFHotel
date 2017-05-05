@@ -241,7 +241,7 @@ $(document).ready(function(){
     	 var index = $(this).find('img').attr('src');
          $('.f_img img').attr('src',index)
     })
- 
+    
     function move(){
     	 if (i == size) {
              $(".f_img_list ul").css({left: 0})
