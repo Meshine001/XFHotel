@@ -66,10 +66,12 @@ public class OrderController {
 	public Message outLease(Long orderId){
 		try {
 			Order o = orderservice.get(orderId);
-			//TODO 退押金
+			//TODO 退押金,
 			String[] prices = o.getPrice().split("@");
 			String refundFee = prices[prices.length-1];
-			if(Order.PAY_PLATFORM_WECHAT.equals(o.getPayPlatform())){
+			//若是微信支付的
+			if(Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
+					||Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())){
 				JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), refundFee);
 				if("success".equals(result.getString("status"))){
 					o.setStatus(Order.STATUS_COMPLETE);
@@ -300,36 +302,10 @@ public class OrderController {
 	public String pay(@PathVariable("id") Long id) {
 		Order order = orderservice.get(id);
 		session.setAttribute("order", order.toMap());
-		// System.out.println(JSONObject.wrap(order.toMap()).toString());
 		return "customer/order";
 	}
 
-	/**
-	 * 给微信下订单
-	 * 
-	 * @param id
-	 *            订单id
-	 * @return 微信扫一扫地址，需要将此地址转为二维码
-	 */
-	@RequestMapping(value = "/payWechat", method = RequestMethod.POST)
-	public @ResponseBody JSONObject wechatPay(Long id,String ip, HttpServletRequest request) {
-		Order order = orderservice.get(id);
-		if(order == null)return null;
-		
-		// TODO 向微信下订单,并获取扫一扫地址
-		String detail = "房间预订";
-		String desc = order.getDescription();
-		String goodSn = ""+order.getRoomId();
-//		String orderSn = ""+order.getId();
-		String orderSn = order.getPayNo();
-		String amount = order.getTotalPrice();
-		String type =  "NATIVE";
-		JSONObject response = WechatOrderUtils.createOrder(detail, desc, "", ip, goodSn, orderSn, amount, type);
-		order.setPayPlatform("wx");
-		orderservice.update(order);
-		return response;
-	
-	}
+
 
 	/**
 	 * 交易完成

@@ -438,7 +438,6 @@ public class MobileController  {
 		JSONObject result = WechatOrderUtils.query(o.getPayNo());
 		if("success".equals(result.getString("status")) 
 				&& "SUCCESS".equals(result.getString("trade_state"))){
-			o.setPayPlatform(Order.PAY_PLATFORM_WECHAT);
 			o.setStatus(Order.STATUS_ON_LEASE);
 			orderservice.update(o);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "支付成功");

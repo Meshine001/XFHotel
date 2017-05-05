@@ -29,7 +29,7 @@ public class LockOperater {
 	public static boolean verifyToken(String result){
 		return result.equals(Constants.LOCK_MSG_TOKEN_OUT_OF_DATE) || result.equals(Constants.LOCK_MSG_TOKEN_NOT_EXIST) || result.equals(Constants.LOCK_MSG_TOKEN_INVALIDATE);
 	}
-	public static String baseUrl = Constants.LOCK_TEST_BASE_URL;
+	public static String baseUrl = Constants.LOCK_BASE_URL;
 	
 	public static String sendPost(String url, JSONObject param, int type) {
         PrintWriter out = null;

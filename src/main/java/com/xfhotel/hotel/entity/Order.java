@@ -29,7 +29,8 @@ public class Order {
 	public final static int STATUS_TIME_OUT = 5;//超时
 	public final static int STATUS_CHARGEBACK = 6;//退款
 
-	public final static String PAY_PLATFORM_WECHAT = "微信";
+	public final static String PAY_PLATFORM_WECHAT_NATIVE = "微信扫码";
+	public final static String PAY_PLATFORM_WECHAT_JSAPI = "微信公共号";
 	public final static String PAY_PLATFORM_ALIPAY = "支付宝";
 
 
@@ -53,9 +54,10 @@ public class Order {
 	private int type;// 订单种类
 	private int status;// 订单状态
 	private boolean needFapiao;
-	private String payPlatform;
+	private String payPlatform;//支付平台
 	private String payNo;//订单号
-
+	private String wxQRCode;//微信扫码地址
+	
 	public String getPayNo() {
 		return payNo;
 	}
@@ -222,6 +224,16 @@ public class Order {
 	public String getPayPlatform() {
 		return payPlatform;
 	}
+	
+	
+
+	public String getWxQRCode() {
+		return wxQRCode;
+	}
+
+	public void setWxQRCode(String wxQRCode) {
+		this.wxQRCode = wxQRCode;
+	}
 
 	public Map toMap(){
 		Map info = new HashMap();
@@ -245,6 +257,7 @@ public class Order {
 		info.put("status", getStatusString(status));
 		info.put("needFapiao", needFapiao?"有发票":"无发票");
 		info.put("payPlatform", payPlatform);
+		info.put("wxQRCode", wxQRCode);
 		return info;
 	}
 	

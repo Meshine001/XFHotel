@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>title-青舍都市公寓-西安租房_西安合租</title>
+<title>公寓详情-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
 <my_header>
 <link rel="stylesheet" type="text/css"
@@ -27,8 +27,9 @@
 					<h1>${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间</h1>
 					<div class="x_add">
 						<span class="x_dizhi"> <i></i>${apartment.address}
-						</span> <a href="javascrip:;" id="call-gps" class="f_map" data-iframeUrl = "<%=basePath%>/utils/roomGps?lng=${apartment.longitude}&lat=${apartment.latitude}" data-target="#gpsModal"
-							data-toggle="modal"> <i></i> 导航
+						</span> <a href="javascrip:;" id="call-gps" class="f_map"
+							data-iframeUrl="<%=basePath%>/utils/roomGps?lng=${apartment.longitude}&lat=${apartment.latitude}"
+							data-target="#gpsModal" data-toggle="modal"> <i></i> 导航
 						</a> <span class="b_ewm" style="display: none;"> <i
 							class="ewm_i"></i> 在线分享
 						</span> <span class="b_sc" style="display: none; cursor: pointer;">
@@ -197,22 +198,22 @@
 									</div>
 									<div class="price_top" style="display: none">
 										<div class="reserve_text">
-											在线收取押金￥<span>300</span>
+											在线收取押金￥<span>100</span>
 										</div>
 									</div>
 									<div class="order_btn_container">
 										<c:choose>
 											<c:when test="${c != null }">
-												<a style="cursor: pointer;" class="order_btn" id="day_yuding"
-													data-show-header="false"
+												<a style="cursor: pointer;" class="order_btn"
+													id="day_yuding" data-show-header="false"
 													data-baseurl="<%=basePath%>/order/module"
 													data-remote="<%=basePath%>/order/module?"
 													data-toggle="modal">立即预订<span class="f14"></span></a>
 											</c:when>
 											<c:otherwise>
-												<a style="cursor: pointer;" class="order_btn" data-toggle="modal"
-													data-target="#loginModal" id="need_login">立即预订<span
-													class="f14"></span></a>
+												<a style="cursor: pointer;" class="order_btn"
+													data-toggle="modal" data-target="#loginModal"
+													id="need_login">立即预订<span class="f14"></span></a>
 											</c:otherwise>
 										</c:choose>
 
@@ -282,11 +283,11 @@
 				<div class="inter">
 					<h4>你可能会喜欢</h4>
 					<ul>
-						<c:forEach items="${apartment.rooms}" var="r">
-							<c:if test="${room.id != r.id}">
-								<a href="../info/${r.id}"> <img alt="140x140"
-									class="img-responsive" src="../images/${r.pics[0]}" /> <em>${apartment.community}-${apartment.bedroom}居室-${r.direction}卧-${r.description}</em>
-									<strong>${r.status}</strong>
+						<c:forEach items="${allApartment}" var="r">
+							<c:if test="${room.id != r.rooms[0].id}">
+								<a href="../info/${r.rooms[0].id}"> <img alt="140x140"
+									class="img-responsive" src="../images/${r.pic2[0]}" />
+									 <em>${r.community}-${r.num_building}-${r.direction}朝向-${r.num_door}房间</em>
 								</a>
 							</c:if>
 						</c:forEach>
@@ -419,35 +420,7 @@
 						</div>
 					</div>
 
-					<div class="row clearfix">
-						<div class="col-md-12 column">
-							<h3>管家信息</h3>
 
-							<em><img alt=""
-								src="http://mf.znimg.com/public/images/mfxgj.jpg"
-								class="img-responsiv img-circle" width="60px"></em>
-							<ul>
-								<li><strong>青舍小管家</strong></li>
-								<li><small>400-0322-222</small>
-								<li><small>周一至周日 07:00 - 23:00</small>
-							</ul>
-							<p>用心倾听每一通来电，认真记录每一个需求，快速解决生活当中的每一个麻烦，我们就是您在青舍都市公寓的贴心小管家，随时恭候您的来电！</p>
-
-						</div>
-					</div>
-					<div class="row clearfix">
-						<div class="col-md-12 column">
-							<h3>此公寓其他房间</h3>
-							<c:forEach items="${apartment.rooms}" var="r">
-								<c:if test="${room.id != r.id}">
-									<a href="../info/${r.id}"> <img alt="140x140"
-										class="img-responsive" src="../images/${r.pics[0]}" /> <em>${apartment.community}-${apartment.bedroom}居室-${r.direction}卧-${r.description}</em>
-										<strong>${r.status}</strong>
-									</a>
-								</c:if>
-							</c:forEach>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -460,19 +433,16 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<iframe id="map-iframe" width="100%" height="100%" style="border: none;" 
-					src="">
-				</iframe>
+				<iframe id="map-iframe" width="100%" height="100%"
+					style="border: none;" src=""> </iframe>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
-		$('#call-gps').click(function(){
-			$('#map-iframe').attr('src',$(this).attr('data-iframeUrl'));
+		$('#call-gps').click(function() {
+			$('#map-iframe').attr('src', $(this).attr('data-iframeUrl'));
 		});
-	</script>
-
-	</my_body>
+	</script> </my_body>
 	<my_script> <script
 		src="<%=basePath%>/dist/customer/js/info.js"></script> <script
 		src="<%=basePath%>/dist/customer/js/comment-list.js"></script> </my_script>

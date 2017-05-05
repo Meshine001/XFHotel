@@ -68,19 +68,19 @@
 						<script type="text/javascript">
 							$(document).ready(function(){
 								$('#myOrder').click(function(){
-									location.href='/hotel/customer/myOrder';
+									location.href='/customer/myOrder';
 								});
 								$('#serviceCenter').click(function(){
-									location.href='/hotel/customer/serviceCenter';
+									location.href='/customer/serviceCenter';
 								});
 								$('#preferential').click(function(){
-									location.href='/hotel/customer/preferential';
+									location.href='/customer/preferential';
 								});
 								$('#myDetails').click(function(){
-									location.href='/hotel/customer/details';
+									location.href='/customer/details';
 								});
 								$('#feedback').click(function(){
-									location.href='/hotel/customer/feedback';
+									location.href='/customer/feedback';
 								});
 							});
 						

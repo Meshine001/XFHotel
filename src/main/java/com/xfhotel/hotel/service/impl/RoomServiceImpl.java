@@ -82,10 +82,9 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public List<Map> getAllRooms() {
 		
-		Integer[] value = {Room.STATUS_IDLE,Room.STATUS_WILL_IDLE};
-		List<Room> rooms = roomDAO.getListByHQL("from Room where status =? or status =?",value);
-		;
+		List<Room> rooms = roomDAO.getListByHQL("from Room",null);
 		List<Map> list = new ArrayList<Map>();
+		
 		for (Room r : rooms) {
 			list.add(this.getRoomInfo(r.getId()));
 		}

@@ -76,15 +76,7 @@ public class WechatController {
 		if (o.getStatus() == Order.STATUS_ON_LEASE) {
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "已支付");
 		}else{
-//			JSONObject result = WechatOrderUtils.query(o.getPayNo());
-//			try {
-//				if("success".equals(result.getString("status")) && null!=result.getString("trade_state")){
-//					return new Message(Constants.MESSAGE_SUCCESS_CODE, "已支付");
-//				}
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				//e.printStackTrace();
-//			}
+				
 		}
 		
 		return new Message(Constants.MESSAGE_ERR_CODE, "未支付");
@@ -218,11 +210,11 @@ public class WechatController {
 			jo.put("obj", null);
 			return jo;
 		}
-		order.setPayPlatform(Order.PAY_PLATFORM_WECHAT);
+		order.setPayPlatform(Order.PAY_PLATFORM_WECHAT_JSAPI);
 		orderService.update(order);
 
 		String detail = order.getDescription();
-		String desc = "房间预定";
+		String desc = "青舍都市";
 		Customer c = customerService.getCustomer(order.getCusId());
 		String openId = c.getWechatOpenId();
 		String goodSn = "" + order.getRoomId();
@@ -247,20 +239,36 @@ public class WechatController {
 		Order order = orderService.get(id);
 		if (order == null)
 			return null;
-
-		// TODO 向微信下订单,并获取扫一扫地址
-		String detail = order.getDescription();
-		String desc = "青舍都市";
-		String goodSn = "" + order.getRoomId();
-		// String orderSn = ""+order.getId();
-		String orderSn = order.getPayNo();
-		String amount = order.getTotalPrice();
-		String type = "NATIVE";
-		JSONObject response = WechatOrderUtils.createOrder(detail, desc, "", ip, goodSn, orderSn, amount, type);
-		order.setPayPlatform(Order.PAY_PLATFORM_WECHAT);
-		orderService.update(order);
 		
-		return response;
+		JSONObject response = null;
+		if("".equals(order.getWxQRCode()) || null == order.getWxQRCode()){
+			// TODO 向微信下订单,并获取扫一扫地址
+			String detail = order.getDescription();
+			String desc = "青舍都市";
+			String goodSn = "" + order.getRoomId();
+			String orderSn = order.getPayNo();
+			String amount = order.getTotalPrice();
+			String type = "NATIVE";
+			response = WechatOrderUtils.createOrder(detail, desc, "", ip, goodSn, orderSn, amount, type);
+			order.setPayPlatform(Order.PAY_PLATFORM_WECHAT_NATIVE);
+			
+			if("success".equals(response.getString("status"))){
+				order.setWxQRCode(((JSONObject)response.get("obj")).getString("url"));
+			}
+			
+			orderService.update(order);
+			
+			return response;
+		}else{
+			response = new JSONObject();
+			response.put("status", "success");
+			JSONObject obj = new JSONObject();
+			obj.put("url", order.getWxQRCode());
+			response.put("obj", obj);
+			return response;
+		}
+
+		
 	}
 
 	/**

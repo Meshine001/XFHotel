@@ -426,7 +426,6 @@ public class HomeController {
 		List<Map> priceMaps = get2MonthPrices((Long)room.get("apartment"), start);
 		List<Map> prices = new ArrayList<Map>();
 		int s = Integer.parseInt(start.substring(start.length()-2, start.length()))-1;
-		System.out.println(s);
 		Iterator<Map> iterator = priceMaps.iterator();
 		int i = 0;
 		while(iterator.hasNext()&&i<(s+6)){
@@ -448,7 +447,11 @@ public class HomeController {
 		session.setAttribute("prices", prices);
 		
 		session.setAttribute("roomRates", commentService.getRoomRates(roomId));
-		session.setAttribute("yajin", Constants.YA_JIN);
+		session.setAttribute("yajin",apartment.get("yajin"));
+		
+		List<Map> allApartment = apartmentService.list();
+		session.setAttribute("allApartment", allApartment);
+		
 		return "/customer/info";
 	}
 	

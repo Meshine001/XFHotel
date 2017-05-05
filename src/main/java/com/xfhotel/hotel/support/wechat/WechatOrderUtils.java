@@ -589,7 +589,7 @@ public class WechatOrderUtils {
 		
 //		JSONObject result = WechatOrderUtils.refund("123213", "21323", "322.11", "22.2");
 //		JSONObject result1 = WechatOrderUtils.query("2017042500002");
-		JSONObject result = WechatOrderUtils.refund("2017042500002", "2017042500001", "0.01", "0.01");
+		JSONObject result = WechatOrderUtils.refund("2017050400004", "2017050400004", "1", "1");
 //		System.out.println(result1);
 		System.out.println(result);
 	}

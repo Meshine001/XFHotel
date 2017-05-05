@@ -2,7 +2,7 @@
 
 public class Constants {
 	
-	public static final String Host_Address = "http://localhost:8080/hotel/";
+	public static final String Host_Address = "http://www.yiyunzn.xyz/";
 	
 	public static final String ADMIN_SESSION_ATTR = "admin-session";
 	public static final String CUSTOMER_SESSION_ATTR = "c";
@@ -58,9 +58,9 @@ public class Constants {
 	public static final String LOCK_TEST_BASE_URL = "http://test.ops.huohetech.com:80";
 	public static final String LOCK_BASE_URL = "http://ops.huohetech.com:80";
 	
-	public static final String LOCK_DES_KEY = "11111111";
+	public static final String LOCK_DES_KEY = "5DD319E4";
 	public static final String LOCK_ACCOUNT = "13072983237";
-	public static final String LOCK_PASSWORD = "123321";
+	public static final String LOCK_PASSWORD = "yiyun3237";
 	
 	public static final String LOCK_MSG_SUCCESS = "HH0000";
 	public static final String LOCK_MSG_TOKEN_OUT_OF_DATE = "OPS04110";
