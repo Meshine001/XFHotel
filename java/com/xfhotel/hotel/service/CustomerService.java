@@ -22,5 +22,7 @@ public interface CustomerService {
 	public void changeStatus(long id, int status);
 	public Customer getCustomer(long id);
 	public Customer  getFind(String tel);
+	public void updateBaseInfo(Customer c);
+	
 	
 }

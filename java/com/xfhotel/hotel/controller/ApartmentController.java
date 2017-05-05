@@ -206,6 +206,7 @@ public class ApartmentController {
 		apartment.setApartmentType(apartmenttype);
 		apartment.setCreateTime(new Date().getTime());
 		apartment.setLockAddress(lock_address);
+		apartment.setYajin(Constants.YA_JIN);
 		
 		//TODO 
 		if(apartmenttype.equals("酒店型")){

@@ -57,7 +57,6 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDAO.get(cId);
 	}
 
-	
 	@Transactional
 	@Override
 	public boolean checkTel(String tel) {
@@ -80,7 +79,6 @@ public class CustomerServiceImpl implements CustomerService {
 			return "原密码错误";
 		}
 	}
-	
 
 	@Override
 	public void logout() {
@@ -120,6 +118,7 @@ public class CustomerServiceImpl implements CustomerService {
 		// TODO Auto-generated method stub
 		return customerDAO.getListByHQL("from Customer", null);
 	}
+
 	@Transactional
 	@Override
 	public Customer getFind(String tel) {
@@ -129,7 +128,11 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDAO.getByHQL(hqlString, values);
 	}
 	
-	
-	
+	@Transactional
+	@Override
+	public void updateBaseInfo(Customer c) {
+		// TODO Auto-generated method stub
+		customerDAO.update(c);
+	}
 
 }

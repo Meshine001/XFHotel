@@ -56,10 +56,7 @@ public class MessageController {
 	 */
 	@RequestMapping(value = "/smartLock/push", method = RequestMethod.POST)
 	public @ResponseBody Map lockPush(@RequestBody Map map) {
-		// String validate_code, String factor, String business_id, String
-		// lock_no, Integer pwd_no, String pwd_user_mobile, String event){
-		// public @ResponseBody String push(@RequestBody Map map){
-		// System.out.println(map);
+
 		String validate_code = (String) map.get("validate_code");
 		String factor = (String) map.get("factor");
 		String business_id = (String) map.get("business_id");
@@ -96,7 +93,7 @@ public class MessageController {
 		String pwd_text = lockService.viewPassword(pwd_user_mobile, lock_no);
 		if (check == 1) {
 			String[] param = new String[2];
-			param[0] = lock_no;
+			param[0] = "";
 			param[1] = pwd_text;
 			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_LOCK_CODE, pwd_user_mobile, param);
 		}
@@ -107,86 +104,6 @@ public class MessageController {
 	}
 
 
-
-	/**
-	 * 轮询订单是否支付，用于更新支付页面自动跳转
-	 * 
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping(value = "askWechatPay", method = RequestMethod.POST)
-	public @ResponseBody Message askWechatPay(Long id) {
-		try {
-			Order order = orderService.get(id);
-			if (order.getStatus() == Order.STATUS_ON_LEASE) {
-				return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return new Message(Constants.MESSAGE_ERR_CODE, "系统错误");
-		}
-		return new Message(Constants.MESSAGE_ERR_CODE, "");
-	}
-
-	/**
-	 * 微信公共号Token验证
-	 * @param signature
-	 * @param timestamp
-	 * @param nonce
-	 * @param echostr
-	 * @return
-	 */
-	@RequestMapping(value = "/wechat/public/push", method = RequestMethod.GET)
-	public @ResponseBody String wechatPublishPush(String signature, String timestamp, String nonce, String echostr) {
-		System.out.println(signature+","+timestamp+","+nonce+","+echostr);
-		try {
-			String wechatToken = "yiyun3237";
-			List<String> infos = new ArrayList<String>();
-			infos.add(wechatToken);
-			infos.add(timestamp);
-			infos.add(nonce);
-			Collections.sort(infos);
-			StringBuffer sb = new StringBuffer();
-			for(String s:infos){
-				sb.append(s);
-			}
-			String hashCode = String.valueOf(DigestUtils.sha(sb.toString()));
-			System.out.println("hashCode:"+hashCode);
-			if(hashCode.equals(signature)){
-				return echostr;
-			}
-			return "";
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-			return "";
-		}
-		
-	}
-
-	/**
-	 * 接收微信支付的push消息
-	 * 
-	 * @param id
-	 */
-	//TODO
-	@RequestMapping(value = "/wechat/pay/push", method = RequestMethod.POST)
-	public void wechatPayPush(Long id) {
-		// TODO
-		Order order = orderService.get(id);
-		order.setStatus(Order.STATUS_ON_LEASE);
-		orderService.update(order);
-
-		// TODO 若用户扫码支付成功，设置门锁密码
-		Long roomId = order.getRoomId();
-		Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
-		String lock_no = (String) apartmentService.getApartmentInfo(apartment).get("lock_address");
-		lockService.addPassword(order.getCusTel(), lock_no, TimeUtil.getDateStr(order.getStartTime()),
-				TimeUtil.getDateStr(order.getEndTime()));
-
-		// TODO 返回微信相关信息
-	}
 
 	public static void main(String[] args) {
 
