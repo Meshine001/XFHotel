@@ -200,7 +200,7 @@ public class MobileController  {
 			vCode.put("diedLine", new Date().getTime()+Constants.SMS_AVAILBEL_TIME);
 			vCode.put("code", vCodeStr);
 			session.setAttribute("vCode", vCode);
-//			System.out.println("send vcode==>"+vCode);
+			//System.out.println("send vcode==>"+vCode);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
