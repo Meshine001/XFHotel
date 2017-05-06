@@ -58,42 +58,42 @@ public class OrderController {
 
 	/**
 	 * 退租
+	 * 
 	 * @param orderId
 	 * @return
 	 */
 	@RequestMapping(value = "/outLease", method = RequestMethod.POST)
 	@ResponseBody
-	public Message outLease(Long orderId){
+	public Message outLease(Long orderId) {
 		try {
 			Order o = orderservice.get(orderId);
-			//TODO 退押金,
+			// TODO 退押金,
 			String[] prices = o.getPrice().split("@");
-			String refundFee = prices[prices.length-1];
-			//若是微信支付的
-			if(Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
-					||Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())){
+			String refundFee = prices[prices.length - 1];
+			// 若是微信支付的
+			if (Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
+					|| Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())) {
 				JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), refundFee);
-				if("success".equals(result.getString("status"))){
+				if ("success".equals(result.getString("status"))) {
 					o.setStatus(Order.STATUS_COMPLETE);
 					orderservice.update(o);
 					return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
-				}else{
+				} else {
 					return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
 				}
-			}else{
+			} else {
 				o.setStatus(Order.STATUS_COMPLETE);
 				orderservice.update(o);
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
 			}
-			
-		
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
+			// e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
 		}
 	}
-	
+
 	/**
 	 * 返回订单模板，在房间信息页，点击‘立即预定’触发
 	 * 
@@ -109,7 +109,7 @@ public class OrderController {
 	public String orderModule(String startTime, String endTime, Long apartmentId) throws Exception {
 		session.setAttribute("oStart", startTime);
 		session.setAttribute("oEnd", endTime);
-		System.out.println(startTime+endTime);
+		System.out.println(startTime + endTime);
 		Map<String, Object> priceInfo = apartmentService.caculatePrice(startTime, endTime, apartmentId);
 		System.out.println(priceInfo);
 		session.setAttribute("oTotalDay", TimeUtil.daysBetween(startTime, endTime));
@@ -119,7 +119,6 @@ public class OrderController {
 		session.setAttribute("oPreferential", "");
 		return "customer/orderModule";
 	}
-
 
 	@RequestMapping(value = "/checkAvailable", method = RequestMethod.GET)
 	public @ResponseBody Message checkAvailable(Long roomId, String startTime, String endTime) {
@@ -158,10 +157,7 @@ public class OrderController {
 	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
 			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
 			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
-//		System.out.println(startTime);
-//		System.out.println(startTime+" 12:00");
-		System.out.println(description+"sda"+preferential+"大大adsas"+personal+needFapiao);
-				Order o = new Order();
+		Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
 		o.setRoomId(roomId);
@@ -170,8 +166,8 @@ public class OrderController {
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
 		try {
-			o.setStartTime(DateUtil.parse(startTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
-			o.setEndTime(DateUtil.parse(endTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
+			o.setStartTime(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
+			o.setEndTime(DateUtil.parse(endTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -185,7 +181,7 @@ public class OrderController {
 		o.setStatus(Order.STATUS_ON_PAY);
 		o.setNeedFapiao(needFapiao);
 		orderservice.add(o);
-		
+
 		return "redirect:pay/" + o.getId();
 	}
 
@@ -224,8 +220,7 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range)
-	{
+	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range) {
 		try {
 			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
@@ -304,8 +299,6 @@ public class OrderController {
 		session.setAttribute("order", order.toMap());
 		return "customer/order";
 	}
-
-
 
 	/**
 	 * 交易完成

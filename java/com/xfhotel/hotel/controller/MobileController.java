@@ -344,8 +344,8 @@ public class MobileController  {
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
 		try {
-			o.setStartTime(DateUtil.parse(startTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
-			o.setEndTime(DateUtil.parse(endTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
+			o.setStartTime(DateUtil.parse(startTime+" 12:00", "yyyy-MM-dd HH:mm").getTime());
+			o.setEndTime(DateUtil.parse(endTime+" 12:00", "yyyy-MM-dd HH:mm").getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -433,7 +433,7 @@ public class MobileController  {
 		
 		return info;
 	}
-	@RequestMapping(value = "blog_content", method = RequestMethod.POST)
+	@RequestMapping(value = "/blog_content", method = RequestMethod.POST)
 	public @ResponseBody Map  initBlog(HttpServletRequest request,Long id){
 		String path = request.getSession().getServletContext().getRealPath("/");
 		Blog blog = blogService.find(id);
@@ -462,9 +462,12 @@ public class MobileController  {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "checkWechatPay", method = RequestMethod.POST)
+	@RequestMapping(value = "/checkWechatPay", method = RequestMethod.POST)
+	@ResponseBody
 	public Message checkWechatOrder(Long id){
+		System.out.println("checkWechatPay===========>id="+id);
 		Order o = orderService.get(id);
+		if(o == null)return new Message(Constants.MESSAGE_ERR_CODE,"订单不存在");
 		JSONObject result = WechatOrderUtils.query(o.getPayNo());
 		if("success".equals(result.getString("status")) 
 				&& "SUCCESS".equals(result.getString("trade_state"))){

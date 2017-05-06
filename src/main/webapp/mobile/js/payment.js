@@ -74,6 +74,27 @@ function callPay(payData) {
     }
 }
 
+var checkCount = 0;
+
+function checkWechatPay() {
+    var url = fnBase.URL + '/mobile/checkWechatPay';
+    var data = {
+        id:_id
+    };
+    fnBase.commonAjax(url,data,function (data) {
+        if(data.statusCode == 1 ){
+            window.location.href = fnBase.URL + '/wx/myorder.html';
+        }else{
+            //查询3次
+            if (checkCount < 3){
+                checkCount++;
+                checkWechatPay();
+            }
+        }
+    });
+
+}
+
 /**
  * jssdk
  */
@@ -90,29 +111,11 @@ function onBridgeReady(payData){
         function(res){
             WeixinJSBridge.log(res.err_msg);
             if(res.err_msg == "get_brand_wcpay_request:ok" ) {
-                var checkCount = 0;
-                //TODO 再次查询是否支付成功
-                var checkWechatPay = function () {
-                    var url = fnBase.URL + '/mobile/checkWechatPay';
-                    var data = {
-                        id:_id
-                    };
-                    fnBase.commonAjax(url,data,function (data) {
-                        if(data.status == 1 ){
-                            window.location.href = fnBase.URL + '/wx/myorder.html';
-                        }else{
-                            //查询3次
-                            if (checkCount < 3){
-                                checkCount++;
-                                checkWechatPay();
-                            }
-                        }
-                    });
-                    fnBase.myalert('支付失败');
-
-                };
-                checkWechatPay();
-                fnBase.myalert('支付成功');
+                // checkCount = 0;
+                // //TODO 再次查询是否支付成功
+                // checkWechatPay();
+                // fnBase.myalert('支付失败');
+                window.location.href = './myorder.html';
 
             }else if(res.err_msg == "get_brand_wcpay_request:cancel"){//支付取消
                 fnBase.myalert('取消支付');
