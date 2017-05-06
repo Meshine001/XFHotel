@@ -174,7 +174,9 @@ public class OrderController {
 		}
 		o.setTime(new Date().getTime());
 		o.setTotalDay(totalDay);
-		o.setPrice(price);
+		Map room = roomService.getRoomInfo(roomId);
+		Apartment apartment = apartmentService.findById((Long)room.get("apartment"));
+		o.setPrice(price+"@"+apartment.getYajin());
 		o.setTotalPrice(totalPrice);
 		o.setPreferential(preferential);
 		o.setType(Apartment.getTypeNum(apartmentType));
