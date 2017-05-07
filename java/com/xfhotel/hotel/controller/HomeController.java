@@ -465,7 +465,7 @@ public class HomeController {
 	@RequestMapping(value = "story/blog_content", method = RequestMethod.GET)
 	public String initBlog(HttpServletRequest request,Long id){
 		request.setAttribute("id", id);
-		System.out.println("啦啦1");
+		
 		return "/customer/story_content";
 	}
 	

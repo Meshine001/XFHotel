@@ -47,62 +47,67 @@ import com.xfhotel.hotel.support.wechat.WechatOrderUtils;
 
 import net.sf.json.JSONObject;
 
+
+
 @Controller
 @RequestMapping("mobile")
-public class MobileController {
+public class MobileController  {
+
 
 	@Autowired
 	RoomService roomService;
-
+	
 	@Autowired
 	ApartmentService apartmentService;
 	@Autowired
 	BannerService bannerService;
 	@Autowired
 	CustomerService customerService;
-
+	
+	
 	@Autowired
 	OrderService orderservice;
-
+	
 	@Autowired
 	HttpSession session;
-
+	
 	@Autowired
 	CommentService commentService;
-
+	
 	@Autowired
 	OrderService orderService;
-
+	
 	@Autowired
 	BlogService blogService;
 
-	@RequestMapping(value = "/home", method = RequestMethod.POST)
-	public @ResponseBody Map home() {
+
+	
+	
+	@RequestMapping(value = "/home",method = RequestMethod.POST)
+	public @ResponseBody Map home(){
 		List<Room> rooms = roomService.getHomeRooms();
 		List<Map> homeRooms = new ArrayList<Map>();
-		for (Room room : rooms) {
+		for(Room room :rooms){
 			Long apartmentId = (Long) roomService.getRoomInfo(room.getId()).get("apartment");
 			homeRooms.add(apartmentService.getApartmentInfo(apartmentId));
 		}
-		Map<String, Object> info = new HashMap<String, Object>();
-		info.put("homeRooms", homeRooms);
+		Map<String,Object> info = new HashMap<String, Object>();
+		info.put("homeRooms",homeRooms);
 		return info;
-
+		
 	}
-
-	@RequestMapping(value = "/info", method = RequestMethod.POST)
-	public @ResponseBody Map info(Long roomId) {
+	@RequestMapping(value = "/info",method = RequestMethod.POST)
+	public @ResponseBody Map info(Long roomId){
 		Map room = roomService.getRoomInfo(roomId);
-		Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
-		Map<String, Object> info = new HashMap<String, Object>();
+		Map apartment = apartmentService.getApartmentInfo((Long)room.get("apartment"));
+		Map<String,Object> info = new HashMap<String, Object>();
 		info.put("room", room);
 		info.put("apartment", apartment);
 		return info;
-
+		
 	}
-
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public @ResponseBody Message login(String tel, String password) {
+	public @ResponseBody  Message login(String tel, String password) {
 		Customer c = customerService.login(tel, password);
 		if (c != null) {
 			session.setAttribute("c", c);
@@ -112,10 +117,9 @@ public class MobileController {
 		}
 
 	}
-
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
-	public @ResponseBody Message find(String tel, String psd) {
-
+	public @ResponseBody  Message find(String tel ,String psd) {
+		
 		if (customerService.checkTel(tel)) {
 			Customer c = customerService.getFind(tel);
 			String content = customerService.changePsd(c.getPassword(), psd, c.getId());
@@ -125,14 +129,15 @@ public class MobileController {
 			} else {
 				return new Message(Constants.MESSAGE_ERR_CODE, content);
 			}
-
+			
 		}
-		return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
+			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
+		
 
 	}
 
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-	public @ResponseBody Message reg(String tel, String password, Model model) {
+	public @ResponseBody Message reg(String tel, String password,Model model) {
 		if (customerService.checkTel(tel)) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "手机号已使用");
 		}
@@ -152,8 +157,8 @@ public class MobileController {
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
 
-	@RequestMapping(value = "/checkVCode")
-	public @ResponseBody Message checkVCode(String tel, String vCode) {
+	@RequestMapping(value="/checkVCode")  
+	public @ResponseBody Message checkVCode(String tel,String vCode){
 		System.out.println(session.getId());
 		try {
 			Map<String, Object> sVCode = (Map<String, Object>) session.getAttribute("vCode");
@@ -161,10 +166,10 @@ public class MobileController {
 			long diedLine = (Long) sVCode.get("diedLine");
 			String code = (String) sVCode.get("code");
 
-			if (sTel.equals(tel) && code.equals(vCode)) {
-				if (diedLine < new Date().getTime()) {
+			if(sTel.equals(tel) && code.equals(vCode)){
+				if(diedLine < new Date().getTime()){
 					return new Message(Constants.MESSAGE_ERR_CODE, "验证超时");
-
+					
 				}
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, "验证成功");
 			}
@@ -177,45 +182,44 @@ public class MobileController {
 		System.out.println("123");
 		return new Message(Constants.MESSAGE_ERR_CODE, "验证失败");
 	}
-
+	
 	/**
 	 * 请求发送注册手机验证码
-	 * 
 	 * @param tel
 	 * @return
 	 */
-	@RequestMapping(value = "/sendVCode")
-	public @ResponseBody Message sendTelValidateCode(String tel) {
+	@RequestMapping(value="/sendVCode")  
+	public @ResponseBody Message sendTelValidateCode(String tel){
 		System.out.println(session.getId());
 		try {
-			String vCodeStr = SendTemplateSMS.generateValidateCode();
-			String[] args = { vCodeStr, Constants.SMS_AVAILBEL_TIME_STR };
-			// 调试时可注释掉下面
-			// 发送短信
+			String vCodeStr= SendTemplateSMS.generateValidateCode();
+			String[] args = {vCodeStr,Constants.SMS_AVAILBEL_TIME_STR};
+			//调试时可注释掉下面
+			//发送短信
 			SendTemplateSMS.sendSMS(Constants.SMS_TEMPLATE_REG, tel, args);
-			// 利用session进行验证
+			//利用session进行验证
 			Map<String, Object> vCode = new HashMap<String, Object>();
 			vCode.put("tel", tel);
-			vCode.put("diedLine", new Date().getTime() + Constants.SMS_AVAILBEL_TIME);
+			vCode.put("diedLine", new Date().getTime()+Constants.SMS_AVAILBEL_TIME);
 			vCode.put("code", vCodeStr);
 			session.setAttribute("vCode", vCode);
-			// System.out.println("send vcode==>"+vCode);
+			//System.out.println("send vcode==>"+vCode);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "获取验证码失败");
 		}
-
+		
 	}
-
+	
 	@RequestMapping(value = "/module", method = RequestMethod.POST)
-	public @ResponseBody Map orderModule(String startTime, String endTime, Long apartmentId) throws Exception {
-		Map<String, Object> info = new HashMap<String, Object>();
+	public  @ResponseBody Map orderModule(String startTime, String endTime, Long apartmentId) throws Exception {
+		Map<String,Object> info = new HashMap<String, Object>();
 		info.put("oStart", startTime);
 		info.put("oEnd", endTime);
 		Map<String, Object> priceInfo = apartmentService.caculatePrice(startTime, endTime, apartmentId);
-		info.put("oTotalDay", TimeUtil.daysBetween(startTime, endTime));
+		info.put("oTotalDay",TimeUtil.daysBetween(startTime, endTime));
 		info.put("oPrice", priceInfo.get("price"));
 		info.put("oTotalPrice", priceInfo.get("totalPrice"));
 		info.put("oCashPledge", priceInfo.get("cashPledge"));
@@ -223,7 +227,7 @@ public class MobileController {
 		System.out.println();
 		return info;
 	}
-
+	
 	@RequestMapping(value = "/checkAvailable", method = RequestMethod.POST)
 	public @ResponseBody Message checkAvailable(Long roomId, String startTime, String endTime) {
 		System.out.println(startTime);
@@ -239,10 +243,10 @@ public class MobileController {
 		}
 
 	}
-
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range) {
-
+	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range)
+	{
+		
 		try {
 			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
@@ -252,7 +256,7 @@ public class MobileController {
 				Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
 				m.put("apartment", apartment);
 				maps.add(m);
-
+				 
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {
@@ -261,15 +265,13 @@ public class MobileController {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");
 	}
-
 	/*
 	 * 获取用户资料
 	 */
 	@RequestMapping(value = "/detailsData", method = RequestMethod.POST)
-	public @ResponseBody Customer getCustomerDetails(Long id) {
+	public @ResponseBody Customer getCustomerDetails(Long id){
 		return customerService.getCustomer(id);
 	}
-
 	/**
 	 * 评论
 	 * 
@@ -306,7 +308,6 @@ public class MobileController {
 			return new Message(Constants.MESSAGE_ERR_CODE, "评论失败");
 		}
 	}
-
 	/**
 	 * 用户提交订单 房间详细信息页，确认订单触发
 	 * 
@@ -331,11 +332,10 @@ public class MobileController {
 	public @ResponseBody Map orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
 			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
 			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
-		// System.out.println(startTime);
-		// System.out.println(startTime+" 12:00");
-		System.out.println(cusId + description + roomId + cusName + cusTel + cusIdCard + personal + startTime + endTime
-				+ totalDay + price + totalPrice + preferential + needFapiao + apartmentType);
-		Order o = new Order();
+//		System.out.println(startTime);
+//		System.out.println(startTime+" 12:00");
+		System.out.println(cusId+description+roomId+cusName+cusTel+cusIdCard+personal+startTime+endTime+totalDay+price+totalPrice+preferential+needFapiao+apartmentType);
+				Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
 		o.setRoomId(roomId);
@@ -344,17 +344,15 @@ public class MobileController {
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
 		try {
-			o.setStartTime(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
-			o.setEndTime(DateUtil.parse(endTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
+			o.setStartTime(DateUtil.parse(startTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
+			o.setEndTime(DateUtil.parse(endTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		o.setTime(new Date().getTime());
 		o.setTotalDay(totalDay);
-		Map room = roomService.getRoomInfo(roomId);
-		Apartment apartment = apartmentService.findById((Long)room.get("apartment"));
-		o.setPrice(price+"@"+apartment.getYajin());
+		o.setPrice(price);
 		o.setTotalPrice(totalPrice);
 		o.setPreferential(preferential);
 		o.setType(Apartment.getTypeNum(apartmentType));
@@ -366,7 +364,7 @@ public class MobileController {
 		info.put("order", order.toMap());
 		return info;
 	}
-
+	
 	@RequestMapping(value = "/changePsd", method = RequestMethod.POST)
 	public @ResponseBody Message changePsd(String oldPsd, String psd, int id) {
 		String content = customerService.changePsd(oldPsd, psd, id);
@@ -378,18 +376,19 @@ public class MobileController {
 		}
 
 	}
-
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public @ResponseBody Message modify(long customerId, String nick, String tel, String idCard, String sex,
-			String birthday, String job, String education, String declaration, String hobby) {
-		CustomerDetails c = new CustomerDetails();
+	public @ResponseBody Message modify(
+			long customerId ,String nick,String tel,String idCard,
+			String sex,String birthday,String job,
+			String education,String declaration,String hobby) {
+		CustomerDetails c = new CustomerDetails(); 
 		c.setNick(nick);
 		c.setTel(tel);
 		c.setIdCard(idCard);
 		c.setBirthday(birthday);
 		c.setJob(job);
 		c.setDeclaration(declaration);
-		c.setHobby(hobby);
+		c.setHobby(hobby); 
 		c.setEducation(education);
 		System.out.println(c);
 		try {
@@ -398,44 +397,44 @@ public class MobileController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-
+			
 			return new Message(Constants.MESSAGE_ERR_CODE, "内部错误");
 		}
 		session.setAttribute(Constants.PAGE, Constants.PAGE_DETAILS);
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
 	}
-
+	
 	/*
 	 * 青舍生活
 	 */
-	@RequestMapping(value = "/story", method = RequestMethod.POST)
-	public @ResponseBody Map storyPage(HttpServletRequest request, int page) {
+	@RequestMapping(value = "/story",method = RequestMethod.POST)
+	public @ResponseBody Map storyPage(HttpServletRequest request, int page){
 		System.out.println(page);
 		PageResults<Blog> pr = blogService.show_blog(page);
 		int sp = pr.getCurrentPage();
 		int ep = pr.getPageCount();
-		if ((sp - Constants.pagesize / 2) > 0) {
-			sp = sp - Constants.pagesize / 2;
-		} else {
-			sp = 1;
+		if ( (sp-Constants.pagesize/2) > 0){
+			sp = sp-Constants.pagesize/2;
 		}
-		if ((sp + Constants.pagesize - 1) < ep) {
-			ep = sp + Constants.pagesize - 1;
+		else{
+			sp=1;
 		}
-		if ((ep - Constants.pagesize + 1) > 0) {
-			sp = ep - Constants.pagesize + 1;
+		if( (sp+Constants.pagesize-1) < ep ){
+			ep = sp+Constants.pagesize-1;
+		}
+		if( (ep-Constants.pagesize+1) > 0 ){
+			sp = ep-Constants.pagesize+1;
 		}
 		Map<String, Object> info = new HashMap<String, Object>();
-
-		info.put("blogs", pr);
-		info.put("sp", sp);
-		info.put("ep", ep);
-
+		
+		info.put("blogs",pr);
+		info.put("sp",sp);
+		info.put("ep",ep);
+		
 		return info;
 	}
-
-	@RequestMapping(value = "/blog_content", method = RequestMethod.POST)
-	public @ResponseBody Map initBlog(HttpServletRequest request, Long id) {
+	@RequestMapping(value = "blog_content", method = RequestMethod.POST)
+	public @ResponseBody Map  initBlog(HttpServletRequest request,Long id){
 		String path = request.getSession().getServletContext().getRealPath("/");
 		Blog blog = blogService.find(id);
 		path += "blog/" + blog.getPath();
@@ -444,9 +443,9 @@ public class MobileController {
 		FileReader fr;
 		try {
 			fr = new FileReader(path);
-			BufferedReader br = new BufferedReader(fr);
+			BufferedReader br=new BufferedReader(fr);
 			String str;
-			while ((str = br.readLine()) != null) {
+			while( ( str=br.readLine())!=null){
 				content.append(str);
 			}
 			br.close();
@@ -457,28 +456,24 @@ public class MobileController {
 		map.put("content", content.toString());
 		return map;
 	}
-
+	
 	/**
 	 * 查询微信支付的状态
-	 * 
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/checkWechatPay", method = RequestMethod.POST)
-	@ResponseBody
-	public Message checkWechatOrder(Long id) {
-		System.out.println("checkWechatPay===========>id=" + id);
+	@RequestMapping(value = "checkWechatPay", method = RequestMethod.GET)
+	public Message checkWechatOrder(Long id){
 		Order o = orderService.get(id);
-		if (o == null)
-			return new Message(Constants.MESSAGE_ERR_CODE, "订单不存在");
 		JSONObject result = WechatOrderUtils.query(o.getPayNo());
-		if ("success".equals(result.getString("status")) && "SUCCESS".equals(result.getString("trade_state"))) {
+		if("success".equals(result.getString("status")) 
+				&& "SUCCESS".equals(result.getString("trade_state"))){
 			o.setStatus(Order.STATUS_ON_LEASE);
 			orderservice.update(o);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "支付成功");
-		} else {
+		}else{
 			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
 		}
 	}
-
+	
 }

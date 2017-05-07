@@ -20,6 +20,12 @@ $(document).ready(function(){
                 str+='<li link="'+data.blogs.results[i].id+'"><div class="pic"><img src="'+data.blogs.results[i].pic+'"></div><h3 class="_title">'+data.blogs.results[i].title+'</h3></li>';
             }
             $(".content-ul").append(str);
+            var len = $('.content-ul li').length;
+            if(len==0){
+                $('#zanwu').show();
+                $("#Myscroll-body").css('background','#FFF')
+                //$('body').addClass('wingBg');
+            }
         });
     }
 

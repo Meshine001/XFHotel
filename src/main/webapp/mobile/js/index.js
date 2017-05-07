@@ -2,9 +2,7 @@
     scrollNav();
     getData();
     alertSearch.info();
-    $("#_fw").click(function () {
-        fnBase.myalert('正在开发，敬请期待！')
-    });
+
     $('.header-mobile .input-search').focus(function () {
         fnBase.keep(1, "mode", 0);
         window.location.href="houseType.html";
