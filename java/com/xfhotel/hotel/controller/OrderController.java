@@ -29,6 +29,7 @@ import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CommentService;
+import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.DateUtil;
@@ -52,7 +53,9 @@ public class OrderController {
 	ApartmentService apartmentService;
 	@Autowired
 	CommentService commentService;
-
+	@Autowired
+	LockService lockService;
+	
 	@Autowired
 	HttpSession session;
 
@@ -117,6 +120,7 @@ public class OrderController {
 		session.setAttribute("oTotalPrice", priceInfo.get("totalPrice"));
 		session.setAttribute("oCashPledge", priceInfo.get("cashPledge"));
 		session.setAttribute("oPreferential", "");
+		session.setAttribute("capacity", priceInfo.get("capacity"));
 		return "customer/orderModule";
 	}
 
@@ -155,7 +159,7 @@ public class OrderController {
 	 */
 	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
 	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
-			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
+			 String otherCusName,String otherCusIdCard,String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
 			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
 		Order o = new Order();
 		o.setCusId(cusId);
@@ -165,6 +169,8 @@ public class OrderController {
 		o.setCusTel(cusTel);
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
+		o.setOtherCusName(otherCusName);
+		o.setOtherCusIdCard(otherCusIdCard);
 		try {
 			o.setStartTime(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
 			o.setEndTime(DateUtil.parse(endTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
@@ -194,6 +200,39 @@ public class OrderController {
 		session.setAttribute("order", o);
 		return "customer/orderDetails";
 	}
+	
+	/**
+	 * 管理员确认订单
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/comfirm", method = RequestMethod.POST)
+	@ResponseBody
+	public Message comfirmOrder(Long id){
+		Order o = orderservice.get(id);
+		if(o == null){
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+		if(o.getStatus() == Order.STATUS_ON_COMFIRM){
+			try {
+				//发送门锁密码
+				Long roomId = o.getRoomId();
+				Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
+				String lock_no = (String) apartmentService.getApartmentInfo(apartment).get("lock_address");
+				lockService.addPassword(o.getCusTel(), lock_no, DateUtil.format(new Date(o.getStartTime()), "yyyyMMddhhmmss"),
+						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddhhmmss"));
+				o.setStatus(Order.STATUS_ON_LEASE);
+				orderservice.update(o);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+			}
+			
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
+		
+	}
 
 	/**
 	 * 用户查看房间密码
@@ -206,7 +245,7 @@ public class OrderController {
 		// TODO 还需要加入一些权限限制
 		Order o = orderservice.get(orderId);
 
-		session.setAttribute("lockPsd", "123213");
+		session.setAttribute("lockPsd", "还没弄好");
 		return "customer/viewLockPsd";
 	}
 

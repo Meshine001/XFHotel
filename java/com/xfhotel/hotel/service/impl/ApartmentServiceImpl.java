@@ -211,6 +211,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		info.put("price", sb.toString());
 		info.put("cashPledge", cashPledge);
 		info.put("totalPrice", sum);
+		info.put("capacity", apartment.getCapacity());
 		return info;
 	}
 

@@ -161,7 +161,6 @@ public class HomeController {
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("searchData", searchData);
 		info.put("areas", Area.getAreas());
-//		info.put("subways", Subway.getSubways());
 		info.put("priceRanges", LeasePrice.getPrices());
 		info.put("layoutTypes", LayoutType.getLayouts());
 		List<Feature> fs = featrueService.listFeatures();

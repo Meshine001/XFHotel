@@ -229,7 +229,7 @@
 								<p class="apt_jg">
 									<span>${room.dayPrice}</span>元/天
 								</p>
-								<p class="apt_bt">${room.apartmenttype}-${room.community}-${room.direction}</p>
+								<p class="apt_bt">${room.apartmenttype}-${room.address_square}-${room.community}</p>
 						</a></li>
 					</c:forEach>
 				</ul>

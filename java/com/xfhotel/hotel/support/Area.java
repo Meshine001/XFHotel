@@ -50,15 +50,11 @@ public class Area {
 		if(areas == null){
 			areas = new ArrayList<Area>();
 			areas.add(new Area(0,"不限"));
-			areas.add(new Area(1,"莲湖区"));
-			areas.add(new Area(2,"新城区"));
-			areas.add(new Area(3,"碑林区"));
-			areas.add(new Area(4,"灞桥区"));
-			areas.add(new Area(5,"未央区"));
-			areas.add(new Area(6,"雁塔区"));
-			areas.add(new Area(7,"阎良区"));
-			areas.add(new Area(8,"临潼区"));
-			areas.add(new Area(9,"长安区"));
+			areas.add(new Area(1,"城东"));
+			areas.add(new Area(2,"城西"));
+			areas.add(new Area(3,"城南"));
+			areas.add(new Area(4,"城北"));
+			areas.add(new Area(5,"城中"));
 		}
 		return areas;
 	}

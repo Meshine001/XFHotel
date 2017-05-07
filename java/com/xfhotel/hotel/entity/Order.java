@@ -28,6 +28,7 @@ public class Order {
 	public final static int STATUS_CANCEL = 4;//删除订单
 	public final static int STATUS_TIME_OUT = 5;//超时
 	public final static int STATUS_CHARGEBACK = 6;//退款
+	public final static int STATUS_ON_COMFIRM = 7;//需要管理员确认
 
 	public final static String PAY_PLATFORM_WECHAT_NATIVE = "微信扫码";
 	public final static String PAY_PLATFORM_WECHAT_JSAPI = "微信公共号";
@@ -57,6 +58,8 @@ public class Order {
 	private String payPlatform;//支付平台
 	private String payNo;//订单号
 	private String wxQRCode;//微信扫码地址
+	private String otherCusName;//其他入住人
+	private String otherCusIdCard;
 	
 	public String getPayNo() {
 		return payNo;
@@ -234,6 +237,24 @@ public class Order {
 	public void setWxQRCode(String wxQRCode) {
 		this.wxQRCode = wxQRCode;
 	}
+	
+	
+
+	public String getOtherCusName() {
+		return otherCusName;
+	}
+
+	public void setOtherCusName(String otherCusName) {
+		this.otherCusName = otherCusName;
+	}
+
+	public String getOtherCusIdCard() {
+		return otherCusIdCard;
+	}
+
+	public void setOtherCusIdCard(String otherCusIdCard) {
+		this.otherCusIdCard = otherCusIdCard;
+	}
 
 	public Map toMap(){
 		Map info = new HashMap();
@@ -258,6 +279,9 @@ public class Order {
 		info.put("needFapiao", needFapiao?"有发票":"无发票");
 		info.put("payPlatform", payPlatform);
 		info.put("wxQRCode", wxQRCode);
+		info.put("otherCusName", otherCusName);
+		info.put("otherCusIdCard", otherCusIdCard);
+		info.put("yajin", price.split("@")[price.split("@").length-1]);
 		return info;
 	}
 	
@@ -286,6 +310,8 @@ public class Order {
 			return "订单超时";
 		case STATUS_ON_LEASE:
 			return "进行中";
+		case STATUS_ON_COMFIRM:
+			return "确认中";
 		}
 		return "已完成";
 	}

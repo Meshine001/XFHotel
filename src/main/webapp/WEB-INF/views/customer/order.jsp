@@ -72,7 +72,7 @@
 				<dl class="detail_list">
 					<dt>费用明细</dt>
 					<dd>
-						<span class="ti">房费</span><span class="list_ite"><dfn>¥</dfn>${order.totalPrice }</span>
+						<span class="ti">房费</span><span class="list_ite"><dfn>¥</dfn>${order.totalPrice }（含押金:¥${order.yajin}）</span>
 					</dd>
 				</dl>
 			</div>
@@ -83,7 +83,10 @@
 		</div>
 		<div class="hotel_tip">
 			<dl class="tip_info">
-				<dd>...............一些说明.......</dd>
+				<dd>1.全天接单，入住时间14:00以后，退房时间12:00以前；<br>
+					2.需开具发票请提前备注说明；<br>
+					3.请准守构架有关行业治安管理条例要求，严格禁止涉黄、赌、毒等违法活动。
+				</dd>
 			</dl>
 		</div>
 		<div class="mo ng-scope" ng-controller="CmoneyCtrl">

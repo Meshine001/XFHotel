@@ -367,6 +367,8 @@ public class ApartmentController {
 		return "redirect:/admin/apartment";
 	}
 
+	
+	
 //	@RequestMapping(value = "/editroom", method = RequestMethod.POST)
 //	public String editroom(Long roomid, String apartmentid) {
 //		session.setAttribute("roomid", roomid);

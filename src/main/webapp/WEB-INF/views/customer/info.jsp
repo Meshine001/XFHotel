@@ -24,9 +24,9 @@
 		<div class="x">
 			<div class="x_l">
 				<div class="x_t">
-					<h1>${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间</h1>
+					<h1>${apartment.community}-${apartment.address_square}-${apartment.direction}朝向</h1>
 					<div class="x_add">
-						<span class="x_dizhi"> <i></i>${apartment.address}
+						<span class="x_dizhi"> <i></i>${apartment.location}-${apartment.address}
 						</span> <a href="javascrip:;" id="call-gps" class="f_map"
 							data-iframeUrl="<%=basePath%>/utils/roomGps?lng=${apartment.longitude}&lat=${apartment.latitude}"
 							data-target="#gpsModal" data-toggle="modal"> <i></i> 导航
@@ -256,12 +256,12 @@
 							</c:forEach>
 						</p>
 						<ul>
-							<li><span class="c99">编号</span><span class="c66">${room.id}</span></li>
-							<li><span class="c99">楼层</span><span class="c66">第${apartment.floor}层/共${apartment.totalfloor}层</span></li>
-							<li><span class="c99">单元</span><span class="c66">${apartment.num_unit}</span></li>
-							<li><span class="c99">房号</span><span class="c66">${apartment.num_door}</span></li>
-							<li><span class="c99">面积</span><span class="c66">${room.square}㎡</span><span
-								class="c66">${room.direction}</span></li>
+							<li style="display: none;"><span class="c99">编号</span><span class="c66">${room.id}</span></li>
+							<li style="display: none;"><span class="c99">楼层</span><span class="c66">第${apartment.floor}层/共${apartment.totalfloor}层</span></li>
+							<li style="display: none;"><span class="c99">单元</span><span class="c66">${apartment.num_unit}</span></li>
+							<li style="display: none;"><span class="c99">房号</span><span class="c66">${apartment.num_door}</span></li>
+							<li><span class="c99">面积</span><span class="c66">${room.square}㎡</span></li>
+							<li><span class="c99">朝向</span><span class="c66">${room.direction}</span></li>
 							<li><span class="c99">可住</span><span class="c66">${room.capacity}人</span></li>
 							<li><span class="c99">居室</span><span class="c66">${apartment.bedroom}室${apartment.livingroom}厅${apartment.bathroom}卫${apartment.balcony}阳台</span></li>
 							<li><span class="c99">小区</span><span class="c66">${apartment.community}</span></li>

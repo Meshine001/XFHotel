@@ -75,7 +75,7 @@ public class WechatController {
 	@ResponseBody
 	public Message isPayed(Long id) {
 		Order o = orderService.get(id);
-		if (o.getStatus() == Order.STATUS_ON_LEASE) {
+		if (o.getStatus() == Order.STATUS_ON_LEASE || o.getStatus() == Order.STATUS_ON_COMFIRM) {
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "已支付");
 		}else{
 				
@@ -298,6 +298,7 @@ public class WechatController {
 		JSONObject result = WechatOrderUtils.createOrder(detail, desc, "", "10.0.0.1", goodSn, orderSn, amount, "APP");
 		return result.toString();
 	}
+	
 
 	/**
 	 * 微信支付回调函数
@@ -355,14 +356,8 @@ public class WechatController {
 				// 此处放防止重复提交操作
 				String out_trade_no = map.get("out_trade_no");
 				Order o = orderService.getByPayNo(out_trade_no);
-				//发送门锁密码
-				Long roomId = o.getRoomId();
-				Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
-				String lock_no = (String) apartmentService.getApartmentInfo(apartment).get("lock_address");
-				lockService.addPassword(o.getCusTel(), lock_no, DateUtil.format(new Date(o.getStartTime()), "yyyyMMddhhmmss"),
-						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddhhmmss"));
 				//更改订单状态
-				o.setStatus(Order.STATUS_ON_LEASE);
+				o.setStatus(Order.STATUS_ON_COMFIRM);
 				orderService.update(o);
 					
 			} else if ("FAIL".equals(result_code)) {
