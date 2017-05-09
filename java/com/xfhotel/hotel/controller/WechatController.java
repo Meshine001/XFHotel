@@ -40,6 +40,7 @@ import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
 import com.xfhotel.hotel.support.TimeUtil;
+import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 import com.xfhotel.hotel.support.wechat.Config;
 import com.xfhotel.hotel.support.wechat.HttpUtils;
 import com.xfhotel.hotel.support.wechat.Log;
@@ -359,6 +360,14 @@ public class WechatController {
 				//更改订单状态
 				o.setStatus(Order.STATUS_ON_COMFIRM);
 				orderService.update(o);
+				String pwd_user_mobile = o.getCusTel();
+				String[] p = {o.getDescription()};
+				//发短信给顾客
+				//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。
+				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
+				//发短信给管理员
+				//【青舍都市】您有新订单需要确认，请及时处理。{1}
+				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, Constants.ADMIN_TEL, p);
 					
 			} else if ("FAIL".equals(result_code)) {
 				

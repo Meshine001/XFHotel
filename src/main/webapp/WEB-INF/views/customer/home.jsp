@@ -448,20 +448,22 @@
 	</article>
 
 	<jsp:include page="../decorators/home-footer.jsp"></jsp:include>
-	<script type="text/javascript">
+	<script>
 		var _hmt = _hmt || [];
 		(function() {
 			var hm = document.createElement("script");
-			hm.src = "https://hm.baidu.com/hm.js?0ae180f0ab390bef5531565759c084a7";
+			hm.src = "https://hm.baidu.com/hm.js?de892eb7bcb9d66253676ee4d1a31276";
 			var s = document.getElementsByTagName("script")[0];
 			s.parentNode.insertBefore(hm, s);
 		})();
 	</script>
+
 	<script type="text/javascript"
 		src="<%=basePath%>/dist/public/js/calendar.js"></script>
 	<script type="text/javascript"
 		src="<%=basePath%>/dist/customer/js/home.js"></script>
-
+	<style type="text/css">
+</style>
 </body>
 
 </html>

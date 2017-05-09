@@ -282,6 +282,7 @@ public class Order {
 		info.put("otherCusName", otherCusName);
 		info.put("otherCusIdCard", otherCusIdCard);
 		info.put("yajin", price.split("@")[price.split("@").length-1]);
+		info.put("payNo", payNo);
 		return info;
 	}
 	
