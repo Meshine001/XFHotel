@@ -55,7 +55,7 @@ public class OrderController {
 	CommentService commentService;
 	@Autowired
 	LockService lockService;
-	
+
 	@Autowired
 	HttpSession session;
 
@@ -159,8 +159,9 @@ public class OrderController {
 	 */
 	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
 	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
-			 String otherCusName,String otherCusIdCard,String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
-			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
+			String otherCusName, String otherCusIdCard, String cusIdCard, String personal, String startTime,
+			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
+			String apartmentType) {
 		Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
@@ -181,8 +182,8 @@ public class OrderController {
 		o.setTime(new Date().getTime());
 		o.setTotalDay(totalDay);
 		Map room = roomService.getRoomInfo(roomId);
-		Apartment apartment = apartmentService.findById((Long)room.get("apartment"));
-		o.setPrice(price+"@"+apartment.getYajin());
+		Apartment apartment = apartmentService.findById((Long) room.get("apartment"));
+		o.setPrice(price + "@" + apartment.getYajin());
 		o.setTotalPrice(totalPrice);
 		o.setPreferential(preferential);
 		o.setType(Apartment.getTypeNum(apartmentType));
@@ -200,38 +201,77 @@ public class OrderController {
 		session.setAttribute("order", o);
 		return "customer/orderDetails";
 	}
-	
+
+	/**
+	 * 关闭订单
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/close", method = RequestMethod.POST)
+	@ResponseBody
+	public Message closeOrder(Long id) {
+		Order o = orderservice.get(id);
+		if (o == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+		// 若是微信支付的
+		if (Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
+				|| Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())) {
+			JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), o.getTotalPrice());
+			if ("success".equals(result.getString("status"))) {
+				o.setStatus(Order.STATUS_CANCEL);
+				orderservice.update(o);
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, "关闭订单成功");
+			} else {
+				return new Message(Constants.MESSAGE_ERR_CODE, "关闭订单失败");
+			}
+		} else {
+			o.setStatus(Order.STATUS_CANCEL);
+			orderservice.update(o);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "关闭订单成功");
+		}
+
+	}
+
 	/**
 	 * 管理员确认订单
+	 * 
 	 * @param id
 	 * @return
 	 */
 	@RequestMapping(value = "/comfirm", method = RequestMethod.POST)
 	@ResponseBody
-	public Message comfirmOrder(Long id){
+	public Message comfirmOrder(Long id) {
 		Order o = orderservice.get(id);
-		if(o == null){
+		if (o == null) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
 		}
-		if(o.getStatus() == Order.STATUS_ON_COMFIRM){
+		if (o.getStatus() == Order.STATUS_ON_COMFIRM) {
 			try {
-				//发送门锁密码
+				// 发送门锁密码
 				Long roomId = o.getRoomId();
 				Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
 				String lock_no = (String) apartmentService.getApartmentInfo(apartment).get("lock_address");
-				lockService.addPassword(o.getCusTel(), lock_no, DateUtil.format(new Date(o.getStartTime()), "yyyyMMddhhmmss"),
+				String result = lockService.addPassword(o.getCusTel(), lock_no,
+						DateUtil.format(new Date(o.getStartTime()), "yyyyMMddhhmmss"),
 						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddhhmmss"));
-				o.setStatus(Order.STATUS_ON_LEASE);
-				orderservice.update(o);
+				if(result.equals("success")){
+					o.setStatus(Order.STATUS_ON_LEASE);
+					orderservice.update(o);
+				}else{
+					return new Message(Constants.MESSAGE_ERR_CODE, result);
+				}
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
 			}
-			
+
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
-		
+
 	}
 
 	/**

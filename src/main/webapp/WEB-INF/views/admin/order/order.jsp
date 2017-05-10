@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>title-青舍都市公寓-西安租房_西安合租</title>
+<title>订单管理-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
 </head>
 <body>
@@ -34,13 +34,13 @@
 							<th>单价</th>
 							<th>总价</th>
 							<th>优惠</th>
-							<th>发票</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${orders}" var="order">
 							<tr>
-								<td>${order.id}</td>
+								<td>${order.payNo}</td>
 								<td>${order.timeStr}</td>
 								<td>${order.status}</td>
 								<td>${order.cusName}</td>
@@ -51,15 +51,12 @@
 								<td>${order.price}</td>
 								<td>${order.totalPrice}</td>
 								<td>${order.preferential}</td>
-								<td><c:choose>
-										<c:when test="${order.needFapiao == true}">
-								需要
-							</c:when>
-										<c:otherwise>
-								不需要
-							</c:otherwise>
-									</c:choose></td>
-								<td>${order.preferential}</td>
+								<td>
+									<c:if test="${order.status=='确认中'}">
+									<a href="javascript:;" class="btn comfirm-order" data-id="${order.id}">确认订单</a><br>
+									<a href="javascript:;" class="btn close-order" data-id="${order.id}">关闭订单</a>
+									</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -67,6 +64,55 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		//确认订单
+		$('.comfirm-order').click(function(){
+			var url = '../order/comfirm';
+			var id = $(this).attr('data-id');
+			$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					'id' : id,
+				},
+				url : url,
+				error : function(data) {
+					
+				},
+				success : function(data) {
+					if(data.statusCode == 1){
+						window.location.href = '../admin/order';
+					}else{
+						alert(data.content);
+					}
+				}
+			});
+		});
+		
+		//关闭订单
+		$('.close-order').click(function(){
+			var url = '../order/close';
+			var id = $(this).attr('data-id');
+			$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					'id' : id,
+				},
+				url : url,
+				error : function(data) {
+					
+				},
+				success : function(data) {
+					if(data.statusCode == 1){
+						window.location.href = '../admin/order';
+					}else{
+						alert(data.content);
+					}
+				}
+			});
+		});
+	</script>
 	</my_body>
 </body>
 </html>
