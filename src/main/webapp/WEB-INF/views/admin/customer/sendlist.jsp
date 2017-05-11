@@ -25,7 +25,7 @@
 		<div class="col-md-12">
 			<div class="card card-mini">
 				<table class="table" id="new-coupon" style="transition: all .1s;">
-					<tr><th style="color:#5cb85c;font-size:18px">创建优惠卷</th><th></th></tr>
+					<tr><th style="color:#5cb85c;font-size:18px">创建优惠卷</th><th><a class="btn" id="closebtn" style="float:right">X</a></th></tr>
 					<tr>
 						<th width="12%">金额</th>
 						<th><input type=number id="pnumber"></th>	
@@ -46,7 +46,7 @@
 						<th>消费满<input type=number id="nnumber2">元可用</th>	
 					</tr>
 					<tr>
-						<th><a href="javascript:;" id="keepbtn" class="btn" style="background:#777;color:#FFF">保存</a></th>
+						<th><a href="javascript:;" id="keepbtn" class="btn" style="background:#777;color:#FFF">确定</a></th>
 						<th></th>
 					</tr>
 				</table>
