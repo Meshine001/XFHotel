@@ -119,15 +119,7 @@ $(".masking").css({
 	"opacity":'0.8',
 	"z-index":'1000000001'
 })
-$("#sending").css({
-	"width":'800px',
-	"background":'#FFF',
-	"position":'fixed',
-	"left":'50%',
-	"top":'10%',
-	"margin-left":'-400px',
-	"z-index":'1000000002'
-})
+
 
 	function getData(_data){
 	$.ajax({
@@ -199,36 +191,41 @@ function fasongdata(){
 var strlist='';
 $("#delivery").click(function(){
 	$(".masking").show();
-	$(".sending").show();
+	$("#sending").show();
 	$("#new-coupon").show();
 	strlist=new Array();
-	var obj=$(this).parent().parent().parent().find('#list tr');
+	var obj=$(this).parent().parent().parent().parent().find('#list tr');
 	for(var i=0;i<obj.length;i++){
-		if(obj.eq(i).hasClass('_active')){
+		if(obj.eq(i).hasClass('_active')==true){
 			strlist.push(obj.eq(i).attr('uid'))
 		}	
 	}
    return strlist;
 })
+$("#closebtn").click(function(){
+	$(".masking").hide();
+	$("#sending").hide();
+	$("#new-coupon").hide();
+})
 
-$("#sublite").click(function(){
-	var _v= $('#variety').val();
-	var _p= $('#price').val();
-	var _L=$('#_number').val();
+$("#keepbtn").click(function(){
 	var postdata={
-			'a':strlist,
-			"b":_v,
-			"c":_p,
-			"d":_L
+			'Id':strlist,
+			"cValue":$('#pnumber').val(),
+			"type":$("#pId").val(),
+			"startTime":$("#mydatepicker2").val(),
+			"endTime":$("#mydatepicker3").val(),
+			"rule":$("#nnumber2").val()
 	}
-	$(".masking,.sending").hide();
+	$(".masking,#sending").hide();
+	console.log(postdata)
 	$.ajax({
 		async : false,
 		cache : false,
 		type : 'POST',
 		dataType : 'json',
 		data : postdata,
-		url : "./get_customers",
+		url : "./sendlist",
 		error : function(data) {// 请求失败处理函数
 			alert("发送失败！");
 		},
