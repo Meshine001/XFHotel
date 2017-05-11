@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.impl.CouponDAOImpl;
 import com.xfhotel.hotel.entity.Coupon;
@@ -13,37 +14,32 @@ public class CouponService implements com.xfhotel.hotel.service.CouponService{
 	@Autowired
 	CouponDAOImpl couponDAO;
 	
-	
-	
 	@Override
 	public void add(Coupon coupon) {
 		// TODO Auto-generated method stub
-		couponDAO.save(coupon);
+		couponDAO.saveOrUpdate(coupon);
 	}
-	
-	
+
 	@Override
 	public void delete(Coupon t) {
 		// TODO Auto-generated method stub
 		couponDAO.delete(t);
 		
 	}
-	
-	
+
 	@Override
 	public void update(Coupon t) {
 		// TODO Auto-generated method stub
 		couponDAO.update(t);
 		
 	}
-	
-	
+
 	@Override
 	public List<Coupon> list() {
 		// TODO Auto-generated method stub
 		return couponDAO.getListByHQL("from Coupon", null);
 		}
-		
+
 	@Override
 	public List<Coupon> getCoupon(Long uId) {
 		String hql = "from Coupon where uId=?";

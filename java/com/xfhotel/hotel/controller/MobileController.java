@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
-import com.xfhotel.hotel.dao.impl.CustomerDAOImpl;
-import com.xfhotel.hotel.dao.impl.CustomerDetailsDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Comment;
@@ -29,7 +28,6 @@ import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.Order;
-import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BannerService;
@@ -65,7 +63,8 @@ public class MobileController  {
 	BannerService bannerService;
 	@Autowired
 	CustomerService customerService;
-	
+	@Autowired
+	CouponService couponService;
 	
 	@Autowired
 	OrderService orderservice;
@@ -106,7 +105,7 @@ public class MobileController  {
 		return info;
 		
 	}
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public @ResponseBody  Message login(String tel, String password) {
 		Customer c = customerService.login(tel, password);
 		if (c != null) {
@@ -477,4 +476,5 @@ public class MobileController  {
 		}
 	}
 	
+
 }

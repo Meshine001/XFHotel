@@ -1,11 +1,10 @@
 package com.xfhotel.hotel.controller;
 
-import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,16 +25,20 @@ import com.xfhotel.hotel.support.Message;
 public class CouponController {
 	@Autowired
 	CouponService couponService;
-	@Autowired
-	HttpSession session;
 	@Autowired 
 	CustomerService customerService;
 	
 	
-	@RequestMapping(value = "/creation", method = RequestMethod.POST)
-	public @ResponseBody Message creation(Long startTime,Long endTime,int type,Double cValue,String rule, String[] Id) {
-		try {
-			for(String dd : Id){
+	@RequestMapping(value = "/sendlist", method = RequestMethod.POST)
+	public @ResponseBody Message sendlist(String startTime,String endTime,int type,Double cValue,String rule,String Id[]) {
+		System.out.println(startTime+endTime+type+cValue+rule+"+++"+Id);
+		try {	
+			String[] arr = new String[] {"1", "2"};
+			List<String> list = Arrays.asList(arr);
+			System.out.println(list);
+			List<String> UserId = Arrays.asList(Id);
+			for(String dd : list){
+				System.out.println("ss");
 				Long uId=Long.parseLong(dd);
 				Coupon coupon = new Coupon();
 				coupon.setcValue(cValue);
@@ -44,6 +47,7 @@ public class CouponController {
 				coupon.setRule(rule);
 				coupon.setuId(uId);
 				couponService.add(coupon);
+				System.out.println("dsdsdsd");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -52,27 +56,35 @@ public class CouponController {
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
 	}
-	@RequestMapping(value = "/sendlist", method = RequestMethod.POST)
-	public @ResponseBody Message dd(Double money , String sex , Double time){
+	@RequestMapping(value = "/dsendlist", method = RequestMethod.POST)
+	public @ResponseBody Message dsendlist(Double money , String sex , Double time){
+		Customer draw = new Customer();
 		try{
+			
+			System.out.println(money);
+			System.out.println(sex);
+			System.out.println(time);
 			if(money!=null){
 				List<Customer> c = customerService.list();
 				for(Customer customer : c){
 					if(customer.getConsumptionCount()>money){
-						session.setAttribute("customer", customer);
+						 draw = customer;
 					}
 				}
 			}else if(sex!=null){
 				List<CustomerDetails> cd = customerService.getlist();
+				
 				for(CustomerDetails customer : cd){
+					
 					if(customer.getSex()==sex){
-						Customer customer2=  customerService.getCustomer(customer.getId());
-						session.setAttribute("customer2", customer2);
+						System.out.println("dsds");
+						draw=  customerService.getCustomer(customer.getId());
 					}
 				}
 			}else if(time!=null){
+				System.out.println("faf");
 				List<Customer> c = customerService.list();
-				if(time==1){
+				if(time==0){
 					for (Customer customer : c) {
 						 Calendar calendar = Calendar.getInstance();
 					        Date date = new Date(System.currentTimeMillis());
@@ -82,10 +94,11 @@ public class CouponController {
 					        date = calendar.getTime();
 					        long ddd = dateToLong(date);
 						if(customer.getRegTime()>ddd){
-							session.setAttribute("customer", customer);
+							draw = customer;
 						}
 				    }
 				}else{
+					System.out.println("00dsd");
 					for (Customer customer : c) {
 						 Calendar calendar = Calendar.getInstance();
 					        Date date = new Date(System.currentTimeMillis());
@@ -95,7 +108,7 @@ public class CouponController {
 					        date = calendar.getTime();
 					        long ddd = dateToLong(date);
 						if(customer.getRegTime()<ddd){
-							session.setAttribute("customer", customer);
+							draw = customer;
 						}
 					}
 				}
@@ -104,10 +117,9 @@ public class CouponController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
-				}
-		
-		return new Message(Constants.MESSAGE_SUCCESS_CODE, "查找成功");
-	} 
+			}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, draw);
+	}
 
 	private long dateToLong(Date date) {
 		// TODO Auto-generated method stub

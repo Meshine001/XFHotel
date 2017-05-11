@@ -122,13 +122,18 @@ $(".masking").css({
 
 
 	function getData(_data){
+	var _data={
+			'money':$("#monetary option:selected").val(),
+			'sex':$("#sex option:selected").val(),
+			'time':$("#longtime option:selected").attr('tid')
+	};
 	$.ajax({
 		type:'POST',
 		async : false,
 		cache : false,
 		dataType:'json',
 		data:'_data',
-		url: "192.168.1.109:8080/Users/HY/Desktop/web/XFHotel/java/com/xfhotel/hotel/controller",
+		url: "./dsendlist",
 		error:function(){
 			alert('数据传输错误！')
 		},
@@ -147,13 +152,73 @@ $(".masking").css({
 
 //条件搜索；
  $("#longtime").on('change',function(){
-        getData($("#longtime option:selected").attr('tid'))
+//        getData($("#longtime option:selected").attr('tid'))
+        $.ajax({
+		type:'POST',
+		async : false,
+		cache : false,
+		dataType:'json',
+		data:{'time':$("#longtime option:selected").attr('tid')},
+		url: "./dsendlist",
+		error:function(){
+			alert('数据传输错误！')
+		},
+		success:function(data){
+			console.log(data);
+			var str='';
+			$("#list").html('');
+			for(var i=0;i<data.status.length;i++){
+				str+='<tr>'+data.data[i].id+'</tr><tr>'+data.data[i].level+'</tr><tr>'+data.data[i].tel+'</tr><tr>'+data.data[i].regTime+'</tr><tr>'+data.data[i].consumptionCount+'</tr><tr>'+data.data[i].consumptionTimes+'</tr><tr>'+data.data[i].status+'</tr><tr><a><i></i></a></tr>'
+			}
+			$("#list").append(str);
+		}
+	})
  });
  $("#monetary").on('change',function(){
-     getData($("#monetary option:selected").val())
+//     getData($("#monetary option:selected").val())
+       $.ajax({
+		type:'POST',
+		async : false,
+		cache : false,
+		dataType:'json',
+		data:{'money':$("#monetary option:selected").val()},
+		url: "./dsendlist",
+		error:function(){
+			alert('数据传输错误！')
+		},
+		success:function(data){
+			console.log(data);
+			var str='';
+			$("#list").html('');
+			for(var i=0;i<data.status.length;i++){
+				str+='<tr>'+data.data[i].id+'</tr><tr>'+data.data[i].level+'</tr><tr>'+data.data[i].tel+'</tr><tr>'+data.data[i].regTime+'</tr><tr>'+data.data[i].consumptionCount+'</tr><tr>'+data.data[i].consumptionTimes+'</tr><tr>'+data.data[i].status+'</tr><tr><a><i></i></a></tr>'
+			}
+			$("#list").append(str);
+		}
+	})
 });
  $("#sex").on('change',function(){
-     getData($("#sex option:selected").val())
+//     getData($("#sex option:selected").val())
+       $.ajax({
+		type:'POST',
+		async : false,
+		cache : false,
+		dataType:'json',
+		data:{'sex':$("#sex option:selected").val()},
+		url: "./dsendlist",
+		error:function(){
+			alert('数据传输错误！')
+		},
+		success:function(data){
+			console.log(data);
+			var str='';
+			$("#list").html('');
+			for(var i=0;i<data.status.length;i++){
+				str+='<tr>'+data.data[i].id+'</tr><tr>'+data.data[i].level+'</tr><tr>'+data.data[i].tel+'</tr><tr>'+data.data[i].regTime+'</tr><tr>'+data.data[i].consumptionCount+'</tr><tr>'+data.data[i].consumptionTimes+'</tr><tr>'+data.data[i].status+'</tr><tr><a><i></i></a></tr>'
+			}
+			$("#list").append(str);
+		}
+	})
 });
 
 $("#list").on('click','tr',function(){
@@ -188,19 +253,20 @@ function fasongdata(){
 }
 
 	
-var strlist='';
+var strlist2='';
 $("#delivery").click(function(){
 	$(".masking").show();
 	$("#sending").show();
 	$("#new-coupon").show();
-	strlist=new Array();
+    var	strlist=new Array();
 	var obj=$(this).parent().parent().parent().parent().find('#list tr');
 	for(var i=0;i<obj.length;i++){
 		if(obj.eq(i).hasClass('_active')==true){
 			strlist.push(obj.eq(i).attr('uid'))
 		}	
 	}
-   return strlist;
+	var strlist2=strlist.join(",")
+   return strlist2;
 })
 $("#closebtn").click(function(){
 	$(".masking").hide();
@@ -210,7 +276,7 @@ $("#closebtn").click(function(){
 
 $("#keepbtn").click(function(){
 	var postdata={
-			'Id':strlist,
+			'Id':strlist2,
 			"cValue":$('#pnumber').val(),
 			"type":$("#pId").val(),
 			"startTime":$("#mydatepicker2").val(),
@@ -220,16 +286,17 @@ $("#keepbtn").click(function(){
 	$(".masking,#sending").hide();
 	console.log(postdata)
 	$.ajax({
-		async : false,
-		cache : false,
+		
 		type : 'POST',
 		dataType : 'json',
 		data : postdata,
-		url : "./sendlist",
+//		url : "hotel/controller/AdminController/sendlist",
+		url:"./sendlist",
 		error : function(data) {// 请求失败处理函数
 			alert("发送失败！");
 		},
 		success :function(data){
+			console.log(data)
 			alert("发送成功")
 		}
 	})

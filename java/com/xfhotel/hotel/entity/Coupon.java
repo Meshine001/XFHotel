@@ -27,8 +27,8 @@ public class Coupon {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private Long startTime;
-	private Long endTime;
+	private String startTime;
+	private String endTime;
 	private int type;
 	private Double cValue;
 	private Long  uId;
@@ -52,16 +52,16 @@ public class Coupon {
 	public void setuId(Long uId){
 		this.uId = uId;
 	}
-	public Long getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Long startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	public Long getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Long endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 	public int getType() {
