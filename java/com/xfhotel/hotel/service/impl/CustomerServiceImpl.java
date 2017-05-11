@@ -50,11 +50,11 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Transactional
 	@Override
-	public Customer modify(CustomerDetails c, long cId) {
+	public Customer modify(CustomerDetails c, long Id) {
 		// TODO Auto-generated method stub
 		customerDetailsDAO.saveOrUpdate(c);
 
-		return customerDAO.get(cId);
+		return customerDAO.get(Id);
 	}
 
 	@Transactional
@@ -133,6 +133,12 @@ public class CustomerServiceImpl implements CustomerService {
 	public void updateBaseInfo(Customer c) {
 		// TODO Auto-generated method stub
 		customerDAO.update(c);
+	}
+	@Transactional
+	@Override
+	public List<CustomerDetails> getlist() {
+		// TODO Auto-generated method stub
+		return customerDetailsDAO.getListByHQL("from CustomerDetails", null);
 	}
 
 }

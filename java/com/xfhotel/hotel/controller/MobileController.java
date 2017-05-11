@@ -25,6 +25,7 @@ import com.xfhotel.hotel.dao.impl.CustomerDetailsDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Comment;
+import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.Order;
@@ -37,6 +38,7 @@ import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
+import com.xfhotel.hotel.service.impl.CouponService;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
@@ -80,8 +82,6 @@ public class MobileController  {
 	@Autowired
 	BlogService blogService;
 
-
-	
 	
 	@RequestMapping(value = "/home",method = RequestMethod.POST)
 	public @ResponseBody Map home(){
@@ -334,7 +334,7 @@ public class MobileController  {
 			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
 //		System.out.println(startTime);
 //		System.out.println(startTime+" 12:00");
-		System.out.println(cusId+description+roomId+cusName+cusTel+cusIdCard+personal+startTime+endTime+totalDay+price+totalPrice+preferential+needFapiao+apartmentType);
+		//System.out.println(cusId+description+roomId+cusName+cusTel+cusIdCard+personal+startTime+endTime+totalDay+price+totalPrice+preferential+needFapiao+apartmentType);
 				Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
@@ -381,7 +381,8 @@ public class MobileController  {
 			long customerId ,String nick,String tel,String idCard,
 			String sex,String birthday,String job,
 			String education,String declaration,String hobby) {
-		CustomerDetails c = new CustomerDetails(); 
+		Customer customer = customerService.getCustomer(customerId);
+		CustomerDetails c = customer.getDetails();
 		c.setNick(nick);
 		c.setTel(tel);
 		c.setIdCard(idCard);

@@ -92,7 +92,7 @@ public class CommentService implements com.xfhotel.hotel.service.CommentService 
 		rates.put("jiaotong", df.format(jiaotong));
 		rates.put("anquan", df.format(anquan));
 		rates.put("xingjiabi", df.format(xingjiabi));
-		return rates;
+		return rates; 
 	}
 
 	
