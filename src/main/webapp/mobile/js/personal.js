@@ -1,11 +1,11 @@
 ﻿
 $(document).ready(function(){
     //$(".vip_info_list li .per-order-status .tip-size").css("display","none");
-    var _uid=fnBase.huoqu(0,"uid");
-    if(_uid==null || _uid=="undefined" || _uid==""){
-        window.location.href="login.html";
-        return;
-    }
+    //var _uid=fnBase.huoqu(0,"uid");
+    //if(_uid==null || _uid=="undefined" || _uid==""){
+    //    window.location.href="login.html";
+    //    return;
+    //}
     var frontURL=Constant.URL+'/mobile/detailsData?id='+_uid;
     //var frontURL=Constant.URL+'/mobile/myOrder';
     var postData={};

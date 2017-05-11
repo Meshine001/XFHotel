@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="utf-8">
-    <title>青舍公寓(详情particulars)</title>
+    <title>青舍公寓</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <link rel="shortcut icon" href="images/bitbug_favicon.ico" />
 
@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="css/swiper-3.3.1.min.css" />
     <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
-    <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
+    <!--<script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>-->
     <script type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
     <script type="text/javascript" src="js/autoZoomLoadImage.js"></script>
     <script type="text/javascript" src="js/fastclick.js"></script>
-    <script charset="gb2312" language="javascript" type="text/javascript" src="js/house_particulars.js"></script>
+    <!--<script charset="gb2312" language="javascript" type="text/javascript" src="js/house_particulars.js"></script>-->
 <!--日历插件-->
     <link href="css/mobiscroll_002.css" rel="stylesheet" type="text/css">
     <script src="js/mobiscroll_002.js" type="text/javascript"></script>
@@ -121,29 +121,20 @@ $(function () {
                     <ul>
                         <!--<li>-->
                             <!--<span class="inf_sp">小区</span>-->
-                            <!--<span>'+data.info.address+'</span>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<span class="inf_sp">单元</span>-->
-                            <!--<span>'+data.info.fearures+'</span>-->
+                            <!--<span>福邸铭门</span>-->
                         <!--</li>-->
                         <!--<li>-->
                             <!--<span class="inf_sp">面积</span>-->
-                            <!--<span>'+data.info.square+data.info.direction+'</span>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<span class="inf_sp">楼层</span>-->
-                            <!--<span>'+data.info.price_scope+'</span>-->
+                            <!--<span>500</span>-->
                         <!--</li>-->
                         <!--<li>-->
                             <!--<span class="inf_sp">可住</span>-->
-                            <!--<span>'+data.info.capacity+"人"+'</span>-->
+                            <!--<span>2ren</span>-->
                         <!--</li>-->
                         <!--<li>-->
                             <!--<span class="inf_sp">户型</span>-->
-                            <!--<span>'+data.info.alyout+'</span>-->
+                            <!--<span>3</span>-->
                         <!--</li>-->
-
                     </ul>
                 </div>
             </section>
@@ -151,21 +142,23 @@ $(function () {
                 <h1 class="ic_house">房源配置</h1>
                 <div class="i_inf deploy">
                     <ul>
-                        <!--<li><i>空调</i></li>-->
-                        <!--<li><i>无线网络</i></li>-->
-                        <!--<li><i>茶室</i></li>-->
-                        <!--<li><i>麻将桌</i></li>-->
-                        <!--<li><i>大床房</i></li>-->
-                        <!--<li><i>卫生间</i></li>-->
-                        <!--<li><i>衣柜</i></li>-->
-                        <!--<li><i>热水淋浴</i></li>-->
-                        <!--<li><i>允许聚会</i></li>-->
+
                     </ul>
                 </div>
             </section>
             <section class="panel describe">
                 <h1 class="ic_house">房间描述</h1>
                 <p id="serviceIntro2"></p>
+            </section>
+            <section class="panel describe">
+                <h1 class="ic_house">房间特色</h1>
+                <div class="i_inf feature">
+                    <ul>
+                        <li><i>电视机</i></li>
+                        <li><i>电视机</i></li>
+
+                    </ul>
+                </div>
             </section>
             <section class="panel criticism">
                 <h1 class="ic_house">消费者评论</h1>
@@ -201,8 +194,6 @@ $(function () {
     <ul>
         <li><input value="" class="" readonly="readonly" placeholder="入住时间" name="appDate" id="appDate" type="text"></li>
         <li><input value="" class="" readonly="readonly" name="appDate" placeholder="离开时间" id="appDate2" type="text"></li>
-        <!--<li><input type="text" placeholder="入住日期" id="checkIn" readonly="readonly" class="doubledate ipticon"></li>-->
-        <!--<li><input type="text" placeholder="离开日期" id="leave" readonly="readonly" class="doubledate ipticon"></li>-->
     </ul>
     <p class="hint" style="clear: both;display: none"><i>!</i>您选的时间段内，有满房，请重新选择时间</p>
     <button class="but-success">确定</button>

@@ -63,7 +63,12 @@ public class AdminController {
 	public String homePage() {
 		return "redirect:/admin/login";
 	}
-
+	//..5.8优惠卷新加...
+	@RequestMapping(value = "/customer_sendlist", method = RequestMethod.GET)
+	public String sendlist() {
+		return "/admin/customer/sendlist";
+	}
+   //..5.8优惠卷结束...
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() {
 		return "/admin/login";
