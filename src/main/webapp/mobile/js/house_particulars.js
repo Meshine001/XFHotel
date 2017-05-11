@@ -44,9 +44,8 @@ $(document).ready(function(){
 
             //房源信息
             $(".housing .i_inf ul").html("");
-            var massage='<li><span class="inf_sp">小区</span><span>'+data.apartment.community+'</span></li><li><span class="inf_sp">单元</span><span>'+data.apartment.num_building
-                +'</span></li><li><span class="inf_sp">面积</span><span>'+data.apartment.square+"㎡"+'</span></li><li><span class="inf_sp">楼层</span><span>'+data.apartment.totalfloor
-                +'</span></li><li><span class="inf_sp">可住</span><span>'+data.apartment.capacity+"人"+'</span></li><li><span class="inf_sp">户型</span><span>'+data.apartment.balcony+"室"+data.apartment.bathroom+"厅"+
+            var massage='<li><span class="inf_sp">小区</span><span>'+data.apartment.community+'</span></li><li><span class="inf_sp">面积</span><span>'+data.apartment.square+"㎡"+'' +
+                '</span></li><li><span class="inf_sp">可住</span><span>'+data.apartment.capacity+"人"+'</span></li><li><span class="inf_sp">户型</span><span>'+data.apartment.balcony+"室"+data.apartment.bathroom+"厅"+
                 data.apartment.bedroom+"卫"+'</span></li>';
             $(".housing .i_inf ul").append(massage);
 
@@ -59,10 +58,14 @@ $(document).ready(function(){
             $(".allocation .deploy ul").append(str);
         //    房源描述
             $(".describe #serviceIntro2").text(data.room.descriptionPersonal);
+        //    房源特色
+        $(".describe .feature ul").html("");
+            var des='';
+            for(var i=0;i<data.apartment.facilityEntity.length;i++){
+                des+='<li><i>'+data.apartment.facilityEntity[i].description+'</i></li>';
+            }
+        $(".describe .feature ul").append(des);
 
-        //}else{
-        //    fnBase.myalert(data.room.descriptionPersonal)
-        //}
     });
 
 
