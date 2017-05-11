@@ -121,14 +121,14 @@ $(".masking").css({
 })
 
 
-	function getData(_data){
+	function getData(key,value){
 	$.ajax({
 		type:'POST',
 		async : false,
 		cache : false,
 		dataType:'json',
-		data:'_data',
-		url: "192.168.1.109:8080/Users/HY/Desktop/web/XFHotel/java/com/xfhotel/hotel/controller",
+		data:{'key':value},
+		url: "./dsendlist",
 		error:function(){
 			alert('数据传输错误！')
 		},
@@ -147,15 +147,16 @@ $(".masking").css({
 
 //条件搜索；
  $("#longtime").on('change',function(){
-        getData($("#longtime option:selected").attr('tid'))
+	 getData('time',$("#longtime option:selected").attr('tid'))
  });
  $("#monetary").on('change',function(){
-     getData($("#monetary option:selected").val())
+	 getData('money',$("#monetary option:selected").val())
 });
  $("#sex").on('change',function(){
-     getData($("#sex option:selected").val())
+	 getData('sex',$("#sex option:selected").val())
 });
-
+ 
+//用户选择
 $("#list").on('click','tr',function(){
 	if($(this).hasClass('_active')==false){
 		$(this).addClass('_active')
@@ -163,44 +164,21 @@ $("#list").on('click','tr',function(){
 		$(this).removeClass('_active')
 	}
 })
-fasongdata();
-function fasongdata(){
-	$("#variety,#price").html('');
-	$.ajax({
-		async : false,
-		cache : false,
-		type : 'POST',
-		dataType : 'json',
-		data : '',
-		url : "192.168.1.109:8080/Users/HY/Desktop/web/XFHotel/java/com/xfhotel/hotel/controller",
-		success :function(data){
-			var str,ptr='';
-			for(var i=0;i<data.vaie.length;i++){
-				str+='<option vid='+data.vid[i]+'>'+data.vid[i]+'</option>'
-			}
-			$("#variety").append(str);
-			for(var e=0;e<data.ptr.length;i++){
-				ptr+='<option pid='+data.pid[i]+'>'+data.pid[i]+'</option>'
-			}
-			$("#price").append(ptr);
-		}
-	})
-}
-
-	
-var strlist='';
+//选择用户发送优惠卷	
+var strlist2='';
 $("#delivery").click(function(){
 	$(".masking").show();
 	$("#sending").show();
 	$("#new-coupon").show();
-	strlist=new Array();
+	var strlist=new Array();
 	var obj=$(this).parent().parent().parent().parent().find('#list tr');
 	for(var i=0;i<obj.length;i++){
 		if(obj.eq(i).hasClass('_active')==true){
 			strlist.push(obj.eq(i).attr('uid'))
 		}	
 	}
-   return strlist;
+	strlist2=strlist.join(",")
+   return strlist2;
 })
 $("#closebtn").click(function(){
 	$(".masking").hide();
@@ -210,7 +188,7 @@ $("#closebtn").click(function(){
 
 $("#keepbtn").click(function(){
 	var postdata={
-			'Id':strlist,
+			'Id':strlist2,
 			"cValue":$('#pnumber').val(),
 			"type":$("#pId").val(),
 			"startTime":$("#mydatepicker2").val(),
@@ -220,21 +198,19 @@ $("#keepbtn").click(function(){
 	$(".masking,#sending").hide();
 	console.log(postdata)
 	$.ajax({
-		async : false,
-		cache : false,
+		
 		type : 'POST',
 		dataType : 'json',
 		data : postdata,
-		url : "./sendlist",
+		url:"./sendlist",
 		error : function(data) {// 请求失败处理函数
 			alert("发送失败！");
 		},
 		success :function(data){
+			console.log(data)
 			alert("发送成功")
 		}
 	})
-	
-//	222
 })
 
 
