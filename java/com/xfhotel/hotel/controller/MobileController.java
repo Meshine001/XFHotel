@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,15 +21,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
-import com.xfhotel.hotel.dao.impl.CustomerDAOImpl;
-import com.xfhotel.hotel.dao.impl.CustomerDetailsDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Comment;
+import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.Order;
-import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BannerService;
@@ -37,6 +36,7 @@ import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
+import com.xfhotel.hotel.service.impl.CouponService;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
@@ -63,7 +63,8 @@ public class MobileController  {
 	BannerService bannerService;
 	@Autowired
 	CustomerService customerService;
-	
+	@Autowired
+	CouponService couponService;
 	
 	@Autowired
 	OrderService orderservice;
@@ -80,8 +81,6 @@ public class MobileController  {
 	@Autowired
 	BlogService blogService;
 
-
-	
 	
 	@RequestMapping(value = "/home",method = RequestMethod.POST)
 	public @ResponseBody Map home(){
@@ -106,7 +105,7 @@ public class MobileController  {
 		return info;
 		
 	}
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public @ResponseBody  Message login(String tel, String password) {
 		Customer c = customerService.login(tel, password);
 		if (c != null) {
@@ -203,7 +202,7 @@ public class MobileController  {
 			vCode.put("diedLine", new Date().getTime()+Constants.SMS_AVAILBEL_TIME);
 			vCode.put("code", vCodeStr);
 			session.setAttribute("vCode", vCode);
-//			System.out.println("send vcode==>"+vCode);
+			//System.out.println("send vcode==>"+vCode);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -334,7 +333,7 @@ public class MobileController  {
 			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
 //		System.out.println(startTime);
 //		System.out.println(startTime+" 12:00");
-		System.out.println(cusId+description+roomId+cusName+cusTel+cusIdCard+personal+startTime+endTime+totalDay+price+totalPrice+preferential+needFapiao+apartmentType);
+		//System.out.println(cusId+description+roomId+cusName+cusTel+cusIdCard+personal+startTime+endTime+totalDay+price+totalPrice+preferential+needFapiao+apartmentType);
 				Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
@@ -381,7 +380,8 @@ public class MobileController  {
 			long customerId ,String nick,String tel,String idCard,
 			String sex,String birthday,String job,
 			String education,String declaration,String hobby) {
-		CustomerDetails c = new CustomerDetails(); 
+		Customer customer = customerService.getCustomer(customerId);
+		CustomerDetails c = customer.getDetails();
 		c.setNick(nick);
 		c.setTel(tel);
 		c.setIdCard(idCard);
@@ -476,4 +476,5 @@ public class MobileController  {
 		}
 	}
 	
+
 }

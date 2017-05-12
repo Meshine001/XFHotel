@@ -121,7 +121,7 @@ $(".masking").css({
 })
 
 
-	function getData(key,value){
+function getData(key,value){
 	$.ajax({
 		type:'POST',
 		async : false,
@@ -137,7 +137,7 @@ $(".masking").css({
 			var str='';
 			$("#list").html('');
 			for(var i=0;i<data.status.length;i++){
-				str+='<tr>'+data.data[i].id+'</tr><tr>'+data.data[i].level+'</tr><tr>'+data.data[i].tel+'</tr><tr>'+data.data[i].regTime+'</tr><tr>'+data.data[i].consumptionCount+'</tr><tr>'+data.data[i].consumptionTimes+'</tr><tr>'+data.data[i].status+'</tr><tr><a><i></i></a></tr>'
+			   str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+data.content[i].regTime+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 			}
 			$("#list").append(str);
 		}
@@ -147,13 +147,13 @@ $(".masking").css({
 
 //条件搜索；
  $("#longtime").on('change',function(){
-	 getData('time',$("#longtime option:selected").attr('tid'))
+	 getData(time,$("#longtime option:selected").attr('tid'))
  });
  $("#monetary").on('change',function(){
-	 getData('money',$("#monetary option:selected").val())
+	 getData(money,$("#monetary option:selected").val())
 });
  $("#sex").on('change',function(){
-	 getData('sex',$("#sex option:selected").val())
+	 getData(sex,$("#sex option:selected").val())
 });
  
 //用户选择
