@@ -230,33 +230,11 @@ $("#list").on('click','tr',function(){
 		$(this).removeClass('_active')
 	}
 })
-fasongdata();
-function fasongdata(){
-	$("#variety,#price").html('');
-	$.ajax({
-		async : false,
-		cache : false,
-		type : 'POST',
-		dataType : 'json',
-		data : '',
-		url : "192.168.1.109:8080/Users/HY/Desktop/web/XFHotel/java/com/xfhotel/hotel/controller",
-		success :function(data){
-			var str,ptr='';
-			for(var i=0;i<data.vaie.length;i++){
-				str+='<option vid='+data.vid[i]+'>'+data.vid[i]+'</option>'
-			}
-			$("#variety").append(str);
-			for(var e=0;e<data.ptr.length;i++){
-				ptr+='<option pid='+data.pid[i]+'>'+data.pid[i]+'</option>'
-			}
-			$("#price").append(ptr);
-		}
-	})
-}
+
 
 	
 var strlist2='';
-$("#delivery").click(function(){
+$(document).on('click','#delivery',function(){
 	$(".masking").show();
 	$("#sending").show();
 	$("#new-coupon").show();
@@ -267,9 +245,10 @@ $("#delivery").click(function(){
 			strlist.push(obj.eq(i).attr('uid'))
 		}	
 	}
-	var strlist2=strlist.join(",")
+	strlist2=strlist.join(",")
    return strlist2;
 })
+
 $("#closebtn").click(function(){
 	$(".masking").hide();
 	$("#sending").hide();
