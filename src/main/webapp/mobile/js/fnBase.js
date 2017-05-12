@@ -2,13 +2,13 @@
 console.log(baseUrl);
 //  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 
-//暂时添加东西关闭
+
 var clientIp = getIp();
 
 var Constant = {
-       //URL: "http://192.168.1.109"
-    //暂时添加东西关闭
-        URL: baseUrl
+//       URL: "http://192.168.1.106"
+ 
+        URL: baseUrl,
         //CLIENT_IP:clientIp
 };
 //zzzz
