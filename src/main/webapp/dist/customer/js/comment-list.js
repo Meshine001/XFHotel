@@ -17,12 +17,17 @@ function appendComments(comment) {
 		method : 'GET',
 		dataType : 'json',
 		success : function(data) {
-			console.log(data);
 			$(img).attr(
 					'src',
 					$('.comment_list').attr('data-url') + '/images/'
 							+ data.details.avatar);
-			var hHtml = "<a><span class='col_pink'>" + data.details.nick
+			var nick;
+			if(data.details.nick == '' || data.details.nick == undefined){
+				nick = '匿名用户';
+			}else{
+				nick = data.details.nick;
+			}
+			var hHtml = "<a><span class='col_pink'>" + nick
 					+ "</span></a>入住时间：  <i>" + comment.entryTime + "</i>";
 			$(h6).html(hHtml);
 		}
