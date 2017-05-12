@@ -175,12 +175,10 @@ public class AdminController {
 	@RequestMapping(value = "/sendlist", method = RequestMethod.POST)
 	public @ResponseBody Message sendlist(String startTime,String endTime,int type,Double cValue,String rule,String Id[]) {
 		System.out.println(startTime+endTime+type+cValue+rule+"+++"+Id);
+		
 		try {
-			
-			String[] arr = new String[] {"1", "2"};
-			List<String> list = Arrays.asList(arr);
+			List<String> list = Arrays.asList(Id);
 			System.out.println(list);
-			List<String> UserId = Arrays.asList(Id);
 			for(String dd : list){
 				System.out.println("ss");
 				Long uId=Long.parseLong(dd);
@@ -202,9 +200,9 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/dsendlist", method = RequestMethod.POST)
 	public @ResponseBody Message dsendlist(Double money , String sex , Double time){
-		Customer draw = new Customer();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		try{
-			
 			System.out.println(money);
 			System.out.println(sex);
 			System.out.println(time);
@@ -212,17 +210,19 @@ public class AdminController {
 				List<Customer> c = customerService.list();
 				for(Customer customer : c){
 					if(customer.getConsumptionCount()>money){
-						 draw = customer;
+						map.put(customer.getTel(), customer);	
 					}
+					
 				}
 			}else if(sex!=null){
 				List<CustomerDetails> cd = customerService.getlist();
-				
-				for(CustomerDetails customer : cd){
+				for(CustomerDetails customer2 : cd){
 					
-					if(customer.getSex()==sex){
+					if(customer2.getSex().equals(sex)){
 						System.out.println("dsds");
-						draw=  customerService.getCustomer(customer.getId());
+						Customer customer=  customerService.getCustomer(customer2.getId());
+						map.put(customer.getTel(), customer);	
+						
 					}
 				}
 			}else if(time!=null){
@@ -238,7 +238,7 @@ public class AdminController {
 					        date = calendar.getTime();
 					        long ddd = dateToLong(date);
 						if(customer.getRegTime()>ddd){
-							draw = customer;
+							map.put(customer.getTel(), customer);
 						}
 				    }
 				}else{
@@ -252,7 +252,7 @@ public class AdminController {
 					        date = calendar.getTime();
 					        long ddd = dateToLong(date);
 						if(customer.getRegTime()<ddd){
-							draw = customer;
+							map.put(customer.getTel(), customer);
 						}
 					}
 				}
@@ -262,7 +262,11 @@ public class AdminController {
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
 			}
-		return new Message(Constants.MESSAGE_SUCCESS_CODE, draw);
+		 ArrayList<Object> list = new ArrayList<Object>();
+		  for(String key : map.keySet()){
+		   list.add(map.get(key));
+		  }
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
 	}
 	private long dateToLong(Date date) {
 		// TODO Auto-generated method stub
