@@ -56,7 +56,7 @@ $(document).ready(function(){
         var postData={};
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
-            $("#avatar").attr('src','http://192.168.1.109:8080/hotel/images/'+data.details.avatar);
+            $("#avatar").attr('src','/images/'+data.details.avatar);
             $("#fillNick").val(data.details.nick);
             $("#Sex").text(data.details.sex);
             $("#tel").val(data.details.tel);

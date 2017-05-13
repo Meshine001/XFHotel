@@ -293,7 +293,7 @@ $("#keepbtn").click(function(){
 		},
 		success :function(data){
 			console.log(data)
-			alert("发送成功")
+			alert(data.content)
 		}
 	})
 	

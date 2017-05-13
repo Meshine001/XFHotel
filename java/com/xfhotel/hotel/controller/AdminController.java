@@ -173,15 +173,12 @@ public class AdminController {
 		return "/admin/dashboard";
 	}
 	@RequestMapping(value = "/sendlist", method = RequestMethod.POST)
-	public @ResponseBody Message sendlist(String startTime,String endTime,int type,Double cValue,String rule,String Id[]) {
+	public @ResponseBody Message sendlist(String startTime,String endTime,int type,Double cValue,String rule,Long Id[]) {
 		System.out.println(startTime+endTime+type+cValue+rule+"+++"+Id);
 		
 		try {
-			List<String> list = Arrays.asList(Id);
-			System.out.println(list);
-			for(String dd : list){
-				System.out.println("ss");
-				Long uId=Long.parseLong(dd);
+			List<Long> list = Arrays.asList(Id);
+			for(Long uId : list){
 				Coupon coupon = new Coupon();
 				coupon.setcValue(cValue);
 				coupon.setStartTime(startTime);

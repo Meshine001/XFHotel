@@ -105,7 +105,7 @@ public class MobileController  {
 		return info;
 		
 	}
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public @ResponseBody  Message login(String tel, String password) {
 		Customer c = customerService.login(tel, password);
 		if (c != null) {
@@ -155,7 +155,19 @@ public class MobileController  {
 
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
+	
+	@RequestMapping(value = "/get", method = RequestMethod.POST)
+	public @ResponseBody PageResults<Comment> getRoomComments(Long roomId,Integer page){
+		return commentService.getComments(roomId, page);
+	}
+	
+	@RequestMapping(value = "/getRoomRates", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> getRoomRates(Long roomId){
+		return commentService.getRoomRates(roomId);
+	}
 
+	
+	
 	@RequestMapping(value="/checkVCode")  
 	public @ResponseBody Message checkVCode(String tel,String vCode){
 		System.out.println(session.getId());

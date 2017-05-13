@@ -94,7 +94,7 @@ function getData() {
         var isoffers;
         $('.plCon .goodlist').html("");
         for (var i = 0; i < data.homeRooms.length; i++) {
-            str += '<li proID=' + data.homeRooms[i].id + '><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="' + Constant.URL+'/images/' + data.homeRooms[i].pic3[1] + '"></a><h1 class="text-ellipsis"><a href="">' + data.homeRooms[i].community + '</a></h1><h2 class="text-ellipsis">' + data.homeRooms[i].balcony + "室" + data.homeRooms[i].bathroom + "厅" +
+            str += '<li proID=' + data.homeRooms[i].id + '><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="' + Constant.URL+'/images/' + data.homeRooms[i].pic3[1] + '"></a><h1 class="text-ellipsis"><a href="">'+data.homeRooms[i].address+"-" + data.homeRooms[i].community + '</a></h1><h2 class="text-ellipsis">' + data.homeRooms[i].balcony + "室" + data.homeRooms[i].bathroom + "厅" +
                 data.homeRooms[i].bedroom + "卫" + "-" + data.homeRooms[i].direction + '</h2><p class="text-ellipsis address">' + data.homeRooms[i].location + data.homeRooms[i].address + '</p><p class="label-group"><i class="label-type1">' + data.homeRooms[i].apartmenttype + '</i></p><span class="label-price">' + data.homeRooms[i].dayPrice + '<small>/天</small></span></div></li>';
         }
         $('.plCon .goodlist').append(str);

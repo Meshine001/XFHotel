@@ -8,7 +8,7 @@ console.log(baseUrl);
 var Constant = {
        //URL: "http://192.168.1.109"
     //暂时添加东西关闭
-        //URL: baseUrl,
+        URL: baseUrl,
         //CLIENT_IP:clientIp
 };
 //zzzz

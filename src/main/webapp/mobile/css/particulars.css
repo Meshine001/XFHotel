@@ -17,7 +17,7 @@
     padding: 0 0.1rem;
     z-index: 10;
     height: 0.45rem;
-    background: #00b38a;
+   
 }
 .navbar a:first-child{border: 0}
 .navbar a{
@@ -100,26 +100,37 @@
     background-color: #ffeacc;
     color: #ff7200;
 }
-/*ÓÃ»§ÆÀÂÛ*/
+/*ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½*/
+
 .panel .appraise{width: 100%;height: auto}
 .panel .appraise li{border-bottom: 1px solid #e6e6e6;padding: 0.06rem 0;;font-size: 0.14rem}
 .panel .appraise li .appInfo span{display: inline-block;padding: 0 0.06rem;background: #999988;color: #fff;border-radius: 0.05rem}
-.panel .appraise li .appInfo i{display: inline-block;color: #ea644a;padding: 0 0.03rem;border: 1px solid #ea644a;margin-left: 0.1rem}
+.panel .appraise li .appInfo i{padding-left: 0.1rem;color:#999988}
+
+#pingjia{font-size:0.14rem;}
+#pingjia span{display: inline-block;color: #ea644a;padding: 0 0.03rem;border: 1px solid #ea644a;margin-left: 0.1rem;}
+.panel .appDate{background:#e0e0e6}
+.panel .pl-pic img{width:24%;height:0.65rem;margin-left:0.02rem}
+/*
+.panel .pl-pic{display:none}
+
+*/
+.panel .appDate{height:0.6rem;;display:none}
 /*---------------*/
 .i_inf{width: 100%;height: auto;overflow: hidden}
 .i_inf ul li{width: 50%;float: left;height: 0.3rem;line-height: 0.3rem;}
 .i_inf ul li span{font-size: 0.14rem;color: #333;line-height: 0.3rem;display: block;float: left;}
 .i_inf .inf_sp{color: #aaa;margin-right: 0.1rem;}
 
-/*deploy ÅäÖÃ*/
+/*deploy ï¿½ï¿½ï¿½ï¿½*/
 .deploy ul li{width: 24%;text-align: center;border: 1px solid #50ccc9;margin-bottom: 0.03rem;margin-right: 0.03rem;border-radius:0.15rem}
 .deploy ul li i{display: block;font-size: 0.14rem;color: #50ccc9;overflow: hidden}
-/*·¿¼äÃèÊö*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 #serviceIntro2{line-height: 0.23rem}
 
 
 
-/*Ñ¡ÔñÆðÖ¹ÈÕÆÚ*/
+/*Ñ¡ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½*/
 .alert-content{
     position: fixed;
     width: 100%;
