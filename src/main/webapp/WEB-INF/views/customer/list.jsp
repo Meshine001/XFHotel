@@ -111,69 +111,9 @@
 
 						</dt>
 					</dl>
-					<dl id="ditie_dl" class="srh_list" style="display: none;">
-						<dd>地铁：</dd>
-						<dt>
-							<ul id="ditie_ul">
-								<span class="srh_all srh_all_on">不限</span>
-								<li id="1"><span>1号线</span></li>
-								<li id="2"><span>2号线</span></li>
-							</ul>
-						</dt>
-					</dl>
-					<dl id="dibiao_dl1" class="srh_list"
-						style="margin-top: 10px; display: none;">
-						<dd>&nbsp;&nbsp;</dd>
-						<dt>
-							<ul id="dibiao_ul">
-								<li id="2884"><span>西流湖站</span></li>
-								<li id="2863"><span>西三环站</span></li>
-								<li id="2882"><span>秦岭路站</span></li>
-								<li id="2865"><span>桐柏路站</span></li>
-								<li id="2883"><span>碧沙岗站</span></li>
-								<li id="2859"><span>绿城广场站</span></li>
-								<li id="2861"><span>医学院站</span></li>
-								<li id="2856"><span>郑州火车站</span></li>
-								<li id="2864"><span>二七广场站</span></li>
-								<li id="2877"><span>人民路站</span></li>
-								<li id="2854"><span>紫荆山站</span></li>
-								<li id="2858"><span>燕庄站</span></li>
-								<li id="2867"><span>民航路站</span></li>
-								<li id="2862"><span>会展中心站</span></li>
-								<li id="2860"><span>黄河南路站</span></li>
-								<li id="2873"><span>农业南路站</span></li>
-								<li id="2866"><span>东风南路站</span></li>
-								<li id="2855"><span>郑州东站</span></li>
-								<li id="2872"><span>博学路站</span></li>
-								<li id="2857"><span>市体育中心站</span></li>
-							</ul>
-						</dt>
-					</dl>
-					<dl id="dibiao_dl2" class="srh_list"
-						style="margin-top: 10px; display: none;">
-						<dd>&nbsp;&nbsp;</dd>
-						<dt>
-							<ul id="dibiao_ul">
-								<li id="2868"><span>刘庄站</span></li>
-								<li id="2871"><span>柳林站</span></li>
-								<li id="2870"><span>沙门站</span></li>
-								<li id="2869"><span>北三环站</span></li>
-								<li id="2875"><span>东风路站</span></li>
-								<li id="2874"><span>关虎屯站</span></li>
-								<li id="2876"><span>黄河路站</span></li>
-								<li id="2854"><span>紫荆山站</span></li>
-								<li id="2879"><span>东大街站</span></li>
-								<li id="2880"><span>陇海东路站</span></li>
-								<li id="2881"><span>二里岗站</span></li>
-								<li id="2878"><span>南五里堡站</span></li>
-								<li id="2885"><span>花寨站</span></li>
-								<li id="2887"><span>南三环站</span></li>
-								<li id="2886"><span>站马屯站</span></li>
-								<li id="2888"><span>南四环站</span></li>
-							</ul>
-						</dt>
-					</dl>
-					<dl class="srh_list">
+
+
+					<dl class="srh_list" style="display: none;">
 						<dd>租金：</dd>
 						<dt>
 							<ul id="priceRange_ul">
@@ -271,28 +211,6 @@
 							</ul>
 						</dt>
 					</dl>
-					<!--            <dl class="srh_list">
-              <dd>产品：</dd>
-              <dt>
-                <ul id="type_ul">
-                  <span class="srh_all srh_all_on">全部</span>
-                  <li id="1"><span>晴朗系列</span></li>
-                  <li id="2"><span>马卡龙系列</span></li>
-                  <li id="3"><span>时光系列</span></li>
-                </ul>
-              </dt>
-            </dl>-->
-					<!--        <dl class="srh_list">
-              <dd>室友：</dd>
-              <dt>
-                <ul id="leixing_ul">
-                  <span class="srh_all srh_all_on">无所谓</span>
-                  <li id="3"><span>全姑娘</span></li>
-                  <li id="2"><span>全小伙</span></li>
-                  <li id="1"><span>爱情公寓</span></li>
-                </ul>
-              </dt>
-            </dl>-->
 				</div>
 			</div>
 		</div>
@@ -324,26 +242,25 @@
 								<!---->
 							</dd>
 							<dt>
-								<!--对比和收藏为鼠标经过时显示，对比的图标选中样式为<i class="duibi_on">，收藏的图标选中样式为<i class="shoucang_on">-->
-								<div class="b_list_tit">
+								<div class="b_list_tit" style="margin-top: 15px;">
 									<span
 										title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
 										class="duibi" style="display: none;"><i></i>加入对比</span><span
 										class="shoucang" style="display: none; cursor: pointer;"><i></i>加入收藏</span>
-									<h3>
-										<a href="info/${apartment.rooms[0].id}"
-											title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
-											target="_blank" rel="nofollow">${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间</a>
+									<h3 >
+										<a href="<%=basePath%>/info/${apartment.rooms[0].id}"
+											title="${apartment.community}-${apartment.address_square}-${apartment.direction}朝向"
+											target="_blank" rel="nofollow">${apartment.community}-${apartment.address_square}-${apartment.direction}朝向</a>
 									</h3>
 								</div>
 								<div class="b_txt">
-									<p>类型：${apartment.apartmenttype}&nbsp;&nbsp;&nbsp;&nbsp;评价：</p>
-									<p>楼层：第${apartment.floor}层/共${apartment.totalfloor}层&nbsp;&nbsp;面积：${apartment.square}㎡&nbsp;&nbsp;朝向：${apartment.direction}</p>
+									<p>类型：${apartment.apartmenttype}&nbsp;&nbsp;&nbsp;&nbsp;</p>
+									<p>面积：${apartment.square}㎡&nbsp;&nbsp;朝向：${apartment.direction}</p>
 									<p>
 										地址：${apartment.location}${apartment.address}<a class="f_map"
 											data-longitude="${apartment.longitude}"
 											data-latitude="${apartment.latitude}"
-											href="javascript:void(0);" title="导航"><i></i>导航</a>
+											href="javascript:void(0);" title=""><i></i></a>
 									</p>
 									<ul>
 										<c:forEach items="${apartment.facilityEntity}" var="f">
@@ -385,7 +302,7 @@
 						}
 						$('.page').append(a);
 					}
-					var html = "<a class='pgdn' title='下一页' href=''>&gt;</a><a"+
+					var html = "<a class='pgdn' title='下一页' href=''>&gt;</a><a "+
 					"href='' title='最后一页'>&gt;&gt;</a>";
 					$('.page').append(html);
 				</script>

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonArray;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Banner;
@@ -153,7 +154,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public String list(SearchForm searchData,Integer currentPage) {
+	public  String list(SearchForm searchData,Integer currentPage) {
 		if(null == currentPage){
 			currentPage = 1;
 		}

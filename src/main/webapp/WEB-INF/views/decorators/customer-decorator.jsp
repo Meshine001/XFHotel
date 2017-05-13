@@ -133,9 +133,9 @@
 							class="xg_pwd fr">修改密码&gt;</a>
 					</div>
 					<div class="e_ewm">
-						<img src="<%=basePath%>/dist/public/v1/images/em.png" width="121"
+						<img src="<%=basePath%>/dist/public/v1/images/em.jpg" width="121"
 							height="121">
-						<p>扫一扫 下载青舍APP</p>
+						<p>扫一扫 关注青舍公共号</p>
 					</div>
 				</div>
 				<div class="e_right">

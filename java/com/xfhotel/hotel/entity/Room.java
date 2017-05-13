@@ -106,7 +106,7 @@ public class Room implements Serializable {
 
 	public void setPrices(String prices) {
 		this.prices = prices;
-		int tmp = Integer.valueOf(prices.split("@")[0]);
+		Double tmp = Double.valueOf(prices.split("@")[0]);
 		for(int i=0; i<Constants.price_scope.length;i++){
 			if(tmp<Constants.price_scope[i]){
 				this.price_scope=i+"";

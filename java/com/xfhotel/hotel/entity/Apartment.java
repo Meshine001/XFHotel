@@ -333,7 +333,8 @@ public class Apartment {
 		map.put("longitude", this.getLongitude());
 		map.put("apartmenttype", apartmentType);
 		map.put("type", this.getType());
-		map.put("address", this.getAddress().split("@")[0]);
+		map.put("address", this.getAddress().split("@")[0].split("-")[1]);
+		map.put("address_square",this.getAddress().split("@")[0].split("-")[0]);
 		map.put("community", this.getAddress().split("@")[1]);
 		map.put("num_building", this.getAddress().split("@")[2]);
 		map.put("location", this.getAddress().split("@")[3]);

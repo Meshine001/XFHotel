@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,9 +23,9 @@ import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Comment;
-import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
@@ -34,12 +33,19 @@ import com.xfhotel.hotel.service.BannerService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.service.impl.CouponService;
+import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
+import com.xfhotel.hotel.support.LayoutType;
+import com.xfhotel.hotel.support.LeasePrice;
+import com.xfhotel.hotel.support.LeaseType;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
+import com.xfhotel.hotel.support.RoomStatus;
+import com.xfhotel.hotel.support.SearchForm;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
@@ -53,6 +59,9 @@ import net.sf.json.JSONObject;
 @RequestMapping("mobile")
 public class MobileController  {
 
+	
+	@Autowired
+	FeatureService featrueService;
 
 	@Autowired
 	RoomService roomService;
@@ -487,6 +496,7 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
 		}
 	}
+	
 	
 
 }

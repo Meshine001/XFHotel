@@ -17,8 +17,7 @@
             $('<i/>').addClass('name-icon icon-li').appendTo($('dd').text(item.endTime).appendTo(allTitle));
             var qunatity = $('<td/>').addClass('qunatity').appendTo(tr);
             var qHtml = "<em style='font-family:arial;'></em>" //+ item.price 
-            + '共'+item.totalDay+'天'
-            + '<br><br><br>'+ item.needFapiao;
+            + '共'+item.totalDay+'天';
             qunatity.html(qHtml);
             var pHtml =  "<em style='font-family:arial;'>¥</em>" + item.totalPrice;
             $('<li/>').html(pHtml).appendTo($('<ul/>').addClass('orderbd-list').appendTo($('<td/>').addClass('price').appendTo(tr)));

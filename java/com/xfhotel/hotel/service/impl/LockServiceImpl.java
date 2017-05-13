@@ -60,7 +60,7 @@ public class LockServiceImpl implements LockService {
 		values[1] = lock.getLock_no();
 		Lock lock_check = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?",values);
 		if(lock_check!=null){
-			return "";
+			return "该手机已有密码";
 		}else{
 			JSONObject param = new JSONObject();
 			param.put("lock_no", lock.getLock_no());
@@ -76,9 +76,10 @@ public class LockServiceImpl implements LockService {
 				lock.setPwd_text(DES.decrypt(result.getString("pwd_text")));
 				lock.setAvailiable(0);
 				lockDAOImpl.save(lock);
+				return "成功";
 			}
-			return "";
-		}
+			return result.getString("rlt_code");
+			}
 	}
 
 	@Override
@@ -127,7 +128,7 @@ public class LockServiceImpl implements LockService {
 
 	@Transactional
 	@Override
-	public void addPassword(String phone, String lock_no, String time_start, String time_end) {
+	public String addPassword(String phone, String lock_no, String time_start, String time_end) throws Exception {
 		Calendar start = Calendar.getInstance();
 		try {
 			start.setTime(new SimpleDateFormat("yyyyMMddHHmmss").parse(time_start));
@@ -148,12 +149,15 @@ public class LockServiceImpl implements LockService {
 		lock.setValid_time_end(end.getTimeInMillis());
 		lock.setValid_time_start(start.getTimeInMillis());
 		String ostr="";
-		try {
-			ostr = this.addPassword(lock);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		ostr = this.addPassword(lock);
+		
+		if(ostr.equals("成功")){
+			return "success";
 		}
+		
+		return ostr;
+		
 		
 	}
 

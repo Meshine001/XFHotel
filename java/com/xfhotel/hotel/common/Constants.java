@@ -4,6 +4,8 @@ public class Constants {
 	
 	public static final String Host_Address = "http://www.yiyunzn.xyz/";
 	
+	public static final String ADMIN_TEL = "18710579465";
+	
 	public static final String ADMIN_SESSION_ATTR = "admin-session";
 	public static final String CUSTOMER_SESSION_ATTR = "c";
 	
@@ -49,6 +51,8 @@ public class Constants {
 	public static final String SMS_VALIDATE_REGISTER = "156526";
 	public static final String SMS_VALIDATE_MODIFY_PASSWORD = "156527";
 	public static final String SMS_INFORM_LOCK_CODE = "156532";
+	public static final String SMS_INFORM_OVER_PAY = "174009";
+	public static final String SMS_INFORM_COMFIRM_ORDER = "174007";
 	
 	public static final String SMS_AVAILBEL_TIME_STR = "2分钟";
 	public static final Long SMS_AVAILBEL_TIME = Long.valueOf(1000*60*2);

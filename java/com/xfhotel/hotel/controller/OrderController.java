@@ -29,6 +29,7 @@ import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CommentService;
+import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.DateUtil;
@@ -52,48 +53,50 @@ public class OrderController {
 	ApartmentService apartmentService;
 	@Autowired
 	CommentService commentService;
+	@Autowired
+	LockService lockService;
 
 	@Autowired
 	HttpSession session;
 
 	/**
 	 * 退租
+	 * 
 	 * @param orderId
 	 * @return
 	 */
 	@RequestMapping(value = "/outLease", method = RequestMethod.POST)
 	@ResponseBody
-	public Message outLease(Long orderId){
+	public Message outLease(Long orderId) {
 		try {
 			Order o = orderservice.get(orderId);
-			//TODO 退押金,
+			// TODO 退押金,
 			String[] prices = o.getPrice().split("@");
-			String refundFee = prices[prices.length-1];
-			//若是微信支付的
-			if(Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
-					||Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())){
+			String refundFee = prices[prices.length - 1];
+			// 若是微信支付的
+			if (Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
+					|| Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())) {
 				JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), refundFee);
-				if("success".equals(result.getString("status"))){
+				if ("success".equals(result.getString("status"))) {
 					o.setStatus(Order.STATUS_COMPLETE);
 					orderservice.update(o);
 					return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
-				}else{
+				} else {
 					return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
 				}
-			}else{
+			} else {
 				o.setStatus(Order.STATUS_COMPLETE);
 				orderservice.update(o);
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
 			}
-			
-		
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
+			// e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
 		}
 	}
-	
+
 	/**
 	 * 返回订单模板，在房间信息页，点击‘立即预定’触发
 	 * 
@@ -109,7 +112,7 @@ public class OrderController {
 	public String orderModule(String startTime, String endTime, Long apartmentId) throws Exception {
 		session.setAttribute("oStart", startTime);
 		session.setAttribute("oEnd", endTime);
-		System.out.println(startTime+endTime);
+		System.out.println(startTime + endTime);
 		Map<String, Object> priceInfo = apartmentService.caculatePrice(startTime, endTime, apartmentId);
 		System.out.println(priceInfo);
 		session.setAttribute("oTotalDay", TimeUtil.daysBetween(startTime, endTime));
@@ -117,9 +120,9 @@ public class OrderController {
 		session.setAttribute("oTotalPrice", priceInfo.get("totalPrice"));
 		session.setAttribute("oCashPledge", priceInfo.get("cashPledge"));
 		session.setAttribute("oPreferential", "");
+		session.setAttribute("capacity", priceInfo.get("capacity"));
 		return "customer/orderModule";
 	}
-
 
 	@RequestMapping(value = "/checkAvailable", method = RequestMethod.GET)
 	public @ResponseBody Message checkAvailable(Long roomId, String startTime, String endTime) {
@@ -156,12 +159,10 @@ public class OrderController {
 	 */
 	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
 	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
-			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
-			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
-//		System.out.println(startTime);
-//		System.out.println(startTime+" 12:00");
-		System.out.println(description+"sda"+preferential+"大大adsas"+personal+needFapiao);
-				Order o = new Order();
+			String otherCusName, String otherCusIdCard, String cusIdCard, String personal, String startTime,
+			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
+			String apartmentType) {
+		Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
 		o.setRoomId(roomId);
@@ -169,23 +170,27 @@ public class OrderController {
 		o.setCusTel(cusTel);
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
+		o.setOtherCusName(otherCusName);
+		o.setOtherCusIdCard(otherCusIdCard);
 		try {
-			o.setStartTime(DateUtil.parse(startTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
-			o.setEndTime(DateUtil.parse(endTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
+			o.setStartTime(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
+			o.setEndTime(DateUtil.parse(endTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		o.setTime(new Date().getTime());
 		o.setTotalDay(totalDay);
-		o.setPrice(price);
+		Map room = roomService.getRoomInfo(roomId);
+		Apartment apartment = apartmentService.findById((Long) room.get("apartment"));
+		o.setPrice(price + "@" + apartment.getYajin());
 		o.setTotalPrice(totalPrice);
 		o.setPreferential(preferential);
 		o.setType(Apartment.getTypeNum(apartmentType));
 		o.setStatus(Order.STATUS_ON_PAY);
 		o.setNeedFapiao(needFapiao);
 		orderservice.add(o);
-		
+
 		return "redirect:pay/" + o.getId();
 	}
 
@@ -195,6 +200,78 @@ public class OrderController {
 		Order o = orderservice.get(orderId);
 		session.setAttribute("order", o);
 		return "customer/orderDetails";
+	}
+
+	/**
+	 * 关闭订单
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/close", method = RequestMethod.POST)
+	@ResponseBody
+	public Message closeOrder(Long id) {
+		Order o = orderservice.get(id);
+		if (o == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+		// 若是微信支付的
+		if (Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
+				|| Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())) {
+			JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), o.getTotalPrice());
+			if ("success".equals(result.getString("status"))) {
+				o.setStatus(Order.STATUS_CANCEL);
+				orderservice.update(o);
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, "关闭订单成功");
+			} else {
+				return new Message(Constants.MESSAGE_ERR_CODE, "关闭订单失败");
+			}
+		} else {
+			o.setStatus(Order.STATUS_CANCEL);
+			orderservice.update(o);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "关闭订单成功");
+		}
+
+	}
+
+	/**
+	 * 管理员确认订单
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/comfirm", method = RequestMethod.POST)
+	@ResponseBody
+	public Message comfirmOrder(Long id) {
+		Order o = orderservice.get(id);
+		if (o == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+		if (o.getStatus() == Order.STATUS_ON_COMFIRM) {
+			try {
+				// 发送门锁密码
+				Long roomId = o.getRoomId();
+				Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
+				String lock_no = (String) apartmentService.getApartmentInfo(apartment).get("lock_address");
+				String result = lockService.addPassword(o.getCusTel(), lock_no,
+						DateUtil.format(new Date(o.getStartTime()), "yyyyMMddhhmmss"),
+						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddhhmmss"));
+				if(result.equals("success")){
+					o.setStatus(Order.STATUS_ON_LEASE);
+					orderservice.update(o);
+				}else{
+					return new Message(Constants.MESSAGE_ERR_CODE, result);
+				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+			}
+
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
+
 	}
 
 	/**
@@ -208,7 +285,7 @@ public class OrderController {
 		// TODO 还需要加入一些权限限制
 		Order o = orderservice.get(orderId);
 
-		session.setAttribute("lockPsd", "123213");
+		session.setAttribute("lockPsd", "还没弄好");
 		return "customer/viewLockPsd";
 	}
 
@@ -224,8 +301,7 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range)
-	{
+	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range) {
 		try {
 			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
@@ -304,8 +380,6 @@ public class OrderController {
 		session.setAttribute("order", order.toMap());
 		return "customer/order";
 	}
-
-
 
 	/**
 	 * 交易完成

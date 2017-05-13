@@ -94,7 +94,7 @@ $(document).ready(function(){
                 timeout:30000,
                 dataType : "json",
                 async : true,
-                type : "post",
+                type : "POST",
                 success : function(data) {
                     fnBase.loadHide();
                     fn(data);
