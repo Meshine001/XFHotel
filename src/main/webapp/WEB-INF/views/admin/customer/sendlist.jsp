@@ -71,7 +71,6 @@
 						<th>
 							注册时间
 								<select id="longtime">
-									
 									<option tid="0">新用户注册</option>
 									<option tid="1">注册满一年</option>
 								</select>

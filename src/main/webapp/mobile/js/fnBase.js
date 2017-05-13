@@ -2,12 +2,12 @@
 console.log(baseUrl);
 //  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 
-//暂时添加东西关闭
-//var clientIp = getIp();
+
+var clientIp = getIp();
 
 var Constant = {
-       //URL: "http://192.168.1.109"
-    //暂时添加东西关闭
+//       URL: "http://192.168.1.106"
+ 
         URL: baseUrl,
         //CLIENT_IP:clientIp
 };
@@ -94,7 +94,7 @@ $(document).ready(function(){
                 timeout:30000,
                 dataType : "json",
                 async : true,
-                type : "POST",
+                type : "post",
                 success : function(data) {
                     fnBase.loadHide();
                     fn(data);

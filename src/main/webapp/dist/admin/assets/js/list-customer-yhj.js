@@ -167,14 +167,9 @@ $(".masking").css({
 			success:function(data){
 				console.log(data);
 				var str='';
-				var newTime=new Array();
 				$("#list").html('');
 				for(var i=0;i<data.content.length;i++){
-					var infotime=data.content[i].regTime;
-					var j = new Date(infotime);
-					var istime=j.toLocaleDateString()
-					    newTime.push(istime);
-					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
+					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+data.content[i].regTime+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 				}
 				$("#list").append(str);
 			}
@@ -195,14 +190,9 @@ $(".masking").css({
 			success:function(data){
 				console.log(data);
 				var str='';
-				var newTime=new Array();
 				$("#list").html('');
 				for(var i=0;i<data.content.length;i++){
-					var infotime=data.content[i].regTime;
-					var j = new Date(infotime);
-					var istime=j.toLocaleDateString()
-					    newTime.push(istime);
-					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
+					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+data.content[i].regTime+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 				}
 				$("#list").append(str);
 			}
@@ -224,14 +214,9 @@ $(".masking").css({
 		success:function(data){
 			console.log(data);
 			var str='';
-			var newTime=new Array();
 			$("#list").html('');
 			for(var i=0;i<data.content.length;i++){
-				var infotime=data.content[i].regTime;
-				var j = new Date(infotime);
-				var istime=j.toLocaleDateString()
-				    newTime.push(istime);
-				str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
+				str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+data.content[i].regTime+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 			}
 			$("#list").append(str);
 		}
@@ -246,8 +231,6 @@ $("#list").on('click','tr',function(){
 	}
 })
 
-
-	
 var strlist2='';
 $(document).on('click','#delivery',function(){
 	$(".masking").show();
@@ -263,6 +246,8 @@ $(document).on('click','#delivery',function(){
 	strlist2=strlist.join(",")
    return strlist2;
 })
+
+
 
 $("#closebtn").click(function(){
 	$(".masking").hide();
@@ -293,7 +278,7 @@ $("#keepbtn").click(function(){
 		},
 		success :function(data){
 			console.log(data)
-			alert(data.content)
+			alert("发送成功")
 		}
 	})
 	
