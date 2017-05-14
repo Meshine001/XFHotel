@@ -38,9 +38,14 @@
             <li><span>联系电话</span><input class="fl" id="tel" type="text" placeholder="用于接收房门密码"></li>
             <li><span>身份证号</span><input class="fl" id="identity" type="text" placeholder="入住人身份证号"></li>
             <li><span>您的需求</span><input class="fl" id="presonal" type="text" placeholder="您还有什么需求？"></li>
-            <li><span>是否开发票</span><div class="fl" id="needpic"><i class="" cod="true">是</i><i cod="false" class="active">否</i></div></li>
+            <!--<li><span>是否开发票</span><div class="fl" id="needpic"><i class="" cod="true">是</i><i cod="false" class="active">否</i></div></li>-->
         </ul>
+        <ul class="price_info addpartenr">
 
+        </ul>
+        <ul class="price_info">
+            <li id="addfriend" style="text-align: center;color: orangered">添加朋友+</li>
+        </ul>
         <div class="prompt_info">
             <h1>* 预定提示</h1>
             <p class="form_ctrl "> 1、本公寓属于智能管理，为了方便您的入住，我们将会把您定好的房间门密码用短信的形式发送到你的手机号上，在填写订单的时候请认真填写。</p>
@@ -54,6 +59,29 @@
     <div class="navbar">
         <a href="javascript:;">提交订单</a>
     </div>
+</div>
+
+
+<!--弹窗-->
+<div id="masking"></div>
+<div class="alert-content">
+    <header><i class="_black">&times;</i>增加朋友一起住<i class="_confirm">确定</i></header>
+    <!--<ul>-->
+        <!--<li>增加新朋友</li>-->
+    <!--</ul>-->
+
+    <ul class="oldpartenr">
+        <li class="selected"><i class="this"></i><span class="_pName">马三炮</span><span class="numbId">6123231921355432</span><i class="_remove"></i></li>
+    </ul>
+    <div class="news-msg">
+        <ul>
+            <li>朋友姓名：<input id="pName" type="text" placeholder="请输入姓名"></li>
+            <li>身份证号：<input id="pId" type="text" placeholder="请输入身份证"></li>
+        </ul>
+        <button id="keep">保存</button>
+    </div>
+    <ins></ins>
+
 </div>
 
 

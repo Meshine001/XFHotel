@@ -397,7 +397,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="customer">
+		<!--<div class="customer">
 			<div class="main">
 				<h3 class="tit">合作伙伴</h3>
 				<div class="qy_div" id="qyfocus" style="overflow: hidden;">
@@ -425,7 +425,7 @@
 					<li></li>
 				</ul>
 			</div>
-		</div>
+		</div>-->
 		<div class="celan" style="top: 75%;">
 			<div class="celan_list">
 				<span class="weixin"><img

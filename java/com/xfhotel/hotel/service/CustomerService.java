@@ -2,8 +2,6 @@ package com.xfhotel.hotel.service;
 
 import java.util.List;
 
-import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
-
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.support.PageResults;
@@ -15,6 +13,8 @@ public interface CustomerService {
 	public boolean checkTel(String tel);
 	public void logout();
 	
+	
+	public List<CustomerDetails> getlist();
 	public List<Customer> list();
 	
 	public String changePsd(String oldPsd,String psd,long id);

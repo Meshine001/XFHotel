@@ -3051,6 +3051,8 @@ body .app-container .app-heading .app-title .description {
 
 body .app-container.app-login {
 	min-height: 100vh !important;
+	background-image: url(../images/bg1920.jpg);
+	background-size:100% 100%;
 }
 
 body .app-container.app-login>div:first-child, body .app-container.app-login>ui-view>div:first-child,
@@ -5810,6 +5812,19 @@ ui-view>.app-messaging-container {
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+.card-header .card-title .card-screen{
+	width:100%;
+	padding:0 20px;
+}
+.card-header .card-title .card-screen li{
+	list-style: none;
+	float:left;	
+	display: block;
+	margin-bottom: -2px;
+	z-index: 10;
+	width: 240px;
+	min-width: 240px;
+}
 
 .card.card-tab .card-header>ul>li.active, .card.card-tab ul.nav-tabs>li.active
 	{
@@ -8467,4 +8482,39 @@ footer.app-footer .footer-copyright {
 
 .media.social-post .media-body .media-comment input {
 	padding: 7.5px 15px;
+}
+
+#list tr{ cursor: pointer; transition: all .3s;}
+#list tr:hover{background: #f2f2f2;}
+#list tr td i{
+	display:block;
+	width:20px;
+	height:20px;
+	background:url('../images/moren.png')  no-repeat center center;
+}
+#list tr._active td i{
+	background:url('../images/moren-hat.png')  no-repeat center center;
+}
+
+#new-coupon{
+	display:none;
+	position:relative;
+}
+#sending{
+	width:800px;
+	background:#FFF;
+	position:fixed;
+	left:50%;
+	top:10%;
+	margin-left:-400px;
+	z-index:1000000002;
+	display:none;
+}
+
+@media screen and (max-width:900px){
+   #sending{
+  	   width:100%;
+  	   left:0;
+  	   margin-left:0px;
+   }
 }

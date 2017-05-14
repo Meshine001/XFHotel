@@ -894,7 +894,7 @@
             mode: 'scroller',
             preset: '',
             lang: 'en-US',
-            setText: 'Set',
+            setText: '确定',
             cancelText: 'Cancel',
             scrollLock: true,
             tap: true,

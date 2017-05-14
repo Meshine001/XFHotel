@@ -1,4 +1,82 @@
 ﻿$(document).ready(function(){
+    addpartenr();
+    var sexVal='';
+
+    $("#addfriend").live('click',function(){
+        $("#masking").show(10,function(){
+            $(".alert-content").animate({bottom:0},300);
+        });
+    });
+function addpartenr(){
+    var isName='';
+    var isID='';
+    $("ins").toggle(function(){
+        $(this).addClass('rotate');
+        $(".news-msg").animate({bottom:0},260);
+    },function(){
+        $("#pName").val('');
+        $("#pId").val('');
+        $(this).removeClass('rotate');
+        $(".news-msg").animate({bottom:'-4.7rem'},200);
+    });
+    $("#keep").click(function(){//填写信息
+        isName=$("#pName").val();
+        isID=$("#pId").val();
+        //身份证验证
+        var isIDCard2=/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+        if(isIDCard2.test(isID)){
+           fnBase.myalert('OK')
+        }else{
+            fnBase.myalert('身份证号码输入有误');
+            return false;
+        }
+
+        var str='';
+        if(isName!=''&& isID!=''){
+            str+='<li><i class="this"></i><span class="_pName">'+isName+'</span><span class="numbId">'+isID+'</span><i class="_remove"></i></li>'
+            $(".alert-content .oldpartenr").append(str);
+
+        }
+        $("ins").removeClass('rotate');
+        $(".news-msg").animate({bottom:'-4.7rem'},200);
+    });
+    $(".alert-content .oldpartenr li").live('click',function(){
+        if($(this).hasClass('selected')==false){
+            $(this).addClass('selected')
+        }else{
+            $(this).removeClass('selected')
+        }
+    });
+    //删除同居人信息
+    $(".alert-content .oldpartenr li ._remove").live('click',function(){
+        $(this).parent().remove();
+    })
+   //确定同居人
+    $(".alert-content ._confirm").click(function(){
+        var opifo='';
+        var strList=new Array();
+        var obj=$(".alert-content .oldpartenr li");
+        for(var i=0;i<obj.length;i++){
+            if(obj.eq(i).hasClass("selected")){
+                strList.push(obj.eq(i).find('._pName').text());
+            }
+        }
+        $(".addpartenr").html('');
+        for(var j=0;j<strList.length;j++){
+            opifo+='<li>'+strList[j]+'<i>X</i></li>'
+        }
+        $(".addpartenr").append(opifo);
+        $(".alert-content").animate({bottom:'-5.6rem'},200);
+        $("#masking").hide();
+    })
+    //取消好友
+    $(".addpartenr li i").live('click',function(){
+        $(this).parent().remove()
+    })
+}
+
+
+
     var cood='';
     var span='';
     var _uid = fnBase.huoqu(0, "uid");

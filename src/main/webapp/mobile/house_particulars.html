@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="utf-8">
-    <title>青舍公寓(详情particulars)</title>
+    <title>青舍公寓</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <link rel="shortcut icon" href="images/bitbug_favicon.ico" />
 
@@ -121,29 +121,20 @@ $(function () {
                     <ul>
                         <!--<li>-->
                             <!--<span class="inf_sp">小区</span>-->
-                            <!--<span>'+data.info.address+'</span>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<span class="inf_sp">单元</span>-->
-                            <!--<span>'+data.info.fearures+'</span>-->
+                            <!--<span>福邸铭门</span>-->
                         <!--</li>-->
                         <!--<li>-->
                             <!--<span class="inf_sp">面积</span>-->
-                            <!--<span>'+data.info.square+data.info.direction+'</span>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<span class="inf_sp">楼层</span>-->
-                            <!--<span>'+data.info.price_scope+'</span>-->
+                            <!--<span>500</span>-->
                         <!--</li>-->
                         <!--<li>-->
                             <!--<span class="inf_sp">可住</span>-->
-                            <!--<span>'+data.info.capacity+"人"+'</span>-->
+                            <!--<span>2ren</span>-->
                         <!--</li>-->
                         <!--<li>-->
                             <!--<span class="inf_sp">户型</span>-->
-                            <!--<span>'+data.info.alyout+'</span>-->
+                            <!--<span>3</span>-->
                         <!--</li>-->
-
                     </ul>
                 </div>
             </section>
@@ -151,15 +142,7 @@ $(function () {
                 <h1 class="ic_house">房源配置</h1>
                 <div class="i_inf deploy">
                     <ul>
-                        <!--<li><i>空调</i></li>-->
-                        <!--<li><i>无线网络</i></li>-->
-                        <!--<li><i>茶室</i></li>-->
-                        <!--<li><i>麻将桌</i></li>-->
-                        <!--<li><i>大床房</i></li>-->
-                        <!--<li><i>卫生间</i></li>-->
-                        <!--<li><i>衣柜</i></li>-->
-                        <!--<li><i>热水淋浴</i></li>-->
-                        <!--<li><i>允许聚会</i></li>-->
+
                     </ul>
                 </div>
             </section>
@@ -167,25 +150,35 @@ $(function () {
                 <h1 class="ic_house">房间描述</h1>
                 <p id="serviceIntro2"></p>
             </section>
+            <section class="panel describe ">
+                <h1 class="ic_house">房间特色</h1>
+                <div class="i_inf feature deploy">
+                    <ul>
+                       
+                    </ul>
+                </div>
+            </section>
             <section class="panel criticism">
                 <h1 class="ic_house">消费者评论</h1>
+                <p id="pingjia">总评价：<span></span></p>
                 <ul class="appraise">
-                    <!--<li>-->
-                        <!--<p class="appInfo"><span class="appName">'+data.info[i].user_nickname+'</span><i>5星</i></p>-->
-                        <!--<p class="appText">' + data.info[i].content + '</p>-->
-                        <!--<p class="appDate">'+data.info[i].ctime+'</p>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<p class="appInfo"><span class="appName">武大郎他</span><i>5星</i></p>-->
-                        <!--<p class="appText">陪老婆出来玩，发现有这么好玩的短租公寓，真是太好了，老婆很喜欢，</p>-->
-                        <!--<p class="appDate">2017-03-21</p>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<p class="appInfo"><span class="appName">阿卡丽</span><i>5星</i></p>-->
-                        <!--<p class="appText">陪老婆出来玩，发现有这么好玩的短租公寓，真是太好了，老婆很喜欢，</p>-->
-                        <!--<p class="appDate">2017-03-21</p>-->
-                    <!--</li>-->
+                <!--
+                   <li>
+                       <p class="appInfo"><span class="appName">'+data.results[i].fromWho+'</span><i>入住时间：'+data.results[i].entryTime+'</i></p>
+                        <p class="appText">'+data.results[i].feel+'</p>
+                        <p class="pl-pic"><img src="' + data.results[i].pic + '"></p>
+                       <p class="appDate" ><span style="font-weight: bold;">房东回复：</span><span>'+data.results[i].reply+'</span></p>
+                    </li>
+                   
+                   <li>
+                       <p class="appInfo"><span class="appName">阿卡丽</span><i>入住时间：2017.20.10</i></p>
+                        <p class="appText">陪老婆出来玩，发现有这么好玩的短租公寓，真是太好了，老婆很喜欢，</p>
+                        <p class="pl-pic"><img src="images/未标题-1.jpg"><img src="images/icnet1.jpg"><img src="images/icnet1.jpg"><img src="images/icnet1.jpg"></p>
+                       <p class="appDate" ><span style="font-weight: bold;">房东回复：</span><span>嗯，感谢您的入住感谢您的入感谢您的入感谢您的入感谢您的入感谢您的入感谢您的入</span></p>
+                    </li>
+                    -->
                 </ul>
+                <div style="clear:both"></div>
             </section>
         </div>
 
@@ -201,8 +194,6 @@ $(function () {
     <ul>
         <li><input value="" class="" readonly="readonly" placeholder="入住时间" name="appDate" id="appDate" type="text"></li>
         <li><input value="" class="" readonly="readonly" name="appDate" placeholder="离开时间" id="appDate2" type="text"></li>
-        <!--<li><input type="text" placeholder="入住日期" id="checkIn" readonly="readonly" class="doubledate ipticon"></li>-->
-        <!--<li><input type="text" placeholder="离开日期" id="leave" readonly="readonly" class="doubledate ipticon"></li>-->
     </ul>
     <p class="hint" style="clear: both;display: none"><i>!</i>您选的时间段内，有满房，请重新选择时间</p>
     <button class="but-success">确定</button>

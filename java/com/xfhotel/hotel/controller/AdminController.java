@@ -1,36 +1,36 @@
 package com.xfhotel.hotel.controller;
-import java.util.HashMap;
-
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
+import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CustomerService;
-import com.xfhotel.hotel.entity.Order;
-import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.UserService;
+import com.xfhotel.hotel.service.impl.CouponService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
 
@@ -46,6 +46,8 @@ public class AdminController {
 	@Autowired
 	CustomerService customerService;
 	
+	@Autowired
+	CouponService couponService;
 
 	@Autowired
 	FeatureService featureService;
@@ -63,7 +65,12 @@ public class AdminController {
 	public String homePage() {
 		return "redirect:/admin/login";
 	}
-
+	//..5.8优惠卷新加...
+	@RequestMapping(value = "/customer_sendlist", method = RequestMethod.GET)
+	public String sendlist() {
+		return "/admin/customer/sendlist";
+	}
+   //..5.8优惠卷结束...
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() {
 		return "/admin/login";
@@ -165,5 +172,103 @@ public class AdminController {
 		session.setAttribute(Constants.ADMIN_SESSION_ATTR, u);
 		return "/admin/dashboard";
 	}
+	@RequestMapping(value = "/sendlist", method = RequestMethod.POST)
+	public @ResponseBody Message sendlist(String startTime,String endTime,int type,Double cValue,String rule,Long Id[]) {
+		System.out.println(startTime+endTime+type+cValue+rule+"+++"+Id);
+		
+		try {
+			List<Long> list = Arrays.asList(Id);
+			for(Long uId : list){
+				Coupon coupon = new Coupon();
+				coupon.setcValue(cValue);
+				coupon.setStartTime(startTime);
+				coupon.setEndTime(endTime);
+				coupon.setRule(rule);
+				coupon.setuId(uId);
+				couponService.add(coupon);
+				System.out.println("dsdsdsd");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
+	}
+	@RequestMapping(value = "/dsendlist", method = RequestMethod.POST)
+	public @ResponseBody Message dsendlist(Double money , String sex , Double time){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try{
+			System.out.println(money);
+			System.out.println(sex);
+			System.out.println(time);
+			if(money!=null){
+				List<Customer> c = customerService.list();
+				for(Customer customer : c){
+					if(customer.getConsumptionCount()>money){
+						map.put(customer.getTel(), customer);	
+					}
+					
+				}
+			}else if(sex!=null){
+				List<CustomerDetails> cd = customerService.getlist();
+				for(CustomerDetails customer2 : cd){
+					
+					if(customer2.getSex().equals(sex)){
+						System.out.println("dsds");
+						Customer customer=  customerService.getCustomer(customer2.getId());
+						map.put(customer.getTel(), customer);	
+						
+					}
+				}
+			}else if(time!=null){
+				System.out.println("faf");
+				List<Customer> c = customerService.list();
+				if(time==0){
+					for (Customer customer : c) {
+						 Calendar calendar = Calendar.getInstance();
+					        Date date = new Date(System.currentTimeMillis());
+					        calendar.setTime(date);
+//					        calendar.add(Calendar.WEEK_OF_YEAR, -1);
+					        calendar.add(Calendar.YEAR, -1);
+					        date = calendar.getTime();
+					        long ddd = dateToLong(date);
+						if(customer.getRegTime()>ddd){
+							map.put(customer.getTel(), customer);
+						}
+				    }
+				}else{
+					System.out.println("00dsd");
+					for (Customer customer : c) {
+						 Calendar calendar = Calendar.getInstance();
+					        Date date = new Date(System.currentTimeMillis());
+					        calendar.setTime(date);
+					        calendar.add(Calendar.WEEK_OF_YEAR, -1);
+//					        calendar.add(Calendar.YEAR, -1);
+					        date = calendar.getTime();
+					        long ddd = dateToLong(date);
+						if(customer.getRegTime()<ddd){
+							map.put(customer.getTel(), customer);
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
+			}
+		 ArrayList<Object> list = new ArrayList<Object>();
+		  for(String key : map.keySet()){
+		   list.add(map.get(key));
+		  }
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+	}
+	private long dateToLong(Date date) {
+		// TODO Auto-generated method stub
+		return 0;
+	} 
+
 
 }

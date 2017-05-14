@@ -87,9 +87,7 @@ $(document).ready(function(){
                     }else if(data.content[i].status=="退款订单"){
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
                     }else if(data.content[i].status=="进行中"){
-                        _str+='<p class="total"><span class="fl cancel">退房</span></p>'
-                    }else if(data.content[i].status=="订单超时"){
-                        _str+='<p class="total"><span class="fl removeLi">删除</span></p>'
+                        _str+='<p class="total"><span class="fl cancel">退房</span><span class="fl cancel">查看密码</span></p>'
                     }else if(data.content[i].status=="已完成"){
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
                     }
@@ -125,7 +123,18 @@ $(document).ready(function(){
     $(".cancel").live('click',function(){
         window.location.href="checkout.html";
     });
-
+    ////删除超时订单
+    //$(".removeLi").live('click',function(){
+    //    var isId=$(this).parent().parent().parent().find('li');
+    //    var postData=isId.attr('orderid');
+    //    var frontURL=Constant.URL+'/mobile/ ';
+    //    fnBase.commonAjax(frontURL,postData,function(data){
+    //        if(data.status=='1'){
+    //            isId.remove();
+    //            fnBase.myalert('订单删除成功')
+    //        }
+    //    })
+    //})
 
 });
 

@@ -106,6 +106,7 @@ public class CustomerController {
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public @ResponseBody Message modify(CustomerDetails c, long customerId) {
 		try {
+			System.out.println(c.getSex());
 			Customer c1 = customerService.modify(c, customerId);
 			session.setAttribute("c", c1);
 		} catch (Exception e) {

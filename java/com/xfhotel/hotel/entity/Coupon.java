@@ -8,35 +8,60 @@ import javax.persistence.Table;
 
 /**
  * 优惠券
- * @author Ming
+ * @author Jing
  *
  */
 @Entity
 @Table(name = "t_coupon")
 public class Coupon {
+	public final static String getTypeDescription(int type){
+		switch(type){
+		case 0:
+			return "电影票";
+		case 1:
+			return "优惠劵";
+		default:
+			return "不限";
+		}
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private Long startTime;
-	private Long endTime;
+	private String startTime;
+	private String endTime;
 	private int type;
-	private String cValue;
+	private Double cValue;
+	private Long  uId;
+	private String  rule;
+	
+	public String getRule() {
+		return rule;
+	}
+	public void setRule(String rule) {
+		this.rule = rule;
+	}
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getStartTime() {
+	public Long getuId(){
+		return uId;
+	}
+	public void setuId(Long uId){
+		this.uId = uId;
+	}
+	public String getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Long startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	public Long getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Long endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 	public int getType() {
@@ -45,10 +70,10 @@ public class Coupon {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public String getcValue() {
+	public Double getcValue() {
 		return cValue;
 	}
-	public void setcValue(String cValue) {
+	public void setcValue(Double cValue) {
 		this.cValue = cValue;
 	}
 	public Coupon() {
@@ -58,7 +83,7 @@ public class Coupon {
 	@Override
 	public String toString() {
 		return "Coupon [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", type=" + type + ", cValue="
-				+ cValue + "]";
+				+ cValue +",uId="+uId +",rule="+ rule+ "]";
 	}
 	
 	
