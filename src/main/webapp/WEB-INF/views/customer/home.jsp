@@ -167,6 +167,10 @@
 .exm_ul li {
 	cursor: pointer;
 }
+
+#newBridge ins#nb_icon_wrap {
+    display: none;
+}
 </style>
 </head>
 <body>
@@ -429,8 +433,8 @@
 					height="60"></span> <span><a href="/down/" title="官方APP"
 					target="_blank"><img
 						src="<%=basePath%>/dist/public/v1/images/app.png" width="60"
-						height="60"></a></span> <span class="customer2"><a
-					href="http://wpa.qq.com/msgrd?v=3&uin=790101285&site=qq&menu=yes"><img
+						height="60"></a></span> <span class="customer2 online-chat"><a
+					href="javascript:;"><img
 						src="<%=basePath%>/dist/public/v1/images/kf.png" width="60"
 						height="60"></a></span> <span><a href="javascript:goTop();"
 					title="返回顶部"><img
@@ -456,14 +460,15 @@
 			var s = document.getElementsByTagName("script")[0];
 			s.parentNode.insertBefore(hm, s);
 		})();
+		$('.online-chat').click(function(){
+			$('#nb_icon_wrap').click();
+		});
 	</script>
 
 	<script type="text/javascript"
 		src="<%=basePath%>/dist/public/js/calendar.js"></script>
 	<script type="text/javascript"
 		src="<%=basePath%>/dist/customer/js/home.js"></script>
-	<style type="text/css">
-</style>
 </body>
 
 </html>

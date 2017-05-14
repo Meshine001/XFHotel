@@ -260,7 +260,7 @@
 										地址：${apartment.location}${apartment.address}<a class="f_map"
 											data-longitude="${apartment.longitude}"
 											data-latitude="${apartment.latitude}"
-											href="javascript:void(0);" title="导航"><i></i></a>
+											href="javascript:void(0);" title=""><i></i></a>
 									</p>
 									<ul>
 										<c:forEach items="${apartment.facilityEntity}" var="f">
