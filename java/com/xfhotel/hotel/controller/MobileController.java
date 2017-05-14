@@ -23,6 +23,7 @@ import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Comment;
+import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.Feature;
@@ -36,7 +37,7 @@ import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
-import com.xfhotel.hotel.service.impl.CouponService;
+import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
@@ -497,6 +498,16 @@ public class MobileController  {
 		}
 	}
 	
+	/**
+	 * 获取用户优惠券
+	 * @param uId
+	 * @return
+	 */
+	@RequestMapping("getCoupons")
+	@ResponseBody
+	public List<Coupon> getCouponsByUser(Long uId){
+		return couponService.getCoupon(uId);
+	}
 	
 
 }

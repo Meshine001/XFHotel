@@ -266,8 +266,7 @@ $("#keepbtn").click(function(){
 	}
 	$(".masking,#sending").hide();
 	console.log(postdata)
-	$.ajax({
-		
+	$.ajax({	
 		type : 'POST',
 		dataType : 'json',
 		data : postdata,
@@ -277,8 +276,14 @@ $("#keepbtn").click(function(){
 			alert("发送失败！");
 		},
 		success :function(data){
-			console.log(data)
-			alert("发送成功")
+			alert(data.content);
+			if(data.statusCode == 1){
+				
+			}else{
+				
+			}
+			
+			
 		}
 	})
 	
