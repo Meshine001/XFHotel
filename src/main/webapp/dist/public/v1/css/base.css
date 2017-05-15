@@ -412,7 +412,7 @@ footer {
 .ftr_tel {
 	float: right;
 	border-left: 1px solid #e8f0f5;
-	width: 210px;
+/*	width: 210px;*/
 	overflow: hidden;
 	padding-left: 123px;
 }
