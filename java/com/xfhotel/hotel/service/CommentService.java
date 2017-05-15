@@ -6,7 +6,7 @@ import java.util.Map;
 import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.support.PageResults;
 
-public interface CommentService extends BaseService<Comment>{
+public interface CommentService extends BaseService<Comment,Long>{
 	public List<Comment> getCommentsByRoom(Long roomId);
 	public PageResults<Comment> getComments(Long roomId,int page);
 	public Map<String, Object> getRoomRates(Long roomId);

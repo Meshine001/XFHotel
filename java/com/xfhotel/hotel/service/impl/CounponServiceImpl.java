@@ -69,4 +69,10 @@ public class CounponServiceImpl implements CouponService{
 		// TODO Auto-generated method stub
 		couponDAO.deleteById(Id);
 		}
+
+	@Override
+	public Coupon findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

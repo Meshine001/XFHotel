@@ -30,11 +30,11 @@
 		<div class="x">
 			<div class="x_l">
 				<div class="x_t">
-					<h1>${apartment.community}-${apartment.address_square}-${apartment.direction}朝向</h1>
+					<h1>${apartment.position.xiao_qu}-${apartment.position.xa_wei_zhi}-${apartment.basic_info.cao_xiang}朝向</h1>
 					<div class="x_add">
-						<span class="x_dizhi"> <i></i>${apartment.location}-${apartment.address}
+						<span class="x_dizhi"> <i></i>${apartment.position.bd_wei_zhi}-${apartment.position.jie_dao}
 						</span> <a href="javascrip:;" id="call-gps" class="f_map"
-							data-iframeUrl="<%=basePath%>/utils/roomGps?lng=${apartment.longitude}&lat=${apartment.latitude}"
+							data-iframeUrl="<%=basePath%>/utils/roomGps?lng=${apartment.position.jing_du}&lat=${apartment.position.wei_du}"
 							data-target="#gpsModal" data-toggle="modal"> <i></i> 导航
 						</a> <span class="b_ewm" style="display: none;"> <i
 							class="ewm_i"></i> 在线分享
@@ -94,13 +94,13 @@
 						<div class="i_z">位置周边</div>
 						<div class="wz_ditu">
 							<img alt="" width="810" height="420"
-								src="http://api.map.baidu.com/staticimage?center=${apartment.longitude},${apartment.latitude}&width=810&height=420&zoom=16&markers=${apartment.longitude},${apartment.latitude}" />
+								src="http://api.map.baidu.com/staticimage?center=${apartment.position.jing_du},${apartment.position.wei_du}&width=810&height=420&zoom=16&markers=${apartment.position.jing_du},${apartment.position.wei_du}" />
 						</div>
 					</div>
 					<div>
 						<div class="i_z">公寓户型</div>
 						<div class="hx_tu">
-							<img alt="户型图" width="810" src="../images/${apartment.pic1}" />
+							<img alt="户型图" width="810" src="../images/${apartment.hu_xing_tu}" />
 						</div>
 					</div>
 				</div>
@@ -173,7 +173,7 @@
 			<div class="x_r">
 				<div class="x_m">
 					<div class="m_q">
-						<span class="m_jiage"><em>￥</em><span id="zujin">${room.prices[0]}</span><font>起</font></span>
+						<span class="m_jiage"><em>￥</em><span id="zujin">${apartment.basic_info.jia_ge}</span><font>起</font></span>
 					</div>
 					<div class="">
 						<input type="hidden" id="apartmentId" value="${apartment.id}">
@@ -200,11 +200,6 @@
 												id="detailRoomNumSelect">
 												<li data-num="1">1间</li>
 											</ul>
-										</div>
-									</div>
-									<div class="price_top" style="display: none">
-										<div class="reserve_text">
-											在线收取押金￥<span>100</span>
 										</div>
 									</div>
 									<div class="order_btn_container">

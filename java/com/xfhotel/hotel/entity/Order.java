@@ -288,12 +288,12 @@ public class Order {
 	
 	String getType(int type){
 		switch (type) {
-		case Apartment.TYPE_APARTMENT:
-			return "公寓式";
-		case Apartment.TYPE_HOTEL:
-			return "酒店式";
-		case Apartment.TYPE_PLAY_ROOM:
-			return "休闲式";
+//		case Apartment.TYPE_APARTMENT:
+//			return "公寓式";
+//		case Apartment.TYPE_HOTEL:
+//			return "酒店式";
+//		case Apartment.TYPE_PLAY_ROOM:
+//			return "休闲式";
 		default:
 			return "全部";
 		}

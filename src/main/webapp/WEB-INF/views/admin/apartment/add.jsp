@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>-青舍都市公寓-西安租房_西安合租</title>
+<title>添加房源-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 </head>
@@ -18,63 +18,73 @@
 			<div class="card">
 				<div class="card-header">添加房源</div>
 				<div class="card-body">
-					<form action="<%=request.getContextPath()%>/admin/apartment/add"
-						method="POST" class="form form-horizontal"
+					<form  action="<%=request.getContextPath()%>/admin/apartment/add"
+						method="POST" class="form form-horizontal form-add-apartment"
 						enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-md-3 control-label">区域</label>
 							<div class="col-md-9">
 								<div id="location">
 									<input type="text" id="location_info" class="form-control"
-										placeholder="" name="location" readonly="readonly"> <input
+										placeholder="" name="bd_wei_zhi" readonly="readonly"> <input
 										type="hidden" id="lng" class="form-control" placeholder=""
-										name="lng"> <input type="hidden" id="lat"
-										class="form-control" placeholder="" name="lat">
+										name="jing_du"> <input type="hidden" id="lat"
+										class="form-control" placeholder="" name="wei_du">
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">详细地址</label>
-
+							<label class="col-md-3 control-label">位置</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="address">
+								<select name="xa_wei_zhi" class="">
+									<option value="城东">城东</option>
+									<option value="城西">城西</option>
+									<option value="城南">城南</option>
+									<option value="城北">城北</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">街道</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder="如：xxx路xxx号"
+									name="jie_dao">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">小区名称</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="community">
+								<input type="text" class="form-control" placeholder="如：xxx小区"
+									name="xiao_qu">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">楼号</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="num_building">
+								<input type="number" class="form-control" placeholder="请填写数字"
+									name="lou_hao">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">单元号</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="num_unit">
+								<input type="number" class="form-control" placeholder="请填写数字"
+									name="dan_yuan">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">楼层</label>
 							<div class="col-md-3">
 								<div class="input-group">
-									<span class="input-group-addon">第</span> <input type="text"
-										class="form-control" placeholder="" name="floor"> <span
+									<span class="input-group-addon">第</span> <input type="number"
+										class="form-control" placeholder="" name="lou_ceng"> <span
 										class="input-group-addon">层</span>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="input-group">
-									<span class="input-group-addon">共</span> <input type="text"
-										class="form-control" placeholder="" name="totalfloor">
+									<span class="input-group-addon">共</span> <input type="number"
+										class="form-control" placeholder="" name="zong_lou_ceng">
 									<span class="input-group-addon">层</span>
 								</div>
 							</div>
@@ -82,21 +92,21 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">门牌号</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="num_door">
+								<input type="text" class="form-control" placeholder="请填写门牌号"
+									name="men_pai">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">锁地址</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="lock_address">
+								<input type="text" class="form-control" placeholder="如：129.11.11.22"
+									name="suo_di_zhi">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">朝向</label>
 							<div class="col-md-9">
-								<select name="direction" class="">
+								<select name="cao_xiang" class="">
 									<option value="南北">南北</option>
 									<option value="东西">东西</option>
 								</select>
@@ -106,8 +116,8 @@
 							<label class="col-md-3 control-label">总面积</label>
 							<div class="col-md-9">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder=""
-										name="square"><span class="input-group-addon">m<sup>2</sup></span>
+									<input type="number" class="form-control" placeholder="请填写房源面积"
+										name="mian_ji"><span class="input-group-addon">m<sup>2</sup></span>
 								</div>
 							</div>
 						</div>
@@ -116,34 +126,41 @@
 							<label class="col-md-3 control-label">户型</label>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder=""
-										name="bedroom"> <span class="input-group-addon">室</span>
+									<input type="number" class="form-control" placeholder=""
+										name="shi"> <span class="input-group-addon">室</span>
 								</div>
 							</div>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder=""
-										name="livingroom"> <span class="input-group-addon">厅</span>
+									<input type="number" class="form-control" placeholder=""
+										name="ting"> <span class="input-group-addon">厅</span>
 								</div>
 							</div>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder=""
-										name="bathroom"> <span class="input-group-addon">卫</span>
+									<input type="number" class="form-control" placeholder=""
+										name="wei"> <span class="input-group-addon">卫</span>
 								</div>
 							</div>
 							<div class="col-sm-3">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder=""
-										name="balcony"> <span class="input-group-addon">阳台</span>
+									<input type="number" class="form-control" placeholder=""
+										name="yang_tai"> <span class="input-group-addon">阳台</span>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">可住几人</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="capacity">
+								<input type="number" class="form-control" placeholder="请填写可住人数"
+									name="reng_shu">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">床</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder="请填写可住人数"
+									name="chuang">
 							</div>
 						</div>
 						<div class="form-group">
@@ -159,46 +176,56 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">周边环境</label>
+							<label class="col-md-3 control-label">综合描述</label>
 							<div class="col-md-9">
-								<textarea name="descriptionAround" rows="3" class="form-control"></textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">个性描述</label>
-							<div class="col-md-9">
-								<textarea name="descriptionPersonal" rows="3"
-									class="form-control"></textarea>
+								<textarea name="miao_su" rows="3" class="form-control" placeholder="对公寓的描述"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">特色</label>
-
 							<div class="col-md-9">
-								<c:forEach items="${l_feature}" var="feature" varStatus="p">
-									<div class="checkbox checkbox-inline">
-										<input type="checkbox" id="fe-${feature.id}" name="feature"
-											value="${feature.id}"> <label for="fe-${feature.id}">${feature.description }
-										</label>
-									</div>
-								</c:forEach>
+								<textarea name="te_se"  class="form-control" placeholder="对公寓的描述"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">配套设施</label>
+							<label class="col-md-3 control-label">家居</label>
 							<div class="col-md-9">
-								<c:forEach items="${l_facility}" var="facility" varStatus="p">
-									<div class="checkbox checkbox-inline">
-										<input type="checkbox" id="fa-${facility.id}" name="facility"
-											value="${facility.id}"> <label
-											for="fa-${facility.id}">${facility.description }</label>
-									</div>
-								</c:forEach>
+								<textarea name="jia_ju"  class="form-control" placeholder="对公寓的描述"></textarea>
 							</div>
 						</div>
-
 						<div class="form-group">
-							<label class="col-md-3 control-label">图片展示</label>
+							<label class="col-md-3 control-label">卫浴</label>
+							<div class="col-md-9">
+								<textarea name="wei_yu"  class="form-control" placeholder="对公寓的描述"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">餐厨</label>
+							<div class="col-md-9">
+								<textarea name="can_chu"  class="form-control" placeholder="对公寓的描述"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">配套</label>
+							<div class="col-md-9">
+								<textarea name="pei_tao"  class="form-control" placeholder="对公寓的描述"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">周边</label>
+							<div class="col-md-9">
+								<textarea name="zou_bian"  class="form-control" placeholder="对公寓的描述"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">其他</label>
+							<div class="col-md-9">
+								<textarea name="qi_ta"  class="form-control" placeholder="对公寓的描述"></textarea>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-md-3 control-label">公寓展示</label>
 							<!-- Button trigger modal -->
 							<div class="col-md-9">
 								<ul>
@@ -257,10 +284,9 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
-								<select name="apartmenttype" id="apartment-type">
-									<c:forEach items="${l_apartmenttype}" var="type">
-										<option value="${type}">${type}</option>
-									</c:forEach>
+								<select name="lei_xing" id="apartment-type">
+										<option value="酒店型">酒店型</option>
+										<option value="休闲型">休闲型</option>
 								</select>
 
 							</div>
@@ -269,12 +295,8 @@
 							<label class="col-md-3 control-label">价格</label>
 							<div class="col-md-9">
 								<div class="input-group">
-									<input type="text" name="dayPrice" class="price-day"> <span
+									<input type="text" name=jia_ge class="price-day"> <span
 										class="input-group-addon">元/天</span>
-								</div>
-								<div class="input-group" style="display: none;">
-									<input type="text" name="hourPrice" class="price-hour">
-									<span class="input-group-addon">元/小时</span>
 								</div>
 							</div>
 						</div>
@@ -283,7 +305,7 @@
 						<div class="form-footer">
 							<div class="form-group">
 								<div class="col-md-9 col-md-offset-3">
-									<button type="submit" class="btn btn-primary">保存</button>
+									<button type="button" class="btn btn-primary btn-submit">保存</button>
 									<button type="button" class="btn btn-default">取消</button>
 								</div>
 							</div>
@@ -291,7 +313,11 @@
 					</form>
 				</div>
 			</div>
-
+			<script type="text/javascript">
+				$('.btn-submit').click(function(){
+					$('.form-add-apartment').submit();
+				});
+			</script>
 		</div>
 		<div class="col-md-6">
 			<div id="map" style="width: 500px; height: 500px"></div>
@@ -302,11 +328,12 @@
 				style="display: none;">
 		</form>
 
-	</div> </my_body>
+	</div>
+	</my_body>
 
 	<my_script> <script
 		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
 		type="text/javascript"></script> <script type="text/javascript"
-		src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script>  </my_script>
+		src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script> </my_script>
 </body>
 </html>

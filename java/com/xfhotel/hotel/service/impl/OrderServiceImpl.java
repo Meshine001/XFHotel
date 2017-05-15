@@ -130,9 +130,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Transactional
 	@Override
-	public List<Order> checkAvailable(Long roomId, String startTime, String endTime) {
+	public List<Order> checkAvailable(Long id, String startTime, String endTime) {
 		String hql = "from Order where roomId = ? and (status =? or status=? or status=?) and (startTime >? and endTime <?)";
-		Object[] values = { roomId, Order.STATUS_ON_PAY, Order.STATUS_ON_LEASE,  Order.STATUS_ON_COMFIRM, (TimeUtil.getDateLong(startTime) - 1),
+		Object[] values = { id, Order.STATUS_ON_PAY, Order.STATUS_ON_LEASE,  Order.STATUS_ON_COMFIRM, (TimeUtil.getDateLong(startTime) - 1),
 				(TimeUtil.getDateLong(endTime) + 1) };
 		return orderDAO.getListByHQL(hql, values);
 	}
