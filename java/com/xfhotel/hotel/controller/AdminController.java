@@ -176,9 +176,10 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/sendlist", method = RequestMethod.POST)
 	public @ResponseBody Message sendlist(String startTime,String endTime,int type,Double cValue,String rule,Long Id[]) {
-		
+		System.out.println(type);
 		try {
 			List<Long> list = Arrays.asList(Id);
+			System.out.println();
 			for(Long uId : list){
 				Coupon coupon = new Coupon();
 				coupon.setcValue(cValue);
@@ -188,14 +189,14 @@ public class AdminController {
 				coupon.setRule(rule);
 				coupon.setuId(uId);
 				couponService.add(coupon);
-				return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
 			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
 		}
-		return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
 	}
 	@RequestMapping(value = "/dsendlist", method = RequestMethod.POST)
 	public @ResponseBody Message dsendlist(Double money , String sex , Double time){
@@ -207,12 +208,9 @@ public class AdminController {
 			System.out.println(time);
 			if(money!=null){
 				List<Customer> c = customerService.list();
-				
 				for(Customer customer : c){
 					if(customer.getConsumptionCount()>money){
 						map.put(customer.getTel(), customer);	
-					}else if(customer.getConsumptionCount().equals(money)){
-						
 					}
 				}
 			}else if(sex!=null){
