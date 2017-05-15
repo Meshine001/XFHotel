@@ -32,9 +32,11 @@
 					</tr>
 					<tr>
 						<th>种类</th>
-						<th>
-							<input id="pId" type=text>
-						</th>	
+						<th><select id="pId">
+									<option value="-1">不限</option>
+									<option value="0">电影票</option>
+									<option value="1" selected="selected">优惠券</option>
+							</select></th>
 					</tr>
 					<tr>
 						<th>有效期</th>

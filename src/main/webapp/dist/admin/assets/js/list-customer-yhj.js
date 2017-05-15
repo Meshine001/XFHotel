@@ -251,7 +251,7 @@ $(document).on('click','#delivery',function(){
 	}
 	strlist2=strlist.join(",")
 	if(strlist.length=='0'){
-		alert('您还没有选择入住人')
+		alert('选择要发优惠卷的用户才可以下一步呦.')
 		return;
 	}else{
 		$(".masking").show();
