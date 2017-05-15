@@ -508,6 +508,51 @@ public class MobileController  {
 	public List<Coupon> getCouponsByUser(Long uId){
 		return couponService.getCoupon(uId);
 	}
+	/**
+	 * 
+	 * @param searchData
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public  Map list(String startTime, String endTime,  Integer area, Integer priceRange, Integer layout,
+			Long[] features, Integer  enterTime, Integer leaseType,  String  moreStr,Integer sortType,Integer currentPage) {
+		System.out.println("0.0");
+		if(null == currentPage){
+			currentPage = 1;
+		}
+		
+		SearchForm searchData = new SearchForm();
+		searchData.setArea(area);
+		searchData.setEndTime(endTime);
+		searchData.setSortType(sortType);
+		searchData.setPriceRange(priceRange);
+		searchData.setLayout(layout);
+		searchData.setFeatures(features);
+		searchData.setEndTime(endTime);
+		searchData.setLayout(layout);
+		searchData.setMoreStr(moreStr);
+		searchData.setSortType(sortType);
+		System.out.println(searchData+"好好好");
+		Map<String, Object> info = new HashMap<String, Object>();
+		info.put("searchData", searchData);
+		info.put("areas", Area.getAreas());
+//		info.put("subways", Subway.getSubways());
+		info.put("priceRanges", LeasePrice.getPrices());
+		info.put("layoutTypes", LayoutType.getLayouts());
+		List<Feature> fs = featrueService.listFeatures();
+		List<com.xfhotel.hotel.support.Feature> features1 = new ArrayList<com.xfhotel.hotel.support.Feature>();
+		for(Feature f:fs){
+			features1.add(new com.xfhotel.hotel.support.Feature((int)f.getId(), f.getDescription()));
+		}
+		com.xfhotel.hotel.support.Feature.setFeatures(features1);
+		info.put("features",com.xfhotel.hotel.support.Feature.getFeatures());
+		info.put("enterTimes", RoomStatus.getStatusArray());
+		info.put("leaseTypes", LeaseType.getLeaseTypes());
+		info.put("page",  apartmentService.getApartmentPage(apartmentService.sort(apartmentService.list(),searchData), currentPage));
+		
+		return info;
+	}
 	
 
 }
