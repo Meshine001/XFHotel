@@ -167,11 +167,19 @@ $(".masking").css({
 			success:function(data){
 				console.log(data);
 				var str='';
+				var newTime=new Array();
 				$("#list").html('');
 				for(var i=0;i<data.content.length;i++){
-					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+data.content[i].regTime+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
+					var infotime=data.content[i].regTime;
+					var j = new Date(infotime);
+					var istime=j.toLocaleDateString()
+					    newTime.push(istime);
+					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 				}
 				$("#list").append(str);
+				if($("#longtime option:selected").attr('tid')=='3'){
+					list(1)
+				}
 			}
 		})
  });
@@ -190,11 +198,19 @@ $(".masking").css({
 			success:function(data){
 				console.log(data);
 				var str='';
+				var newTime=new Array();
 				$("#list").html('');
 				for(var i=0;i<data.content.length;i++){
-					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+data.content[i].regTime+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
+					var infotime=data.content[i].regTime;
+					var j = new Date(infotime);
+					var istime=j.toLocaleDateString()
+					    newTime.push(istime);
+					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 				}
 				$("#list").append(str);
+				if($("#monetary option:selected").val()=='0'){
+					list(1)
+				}
 			}
 		})
 	
@@ -214,11 +230,19 @@ $(".masking").css({
 		success:function(data){
 			console.log(data);
 			var str='';
+			var newTime=new Array();
 			$("#list").html('');
 			for(var i=0;i<data.content.length;i++){
-				str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+data.content[i].regTime+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
+				var infotime=data.content[i].regTime;
+				var j = new Date(infotime);
+				var istime=j.toLocaleDateString()
+				    newTime.push(istime);
+				str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 			}
 			$("#list").append(str);
+			if($("#sex option:selected").val()=='全部'){
+				list(1)
+			}
 		}
 	})
 });
@@ -231,11 +255,19 @@ $("#list").on('click','tr',function(){
 	}
 })
 
+$("#about").click(function(){
+	if($(this).hasClass('_active')==false){
+		$(this).addClass('_active');
+		$("#list tr").addClass('_active');
+	}else{
+		$(this).removeClass('_active');
+		$("#list tr").removeClass('_active');
+	}
+})
+
+	
 var strlist2='';
 $(document).on('click','#delivery',function(){
-	$(".masking").show();
-	$("#sending").show();
-	$("#new-coupon").show();
     var	strlist=new Array();
 	var obj=$(this).parent().parent().parent().parent().find('#list tr');
 	for(var i=0;i<obj.length;i++){
@@ -244,10 +276,17 @@ $(document).on('click','#delivery',function(){
 		}	
 	}
 	strlist2=strlist.join(",")
+	if(strlist.length=='0'){
+		alert('您还没有选择入住人')
+		return;
+	}else{
+		$(".masking").show();
+		$("#sending").show();
+		$("#new-coupon").show();
+	}
+	alert(strlist2)
    return strlist2;
 })
-
-
 
 $("#closebtn").click(function(){
 	$(".masking").hide();
@@ -256,6 +295,7 @@ $("#closebtn").click(function(){
 })
 
 $("#keepbtn").click(function(){
+	
 	var postdata={
 			'Id':strlist2,
 			"cValue":$('#pnumber').val(),
@@ -271,7 +311,6 @@ $("#keepbtn").click(function(){
 		type : 'POST',
 		dataType : 'json',
 		data : postdata,
-//		url : "hotel/controller/AdminController/sendlist",
 		url:"./sendlist",
 		error : function(data) {// 请求失败处理函数
 			alert("发送失败！");

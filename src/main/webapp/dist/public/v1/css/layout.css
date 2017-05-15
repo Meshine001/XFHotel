@@ -257,6 +257,7 @@
 	margin-right: 15px;
 	float: left;
 	position: relative;
+	transition:all .6s;
 }
 
 .two a:last-child {
@@ -267,10 +268,11 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: rgb(255, 75, 94);
+	background:url(black40.png);
 	width: 100%;
 	height: 100%;
 	text-align: center;
+	
 }
 
 .mask span {
@@ -292,8 +294,12 @@
 	line-height: 30px;
 	margin-top: 10px;
 	cursor: pointer;
+	transition: .6s;
 }
-
+.mask .mask_btn:hover{
+	border-color:red;
+	color:red;
+}
 .three {
 	margin-top: 16px;
 	overflow: hidden;
@@ -524,7 +530,7 @@
 	-ms-transform: translateY(-50%);
 	-o-transform: translateY(-50%);
 	transform: translateY(-50%);
-	left: 1571px;
+	right:0;
 }
 
 .celan_list {
@@ -603,12 +609,12 @@ div#index_list_calendar-box {
 }
 
 .service_ul {
-	display: -webkit-flex;
+	/*display: -webkit-flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	align-content: center;
+	align-content: center;*/
 	margin-top: 50px;
 }
 
@@ -617,8 +623,13 @@ div#index_list_calendar-box {
 	height: 150px;
 	text-align: center;
 	padding: 5px;
+	float:left;
+	position:relative;
+	transition:all .5s;
 }
-
+.service_ul li:hover{
+	transform:rotate(10deg);
+}
 .service_ul li p {
 	color: #999999;
 	font-size: 20px;

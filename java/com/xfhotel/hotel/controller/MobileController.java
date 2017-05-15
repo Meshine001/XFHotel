@@ -27,6 +27,7 @@ import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
@@ -34,12 +35,19 @@ import com.xfhotel.hotel.service.BannerService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.service.impl.CouponService;
+import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
+import com.xfhotel.hotel.support.LayoutType;
+import com.xfhotel.hotel.support.LeasePrice;
+import com.xfhotel.hotel.support.LeaseType;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
+import com.xfhotel.hotel.support.RoomStatus;
+import com.xfhotel.hotel.support.SearchForm;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
@@ -54,6 +62,9 @@ import net.sf.json.JSONObject;
 public class MobileController  {
 
 
+	@Autowired
+	FeatureService featrueService;
+	
 	@Autowired
 	RoomService roomService;
 	
@@ -476,5 +487,15 @@ public class MobileController  {
 		}
 	}
 	
+	@RequestMapping(value = "/get", method = RequestMethod.POST)
+	public @ResponseBody PageResults<Comment> getRoomComments(Long roomId,Integer page){
+		return commentService.getComments(roomId, page);
+	}
+	
+	@RequestMapping(value = "/getRoomRates", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> getRoomRates(Long roomId){
+		return commentService.getRoomRates(roomId);
+	}
+
 
 }
