@@ -207,11 +207,13 @@ public class AdminController {
 			System.out.println(time);
 			if(money!=null){
 				List<Customer> c = customerService.list();
+				
 				for(Customer customer : c){
 					if(customer.getConsumptionCount()>money){
 						map.put(customer.getTel(), customer);	
+					}else if(customer.getConsumptionCount().equals(money)){
+						
 					}
-					
 				}
 			}else if(sex!=null){
 				List<CustomerDetails> cd = customerService.getlist();
