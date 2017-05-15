@@ -3,8 +3,8 @@ $(document).ready(function(){
     addres();
 //           页面1 点击筛选与排序弹出页面2
     $("#filterbtn").click(function(){
-        //$(".sx_filter").hide();
-        //$("#filter").show();
+        $(".sx_filter").hide();
+        $("#filter").show();
     });
 //           页面2 {点击 返回按钮 and  确定按钮 返回页面1}；
     $(" #back_main,#confirm").click(function(){

@@ -106,6 +106,7 @@ public class CustomerController {
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public @ResponseBody Message modify(CustomerDetails c, long customerId) {
 		try {
+			System.out.println(c.getSex());
 			Customer c1 = customerService.modify(c, customerId);
 			session.setAttribute("c", c1);
 		} catch (Exception e) {
@@ -131,7 +132,7 @@ public class CustomerController {
 		if (customerService.checkTel(tel)) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "手机号已使用");
 		}
-		CustomerDetails details = new CustomerDetails(tel, Constants.DEFAULT_AVATAR, tel);
+		CustomerDetails details = new CustomerDetails("", Constants.DEFAULT_AVATAR, tel);
 		Customer c = new Customer(tel, password);
 		c.setConsumptionTimes(0);
 		c.setConsumptionCount(0.00F);

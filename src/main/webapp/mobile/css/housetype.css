@@ -10,7 +10,7 @@
     justify-content: space-between;
     display: flex;
     font-size: 0.18rem;
-    background: #00b38a;
+    background: #50ccc9;
     color: #ffffff;
     font-size: 0.18rem;
 }
@@ -22,7 +22,7 @@
 .goodlist{ margin-top: 0;}
 .service{margin-top: 0;margin-bottom: 0.45rem}
 /*filterbtn*/
-#filterbtn,#confirm{transition: .5s;position: fixed;width: 100%;height:0.45rem;bottom: 0;left: 0;background: #00b38a;font-size: 0.15rem;text-align: center;color:#FFF }
+#filterbtn,#confirm{transition: .5s;position: fixed;width: 100%;height:0.45rem;bottom: 0;left: 0;background: #50ccc9;font-size: 0.15rem;text-align: center;color:#FFF }
 #filterbtn:hover,#confirm:hover{color: #ffffff}
 .MultiSelect{width: 100%;height: auto;overflow-y:auto;overflow-x:hidden  }
 /*≈≈–ÚµØ¥∞#filter*/

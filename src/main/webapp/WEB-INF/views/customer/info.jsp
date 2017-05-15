@@ -16,7 +16,13 @@
 	src="<%=basePath%>/dist/zui/lib/price-calendar/js/yui-min.js"></script>
 <script type="text/javascript">
 	
-</script> </my_header>
+</script> 
+<style type="text/css">
+#newBridge ins#nb_icon_wrap {
+    display: none;
+}
+</style>
+</my_header>
 </head>
 <body>
 	<my_body>
@@ -275,7 +281,7 @@
 							height="110">
 						<div class="gj_mz">
 							<span class="gj_name">在线管家</span><span class="gj_tel"></span>周一至周日
-							07:00 - 23:00 <span class="gj_chat" style="cursor: pointer;"><i></i>在线聊天</span>
+							07:00 - 23:00 <span class="gj_chat online-chat" style="cursor: pointer;"><i></i>在线聊天</span>
 						</div>
 					</div>
 					<p></p>
@@ -442,9 +448,25 @@
 		$('#call-gps').click(function() {
 			$('#map-iframe').attr('src', $(this).attr('data-iframeUrl'));
 		});
-	</script> </my_body>
-	<my_script> <script
+	</script> 
+		<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?de892eb7bcb9d66253676ee4d1a31276";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+		$('.online-chat').click(function(){
+			$('#nb_icon_wrap').click();
+		});
+	</script>
+	</my_body>
+	<my_script>
+	 <script
 		src="<%=basePath%>/dist/customer/js/info.js"></script> <script
-		src="<%=basePath%>/dist/customer/js/comment-list.js"></script> </my_script>
+		src="<%=basePath%>/dist/customer/js/comment-list.js"></script>
+		
+    </my_script>
 </body>
 </html>

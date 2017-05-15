@@ -1,12 +1,15 @@
 ﻿var baseUrl = getRootPath();//调试环境用这个
 console.log(baseUrl);
 //  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
+
+
 var clientIp = getIp();
 
 var Constant = {
-//       URL: "http://192.168.1.109"
-		URL: baseUrl,
-//        CLIENT_IP:clientIp
+//       URL: "http://192.168.1.106"
+ 
+        URL: baseUrl,
+        //CLIENT_IP:clientIp
 };
 //zzzz
 /**
@@ -91,7 +94,7 @@ $(document).ready(function(){
                 timeout:30000,
                 dataType : "json",
                 async : true,
-                type : "POST",
+                type : "post",
                 success : function(data) {
                     fnBase.loadHide();
                     fn(data);

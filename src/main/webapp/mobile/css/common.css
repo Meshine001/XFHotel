@@ -143,7 +143,7 @@ white-space: nowrap;
     justify-content: space-between;
     display: flex;
     font-size: 0.18rem;
-    background: #00b38a;color: #ffffff;font-size: 0.18rem;
+    background: #50ccc9;color: #ffffff;font-size: 0.18rem;
 }
 
 .header-mobile {}
@@ -191,7 +191,7 @@ white-space: nowrap;
     padding: 0 0.1rem;
     z-index: 10;
     height: 0.45rem;
-    background: #1fc8a1;
+    background: #50ccc9;
 }
 .navbar a {
     width: 100%;

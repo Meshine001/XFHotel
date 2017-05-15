@@ -36,7 +36,7 @@ $(document).ready(function(){
             //房源概况
 
             $(".information").html("");
-            var priceStr ='<h1 class="ic_house">'+data.apartment.community+'</h1><p class="info_L24">'+data.apartment.balcony+"室"+data.apartment.bathroom+"厅"+
+            var priceStr ='<h1 class="ic_house">'+data.apartment.address+"-" +data.apartment.community+'</h1><p class="info_L24">'+data.apartment.balcony+"室"+data.apartment.bathroom+"厅"+
                 data.apartment.bedroom+"卫"+"-"+data.room.direction+'</p>' +
                 '<p class="info_L24 label-adders">'+data.apartment.location+data.apartment.address+'</p><p class="info_L24 label-group"><i class="label-type1">'
                 +data.apartment.apartmenttype+'</i></p><span class="label-price">'+data.apartment.dayPrice+'<small>/天</small></span>'
@@ -44,9 +44,8 @@ $(document).ready(function(){
 
             //房源信息
             $(".housing .i_inf ul").html("");
-            var massage='<li><span class="inf_sp">小区</span><span>'+data.apartment.community+'</span></li><li><span class="inf_sp">单元</span><span>'+data.apartment.num_building
-                +'</span></li><li><span class="inf_sp">面积</span><span>'+data.apartment.square+"㎡"+'</span></li><li><span class="inf_sp">楼层</span><span>'+data.apartment.totalfloor
-                +'</span></li><li><span class="inf_sp">可住</span><span>'+data.apartment.capacity+"人"+'</span></li><li><span class="inf_sp">户型</span><span>'+data.apartment.balcony+"室"+data.apartment.bathroom+"厅"+
+            var massage='<li><span class="inf_sp">小区</span><span>'+data.apartment.community+'</span></li><li><span class="inf_sp">面积</span><span>'+data.apartment.square+"㎡"+'' +
+                '</span></li><li><span class="inf_sp">可住</span><span>'+data.apartment.capacity+"人"+'</span></li><li><span class="inf_sp">户型</span><span>'+data.apartment.balcony+"室"+data.apartment.bathroom+"厅"+
                 data.apartment.bedroom+"卫"+'</span></li>';
             $(".housing .i_inf ul").append(massage);
 
@@ -59,26 +58,49 @@ $(document).ready(function(){
             $(".allocation .deploy ul").append(str);
         //    房源描述
             $(".describe #serviceIntro2").text(data.room.descriptionPersonal);
+        //    房源特色
+        $(".describe .feature  ul").html("");
+            var des='';
+            for(var i=0;i<data.apartment.featureEntity.length;i++){
+                des+='<li><i>'+data.apartment.featureEntity[i].description+'</i></li>';
+            }
+        $(".describe .feature ul").append(des);
 
-        //}else{
-        //    fnBase.myalert(data.room.descriptionPersonal)
-        //}
     });
-
+    
 
     //    评价列表显示
-    var frontURL=Constant.URL+'/mobile/comment';
-    var postData={};
+    var frontURL=Constant.URL+'/mobile/getRoomRates';
+    var postData={"roomId":_id};
+    fnBase.commonAjax(frontURL,postData,function(data){
+    	$("#pingjia span").text(data.pingjun+"星")
+    })
+    
+    var frontURL=Constant.URL+'/mobile/get';
+    var postData={"roomId":_id,"page":1};
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
-        if(data.status=="1"){
+        
             $(".criticism ul").html("");
             var plStr = '';
-            for(var i=0;i<data.info.length;i++){
-                plStr+='<li><p class="appInfo"><span class="appName">'+data.info[i].user_nickname+'</span><i>5星</i></p><p class="appText">' + data.info[i].content + '</p><p class="appDate">'+data.info[i].ctime+'</p></li>'
+            for(var i=0;i<data.results.length;i++){
+                plStr+='<li><p class="appInfo"><span class="appName">'+data.results[i].fromWho+'</span><i>入住时间：'+data.results[i].time+'</i></p><p class="appText">'+data.results[i].feel+'</p><p class="pl-pic">';
+                if(data.results[i].pics.length>0){
+                	$(".panel .pl-pic").show();
+                	for(var j=0;j<data.results[i].pics.length;j++){
+                		plStr+='<img src="/images/' + data.results[i].pics[0] +'">'
+                	}
+                }
+                if(data.results[i].reply==null){
+                	$(".panel .appDate").hide();
+                }else{
+                	$(".panel .appDate").show();
+                	plStr+='</p><p class="appDate" ><span style="font-weight: bold;">房东回复：</span><span>'+data.results[i].reply+'</span></p>'
+                }
+                plStr+='</li>';
             }
             $(".criticism ul").append(plStr)
-        }
+       
     });
     //    评价
 

@@ -12,7 +12,7 @@
 </head>
 <body>
 	<my_body>
-		<h2>${orderMsg}</h2>
+		<h2 style="font-size:45px;">${orderMsg}</h2>
 	</my_body>
 </body>
 </html>

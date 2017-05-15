@@ -24,7 +24,65 @@
 .prompt_info h1{font-size: 0.14rem;line-height: 0.4rem}
 .prompt_info p{margin-bottom: 0.1rem}
 
+/*添加的新朋友信息*/
+.addpartenr li{width: 50%;float: left;background: #d6941a;border-right: 1px solid  #FFF;color:#FFF;text-align: center;position: relative}
+.addpartenr li i{width: 0.3rem;position: absolute;right: 0;height: 100%;background: red}
+
+
+
 /*开发票*/
 #needpic{border-left:0 }
 #needpic i{margin-left: 0.1rem;width: 0.6rem;float: left;padding-left: 0.25rem;background: url("../images/moren.png") no-repeat center left;background-size: 0.18rem}
 #needpic .active{background: url("../images/moren_hover.png") no-repeat center left;background-size: 0.18rem}
+
+
+/*添加住客*/
+.alert-content{
+    position: fixed;
+    width: 100%;
+    height:5.5rem;
+    background: #fff;
+    z-index: 1003;
+    bottom: -5.6rem;
+    box-shadow: 0 0 0.2rem #333;
+}
+.alert-content header{
+    width: 100%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    padding: 0;
+    border-bottom: 1px solid #dddddd;
+    font-size:0.16rem;
+    color: #353535;
+    text-align: center;
+    font-weight: normal;
+    position: relative;
+}
+.alert-content header ._black{float: left;padding: 0 0.2rem;font-size: 0.3rem}
+.alert-content header ._confirm{float: right;padding: 0 0.2rem;color: orangered}
+
+.alert-content ul{width: 90%;margin: 0 auto;}
+.alert-content ul li{position: relative;line-height: 0.4rem;font-size: 0.14rem;border-bottom: 1px solid #ddd;text-indent: 0.25rem}
+.alert-content ul li .this{
+    width: 0.1rem;
+    height: 0.1rem;
+    position: absolute;
+    top: 0.15rem;
+    left: 0.1rem;
+    border: 1px solid #0cbb08;
+    border-width: 1px;
+}
+.alert-content ul li.selected .this{background: #0cbb08}
+.alert-content ul li.selected{}
+
+.alert-content ul li .numbId{margin-left: 0.2rem}
+.alert-content ul li ._remove{display: block;width: 0.6rem;height: 0.4rem;float: right;background: url("../images/deleteico.png") no-repeat center right 0.1rem;background-size:0.16rem }
+
+/*增加新朋友*/
+.alert-content ins.rotate{transform: rotate(90deg)}
+.alert-content ins{transition: all .3s;width: 0.4rem;height: 0.4rem;position: absolute;bottom: 0.1rem;right: 0.1rem;background: url("../images/add.png")no-repeat center center;background-size: 0.4rem;border-radius: 50%;z-index: 100}
+.alert-content .news-msg{position: absolute;bottom: -4.7rem;left: 0;width: 100%;height: 4.7rem;background:#fff;border-top: 4px solid orangered}
+.alert-content .news-msg ul{width: 100%;}
+.alert-content .news-msg ul li{font-size: 0.14rem;width: 100%;height: 0.45rem;line-height: 0.45rem;border-bottom: 1px solid #d1d1d1}
+.alert-content .news-msg ul li input{display: block;width: 2.7rem;height: 0.45rem;font-size: 0.14rem;float: right}
+.alert-content .news-msg button{display: block;width: 1.6rem;height: 0.35rem;background: orangered;margin: 0.2rem auto;color: #fff;font-size: 0.14rem}
