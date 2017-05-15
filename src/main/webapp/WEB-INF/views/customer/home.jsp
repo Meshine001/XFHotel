@@ -167,6 +167,10 @@
 .exm_ul li {
 	cursor: pointer;
 }
+
+#newBridge ins#nb_icon_wrap {
+    display: none;
+}
 </style>
 </head>
 <body>
@@ -229,7 +233,7 @@
 								<p class="apt_jg">
 									<span>${room.dayPrice}</span>元/天
 								</p>
-								<p class="apt_bt">${room.apartmenttype}-${room.community}-${room.direction}</p>
+								<p class="apt_bt">${room.apartmenttype}-${room.address_square}-${room.community}</p>
 						</a></li>
 					</c:forEach>
 				</ul>
@@ -429,8 +433,8 @@
 					height="60"></span> <span><a href="/down/" title="官方APP"
 					target="_blank"><img
 						src="<%=basePath%>/dist/public/v1/images/app.png" width="60"
-						height="60"></a></span> <span class="customer2"><a
-					href="http://wpa.qq.com/msgrd?v=3&uin=790101285&site=qq&menu=yes"><img
+						height="60"></a></span> <span class="customer2 online-chat"><a
+					href="javascript:;"><img
 						src="<%=basePath%>/dist/public/v1/images/kf.png" width="60"
 						height="60"></a></span> <span><a href="javascript:goTop();"
 					title="返回顶部"><img
@@ -448,20 +452,23 @@
 	</article>
 
 	<jsp:include page="../decorators/home-footer.jsp"></jsp:include>
-	<script type="text/javascript">
+	<script>
 		var _hmt = _hmt || [];
 		(function() {
 			var hm = document.createElement("script");
-			hm.src = "https://hm.baidu.com/hm.js?0ae180f0ab390bef5531565759c084a7";
+			hm.src = "https://hm.baidu.com/hm.js?de892eb7bcb9d66253676ee4d1a31276";
 			var s = document.getElementsByTagName("script")[0];
 			s.parentNode.insertBefore(hm, s);
 		})();
+		$('.online-chat').click(function(){
+			$('#nb_icon_wrap').click();
+		});
 	</script>
+
 	<script type="text/javascript"
 		src="<%=basePath%>/dist/public/js/calendar.js"></script>
 	<script type="text/javascript"
 		src="<%=basePath%>/dist/customer/js/home.js"></script>
-
 </body>
 
 </html>

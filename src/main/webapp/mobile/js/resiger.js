@@ -48,11 +48,6 @@ var resiger={
         });
 
 
-
-
-
-
-        //注册就是这个，手机连wifi没。微信来语音 听不到信号不好
         resiger.inputList[3].blur(function(){
             var phoneNumber=resiger.inputList[0].val();
             var _yzm=resiger.inputList[3].val();
@@ -70,19 +65,7 @@ var resiger={
                     resiger.inputList[3].val(data.content);
                 }
             });
-            //$.ajax({
-            //    type: 'get',
-            //    url:'http://192.168.1.109:8080/hotel/mobile/checkVCode',
-            //    dataType:'json',
-            //    data:{"tel":phoneNumber,"vCode":_yzm},
-            //    success:function(data){
-            //        console.log(data);
-            //        resiger.inputList[3].val(data.content);
-            //    },
-            //    error:function(){
-            //        resiger.inputList[3].val(data.content);
-            //    }
-            //});
+         
         });
         resiger.btnList[1].click(function(){
             var phoneNumber=resiger.inputList[0].val();

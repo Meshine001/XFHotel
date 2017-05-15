@@ -25,14 +25,16 @@ import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
+import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.UserService;
-import com.xfhotel.hotel.service.impl.CouponService;
+import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
+import com.xfhotel.hotel.support.TimeUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -173,30 +175,27 @@ public class AdminController {
 		return "/admin/dashboard";
 	}
 	@RequestMapping(value = "/sendlist", method = RequestMethod.POST)
-	public @ResponseBody Message sendlist(String startTime,String endTime,int type,Double cValue,String rule,String Id[]) {
-		System.out.println(startTime+endTime+type+cValue+rule+"+++"+Id);
+	public @ResponseBody Message sendlist(String startTime,String endTime,int type,Double cValue,String rule,Long Id[]) {
 		
 		try {
-			List<String> list = Arrays.asList(Id);
-			System.out.println(list);
-			for(String dd : list){
-				System.out.println("ss");
-				Long uId=Long.parseLong(dd);
+			List<Long> list = Arrays.asList(Id);
+			for(Long uId : list){
 				Coupon coupon = new Coupon();
 				coupon.setcValue(cValue);
-				coupon.setStartTime(startTime);
-				coupon.setEndTime(endTime);
+				coupon.setStartTime(TimeUtil.getDateLong(startTime));
+				coupon.setEndTime(TimeUtil.getDateLong(endTime));
+				coupon.setType(type);
 				coupon.setRule(rule);
 				coupon.setuId(uId);
 				couponService.add(coupon);
-				System.out.println("dsdsdsd");
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
 		}
-		return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
+		return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
 	}
 	@RequestMapping(value = "/dsendlist", method = RequestMethod.POST)
 	public @ResponseBody Message dsendlist(Double money , String sex , Double time){

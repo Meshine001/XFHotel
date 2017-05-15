@@ -8,12 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.impl.CouponDAOImpl;
 import com.xfhotel.hotel.entity.Coupon;
+import com.xfhotel.hotel.service.CouponService;
 
 @Service
-public class CouponService implements com.xfhotel.hotel.service.CouponService{
+public class CounponServiceImpl implements CouponService{
 	@Autowired
 	CouponDAOImpl couponDAO;
 	
+	@Transactional
 	@Override
 	public void add(Coupon coupon) {
 		// TODO Auto-generated method stub
@@ -40,6 +42,7 @@ public class CouponService implements com.xfhotel.hotel.service.CouponService{
 		return couponDAO.getListByHQL("from Coupon", null);
 		}
 
+	@Transactional
 	@Override
 	public List<Coupon> getCoupon(Long uId) {
 		String hql = "from Coupon where uId=?";
@@ -66,7 +69,4 @@ public class CouponService implements com.xfhotel.hotel.service.CouponService{
 		// TODO Auto-generated method stub
 		couponDAO.deleteById(Id);
 		}
-	}
-
-	
-	
+}

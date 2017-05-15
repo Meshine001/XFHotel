@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.xfhotel.hotel.support.TimeUtil;
+
 /**
  * 优惠券
  * @author Jing
@@ -14,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "t_coupon")
 public class Coupon {
+	
 	public final static String getTypeDescription(int type){
 		switch(type){
 		case 0:
@@ -27,12 +30,13 @@ public class Coupon {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String startTime;
-	private String endTime;
+	private Long startTime;
+	private Long endTime;
 	private int type;
 	private Double cValue;
 	private Long  uId;
 	private String  rule;
+	private boolean isUsed;//是否已经使用
 	
 	public String getRule() {
 		return rule;
@@ -53,19 +57,19 @@ public class Coupon {
 		this.uId = uId;
 	}
 	public String getStartTime() {
-		return startTime;
+		return TimeUtil.getDateStr(startTime);
 	}
-	public void setStartTime(String startTime) {
+	public void setStartTime(Long startTime) {
 		this.startTime = startTime;
 	}
 	public String getEndTime() {
-		return endTime;
+		return TimeUtil.getDateStr(endTime);
 	}
-	public void setEndTime(String endTime) {
+	public void setEndTime(Long endTime) {
 		this.endTime = endTime;
 	}
-	public int getType() {
-		return type;
+	public String getType() {
+		return getTypeDescription(type);
 	}
 	public void setType(int type) {
 		this.type = type;
@@ -79,6 +83,13 @@ public class Coupon {
 	public Coupon() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public boolean isUsed() {
+		return isUsed;
+	}
+	public void setUsed(boolean isUsed) {
+		this.isUsed = isUsed;
 	}
 	@Override
 	public String toString() {

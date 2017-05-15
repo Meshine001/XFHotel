@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>title-青舍都市公寓-西安租房_西安合租</title>
+<title>确认订单-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
 </head>
 <body>
@@ -17,13 +17,14 @@
 				<h3 class="t_h30">确认订单</h3>
 				<div class="ol_info">
 					<p>请如实填写以下信息。</p>
-					<h4>${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间</h4>
-					<h4>${oStart}入住-${oEnd}离开&nbsp;&nbsp;共${oTotalDay}晚&nbsp;&nbsp;¥${oTotalPrice}</h4>
+					<h4>${apartment.community}-${apartment.address_square}-${apartment.direction}朝向</h4>
+					<h4>${oStart}入住-${oEnd}离开&nbsp;&nbsp;共${oTotalDay}晚</h4>
+					<h4>押金：¥${oCashPledge}&nbsp;&nbsp;需要支付：¥${oTotalPrice}</h4>
 					<form action="<%=basePath%>/order/modulePost" method="post" name=""
 						id="">
 						<input type="hidden" name="cusId" value="${c.id}"> <input
 							type="hidden" name="description"
-							value="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间">
+							value="${apartment.community}-${apartment.num_building}号楼-${apartment.num_unit}单元-${apartment.floor}楼-${apartment.num_door}房间">
 						<input type="hidden" name="roomId" value="${room.id}">
 						<dl>
 							<dd>
@@ -54,6 +55,24 @@
 							</dt>
 						</dl>
 						<dl>
+							<dd>
+								<font color="#FF0000"></font>&nbsp;同住人信息：
+							</dd>
+							<dt>
+								<input id="otherCusName" class="ol_input" value=""
+									name="otherCusName" placeholder="请填同住人姓名，若无可不填">
+							</dt>
+
+
+						</dl>
+						<dl>
+							<dt>
+								<input id="otherCusIDCard" class="ol_input" value=""
+									name="otherCusIdCard" placeholder="请填同住人身份证">
+							</dt>
+						</dl>
+
+						<dl style="display: none;">
 							<dd>需要发票：</dd>
 							<dt class="woman">
 								<input name="needFapiao" type="radio" value="false"

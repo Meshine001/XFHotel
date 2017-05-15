@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,9 +36,11 @@ import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
+import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
 import com.xfhotel.hotel.support.TimeUtil;
+import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 import com.xfhotel.hotel.support.wechat.Config;
 import com.xfhotel.hotel.support.wechat.HttpUtils;
 import com.xfhotel.hotel.support.wechat.Log;
@@ -73,7 +76,7 @@ public class WechatController {
 	@ResponseBody
 	public Message isPayed(Long id) {
 		Order o = orderService.get(id);
-		if (o.getStatus() == Order.STATUS_ON_LEASE) {
+		if (o.getStatus() == Order.STATUS_ON_LEASE || o.getStatus() == Order.STATUS_ON_COMFIRM) {
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "已支付");
 		}else{
 				
@@ -296,6 +299,7 @@ public class WechatController {
 		JSONObject result = WechatOrderUtils.createOrder(detail, desc, "", "10.0.0.1", goodSn, orderSn, amount, "APP");
 		return result.toString();
 	}
+	
 
 	/**
 	 * 微信支付回调函数
@@ -353,15 +357,17 @@ public class WechatController {
 				// 此处放防止重复提交操作
 				String out_trade_no = map.get("out_trade_no");
 				Order o = orderService.getByPayNo(out_trade_no);
-				//发送门锁密码
-				Long roomId = o.getRoomId();
-				Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
-				String lock_no = (String) apartmentService.getApartmentInfo(apartment).get("lock_address");
-				lockService.addPassword(o.getCusTel(), lock_no, TimeUtil.getDateStr(o.getStartTime()),
-						TimeUtil.getDateStr(o.getEndTime()));
 				//更改订单状态
-				o.setStatus(Order.STATUS_ON_LEASE);
+				o.setStatus(Order.STATUS_ON_COMFIRM);
 				orderService.update(o);
+				String pwd_user_mobile = o.getCusTel();
+				String[] p = {o.getDescription()};
+				//发短信给顾客
+				//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。
+				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
+				//发短信给管理员
+				//【青舍都市】您有新订单需要确认，请及时处理。{1}
+				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, Constants.ADMIN_TEL, p);
 					
 			} else if ("FAIL".equals(result_code)) {
 				

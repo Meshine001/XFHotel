@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +37,7 @@ import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
-import com.xfhotel.hotel.service.impl.CouponService;
+import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
@@ -61,10 +60,10 @@ import net.sf.json.JSONObject;
 @RequestMapping("mobile")
 public class MobileController  {
 
-
+	
 	@Autowired
 	FeatureService featrueService;
-	
+
 	@Autowired
 	RoomService roomService;
 	
@@ -116,7 +115,7 @@ public class MobileController  {
 		return info;
 		
 	}
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public @ResponseBody  Message login(String tel, String password) {
 		Customer c = customerService.login(tel, password);
 		if (c != null) {
@@ -166,7 +165,19 @@ public class MobileController  {
 
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
+	
+	@RequestMapping(value = "/get", method = RequestMethod.POST)
+	public @ResponseBody PageResults<Comment> getRoomComments(Long roomId,Integer page){
+		return commentService.getComments(roomId, page);
+	}
+	
+	@RequestMapping(value = "/getRoomRates", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> getRoomRates(Long roomId){
+		return commentService.getRoomRates(roomId);
+	}
 
+	
+	
 	@RequestMapping(value="/checkVCode")  
 	public @ResponseBody Message checkVCode(String tel,String vCode){
 		System.out.println(session.getId());
@@ -487,15 +498,16 @@ public class MobileController  {
 		}
 	}
 	
-	@RequestMapping(value = "/get", method = RequestMethod.POST)
-	public @ResponseBody PageResults<Comment> getRoomComments(Long roomId,Integer page){
-		return commentService.getComments(roomId, page);
+	/**
+	 * 获取用户优惠券
+	 * @param uId
+	 * @return
+	 */
+	@RequestMapping("getCoupons")
+	@ResponseBody
+	public List<Coupon> getCouponsByUser(Long uId){
+		return couponService.getCoupon(uId);
 	}
 	
-	@RequestMapping(value = "/getRoomRates", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> getRoomRates(Long roomId){
-		return commentService.getRoomRates(roomId);
-	}
-
 
 }

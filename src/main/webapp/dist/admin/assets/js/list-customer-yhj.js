@@ -121,33 +121,7 @@ $(".masking").css({
 })
 
 
-	function getData(_data){
-	var _data={
-			'money':$("#monetary option:selected").val(),
-			'sex':$("#sex option:selected").val(),
-			'time':$("#longtime option:selected").attr('tid')
-	};
-	$.ajax({
-		type:'POST',
-		async : false,
-		cache : false,
-		dataType:'json',
-		data:'_data',
-		url: "./dsendlist",
-		error:function(){
-			alert('数据传输错误！')
-		},
-		success:function(data){
-			console.log(data);
-			var str='';
-			$("#list").html('');
-			for(var i=0;i<data.content.length;i++){
-				str='<tr>'+data.content[i].id+'</tr><tr>'+data.data[i].level+'</tr><tr>'+data.content[i].tel+'</tr><tr>'+data.content[i].regTime+'</tr><tr>'+data.content[i].consumptionCount+'</tr><tr>'+data.content[i].consumptionTimes+'</tr><tr>'+data.content[i].status+'</tr><tr><a><i></i></a></tr>'
-			}
-			$("#list").append(str);
-		}
-	})
-}
+	
 
 
 //条件搜索；
@@ -284,7 +258,6 @@ $(document).on('click','#delivery',function(){
 		$("#sending").show();
 		$("#new-coupon").show();
 	}
-	alert(strlist2)
    return strlist2;
 })
 

@@ -96,7 +96,7 @@
 
 /*service-image*/
 .service-image a{margin: 0.06rem 0.1rem;display: block}
-.service-image a img{width: 100%;display: block}
+.service-image a img{width: 100%;display: block;height:3rem;}
 
 
 

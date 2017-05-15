@@ -440,6 +440,7 @@ public class WechatOrderUtils {
 		String response = "";
 		try {// 注意，此处的httputil一定发送请求的时候一定要注意中文乱码问题，中文乱码问题会导致在客户端加密是正确的，可是微信端返回的是加密错误
 			response = HttpUtils.post(wx_order, xml);
+			System.out.println(response);
 		} catch (Exception e) {
 			Log.error("微信支付统一下单失败:http请求失败", e);
 			result.put("status", "error");

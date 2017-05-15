@@ -16,7 +16,13 @@
 	src="<%=basePath%>/dist/zui/lib/price-calendar/js/yui-min.js"></script>
 <script type="text/javascript">
 	
-</script> </my_header>
+</script> 
+<style type="text/css">
+#newBridge ins#nb_icon_wrap {
+    display: none;
+}
+</style>
+</my_header>
 </head>
 <body>
 	<my_body>
@@ -24,9 +30,9 @@
 		<div class="x">
 			<div class="x_l">
 				<div class="x_t">
-					<h1>${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间</h1>
+					<h1>${apartment.community}-${apartment.address_square}-${apartment.direction}朝向</h1>
 					<div class="x_add">
-						<span class="x_dizhi"> <i></i>${apartment.address}
+						<span class="x_dizhi"> <i></i>${apartment.location}-${apartment.address}
 						</span> <a href="javascrip:;" id="call-gps" class="f_map"
 							data-iframeUrl="<%=basePath%>/utils/roomGps?lng=${apartment.longitude}&lat=${apartment.latitude}"
 							data-target="#gpsModal" data-toggle="modal"> <i></i> 导航
@@ -256,12 +262,12 @@
 							</c:forEach>
 						</p>
 						<ul>
-							<li><span class="c99">编号</span><span class="c66">${room.id}</span></li>
-							<li><span class="c99">楼层</span><span class="c66">第${apartment.floor}层/共${apartment.totalfloor}层</span></li>
-							<li><span class="c99">单元</span><span class="c66">${apartment.num_unit}</span></li>
-							<li><span class="c99">房号</span><span class="c66">${apartment.num_door}</span></li>
-							<li><span class="c99">面积</span><span class="c66">${room.square}㎡</span><span
-								class="c66">${room.direction}</span></li>
+							<li style="display: none;"><span class="c99">编号</span><span class="c66">${room.id}</span></li>
+							<li style="display: none;"><span class="c99">楼层</span><span class="c66">第${apartment.floor}层/共${apartment.totalfloor}层</span></li>
+							<li style="display: none;"><span class="c99">单元</span><span class="c66">${apartment.num_unit}</span></li>
+							<li style="display: none;"><span class="c99">房号</span><span class="c66">${apartment.num_door}</span></li>
+							<li><span class="c99">面积</span><span class="c66">${room.square}㎡</span></li>
+							<li><span class="c99">朝向</span><span class="c66">${room.direction}</span></li>
 							<li><span class="c99">可住</span><span class="c66">${room.capacity}人</span></li>
 							<li><span class="c99">居室</span><span class="c66">${apartment.bedroom}室${apartment.livingroom}厅${apartment.bathroom}卫${apartment.balcony}阳台</span></li>
 							<li><span class="c99">小区</span><span class="c66">${apartment.community}</span></li>
@@ -275,7 +281,7 @@
 							height="110">
 						<div class="gj_mz">
 							<span class="gj_name">在线管家</span><span class="gj_tel"></span>周一至周日
-							07:00 - 23:00 <span class="gj_chat" style="cursor: pointer;"><i></i>在线聊天</span>
+							07:00 - 23:00 <span class="gj_chat online-chat" style="cursor: pointer;"><i></i>在线聊天</span>
 						</div>
 					</div>
 					<p></p>
@@ -442,9 +448,25 @@
 		$('#call-gps').click(function() {
 			$('#map-iframe').attr('src', $(this).attr('data-iframeUrl'));
 		});
-	</script> </my_body>
-	<my_script> <script
+	</script> 
+		<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?de892eb7bcb9d66253676ee4d1a31276";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+		$('.online-chat').click(function(){
+			$('#nb_icon_wrap').click();
+		});
+	</script>
+	</my_body>
+	<my_script>
+	 <script
 		src="<%=basePath%>/dist/customer/js/info.js"></script> <script
-		src="<%=basePath%>/dist/customer/js/comment-list.js"></script> </my_script>
+		src="<%=basePath%>/dist/customer/js/comment-list.js"></script>
+		
+    </my_script>
 </body>
 </html>

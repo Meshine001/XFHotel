@@ -11,11 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.impl.CommentDAOImpl;
 import com.xfhotel.hotel.entity.Comment;
+import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.support.PageResults;
 
 @Service
-public class CommentService implements com.xfhotel.hotel.service.CommentService {
-	
+public class CommentServiceImpl implements CommentService{
+
 	@Autowired
 	CommentDAOImpl commentDAO;
 
@@ -92,9 +93,8 @@ public class CommentService implements com.xfhotel.hotel.service.CommentService 
 		rates.put("jiaotong", df.format(jiaotong));
 		rates.put("anquan", df.format(anquan));
 		rates.put("xingjiabi", df.format(xingjiabi));
-		return rates; 
+		return rates;
 	}
 
-	
 
 }
