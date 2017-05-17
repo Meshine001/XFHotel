@@ -123,8 +123,11 @@
 .i_inf .inf_sp{color: #aaa;margin-right: 0.1rem;}
 
 /*deploy ����*/
-.deploy ul li{width: 24%;text-align: center;border: 1px solid #50ccc9;margin-bottom: 0.03rem;margin-right: 0.03rem;border-radius:0.15rem}
-.deploy ul li i{display: block;font-size: 0.14rem;color: #50ccc9;overflow: hidden}
+.deploy .facility{width:100%;}
+.deploy .facility li{width: 100%;border-bottom: 1px solid #aaa;margin-bottom: 0.03rem;height:auto;}
+.deploy .facility li .pNames{font-size:0.14rem;font-weight:400;display:block;}
+.deploy .facility li .facility-list{width:80%;height:auto;margin:0 auto}
+.deploy .facility li .facility-list i{display:inline-block;width:22.8%;height:0.5rem;border:1px solid #ccc;font-size:0.14rem}
 /*��������*/
 #serviceIntro2{line-height: 0.23rem}
 

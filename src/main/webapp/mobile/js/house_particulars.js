@@ -1,6 +1,48 @@
 ﻿
 $(document).ready(function(){
-
+	var _uid = fnBase.huoqu(0, "uid");
+	var _id = decodeURIComponent(fnBase.request("id"));
+	$.ajax({
+		type:'GET',
+		dataType:'json',
+		url:'./info.json',
+		data:{
+			'roomId':_id,
+		},
+		success:function(data){
+			console.log(data)
+			//房屋图片展示
+            $(".swiper-container .swiper-wrapper").html("");
+            var lunbo_str = '';
+            var lunbo_length = data.pic_show.length;
+            for (var i = 0; i < lunbo_length; i++){
+                lunbo_str += '<div class="swiper-slide"><img src="'+Constant.URL+"/images/"+data.pic_show[i]+'"/></div>';
+            }
+            $(".swiper-container .swiper-wrapper").append(lunbo_str);
+            var mySwiper = new Swiper ('.swiper-container',{
+                loop: true,
+                autoplay: 1800,
+                pagination: '.swiper-pagination',
+                autoplayDisableOnInteraction: false
+            });
+            //房源概况
+            $(".information").html("");
+            var priceStr ='<h1 class="ic_house">'+data.position.xa_wei_zhi+"-" +data.position.xiao_qu+'</h1><p class="info_L24">'+data.basic_info.shi+"室"+data.basic_info.ting+"厅"+
+            data.basic_info.wei+"卫"+"-"+data.basic_info.cao_xiang+'</p>' +
+                '<p class="info_L24 label-adders">'+data.position.bd_wei_zhi+"-"+data.position.jie_dao+data.position.xiao_qu+'</p><p class="info_L24 label-group"><i class="label-type1">'
+                +data.basic_info.lei_xing+'</i></p><span class="label-price">'+data.basic_info.jia_ge+'<small>/天</small></span>'
+            $(".information").append(priceStr);
+            //房源信息
+            $(".housing .i_inf ul").html("");
+            var massage='<li><span class="inf_sp">面积</span><span>'+data.basic_info.mian_ji+"㎡"+'' +
+                '</span></li><li><span class="inf_sp">可住</span><span>'+data.basic_info.reng_shu+"人"+'</span></li><li><span class="inf_sp">户型</span><span>'+data.basic_info.shi+"室"+data.basic_info.ting+"厅"+
+                data.basic_info.wei+"卫"+'</span></li><li><span class="inf_sp">床位</span><span>'+data.basic_info.chuang+'</span></li><li><span class="inf_sp">位置</span><span>'+data.position.dan_yuan+"单元"+data.position.lou_hao+"号楼"+data.position.lou_ceng+"层"+'</span></li>';
+            $(".housing .i_inf ul").append(massage);
+            
+            
+		}
+	})
+	
 
 
     ////轮播
@@ -12,7 +54,7 @@ $(document).ready(function(){
     var postData={"roomId":_id};
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
-        fnBase.keep(1,"community",data.apartment.community);
+     fnBase.keep(1,"community",data.apartment.community);
         fnBase.keep(1,"dayPrice",data.apartment.dayPrice);
         fnBase.keep(1,"roomType",data.apartment.apartmenttype);
         fnBase.keep(1,"roonWz",data.apartment.num_building);
@@ -20,42 +62,41 @@ $(document).ready(function(){
         fnBase.keep(1,"num_door",data.apartment.num_door);
         //if(data.success){
             //轮播图
-            $(".swiper-container .swiper-wrapper").html("");
-            var lunbo_str = '';
-            var lunbo_length = data.apartment.pic3.length;
-            for (var i = 0; i < lunbo_length; i++){
-                lunbo_str += '<div class="swiper-slide"><img src="'+Constant.URL+"/images/"+data.apartment.pic2[i]+'"/></div>';
-            }
-            $(".swiper-container .swiper-wrapper").append(lunbo_str);
-            var mySwiper = new Swiper ('.swiper-container',{
-                loop: true,
-                autoplay: 1800,
-                pagination: '.swiper-pagination',
-                autoplayDisableOnInteraction: false
-            });
+//            $(".swiper-container .swiper-wrapper").html("");
+//            var lunbo_str = '';
+//            var lunbo_length = data.apartment.pic3.length;
+//            for (var i = 0; i < lunbo_length; i++){
+//                lunbo_str += '<div class="swiper-slide"><img src="'+Constant.URL+"/images/"+data.apartment.pic2[i]+'"/></div>';
+//            }
+//            $(".swiper-container .swiper-wrapper").append(lunbo_str);
+//            var mySwiper = new Swiper ('.swiper-container',{
+//                loop: true,
+//                autoplay: 1800,
+//                pagination: '.swiper-pagination',
+//                autoplayDisableOnInteraction: false
+//            });
             //房源概况
-
-            $(".information").html("");
-            var priceStr ='<h1 class="ic_house">'+data.apartment.address+"-" +data.apartment.community+'</h1><p class="info_L24">'+data.apartment.balcony+"室"+data.apartment.bathroom+"厅"+
-                data.apartment.bedroom+"卫"+"-"+data.room.direction+'</p>' +
-                '<p class="info_L24 label-adders">'+data.apartment.location+data.apartment.address+'</p><p class="info_L24 label-group"><i class="label-type1">'
-                +data.apartment.apartmenttype+'</i></p><span class="label-price">'+data.apartment.dayPrice+'<small>/天</small></span>'
-            $(".information").append(priceStr);
+//            $(".information").html("");
+//            var priceStr ='<h1 class="ic_house">'+data.apartment.address+"-" +data.apartment.community+'</h1><p class="info_L24">'+data.apartment.balcony+"室"+data.apartment.bathroom+"厅"+
+//                data.apartment.bedroom+"卫"+"-"+data.room.direction+'</p>' +
+//                '<p class="info_L24 label-adders">'+data.apartment.location+data.apartment.address+'</p><p class="info_L24 label-group"><i class="label-type1">'
+//                +data.apartment.apartmenttype+'</i></p><span class="label-price">'+data.apartment.dayPrice+'<small>/天</small></span>'
+//            $(".information").append(priceStr);
 
             //房源信息
-            $(".housing .i_inf ul").html("");
-            var massage='<li><span class="inf_sp">小区</span><span>'+data.apartment.community+'</span></li><li><span class="inf_sp">面积</span><span>'+data.apartment.square+"㎡"+'' +
-                '</span></li><li><span class="inf_sp">可住</span><span>'+data.apartment.capacity+"人"+'</span></li><li><span class="inf_sp">户型</span><span>'+data.apartment.balcony+"室"+data.apartment.bathroom+"厅"+
-                data.apartment.bedroom+"卫"+'</span></li>';
-            $(".housing .i_inf ul").append(massage);
+//            $(".housing .i_inf ul").html("");
+//            var massage='<li><span class="inf_sp">小区</span><span>'+data.apartment.community+'</span></li><li><span class="inf_sp">面积</span><span>'+data.apartment.square+"㎡"+'' +
+//                '</span></li><li><span class="inf_sp">可住</span><span>'+data.apartment.capacity+"人"+'</span></li><li><span class="inf_sp">户型</span><span>'+data.apartment.balcony+"室"+data.apartment.bathroom+"厅"+
+//                data.apartment.bedroom+"卫"+'</span></li>';
+//            $(".housing .i_inf ul").append(massage);
 
         //    房源配置
-            $(".allocation .deploy ul").html("");
-            var str='';
-            for(var i=0;i<data.apartment.facilityEntity.length;i++){
-                str+='<li><i>'+data.apartment.facilityEntity[i].description+'</i></li>';
-            }
-            $(".allocation .deploy ul").append(str);
+//            $(".allocation .deploy ul").html("");
+//            var str='';
+//            for(var i=0;i<data.apartment.facilityEntity.length;i++){
+//                str+='<li><i>'+data.apartment.facilityEntity[i].description+'</i></li>';
+//            }
+//            $(".allocation .deploy ul").append(str);
         //    房源描述
             $(".describe #serviceIntro2").text(data.room.descriptionPersonal);
         //    房源特色
