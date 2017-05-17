@@ -13,7 +13,7 @@ public interface CouponService extends BaseService<Coupon>{
 	
 	public Coupon modify(Coupon c, long uId);
 	
-	public Coupon getCoupon(long id);
+	public Coupon getCoupon2(long id);
 	
 	public void deleteById(long Id);
 	

@@ -241,15 +241,18 @@ $("#about").click(function(){
 
 	
 var strlist2='';
+
 $(document).on('click','#delivery',function(){
     var	strlist=new Array();
 	var obj=$(this).parent().parent().parent().parent().find('#list tr');
-	for(var i=0;i<obj.length;i++){
+	
+	for(var i=1;i<obj.length;i++){
 		if(obj.eq(i).hasClass('_active')==true){
 			strlist.push(obj.eq(i).attr('uid'))
 		}	
 	}
 	strlist2=strlist.join(",")
+	console.log(strlist2)
 	if(strlist.length=='0'){
 		alert('选择要发优惠卷的用户才可以下一步呦！')
 		return;
