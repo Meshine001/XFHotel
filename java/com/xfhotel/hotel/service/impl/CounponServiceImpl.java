@@ -21,7 +21,7 @@ public class CounponServiceImpl implements CouponService{
 		// TODO Auto-generated method stub
 		couponDAO.saveOrUpdate(coupon);
 	}
-
+	@Transactional
 	@Override
 	public void delete(Coupon t) {
 		// TODO Auto-generated method stub
@@ -63,7 +63,7 @@ public class CounponServiceImpl implements CouponService{
 		return couponDAO.get(id);
 		}
 
-
+	@Transactional
 	@Override
 	public void deleteById(long Id) {
 		// TODO Auto-generated method stub

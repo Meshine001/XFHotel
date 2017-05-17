@@ -64,7 +64,7 @@
 <!-- ------------------class="clearfix"-----------------------排序弹窗filter2-->
     <div id="filter" style="display: none">
         <header class="fil-black">
-            <a href="#" id="back_main" class="black-0 fl"></a>
+            <a href="#" onclick="javascript:history.back();" id="back_main" class="black-0 fl"></a>
             <i></i>
             <span class="empty fl">清空</span>
         </header>
@@ -73,7 +73,7 @@
             <!-- 1区域-->
             <div class="quyu">
                 <i>区域</i>
-                <i id="area">全城&or;</i>
+                <i id="area">全城</i>
             </div>
             <!-- 2租金-->
             <!--<div class="reprises r-list">-->
@@ -98,25 +98,25 @@
                 <!--</ul>-->
             <!--</div>-->
             <!-- 4户型-->
-            <div class="r-list">
+            <div class="r-list" id="house-layou">
                 <h5>户型</h5>
                 <ul>
-                    <li class="active">不限</li>
-                    <li>一室</li>
-                    <li>两室</li>
-                    <li>三室</li>
-                    <li>四室</li>
+                    <li la='0' class="active">不限</li>
+                    <li la='1'>一室</li>
+                    <li la='2'>两室</li>
+                    <li la='3'>三室</li>
+                    <li la='4'>四室</li>
                 </ul>
             </div>
             <!-- 5房间特色-->
-            <div class="r-list">
+            <div class="r-list" id="house-features">
                 <h5>特色配置</h5>
                 <ul>
-                    <li class="active">不限</li>
-                    <li>交通便利</li>
-                    <li>商业中心</li>
-                    <li>大学中心</li>
-                    <li>娱乐中心</li>
+                    <li fa='0' class="active">不限</li>
+                    <li fa='1' >交通便利</li>
+                    <li fa='2' >商业中心</li>
+                    <li fa='3' >大学中心</li>
+                    <li fa='4' >娱乐中心</li>
                 </ul>
             </div>
             <!-- 6状态-->
@@ -154,11 +154,12 @@
                     <li>地区选择</li>
                 </ul>
                 <ul class="q_right">
-                    <li>城内</li>
-                    <li>城东</li>
-                    <li>城南</li>
-                    <li>城西</li>
-                    <li>城北</li>
+                    <li tokon='0'>全部</li>
+                    <li tokon='1'>城东</li>
+                    <li tokon='2'>城南</li>
+                    <li tokon='3'>城西</li>
+                    <li tokon='4'>城北</li>
+                    <li tokon='4'>城内</li>
                 </ul>
             </div>
         </div>

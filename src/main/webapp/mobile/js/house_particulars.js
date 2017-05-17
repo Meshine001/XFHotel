@@ -8,16 +8,19 @@ $(document).ready(function(){
 
     var _uid = fnBase.huoqu(0, "uid");
     var _id = decodeURIComponent(fnBase.request("id"));
-    var frontURL=Constant.URL+'/mobile/info';
-    var postData={"roomId":_id};
+    //var frontURL=Constant.URL+'/mobile/info';
+    //var postData={"roomId":_id};
+    var frontURL='js/info.json';
+    var postData={"roomId":2};
+
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
-        fnBase.keep(1,"community",data.apartment.community);
-        fnBase.keep(1,"dayPrice",data.apartment.dayPrice);
-        fnBase.keep(1,"roomType",data.apartment.apartmenttype);
-        fnBase.keep(1,"roonWz",data.apartment.num_building);
-        fnBase.keep(1,"roomCX",data.room.direction);
-        fnBase.keep(1,"num_door",data.apartment.num_door);
+        //fnBase.keep(1,"community",data.apartment.community);
+        //fnBase.keep(1,"dayPrice",data.apartment.dayPrice);
+        //fnBase.keep(1,"roomType",data.apartment.apartmenttype);
+        //fnBase.keep(1,"roonWz",data.apartment.num_building);
+        //fnBase.keep(1,"roomCX",data.room.direction);
+        //fnBase.keep(1,"num_door",data.apartment.num_door);
         //if(data.success){
             //轮播图
             $(".swiper-container .swiper-wrapper").html("");

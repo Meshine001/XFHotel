@@ -197,10 +197,10 @@ public class MobileController  {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("12365");
+//			System.out.println("12365");
 			return new Message(Constants.MESSAGE_ERR_CODE, "验证失败");
 		}
-		System.out.println("123");
+//		System.out.println("123");
 		return new Message(Constants.MESSAGE_ERR_CODE, "验证失败");
 	}
 	
@@ -245,15 +245,14 @@ public class MobileController  {
 		info.put("oTotalPrice", priceInfo.get("totalPrice"));
 		info.put("oCashPledge", priceInfo.get("cashPledge"));
 		info.put("oPreferential", "");
-		System.out.println();
 		return info;
 	}
 	
 	@RequestMapping(value = "/checkAvailable", method = RequestMethod.POST)
 	public @ResponseBody Message checkAvailable(Long roomId, String startTime, String endTime) {
-		System.out.println(startTime);
-		System.out.println(roomId);
-		System.out.println(endTime);
+//		System.out.println(startTime);
+//		System.out.println(roomId);
+//		System.out.println(endTime);
 		try {
 			List<Order> availableOders = orderservice.checkAvailable(roomId, startTime, endTime);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, availableOders);
@@ -331,12 +330,13 @@ public class MobileController  {
 	}
 	/**
 	 * 用户提交订单 房间详细信息页，确认订单触发
-	 * 
 	 * @param cusId
 	 * @param description
 	 * @param roomId
 	 * @param cusName
 	 * @param cusTel
+	 * @param otherCusName
+	 * @param otherCusIdCard
 	 * @param cusIdCard
 	 * @param personal
 	 * @param startTime
@@ -347,6 +347,7 @@ public class MobileController  {
 	 * @param preferential
 	 * @param needFapiao
 	 * @param apartmentType
+	 * @param id
 	 * @return
 	 */
 	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
@@ -361,6 +362,7 @@ public class MobileController  {
 		double favorable = coupon.getcValue();
 		long totalPrice2 = Long.parseLong(totalPrice);
 		totalPrice = String.valueOf(totalPrice2 -favorable); 
+		
 		Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
@@ -392,9 +394,9 @@ public class MobileController  {
 		Order order = orderservice.get(o.getId());
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order.toMap());
+//		System.out.println(info);
 		return info;
 	}
-	
 	
 	@RequestMapping(value = "/changePsd", method = RequestMethod.POST)
 	public @ResponseBody Message changePsd(String oldPsd, String psd, int id) {
@@ -489,6 +491,7 @@ public class MobileController  {
 		return map;
 	}
 	
+
 	/**
 	 * 查询微信支付的状态
 	 * @param id
@@ -516,19 +519,25 @@ public class MobileController  {
 	
 	@RequestMapping("getMyCoupons")
 	@ResponseBody
-	public Map getMyCoupons(Long uId ,Double totalPrice){
+	public ArrayList<Object> getMyCoupons(Long uId ,Double totalPrice){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Coupon> coupon = couponService.getCoupon(uId);
 		for(Coupon coupon2:coupon){
-			long startTime = Long.parseLong(coupon2.getStartTime()); 
-			long endTime = Long.parseLong(coupon2.getEndTime()); 
+			long startTime = TimeUtil.getDateLong(coupon2.getStartTime());
+			long endTime = TimeUtil.getDateLong(coupon2.getEndTime());
 			long rule = Long.parseLong(coupon2.getRule()); 
 			long time = new Date().getTime();
-			if(startTime<=time||time<=endTime||totalPrice<=rule){
+			boolean usable = coupon2.isUsed();
+//			System.out.println(usable);
+			if(startTime<=time&&time<=endTime&&totalPrice>=rule&&usable!=true){
 				map.put(coupon2.getEndTime(), coupon2);
 			}
 		}
-		return map;
+		ArrayList<Object> list = new ArrayList<Object>();
+		  for(String key : map.keySet()){
+		   list.add(map.get(key));
+		  }
+		return list;
 	}
 	/**
 	 * 获取用户优惠券
@@ -538,13 +547,15 @@ public class MobileController  {
 	@RequestMapping("getCoupons")
 	@ResponseBody
 	public List<Coupon>  getCouponsByUser(Long uId ){
+		System.out.println(uId);
 		List<Coupon> coupon = couponService.getCoupon(uId);
 		for(Coupon coupon2:coupon){
-			long startTime = Long.parseLong(coupon2.getStartTime()); 
-			long endTime = Long.parseLong(coupon2.getEndTime()); 
+			long endTime = TimeUtil.getDateLong(coupon2.getEndTime());
 			long time = new Date().getTime();
-			if(startTime<=time||time<=endTime){
-				couponService.deleteById(coupon2.getId());
+//			System.out.println(time + endTime);
+			boolean usable = coupon2.isUsed();
+			if(time>=endTime||usable==true){
+				couponService.delete(couponService.getCoupon2(coupon2.getId()));
 			}
 		}
 		return couponService.getCoupon(uId);

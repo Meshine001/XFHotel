@@ -5,7 +5,7 @@ $(document).ready(function(){
     var _startTime = fnBase.huoqu(1, "startTime");
     var _endTime=fnBase.huoqu(1,"endTime");
     var _oTotalDay=fnBase.huoqu(1,"oTotalDay");
-    var _oTotalPrice=fnBase.huoqu(1,"oTotalPrice");
+    var _oTotalPrice=fnBase.huoqu(1,"oTotalPrices");
     _id = decodeURIComponent(fnBase.request("id"));
     var _price=fnBase.huoqu(1,"dayPrice");
     var _apartmenttype=fnBase.huoqu(1,"roomType");

@@ -30,7 +30,7 @@
             <h1 class="r_name roomName">福邸铭门(22楼)</h1>
             <h1 class="r_name roomTime"><i>2017-04-26入住</i><i>2017-04-30离开</i> </h1>
             <h1 class="o_pay roompYJ">押金：<span class="money">￥280</span></h1>
-            <h1 class="o_pay roompPic">订单总额：<span class="money">￥598</span></h1>
+            <h1 class="o_pay roompPic">订单总额：<span class="money">￥598</span><a>优惠劵</a></h1>
         </div>
 
         <ul class="price_info">
@@ -38,7 +38,7 @@
             <li><span>联系电话</span><input class="fl" id="tel" type="text" placeholder="用于接收房门密码"></li>
             <li><span>身份证号</span><input class="fl" id="identity" type="text" placeholder="入住人身份证号"></li>
             <li><span>您的需求</span><input class="fl" id="presonal" type="text" placeholder="您还有什么需求？"></li>
-            <!--<li><span>是否开发票</span><div class="fl" id="needpic"><i class="" cod="true">是</i><i cod="false" class="active">否</i></div></li>-->
+            <li><span>是否开发票</span><div class="fl" id="needpic"><i class="" cod="true">是</i><i cod="false" class="active">否</i></div></li>
         </ul>
         <ul class="price_info addpartenr">
 
@@ -60,19 +60,25 @@
         <a href="javascript:;">提交订单</a>
     </div>
 </div>
+<!-- 使用优惠劵 -->
+<div id="usecoupon">
+	<header><i class="_black">&times;</i>可用优惠劵<i class="_confirm">确定</i></header>
+	<ul>
+	</ul>	
+	<p id="zanwu"></p>
+</div>
 
 
-<!--弹窗-->
+
+<!--添加同住人信息-->
 <div id="masking"></div>
 <div class="alert-content">
     <header><i class="_black">&times;</i>增加朋友一起住<i class="_confirm">确定</i></header>
     <!--<ul>-->
         <!--<li>增加新朋友</li>-->
     <!--</ul>-->
-
     <ul class="oldpartenr">
-        <li class="selected"><i class="this"></i><span class="_pName">马三炮</span><span class="numbId">6123231921355432</span><i class="_remove"></i></li>
-    </ul>
+    </ul>   
     <div class="news-msg">
         <ul>
             <li>朋友姓名：<input id="pName" type="text" placeholder="请输入姓名"></li>
