@@ -48,6 +48,7 @@ import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -68,16 +69,6 @@ public class ApartmentController {
 	@Autowired
 	HttpSession session;
 
-	@RequestMapping(value = "/features/add", method = RequestMethod.POST)
-	public @ResponseBody Message addFeatures(String description) {
-		Feature f = featureService.add(description);
-		if (f == null) {
-			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
-		} else {
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
-		}
-
-	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String apartmentList() {
@@ -85,55 +76,6 @@ public class ApartmentController {
 		return "/admin/apartment/list";
 	}
 
-	@RequestMapping(value = "/features/delete/{id}", method = RequestMethod.POST)
-	public @ResponseBody Message deleteFeatures(@PathVariable("id") Long id) {
-		try {
-			Feature f = featureService.findById(id);
-			featureService.delete(f);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, "删除成功");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return new Message(Constants.MESSAGE_ERR_CODE, "删除失败");
-	}
-
-	@RequestMapping(value = "/facility/add", method = RequestMethod.POST)
-	public @ResponseBody Message addFacility(String description) {
-		try {
-			Facility f = new Facility();
-			f.setDescription(description);
-			facilityService.add(f);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
-		}
-
-	}
-
-	@RequestMapping(value = "/facility/delete/{id}", method = RequestMethod.POST)
-	public @ResponseBody Message deleteFacility(@PathVariable("id") Long id) {
-		try {
-			Facility f = facilityService.findById(id);
-			facilityService.delete(f);
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, "删除成功");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return new Message(Constants.MESSAGE_ERR_CODE, "删除失败");
-	}
-
-	@RequestMapping(value = "/features", method = RequestMethod.GET)
-	public @ResponseBody Message features() {
-		List featrues = featureService.listFeatures();
-		if (!featrues.isEmpty()) {
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, featrues);
-		}
-		return new Message(Constants.MESSAGE_ERR_CODE, "暂时没有特色信息");
-	}
 
 	/**
 	 * 跳转添加公寓页面
@@ -147,6 +89,43 @@ public class ApartmentController {
 	}
 
 
+	/**
+	 * 添加公寓
+	 * @param jing_du
+	 * @param wei_du
+	 * @param bd_wei_zhi
+	 * @param xa_wei_zhi
+	 * @param jie_dao
+	 * @param xiao_qu
+	 * @param lou_hao
+	 * @param dan_yuan
+	 * @param lou_ceng
+	 * @param zong_lou_ceng
+	 * @param men_pai
+	 * @param suo_di_zhi
+	 * @param cao_xiang
+	 * @param mian_ji
+	 * @param shi
+	 * @param ting
+	 * @param wei
+	 * @param yang_tai
+	 * @param reng_shu
+	 * @param chuang
+	 * @param miao_su
+	 * @param te_se
+	 * @param jia_ju
+	 * @param wei_yu
+	 * @param can_chu
+	 * @param pei_tao
+	 * @param zou_bian
+	 * @param qi_ta
+	 * @param pic1
+	 * @param pic2
+	 * @param pic3
+	 * @param lei_xing
+	 * @param jia_ge
+	 * @return
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(String jing_du, String wei_du, String bd_wei_zhi, String xa_wei_zhi, String jie_dao,
 			String xiao_qu, String lou_hao, String dan_yuan, String lou_ceng, String zong_lou_ceng, String men_pai,
@@ -163,80 +142,109 @@ public class ApartmentController {
 		return "redirect:/admin/apartment/update/" + apartment.getId();
 	};
 
+	/**
+	 * 获取某公寓详细信息
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("get")
 	@ResponseBody
 	public JSONObject get(Long id){
 		return apartmentService.getApartmentById(id);
 	}
-//	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-//	public String update(@PathVariable("id") Long id, String address, String location, String lng, String lat,
-//			String community, String num_building, String num_unit, String num_door, String floor, String totalfloor,
-//			String direction, Double square, String bedroom, String livingroom, String bathroom, String capacity,
-//			String balcony, String descriptionAround, String descriptionPersonal, String[] facility, String[] feature,
-//			String apartmenttype, String dayPrice, String pic1, String[] pic2, String[] pic3) {
-//
-//		
-////		apartmentService.update(apartment);
-//
-//		return "redirect:/admin/apartment/update/" + apartment.getId();
-//	}
+	
 
-//	@SuppressWarnings("unchecked")
-//	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-//	public String updatePage(@PathVariable("id") Long id) {
-//		Map<String, Object> apartment = apartmentService.getApartmentInfo(id);
-//		session.setAttribute("apartment", apartment);
-//		List<Facility> l_facility = facilityService.listFacilities();
-//		session.setAttribute("l_facility", l_facility);
-//		List<Feature> l_feature = featureService.listFeatures();
-//		session.setAttribute("l_feature", l_feature);
-//		String[] l_apartmenttype = { "酒店型", "休闲型" };
-//		session.setAttribute("l_apartmenttype", l_apartmenttype);
-//		return "/admin/apartment/update";
-//	}
-//
-//	@RequestMapping(value = "/delete/{id}")
-//	public String delete(@PathVariable("id") Long id) {
-//		Apartment apartment = apartmentService.findById(id);
-//		List<Room> rooms = apartment.getRooms();
-//		for (Room room : rooms) {
-//			roomService.delete(room);
-//		}
-//		apartmentService.delete(apartment);
-//
-//		return "forward:/admin/apartment";
-//	}
-//
-//	@RequestMapping(value = "/getapartment", method = RequestMethod.POST)
-//	public @ResponseBody Map getApartment(String apartmentid) {
-//		Map map = apartmentService.getApartmentInfo(Long.valueOf(apartmentid));
-//		return map;
-//	}
-//
-//	@RequestMapping(value = "/price/set", method = RequestMethod.POST)
-//	public String priceSet(Long apartmentId, String date, String price) {
-//		Apartment apartment = apartmentService.findById(apartmentId);
-//		Price sp = apartmentService.getSpPrice(apartment, TimeUtil.getDateLong(date));
-//		if (sp != null) {
-//			sp.setPrice(Double.valueOf(price));
-//		} else {
-//			sp = new Price(apartment, TimeUtil.getDateLong(date), Double.valueOf(price));
-//		}
-//		apartmentService.setSpPrice(sp);
-//
-//		return "redirect:/admin/apartment/price/" + apartmentId;
-//	}
-//
-//	@RequestMapping(value = "/price/{id}", method = RequestMethod.GET)
-//	public String price(@PathVariable("id") Long id) {
-//		Apartment apartment = apartmentService.findById(id);
-//		Long start = TimeUtil.getCurrentDateLong();
-//		Long end = start + 1000 * 60 * 60 * 25 * 60;// 60天
-//		List<Map> prices = apartmentService.getSpPrices(start, end, apartment);
-//		session.setAttribute("apartment", apartmentService.getApartmentInfo(apartment.getId()));
-//		session.setAttribute("spPrices", prices);
-//		return "admin/apartment/price";
-//	}
+	/**
+	 * 设置公寓首页显示
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/showHome/{id}", method = RequestMethod.GET)
+	public String showHome(@PathVariable("id")Long id){
+		Apartment apartment = apartmentService.findById(id);
+		apartment.setShow_home(apartment.isShow_home()?false:true);
+		apartmentService.update(apartment);
+		return "redirect:/admin/apartment";
+	}
+	
+	
+	
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+	public String update(@PathVariable("id") Long id, String jing_du, String wei_du, String bd_wei_zhi, String xa_wei_zhi, String jie_dao,
+			String xiao_qu, String lou_hao, String dan_yuan, String lou_ceng, String zong_lou_ceng, String men_pai,
+			String suo_di_zhi, String cao_xiang, String mian_ji, String shi, String ting, String wei, String yang_tai,
+			String reng_shu, String chuang, String miao_su, String te_se, String jia_ju, String wei_yu, String can_chu,
+			String pei_tao, String zou_bian, String qi_ta, String pic1, String[] pic2, String[] pic3, String lei_xing,
+			String jia_ge) {
+
+    	Apartment apartment = apartmentService.update(id, jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, jia_ju, wei_yu, can_chu, pei_tao, zou_bian, qi_ta, pic1, pic2, pic3, lei_xing, jia_ge);
+
+		return "redirect:/admin/apartment/update/" + apartment.getId();
+	}
+
+	String formatJSONArrayString(JSONArray ja){
+		StringBuffer sb = new StringBuffer();
+		for(int i=0;i<ja.size();i++){
+			sb.append(ja.get(i));
+			if(i!=ja.size()-1)
+			sb.append("，");
+		}
+		return sb.toString().trim();
+	}
+	
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+	public String updatePage(@PathVariable("id") Long id) {
+		Apartment apartment = apartmentService.findById(id);
+		session.setAttribute("apartment", apartment);
+		session.setAttribute("te_se", formatJSONArrayString(apartment.getTe_se()));
+		session.setAttribute("jia_ju", formatJSONArrayString(apartment.getJia_ju()));
+		session.setAttribute("wei_yu", formatJSONArrayString(apartment.getWei_yu()));
+		session.setAttribute("can_chu", formatJSONArrayString(apartment.getCan_chu()));
+		session.setAttribute("pei_tao", formatJSONArrayString(apartment.getPei_tao()));
+		session.setAttribute("zou_bian", formatJSONArrayString(apartment.getZou_bian()));
+		session.setAttribute("qi_ta", formatJSONArrayString(apartment.getQi_ta()));
+		
+		return "/admin/apartment/update";
+	}
+
+	@RequestMapping(value = "/delete/{id}")
+	public String delete(@PathVariable("id") Long id) {
+		Apartment apartment = apartmentService.findById(id);
+		apartmentService.delete(apartment);
+		return "forward:/admin/apartment";
+	}
+
+
+	@RequestMapping(value = "/price/set", method = RequestMethod.POST)
+	public String priceSet(Long apartmentId, String date, String price) {
+		Apartment apartment = apartmentService.findById(apartmentId);
+		Price sp = apartmentService.getSpPrice(apartmentId, TimeUtil.getDateLong(date));
+		if (sp != null) {
+			sp.setPrice(Double.valueOf(price));
+		} else {
+			sp = new Price(apartmentId, TimeUtil.getDateLong(date), Double.valueOf(price));
+		}
+		
+		apartmentService.setSpPrice(sp);
+
+		return "redirect:/admin/apartment/price/" + apartmentId;
+	}
+
+	/**
+	 * 设置特殊价格
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/price/{id}", method = RequestMethod.GET)
+	public String price(@PathVariable("id") Long id) {
+		Apartment apartment = apartmentService.findById(id);
+		Long start = TimeUtil.getCurrentDateLong();
+		Long end = start + 1000 * 60 * 60 * 25 * 60;// 60天
+		List<Price> prices = apartmentService.getSpPrices(start, end, id);
+		session.setAttribute("apartment", apartment);
+		session.setAttribute("spPrices", prices);
+		return "admin/apartment/price";
+	}
 //
 //	@RequestMapping(value = "/showHome/{id}", method = RequestMethod.GET)
 //	public String showHome(@PathVariable("id") Long id) {

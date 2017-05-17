@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>-青舍都市公寓-西安租房_西安合租</title>
+<title>编辑房源-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 </head>
@@ -16,69 +16,93 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div class="card">
-				<div class="card-header">添加房源</div>
+				<div class="card-header">修改房源</div>
 				<div class="card-body">
-					<form
-						action="<%=request.getContextPath()%>/admin/apartment/update/${apartment.id}"
-						method="POST" class="form form-horizontal">
+					<form action="<%=request.getContextPath()%>/admin/apartment/update/${apartment.id}"
+						method="POST" class="form form-horizontal form-add-apartment"
+						enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-md-3 control-label">区域</label>
 							<div class="col-md-9">
 								<div id="location">
 									<input type="text" id="location_info" class="form-control"
-										placeholder="" name="location" readonly="readonly"
-										value="${apartment.location}"> <input type="hidden"
-										id="lng" class="form-control" placeholder="" name="lng"
-										value="${apartment.longitude}"> <input type="hidden"
-										id="lat" class="form-control" placeholder="" name="lat"
-										value="${apartment.latitude}">
+										placeholder="" name="bd_wei_zhi" readonly="readonly"
+										value="${apartment.position.bd_wei_zhi}"> <input
+										type="hidden" id="lng" class="form-control" placeholder=""
+										name="jing_du" value="${apartment.position.jing_du}"> <input
+										type="hidden" id="lat" class="form-control" placeholder=""
+										name="wei_du" value="${apartment.position.wei_du}">
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">详细地址</label>
-
+							<label class="col-md-3 control-label">位置</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="address" value="${apartment.address}">
+								<select name="xa_wei_zhi" class="xa_wei_zhi"
+									data-value="${apartment.position.xa_wei_zhi}">
+									<option value="城东">城东</option>
+									<option value="城西">城西</option>
+									<option value="城南">城南</option>
+									<option value="城北">城北</option>
+								</select>
+								<script type="text/javascript">
+									$.each($('.xa_wei_zhi option'), function(
+											index, item) {
+										console.log(item);
+										if ($(item).attr('value') == $(
+												'.xa_wei_zhi').attr(
+												'data-value')) {
+											$(item)
+													.attr('selected',
+															'selected');
+										}
+									});
+								</script>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">街道</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder="如：xxx路xxx号"
+									name="jie_dao" value="${apartment.position.jie_dao}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">小区名称</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="community" value="${apartment.community}">
+								<input type="text" class="form-control" placeholder="如：xxx小区"
+									name="xiao_qu" value="${apartment.position.xiao_qu}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">楼号</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="num_building" value="${apartment.num_building}">
+								<input type="number" class="form-control" placeholder="请填写数字"
+									name="lou_hao" value="${apartment.position.lou_hao}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">单元号</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="num_unit" value="${apartment.num_unit}">
+								<input type="number" class="form-control" placeholder="请填写数字"
+									name="dan_yuan" value="${apartment.position.dan_yuan}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">楼层</label>
 							<div class="col-md-3">
 								<div class="input-group">
-									<span class="input-group-addon">第</span> <input type="text"
-										class="form-control" placeholder="" name="floor"
-										value="${apartment.floor}"> <span
+									<span class="input-group-addon">第</span> <input type="number"
+										class="form-control" placeholder="" name="lou_ceng"
+										value="${apartment.position.lou_ceng}"> <span
 										class="input-group-addon">层</span>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="input-group">
-									<span class="input-group-addon">共</span> <input type="text"
-										class="form-control" placeholder="" name="totalfloor"
-										value="${apartment.totalfloor}"> <span
+									<span class="input-group-addon">共</span> <input type="number"
+										class="form-control" placeholder="" name="zong_lou_ceng"
+										value="${apartment.position.zong_lou_ceng}"> <span
 										class="input-group-addon">层</span>
 								</div>
 							</div>
@@ -86,38 +110,46 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">门牌号</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="num_door" value="${apartment.num_door}">
+								<input type="text" class="form-control" placeholder="请填写门牌号"
+									name="men_pai" value="${apartment.position.men_pai}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">锁地址</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="lock_address" value="${apartment.lock_address}">
+								<input type="text" class="form-control"
+									placeholder="如：129.11.11.22" name="suo_di_zhi"
+									value="${apartment.basic_info.suo_di_zhi}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">朝向</label>
 							<div class="col-md-9">
-								<select name="direction" class="">
-									<c:if test="${apartment.direction == '南北'}">
-										<option value="南北" selected="selected">南北</option>
-										<option value="东西">东西</option>
-									</c:if>
-									<c:if test="${apartment.direction != '南北'}">
-										<option value="南北">南北</option>
-										<option value="东西" selected="selected">东西</option>
-									</c:if>
+								<select name="cao_xiang" class="cao_xiang"
+									data-value="${apartment.basic_info.cao_xiang}">
+									<option value="南北">南北</option>
+									<option value="东西">东西</option>
 								</select>
+								<script type="text/javascript">
+									$.each($('.cao_xiang option'), function(
+											index, item) {
+										if ($(item).attr('value') == $(
+												'.cao_xiang')
+												.attr('data-value')) {
+											$(item)
+													.attr('selected',
+															'selected');
+										}
+									});
+								</script>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">总面积</label>
 							<div class="col-md-9">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder=""
-										name="square" value="${apartment.square }"><span
+									<input type="number" class="form-control" placeholder="请填写房源面积"
+										name="mian_ji" value="${apartment.basic_info.mian_ji}"><span
 										class="input-group-addon">m<sup>2</sup></span>
 								</div>
 							</div>
@@ -127,47 +159,53 @@
 							<label class="col-md-3 control-label">户型</label>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder=""
-										name="bedroom" value="${apartment.bedroom}"> <span
+									<input type="number" class="form-control" placeholder=""
+										name="shi" value="${apartment.basic_info.shi}"> <span
 										class="input-group-addon">室</span>
 								</div>
 							</div>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder=""
-										name="livingroom" value="${apartment.livingroom}"> <span
+									<input type="number" class="form-control" placeholder=""
+										name="ting" value="${apartment.basic_info.ting}"> <span
 										class="input-group-addon">厅</span>
 								</div>
 							</div>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder=""
-										name="bathroom" value="${apartment.bathroom}"> <span
+									<input type="number" class="form-control" placeholder=""
+										name="wei" value="${apartment.basic_info.wei}"> <span
 										class="input-group-addon">卫</span>
 								</div>
 							</div>
 							<div class="col-sm-3">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder=""
-										name="balcony" value="${apartment.balcony}"> <span
-										class="input-group-addon">阳台</span>
+									<input type="number" class="form-control" placeholder=""
+										name="yang_tai" value="${apartment.basic_info.yang_tai}">
+									<span class="input-group-addon">阳台</span>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">可住几人</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder=""
-									name="capacity" value="${apartment.capacity}">
+								<input type="number" class="form-control" placeholder="请填写可住人数"
+									name="reng_shu" value="${apartment.basic_info.reng_shu}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">床</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" placeholder="对床的描述"
+									name="chuang" value="${apartment.basic_info.chuang}">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">户型图</label>
 							<div class="col-md-9">
 								<ul>
-									<li><input type="hidden" name="pic1" id="pic1-1-input"
-										value="${apartment.pic1}"> <img alt=""
-										src="<%=basePath%>/images/${apartment.pic1}"
+									<li><input type="hidden" name="pic1" id="pic1-1-input" value="${apartment.hu_xing_tu}">
+										<img alt="" src="<%=basePath%>/images/${apartment.hu_xing_tu}"
 										class="img-thumbnail" width="120px" height="80px"
 										id="pic1-1-img"><span
 										class="badge badge-info badge-icon upload-image" id="pic1-1"><i
@@ -176,98 +214,88 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">周边环境</label>
+							<label class="col-md-3 control-label">综合描述</label>
 							<div class="col-md-9">
-								<textarea name="descriptionAround" rows="3" class="form-control">${apartment.descriptionAround}</textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">个性描述</label>
-							<div class="col-md-9">
-								<textarea name="descriptionPersonal" rows="3"
-									class="form-control">${apartment.rooms[0].descriptionPersonal}</textarea>
+								<textarea name="miao_su" rows="3" class="form-control"
+									placeholder="对公寓的综合描述">${apartment.description}</textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">特色</label>
-
 							<div class="col-md-9">
-								<c:forEach items="${l_feature}" var="feature" varStatus="p">
-									<div class="checkbox checkbox-inline">
-										<input type="checkbox" id="fe-${feature.id}" name="feature"
-											value="${feature.id}"> <label for="fe-${feature.id}">${feature.description }
-										</label>
-									</div>
-									<c:forEach items="${apartment.features}" var="f">
-										<c:if test="${f == feature.id }">
-											<script type="text/javascript">
-												$('#fe-'+${f}).attr('checked','checked');
-											</script>
-										</c:if>
-									</c:forEach>
-								</c:forEach>
+								<textarea name="te_se" class="form-control"
+									placeholder="如：智能门锁，自动售货机，遥控窗帘等；用中文输入法“，”分隔">
+									${te_se}
+								</textarea>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">配套设施</label>
+							<label class="col-md-3 control-label">家居</label>
 							<div class="col-md-9">
-								<c:forEach items="${l_facility}" var="facility" varStatus="p">
-									<div class="checkbox checkbox-inline">
-										<input type="checkbox" id="fa-${facility.id}" name="facility"
-											value="${facility.id}"> <label
-											for="fa-${facility.id}">${facility.description }</label>
-										<c:forEach items="${apartment.facilities}" var="f">
-											<c:if test="${f == facility.id}">
-												<script type="text/javascript">
-													$('#fa-'+${f}).attr('checked','checked');
-												</script>
-											</c:if>
-										</c:forEach>
-									</div>
-								</c:forEach>
+								<textarea name="jia_ju" class="form-control"
+									placeholder="如：无线网络，电视，冰箱等；用中文输入法“，”分隔">
+								${jia_ju}
+								</textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">卫浴</label>
+							<div class="col-md-9">
+								<textarea name="wei_yu" class="form-control"
+									placeholder="如：淋浴，毛巾，浴巾等；用中文输入法“，”分隔">
+									${wei_yu}
+								</textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">餐厨</label>
+							<div class="col-md-9">
+								<textarea name="can_chu" class="form-control"
+									placeholder="如：燃气灶，烹饪锅具，刀具案板等；用中文输入法“，”分隔">
+									${can_chu}
+								</textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">配套</label>
+							<div class="col-md-9">
+								<textarea name="pei_tao" class="form-control"
+									placeholder="如：楼宇门禁，小区保安，停车位等；用中文输入法“，”分隔">
+									${pei_tao}
+								</textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">周边</label>
+							<div class="col-md-9">
+								<textarea name="zou_bian" class="form-control"
+									placeholder="如：地铁，公交站，餐馆等；用中文输入法“，”分隔">
+									${zou_bian}
+								</textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">其他</label>
+							<div class="col-md-9">
+								<textarea name="qi_ta" class="form-control"
+									placeholder="如：可做饭，可吸烟，可聚会等；用中文输入法“，”分隔">
+									${qi_ta}
+								</textarea>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-3 control-label">图片展示</label>
+							<label class="col-md-3 control-label">公寓展示</label>
 							<!-- Button trigger modal -->
 							<div class="col-md-9">
 								<ul>
-									<li><input type="hidden" name="pic2" id="pic2-1-input"
-										value="${apartment.pic2[0]}"> <img alt=""
-										src="<%=basePath%>/images/${apartment.pic2[0]}"
-										class="img-thumbnail" width="120px" height="80px"
-										id="pic2-1-img"><span
-										class="badge badge-info badge-icon upload-image" id="pic2-1"><i
-											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
-									<li><input type="hidden" name="pic2" id="pic2-2-input"
-										value="${apartment.pic2[1]}"> <img alt=""
-										src="<%=basePath%>/images/${apartment.pic2[1]}"
-										class="img-thumbnail" width="120px" height="80px"
-										id="pic2-2-img"><span
-										class="badge badge-info badge-icon upload-image" id="pic2-2"><i
-											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
-									<li><input type="hidden" name="pic2" id="pic2-3-input"
-										value="${apartment.pic2[2]}"> <img alt=""
-										src="<%=basePath%>/images/${apartment.pic2[2]}"
-										class="img-thumbnail" width="120px" height="80px"
-										id="pic2-3-img"><span
-										class="badge badge-info badge-icon upload-image" id="pic2-3"><i
-											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
-									<li><input type="hidden" name="pic2" id="pic2-4-input"
-										value="${apartment.pic2[3]}"> <img alt=""
-										src="<%=basePath%>/images/${apartment.pic2[3]}"
-										class="img-thumbnail" width="120px" height="80px"
-										id="pic2-4-img"><span
-										class="badge badge-info badge-icon upload-image" id="pic2-4"><i
-											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
-									<li><input type="hidden" name="pic2" id="pic2-5-input"
-										value="${apartment.pic2[4]}"> <img alt=""
-										src="<%=basePath%>/images/${apartment.pic2[4]}"
-										class="img-thumbnail" width="120px" height="80px"
-										id="pic2-5-img"><span
-										class="badge badge-info badge-icon upload-image" id="pic2-5"><i
-											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
+									<c:forEach items="${apartment.fang_jian_tu}" var="img" varStatus="p">
+										<li><input type="hidden" name="pic2" id="pic2-${p.index}-input" value="${img}">
+											<img alt="" src="<%=basePath%>/images/${img}" class="img-thumbnail" width="120px"
+											height="80px" id="pic2-${p.index}-img"><span
+											class="badge badge-info badge-icon upload-image" id="pic2-${p.index}"><i
+												class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
+									</c:forEach>
 								</ul>
 							</div>
 						</div>
@@ -276,59 +304,44 @@
 							<!-- Button trigger modal -->
 							<div class="col-md-9">
 								<ul>
-									<li><input type="hidden" name="pic3" id="pic3-1-input"
-										value="${apartment.pic3[0]}"> <img alt=""
-										src="<%=basePath%>/images/${apartment.pic3[0]}"
-										class="img-thumbnail" width="120px" height="80px"
-										id="pic3-1-img"><span
-										class="badge badge-info badge-icon upload-image" id="pic3-1"><i
+									<c:forEach items="${apartment.xiao_qu_tu}" var="img" varStatus="p">
+										<li><input type="hidden" value="${img}" name="pic3" id="pic3-${p.index}-input">
+										<img alt="" src="<%=basePath%>/images/${img}" class="img-thumbnail" width="120px"
+										height="80px" id="pic3-${p.index}-img"><span
+										class="badge badge-info badge-icon upload-image" id="pic3-${p.index}"><i
 											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
-									<li><input type="hidden" name="pic3" id="pic3-2-input"
-										value="${apartment.pic3[1]}"> <img alt=""
-										src="<%=basePath%>/images/${apartment.pic3[1]}"
-										class="img-thumbnail" width="120px" height="80px"
-										id="pic3-2-img"><span
-										class="badge badge-info badge-icon upload-image" id="pic3-2"><i
-											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
-									<li><input type="hidden" name="pic3" id="pic3-3-input"
-										value="${apartment.pic3[2]}"> <img alt=""
-										src="<%=basePath%>/images/${apartment.pic3[2]}"
-										class="img-thumbnail" width="120px" height="80px"
-										id="pic3-3-img"><span
-										class="badge badge-info badge-icon upload-image" id="pic3-3"><i
-											class="fa fa-edit" aria-hidden="true"></i><span>更换</span></span></li>
+									</c:forEach>
 								</ul>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-3 control-label">出租类型</label>
-
 							<div class="col-md-9">
-								<select name="apartmenttype" id="apartment-type">
-									<c:forEach items="${l_apartmenttype}" var="type">
-										<c:if test="${apartment.apartmenttype == type}">
-											<option selected="selected" value="${type}">${type}</option>
-										</c:if>
-										<c:if test="${apartment.apartmenttype != type}">
-											<option value="${type}">${type}</option>
-										</c:if>
-									</c:forEach>
+								<select name="lei_xing" id="apartment-type" class="lei_xing" data-value = "${apartment.basic_info.lei_xing}">
+									<option value="酒店型">酒店型</option>
+									<option value="休闲型">休闲型</option>
 								</select>
-
+								<script type="text/javascript">
+									$.each($('.lei_xing option'), function(
+											index, item) {
+										if ($(item).attr('value') == $(
+												'.lei_xing')
+												.attr('data-value')) {
+											$(item)
+													.attr('selected',
+															'selected');
+										}
+									});
+								</script>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">价格</label>
 							<div class="col-md-9">
 								<div class="input-group">
-									<input type="text" name="dayPrice" class="price-day"
-										value="${apartment.dayPrice}"> <span
+									<input type="text" name=jia_ge class="price-day" value="${apartment.basic_info.jia_ge}"> <span
 										class="input-group-addon">元/天</span>
-								</div>
-								<div class="input-group" style="display: none;">
-									<input type="text" name="hourPrice" class="price-hour">
-									<span class="input-group-addon">元/小时</span>
 								</div>
 							</div>
 						</div>
@@ -337,54 +350,23 @@
 						<div class="form-footer">
 							<div class="form-group">
 								<div class="col-md-9 col-md-offset-3">
-									<button type="submit" class="btn btn-primary">保存</button>
-									<button type="button" class="btn btn-default">取消</button>
+									<button type="submit" class="btn btn-primary btn-submit">保存</button>
+									<a type="button" class="btn btn-default" href="<%=basePath%>/admin/apartment">取消</a>
 								</div>
 							</div>
 						</div>
 					</form>
 				</div>
 			</div>
-
+			<script type="text/javascript">
+				$('.btn-submit').click(function() {
+					$('.form-add-apartment').submit();
+				});
+			</script>
 		</div>
 		<div class="col-md-6">
 			<div id="map" style="width: 500px; height: 500px"></div>
 		</div>
-		<script
-			src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
-			type="text/javascript"></script>
-		<script type="text/javascript">
-			var map = new BMap.Map("map");
-			var geolocation = new BMap.Geolocation();
-			var point = new BMap.Point($('#lng').val(), $('#lat').val());
-			var marker = new BMap.Marker(point);
-			marker.setPosition(point);
-			map.addOverlay(marker);
-			map.centerAndZoom(point, 12);
-			map.enableScrollWheelZoom(true);
-			map.addEventListener('ondragging', function() {
-				marker.setPosition(map.getCenter());
-			});
-			map.addEventListener("dragend", function showInfo() {
-				var cp = map.getCenter();
-				getaddress(cp.lng, cp.lat);
-			});
-			function getaddress(lng, lat) {
-				var pt = new BMap.Point(lng, lat);
-				var geoc = new BMap.Geocoder();
-				geoc.getLocation(pt,
-						function(rs) {
-							var addComp = rs.addressComponents;
-							$('#location_info').val(
-									addComp.province + ", " + addComp.city
-											+ ", " + addComp.district + ", "
-											+ addComp.street);
-							$('#lng').val(lng);
-							$('#lat').val(lat);
-
-						});
-			}
-		</script>
 		<!-- 上传图片 -->
 		<form action="" id="upload-image-form">
 			<input type="file" id="upload-image-input" name="file"
@@ -394,7 +376,9 @@
 	</div>
 	</my_body>
 
-	<my_script> <script type="text/javascript"
-		src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script></my_script>
+	<my_script> <script
+		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
+		type="text/javascript"></script>  <script type="text/javascript"
+		src="<%=basePath%>/dist/admin/assets/js/update-apartment.js"></script></my_script>
 </body>
 </html>

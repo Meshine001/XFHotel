@@ -1,14 +1,10 @@
 ﻿ package com.xfhotel.hotel.entity;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import net.sf.json.JSONArray;
@@ -17,8 +13,14 @@ import net.sf.json.JSONObject;
 @Entity
 @Table(name = "t_apartment")
 public class Apartment {
-	public static final String TYPE_HOTEL = "酒店型";
-	public static final String TYPE_PALY_ROOM = "休闲型";
+	
+	public final static int TYPE_NUM = 4;
+	public final static int TYPE_ALL = 0;
+	public final static int TYPE_HOTEL = 1;
+	public final static int TYPE_APARTMENT = 2;
+	public final static int TYPE_PLAY_ROOM = 3;
+	
+	
 	
 	@Id
 	@GeneratedValue(generator = "apartmentgenerator")
@@ -173,6 +175,30 @@ public class Apartment {
 
 	public JSONObject toJson(){
 		return JSONObject.fromObject(this);
+	}
+	
+	public final static String getTypeDescription(int type){
+		switch(type){
+		case 0:
+			return "不限";
+		case 1:
+			return "酒店型";
+		case 2:
+			return "公寓型";
+		case 3:
+			return "休闲型";
+		default:
+			return "不限";
+		}
+	}
+	
+	public final static int getTypeCode(String type){
+		if(type.equals("不限"))return 0;
+		if(type.equals("酒店型"))return 1;
+		if(type.equals("公寓型"))return 2;
+		if(type.equals("休闲型"))return 3;
+		return 0;
+
 	}
 
 }

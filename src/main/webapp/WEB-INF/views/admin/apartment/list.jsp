@@ -45,26 +45,26 @@
 						<c:forEach items="${apartments}" var="apartment">
 							<tr>
 								<td>${apartment.id}</td>
-								<td>${apartment.apartmenttype}</td>
-								<td>${apartment.num_door}</td>
-								<td>${apartment.location}</td>
-								<td>${apartment.address}</td>
-								<td>${apartment.community}</td>
-								<td>${apartment.num_building}</td>
-								<td>${apartment.floor}/${apartment.totalfloor}</td>
-								<td>${apartment.direction}</td>
-								<td>${apartment.square}</td>
+								<td>${apartment.basic_info.lei_xing}</td>
+								<td>${apartment.position.men_pai}</td>
+								<td>${apartment.position.jie_dao}</td>
+								<td>${apartment.position.xa_wei_zhi}</td>
+								<td>${apartment.position.xiao_qu}</td>
+								<td>${apartment.position.lou_hao}</td>
+								<td>${apartment.position.lou_ceng}/${apartment.position.zong_lou_ceng}</td>
+								<td>${apartment.basic_info.cao_xiang}</td>
+								<td>${apartment.basic_info.mian_ji}</td>
 								<th><a class="btn"
 									href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a>&nbsp;&nbsp;<br>
 									<a class="btn"
 									href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格</a>&nbsp;&nbsp;<br>
 									
 									<a href="<%=basePath %>/admin/apartment/showHome/${apartment.id}" class="btn" >
-									<c:if test="${apartment.rooms[0].showHome == true }">
+									<c:if test="${apartment.show_home == true }">
 									首页隐藏
 									</c:if>
 									
-									<c:if test="${apartment.rooms[0].showHome == false }">
+									<c:if test="${apartment.show_home == false }">
 									首页显示
 									</c:if>
 									</a><br>

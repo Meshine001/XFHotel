@@ -17,7 +17,7 @@
 			<div class="card card-mini">
 				<div class="card-header">
 					<div class="card-title">
-						<h3>公寓${apartment.id}-${apartment.community}-${apartment.num_building}-${apartment.floor}/${apartment.totalfloor}-价格表</h3>
+						<h3>公寓${apartment.id}-${apartment.basic_info.xiao_qu}-${apartment.position.lou_hao}-${apartment.position.lou_ceng}/${apartment.position.zong_lou_ceng}-价格表</h3>
 					</div>
 				</div>
 				<div class="card-body">
@@ -26,7 +26,7 @@
 							<label class="col-md-3 control-label">日常价</label>
 							<div class="col-md-3">
 								<input type="text" class="form-control" placeholder=""
-									name="oldPrice" value="${apartment.dayPrice}">
+									name="oldPrice" value="${apartment.basic_info.jia_ge}">
 							</div>
 						</div>
 						<c:forEach items="${spPrices}" var="sp">

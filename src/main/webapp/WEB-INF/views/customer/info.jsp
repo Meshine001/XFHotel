@@ -16,10 +16,10 @@
 	src="<%=basePath%>/dist/zui/lib/price-calendar/js/yui-min.js"></script>
 <script type="text/javascript">
 	
-</script> 
+</script>
 <style type="text/css">
 #newBridge ins#nb_icon_wrap {
-    display: none;
+	display: none;
 }
 </style>
 </my_header>
@@ -43,15 +43,15 @@
 						</span>
 					</div>
 					<div class="f_img">
-						<img id="datu" src="../images/${apartment.picShow[0]}" width="810"
-							height="497" index="0">
+						<img id="datu" src="../images/${apartment.pic_show[0]}"
+							width="810" height="497" index="0">
 					</div>
 					<div class="f_img_list">
 						<i id="pre" class="bt_left"></i>
 						<div class="w00" style="width: 770px">
 							<ul
 								style="width: 2190px; margin-left: -10px; position: relative;">
-								<c:forEach items="${apartment.picShow}" var="pic" varStatus="p">
+								<c:forEach items="${apartment.pic_show}" var="pic" varStatus="p">
 									<li index="${p.index }"><img src="../images/${pic}"
 										width="138" height="84" /></li>
 								</c:forEach>
@@ -62,45 +62,92 @@
 				</div>
 				<div class="x_i">
 					<div>
-						<div class="i_z">个性描述</div>
+						<div class="i_z">综合描述</div>
 						<div class="x_fj_info">
-							<p>${room.descriptionPersonal}</p>
+							<p>${apartment.description}</p>
 						</div>
-					</div>
-					<div>
-						<div class="i_z">周边描述</div>
-						<div class="x_fj_info">
-							<p>${apartment.descriptionAround}</p>
-						</div>
-					</div>
-					<div>
-						<div class="i_z">房间特色</div>
-						<p class="i_span">
-							<c:forEach items="${apartment.featureEntity}" var="f">
-								<span>${f.description}</span>
-							</c:forEach>
-						</p>
-
 					</div>
 					<div>
 						<div class="i_z">配套设施</div>
-						<p class="i_span">
-							<c:forEach items="${room.facilityEntity}" var="f">
-								<span>${f.description}</span>
-							</c:forEach>
-						</p>
+						<div class="x_fj_info">
+							<div>
+								<div class="i_z">特色</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.te_se}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+							<div>
+								<div class="i_z">家居</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.jia_ju}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+							<div>
+								<div class="i_z">卫浴</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.wei_yu}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+							<div>
+								<div class="i_z">餐厨</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.can_chu}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+							<div>
+								<div class="i_z">配套</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.pei_tao}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+							<div>
+								<div class="i_z">周边</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.zou_bian}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+							<div>
+								<div class="i_z">其他</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.qi_ta}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+						</div>
 					</div>
+
 					<div>
-						<div class="i_z">位置周边</div>
+						<div class="i_z">位置地图</div>
 						<div class="wz_ditu">
 							<img alt="" width="810" height="420"
 								src="http://api.map.baidu.com/staticimage?center=${apartment.position.jing_du},${apartment.position.wei_du}&width=810&height=420&zoom=16&markers=${apartment.position.jing_du},${apartment.position.wei_du}" />
 						</div>
 					</div>
-					<div>
+					<div style="display: none;">
 						<div class="i_z">公寓户型</div>
 						<div class="hx_tu">
-							<img alt="户型图" width="810" src="../images/${apartment.hu_xing_tu}" />
+							<img alt="户型图" width="810"
+								src="../images/${apartment.hu_xing_tu}" />
 						</div>
 					</div>
 				</div>
@@ -257,15 +304,13 @@
 							</c:forEach>
 						</p>
 						<ul>
-							<li style="display: none;"><span class="c99">编号</span><span class="c66">${room.id}</span></li>
-							<li style="display: none;"><span class="c99">楼层</span><span class="c66">第${apartment.floor}层/共${apartment.totalfloor}层</span></li>
-							<li style="display: none;"><span class="c99">单元</span><span class="c66">${apartment.num_unit}</span></li>
-							<li style="display: none;"><span class="c99">房号</span><span class="c66">${apartment.num_door}</span></li>
-							<li><span class="c99">面积</span><span class="c66">${room.square}㎡</span></li>
-							<li><span class="c99">朝向</span><span class="c66">${room.direction}</span></li>
-							<li><span class="c99">可住</span><span class="c66">${room.capacity}人</span></li>
-							<li><span class="c99">居室</span><span class="c66">${apartment.bedroom}室${apartment.livingroom}厅${apartment.bathroom}卫${apartment.balcony}阳台</span></li>
-							<li><span class="c99">小区</span><span class="c66">${apartment.community}</span></li>
+							<li style="display: none;"><span class="c99">编号</span><span
+								class="c66">${apartment.id}</span></li>
+							<li><span class="c99">面积</span><span class="c66">${apartment.basic_info.mian_ji}㎡</span></li>
+							<li><span class="c99">朝向</span><span class="c66">${apartment.basic_info.cao_xiang}</span></li>
+							<li><span class="c99">可住</span><span class="c66">${apartment.basic_info.reng_shu}人</span></li>
+							<li><span class="c99">居室</span><span class="c66">${apartment.basic_info.shi}室${apartment.basic_info.ting}厅${apartment.basic_info.wei}卫${apartment.basic_info.yang_tai}阳台</span></li>
+							<li><span class="c99">小区</span><span class="c66">${apartment.basic_info.cao_xiang}</span></li>
 						</ul>
 					</div>
 				</div>
@@ -276,7 +321,8 @@
 							height="110">
 						<div class="gj_mz">
 							<span class="gj_name">在线管家</span><span class="gj_tel"></span>周一至周日
-							07:00 - 23:00 <span class="gj_chat online-chat" style="cursor: pointer;"><i></i>在线聊天</span>
+							07:00 - 23:00 <span class="gj_chat online-chat"
+								style="cursor: pointer;"><i></i>在线聊天</span>
 						</div>
 					</div>
 					<p></p>
@@ -284,12 +330,13 @@
 				<div class="inter">
 					<h4>你可能会喜欢</h4>
 					<ul>
-						<c:forEach items="${allApartment}" var="r">
-							<c:if test="${room.id != r.rooms[0].id}">
-								<a href="../info/${r.rooms[0].id}"> <img alt="140x140"
-									class="img-responsive" src="../images/${r.pic2[0]}" />
-									 <em>${r.community}-${r.num_building}-${r.direction}朝向-${r.num_door}房间</em>
+						<c:forEach items="${allApartment}" var="r" varStatus="p">
+							<c:if test="${p.index < 5}">
+							<c:if test="${apartment.id != r.id}">
+								<a href="../info/${r.id}"> <img alt="140x140"
+									class="img-responsive" src="../images/${r.fang_jian_tu[0]}" /> <em>${apartment.basic_info.xiao_qu}-${apartment.basic_info.cao_xiang}朝向</em>
 								</a>
+							</c:if>
 							</c:if>
 						</c:forEach>
 					</ul>
@@ -443,8 +490,7 @@
 		$('#call-gps').click(function() {
 			$('#map-iframe').attr('src', $(this).attr('data-iframeUrl'));
 		});
-	</script> 
-		<script>
+	</script> <script>
 		var _hmt = _hmt || [];
 		(function() {
 			var hm = document.createElement("script");
@@ -452,16 +498,12 @@
 			var s = document.getElementsByTagName("script")[0];
 			s.parentNode.insertBefore(hm, s);
 		})();
-		$('.online-chat').click(function(){
+		$('.online-chat').click(function() {
 			$('#nb_icon_wrap').click();
 		});
-	</script>
-	</my_body>
-	<my_script>
-	 <script
+	</script> </my_body>
+	<my_script> <script
 		src="<%=basePath%>/dist/customer/js/info.js"></script> <script
-		src="<%=basePath%>/dist/customer/js/comment-list.js"></script>
-		
-    </my_script>
+		src="<%=basePath%>/dist/customer/js/comment-list.js"></script> </my_script>
 </body>
 </html>

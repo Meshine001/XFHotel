@@ -68,10 +68,10 @@ public class HomeController {
 	//
 	// @Autowired
 	// OrderService orderService;
-	//
-	// @Autowired
-	// CommentService commentService;
-	//
+	
+	 @Autowired
+	 CommentService commentService;
+	
 	@Autowired
 	HttpSession session;
 
@@ -337,38 +337,16 @@ public class HomeController {
 
 		String start = TimeUtil.getDateStr(new Date().getTime());
 		session.setAttribute("startDate", start);
-		// 获得两个月的价格
-
-		JSONArray prices2 = apartmentService.get2MonthPrices(id, start);
-		JSONArray prices = new JSONArray();
-		int s = Integer.parseInt(start.substring(start.length() - 2, start.length())) - 1;
-		Iterator<Object> iterator = prices2.iterator();
-		int i = 0;
-		while (iterator.hasNext() && i < (s + 6)) {
-			if (i < s) {
-				iterator.next();
-				i++;
-				continue;
-			}
-			JSONObject info = JSONObject.fromObject(iterator.next());
-			System.out.println(info);
-			String date = (String)info.keys().next();
-			Map<String, Object> m = new HashMap<String, Object>();
-			m.put("date", date.substring(date.length() - 2, date.length()));
-			Map<String, Object> details = info.get(date);
-			m.put("price", details.get("price"));
-			prices.add(m);
-			i++;
-		}
-
-		session.setAttribute("prices", prices);
-
-		// session.setAttribute("roomRates",
-		// commentService.getRoomRates(roomId));
+		// 获得一周内的价钱
+		session.setAttribute("prices", apartmentService.get7DaysPrices(id, start));
+		//获得评论 
+		session.setAttribute("roomRates",
+	    commentService.getRoomRates(id));
+		
 		// session.setAttribute("yajin",apartment.get("yajin"));
-		//
-		// List<Map> allApartment = apartmentService.list();
-		// session.setAttribute("allApartment", allApartment);
+		
+
+		session.setAttribute("allApartment", apartmentService.list());
 
 		return "/customer/info";
 	}

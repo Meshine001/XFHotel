@@ -18,7 +18,7 @@
 			<div class="card">
 				<div class="card-header">添加房源</div>
 				<div class="card-body">
-					<form  action="<%=request.getContextPath()%>/admin/apartment/add"
+					<form action="<%=request.getContextPath()%>/admin/apartment/add"
 						method="POST" class="form form-horizontal form-add-apartment"
 						enctype="multipart/form-data">
 						<div class="form-group">
@@ -26,10 +26,10 @@
 							<div class="col-md-9">
 								<div id="location">
 									<input type="text" id="location_info" class="form-control"
-										placeholder="" name="bd_wei_zhi" readonly="readonly"> <input
-										type="hidden" id="lng" class="form-control" placeholder=""
-										name="jing_du"> <input type="hidden" id="lat"
-										class="form-control" placeholder="" name="wei_du">
+										placeholder="" name="bd_wei_zhi" readonly="readonly">
+									<input type="hidden" id="lng" class="form-control"
+										placeholder="" name="jing_du"> <input type="hidden"
+										id="lat" class="form-control" placeholder="" name="wei_du">
 								</div>
 							</div>
 						</div>
@@ -99,8 +99,8 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">锁地址</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder="如：129.11.11.22"
-									name="suo_di_zhi">
+								<input type="text" class="form-control"
+									placeholder="如：129.11.11.22" name="suo_di_zhi">
 							</div>
 						</div>
 						<div class="form-group">
@@ -159,7 +159,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">床</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" placeholder="请填写可住人数"
+								<input type="text" class="form-control" placeholder="对床的描述"
 									name="chuang">
 							</div>
 						</div>
@@ -178,52 +178,60 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">综合描述</label>
 							<div class="col-md-9">
-								<textarea name="miao_su" rows="3" class="form-control" placeholder="对公寓的描述"></textarea>
+								<textarea name="miao_su" rows="3" class="form-control"
+									placeholder="对公寓的综合描述"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">特色</label>
 							<div class="col-md-9">
-								<textarea name="te_se"  class="form-control" placeholder="对公寓的描述"></textarea>
+								<textarea name="te_se" class="form-control"
+									placeholder="如：智能门锁，自动售货机，遥控窗帘等；用中文输入法“，”分隔"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">家居</label>
 							<div class="col-md-9">
-								<textarea name="jia_ju"  class="form-control" placeholder="对公寓的描述"></textarea>
+								<textarea name="jia_ju" class="form-control"
+									placeholder="如：无线网络，电视，冰箱等；用中文输入法“，”分隔"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">卫浴</label>
 							<div class="col-md-9">
-								<textarea name="wei_yu"  class="form-control" placeholder="对公寓的描述"></textarea>
+								<textarea name="wei_yu" class="form-control"
+									placeholder="如：淋浴，毛巾，浴巾等；用中文输入法“，”分隔"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">餐厨</label>
 							<div class="col-md-9">
-								<textarea name="can_chu"  class="form-control" placeholder="对公寓的描述"></textarea>
+								<textarea name="can_chu" class="form-control"
+									placeholder="如：燃气灶，烹饪锅具，刀具案板等；用中文输入法“，”分隔"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">配套</label>
 							<div class="col-md-9">
-								<textarea name="pei_tao"  class="form-control" placeholder="对公寓的描述"></textarea>
+								<textarea name="pei_tao" class="form-control"
+									placeholder="如：楼宇门禁，小区保安，停车位等；用中文输入法“，”分隔"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">周边</label>
 							<div class="col-md-9">
-								<textarea name="zou_bian"  class="form-control" placeholder="对公寓的描述"></textarea>
+								<textarea name="zou_bian" class="form-control"
+									placeholder="如：地铁，公交站，餐馆等；用中文输入法“，”分隔"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">其他</label>
 							<div class="col-md-9">
-								<textarea name="qi_ta"  class="form-control" placeholder="对公寓的描述"></textarea>
+								<textarea name="qi_ta" class="form-control"
+									placeholder="如：可做饭，可吸烟，可聚会等；用中文输入法“，”分隔"></textarea>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label class="col-md-3 control-label">公寓展示</label>
 							<!-- Button trigger modal -->
@@ -285,8 +293,8 @@
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
 								<select name="lei_xing" id="apartment-type">
-										<option value="酒店型">酒店型</option>
-										<option value="休闲型">休闲型</option>
+									<option value="酒店型">酒店型</option>
+									<option value="休闲型">休闲型</option>
 								</select>
 
 							</div>
@@ -306,7 +314,7 @@
 							<div class="form-group">
 								<div class="col-md-9 col-md-offset-3">
 									<button type="button" class="btn btn-primary btn-submit">保存</button>
-									<button type="button" class="btn btn-default">取消</button>
+									<a type="button" class="btn btn-default" href="<%=basePath%>/admin/apartment">取消</a>
 								</div>
 							</div>
 						</div>
@@ -314,7 +322,7 @@
 				</div>
 			</div>
 			<script type="text/javascript">
-				$('.btn-submit').click(function(){
+				$('.btn-submit').click(function() {
 					$('.form-add-apartment').submit();
 				});
 			</script>

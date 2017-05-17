@@ -36,6 +36,7 @@ public class Price {
 
 	public Price(Long apartment_id, long date, Double price) {
 		super();
+		this.apartment_id = apartment_id;
 		this.date = date;
 		this.price = price;
 	}
@@ -46,8 +47,8 @@ public class Price {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public long getDate() {
-		return date;
+	public String getDate() {
+		return TimeUtil.getDateStr(date);
 	}
 	
 	public void setDate(long date) {
