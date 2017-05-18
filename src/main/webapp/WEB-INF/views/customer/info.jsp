@@ -213,7 +213,7 @@
 							</ul>
 						</div>
 						<div class="comment_list" data-url="<%=basePath%>"
-							data-room="${room.id}" data-page="1"></div>
+							data-room="${apartment.id}" data-page="1"></div>
 					</div>
 				</div>
 			</div>
@@ -344,135 +344,6 @@
 			</div>
 		</div>
 	</article>
-	<div class="row clearfix" style="margin-top: 50px; display: none;">
-		<div class="col-md-12 column">
-			<div class="row clearfix">
-				<div class="col-md-4 column">
-					<div class="row clearfix">
-						<div class="col-md-12 column">
-							<h3 class="text-left type-hotel-price">
-								<small>￥</small>${room.prices[0]}<small>/天</small><small
-									style="display: none;"> 原价:1480元/天</small>
-							</h3>
-							<h3 class="text-left type-apartment-price">
-								<small>￥</small>${room.prices[2]}<small>/月</small><small
-									style="display: none;"> 原价:1480元/月</small>
-							</h3>
-							<c:forEach items="${room.facilityEntity}" var="f">
-								<span class="label label-default">${f.description}</span>
-							</c:forEach>
-
-							<hr class="divider">
-							<br>
-							<button type="button" class="btn btn-info btn-block"
-								data-toggle="modal" data-target="#orderModal">立即预定</button>
-							<c:if test="${searchType == '酒店型公寓' }">
-								<button type="button" class="btn btn-info btn-block"
-									data-toggle="modal" data-target="#orderModal">立即预定</button>
-							</c:if>
-							<c:if test="${searchType == '短租型公寓' }">
-								<button type="button" class="btn btn-info btn-block"
-									data-toggle="modal" data-target="#reservationModal">预约看房</button>
-							</c:if>
-							<!-- Modal -->
-							<div class="modal fade" id="reservationModal" tabindex="-1"
-								role="dialog" aria-labelledby="reservationModalLabel"
-								aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">
-												<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-											</button>
-											<h4 class="modal-title" id="reservationModalLabel">在线预约</h4>
-										</div>
-										<div class="modal-body">
-											<div class="row">
-												<div class="col-md-12">
-													<form action="" method="post">
-														姓名：<input type="text" name="cusName" value=""><br>
-														手机：<input type="text" name="cusTel" value=""><br>
-														个人需求：<input type="text" name="cusPersonal" value=""><br>
-													</form>
-												</div>
-											</div>
-
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">取消</button>
-											<button type="button" class="btn btn-primary "
-												id="resercation-submit">提交</button>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<!-- Modal -->
-							<div class="modal fade" id="orderModal" tabindex="-1"
-								role="dialog" aria-labelledby="orderModalLabel"
-								aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">
-												<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-											</button>
-											<h4 class="modal-title" id="orderModalLabel">确认订单</h4>
-										</div>
-										<div class="modal-body">
-											<div class="row">
-												<div class="col-md-12">
-													<form action="../order/add" method="post" id="order-form">
-														<input type="hidden" name="cusId" value="${c.id}"
-															id="cusId"> <input type="hidden" name="roomId"
-															value="${room.id}"> <input type="hidden"
-															name="apartmentId" value="${room.apartment}"> <input
-															type="hidden" name="type" value="1">
-														<ul>
-															<li><span>入离时间</span><span><input type="date"
-																	class="order-date" id="order-start" name="startTime"></span>至<span><input
-																	type="date" class="order-date" id="order-end"
-																	name="endTime"></span>共<span id="order-total-day">0</span>晚<a
-																class="btn">修改时间</a></li>
-															<li><span>房费</span><span><small>￥</small><span
-																	id="order-price">${room.prices[0]}</span></span><span></span></li>
-															<li><span>住客姓名</span><span><input type="text"
-																	name="cusName"></span></li>
-															<li><span>身份证</span><input type="text"
-																name="cusIdCard"></li>
-															<li><span>联系手机</span><input type="text"
-																name="cusTel"></li>
-															<li><span>个人需求</span><input type="text"
-																name="cusPersonal"></li>
-															<li><span>发票</span><span><input
-																	type="checkbox" name="needFapiao">是否需要发票</span></li>
-															<li><a>入住须知</a></li>
-														</ul>
-														<span>订单总额￥</span><span id="order-total-price">0.00</span>
-													</form>
-												</div>
-											</div>
-
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">取消</button>
-											<button type="button" class="btn btn-primary "
-												id="order-submit">提交</button>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="modal fade" id="gpsModal">
 		<div class="modal-dialog modal-fullscreen">
 			<div class="modal-header">

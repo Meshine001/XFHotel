@@ -1,51 +1,21 @@
 package com.xfhotel.hotel.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
-import com.xfhotel.hotel.entity.Facility;
-import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Price;
-import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.FileService;
 import com.xfhotel.hotel.service.RoomService;
-import com.xfhotel.hotel.service.impl.ApartmentServiceImpl;
-import com.xfhotel.hotel.support.DateUtil;
-import com.xfhotel.hotel.support.Message;
-import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 
 import net.sf.json.JSONArray;
@@ -245,72 +215,5 @@ public class ApartmentController {
 		session.setAttribute("spPrices", prices);
 		return "admin/apartment/price";
 	}
-//
-//	@RequestMapping(value = "/showHome/{id}", method = RequestMethod.GET)
-//	public String showHome(@PathVariable("id") Long id) {
-//		Map info = apartmentService.getApartmentInfo(id);
-//		List<Map> rooms = (List<Map>) info.get("rooms");
-//		Room room = roomService.findById((Long) rooms.get(0).get("id"));
-//		room.setShowHome(room.isShowHome() ? false : true);
-//		roomService.update(room);
-//		return "redirect:/admin/apartment";
-//	}
-//
-//	// @RequestMapping(value = "/editroom", method = RequestMethod.POST)
-//	// public String editroom(Long roomid, String apartmentid) {
-//	// session.setAttribute("roomid", roomid);
-//	// session.setAttribute("apartmentid", apartmentid);
-//	// List l_facility = facilityService.listFacilities();
-//	// session.setAttribute("l_facility", l_facility);
-//	// List l_feature = featureService.listFeatures();
-//	// session.setAttribute("l_feature", l_feature);
-//	// session.setAttribute("room", roomService.getRoomInfo(roomid));
-//	// return "/admin/apartment/editroom";
-//	// }
-//
-//	// @RequestMapping(value = "/room/pic/update/{roomid}", method =
-//	// RequestMethod.POST)
-//	// public @ResponseBody Message updateRoomPic(@PathVariable(value =
-//	// "roomid") Long roomid, String[] pics) {
-//	// try {
-//	// roomService.updateRoomPic(roomid, pics);
-//	// return new Message(Constants.MESSAGE_SUCCESS_CODE, "更新成功");
-//	// } catch (Exception e) {
-//	// // TODO Auto-generated catch block
-//	// e.printStackTrace();
-//	// }
-//	// return new Message(Constants.MESSAGE_ERR_CODE, "更新房间图片失败");
-//	// }
-//
-//	// @RequestMapping(value = "/room/{roomid}", method = RequestMethod.POST)
-//	// public @ResponseBody Map getRoom(@PathVariable("roomid") String roomid) {
-//	// Map map = roomService.getRoomInfo(Long.valueOf(roomid));
-//	// return map;
-//	// }
-//
-//	// @RequestMapping(value = "/room/update/{roomid}", method =
-//	// RequestMethod.POST)
-//	// public String updateroom(@PathVariable(value = "roomid") Long roomid,
-//	// RedirectAttributes attr,
-//	// HttpServletRequest request, String description, String type, String
-//	// ltype, String square, String direction,
-//	// String[] facility, String[] prices) {
-//	// String apartmentid = (String) session.getAttribute("apartmentid");
-//	// Room room = roomService.findById(roomid);
-//	//
-//	// List lf = facilityService.listFacilities();
-//	// room.setDescription(description + "@" + type + "@" + ltype);
-//	// room.setSquare(Double.valueOf(square));
-//	// room.setDirection(direction);
-//	//
-//	// room.setFacilities(facility);
-//	//
-//	// room.setPrices(StringSplitUtil.buildStrGroup(prices));
-//	//
-//	// roomService.update(room);
-//	//
-//	// attr.addAttribute("apartmentid", apartmentid);
-//	//
-//	// return "redirect:/admin/apartment/edit";
-//	// }
+
 }

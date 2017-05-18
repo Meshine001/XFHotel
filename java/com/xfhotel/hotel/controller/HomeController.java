@@ -37,6 +37,7 @@ import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
+import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
@@ -61,17 +62,16 @@ public class HomeController {
 
 	@Autowired
 	ApartmentService apartmentService;
-	// @Autowired
-	// BannerService bannerService;
-	// @Autowired
-	// BlogService blogService;
-	//
-	// @Autowired
-	// OrderService orderService;
-	
-	 @Autowired
-	 CommentService commentService;
-	
+
+	@Autowired
+	BlogService blogService;
+
+	@Autowired
+	SystemConfService systemConfService;
+
+	@Autowired
+	CommentService commentService;
+
 	@Autowired
 	HttpSession session;
 
@@ -81,254 +81,102 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		session.setAttribute("homeRoom", apartmentService.getHomeApartments());
-		// session.setAttribute("homeBlog",
-		// blogService.list(1,10).getResults());
+		session.setAttribute("homeBlog", blogService.list(1, 10).getResults());
 		return "/customer/home";
 	}
 
-	// @RequestMapping(value = "/story",method = RequestMethod.GET)
-	// public String storyPage(HttpServletRequest request, int page){
-	//
-	// PageResults<Blog> pr = blogService.show_blog(page);
-	// int sp = pr.getCurrentPage();
-	// int ep = pr.getPageCount();
-	// if ( (sp-Constants.pagesize/2) > 0){
-	// sp = sp-Constants.pagesize/2;
-	// }
-	// else{
-	// sp=1;
-	// }
-	// if( (sp+Constants.pagesize-1) < ep ){
-	// ep = sp+Constants.pagesize-1;
-	// }
-	// if( (ep-Constants.pagesize+1) > 0 ){
-	// sp = ep-Constants.pagesize+1;
-	// }
-	// request.getSession().setAttribute("blogs",pr);
-	// request.getSession().setAttribute("sp",sp);
-	// request.getSession().setAttribute("ep",ep);
-	// return "/customer/story";
-	// }
-	//
-	// @RequestMapping(value = "/serviceCenter",method = RequestMethod.GET)
-	// public String serviceCenterPage(){
-	//
-	// return "/customer/serviceCenter";
-	// }
-	//
+	@RequestMapping(value = "/story", method = RequestMethod.GET)
+	public String storyPage(HttpServletRequest request, int page) {
 
-	//
-	// @RequestMapping(value = "list", method = RequestMethod.GET)
-	// public String list(SearchForm searchData,Integer currentPage) {
-	// if(null == currentPage){
-	// currentPage = 1;
-	// }
-	// System.out.println(searchData);
-	// Map<String, Object> info = new HashMap<String, Object>();
-	// info.put("searchData", searchData);
-	// info.put("areas", Area.getAreas());
-	//// info.put("subways", Subway.getSubways());
-	// info.put("priceRanges", LeasePrice.getPrices());
-	// info.put("layoutTypes", LayoutType.getLayouts());
-	// List<Feature> fs = featrueService.listFeatures();
-	// List<com.xfhotel.hotel.support.Feature> features = new
-	// ArrayList<com.xfhotel.hotel.support.Feature>();
-	// for(Feature f:fs){
-	// features.add(new com.xfhotel.hotel.support.Feature((int)f.getId(),
-	// f.getDescription()));
-	// }
-	// com.xfhotel.hotel.support.Feature.setFeatures(features);
-	// info.put("features",com.xfhotel.hotel.support.Feature.getFeatures());
-	// info.put("enterTimes", RoomStatus.getStatusArray());
-	// info.put("leaseTypes", LeaseType.getLeaseTypes());
-	//
-	// info.put("page",
-	// getApartmentPage(sort(apartmentService.list(),searchData), currentPage));
-	// session.setAttribute("info", info);
-	// return "/customer/list";
-	// }
-	//
-	// /**
-	// * 构造分页信息
-	// * @param list
-	// * @param currentPage
-	// * @return
-	// */
-	// private PageResults<Map> getApartmentPage(List<Map> list,int
-	// currentPage){
-	// PageResults<Map> page = new PageResults<Map>();
-	// int totalCount = list.size();
-	// int pageSize = 5;
-	// int t = totalCount/pageSize;
-	// int pageCount = t*pageSize < totalCount ?t+1:t;
-	// int pageNo = currentPage<pageCount?currentPage+1:currentPage;
-	// page.setTotalCount(totalCount);
-	// page.setPageSize(pageSize);
-	// page.setPageCount(pageCount);
-	// page.setPageNo(pageNo);
-	// page.setCurrentPage(currentPage);
-	// int m = (currentPage-1)*pageSize;
-	// int n = m+pageSize;
-	// List<Map> results = new ArrayList<Map>();
-	// for(int i = m;i<totalCount && i<n;i++){
-	// results.add(list.get(i));
-	// }
-	// page.setResults(results);
-	// return page;
-	// }
-	//
-	// @RequestMapping(value = "homeSearch", method = RequestMethod.GET)
-	// public String homeSearch(String checkinday,String checkoutday,String
-	// city){
-	// //TODO
-	// StringBuffer sb = new StringBuffer("redirect:list?");
-	// SearchForm searchData = new SearchForm();
-	// searchData.setStartTime(checkinday);
-	// searchData.setEndTime(checkoutday);
-	// searchData.setArea(0);
-	// searchData.setPriceRange(0);
-	// searchData.setLayout(0);
-	// Long[] f = {0L};
-	// searchData.setFeatures(f);
-	// searchData.setEnterTime(0);
-	// searchData.setLeaseType(Apartment.TYPE_ALL);
-	// searchData.setMoreStr(" ");
-	// searchData.setSortType(0);
-	// sb.append(searchData.toHttpGetPram());
-	// sb.append("&currentPage=1");
-	// return sb.toString();
-	// }
-	//
-	// public List sort(List list, SearchForm searchData) {
-	// double rates[] = new double[list.size()];
-	// for(int i=0; i<list.size(); i++){
-	// Object obj = list.get(i);
-	// rates[i] = searchData.rate((Map) obj);
-	// }
-	//
-	// for(int i=0; i<list.size(); i++){
-	// for(int j=i+1; j<list.size(); j++){
-	// int check=0;
-	// if( rates[i] == rates[j] ){
-	// switch(searchData.getSortType()){
-	// case 0:{
-	// Map obj1 = (Map) list.get(i);
-	// Map obj2 = (Map) list.get(j);
-	// //compare
-	// break;
-	// }
-	// case 1:{
-	// Map obj1 = (Map) list.get(i);
-	// Map obj2 = (Map) list.get(j);
-	// //compare
-	// double price1 = Double.valueOf(((String[])obj1.get("prices"))[0]);
-	// double price2 = Double.valueOf(((String[])obj2.get("prices"))[0]);
-	// if( price1>price2 )
-	// check=1;
-	// break;
-	// }
-	// case 2:{
-	// Map obj1 = (Map) list.get(i);
-	// Map obj2 = (Map) list.get(j);
-	// //compare
-	// double square1 = (Double)obj1.get("square");
-	// double square2 = (Double)obj2.get("square");
-	// if( square1<square2 )
-	// check=1;
-	// break;
-	// }
-	// }
-	// }
-	// if( rates[i] < rates[j] || rates[i] == rates[j] && check==1){
-	// Object tmp = list.get(i);
-	// list.set(i, list.get(j));
-	// list.set(j, tmp);
-	// double t = rates[i];
-	// rates[i] = rates[j];
-	// rates[j] = t;
-	// }
-	// }
-	// }
-	// return list;
-	// }
-	//
+		PageResults<Blog> pr = blogService.show_blog(page);
+		int sp = pr.getCurrentPage();
+		int ep = pr.getPageCount();
+		if ((sp - Constants.pagesize / 2) > 0) {
+			sp = sp - Constants.pagesize / 2;
+		} else {
+			sp = 1;
+		}
+		if ((sp + Constants.pagesize - 1) < ep) {
+			ep = sp + Constants.pagesize - 1;
+		}
+		if ((ep - Constants.pagesize + 1) > 0) {
+			sp = ep - Constants.pagesize + 1;
+		}
+		request.getSession().setAttribute("blogs", pr);
+		request.getSession().setAttribute("sp", sp);
+		request.getSession().setAttribute("ep", ep);
+		return "/customer/story";
+	}
 
-	// /**
-	// * 价格日历数据源
-	// * @param id
-	// * @param startDate
-	// * @return
-	// */
-	// @RequestMapping(value = "/price/{id}/{startDate}", method =
-	// RequestMethod.GET)
-	// public @ResponseBody Map getRangePrices(@PathVariable("id")Long
-	// id,@PathVariable("startDate")String startDate){
-	// List<Map> prices = get2MonthPrices(id, startDate);
-	// Iterator<Map> iterator = prices.iterator();
-	// Map data = new HashMap<String, Object>();
-	// while(iterator.hasNext()){
-	// Map m = iterator.next();
-	// String date = (String) m.keySet().iterator().next();
-	// data.put(date, m.get(date));
-	// }
-	//
-	// return data;
-	// }
-	//
-	// @RequestMapping(value="/price/script")
-	// public String calendarScript(){
-	// return "customer/priceCalendarScript";
-	// }
-	//
-	//
-	// /**
-	// * 计算价钱
-	// * @param id
-	// * @param start
-	// * @param end
-	// * @return
-	// */
-	// @RequestMapping(value = "/price", method = RequestMethod.GET)
-	// public @ResponseBody Map calcuPrice(Long id,String start,String end){
-	// Map<String, Object> p = new HashMap<String, Object>();
-	// List<Map> prices = get2MonthPrices(id, start);
-	// Double sum = 0D;
-	// boolean f = false;
-	// int day = 0;
-	// List<Double> sb = new ArrayList<Double>();
-	// for(Map m:prices){
-	// String d = (String) m.get("start");
-	// if(d.equals(start))f=true;
-	// if(f){
-	// String prStr = String.valueOf(m.get("houseprice"));
-	// Double pr = Double.valueOf(prStr);
-	// sum += pr;
-	// day++;
-	// sb.add(pr);
-	// if(d.equals(end)){
-	// day -= 1;
-	// sum -= pr;
-	// sb.remove(sb.size()-1);
-	// break;
-	// }
-	// }
-	// }
-	// StringBuffer sbb = new StringBuffer();
-	// for(int i=0;i<sb.size();i++){
-	// sbb.append(sb.get(i));
-	// if(i!=(sb.size()-1)){
-	// sbb.append("@");
-	// }
-	// }
-	//
-	// p.put("start", start);
-	// p.put("end", end);
-	// p.put("totalPrice", sum);
-	// p.put("totalDay", day);
-	// p.put("price", sbb.toString());
-	// return p;
-	// }
-	//
+	@RequestMapping(value = "/serviceCenter", method = RequestMethod.GET)
+	public String serviceCenterPage() {
+
+		return "/customer/serviceCenter";
+	}
+
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public String list(SearchForm searchData, Integer currentPage) {
+		if (null == currentPage) {
+			currentPage = 1;
+		}
+		System.out.println(searchData);
+		Map<String, Object> info = new HashMap<String, Object>();
+		info.put("searchData", searchData);
+		info.put("areas", Area.getAreas());
+		info.put("priceRanges", LeasePrice.getPrices());
+		info.put("layoutTypes", LayoutType.getLayouts());
+		info.put("enterTimes", RoomStatus.getStatusArray());
+		info.put("leaseTypes", LeaseType.getLeaseTypes());
+		info.put("page", apartmentService.getApartmentPage(
+				apartmentService.sort(apartmentService.list(), searchData),
+				currentPage));
+		session.setAttribute("info", info);
+		
+		return "/customer/list";
+	}
+
+	@RequestMapping(value = "homeSearch", method = RequestMethod.GET)
+	public String homeSearch(String checkinday, String checkoutday, String city) {
+		// TODO
+		StringBuffer sb = new StringBuffer("redirect:list?");
+		SearchForm searchData = new SearchForm();
+		searchData.setStartTime(checkinday);
+		searchData.setEndTime(checkoutday);
+		searchData.setArea(0);
+		searchData.setPriceRange(0);
+		searchData.setLayout(0);
+		Long[] f = { 0L };
+		searchData.setFeatures(f);
+		searchData.setEnterTime(0);
+		searchData.setLeaseType(Apartment.TYPE_ALL);
+		searchData.setMoreStr(" ");
+		searchData.setSortType(0);
+		sb.append(searchData.toHttpGetPram());
+		sb.append("&currentPage=1");
+		return sb.toString();
+	}
+
+
+	/**
+	 * 价格日历数据源
+	 * 
+	 * @param id
+	 * @param startDate
+	 * @return
+	 */
+	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.GET)
+	public @ResponseBody JSONObject getRangePrices(@PathVariable("id") Long id,
+			@PathVariable("startDate") String startDate) {
+		JSONArray prices = apartmentService.get2MonthPrices(id, startDate);
+		JSONObject data = new JSONObject();
+		for (Object obj : prices) {
+			String key = (String) JSONObject.fromObject(obj).keys().next();
+			data.put(key, JSONObject.fromObject(obj).get(key));
+		}
+
+		return data;
+	}
+
 	@RequestMapping(value = "info/{apartmentId}", method = RequestMethod.GET)
 	public String info(@PathVariable("apartmentId") Long id) {
 		JSONObject apartment = apartmentService.getApartmentById(id);
@@ -339,55 +187,45 @@ public class HomeController {
 		session.setAttribute("startDate", start);
 		// 获得一周内的价钱
 		session.setAttribute("prices", apartmentService.get7DaysPrices(id, start));
-		//获得评论 
-		session.setAttribute("roomRates",
-	    commentService.getRoomRates(id));
-		
-		// session.setAttribute("yajin",apartment.get("yajin"));
-		
+		// 获得评论
+		session.setAttribute("roomRates", commentService.getRoomRates(id));
+
+		session.setAttribute("yajin", systemConfService.getConfig().getYa_jin());
 
 		session.setAttribute("allApartment", apartmentService.list());
 
 		return "/customer/info";
 	}
-	//
-	// @RequestMapping(value = "test", method = RequestMethod.GET)
-	// public String test() {
-	//
-	// return "/customer/reservation1";
-	// }
-	//
-	//
-	// @RequestMapping(value = "story/blog_content", method = RequestMethod.GET)
-	// public String initBlog(HttpServletRequest request,Long id){
-	// request.setAttribute("id", id);
-	//
-	// return "/customer/story_content";
-	// }
-	//
-	// @RequestMapping(value = "story/load_content", method =
-	// RequestMethod.POST)
-	// public @ResponseBody Map loadBlog(HttpServletRequest request,Long id) {
-	// String path = request.getSession().getServletContext().getRealPath("/");
-	// Blog blog = blogService.find(id);
-	// path += "blog/" + blog.getPath();
-	// Map map = blog.toMap();
-	// StringBuffer content = new StringBuffer();
-	// FileReader fr;
-	// try {
-	// fr = new FileReader(path);
-	// BufferedReader br=new BufferedReader(fr);
-	// String str;
-	// while( ( str=br.readLine())!=null){
-	// content.append(str);
-	// }
-	// br.close();
-	// } catch (Exception e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// map.put("content", content.toString());
-	//
-	// return map;
-	// }
+
+	@RequestMapping(value = "story/blog_content", method = RequestMethod.GET)
+	public String initBlog(HttpServletRequest request, Long id) {
+		request.setAttribute("id", id);
+
+		return "/customer/story_content";
+	}
+
+	@RequestMapping(value = "story/load_content", method = RequestMethod.POST)
+	public @ResponseBody Map loadBlog(HttpServletRequest request, Long id) {
+		String path = request.getSession().getServletContext().getRealPath("/");
+		Blog blog = blogService.find(id);
+		path += "blog/" + blog.getPath();
+		Map map = blog.toMap();
+		StringBuffer content = new StringBuffer();
+		FileReader fr;
+		try {
+			fr = new FileReader(path);
+			BufferedReader br = new BufferedReader(fr);
+			String str;
+			while ((str = br.readLine()) != null) {
+				content.append(str);
+			}
+			br.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		map.put("content", content.toString());
+
+		return map;
+	}
 }

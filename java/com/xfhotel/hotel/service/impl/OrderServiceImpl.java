@@ -1,5 +1,6 @@
 package com.xfhotel.hotel.service.impl;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -244,6 +245,41 @@ public class OrderServiceImpl implements OrderService {
 	public Order getByPayNo(String payNo) {
 		// TODO Auto-generated method stub
 		return orderDAO.getByHQL("from Order where payNo="+payNo, null);
+	}
+
+	@Transactional
+	@Override
+	public Order postOrder(Long cusId, String description, Long roomId, String cusName, String cusTel,
+			String otherCusName, String otherCusIdCard, String cusIdCard, String personal, String startTime,
+			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
+			String apartmentType) {
+		Order o = new Order();
+		o.setCusId(cusId);
+		o.setDescription(description);
+		o.setRoomId(roomId);
+		o.setCusName(cusName);
+		o.setCusTel(cusTel);
+		o.setCusIdCard(cusIdCard);
+		o.setPersonal(personal);
+		o.setOtherCusName(otherCusName);
+		o.setOtherCusIdCard(otherCusIdCard);
+		try {
+			o.setStartTime(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
+			o.setEndTime(DateUtil.parse(endTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		o.setTime(new Date().getTime());
+		o.setTotalDay(totalDay);
+		o.setPrice(price + "@" + systemConfiService.getConfig().getYa_jin());
+		o.setTotalPrice(totalPrice);
+		o.setPreferential(preferential);
+		o.setType(apartmentType);
+		o.setStatus(Order.STATUS_ON_PAY);
+		o.setNeedFapiao(needFapiao);
+		add(o);
+		return o;
 	}
 
 	

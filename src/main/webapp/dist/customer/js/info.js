@@ -192,11 +192,11 @@
 			    	url:url,
 			    	dataType:'json',
 			    	success:function(data){
-//			    		var pData = new Array();
-//			    		$.each(data,function(index,item){
-//			    			pData[index] = item;
-//			    		});
-			    		//console.log(data);
+			    		var pData = new Array();
+			    		$.each(data,function(index,item){
+			    			pData[index] = item;
+			    		});
+			    		console.log(data);
 			    		oCalendar.set('data',data);
 			    		oCalendar.render();
 			    	},

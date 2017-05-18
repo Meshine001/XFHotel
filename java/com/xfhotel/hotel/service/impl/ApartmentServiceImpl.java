@@ -1,9 +1,12 @@
 package com.xfhotel.hotel.service.impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.impl.ApartmentDAOImpl;
 import com.xfhotel.hotel.dao.impl.PriceDAOImpl;
+import com.xfhotel.hotel.dao.impl.SystemConfDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.DateUtil;
+import com.xfhotel.hotel.support.PageResults;
+import com.xfhotel.hotel.support.SearchForm;
 import com.xfhotel.hotel.support.TimeUtil;
 
 import net.sf.json.JSONArray;
@@ -29,6 +36,9 @@ public class ApartmentServiceImpl implements ApartmentService {
 	ApartmentDAOImpl apartmentDAO;
 	@Autowired
 	PriceDAOImpl priceDAO;
+	@Autowired
+	SystemConfService systemConfService;
+	
 	@Autowired
 	OrderService orderService;
 
@@ -199,8 +209,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 			details.put("roomNum", "1");
 
 			for (Price m : sp) {
-				String t = DateUtil.format(new Date(m.getDate()), "yyyy-MM-dd");
-				if (DateUtil.format(d, "yyyy-MM-dd").equals(t)) {
+				if (DateUtil.format(d, "yyyy-MM-dd").equals(m.getDate())) {
 					details.put("price", m.getPrice());
 				}
 			}
@@ -278,6 +287,73 @@ public class ApartmentServiceImpl implements ApartmentService {
 	@Override
 	public void setSpPrice(Price price) {
 		priceDAO.saveOrUpdate(price);
+	}
+	
+	@Transactional
+	@Override
+	public Map<String, Object> caculatePrice(String startTime, String endTime, Long apartmentId) {
+		Map<String, Object> info = new HashMap<String, Object>();
+		StringBuffer sb = new StringBuffer();
+		Apartment apartment = apartmentDAO.get(apartmentId);
+		Double sum = 0.00D;
+		Double cashPledge = systemConfService.getConfig().getYa_jin();
+		List<String> days = TimeUtil.getBetweenDays(startTime, endTime);
+		for (int i = 0; i < days.size() - 1; i++) {
+			Price p = getSpPrice(apartmentId, TimeUtil.getDateLong(days.get(i)));
+			Double pp = null;
+			if (p != null) {// 有特殊价格
+				pp = p.getPrice();
+			} else {
+				pp = Double.valueOf(apartment.getBasic_info().getDouble("jia_ge"));
+			}
+			if (i == 0) {
+				sb.append(pp);
+			} else {
+				sb.append("@" + pp);
+			}
+			sum += pp;
+		}
+		sum += cashPledge;
+		sb.append("@"+cashPledge);
+		info.put("price", sb.toString());
+		info.put("cashPledge", cashPledge);
+		info.put("totalPrice", sum);
+		info.put("capacity", apartment.getBasic_info().get("reng_shu"));
+		return info;
+	}
+	
+	/**
+	 * 排序
+	 */
+	@Override
+	public List<Apartment> sort(List<Apartment> list, SearchForm searchData) {
+		// TODO Auto-generated method stub
+		 return list;
+	}
+	
+	
+	@Override
+	public PageResults<JSONObject> getApartmentPage(List<Apartment> list, int currentPage) {
+		
+		PageResults<JSONObject> page = new PageResults<JSONObject>();
+		int totalCount = list.size();
+		int pageSize = 5;
+		int t = totalCount / pageSize;
+		int pageCount = t * pageSize < totalCount ? t + 1 : t;
+		int pageNo = currentPage < pageCount ? currentPage + 1 : currentPage;
+		page.setTotalCount(totalCount);
+		page.setPageSize(pageSize);
+		page.setPageCount(pageCount);
+		page.setPageNo(pageNo);
+		page.setCurrentPage(currentPage);
+		int m = (currentPage - 1) * pageSize;
+		int n = m + pageSize;
+		List<JSONObject> results = new ArrayList<JSONObject>();
+		for (int i = m; i < totalCount && i < n; i++) {
+			results.add(list.get(i).toJson());
+		}
+		page.setResults(results);
+		return page;
 	}
 
 }
