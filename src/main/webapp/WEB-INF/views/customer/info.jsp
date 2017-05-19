@@ -61,19 +61,19 @@
 					</div>
 				</div>
 				<div class="x_i">
-					<div>
+					<div class="bbx">
 						<div class="i_z">个性描述</div>
 						<div class="x_fj_info">
 							<p>${room.descriptionPersonal}</p>
 						</div>
 					</div>
-					<div>
+					<div  class="bbx">
 						<div class="i_z">周边描述</div>
 						<div class="x_fj_info">
 							<p>${apartment.descriptionAround}</p>
 						</div>
 					</div>
-					<div>
+					<div class="bbx">
 						<div class="i_z">房间特色</div>
 						<p class="i_span">
 							<c:forEach items="${apartment.featureEntity}" var="f">
@@ -82,7 +82,7 @@
 						</p>
 
 					</div>
-					<div>
+					<div class="bbx">
 						<div class="i_z">配套设施</div>
 						<p class="i_span">
 							<c:forEach items="${room.facilityEntity}" var="f">
@@ -90,14 +90,14 @@
 							</c:forEach>
 						</p>
 					</div>
-					<div>
+					<div class="bbx">
 						<div class="i_z">位置周边</div>
 						<div class="wz_ditu">
 							<img alt="" width="810" height="420"
 								src="http://api.map.baidu.com/staticimage?center=${apartment.longitude},${apartment.latitude}&width=810&height=420&zoom=16&markers=${apartment.longitude},${apartment.latitude}" />
 						</div>
 					</div>
-					<div>
+					<div class="bbx">
 						<div class="i_z">公寓户型</div>
 						<div class="hx_tu">
 							<img alt="户型图" width="810" src="../images/${apartment.pic1}" />

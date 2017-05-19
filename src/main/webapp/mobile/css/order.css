@@ -32,8 +32,8 @@
 .prompt_info p{margin-bottom: 0.1rem}
 
 /*��ӵ���������Ϣ*/
-.addpartenr li{width: 50%;float: left;background: #d6941a;border-right: 1px solid  #FFF;color:#FFF;text-align: center;position: relative}
-.addpartenr li i{width: 0.3rem;position: absolute;right: 0;height: 100%;background: red}
+.addpartenr li{width: 50%;float: left;background: #938f88;border-right: 1px solid  #FFF;color:#FFF;text-align: center;position: relative}
+.addpartenr li i{width: 0.3rem;position: absolute;right: 0;height: 100%;background: #bab4b4}
 
 
 

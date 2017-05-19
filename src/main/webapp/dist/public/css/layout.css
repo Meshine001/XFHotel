@@ -5682,7 +5682,7 @@
 	background: url(../images/kxun.jpg) center center;
 	margin: 0 auto;
 }
-
+#title{font-size:16px;line-height:32px;font-weight: bold;padding: 20px 0 0 0;}
 .crumbs {
 	height: 54px;
 	line-height: 54px;
@@ -6149,7 +6149,10 @@
 	margin-top: 20px;
 	padding-bottom: 40px;
 }
-
+.x_i .bbx{
+	width:100%;height:auto;
+	clear:both;
+}
 .x_fj_info {
 	padding: 0 20px;
 }
@@ -6832,6 +6835,8 @@
 	zoom: 1;
 	padding-bottom: 30px;
 }
+
+.q_zb
 
 .q_zb .i_z {
 	margin: 20px 0;
@@ -7545,19 +7550,22 @@ span.gj_chat {
 
 .page a {
 	display: inline-block;
-	width: 36px;
+	padding:0 10px;
 	height: 36px;
 	background: #fff;
-	font-size: 16px;
+	font-size: 14px;
 	color: #666;
 	text-align: center;
 	line-height: 36px;
 	margin: 0 5px;
 	vertical-align: middle;
 }
-
+.page a:hover{
+	background: #333;
+	color: #fff;
+}
 .page .page_on {
-	background: #5bcfcc;
+	background: #333;
 	color: #fff;
 }
 
