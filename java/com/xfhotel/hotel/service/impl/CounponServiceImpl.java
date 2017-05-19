@@ -51,10 +51,10 @@ public class CounponServiceImpl implements CouponService{
 		}
 	@Transactional
 	@Override
-	public Coupon modify(Coupon c, long uId) {
+	public Coupon modify(Coupon c, long id) {
 		// TODO Auto-generated method stub
 		couponDAO.saveOrUpdate(c);
-		return couponDAO.get(uId);
+		return couponDAO.get(id);
 		}
 	@Transactional
 	@Override

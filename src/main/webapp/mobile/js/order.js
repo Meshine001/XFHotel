@@ -1,7 +1,7 @@
 ﻿$(document).ready(function(){
     addpartenr();
     var sexVal='';
-    var couponid=''
+    var couponid='';
     $("#addfriend").live('click',function(){
         $("#masking").show(10,function(){
             $(".alert-content").animate({bottom:0},300);
@@ -74,13 +74,13 @@ function addpartenr(){
         $(".addpartenr").append(opifo);
         $(".alert-content").animate({bottom:'-5.6rem'},200);
         $("#masking").hide();
-    })
+    });
     //取消好友
     $(".addpartenr li i").live('click',function(){
         $(this).parent().remove()
-    })
+    });
   
-    
+   
     
 
     
@@ -127,7 +127,7 @@ function addpartenr(){
     $("#usecoupon ul li").live('click',function(){
     	if($(this).find('.ifrader').hasClass('hat')==false){
     		$(this).find('.ifrader').addClass('hat');
-//    		$(this).find('.ifrader').sibling().removeClass('hat')
+			$(this).siblings().find('.ifrader').removeClass('hat')
     	}else{
     		$(this).find('.ifrader').removeClass('hat')
     	}
@@ -160,7 +160,7 @@ function addpartenr(){
         		 $('#usecoupon ul').append(_data)
     		 }
     	 })
-    })
+    });
 //    选取优惠劵
     
     $("#usecoupon header ._confirm").click(function(){
@@ -174,7 +174,7 @@ function addpartenr(){
         couponid=strList.join(",");
         return couponid;
         
-    })
+    });
     
     //    提交订单
     $(".navbar a").click(function(){
@@ -221,7 +221,7 @@ function addpartenr(){
 
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
-            fnBase.keep(1,'oTotalPrices',data.order.totalPrice)
+            fnBase.keep(1,'oTotalPrices',data.order.totalPrice);
 
             if(data.order.id != '' && data.order.id != undefined){
                 location.href = Constant.URL + '/wx/payment.html?id='+data.order.id;

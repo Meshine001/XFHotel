@@ -46,10 +46,14 @@
 					</ul>
 					<div class="ftr_tel">
 
-						<a href="" target="_blank" title="Android下载" class="android"><img
-							src="<%=basePath%>/dist/public/v1/images/em.jpg" width="100" height="100"></a><a
-							href="" target="_blank" title="IOS下载" class="ios"><img
-							src="<%=basePath%>/dist/public/v1/images/em.jpg" width="100" height="100"></a>
+						<a href="" target="_blank" title="Android下载" class="android tl" style="float:left;margin-right:20px">
+							<p style="color:#fff">Android下载</p>
+							<img src="<%=basePath%>/dist/public/v1/images/em.jpg" width="100" height="100">
+						</a>
+						<a href="" target="_blank" title="IOS下载" class="ios tl" style="float:left">
+							<p style="color:#fff">IOS下载</p>
+						   <img src="<%=basePath%>/dist/public/v1/images/em.jpg" width="100" height="100">
+						</a>
 					</div>
 				</div>
 

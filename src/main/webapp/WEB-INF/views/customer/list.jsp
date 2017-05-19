@@ -287,7 +287,7 @@
 
 				<div class="page" data-pageCount="${info.page.pageCount}"
 					data-currentPage="${info.page.currentPage}">
-					<a class="up none" title="首页">&lt;&lt;</a>
+					<a class="up none" title="首页">First</a>
 					<a class="up none"
 						title="上一页">&lt;</a> 
 					
@@ -303,7 +303,7 @@
 						$('.page').append(a);
 					}
 					var html = "<a class='pgdn' title='下一页' href=''>&gt;</a><a "+
-					"href='' title='最后一页'>&gt;&gt;</a>";
+					"href='' title='最后一页'>Last</a>";
 					$('.page').append(html);
 				</script>
 			</div>

@@ -895,7 +895,7 @@
             preset: '',
             lang: 'en-US',
             setText: '确定',
-            cancelText: 'Cancel',
+            cancelText: '返回',
             scrollLock: true,
             tap: true,
             formatResult: function (d) {

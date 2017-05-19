@@ -56,7 +56,7 @@
 .panel p{
     font-size: 0.14rem;
     margin: 3px 0;
-    color: #666;
+    color: #878787;
     /*line-height: 0.23rem;*/
 }
 .panel .info_L24{
@@ -90,10 +90,10 @@
     color: red;
 }
 .panel .label-type1{
-    height: 0.18rem;
-    line-height: 0.18rem;
+    height: 0.25rem;
+    line-height: 0.25rem;
     border-radius: 0.2rem;
-    padding: 0 0.1rem;
+    padding: 0 0.25rem;
     font-size: 0.14rem;
     margin: 0.1rem 0.08rem 0 0;
     display: inline-block;
@@ -115,19 +115,34 @@
 .panel .pl-pic{display:none}
 
 */
-.panel .appDate{height:0.6rem;;display:none}
+.panel .appDate{height:0.6rem;;display:none;border-radius: 0.05rem;padding: 0.03rem}
 /*---------------*/
 .i_inf{width: 100%;height: auto;overflow: hidden}
 .i_inf ul li{width: 50%;float: left;height: 0.3rem;line-height: 0.3rem;}
-.i_inf ul li span{font-size: 0.14rem;color: #333;line-height: 0.3rem;display: block;float: left;}
+.i_inf ul li span{font-size: 0.14rem;color: #878787;line-height: 0.3rem;display: block;float: left;}
 .i_inf .inf_sp{color: #aaa;margin-right: 0.1rem;}
 
 /*deploy ����*/
-.deploy .facility{width:100%;}
-.deploy .facility li{width: 100%;border-bottom: 1px solid #aaa;margin-bottom: 0.03rem;height:auto;}
+.deploy .facility{width:100%;transition: all .3s}
+.deploy .facility li{width: 100%;margin-bottom: 0.03rem;height:auto;}
 .deploy .facility li .pNames{font-size:0.14rem;font-weight:400;display:block;}
-.deploy .facility li .facility-list{width:80%;height:auto;margin:0 auto}
-.deploy .facility li .facility-list i{display:inline-block;width:22.8%;height:0.5rem;border:1px solid #ccc;font-size:0.14rem}
+.deploy .facility li .facility-list{width:80%;height:auto;margin:0 auto;}
+.deploy .facility li .facility-list i{
+    display: inline-block;
+    width: 24%;
+    height: 0.3rem;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 0.3rem;
+    margin-bottom: 0.02rem;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 0.1rem;
+    margin-left: 0.02rem;
+}
+/*户型图*/
+.describe .hu_xing_tu img{width: 100%;height: 2rem;}
+
 /*��������*/
 #serviceIntro2{line-height: 0.23rem}
 

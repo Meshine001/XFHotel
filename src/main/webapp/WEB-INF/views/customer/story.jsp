@@ -35,7 +35,7 @@
 		</div>
 	</c:forEach>
 	<div id="pagecontroller" class="page">
-		<a class="up none" href="<%=basePath%>/story?page=1">&laquo;</a>
+		<a class="up none" href="<%=basePath%>/story?page=1">&lt;</a>
 		<c:forEach varStatus="p" begin="${sp}" end="${ep }" step="1">
 			<c:if test="${p.current==blogs.getCurrentPage()}">
 				<a class="page_on" href="<%=basePath%>/story?page=${p.current}">${p.current}</a>
@@ -44,7 +44,7 @@
 				<a href="<%=basePath%>/story?page=${p.current}">${p.current}</a>
 			</c:if>
 		</c:forEach>
-		<a class="pgdn" href="<%=basePath%>/story?page=${blogs.getPageCount()}">&raquo;</a>
+		<a class="pgdn" href="<%=basePath%>/story?page=${blogs.getPageCount()}">&gt;</a>
 	</div>
 	
 	</my_body>

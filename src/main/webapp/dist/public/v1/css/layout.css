@@ -195,12 +195,19 @@
 
 .apt_ul li {
 	float: left;
-	border: 1px solid #e6e5e1;
-	margin-right: 30px;
-	padding-bottom: 10px;
+	border: 1px solid #A7A7A7;
+	margin-right: 28px;
+	padding-bottom: 8px;
 	margin-top: 30px;
+	transition: all .3s;
+	overflow: hidden;
 }
-
+.apt_ul li img{
+	border:0;
+}
+.apt_ul li:hover{
+	   border-color:#333;
+}
 .apt_ul li .apt_jg {
 	text-align: center;
 	font-size: 18px;
@@ -212,6 +219,9 @@
 	font-size: 16px;
 	color: #999;
 	text-align: center;
+}
+.apt_ul li:hover .apt_bt {
+	   color:#333;
 }
 
 .apt_ul li:nth-child(3n) {
@@ -268,11 +278,11 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	background:url(black40.png);
+	background:url(block80.png);
 	width: 100%;
 	height: 100%;
 	text-align: center;
-	
+	transition: all .4s;
 }
 
 .mask span {
@@ -297,8 +307,8 @@
 	transition: .6s;
 }
 .mask .mask_btn:hover{
-	border-color:red;
-	color:red;
+	border-color:#5bcecc;
+	color:#5bcecc;
 }
 .three {
 	margin-top: 16px;
@@ -591,21 +601,22 @@ div#index_list_calendar-box {
 }
 
 .service {
-	background-color: #edeced;
+	background-color: #e6e6e6;
 	padding: 10px 0;
 }
 
 .tit {
-	font-size: 30px;
-	color: #252535;
-	text-align: center;
-	padding: 20px 0;
+	font-size: 36px;
+    color: #252535;
+    text-align: center;
+    padding: 20px 0 0 0;
 }
 
 .tit-sub {
 	text-align: center;
-	font-size: 20px;
+	font-size: 16px;
 	color: #999999;
+	font-family: -webkit-pictograph;
 }
 
 .service_ul {
@@ -617,7 +628,10 @@ div#index_list_calendar-box {
 	align-content: center;*/
 	margin-top: 50px;
 }
-
+.service_ul li p {
+	color: #999999;
+	font-size: 16px;
+}
 .service_ul li {
 	width: 200px;
 	height: 150px;
@@ -628,11 +642,12 @@ div#index_list_calendar-box {
 	transition:all .5s;
 }
 .service_ul li:hover{
-	transform:rotate(10deg);
+	transform:rotate(3deg);
+	background:#5bcecc;
+	color:#FFF;
 }
-.service_ul li p {
-	color: #999999;
-	font-size: 20px;
+.service_ul li:hover p{
+	color:#fff;
 }
 
 .x_l {

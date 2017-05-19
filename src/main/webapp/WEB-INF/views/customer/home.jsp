@@ -181,19 +181,22 @@
 				<a href="${banner.linkUrl }" title="${banner.title}" target="_blank"
 					style="width: 100%; height: 100%;">
 					<div class="hr_img banner_img img-responsive"
-						style="position: absolute; width: 100%; height: 100%; background: url(&quot;<%=basePath%>/images/${banner.pic}&quot;) center 0px no-repeat; display: block; opacity: 0.733271;">
+						style="position: absolute; width: 100%; height: 100%; background: url(&quot;<%=basePath%>/images/${banner.pic}&quot;) center 0px no-repeat; display: block; ;">
 					</div>
 				</a>
 			</c:forEach>
 			<a href="" title="" target="" style="width: 100%; height: 100%;">
 				<div class="hr_img banner_img"
-					style="position: absolute; width: 100%; height: 100%; background: url(&quot;dist/public/v1/images/banner.jpg&quot;) center 0px no-repeat; display: block; opacity: 0.733271;">
+					style="position: absolute; width: 100%; height: 100%; background: url(&quot;dist/public/v1/images/H-315.png&quot;) center 0px no-repeat; background-size:100% 100%;display: block; ;">
 				</div>
-			</a> <a href="" title="" target="" style="width: 100%; height: 100%;">
+			</a>
+			<a href="" title="" target="" style="width: 100%; height: 100%;">
 				<div class="hr_img banner_img"
-					style="position: absolute; width: 100%; height: 100%; background: url(&quot;dist/public/v1/images/banner1.jpg&quot;) center 0px no-repeat; display: block; opacity: 0.733271;">
+					style="position: absolute; width: 100%; height: 100%; background: url(&quot;dist/public/v1/images/ttttttttK.png&quot;) center 0px no-repeat; background-size:100% 100%;display: block; ;">
 				</div>
-			</a> <span class="pics_pre1" style="" onclick="pre_pic()"></span> <span
+			</a>
+			
+			<span class="pics_pre1" style="" onclick="pre_pic()"></span> <span
 				class="pics_next1" style="" onclick="next_pic()"></span>
 			<div class="main">
 				<form action="<%=basePath%>/homeSearch" method="get"
@@ -221,6 +224,7 @@
 		<div class="apartment">
 			<div class="main">
 				<h3 class="tit">这里有你需要的公寓</h3>
+				<p style="text-align:center;font-family: -webkit-pictograph;font-size:16px">Here's what you want </p>
 				<div class="exm_nav fj_nav">
 					<span id="fj_on_1" onmouseover="on_fj(1);" class="exm_nav_on"></span>
 				</div>
@@ -281,6 +285,7 @@
 		<div class="hai">
 			<div class="main">
 				<h3 class="tit">青舍生活</h3>
+				<p style="text-align:center;font-family: -webkit-pictograph;font-size:16px">Ultimate life</p>
 				<div class="exm_nav fj_nav">
 					<span class="exm_nav_on"></span>
 				</div>
