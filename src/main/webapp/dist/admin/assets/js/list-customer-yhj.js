@@ -87,10 +87,8 @@ function list(page) {
 						var a_detail = $('<a></a>').append(td_input);
 //						a_detail.attr('href', './view_customer?id='+value.id);
 //						var a_op = $('<a></a>').append(getOp(value.status));
-//						a_op.attr('onclick',
-//										'change(' + value.id + ','
-//												+ value.status +','
-//												+ data.currentPage + ')').attr(
+//						
+//						a_op.attr('onclick','change(' + value.id + ','+ value.status +','+ data.currentPage + ')').attr(
 //										'href', 'javascript:void(0);');
 						
 						var td_status = $('<td></td>').append(a_detail);

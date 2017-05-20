@@ -22,6 +22,36 @@
 					</div>
 				</div>
 				<table class="table">
+				<thead>
+						<th>
+							注册时间
+								<select id="longtime">
+									<option tid="3">全部</option>
+									<option tid="0">新用户注册</option>
+									<option tid="1">注册满一年</option>
+								</select>
+						</th>
+						<th>
+							消费金额筛选
+								<select id="monetary">
+									<option value="0">全部</option>
+									<option value="200">满200</option>
+									<option value="400">满400</option>
+									<option value="600">满600</option>
+								</select>
+						</th>
+						<th> 性别
+								<select id="sex">
+								    <option>全部</option>
+									<option>男</option>
+									<option>女</option>
+								</select>       
+						</th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+					</thead>
 					<thead>
 						<th>序号</th>
 						<th>等级</th>
@@ -41,7 +71,10 @@
 		</div>
 	</div>
 	</my_body>
-	<my_script> <script type="text/javascript"
-		src="<%=basePath%>/dist/admin/assets/js/list-customer.js"></script> </my_script>
+	<my_script>
+		<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/list-customer.js"></script> 
+	
+	</my_script>
+		
 </body>
 </html>
