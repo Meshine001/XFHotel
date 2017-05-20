@@ -45,7 +45,7 @@
 					<div class="f_img">
 						<img id="datu" src="../images/${apartment.picShow[0]}" width="810"
 							height="497" index="0">
-					</div>
+					</div> 
 					<div class="f_img_list">
 						<i id="pre" class="bt_left"></i>
 						<div class="w00" style="width: 770px">
