@@ -96,5 +96,11 @@ public class CommentServiceImpl implements CommentService{
 		return rates;
 	}
 
+	@Override
+	public Comment findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

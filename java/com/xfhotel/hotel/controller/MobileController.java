@@ -30,7 +30,6 @@ import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
-import com.xfhotel.hotel.service.BannerService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CouponService;
@@ -69,8 +68,7 @@ public class MobileController  {
 	
 	@Autowired
 	ApartmentService apartmentService;
-	@Autowired
-	BannerService bannerService;
+
 	@Autowired
 	CustomerService customerService;
 	@Autowired

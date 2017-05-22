@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.dao.impl.SystemConfDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Order;
@@ -32,6 +33,7 @@ import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
+import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.StringSplitUtil;
@@ -55,6 +57,8 @@ public class OrderController {
 	CommentService commentService;
 	@Autowired
 	LockService lockService;
+	@Autowired
+	SystemConfService systemConfiService;
 
 	@Autowired
 	HttpSession session;
@@ -112,7 +116,6 @@ public class OrderController {
 	public String orderModule(String startTime, String endTime, Long apartmentId) throws Exception {
 		session.setAttribute("oStart", startTime);
 		session.setAttribute("oEnd", endTime);
-		System.out.println(startTime + endTime);
 		Map<String, Object> priceInfo = apartmentService.caculatePrice(startTime, endTime, apartmentId);
 		System.out.println(priceInfo);
 		session.setAttribute("oTotalDay", TimeUtil.daysBetween(startTime, endTime));
@@ -181,12 +184,10 @@ public class OrderController {
 		}
 		o.setTime(new Date().getTime());
 		o.setTotalDay(totalDay);
-		Map room = roomService.getRoomInfo(roomId);
-		Apartment apartment = apartmentService.findById((Long) room.get("apartment"));
-		o.setPrice(price + "@" + apartment.getYajin());
+		o.setPrice(price + "@" + systemConfiService.getConfig().getYa_jin());
 		o.setTotalPrice(totalPrice);
 		o.setPreferential(preferential);
-		o.setType(Apartment.getTypeNum(apartmentType));
+		o.setType(apartmentType);
 		o.setStatus(Order.STATUS_ON_PAY);
 		o.setNeedFapiao(needFapiao);
 		orderservice.add(o);
@@ -252,7 +253,7 @@ public class OrderController {
 				// 发送门锁密码
 				Long roomId = o.getRoomId();
 				Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
-				String lock_no = (String) apartmentService.getApartmentInfo(apartment).get("lock_address");
+				String lock_no = (String) apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
 				String result = lockService.addPassword(o.getCusTel(), lock_no,
 						DateUtil.format(new Date(o.getStartTime()), "yyyyMMddhhmmss"),
 						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddhhmmss"));
@@ -306,11 +307,8 @@ public class OrderController {
 			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
 			for (Order o : orders) {
-				Map m = o.toMap();
-				Map room = roomService.getRoomInfo(o.getRoomId());
-				Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
-				m.put("apartment", apartment);
-				maps.add(m);
+				JSONObject apartment = apartmentService.getApartmentById(o.getRoomId());
+				maps.add(apartment);
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {
@@ -328,12 +326,9 @@ public class OrderController {
 	 */
 	@RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
 	public String comment(@PathVariable("id") Long id) {
-		Map<String, Object> order = orderservice.get(id).toMap();
-		Map<String, Object> room = roomService.getRoomInfo((Long) order.get("roomId"));
-		session.setAttribute("order", order);
-		session.setAttribute("room", room);
-		Map<String, Object> apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
-		session.setAttribute("apartment", apartment);
+		Order order = orderservice.get(id);
+		session.setAttribute("order", order.toMap());
+		session.setAttribute("apartment", apartmentService.getApartmentById(order.getRoomId()));
 		return "customer/comment";
 	}
 
@@ -402,68 +397,6 @@ public class OrderController {
 		return "/customer/success";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(Long cusId, Long roomId, Long apartmentId, String cusName, String cusTel, String cusPersonal,
-			String startTime, String endTime, int type, String cusIdCard, boolean needFapiao) {
-		Order order = null;
-		try {
-
-			Room room = roomService.findById(roomId);
-			if (room.getStatus() == Room.STATUS_LEASED || room.getStatus() == Room.STATUS_ON_PAY) {
-				session.setAttribute("err", "房间已租出");
-				return "/customer/err";
-			}
-
-			Map roomInfo = roomService.getRoomInfo(roomId);
-			Map apartmentInfo = apartmentService.getApartmentInfo(apartmentId);
-
-			StringBuffer sb = new StringBuffer();
-			sb.append(apartmentInfo.get("community") + " ");
-			sb.append(apartmentInfo.get("floor") + "/" + apartmentInfo.get("totalfloor") + " ");
-
-			order = new Order();
-			order.setCusId(cusId);
-			order.setDescription(sb.toString());
-			order.setRoomId(roomId);
-			order.setCusName(cusName);
-			order.setCusTel(cusTel);
-			order.setCusIdCard(cusIdCard);
-			order.setPersonal(cusPersonal);
-			String patterns = "yy-MM-dd";
-			Date start = DateUtils.parseDate(startTime, patterns);
-			Date end = DateUtils.parseDate(endTime, patterns);
-			order.setStartTime(start.getTime());
-			order.setEndTime(end.getTime());
-
-			long diff = end.getTime() - start.getTime();
-			int days = (int) (diff / (1000 * 60 * 60 * 24));
-
-			order.setTotalDay(days);
-			String[] prices = (String[]) roomInfo.get("prices");
-			order.setPrice(prices[0]);
-			if (type == Apartment.TYPE_HOTEL) {
-				Double p = Double.valueOf(prices[0]);
-				Double totalPrice = p * days;
-				order.setTotalPrice(String.valueOf(totalPrice));
-			}
-			order.setType(type);
-			order.setStatus(Order.STATUS_ON_PAY);
-			order.setTime(new Date().getTime());
-			order.setNeedFapiao(needFapiao);
-			orderservice.add(order);
-
-			room.setStatus(Room.STATUS_ON_PAY);
-			roomService.update(room);
-
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
-			session.setAttribute("err", "无法生成订单");
-			return "/customer/err";
-		}
-
-		return "redirect:/order/pay/" + order.getId();
-	}
 
 	@RequestMapping(value = "/msg", method = RequestMethod.GET)
 	public String msg(int msg) {

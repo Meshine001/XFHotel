@@ -130,4 +130,10 @@ public class BlogServiceImpl implements BlogService{
 		return blogDAO.findPageByFetchedHql("from Blog blog where blog.status=0 order by blog.date desc ", "select count(*) from Blog blog where blog.status=0", page, 2, null);
 	}
 
+	@Override
+	public Blog findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.xfhotel.hotel.support.TimeUtil;
@@ -22,8 +23,7 @@ public class Price {
 	@GenericGenerator(name="facilitygenerator",strategy="increment")
 	private long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Apartment apartment;
+	private long apartment_id;
 	
 	private long date;
 	private Double price;
@@ -34,9 +34,9 @@ public class Price {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Price(Apartment apartment, long date, Double price) {
+	public Price(Long apartment_id, long date, Double price) {
 		super();
-		this.apartment = apartment;
+		this.apartment_id = apartment_id;
 		this.date = date;
 		this.price = price;
 	}
@@ -47,15 +47,10 @@ public class Price {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Apartment getApartment() {
-		return apartment;
+	public String getDate() {
+		return TimeUtil.getDateStr(date);
 	}
-	public void setApartment(Apartment apartment) {
-		this.apartment = apartment;
-	}
-	public long getDate() {
-		return date;
-	}
+	
 	public void setDate(long date) {
 		this.date = date;
 	}
@@ -66,6 +61,15 @@ public class Price {
 		this.price = price;
 	}
 	
+	
+	public long getApartment_id() {
+		return apartment_id;
+	}
+
+	public void setApartment_id(long apartment_id) {
+		this.apartment_id = apartment_id;
+	}
+
 	public Map<String, Object> toMap(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("date", TimeUtil.getDateStr(date));

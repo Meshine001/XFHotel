@@ -1,27 +1,14 @@
 ﻿ package com.xfhotel.hotel.entity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.xfhotel.hotel.common.Constants;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Entity
 @Table(name = "t_apartment")
@@ -32,6 +19,163 @@ public class Apartment {
 	public final static int TYPE_HOTEL = 1;
 	public final static int TYPE_APARTMENT = 2;
 	public final static int TYPE_PLAY_ROOM = 3;
+	
+	
+	
+	@Id
+	@GeneratedValue(generator = "apartmentgenerator")
+	@GenericGenerator(name = "apartmentgenerator", strategy = "increment")
+	private long id;
+	
+	private String basic_info;//基本信息
+	
+	private String position;//位置信息
+	
+	private String description;//综合描述
+	
+	private String te_se;
+	private String jia_ju;
+	private String wei_yu;
+	private String can_chu;
+	private String pei_tao;
+	private String zou_bian;
+	private String qi_ta;
+	
+	
+	private String hu_xing_tu;
+	private String fang_jian_tu;
+	private String xiao_qu_tu;
+	
+	private boolean show_home;
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public JSONObject getBasic_info() {
+		return JSONObject.fromObject(basic_info);
+	}
+
+	public void setBasic_info(String basic_info) {
+		this.basic_info = basic_info;
+	}
+
+	
+
+	public JSONArray getTe_se() {
+		return JSONArray.fromObject(te_se);
+	}
+
+	public void setTe_se(String te_se) {
+		this.te_se = te_se;
+	}
+
+	public JSONArray getJia_ju() {
+		return JSONArray.fromObject(jia_ju);
+	}
+
+	public void setJia_ju(String jia_ju) {
+		this.jia_ju = jia_ju;
+	}
+
+	public JSONArray getWei_yu() {
+		return JSONArray.fromObject(wei_yu);
+	}
+
+	public void setWei_yu(String wei_yu) {
+		this.wei_yu = wei_yu;
+	}
+
+	public JSONArray getCan_chu() {
+		return JSONArray.fromObject(can_chu);
+	}
+
+	public void setCan_chu(String can_chu) {
+		this.can_chu = can_chu;
+	}
+
+	public JSONArray getPei_tao() {
+		return JSONArray.fromObject(pei_tao);
+	}
+
+	public void setPei_tao(String pei_tao) {
+		this.pei_tao = pei_tao;
+	}
+
+	public JSONArray getZou_bian() {
+		return JSONArray.fromObject(zou_bian);
+	}
+
+	public void setZou_bian(String zou_bian) {
+		this.zou_bian = zou_bian;
+	}
+
+	public JSONArray getQi_ta() {
+		return JSONArray.fromObject(qi_ta);
+	}
+
+	public void setQi_ta(String qi_ta) {
+		this.qi_ta = qi_ta;
+	}
+
+	
+
+	public String getHu_xing_tu() {
+		return hu_xing_tu;
+	}
+
+	public void setHu_xing_tu(String hu_xing_tu) {
+		this.hu_xing_tu = hu_xing_tu;
+	}
+
+	public JSONArray getFang_jian_tu() {
+		return JSONArray.fromObject(fang_jian_tu);
+	}
+
+	public void setFang_jian_tu(String fang_jian_tu) {
+		this.fang_jian_tu = fang_jian_tu;
+	}
+
+	public JSONArray getXiao_qu_tu() {
+		return JSONArray.fromObject(xiao_qu_tu);
+	}
+
+	public void setXiao_qu_tu(String xiao_qu_tu) {
+		this.xiao_qu_tu = xiao_qu_tu;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+
+	public JSONObject getPosition() {
+		return JSONObject.fromObject(position);
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public boolean isShow_home() {
+		return show_home;
+	}
+
+	public void setShow_home(boolean show_home) {
+		this.show_home = show_home;
+	}
+
+	public JSONObject toJson(){
+		return JSONObject.fromObject(this);
+	}
 	
 	public final static String getTypeDescription(int type){
 		switch(type){
@@ -47,345 +191,14 @@ public class Apartment {
 			return "不限";
 		}
 	}
-
-	// Position
-	// facilities
-	// map
-	@Id
-	@GeneratedValue(generator = "apartmentgenerator")
-	@GenericGenerator(name = "apartmentgenerator", strategy = "increment")
-	private long id;
-	// coordinate 经纬度
-	private double latitude; // for map
-	private double longitude;
-
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "apartment_id")
-	public List<Room> rooms; //
-
-	public String facilities; //
-	public String features;// label for apartment
-
-	public String prices;// day@weekend@month@year
-	public String price_scope;
-
-	private String apartmentType; // hotel or apartment
-
-	private String type; // together,sigle
-
-	private String address;// address : cell : num_building
-
-	private String floor;// current floor : total floor
-
-	private String direction;//
-	private double square;// square for apartment
-	private String capacity;// num of people
-	private String layout;// bedroom : livingroom : bathroom : balcony
-
-	private String description;// enviroment,transportation,etc.
-	private String lockAddress;
-	private String pic1;// layoutPic
-	private String pic2;// ke ting, can ting
-	private String pic3;// bathroom chufang
-	private String pic4;// xiao qu
 	
+	public final static int getTypeCode(String type){
+		if(type.equals("不限"))return 0;
+		if(type.equals("酒店型"))return 1;
+		if(type.equals("公寓型"))return 2;
+		if(type.equals("休闲型"))return 3;
+		return 0;
 
-	private Long createTime;
-
-	private Double yajin;
-	
-	public Apartment() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-
-	public String getLockAddress() {
-		return lockAddress;
-	}
-
-
-
-	public void setLockAddress(String lockAddress) {
-		this.lockAddress = lockAddress;
-	}
-
-
-
-	public String getPrice_scope() {
-		return price_scope;
-	}
-
-	public void setPrice_scope(String price_scope) {
-		this.price_scope = price_scope;
-	}
-
-	public Long getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Long createTime) {
-		this.createTime = createTime;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-
-	public double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-
-	public List<Room> getRooms() {
-		return rooms;
-	}
-
-	public void setRooms(List<Room> rooms) {
-		this.rooms = rooms;
-	}
-
-	public String[] getFacilities() {
-		return facilities.substring(1).split("@");
-	}
-
-	public void setFacilities(String[] facilities) {
-		if (facilities == null) {
-			this.facilities = "";
-			return;
-		}
-		String str = "";
-		for (int i = 0; i < facilities.length; i++) {
-			str = str + "@";
-			str = str + facilities[i];
-		}
-		this.facilities = str;
-	}
-
-	public String[] getFeatures() {
-		return features.split("@");
-	}
-
-	public void setFeatures(String features[]) {
-		if (features == null) {
-			this.features = "";
-			return;
-		}
-		String str = "";
-		for (int i = 0; i < features.length; i++) {
-			if (i > 0)
-				str = str + "@";
-			str = str + features[i];
-		}
-		this.features = str;
-	}
-
-	public String getPrices() {
-		return prices;
-	}
-
-	public void setPrices(String prices) {
-		this.prices = prices;
-		Double tmp = Double.valueOf(prices.split("@")[0]);
-		for (int i = 0; i < Constants.price_scope.length; i++) {
-			if (tmp < Constants.price_scope[i]) {
-				this.price_scope = i + "";
-			}
-		}
-		this.price_scope = Constants.price_scope.length + "";
-	}
-
-	public String getApartmentType() {
-		return apartmentType;
-	}
-
-	public void setApartmentType(String apartmentType) {
-		this.apartmentType = apartmentType;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getFloor() {
-		return floor;
-	}
-
-	public void setFloor(String floor) {
-		this.floor = floor;
-	}
-
-	public String getDirection() {
-		return direction;
-	}
-
-	public void setDirection(String direction) {
-		this.direction = direction;
-	}
-
-	public double getSquare() {
-		return square;
-	}
-
-	public void setSquare(double square) {
-		this.square = square;
-	}
-
-	public String getCapacity() {
-		return capacity;
-	}
-
-	public void setCapacity(String capacity) {
-		this.capacity = capacity;
-	}
-
-	public String getLayout() {
-		return layout;
-	}
-
-	public void setLayout(String layout) {
-		this.layout = layout;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getPic1() {
-		return pic1;
-	}
-
-	public void setPic1(String pic1) {
-		this.pic1 = pic1;
-	}
-
-	public String getPic2() {
-		return pic2;
-	}
-
-	public void setPic2(String pic2) {
-		this.pic2 = pic2;
-	}
-
-	public String getPic3() {
-		return pic3;
-	}
-
-	public void setPic3(String pic3) {
-		this.pic3 = pic3;
-	}
-
-	public String getPic4() {
-		return pic4;
-	}
-
-	public void setPic4(String pic4) {
-		this.pic4 = pic4;
-	}
-
-	public Double getYajin() {
-		return yajin;
-	}
-
-
-
-	public void setYajin(Double yajin) {
-		this.yajin = yajin;
-	}
-
-
-
-	public Map toMap() {
-		Map map = new HashMap();
-		map.put("id", this.getId());
-		map.put("latitude", this.getLatitude());
-		map.put("longitude", this.getLongitude());
-		map.put("apartmenttype", apartmentType);
-		map.put("type", this.getType());
-		map.put("address", this.getAddress().split("@")[0].split("-")[1]);
-		map.put("address_square",this.getAddress().split("@")[0].split("-")[0]);
-		map.put("community", this.getAddress().split("@")[1]);
-		map.put("num_building", this.getAddress().split("@")[2]);
-		map.put("location", this.getAddress().split("@")[3]);
-		map.put("floor", this.getFloor().split("@")[0]);
-		map.put("totalfloor", this.getFloor().split("@")[1]);
-		map.put("num_unit", floor.split("@")[2]);
-		map.put("num_door", floor.split("@")[3]);
-		map.put("direction", this.getDirection());
-		map.put("square", this.getSquare());
-		map.put("capacity", this.getCapacity());
-		map.put("lock_address", this.lockAddress);
-		map.put("bedroom", this.getLayout().split("@")[0]);
-		map.put("livingroom", this.getLayout().split("@")[1]);
-		map.put("bathroom", this.getLayout().split("@")[2]);
-		map.put("balcony", this.getLayout().split("@")[3]);
-		map.put("descriptionAround", this.getDescription());
-		map.put("pic1", pic1);
-		map.put("pic2", pic2.split("@"));
-		map.put("pic3", pic3.split("@"));
-		map.put("pic4", pic4.split("@"));
-		List<String> picShow = new ArrayList<String>();
-		for(String p:pic2.split("@")){
-			picShow.add(p);
-		}
-		for(String p:pic3.split("@")){
-			picShow.add(p);
-		}
-		map.put("picShow", picShow);
-		map.put("dayPrice", prices);
-
-		ArrayList rooms = new ArrayList();
-		Iterator itr = this.getRooms().iterator();
-		while (itr.hasNext()) {
-			Room r = (Room) itr.next();
-			rooms.add(r.toMap());
-		}
-		map.put("rooms", rooms);
-		map.put("facilities", this.getFacilities());
-		map.put("features", this.getFeatures());
-		map.put("prices", prices.split("@"));
-		map.put("yajin", yajin);
-		return map;
-	}
-	
-	public static int getTypeNum(String s){
-		if(s.equals("酒店型")){
-			return Apartment.TYPE_HOTEL;
-		}else{
-			return Apartment.TYPE_PLAY_ROOM;
-		}
-		
 	}
 
 }

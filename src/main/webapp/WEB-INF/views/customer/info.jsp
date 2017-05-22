@@ -16,10 +16,10 @@
 	src="<%=basePath%>/dist/zui/lib/price-calendar/js/yui-min.js"></script>
 <script type="text/javascript">
 	
-</script> 
+</script>
 <style type="text/css">
 #newBridge ins#nb_icon_wrap {
-    display: none;
+	display: none;
 }
 </style>
 </my_header>
@@ -30,11 +30,11 @@
 		<div class="x">
 			<div class="x_l">
 				<div class="x_t">
-					<h1>${apartment.community}-${apartment.address_square}-${apartment.direction}朝向</h1>
+					<h1>${apartment.position.xiao_qu}-${apartment.position.xa_wei_zhi}-${apartment.basic_info.cao_xiang}朝向</h1>
 					<div class="x_add">
-						<span class="x_dizhi"> <i></i>${apartment.location}-${apartment.address}
+						<span class="x_dizhi"> <i></i>${apartment.position.bd_wei_zhi}-${apartment.position.jie_dao}
 						</span> <a href="javascrip:;" id="call-gps" class="f_map"
-							data-iframeUrl="<%=basePath%>/utils/roomGps?lng=${apartment.longitude}&lat=${apartment.latitude}"
+							data-iframeUrl="<%=basePath%>/utils/roomGps?lng=${apartment.position.jing_du}&lat=${apartment.position.wei_du}"
 							data-target="#gpsModal" data-toggle="modal"> <i></i> 导航
 						</a> <span class="b_ewm" style="display: none;"> <i
 							class="ewm_i"></i> 在线分享
@@ -43,15 +43,15 @@
 						</span>
 					</div>
 					<div class="f_img">
-						<img id="datu" src="../images/${apartment.picShow[0]}" width="810"
-							height="497" index="0">
-					</div> 
+						<img id="datu" src="../images/${apartment.pic_show[0]}"
+							width="810" height="497" index="0">
+					</div>
 					<div class="f_img_list">
 						<i id="pre" class="bt_left"></i>
 						<div class="w00" style="width: 770px">
 							<ul
 								style="width: 2190px; margin-left: -10px; position: relative;">
-								<c:forEach items="${apartment.picShow}" var="pic" varStatus="p">
+								<c:forEach items="${apartment.pic_show}" var="pic" varStatus="p">
 									<li index="${p.index }"><img src="../images/${pic}"
 										width="138" height="84" /></li>
 								</c:forEach>
@@ -61,46 +61,93 @@
 					</div>
 				</div>
 				<div class="x_i">
-					<div class="bbx">
-						<div class="i_z">个性描述</div>
+					<div>
+						<div class="i_z">综合描述</div>
 						<div class="x_fj_info">
-							<p>${room.descriptionPersonal}</p>
+							<p>${apartment.description}</p>
 						</div>
 					</div>
-					<div  class="bbx">
-						<div class="i_z">周边描述</div>
-						<div class="x_fj_info">
-							<p>${apartment.descriptionAround}</p>
-						</div>
-					</div>
-					<div class="bbx">
-						<div class="i_z">房间特色</div>
-						<p class="i_span">
-							<c:forEach items="${apartment.featureEntity}" var="f">
-								<span>${f.description}</span>
-							</c:forEach>
-						</p>
-
-					</div>
-					<div class="bbx">
+					<div>
 						<div class="i_z">配套设施</div>
-						<p class="i_span">
-							<c:forEach items="${room.facilityEntity}" var="f">
-								<span>${f.description}</span>
-							</c:forEach>
-						</p>
+						<div class="x_fj_info">
+							<div>
+								<div class="i_z">特色</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.te_se}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+							<div>
+								<div class="i_z">家居</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.jia_ju}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+							<div>
+								<div class="i_z">卫浴</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.wei_yu}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+							<div>
+								<div class="i_z">餐厨</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.can_chu}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+							<div>
+								<div class="i_z">配套</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.pei_tao}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+							<div>
+								<div class="i_z">周边</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.zou_bian}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+							<div>
+								<div class="i_z">其他</div>
+								<p class="i_span">
+									<c:forEach items="${apartment.qi_ta}" var="f">
+										<span>${f}</span>
+									</c:forEach>
+								</p>
+
+							</div>
+						</div>
 					</div>
-					<div class="bbx">
-						<div class="i_z">位置周边</div>
+
+					<div>
+						<div class="i_z">位置地图</div>
 						<div class="wz_ditu">
 							<img alt="" width="810" height="420"
-								src="http://api.map.baidu.com/staticimage?center=${apartment.longitude},${apartment.latitude}&width=810&height=420&zoom=16&markers=${apartment.longitude},${apartment.latitude}" />
+								src="http://api.map.baidu.com/staticimage?center=${apartment.position.jing_du},${apartment.position.wei_du}&width=810&height=420&zoom=16&markers=${apartment.position.jing_du},${apartment.position.wei_du}" />
 						</div>
 					</div>
-					<div class="bbx">
+					<div style="display: none;">
 						<div class="i_z">公寓户型</div>
 						<div class="hx_tu">
-							<img alt="户型图" width="810" src="../images/${apartment.pic1}" />
+							<img alt="户型图" width="810"
+								src="../images/${apartment.hu_xing_tu}" />
 						</div>
 					</div>
 				</div>
@@ -166,14 +213,14 @@
 							</ul>
 						</div>
 						<div class="comment_list" data-url="<%=basePath%>"
-							data-room="${room.id}" data-page="1"></div>
+							data-room="${apartment.id}" data-page="1"></div>
 					</div>
 				</div>
 			</div>
 			<div class="x_r">
 				<div class="x_m">
 					<div class="m_q">
-						<span class="m_jiage"><em>￥</em><span id="zujin">${room.prices[0]}</span><font>起</font></span>
+						<span class="m_jiage"><em>￥</em><span id="zujin">${apartment.basic_info.jia_ge}</span><font>起</font></span>
 					</div>
 					<div class="">
 						<input type="hidden" id="apartmentId" value="${apartment.id}">
@@ -200,11 +247,6 @@
 												id="detailRoomNumSelect">
 												<li data-num="1">1间</li>
 											</ul>
-										</div>
-									</div>
-									<div class="price_top" style="display: none">
-										<div class="reserve_text">
-											在线收取押金￥<span>100</span>
 										</div>
 									</div>
 									<div class="order_btn_container">
@@ -262,15 +304,13 @@
 							</c:forEach>
 						</p>
 						<ul>
-							<li style="display: none;"><span class="c99">编号</span><span class="c66">${room.id}</span></li>
-							<li style="display: none;"><span class="c99">楼层</span><span class="c66">第${apartment.floor}层/共${apartment.totalfloor}层</span></li>
-							<li style="display: none;"><span class="c99">单元</span><span class="c66">${apartment.num_unit}</span></li>
-							<li style="display: none;"><span class="c99">房号</span><span class="c66">${apartment.num_door}</span></li>
-							<li><span class="c99">面积</span><span class="c66">${room.square}㎡</span></li>
-							<li><span class="c99">朝向</span><span class="c66">${room.direction}</span></li>
-							<li><span class="c99">可住</span><span class="c66">${room.capacity}人</span></li>
-							<li><span class="c99">居室</span><span class="c66">${apartment.bedroom}室${apartment.livingroom}厅${apartment.bathroom}卫${apartment.balcony}阳台</span></li>
-							<li><span class="c99">小区</span><span class="c66">${apartment.community}</span></li>
+							<li style="display: none;"><span class="c99">编号</span><span
+								class="c66">${apartment.id}</span></li>
+							<li><span class="c99">面积</span><span class="c66">${apartment.basic_info.mian_ji}㎡</span></li>
+							<li><span class="c99">朝向</span><span class="c66">${apartment.basic_info.cao_xiang}</span></li>
+							<li><span class="c99">可住</span><span class="c66">${apartment.basic_info.reng_shu}人</span></li>
+							<li><span class="c99">居室</span><span class="c66">${apartment.basic_info.shi}室${apartment.basic_info.ting}厅${apartment.basic_info.wei}卫${apartment.basic_info.yang_tai}阳台</span></li>
+							<li><span class="c99">小区</span><span class="c66">${apartment.basic_info.cao_xiang}</span></li>
 						</ul>
 					</div>
 				</div>
@@ -281,7 +321,8 @@
 							height="110">
 						<div class="gj_mz">
 							<span class="gj_name">在线管家</span><span class="gj_tel"></span>周一至周日
-							07:00 - 23:00 <span class="gj_chat online-chat" style="cursor: pointer;"><i></i>在线聊天</span>
+							07:00 - 23:00 <span class="gj_chat online-chat"
+								style="cursor: pointer;"><i></i>在线聊天</span>
 						</div>
 					</div>
 					<p></p>
@@ -289,12 +330,13 @@
 				<div class="inter">
 					<h4>你可能会喜欢</h4>
 					<ul>
-						<c:forEach items="${allApartment}" var="r">
-							<c:if test="${room.id != r.rooms[0].id}">
-								<a href="../info/${r.rooms[0].id}"> <img alt="140x140"
-									class="img-responsive" src="../images/${r.pic2[0]}" />
-									 <em>${r.community}-${r.num_building}-${r.direction}朝向-${r.num_door}房间</em>
+						<c:forEach items="${allApartment}" var="r" varStatus="p">
+							<c:if test="${p.index < 5}">
+							<c:if test="${apartment.id != r.id}">
+								<a href="../info/${r.id}"> <img alt="140x140"
+									class="img-responsive" src="../images/${r.fang_jian_tu[0]}" /> <em>${apartment.basic_info.xiao_qu}-${apartment.basic_info.cao_xiang}朝向</em>
 								</a>
+							</c:if>
 							</c:if>
 						</c:forEach>
 					</ul>
@@ -302,135 +344,6 @@
 			</div>
 		</div>
 	</article>
-	<div class="row clearfix" style="margin-top: 50px; display: none;">
-		<div class="col-md-12 column">
-			<div class="row clearfix">
-				<div class="col-md-4 column">
-					<div class="row clearfix">
-						<div class="col-md-12 column">
-							<h3 class="text-left type-hotel-price">
-								<small>￥</small>${room.prices[0]}<small>/天</small><small
-									style="display: none;"> 原价:1480元/天</small>
-							</h3>
-							<h3 class="text-left type-apartment-price">
-								<small>￥</small>${room.prices[2]}<small>/月</small><small
-									style="display: none;"> 原价:1480元/月</small>
-							</h3>
-							<c:forEach items="${room.facilityEntity}" var="f">
-								<span class="label label-default">${f.description}</span>
-							</c:forEach>
-
-							<hr class="divider">
-							<br>
-							<button type="button" class="btn btn-info btn-block"
-								data-toggle="modal" data-target="#orderModal">立即预定</button>
-							<c:if test="${searchType == '酒店型公寓' }">
-								<button type="button" class="btn btn-info btn-block"
-									data-toggle="modal" data-target="#orderModal">立即预定</button>
-							</c:if>
-							<c:if test="${searchType == '短租型公寓' }">
-								<button type="button" class="btn btn-info btn-block"
-									data-toggle="modal" data-target="#reservationModal">预约看房</button>
-							</c:if>
-							<!-- Modal -->
-							<div class="modal fade" id="reservationModal" tabindex="-1"
-								role="dialog" aria-labelledby="reservationModalLabel"
-								aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">
-												<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-											</button>
-											<h4 class="modal-title" id="reservationModalLabel">在线预约</h4>
-										</div>
-										<div class="modal-body">
-											<div class="row">
-												<div class="col-md-12">
-													<form action="" method="post">
-														姓名：<input type="text" name="cusName" value=""><br>
-														手机：<input type="text" name="cusTel" value=""><br>
-														个人需求：<input type="text" name="cusPersonal" value=""><br>
-													</form>
-												</div>
-											</div>
-
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">取消</button>
-											<button type="button" class="btn btn-primary "
-												id="resercation-submit">提交</button>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<!-- Modal -->
-							<div class="modal fade" id="orderModal" tabindex="-1"
-								role="dialog" aria-labelledby="orderModalLabel"
-								aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">
-												<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-											</button>
-											<h4 class="modal-title" id="orderModalLabel">确认订单</h4>
-										</div>
-										<div class="modal-body">
-											<div class="row">
-												<div class="col-md-12">
-													<form action="../order/add" method="post" id="order-form">
-														<input type="hidden" name="cusId" value="${c.id}"
-															id="cusId"> <input type="hidden" name="roomId"
-															value="${room.id}"> <input type="hidden"
-															name="apartmentId" value="${room.apartment}"> <input
-															type="hidden" name="type" value="1">
-														<ul>
-															<li><span>入离时间</span><span><input type="date"
-																	class="order-date" id="order-start" name="startTime"></span>至<span><input
-																	type="date" class="order-date" id="order-end"
-																	name="endTime"></span>共<span id="order-total-day">0</span>晚<a
-																class="btn">修改时间</a></li>
-															<li><span>房费</span><span><small>￥</small><span
-																	id="order-price">${room.prices[0]}</span></span><span></span></li>
-															<li><span>住客姓名</span><span><input type="text"
-																	name="cusName"></span></li>
-															<li><span>身份证</span><input type="text"
-																name="cusIdCard"></li>
-															<li><span>联系手机</span><input type="text"
-																name="cusTel"></li>
-															<li><span>个人需求</span><input type="text"
-																name="cusPersonal"></li>
-															<li><span>发票</span><span><input
-																	type="checkbox" name="needFapiao">是否需要发票</span></li>
-															<li><a>入住须知</a></li>
-														</ul>
-														<span>订单总额￥</span><span id="order-total-price">0.00</span>
-													</form>
-												</div>
-											</div>
-
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">取消</button>
-											<button type="button" class="btn btn-primary "
-												id="order-submit">提交</button>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="modal fade" id="gpsModal">
 		<div class="modal-dialog modal-fullscreen">
 			<div class="modal-header">
@@ -448,8 +361,7 @@
 		$('#call-gps').click(function() {
 			$('#map-iframe').attr('src', $(this).attr('data-iframeUrl'));
 		});
-	</script> 
-		<script>
+	</script> <script>
 		var _hmt = _hmt || [];
 		(function() {
 			var hm = document.createElement("script");
@@ -457,16 +369,12 @@
 			var s = document.getElementsByTagName("script")[0];
 			s.parentNode.insertBefore(hm, s);
 		})();
-		$('.online-chat').click(function(){
+		$('.online-chat').click(function() {
 			$('#nb_icon_wrap').click();
 		});
-	</script>
-	</my_body>
-	<my_script>
-	 <script
+	</script> </my_body>
+	<my_script> <script
 		src="<%=basePath%>/dist/customer/js/info.js"></script> <script
-		src="<%=basePath%>/dist/customer/js/comment-list.js"></script>
-		
-    </my_script>
+		src="<%=basePath%>/dist/customer/js/comment-list.js"></script> </my_script>
 </body>
 </html>

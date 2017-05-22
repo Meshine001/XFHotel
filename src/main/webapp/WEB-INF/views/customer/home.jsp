@@ -232,12 +232,12 @@
 					<c:forEach items="${homeRoom}" var="room">
 						<li><a href="<%=basePath%>/info/${room.id}"
 							title="${room.square}"> <img class="readyload"
-								src="<%=basePath%>/images/${room.pic2[0]}" data-original=""
+								src="<%=basePath%>/images/${room.fang_jian_tu[0]}" data-original=""
 								width="378" height="251" style="display: inline;">
 								<p class="apt_jg">
-									<span>${room.dayPrice}</span>元/天
+									<span>${room.basic_info.jia_ge}</span>元/天
 								</p>
-								<p class="apt_bt">${room.apartmenttype}-${room.address_square}-${room.community}</p>
+								<p class="apt_bt">${room.basic_info.lei_xing}-${room.position.xa_wei_zhi}-${room.position.xiao_qu}</p>
 						</a></li>
 					</c:forEach>
 				</ul>

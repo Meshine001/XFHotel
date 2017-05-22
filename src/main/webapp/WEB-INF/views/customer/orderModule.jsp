@@ -17,15 +17,15 @@
 				<h3 class="t_h30">确认订单</h3>
 				<div class="ol_info">
 					<p>请如实填写以下信息。</p>
-					<h4>${apartment.community}-${apartment.address_square}-${apartment.direction}朝向</h4>
+					<h4>${apartment.position.xiao_qu}-${apartment.position.xa_wei_zhi}-${apartment.basic_info.cao_xiang}朝向</h4>
 					<h4>${oStart}入住-${oEnd}离开&nbsp;&nbsp;共${oTotalDay}晚</h4>
 					<h4>押金：¥${oCashPledge}&nbsp;&nbsp;需要支付：¥${oTotalPrice}</h4>
 					<form action="<%=basePath%>/order/modulePost" method="post" name=""
 						id="">
 						<input type="hidden" name="cusId" value="${c.id}"> <input
 							type="hidden" name="description"
-							value="${apartment.community}-${apartment.num_building}号楼-${apartment.num_unit}单元-${apartment.floor}楼-${apartment.num_door}房间">
-						<input type="hidden" name="roomId" value="${room.id}">
+							value="${apartment.position.xiao_qu}-${apartment.position.lou_hao}号楼-${apartment.position.dan_yuan}单元-${apartment.position.lou_ceng}楼-${apartment.position.men_pai}房间">
+						<input type="hidden" name="roomId" value="${apartment.id}">
 						<dl>
 							<dd>
 								<font color="#FF0000">*</font>&nbsp;您的姓名：
@@ -95,7 +95,7 @@
 							type="hidden" name="totalPrice" value="${oTotalPrice}"> <input
 							type="hidden" name="preferential" value="${oPreferential}">
 						<input type="hidden" name="apartmentType"
-							value="${apartment.apartmenttype}"> <input id="submit"
+							value="${apartment.basic_info.lei_xing}"> <input id="submit"
 							type="submit" class="tijiao" value="提&nbsp;&nbsp;交" name="">
 					</form>
 				</div>

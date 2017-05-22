@@ -8,15 +8,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Banner;
-import com.xfhotel.hotel.service.BannerService;
 import com.xfhotel.hotel.support.Message;
 
 @Controller
 @RequestMapping("/admin/system")
 public class SystemController {
 	
-	@Autowired
-	BannerService bannerService;
 	
 	@RequestMapping(value = "/banner/updatelist", method = RequestMethod.POST)
 	public @ResponseBody Message updateBannerList(){
@@ -27,13 +24,13 @@ public class SystemController {
 	@RequestMapping(value = "/banner/add", method = RequestMethod.POST)
 	public @ResponseBody Message addBanner(String linkUrl,String title,String pic,boolean showHome){
 		try {
-			Banner banner = new Banner();
-			banner.setLinkUrl(linkUrl);
-			banner.setTitle(title);
-			banner.setPic(pic);
-			banner.setShowHome(showHome);
-			System.out.println(banner);
-			bannerService.add(banner);
+//			Banner banner = new Banner();
+//			banner.setLinkUrl(linkUrl);
+//			banner.setTitle(title);
+//			banner.setPic(pic);
+//			banner.setShowHome(showHome);
+//			System.out.println(banner);
+//			bannerService.add(banner);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

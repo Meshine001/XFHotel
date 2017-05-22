@@ -7,7 +7,7 @@ import com.xfhotel.hotel.entity.Coupon;
 
 
 
-public interface CouponService extends BaseService<Coupon>{
+public interface CouponService extends BaseService<Coupon,Long>{
 
 	public List<Coupon> getCoupon(Long uId);
 	
