@@ -2,13 +2,13 @@
 $(document).ready(function(){
 	var _uid = fnBase.huoqu(0, "uid");
 	var _id = decodeURIComponent(fnBase.request("id"));
+	console.log(fnBase.URL);
 	$.ajax({
 		type:'GET',
 		dataType:'json',
-		url:'info.json',
+		url:Constant.URL+'/mobile/info',
 		data:{
-            //'roomId':_id,
-			'roomId':2
+            'apartmentId':_id,
 		},
 		success:function(data){
 			console.log(data);
@@ -121,7 +121,7 @@ $(document).ready(function(){
             //    房源描述
             $(".describe #serviceIntro2").text(data.description);
             //    户型图
-            $(".describe .hu_xing_tu img").attr('src',data.hu_xing_tu);
+            $(".describe .hu_xing_tu img").attr('src',Constant.URL+'/images/'+data.hu_xing_tu);
 
         // 房屋位置；
             //创建和初始化地图函数：

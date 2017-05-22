@@ -15,9 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.dao.impl.OrderDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.DateUtil;
+import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 
 @Service
@@ -25,6 +29,12 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	OrderDAOImpl orderDAO;
+	
+	@Autowired
+	SystemConfService systemConfiService;
+	
+	@Autowired
+	CouponService couponService;
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -250,9 +260,21 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	@Override
 	public Order postOrder(Long cusId, String description, Long roomId, String cusName, String cusTel,
-			String otherCusName, String otherCusIdCard, String cusIdCard, String personal, String startTime,
+			String[] otherCusName, String[] otherCusIdCard, String cusIdCard, String personal, String startTime,
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
-			String apartmentType) {
+			String apartmentType,Long counponId) {
+		
+		if(null != counponId){
+			Coupon coupon =couponService.getCoupon2(counponId);
+			boolean isUsed = true;
+			coupon.setUsed(isUsed);
+			couponService.modify(coupon, counponId);
+			double favorable = coupon.getcValue();
+			Double totalPrice2 = Double.parseDouble(totalPrice);
+			totalPrice = String.valueOf(totalPrice2 -favorable); 
+		}
+		
+		
 		Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
@@ -261,8 +283,8 @@ public class OrderServiceImpl implements OrderService {
 		o.setCusTel(cusTel);
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
-		o.setOtherCusName(otherCusName);
-		o.setOtherCusIdCard(otherCusIdCard);
+		o.setOtherCusName(StringSplitUtil.buildStrGroup(otherCusName));
+		o.setOtherCusIdCard(StringSplitUtil.buildStrGroup(otherCusIdCard));
 		try {
 			o.setStartTime(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
 			o.setEndTime(DateUtil.parse(endTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
@@ -279,6 +301,7 @@ public class OrderServiceImpl implements OrderService {
 		o.setStatus(Order.STATUS_ON_PAY);
 		o.setNeedFapiao(needFapiao);
 		add(o);
+		
 		return o;
 	}
 
