@@ -1,4 +1,5 @@
 package com.xfhotel.hotel.controller;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -31,7 +32,6 @@ import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.UserService;
-import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.TimeUtil;
@@ -176,9 +176,10 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/sendlist", method = RequestMethod.POST)
 	public @ResponseBody Message sendlist(String startTime,String endTime,int type,Double cValue,String rule,Long Id[]) {
-		
+		System.out.println(type);
 		try {
 			List<Long> list = Arrays.asList(Id);
+			System.out.println();
 			for(Long uId : list){
 				Coupon coupon = new Coupon();
 				coupon.setcValue(cValue);
@@ -188,35 +189,29 @@ public class AdminController {
 				coupon.setRule(rule);
 				coupon.setuId(uId);
 				couponService.add(coupon);
-				return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
 			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
 		}
-		return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
 	}
 	@RequestMapping(value = "/dsendlist", method = RequestMethod.POST)
 	public @ResponseBody Message dsendlist(Double money , String sex , Double time){
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		try{
-			System.out.println(money);
-			System.out.println(sex);
-			System.out.println(time);
 			if(money!=null){
 				List<Customer> c = customerService.list();
 				for(Customer customer : c){
 					if(customer.getConsumptionCount()>money){
 						map.put(customer.getTel(), customer);	
 					}
-					
 				}
 			}else if(sex!=null){
 				List<CustomerDetails> cd = customerService.getlist();
 				for(CustomerDetails customer2 : cd){
-					
 					if(customer2.getSex().equals(sex)){
 						System.out.println("dsds");
 						Customer customer=  customerService.getCustomer(customer2.getId());
@@ -225,32 +220,36 @@ public class AdminController {
 					}
 				}
 			}else if(time!=null){
-				System.out.println("faf");
 				List<Customer> c = customerService.list();
-				if(time==0){
+//				System.out.println(time+"'0.0.'");
+				if(time==1){
 					for (Customer customer : c) {
 						 Calendar calendar = Calendar.getInstance();
 					        Date date = new Date(System.currentTimeMillis());
+					        Date time1 = new Date(customer.getRegTime());
 					        calendar.setTime(date);
 //					        calendar.add(Calendar.WEEK_OF_YEAR, -1);
 					        calendar.add(Calendar.YEAR, -1);
 					        date = calendar.getTime();
-					        long ddd = dateToLong(date);
-						if(customer.getRegTime()>ddd){
+//					        System.out.println(time1.before(date));
+						if(time1.before(date)||time1.equals(date)){
+//							System.out.println(ddd+customer.getRegTime());
 							map.put(customer.getTel(), customer);
+							
 						}
 				    }
 				}else{
-					System.out.println("00dsd");
+//					System.out.println("00dsd");
 					for (Customer customer : c) {
 						 Calendar calendar = Calendar.getInstance();
 					        Date date = new Date(System.currentTimeMillis());
+					        Date time1 = new Date(customer.getRegTime());
 					        calendar.setTime(date);
 					        calendar.add(Calendar.WEEK_OF_YEAR, -1);
 //					        calendar.add(Calendar.YEAR, -1);
 					        date = calendar.getTime();
-					        long ddd = dateToLong(date);
-						if(customer.getRegTime()<ddd){
+//					        System.out.println(time1.after(date));
+						if(time1.after(date)||time1.equals(date)){
 							map.put(customer.getTel(), customer);
 						}
 					}
@@ -265,6 +264,7 @@ public class AdminController {
 		  for(String key : map.keySet()){
 		   list.add(map.get(key));
 		  }
+		  
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
 	}
 	private long dateToLong(Date date) {

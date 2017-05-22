@@ -121,33 +121,7 @@ $(".masking").css({
 })
 
 
-	function getData(_data){
-	var _data={
-			'money':$("#monetary option:selected").val(),
-			'sex':$("#sex option:selected").val(),
-			'time':$("#longtime option:selected").attr('tid')
-	};
-	$.ajax({
-		type:'POST',
-		async : false,
-		cache : false,
-		dataType:'json',
-		data:'_data',
-		url: "./dsendlist",
-		error:function(){
-			alert('数据传输错误！')
-		},
-		success:function(data){
-			console.log(data);
-			var str='';
-			$("#list").html('');
-			for(var i=0;i<data.content.length;i++){
-				str='<tr>'+data.content[i].id+'</tr><tr>'+data.data[i].level+'</tr><tr>'+data.content[i].tel+'</tr><tr>'+data.content[i].regTime+'</tr><tr>'+data.content[i].consumptionCount+'</tr><tr>'+data.content[i].consumptionTimes+'</tr><tr>'+data.content[i].status+'</tr><tr><a><i></i></a></tr>'
-			}
-			$("#list").append(str);
-		}
-	})
-}
+	
 
 
 //条件搜索；
@@ -167,11 +141,19 @@ $(".masking").css({
 			success:function(data){
 				console.log(data);
 				var str='';
+				var newTime=new Array();
 				$("#list").html('');
 				for(var i=0;i<data.content.length;i++){
-					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+data.content[i].regTime+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
+					var infotime=data.content[i].regTime;
+					var j = new Date(infotime);
+					var istime=j.toLocaleDateString()
+					    newTime.push(istime);
+					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 				}
 				$("#list").append(str);
+				if($("#longtime option:selected").attr('tid')=='3'){
+					list(1)
+				}
 			}
 		})
  });
@@ -190,11 +172,19 @@ $(".masking").css({
 			success:function(data){
 				console.log(data);
 				var str='';
+				var newTime=new Array();
 				$("#list").html('');
 				for(var i=0;i<data.content.length;i++){
-					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+data.content[i].regTime+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
+					var infotime=data.content[i].regTime;
+					var j = new Date(infotime);
+					var istime=j.toLocaleDateString()
+					    newTime.push(istime);
+					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 				}
 				$("#list").append(str);
+				if($("#monetary option:selected").val()=='0'){
+					list(1)
+				}
 			}
 		})
 	
@@ -214,11 +204,19 @@ $(".masking").css({
 		success:function(data){
 			console.log(data);
 			var str='';
+			var newTime=new Array();
 			$("#list").html('');
 			for(var i=0;i<data.content.length;i++){
-				str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+data.content[i].regTime+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
+				var infotime=data.content[i].regTime;
+				var j = new Date(infotime);
+				var istime=j.toLocaleDateString()
+				    newTime.push(istime);
+				str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 			}
 			$("#list").append(str);
+			if($("#sex option:selected").val()=='全部'){
+				list(1)
+			}
 		}
 	})
 });
@@ -231,23 +229,40 @@ $("#list").on('click','tr',function(){
 	}
 })
 
+$("#about").click(function(){
+	if($(this).hasClass('_active')==false){
+		$(this).addClass('_active');
+		$("#list tr").addClass('_active');
+	}else{
+		$(this).removeClass('_active');
+		$("#list tr").removeClass('_active');
+	}
+})
+
+	
 var strlist2='';
+
 $(document).on('click','#delivery',function(){
-	$(".masking").show();
-	$("#sending").show();
-	$("#new-coupon").show();
     var	strlist=new Array();
 	var obj=$(this).parent().parent().parent().parent().find('#list tr');
-	for(var i=0;i<obj.length;i++){
+	
+	for(var i=1;i<obj.length;i++){
 		if(obj.eq(i).hasClass('_active')==true){
 			strlist.push(obj.eq(i).attr('uid'))
 		}	
 	}
 	strlist2=strlist.join(",")
+	console.log(strlist2)
+	if(strlist.length=='0'){
+		alert('选择要发优惠卷的用户才可以下一步呦！')
+		return;
+	}else{
+		$(".masking").show();
+		$("#sending").show();
+		$("#new-coupon").show();
+	}
    return strlist2;
 })
-
-
 
 $("#closebtn").click(function(){
 	$(".masking").hide();
@@ -256,6 +271,7 @@ $("#closebtn").click(function(){
 })
 
 $("#keepbtn").click(function(){
+	
 	var postdata={
 			'Id':strlist2,
 			"cValue":$('#pnumber').val(),
@@ -266,24 +282,18 @@ $("#keepbtn").click(function(){
 	}
 	$(".masking,#sending").hide();
 	console.log(postdata)
-	$.ajax({	
+	$.ajax({
+		
 		type : 'POST',
 		dataType : 'json',
 		data : postdata,
-//		url : "hotel/controller/AdminController/sendlist",
 		url:"./sendlist",
 		error : function(data) {// 请求失败处理函数
 			alert("发送失败！");
 		},
 		success :function(data){
-			alert(data.content);
-			if(data.statusCode == 1){
-				
-			}else{
-				
-			}
-			
-			
+			console.log(data)
+			alert("发送成功")
 		}
 	})
 	

@@ -11,9 +11,9 @@ public interface CouponService extends BaseService<Coupon,Long>{
 
 	public List<Coupon> getCoupon(Long uId);
 	
-	public Coupon modify(Coupon c, long uId);
+	public Coupon modify(Coupon c, long id);
 	
-	public Coupon getCoupon(long id);
+	public Coupon getCoupon2(long id);
 	
 	public void deleteById(long Id);
 	

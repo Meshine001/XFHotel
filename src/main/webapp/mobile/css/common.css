@@ -4,7 +4,7 @@
     -webkit-box-sizing:border-box;-webkit-overflow-scrolling: touch; /* Safari */}
 a{ text-decoration:none;color: #968687;}
 ul,ul li{ list-style:none;}
-html,body{font-size: 0.26rem;font-family:"microsoft yahei";background: #f2f4f3;}
+html,body{color: #878787;font-size: 0.26rem;font-family:"microsoft yahei";background: #f2f4f3;}
 
 /*样式重置*/
 table{border-collapse:collapse;border-spacing:0}

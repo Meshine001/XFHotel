@@ -29,7 +29,7 @@ public class DES {
 		}
 		return stringBuilder.toString();
 	}
-
+	
 	/**
 	 * 加密
 	 * 
@@ -95,8 +95,9 @@ public class DES {
 		char[] hexChars = hexString.toCharArray();
 		byte[] d = new byte[length];
 		for (int i = 0; i < length; i++) {
-			int pos = i * 2;
-			d[i] = (byte) (charToByte(hexChars[pos]) << 4 | charToByte(hexChars[pos + 1]));
+			int pos = 1 * 2;
+			
+
 		}
 		
 		return new String(decrypt(d,Constants.LOCK_DES_KEY),Charset.forName("UTF-8"));

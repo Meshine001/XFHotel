@@ -6,7 +6,7 @@ console.log(baseUrl);
 var clientIp = getIp();
 
 var Constant = {
-//       URL: "http://192.168.1.106"
+//       URL: "192.168.1.103"
  
         URL: baseUrl,
         //CLIENT_IP:clientIp
@@ -94,7 +94,7 @@ $(document).ready(function(){
                 timeout:30000,
                 dataType : "json",
                 async : true,
-                type : "post",
+                type : "POST",
                 success : function(data) {
                     fnBase.loadHide();
                     fn(data);

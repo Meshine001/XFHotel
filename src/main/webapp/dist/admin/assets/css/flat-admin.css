@@ -8486,13 +8486,15 @@ footer.app-footer .footer-copyright {
 
 #list tr{ cursor: pointer; transition: all .3s;}
 #list tr:hover{background: #f2f2f2;}
-#list tr td i{
+#list tr td i,#about i{
 	display:block;
 	width:20px;
 	height:20px;
 	background:url('../images/moren.png')  no-repeat center center;
 }
-#list tr._active td i{
+#about i{float:left;}
+#about{cursor: pointer;}
+#list tr._active td i,#about._active i{
 	background:url('../images/moren-hat.png')  no-repeat center center;
 }
 

@@ -32,11 +32,11 @@ import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CommentService;
+import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.RoomService;
-import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
@@ -195,10 +195,10 @@ public class MobileController  {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("12365");
+//			System.out.println("12365");
 			return new Message(Constants.MESSAGE_ERR_CODE, "验证失败");
 		}
-		System.out.println("123");
+//		System.out.println("123");
 		return new Message(Constants.MESSAGE_ERR_CODE, "验证失败");
 	}
 	
@@ -233,7 +233,7 @@ public class MobileController  {
 	}
 	
 	@RequestMapping(value = "/module", method = RequestMethod.POST)
-	public  @ResponseBody Map orderModule(String startTime, String endTime, Long apartmentId) throws Exception {
+	public  @ResponseBody Map orderModule(String startTime, String endTime, Long apartmentId ,Long id) throws Exception {
 		Map<String,Object> info = new HashMap<String, Object>();
 		info.put("oStart", startTime);
 		info.put("oEnd", endTime);
@@ -243,15 +243,14 @@ public class MobileController  {
 		info.put("oTotalPrice", priceInfo.get("totalPrice"));
 		info.put("oCashPledge", priceInfo.get("cashPledge"));
 		info.put("oPreferential", "");
-		System.out.println();
 		return info;
 	}
 	
 	@RequestMapping(value = "/checkAvailable", method = RequestMethod.POST)
 	public @ResponseBody Message checkAvailable(Long roomId, String startTime, String endTime) {
-		System.out.println(startTime);
-		System.out.println(roomId);
-		System.out.println(endTime);
+//		System.out.println(startTime);
+//		System.out.println(roomId);
+//		System.out.println(endTime);
 		try {
 			List<Order> availableOders = orderservice.checkAvailable(roomId, startTime, endTime);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, availableOders);
@@ -329,12 +328,13 @@ public class MobileController  {
 	}
 	/**
 	 * 用户提交订单 房间详细信息页，确认订单触发
-	 * 
 	 * @param cusId
 	 * @param description
 	 * @param roomId
 	 * @param cusName
 	 * @param cusTel
+	 * @param otherCusName
+	 * @param otherCusIdCard
 	 * @param cusIdCard
 	 * @param personal
 	 * @param startTime
@@ -345,16 +345,23 @@ public class MobileController  {
 	 * @param preferential
 	 * @param needFapiao
 	 * @param apartmentType
+	 * @param id
 	 * @return
 	 */
 	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
 	public @ResponseBody Map orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
-			String cusIdCard, String personal, String startTime, String endTime, Integer totalDay, String price,
-			String totalPrice, String preferential, boolean needFapiao, String apartmentType) {
-//		System.out.println(startTime);
-//		System.out.println(startTime+" 12:00");
-		//System.out.println(cusId+description+roomId+cusName+cusTel+cusIdCard+personal+startTime+endTime+totalDay+price+totalPrice+preferential+needFapiao+apartmentType);
-				Order o = new Order();
+			String otherCusName, String otherCusIdCard, String cusIdCard, String personal, String startTime,
+			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
+			String apartmentType,Long id) {
+		Coupon coupon =couponService.getCoupon2(id);
+		boolean isUsed = true;
+		coupon.setUsed(isUsed);
+		couponService.modify(coupon, id);
+		double favorable = coupon.getcValue();
+		long totalPrice2 = Long.parseLong(totalPrice);
+		totalPrice = String.valueOf(totalPrice2 -favorable); 
+		
+		Order o = new Order();
 		o.setCusId(cusId);
 		o.setDescription(description);
 		o.setRoomId(roomId);
@@ -362,16 +369,20 @@ public class MobileController  {
 		o.setCusTel(cusTel);
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
+		o.setOtherCusName(otherCusName);
+		o.setOtherCusIdCard(otherCusIdCard);
 		try {
-			o.setStartTime(DateUtil.parse(startTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
-			o.setEndTime(DateUtil.parse(endTime+" 12:00", "yyyy-MM-dd hh:mm").getTime());
+			o.setStartTime(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
+			o.setEndTime(DateUtil.parse(endTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		o.setTime(new Date().getTime());
 		o.setTotalDay(totalDay);
-		o.setPrice(price);
+		Map room = roomService.getRoomInfo(roomId);
+		Apartment apartment = apartmentService.findById((Long) room.get("apartment"));
+		o.setPrice(price + "@" + apartment.getYajin());
 		o.setTotalPrice(totalPrice);
 		o.setPreferential(preferential);
 		o.setType(Apartment.getTypeNum(apartmentType));
@@ -381,6 +392,7 @@ public class MobileController  {
 		Order order = orderservice.get(o.getId());
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order.toMap());
+//		System.out.println(info);
 		return info;
 	}
 	
@@ -477,6 +489,7 @@ public class MobileController  {
 		return map;
 	}
 	
+
 	/**
 	 * 查询微信支付的状态
 	 * @param id
@@ -495,7 +508,35 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
 		}
 	}
+	/**
+	 * 获取可用优惠卷
+	 * @param uId
+	 * @param totalPrice
+	 * @return
+	 */
 	
+	@RequestMapping("getMyCoupons")
+	@ResponseBody
+	public ArrayList<Object> getMyCoupons(Long uId ,Double totalPrice){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Coupon> coupon = couponService.getCoupon(uId);
+		for(Coupon coupon2:coupon){
+			long startTime = TimeUtil.getDateLong(coupon2.getStartTime());
+			long endTime = TimeUtil.getDateLong(coupon2.getEndTime());
+			long rule = Long.parseLong(coupon2.getRule()); 
+			long time = new Date().getTime();
+			boolean usable = coupon2.isUsed();
+//			System.out.println(usable);
+			if(startTime<=time&&time<=endTime&&totalPrice>=rule&&usable!=true){
+				map.put(coupon2.getEndTime(), coupon2);
+			}
+		}
+		ArrayList<Object> list = new ArrayList<Object>();
+		  for(String key : map.keySet()){
+		   list.add(map.get(key));
+		  }
+		return list;
+	}
 	/**
 	 * 获取用户优惠券
 	 * @param uId
@@ -503,9 +544,46 @@ public class MobileController  {
 	 */
 	@RequestMapping("getCoupons")
 	@ResponseBody
-	public List<Coupon> getCouponsByUser(Long uId){
+	public List<Coupon>  getCouponsByUser(Long uId ){
+		System.out.println(uId);
+		List<Coupon> coupon = couponService.getCoupon(uId);
+		for(Coupon coupon2:coupon){
+			long endTime = TimeUtil.getDateLong(coupon2.getEndTime());
+			long time = new Date().getTime();
+//			System.out.println(time + endTime);
+			boolean usable = coupon2.isUsed();
+			if(time>=endTime||usable==true){
+				couponService.delete(couponService.getCoupon2(coupon2.getId()));
+			}
+		}
 		return couponService.getCoupon(uId);
 	}
-	
+
+	@RequestMapping(value = "list", method = RequestMethod.POST)
+	public @ResponseBody Map list(SearchForm searchData,Integer currentPage) {
+		if(null == currentPage){
+			currentPage = 1;
+		}
+		System.out.println(searchData);
+		Map<String, Object> info = new HashMap<String, Object>();
+		info.put("searchData", searchData);
+		info.put("areas", Area.getAreas());
+//		info.put("subways", Subway.getSubways());
+		info.put("priceRanges", LeasePrice.getPrices());
+		info.put("layoutTypes", LayoutType.getLayouts());
+		List<Feature> fs = featrueService.listFeatures();
+		List<com.xfhotel.hotel.support.Feature> features = new ArrayList<com.xfhotel.hotel.support.Feature>();
+		for(Feature f:fs){
+			features.add(new com.xfhotel.hotel.support.Feature((int)f.getId(), f.getDescription()));
+		}
+		com.xfhotel.hotel.support.Feature.setFeatures(features);
+		info.put("features",com.xfhotel.hotel.support.Feature.getFeatures());
+		info.put("enterTimes", RoomStatus.getStatusArray());
+		info.put("leaseTypes", LeaseType.getLeaseTypes());
+		
+		info.put("page",  apartmentService.getApartmentPage(apartmentService.sort(apartmentService.list(),searchData), currentPage));
+		session.setAttribute("info", info);
+		return info;
+	}
 
 }
