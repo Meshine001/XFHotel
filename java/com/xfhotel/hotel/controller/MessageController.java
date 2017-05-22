@@ -29,7 +29,6 @@ import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
-import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
 import com.xfhotel.hotel.support.TimeUtil;
@@ -43,8 +42,7 @@ public class MessageController {
 	LockService lockService;
 	@Autowired
 	OrderService orderService;
-	@Autowired
-	RoomService roomService;
+
 	@Autowired
 	ApartmentService apartmentService;
 

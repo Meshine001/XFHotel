@@ -26,17 +26,13 @@ import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
-import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.Order;
-import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
-import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.OrderService;
-import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
@@ -60,9 +56,6 @@ import net.sf.json.JSONObject;
 @RequestMapping("mobile")
 public class MobileController  {
 
-	
-	@Autowired
-	FeatureService featrueService;
 
 	@Autowired
 	ApartmentService apartmentService;
@@ -331,8 +324,16 @@ public class MobileController  {
 	public @ResponseBody Map orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
 			String otherCusName[], String otherCusIdCard[], String cusIdCard, String personal, String startTime,
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
-			String apartmentType,Long id) {
-		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, id);
+			String apartmentType,String id) {
+		Long couponId = null;
+		try {
+			couponId = Long.valueOf(id);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
+		
+		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order.toMap());
 		return info;
@@ -514,13 +515,6 @@ public class MobileController  {
 //		info.put("subways", Subway.getSubways());
 		info.put("priceRanges", LeasePrice.getPrices());
 		info.put("layoutTypes", LayoutType.getLayouts());
-		List<Feature> fs = featrueService.listFeatures();
-		List<com.xfhotel.hotel.support.Feature> features = new ArrayList<com.xfhotel.hotel.support.Feature>();
-		for(Feature f:fs){
-			features.add(new com.xfhotel.hotel.support.Feature((int)f.getId(), f.getDescription()));
-		}
-		com.xfhotel.hotel.support.Feature.setFeatures(features);
-		info.put("features",com.xfhotel.hotel.support.Feature.getFeatures());
 		info.put("enterTimes", RoomStatus.getStatusArray());
 		info.put("leaseTypes", LeaseType.getLeaseTypes());
 		

@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.service.ApartmentService;
-import com.xfhotel.hotel.service.FacilityService;
-import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.FileService;
-import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.TimeUtil;
 
 import net.sf.json.JSONArray;
@@ -27,12 +24,7 @@ public class ApartmentController {
 
 	@Autowired
 	ApartmentService apartmentService;
-	@Autowired
-	FacilityService facilityService;
-	@Autowired
-	RoomService roomService;
-	@Autowired
-	FeatureService featureService;
+
 
 	@Autowired
 	FileService fileService;
@@ -187,7 +179,6 @@ public class ApartmentController {
 
 	@RequestMapping(value = "/price/set", method = RequestMethod.POST)
 	public String priceSet(Long apartmentId, String date, String price) {
-		Apartment apartment = apartmentService.findById(apartmentId);
 		Price sp = apartmentService.getSpPrice(apartmentId, TimeUtil.getDateLong(date));
 		if (sp != null) {
 			sp.setPrice(Double.valueOf(price));

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.CustomerDetails;
-import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.entity.User;
 
 @Repository

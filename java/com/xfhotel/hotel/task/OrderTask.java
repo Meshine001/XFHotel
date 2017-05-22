@@ -8,9 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Order;
-import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.OrderService;
-import com.xfhotel.hotel.service.RoomService;
 
 @Component
 public class OrderTask{
@@ -18,8 +16,7 @@ public class OrderTask{
 	@Autowired
 	OrderService orderService;
 	
-	@Autowired
-	RoomService roomService;
+
 	
 	/**
 	 * 定时刷新订单对应的房间的状态，
@@ -28,11 +25,6 @@ public class OrderTask{
 	 */
 	@Scheduled(cron = "0 0/20 * * * ?")
 	public void refreshRoomStatus(){
-		List<Order> diedOrders = orderService.listDiedOrders(Apartment.TYPE_HOTEL);
-		for(Order o:diedOrders){
-			Room room = roomService.findById(o.getRoomId());
-			room.setStatus(Room.STATUS_IDLE);
-			roomService.update(room);
-		}
+		
 	}
 }

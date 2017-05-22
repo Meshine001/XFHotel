@@ -27,12 +27,10 @@ import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Price;
-import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
-import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
@@ -49,8 +47,6 @@ public class OrderController {
 
 	@Autowired
 	OrderService orderservice;
-	@Autowired
-	RoomService roomService;
 	@Autowired
 	ApartmentService apartmentService;
 	@Autowired
@@ -307,7 +303,9 @@ public class OrderController {
 			List<Map> maps = new ArrayList<Map>();
 			for (Order o : orders) {
 				JSONObject apartment = apartmentService.getApartmentById(o.getRoomId());
-				maps.add(apartment);
+				Map<String, Object> info = o.toMap();
+				info.put("apartment", apartment);
+				maps.add(info);
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {
@@ -388,10 +386,6 @@ public class OrderController {
 			session.setAttribute("err", "支付超时");
 			return "/customer/err";
 		}
-
-		Room room = roomService.findById(order.getRoomId());
-		room.setStatus(Room.STATUS_LEASED);
-		roomService.update(room);
 
 		return "/customer/success";
 	}
