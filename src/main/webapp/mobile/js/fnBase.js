@@ -17,7 +17,7 @@ var Constant = {
  */
 function getIp() {
     var ip;
-    var ipInfoUrl = 'https://ipinfo.io/json';
+    var ipInfoUrl = 'http://ipinfo.io/json';
     $.ajax({
         url:ipInfoUrl,
         async:false,

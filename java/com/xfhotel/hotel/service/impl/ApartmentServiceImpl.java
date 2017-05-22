@@ -1,5 +1,6 @@
 package com.xfhotel.hotel.service.impl;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -354,6 +355,27 @@ public class ApartmentServiceImpl implements ApartmentService {
 		}
 		page.setResults(results);
 		return page;
+	}
+	@Transactional
+	@Override
+	public JSONObject createOrderMoudle(String startTime, String endTime, Long apartmentId) {
+		JSONObject moudle = new JSONObject();
+		moudle.put("oStart", startTime);
+		moudle.put("oEnd", endTime);
+		Map<String, Object> priceInfo = caculatePrice(startTime, endTime, apartmentId);
+		System.out.println(priceInfo);
+		try {
+			moudle.put("oTotalDay", TimeUtil.daysBetween(startTime, endTime));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		moudle.put("oPrice", priceInfo.get("price"));
+		moudle.put("oTotalPrice", priceInfo.get("totalPrice"));
+		moudle.put("oCashPledge", priceInfo.get("cashPledge"));
+		moudle.put("oPreferential", "");
+		moudle.put("capacity", priceInfo.get("capacity"));
+		return moudle;
 	}
 
 }

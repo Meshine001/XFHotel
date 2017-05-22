@@ -51,6 +51,7 @@ import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 import com.xfhotel.hotel.support.wechat.WechatOrderUtils;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 
@@ -63,9 +64,6 @@ public class MobileController  {
 	@Autowired
 	FeatureService featrueService;
 
-	@Autowired
-	RoomService roomService;
-	
 	@Autowired
 	ApartmentService apartmentService;
 
@@ -92,25 +90,15 @@ public class MobileController  {
 	
 	@RequestMapping(value = "/home",method = RequestMethod.POST)
 	public @ResponseBody Map home(){
-		List<Room> rooms = roomService.getHomeRooms();
-		List<Map> homeRooms = new ArrayList<Map>();
-		for(Room room :rooms){
-			Long apartmentId = (Long) roomService.getRoomInfo(room.getId()).get("apartment");
-			homeRooms.add(apartmentService.getApartmentInfo(apartmentId));
-		}
+		JSONArray homeRooms = apartmentService.getHomeApartments();
 		Map<String,Object> info = new HashMap<String, Object>();
 		info.put("homeRooms",homeRooms);
 		return info;
 		
 	}
-	@RequestMapping(value = "/info",method = RequestMethod.POST)
-	public @ResponseBody Map info(Long roomId){
-		Map room = roomService.getRoomInfo(roomId);
-		Map apartment = apartmentService.getApartmentInfo((Long)room.get("apartment"));
-		Map<String,Object> info = new HashMap<String, Object>();
-		info.put("room", room);
-		info.put("apartment", apartment);
-		return info;
+	@RequestMapping(value = "/info",method = RequestMethod.GET)
+	public @ResponseBody JSONObject info(Long apartmentId){
+		return apartmentService.getApartmentById(apartmentId);
 		
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -233,17 +221,9 @@ public class MobileController  {
 	}
 	
 	@RequestMapping(value = "/module", method = RequestMethod.POST)
-	public  @ResponseBody Map orderModule(String startTime, String endTime, Long apartmentId ,Long id) throws Exception {
-		Map<String,Object> info = new HashMap<String, Object>();
-		info.put("oStart", startTime);
-		info.put("oEnd", endTime);
-		Map<String, Object> priceInfo = apartmentService.caculatePrice(startTime, endTime, apartmentId);
-		info.put("oTotalDay",TimeUtil.daysBetween(startTime, endTime));
-		info.put("oPrice", priceInfo.get("price"));
-		info.put("oTotalPrice", priceInfo.get("totalPrice"));
-		info.put("oCashPledge", priceInfo.get("cashPledge"));
-		info.put("oPreferential", "");
-		return info;
+	public  @ResponseBody JSONObject orderModule(String startTime, String endTime, Long apartmentId ,Long id) throws Exception {
+		
+		return apartmentService.createOrderMoudle(startTime, endTime, apartmentId);
 	}
 	
 	@RequestMapping(value = "/checkAvailable", method = RequestMethod.POST)
@@ -270,8 +250,7 @@ public class MobileController  {
 			List<Map> maps = new ArrayList<Map>();
 			for (Order o : orders) {
 				Map m = o.toMap();
-				Map room = roomService.getRoomInfo(o.getRoomId());
-				Map apartment = apartmentService.getApartmentInfo((Long) room.get("apartment"));
+				Map apartment = apartmentService.getApartmentById(o.getRoomId());
 				m.put("apartment", apartment);
 				maps.add(m);
 				 
@@ -350,49 +329,12 @@ public class MobileController  {
 	 */
 	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
 	public @ResponseBody Map orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
-			String otherCusName, String otherCusIdCard, String cusIdCard, String personal, String startTime,
+			String otherCusName[], String otherCusIdCard[], String cusIdCard, String personal, String startTime,
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
 			String apartmentType,Long id) {
-		Coupon coupon =couponService.getCoupon2(id);
-		boolean isUsed = true;
-		coupon.setUsed(isUsed);
-		couponService.modify(coupon, id);
-		double favorable = coupon.getcValue();
-		long totalPrice2 = Long.parseLong(totalPrice);
-		totalPrice = String.valueOf(totalPrice2 -favorable); 
-		
-		Order o = new Order();
-		o.setCusId(cusId);
-		o.setDescription(description);
-		o.setRoomId(roomId);
-		o.setCusName(cusName);
-		o.setCusTel(cusTel);
-		o.setCusIdCard(cusIdCard);
-		o.setPersonal(personal);
-		o.setOtherCusName(otherCusName);
-		o.setOtherCusIdCard(otherCusIdCard);
-		try {
-			o.setStartTime(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
-			o.setEndTime(DateUtil.parse(endTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		o.setTime(new Date().getTime());
-		o.setTotalDay(totalDay);
-		Map room = roomService.getRoomInfo(roomId);
-		Apartment apartment = apartmentService.findById((Long) room.get("apartment"));
-		o.setPrice(price + "@" + apartment.getYajin());
-		o.setTotalPrice(totalPrice);
-		o.setPreferential(preferential);
-		o.setType(Apartment.getTypeNum(apartmentType));
-		o.setStatus(Order.STATUS_ON_PAY);
-		o.setNeedFapiao(needFapiao);
-		orderservice.add(o);
-		Order order = orderservice.get(o.getId());
+		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, id);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order.toMap());
-//		System.out.println(info);
 		return info;
 	}
 	
@@ -520,10 +462,11 @@ public class MobileController  {
 	public ArrayList<Object> getMyCoupons(Long uId ,Double totalPrice){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Coupon> coupon = couponService.getCoupon(uId);
+		
 		for(Coupon coupon2:coupon){
 			long startTime = TimeUtil.getDateLong(coupon2.getStartTime());
 			long endTime = TimeUtil.getDateLong(coupon2.getEndTime());
-			long rule = Long.parseLong(coupon2.getRule()); 
+			Double rule = Double.valueOf(coupon2.getRule()); 
 			long time = new Date().getTime();
 			boolean usable = coupon2.isUsed();
 //			System.out.println(usable);

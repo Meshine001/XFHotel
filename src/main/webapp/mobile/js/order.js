@@ -143,7 +143,7 @@ function addpartenr(){
     $(".order_info .roompPic a").live('click',function(){
     	var frontURL=Constant.URL+'/mobile/getMyCoupons';
     	var postData={
-    			'uId':2,
+    			'uId':_uid,
     			'totalPrice':_oTotalPrice
     	}
     	 fnBase.commonAjax(frontURL,postData,function(data){
@@ -218,6 +218,8 @@ function addpartenr(){
             "otherCusName":$("#pName").val(),
         	"otherCusIdCard":$("#pId").val()
         };
+        
+        console.log(postData);
 
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);

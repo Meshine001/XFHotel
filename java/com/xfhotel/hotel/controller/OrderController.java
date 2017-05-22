@@ -252,8 +252,7 @@ public class OrderController {
 			try {
 				// 发送门锁密码
 				Long roomId = o.getRoomId();
-				Long apartment = (Long) roomService.getRoomInfo(roomId).get("apartment");
-				String lock_no = (String) apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
+				String lock_no = apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
 				String result = lockService.addPassword(o.getCusTel(), lock_no,
 						DateUtil.format(new Date(o.getStartTime()), "yyyyMMddhhmmss"),
 						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddhhmmss"));
