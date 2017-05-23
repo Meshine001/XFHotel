@@ -139,8 +139,8 @@ function getaddress(lng, lat) {
 			coupon=classdata.join('，');
 			Puttingdata=strarlist.join('，');
 		}
-		$(this).parent().parent().find('.form-control').val(Puttingdata);//名字
-		$(this).parent().parent().find('.form-control-classl').val(coupon);//icon class
+		$(this).parent().parent().find('.form-control').attr('value',Puttingdata);//名字
+		$(this).parent().parent().find('.form-control-class').attr('value',coupon);//icon class
 		$(this).parent().parent().css({'height':'auto','border':'none'});
 		$(this).parent().parent().find('.checkBox').hide();
 		$(this).hide();

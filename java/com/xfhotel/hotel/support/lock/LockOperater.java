@@ -162,8 +162,11 @@ public class LockOperater implements LockService {
 	@Override
 	public JSONObject pwdUpdate(String version, String access_token, String s_id, String lock_no, String pwd_text,
 			String valid_time_start, String valid_time_end, String extra) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/pwd/update";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		JSONObject response = sendPost(url, param, POST_TYPE_NO_HEADER);
+		return response;
 	}
 	
 

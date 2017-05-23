@@ -41,6 +41,14 @@ public class Apartment {
 	private String zou_bian;
 	private String qi_ta;
 	
+	private String te_se_class;
+	private String jia_ju_class;
+	private String wei_yu_class;
+	private String can_chu_class;
+	private String pei_tao_class;
+	private String zou_bian_class;
+	private String qi_ta_class;
+	
 	
 	private String hu_xing_tu;
 	private String fang_jian_tu;
@@ -171,6 +179,63 @@ public class Apartment {
 
 	public void setShow_home(boolean show_home) {
 		this.show_home = show_home;
+	}
+	
+
+	public JSONArray getTe_se_class() {
+		return JSONArray.fromObject(te_se_class);
+	}
+
+	public void setTe_se_class(String te_se_class) {
+		this.te_se_class = te_se_class;
+	}
+
+	public JSONArray getJia_ju_class() {
+		return JSONArray.fromObject(jia_ju_class);
+	}
+
+	public void setJia_ju_class(String jia_ju_class) {
+		this.jia_ju_class = jia_ju_class;
+	}
+
+	public JSONArray getWei_yu_class() {
+		return JSONArray.fromObject(wei_yu_class);
+	}
+
+	public void setWei_yu_class(String wei_yu_class) {
+		this.wei_yu_class = wei_yu_class;
+	}
+
+	public JSONArray getCan_chu_class() {
+		return JSONArray.fromObject(can_chu_class);
+	}
+
+	public void setCan_chu_class(String can_chu_class) {
+		this.can_chu_class = can_chu_class;
+	}
+
+	public JSONArray getPei_tao_class() {
+		return JSONArray.fromObject(pei_tao_class);
+	}
+
+	public void setPei_tao_class(String pei_tao_class) {
+		this.pei_tao_class = pei_tao_class;
+	}
+
+	public JSONArray getZou_bian_class() {
+		return JSONArray.fromObject(zou_bian_class);
+	}
+
+	public void setZou_bian_class(String zou_bian_class) {
+		this.zou_bian_class = zou_bian_class;
+	}
+
+	public JSONArray getQi_ta_class() {
+		return JSONArray.fromObject(qi_ta_class);
+	}
+
+	public void setQi_ta_class(String qi_ta_class) {
+		this.qi_ta_class = qi_ta_class;
 	}
 
 	public JSONObject toJson(){
