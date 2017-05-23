@@ -62,6 +62,7 @@ public class LockServiceImpl implements LockService {
 		if(lock_check!=null){
 			return "该手机已有密码";
 		}else{
+			LockOperater.getInstance().pwd
 			JSONObject param = new JSONObject();
 			param.put("lock_no", lock.getLock_no());
 			param.put("valid_time_start", lock.getValid_time_start());

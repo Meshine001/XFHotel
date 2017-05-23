@@ -32,6 +32,7 @@ import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
 import com.xfhotel.hotel.support.TimeUtil;
+import com.xfhotel.hotel.support.lock.LockOperater;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 
 @Controller
@@ -62,7 +63,7 @@ public class MessageController {
 		Integer pwd_no = (Integer) map.get("pwd_no");
 		String pwd_user_mobile = (String) map.get("pwd_user_mobile");
 		String event = (String) map.get("event");
-		String str = Constants.LOCK_DES_KEY + factor + Constants.LOCK_ACCOUNT;
+		String str = LockOperater.LOCK_DES_KEY + factor + LockOperater.LOCK_ACCOUNT;
 		MessageDigest md;
 		try {
 			md = MessageDigest.getInstance("MD5");

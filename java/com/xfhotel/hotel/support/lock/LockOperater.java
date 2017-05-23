@@ -95,12 +95,11 @@ public class LockOperater implements LockService {
 			conn.setRequestProperty("connection", "Keep-Alive");
 			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
 			conn.setRequestProperty("Content-Type", "application/json");
-			if (type != 0) {
-				System.out.println(LockOperater.ACCESS_TOKEN);
+			if (type == POST_TYPE_NEED_HEADER) {
 				conn.setRequestProperty("access_token", LockOperater.ACCESS_TOKEN);
 				UUID uuid = UUID.randomUUID();
 				conn.setRequestProperty("s_id", uuid.toString());
-				conn.setRequestProperty("version", "1.5.0");
+				conn.setRequestProperty("version", "1.1");
 			}
 			// 发送POST请求必须设置如下两行
 			conn.setDoOutput(true);
@@ -143,7 +142,7 @@ public class LockOperater implements LockService {
 		JSONObject param = new JSONObject();
 		param.put("account", account);
 		param.put("password", DES.encrypt(password.getBytes()));
-		JSONObject response = sendPost(url, param, POST_TYPE_NO_HEADER);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
 		return response;
 	}
 
@@ -154,7 +153,12 @@ public class LockOperater implements LockService {
 
 		return null;
 	}
-
+	
+	public JSONObject pwdAdd(String lock_no, String pwd_text,
+			String valid_time_start, String valid_time_end, String pwd_user_name, String pwd_user_mobile,
+			String pwd_user_idcard, String description, String extra) {
+		return pwdAdd("", "", "", lock_no, pwd_text, valid_time_start, valid_time_end, pwd_user_name, pwd_user_mobile, pwd_user_idcard, description, extra);
+	}
 	@Override
 	public JSONObject pwdUpdate(String version, String access_token, String s_id, String lock_no, String pwd_text,
 			String valid_time_start, String valid_time_end, String extra) {
@@ -254,8 +258,24 @@ public class LockOperater implements LockService {
 	@Override
 	public JSONObject pwdList(String version, String access_token, String s_id, String lock_no, int pwd_no,
 			String pwd_user_mobile, String status) {
-		// TODO Auto-generated method stub
+		
 		return null;
+	}
+	
+	/**
+	 * 获取密码列表
+	 * @param lock_no
+	 * @param pwd_user_mobile
+	 * @return
+	 */
+	public JSONObject pwdList(String lock_no, 
+			String pwd_user_mobile) {
+		String url = baseUrl + "/pwd/list";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		param.put("pwd_user_mobile", pwd_user_mobile);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
@@ -292,6 +312,7 @@ public class LockOperater implements LockService {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(getInstance().lockDetails("11.1.116.166"));
+//		System.out.println(getInstance().lockDetails("11.1.116.166"));
+	System.out.println(getInstance().pwdList("11.1.116.166", "18710579465"));
 	}
 }
