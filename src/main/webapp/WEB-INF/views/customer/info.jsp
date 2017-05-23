@@ -76,7 +76,8 @@
 								<div class="i_z">特色</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.te_se}" var="f">
-										<span ><i></i>${f}</span>
+										<span><i></i>${f}</span>
+										<!-- class写在 span上 -->
 									</c:forEach>
 								</p>
 
