@@ -131,7 +131,7 @@
     display: inline-block;
     width: 22.5%;
     height: 0.6rem;
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     text-align: center;
     line-height: 0.88rem;
     margin-bottom: 0.02rem;
@@ -140,6 +140,7 @@
     font-size: 0.1rem;
     margin-left: 0.02rem;
     position: relative;
+    color: orangered;
 }
 .deploy .facility li .facility-list i em{
     width: 28px;
@@ -245,6 +246,11 @@
     background: url("../images/icons_detail_facility.png") no-repeat;
     background-size: 2494px 26px;
     background-position: -622px 0px;
+}
+.deploy .facility li .facility-list .icon-hatwort em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -180px 0px;
 }
 .deploy .facility li .facility-list .icon-mahjong em{
     background: url("../images/icons_detail_facility.png") no-repeat;

@@ -61,25 +61,27 @@
 					</div>
 				</div>
 				<div class="x_i">
-					<div>
+					<div style="clear:both">
 						<div class="i_z">综合描述</div>
+						<p class="det-line-h"></p>
 						<div class="x_fj_info">
 							<p>${apartment.description}</p>
 						</div>
 					</div>
 					<div>
 						<div class="i_z">配套设施</div>
+						<p class="det-line-h"></p>
 						<div class="x_fj_info">
-							<div>
+							<div style="clear:both">
 								<div class="i_z">特色</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.te_se}" var="f">
-										<span>${f}</span>
+										<span><i></i>${f}</span>
 									</c:forEach>
 								</p>
 
 							</div>
-							<div>
+							<div style="clear:both">
 								<div class="i_z">家居</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.jia_ju}" var="f">
@@ -88,7 +90,7 @@
 								</p>
 
 							</div>
-							<div>
+							<div style="clear:both">
 								<div class="i_z">卫浴</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.wei_yu}" var="f">
@@ -97,7 +99,7 @@
 								</p>
 
 							</div>
-							<div>
+							<div style="clear:both">
 								<div class="i_z">餐厨</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.can_chu}" var="f">
@@ -106,7 +108,7 @@
 								</p>
 
 							</div>
-							<div>
+							<div style="clear:both">
 								<div class="i_z">配套</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.pei_tao}" var="f">
@@ -115,7 +117,7 @@
 								</p>
 
 							</div>
-							<div>
+							<div style="clear:both">
 								<div class="i_z">周边</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.zou_bian}" var="f">
@@ -124,7 +126,7 @@
 								</p>
 
 							</div>
-							<div>
+							<div style="clear:both">
 								<div class="i_z">其他</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.qi_ta}" var="f">
@@ -138,6 +140,7 @@
 
 					<div>
 						<div class="i_z">位置地图</div>
+						<p class="det-line-h"></p>
 						<div class="wz_ditu">
 							<img alt="" width="810" height="420"
 								src="http://api.map.baidu.com/staticimage?center=${apartment.position.jing_du},${apartment.position.wei_du}&width=810&height=420&zoom=16&markers=${apartment.position.jing_du},${apartment.position.wei_du}" />
@@ -197,19 +200,19 @@
 					</div>
 				</div>
 				<div class="x_ping_jia">
-					<h1>服务评价</h1>
+					<h1 style="font-size:18px;color:#5ccece;">服务评价</h1>
 					<div id="comment_box">
 						<div class="comment_box clearfix">
 							<div class="score_l">
-								<span class="x_textscore">${roomRates.pingjun}<em
+								<span class="x_textscore">综合评分；<i>${roomRates.pingjun}</i><em
 									class="f_24">/5分</em></span>
 							</div>
 							<ul class="score_r clearfix">
-								<li><span>整洁卫生</span>${roomRates.weisheng}分</li>
-								<li><span>描述相符</span>${roomRates.miaoshu}分</li>
-								<li><span>交通位置</span>${roomRates.jiaotong}分</li>
-								<li><span>安全程度</span>${roomRates.anquan}分</li>
-								<li><span>性价比</span>${roomRates.xingjiabi}分</li>
+								<li><span>整洁卫生</span><i>${roomRates.weisheng}</i>分</li>
+								<li><span>描述相符</span><i>${roomRates.miaoshu}</i>分</li>
+								<li><span>交通位置</span><i>${roomRates.jiaotong}</i>分</li>
+								<li><span>安全程度</span><i>${roomRates.anquan}</i>分</li>
+								<li><span>性价比</span><i>${roomRates.xingjiabi}</i>分</li>
 							</ul>
 						</div>
 						<div class="comment_list" data-url="<%=basePath%>"

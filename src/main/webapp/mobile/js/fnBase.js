@@ -88,7 +88,7 @@ $(document).ready(function(){
         commonAjax : function(url, data,fn){
             //fnBase.loadShow();
             $.ajax({
-                cache : true,
+//                cache : true,
                 data : data,
                 url : url,
                 timeout:30000,
