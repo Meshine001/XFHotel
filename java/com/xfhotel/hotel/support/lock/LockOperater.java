@@ -31,7 +31,7 @@ public class LockOperater implements LockService {
 	public final static int POST_TYPE_NO_HEADER = 0;
 
 	public static final String LOCK_TEST_BASE_URL = "http://test.ops.huohetech.com:80";
-	public static final String LOCK_BASE_URL = "http://ops.huohetech.com:80";
+	public static final String LOCK_BASE_URL = "http://ops.huohetech.com";
 
 	public static final String LOCK_DES_KEY = "5DD319E4";
 	public static final String LOCK_ACCOUNT = "13072983237";
@@ -142,7 +142,7 @@ public class LockOperater implements LockService {
 		JSONObject param = new JSONObject();
 		param.put("account", account);
 		param.put("password", DES.encrypt(password.getBytes()));
-		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		JSONObject response = sendPost(url, param, POST_TYPE_NO_HEADER);
 		return response;
 	}
 
@@ -155,9 +155,9 @@ public class LockOperater implements LockService {
 	}
 	
 	public JSONObject pwdAdd(String lock_no, String pwd_text,
-			String valid_time_start, String valid_time_end, String pwd_user_name, String pwd_user_mobile,
+			Long valid_time_start, Long valid_time_end, String pwd_user_name, String pwd_user_mobile,
 			String pwd_user_idcard, String description, String extra) {
-		return pwdAdd("", "", "", lock_no, pwd_text, valid_time_start, valid_time_end, pwd_user_name, pwd_user_mobile, pwd_user_idcard, description, extra);
+		return pwdAdd("", "", "", lock_no, pwd_text,""+ valid_time_start, ""+valid_time_end, pwd_user_name, pwd_user_mobile, pwd_user_idcard, description, extra);
 	}
 	@Override
 	public JSONObject pwdUpdate(String version, String access_token, String s_id, String lock_no, String pwd_text,
@@ -165,6 +165,7 @@ public class LockOperater implements LockService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 	@Override
 	public JSONObject pwdOfflineAdd(String version, String access_token, String s_id, String lock_no,

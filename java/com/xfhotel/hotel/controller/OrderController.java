@@ -249,14 +249,12 @@ public class OrderController {
 				// 发送门锁密码
 				Long roomId = o.getRoomId();
 				String lock_no = apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
-				String result = lockService.addPassword(o.getCusTel(), lock_no,
-						DateUtil.format(new Date(o.getStartTime()), "yyyyMMddhhmmss"),
-						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddhhmmss"));
-				if(result.equals("success")){
+				Message result = lockService.addPassword(o.getCusTel(), lock_no, ""+o.getStartTime(), ""+o.getEndTime());
+				if(result.getStatusCode() == Constants.MESSAGE_SUCCESS_CODE){
 					o.setStatus(Order.STATUS_ON_LEASE);
 					orderservice.update(o);
 				}else{
-					return new Message(Constants.MESSAGE_ERR_CODE, result);
+					return result;
 				}
 				
 			} catch (Exception e) {

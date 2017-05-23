@@ -69,7 +69,7 @@ public class MessageController {
 			md = MessageDigest.getInstance("MD5");
 			md.update(str.getBytes());
 			str = new BigInteger(1, md.digest()).toString(16);
-			if (str.equals(validate_code) || 1 == 1) {
+			if (str.equals(validate_code)) {
 				if (event.equals("PUSH_LOCK_SET_PWD_SUCCESS")) {
 					lockSuccess(business_id, lock_no, pwd_no, pwd_user_mobile);
 				} else if (event.equals("PUSH_LOCK_SET_PWD_FAIL")) {
