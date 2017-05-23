@@ -136,6 +136,7 @@ public class LockOperater implements LockService {
 		return JSONObject.fromObject(result);
 	}
 
+
 	@Override
 	public JSONObject login(String version, String s_id, String account, String password) {
 		String url = baseUrl + "/login";
@@ -150,10 +151,22 @@ public class LockOperater implements LockService {
 	public JSONObject pwdAdd(String version, String access_token, String s_id, String lock_no, String pwd_text,
 			String valid_time_start, String valid_time_end, String pwd_user_name, String pwd_user_mobile,
 			String pwd_user_idcard, String description, String extra) {
-
-		return null;
+		String url = baseUrl + "/pwd/add";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		param.put("pwd_text", pwd_text);
+		param.put("valid_time_start", valid_time_start);
+		param.put("valid_time_end", valid_time_end);
+		param.put("pwd_user_name", pwd_user_name);
+		param.put("pwd_user_mobile", pwd_user_mobile);
+		param.put("pwd_user_idcard", pwd_user_idcard);
+		param.put("description", description);
+		param.put("extra", extra);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		
+		return response;
 	}
-	
+
 	public JSONObject pwdAdd(String lock_no, String pwd_text,
 			Long valid_time_start, Long valid_time_end, String pwd_user_name, String pwd_user_mobile,
 			String pwd_user_idcard, String description, String extra) {
@@ -161,9 +174,17 @@ public class LockOperater implements LockService {
 	}
 	@Override
 	public JSONObject pwdUpdate(String version, String access_token, String s_id, String lock_no, String pwd_text,
-			String valid_time_start, String valid_time_end, String extra) {
-		// TODO Auto-generated method stub
-		return null;
+			String valid_time_start, String valid_time_end, String extra,String pwd_no) {
+		String url = baseUrl + "/pwd/update";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		param.put("pwd_text", pwd_text);
+		param.put("pwd_no", pwd_no);
+		param.put("valid_time_start", valid_time_start);
+		param.put("valid_time_end", valid_time_end);
+		param.put("extra", extra);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 	
 
@@ -171,76 +192,141 @@ public class LockOperater implements LockService {
 	public JSONObject pwdOfflineAdd(String version, String access_token, String s_id, String lock_no,
 			String valid_time_start, String valid_time_end, String pwd_user_name, String pwd_user_mobile,
 			String pwd_user_idcard, String description) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/pwd/offline_add";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		param.put("valid_time_start", valid_time_start);
+		param.put("valid_time_end", valid_time_end);
+		param.put("pwd_user_name", pwd_user_name);
+		param.put("pwd_user_mobile", pwd_user_mobile);
+		param.put("pwd_user_idcard", pwd_user_idcard);
+		param.put("description", description);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject pwdDelete(String version, String access_token, String s_id, String lock_no, String pwd_no,
 			String pwd_user_mobile, String extra) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/pwd/delete";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		param.put("pwd_no", pwd_no);
+		param.put("pwd_user_mobile", pwd_user_mobile);
+		param.put("extra", extra);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject lockRemoteOpen(String version, String access_token, String s_id, String lock_no,
 			String pwd_user_mobile, String pwd_user_name) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/lock/remote_open";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		param.put("pwd_user_mobile", pwd_user_mobile);
+		param.put("pwd_user_name", pwd_user_name);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject lockAuth(String version, String access_token, String s_id, String lock_no, String mobile,
 			String name, String allow_auth, String auth_time_start, String auth_time_end) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/lock/auth";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		param.put("mobile", mobile);
+		param.put("name", name);
+		param.put("allow_auth", allow_auth);
+		param.put("auth_time_start", auth_time_start);
+		param.put("auth_time_end", auth_time_end);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject lockCancelAuth(String version, String access_token, String s_id, String lock_no, String mobile) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/lock/cancel_auth";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		param.put("mobile", mobile);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject pwdUpdateFun(String version, String access_token, String s_id, String lock_no, String pwd_text,
 			String valid_time_start, String valid_time_end, String extra) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/pwd/update_func";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		param.put("valid_time_start", valid_time_start);
+		param.put("valid_time_end", valid_time_end);
+		param.put("extra", extra);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject nodeUpdateInstallInfo(String version, String access_token, String s_id, String node_no,
 			String house_code) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/node/update_install_info";
+		JSONObject param = new JSONObject();
+		param.put("node_no", node_no);
+		param.put("house_code", house_code);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject lockUpdateInstallInfo(String version, String access_token, String s_id, String lock_no,
 			String house_code, String room_code) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/lock/update_install_info";
+		JSONObject param = new JSONObject();
+		param.put("room_code", room_code);
+		param.put("house_code", house_code);
+		param.put("lock_no", lock_no);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject nodeList(String vaersion, String access_token, String s_id, int page_size, int current_page,
 			String node_no, String house_code) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/node/list";
+		JSONObject param = new JSONObject();
+		param.put("page_size", page_size);
+		param.put("house_code", house_code);
+		param.put("current_page", current_page);
+		param.put("node_no", node_no);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject nodeView(String version, String access_token, String s_id, String node_no) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/node/view";
+		JSONObject param = new JSONObject();
+		param.put("node_no", node_no);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
+	
 	}
 
 	@Override
 	public JSONObject lockList(String version, String access_token, String s_id, int page_size, int current_page,
 			String node_no, String lock_code, String house_code, String roon_code) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/lock/list";
+		JSONObject param = new JSONObject();
+		param.put("page_size", page_size);
+		param.put("house_code", house_code);
+		param.put("current_page", current_page);
+		param.put("node_no", node_no);
+		param.put("lock_code", lock_code);
+		param.put("roon_code", roon_code);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
@@ -259,8 +345,14 @@ public class LockOperater implements LockService {
 	@Override
 	public JSONObject pwdList(String version, String access_token, String s_id, String lock_no, int pwd_no,
 			String pwd_user_mobile, String status) {
-		
-		return null;
+		String url = baseUrl + "/pwd/list";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		param.put("pwd_no", pwd_no);
+		param.put("pwd_user_mobile", pwd_user_mobile);
+		param.put("status", status);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 	
 	/**
@@ -281,39 +373,71 @@ public class LockOperater implements LockService {
 
 	@Override
 	public JSONObject pwdDynamicPwd(String version, String access_token, String s_id, String lock_no) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/pwd/dynamic_pwd";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject pwdTempPwd(String version, String access_token, String s_id, String lock_no, String pwd_user_name,
 			String pwd_user_mobile, String pwd_user_idcard, String description) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/pwd/temp_pwd";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		param.put("pwd_user_name", pwd_user_name);
+		param.put("pwd_user_mobile", pwd_user_mobile);
+		param.put("pwd_user_idcard", pwd_user_idcard);
+		param.put("description", description);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject lockOpenLockHis(String version, String access_token, String s_id, int page_size, int current_page,
 			String lock_no, Long searsh_time_start, Long searsh_time_end) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/lock/open_lock_his";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		param.put("page_size", page_size);
+		param.put("current_page", current_page);
+		param.put("searsh_time_start", searsh_time_start);
+		param.put("searsh_time_end", searsh_time_end);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject lockValidateOwner(String version, String access_token, String s_id, String account,
 			String password, String lock_no) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/lock/validate_owner";
+		JSONObject param = new JSONObject();
+		param.put("account", account);
+		param.put("lock_no", lock_no);
+		param.put("password", DES.encrypt(password.getBytes()));
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	@Override
 	public JSONObject pwdViewFunc(String version, String access_token, String s_id, String lock_no) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/pwd/view_func";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
 	}
 
 	public static void main(String[] args) {
 //		System.out.println(getInstance().lockDetails("11.1.116.166"));
-	System.out.println(getInstance().pwdList("11.1.116.166", "18710579465"));
+//	System.out.println(getInstance().pwdList("11.1.116.166", "18710579465"));
+		long i=new Date().getTime();
+		System.out.println(i);
+		i=i+1000*60*2;
+		Long n = i+1000*60*6;
+		System.out.println(n);
+		System.out.println(i);
+		System.out.println(getInstance().pwdAdd("", "", "", "11.1.116.166", "", ""+i, ""+n, "", "15825095926", "", "", ""));
 	}
 }
