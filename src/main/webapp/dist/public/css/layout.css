@@ -7629,16 +7629,228 @@ span.gj_chat {
     margin-right: 5px;
     margin-bottom: 9px;
     display: inline-block;
-    border: 1px solid #333; 
     width: 120px;
     height:60px;
     text-align: center;
     position: relative;
 }
 .i_span span i{
-	width:52px;
-	height:49px;
-	border: 1px solid #333;
-	
+    width: 28px;
+    height: 32px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-left: -14px;
+    overflow: hidden;
 }
-
+/* calss。。。。。 */
+.i_span span.icon-tv i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -52px 0px;
+}
+.i_span span.icon-wifi i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: 2px 0px;
+}
+.i_span span.icon-airconditioner i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -81px 0px;
+}
+.i_span span.icon-icebox i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -108px 0px;
+}
+.i_span span.icon-washingmachine i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -135px 0px;
+}
+.i_span span.icon-heating i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -165px 0px;
+}
+.i_span span.icon-smartlock i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1143px 0px;
+}
+.i_span span.icon-accesscontrol i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1224px 0px;
+}
+.i_span span.icon-hairandbodylotion i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -434px 0px;
+}
+.i_span span.icon-KTV i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -897px 0px;
+}
+.i_span span.icon-wbl i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -624px 0px;
+}
+.i_span span.icon-towel i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -217px 0px;
+}
+.i_span span.icon-tissues i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -352px 0px;
+}
+.i_span span.icon-atableware i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -679px 0px;
+}
+.i_span span.icon-cookingpots i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -543px 0px;
+}
+.i_span span.icon-hairdryer i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1198px 0px;
+}
+.i_span span.icon-infirmary i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1006px 0px;
+}
+.i_span span.icon-elevator i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1250px 0px;
+}
+.i_span span.icon-electriccooker i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -652px 0px;
+}
+.i_span span.icon-hatwort i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -189px 0px;
+}
+.i_span span.icon-mahjong i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -978px 0px;
+}
+.i_span span.icon-slipper i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -326px 0px;
+}
+.i_span span.icon-liquidshampoo i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -299px 0px;
+}
+.i_span span.icon-toiletthings i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -270px 0px;
+}
+.i_span span.icon-bank i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1308px 0px;
+}
+.i_span span.icon-metro i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1333px 0px;
+}
+.i_span span.icon-BUS i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1361px 0px;
+}
+.i_span span.icon-restaurant i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1388px 0px;
+}
+.i_span span.icon-market i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1416px 0px;
+}
+.i_span span.icon-svs i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1446px 0px;
+}
+.i_span span.icon-drugstore i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1477px 0px;
+}
+.i_span span.icon-cinema i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1537px 0px;
+}
+.i_span span.icon-recreation i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1506px 0px;
+}
+.i_span span.icon-sightspot i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1867px 0px;
+}
+.i_span span.icon-Fitness i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1570px 0px;
+}
+.i_span span.icon-tea i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1599px 0px;
+}
+.i_span span.icon-slotmachine i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1631px 0px;
+}
+.i_span span.icon-publicsecurity i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1663px 0px;
+}
+.i_span span.icon-projector i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1697px 0px;
+}
+.i_span span.icon-smoke i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1732px 0px;
+}
+.i_span span.icon-Cooking i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1763px 0px;
+}
+.i_span span.icon-dinetogether i{
+	background: url("../images/icons_detail_facility.png") no-repeat;
+ 	background-size: 2613px 30px;
+    background-position: -1793px 0px;
+}

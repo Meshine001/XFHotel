@@ -77,6 +77,7 @@
 								<p class="i_span">
 									<c:forEach items="${apartment.te_se}" var="f">
 										<span><i></i>${f}</span>
+										<!-- class写在 span上 -->
 									</c:forEach>
 								</p>
 
@@ -85,7 +86,7 @@
 								<div class="i_z">家居</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.jia_ju}" var="f">
-										<span>${f}</span>
+										<span ><i></i>${f}</span>
 									</c:forEach>
 								</p>
 
@@ -94,7 +95,7 @@
 								<div class="i_z">卫浴</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.wei_yu}" var="f">
-										<span>${f}</span>
+										<span><i></i>${f}</span>
 									</c:forEach>
 								</p>
 
@@ -103,7 +104,7 @@
 								<div class="i_z">餐厨</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.can_chu}" var="f">
-										<span>${f}</span>
+										<span><i></i>${f}</span>
 									</c:forEach>
 								</p>
 
@@ -112,7 +113,7 @@
 								<div class="i_z">配套</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.pei_tao}" var="f">
-										<span>${f}</span>
+										<span><i></i>${f}</span>
 									</c:forEach>
 								</p>
 
@@ -121,7 +122,7 @@
 								<div class="i_z">周边</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.zou_bian}" var="f">
-										<span>${f}</span>
+										<span><i></i>${f}</span>
 									</c:forEach>
 								</p>
 
@@ -130,7 +131,7 @@
 								<div class="i_z">其他</div>
 								<p class="i_span">
 									<c:forEach items="${apartment.qi_ta}" var="f">
-										<span>${f}</span>
+										<span><i></i>${f}</span>
 									</c:forEach>
 								</p>
 
