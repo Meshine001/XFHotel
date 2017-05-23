@@ -22,9 +22,9 @@ public interface LockService {
 	public JSONObject lockList(String version, String access_token, String s_id, int page_size, int current_page,
 			String node_no, String lock_code, String house_code, String roon_code);
 
-	public JSONObject lockdetails(String version, String access_token, String s_id, String lock_no);
+	public JSONObject lockDetails(String version, String access_token, String s_id, String lock_no);
 
-	public JSONObject pwdLost(String version, String access_token, String s_id, String lock_no, int pwd_no,
+	public JSONObject pwdList(String version, String access_token, String s_id, String lock_no, int pwd_no,
 			String pwd_user_mobile, String status);
 
 	public JSONObject pwdDynamicPwd(String version, String access_token, String s_id, String lock_no);

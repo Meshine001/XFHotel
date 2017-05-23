@@ -239,7 +239,7 @@ public class LockOperater implements LockService {
 	}
 
 	@Override
-	public JSONObject lockdetails(String version, String access_token, String s_id, String lock_no) {
+	public JSONObject lockDetails(String version, String access_token, String s_id, String lock_no) {
 		String url = baseUrl + "/lock/view";
 		JSONObject param = new JSONObject();
 		param.put("lock_no", lock_no);
@@ -247,12 +247,12 @@ public class LockOperater implements LockService {
 		return response;
 	}
 
-	public JSONObject lockdetails(String lock_no) {
-		return lockdetails("", "", "", lock_no);
+	public JSONObject lockDetails(String lock_no) {
+		return lockDetails("", "", "", lock_no);
 	}
 
 	@Override
-	public JSONObject pwdLost(String version, String access_token, String s_id, String lock_no, int pwd_no,
+	public JSONObject pwdList(String version, String access_token, String s_id, String lock_no, int pwd_no,
 			String pwd_user_mobile, String status) {
 		// TODO Auto-generated method stub
 		return null;
@@ -292,6 +292,6 @@ public class LockOperater implements LockService {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(getInstance().lockdetails("11.1.116.166"));
+		System.out.println(getInstance().lockDetails("11.1.116.166"));
 	}
 }
