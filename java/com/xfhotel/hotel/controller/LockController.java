@@ -25,38 +25,6 @@ public class LockController {
 	@Autowired
 	LockService lockService;
 	
-	@RequestMapping(value = "/addpassword", method = RequestMethod.POST)
-	public @ResponseBody String addPassword(String phone, String lock_no, String time_start, String time_end) {
-		Calendar start = Calendar.getInstance();
-		try {
-			start.setTime(new SimpleDateFormat("yyyyMMddHHmmss").parse(time_start));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Calendar end = Calendar.getInstance();
-		try {
-			end.setTime(new SimpleDateFormat("yyyyMMddHHmmss").parse(time_end));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Lock lock = new Lock();
-		lock.setPwd_user_mobile(phone);
-		lock.setLock_no(lock_no);
-		lock.setValid_time_end(end.getTimeInMillis());
-		lock.setValid_time_start(start.getTimeInMillis());
-		String ostr="";
-		try {
-			ostr = lockService.addPassword(lock);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			logger.info(e.toString());
-			e.printStackTrace();
-			return e.toString();
-		}
-		return ostr;
-	}
 	
 	@RequestMapping(value = "/changepassword", method = RequestMethod.POST)
 	public String changePassword(String phone, String lock_no, String password) {

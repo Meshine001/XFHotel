@@ -15,7 +15,7 @@ public class DES {
 	}
 
 	public static String encrypt(byte[] datasource){
-		byte[] desStr = encrypt(datasource,Constants.LOCK_DES_KEY);
+		byte[] desStr = encrypt(datasource,LockOperater.LOCK_DES_KEY);
 		StringBuilder stringBuilder = new StringBuilder();
 		if(desStr ==null || desStr.length<=0)
 			return null;
@@ -100,7 +100,7 @@ public class DES {
 
 		}
 		
-		return new String(decrypt(d,Constants.LOCK_DES_KEY),Charset.forName("UTF-8"));
+		return new String(decrypt(d,LockOperater.LOCK_DES_KEY),Charset.forName("UTF-8"));
 	}
 	private static byte charToByte(char c) {   
 		    return (byte) "0123456789ABCDEF".indexOf(c);   

@@ -2,12 +2,15 @@ package com.xfhotel.hotel.service.impl;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -142,10 +145,15 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	@Override
 	public List<Order> checkAvailable(Long id, String startTime, String endTime) {
-		String hql = "from Order where roomId = ? and (status =? or status=? or status=?) and (startTime >? and endTime <?)";
-		Object[] values = { id, Order.STATUS_ON_PAY, Order.STATUS_ON_LEASE,  Order.STATUS_ON_COMFIRM, (TimeUtil.getDateLong(startTime) - 1),
-				(TimeUtil.getDateLong(endTime) + 1) };
-		return orderDAO.getListByHQL(hql, values);
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria c = session.createCriteria(Order.class);
+		c.add(Restrictions.eq("roomId", id));
+		SimpleExpression[] or = {Restrictions.eq("status", Order.STATUS_ON_PAY),
+				Restrictions.eq("status", Order.STATUS_ON_LEASE),
+				Restrictions.eq("status", Order.STATUS_ON_COMFIRM)};
+		c.add(Restrictions.or(or));
+		c.add(Restrictions.between("startTime", (TimeUtil.getDateLong(startTime) - 1), (TimeUtil.getDateLong(endTime) + 1)));
+		return c.list();
 	}
 
 	@Override
@@ -169,7 +177,7 @@ public class OrderServiceImpl implements OrderService {
 		c.add(Restrictions.eq("cusId", cId));
 
 		if (type != 0) {// 不是 全部
-			c.add(Restrictions.eq("type", type));
+			c.add(Restrictions.eq("type", Apartment.getTypeDescription(type)));
 		}
 
 		switch (category) {
@@ -189,12 +197,12 @@ public class OrderServiceImpl implements OrderService {
 		for(Order o:list){
 			Long current = new Date().getTime();
 			Long die = o.getTime()+Constants.EFFECTIVE_ORDER_TIME_DURING;
-			if(die < current && o.getStatus() == Order.STATUS_ON_PAY){
+			if(die < current && o.getStatus() == Order.STATUS_ON_PAY ){
 				o.setStatus(Order.STATUS_TIME_OUT);
 				orderDAO.update(o);
 			}
-			
 		}
+		
 		return list;
 
 	}

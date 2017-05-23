@@ -30,7 +30,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Customer;
-import com.xfhotel.hotel.entity.Feature;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.FileService;
 import com.xfhotel.hotel.support.BlogUploadUtil;

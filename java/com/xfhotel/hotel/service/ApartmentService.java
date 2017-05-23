@@ -19,16 +19,16 @@ public interface ApartmentService extends BaseService<Apartment, Long> {
 	public Apartment add(String jing_du, String wei_du, String bd_wei_zhi, String xa_wei_zhi, String jie_dao,
 			String xiao_qu, String lou_hao, String dan_yuan, String lou_ceng, String zong_lou_ceng, String men_pai,
 			String suo_di_zhi, String cao_xiang, String mian_ji, String shi, String ting, String wei, String yang_tai,
-			String reng_shu, String chuang, String miao_su, String te_se, String jia_ju, String wei_yu, String can_chu,
-			String pei_tao, String zou_bian, String qi_ta, String pic1, String[] pic2, String[] pic3, String lei_xing,
+			String reng_shu, String chuang, String miao_su, String te_se,String te_se_class, String jia_ju,String jia_ju_class, String wei_yu,String wei_yu_class, String can_chu,String can_chu_class,
+			String pei_tao,String pei_tao_class, String zou_bian,String zou_bian_class, String qi_ta, String qi_ta_class,String pic1, String[] pic2, String[] pic3, String lei_xing,
 			String jia_ge);
 
-	public Apartment update(Long id, String jing_du, String wei_du, String bd_wei_zhi, String xa_wei_zhi,
-			String jie_dao, String xiao_qu, String lou_hao, String dan_yuan, String lou_ceng, String zong_lou_ceng,
-			String men_pai, String suo_di_zhi, String cao_xiang, String mian_ji, String shi, String ting, String wei,
-			String yang_tai, String reng_shu, String chuang, String miao_su, String te_se, String jia_ju, String wei_yu,
-			String can_chu, String pei_tao, String zou_bian, String qi_ta, String pic1, String[] pic2, String[] pic3,
-			String lei_xing, String jia_ge);
+	public Apartment update(Long id,String jing_du, String wei_du, String bd_wei_zhi, String xa_wei_zhi, String jie_dao,
+			String xiao_qu, String lou_hao, String dan_yuan, String lou_ceng, String zong_lou_ceng, String men_pai,
+			String suo_di_zhi, String cao_xiang, String mian_ji, String shi, String ting, String wei, String yang_tai,
+			String reng_shu, String chuang, String miao_su, String te_se,String te_se_class, String jia_ju,String jia_ju_class, String wei_yu,String wei_yu_class, String can_chu,String can_chu_class,
+			String pei_tao,String pei_tao_class, String zou_bian,String zou_bian_class, String qi_ta, String qi_ta_class,String pic1, String[] pic2, String[] pic3, String lei_xing,
+			String jia_ge);
 
 	public JSONArray getHomeApartments();
 

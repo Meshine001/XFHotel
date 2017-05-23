@@ -29,10 +29,10 @@ import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
-import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
 import com.xfhotel.hotel.support.TimeUtil;
+import com.xfhotel.hotel.support.lock.LockOperater;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 
 @Controller
@@ -43,8 +43,7 @@ public class MessageController {
 	LockService lockService;
 	@Autowired
 	OrderService orderService;
-	@Autowired
-	RoomService roomService;
+
 	@Autowired
 	ApartmentService apartmentService;
 
@@ -64,13 +63,13 @@ public class MessageController {
 		Integer pwd_no = (Integer) map.get("pwd_no");
 		String pwd_user_mobile = (String) map.get("pwd_user_mobile");
 		String event = (String) map.get("event");
-		String str = Constants.LOCK_DES_KEY + factor + Constants.LOCK_ACCOUNT;
+		String str = LockOperater.LOCK_DES_KEY + factor + LockOperater.LOCK_ACCOUNT;
 		MessageDigest md;
 		try {
 			md = MessageDigest.getInstance("MD5");
 			md.update(str.getBytes());
 			str = new BigInteger(1, md.digest()).toString(16);
-			if (str.equals(validate_code) || 1 == 1) {
+			if (str.equals(validate_code)) {
 				if (event.equals("PUSH_LOCK_SET_PWD_SUCCESS")) {
 					lockSuccess(business_id, lock_no, pwd_no, pwd_user_mobile);
 				} else if (event.equals("PUSH_LOCK_SET_PWD_FAIL")) {

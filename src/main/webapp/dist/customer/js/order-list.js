@@ -9,7 +9,7 @@
             var main = $('<div></div>').addClass('mainorder-main').appendTo(mainorder); 
             var tr = $('<tr></tr>').appendTo($('<tbody></tbody>').appendTo($('<table></table>').addClass('order-bd clearfix').appendTo(main)));
             var product = $('<div></div>').addClass('hotel-order product-fist clearfix').appendTo($('<td></td>').addClass('product').appendTo(tr));
-            $('<img/>').attr('src','../images/'+item.apartment.pic2[0]).appendTo($('<p/>').addClass('hotel-pic').appendTo(product));
+            $('<img/>').attr('src','../images/'+item.apartment.pic_show[0]).appendTo($('<p/>').addClass('hotel-pic').appendTo(product));
             var allTitle = $('<dl/>').addClass('all-title').appendTo(product);
             $('<dt/>').text(item.description).appendTo(allTitle);
             $('<dt/>').appendTo(allTitle);
@@ -57,6 +57,7 @@
                     alert("连接异常！");
                 },
                 success : function(data) {
+                	console.log(data);
                     $('.order-list').empty();
                     if (data.statusCode == 0) {
                         

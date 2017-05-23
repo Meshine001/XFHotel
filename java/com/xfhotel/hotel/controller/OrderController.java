@@ -27,12 +27,10 @@ import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Price;
-import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
-import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
@@ -49,8 +47,6 @@ public class OrderController {
 
 	@Autowired
 	OrderService orderservice;
-	@Autowired
-	RoomService roomService;
 	@Autowired
 	ApartmentService apartmentService;
 	@Autowired
@@ -253,14 +249,12 @@ public class OrderController {
 				// 发送门锁密码
 				Long roomId = o.getRoomId();
 				String lock_no = apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
-				String result = lockService.addPassword(o.getCusTel(), lock_no,
-						DateUtil.format(new Date(o.getStartTime()), "yyyyMMddhhmmss"),
-						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddhhmmss"));
-				if(result.equals("success")){
+				Message result = lockService.addPassword(o.getCusTel(), lock_no, ""+o.getStartTime(), ""+o.getEndTime());
+				if(result.getStatusCode() == Constants.MESSAGE_SUCCESS_CODE){
 					o.setStatus(Order.STATUS_ON_LEASE);
 					orderservice.update(o);
 				}else{
-					return new Message(Constants.MESSAGE_ERR_CODE, result);
+					return result;
 				}
 				
 			} catch (Exception e) {
@@ -307,7 +301,9 @@ public class OrderController {
 			List<Map> maps = new ArrayList<Map>();
 			for (Order o : orders) {
 				JSONObject apartment = apartmentService.getApartmentById(o.getRoomId());
-				maps.add(apartment);
+				Map<String, Object> info = o.toMap();
+				info.put("apartment", apartment);
+				maps.add(info);
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {
@@ -388,10 +384,6 @@ public class OrderController {
 			session.setAttribute("err", "支付超时");
 			return "/customer/err";
 		}
-
-		Room room = roomService.findById(order.getRoomId());
-		room.setStatus(Room.STATUS_LEASED);
-		roomService.update(room);
 
 		return "/customer/success";
 	}

@@ -28,8 +28,6 @@ import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
-import com.xfhotel.hotel.service.FacilityService;
-import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
@@ -51,10 +49,6 @@ public class AdminController {
 	@Autowired
 	CouponService couponService;
 
-	@Autowired
-	FeatureService featureService;
-	@Autowired
-	FacilityService facilityService;
 	@Autowired
 	OrderService orderservice;
 	@Autowired
@@ -105,8 +99,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/system", method = RequestMethod.GET)
 	public String systemPage() {
-		session.setAttribute("features", featureService.listFeatures());
-		session.setAttribute("facilities", facilityService.listFacilities());
+		
 		return "/admin/system";
 	}
 

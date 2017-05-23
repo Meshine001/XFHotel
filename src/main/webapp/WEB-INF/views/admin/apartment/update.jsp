@@ -229,7 +229,7 @@
 								</textarea>-->
 								<div class="informers">
 								  <input type="text" class="form-control" placeholder="可选的特色" name="te_se" value="${te_se}">
-								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <input type="text" class="form-control-class" placeholder=""  value="${te_se_class}" name="te_se_class" style="display:none">
 								  <div class="checkBox">
 								  		<ul>
 								  			<li data-icon="icon-smartlock">智能门锁<span></span></li>
@@ -252,8 +252,8 @@
 								${jia_ju}
 								</textarea>-->
 								<div class="informers">
-								  <input type="text" class="form-control" placeholder="可选的家居" name="te_se" value="${jia_ju}">
-								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <input type="text" class="form-control" placeholder="可选的家居" name="jia_ju" value="${jia_ju}">
+								  <input type="text" class="form-control-class" placeholder="" name="jia_ju_class" style="display:none" value="${jia_ju_class}">
 								  <div class="checkBox">
 								  		<ul>
 								  			<li data-icon="icon-wifi">无线网<span></span></li>
@@ -277,8 +277,8 @@
 									${wei_yu}
 								</textarea>-->
 								<div class="informers">
-								  <input type="text" class="form-control" placeholder="可选的卫浴" name="te_se" value="${wei_yu}">
-								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <input type="text" class="form-control" placeholder="可选的卫浴" name="wei_yu" value="${wei_yu}">
+								  <input type="text" class="form-control-class" placeholder="" name="wei_yu_class" style="display:none" value="${wei_yu_class}">
 								  <div class="checkBox">
 								  		<ul>
 								  			<li data-icon="icon-hairandbodylotion">淋浴<span></span></li>
@@ -302,8 +302,8 @@
 									${can_chu}
 								</textarea>-->
 								<div class="informers">
-								  <input type="text" class="form-control" placeholder="可选的餐厨" name="te_se" value="${can_chu}">
-								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <input type="text" class="form-control" placeholder="可选的餐厨" name="can_chu" value="${can_chu}">
+								  <input type="text" class="form-control-class" placeholder="" name="can_chu_class" style="display:none" value="${can_chu_class}">
 								  <div class="checkBox">
 								  		<ul>								  
 								  			<li data-icon="icon-cookingpots">烹饪锅具<span></span></li>
@@ -324,8 +324,8 @@
 									${pei_tao}
 								</textarea>-->
 								<div class="informers">
-								  <input type="text" class="form-control" placeholder="可选的配套" name="te_se" value="${pei_tao}">
-								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <input type="text" class="form-control" placeholder="可选的配套" name="pei_tao" value="${pei_tao}">
+								  <input type="text" class="form-control-class" placeholder="" name="pei_tao_class" style="display:none" value="${pei_tao_class}">
 								  <div class="checkBox">
 								  		<ul>
 								  			<li data-icon="icon-accesscontrol">楼宇门禁<span></span></li>
@@ -346,8 +346,8 @@
 									${zou_bian}
 								</textarea>-->
 								<div class="informers">
-								  <input type="text" class="form-control" placeholder="周边" name="te_se" value="${zou_bian}">
-								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <input type="text" class="form-control" placeholder="周边" name="zhou_bian" value="${zhou_bian}">
+								  <input type="text" class="form-control-class" placeholder="" name="zhou_bian_class" style="display:none" value="${zhou_bian_class}">
 								  <div class="checkBox">
 								  		<ul>
 								  			<li data-icon="icon-metro">地铁<span></span></li>
@@ -377,8 +377,8 @@
 									${qi_ta}
 								</textarea>-->
 								<div class="informers">
-								  <input type="text" class="form-control" placeholder="其他" name="te_se" value="${qi_ta}">
-								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <input type="text" class="form-control" placeholder="其他" name="qi_ta" value="${qi_ta}">
+								  <input type="text" class="form-control-class" placeholder="" name="qi_ta_class" style="display:none" value="${qi_ta_class}">
 								  <div class="checkBox">
 								  		<ul>
 								  			<li data-icon="icon-Cooking">可做饭<span></span></li>

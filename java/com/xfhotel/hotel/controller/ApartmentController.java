@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.service.ApartmentService;
-import com.xfhotel.hotel.service.FacilityService;
-import com.xfhotel.hotel.service.FeatureService;
 import com.xfhotel.hotel.service.FileService;
-import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.support.TimeUtil;
 
 import net.sf.json.JSONArray;
@@ -27,12 +24,7 @@ public class ApartmentController {
 
 	@Autowired
 	ApartmentService apartmentService;
-	@Autowired
-	FacilityService facilityService;
-	@Autowired
-	RoomService roomService;
-	@Autowired
-	FeatureService featureService;
+
 
 	@Autowired
 	FileService fileService;
@@ -100,14 +92,11 @@ public class ApartmentController {
 	public String add(String jing_du, String wei_du, String bd_wei_zhi, String xa_wei_zhi, String jie_dao,
 			String xiao_qu, String lou_hao, String dan_yuan, String lou_ceng, String zong_lou_ceng, String men_pai,
 			String suo_di_zhi, String cao_xiang, String mian_ji, String shi, String ting, String wei, String yang_tai,
-			String reng_shu, String chuang, String miao_su, String te_se, String jia_ju, String wei_yu, String can_chu,
-			String pei_tao, String zou_bian, String qi_ta, String pic1, String[] pic2, String[] pic3, String lei_xing,
+			String reng_shu, String chuang, String miao_su, String te_se,String te_se_class, String jia_ju,String jia_ju_class, String wei_yu,String wei_yu_class, String can_chu,String can_chu_class,
+			String pei_tao,String pei_tao_class, String zhou_bian,String zhou_bian_class, String qi_ta, String qi_ta_class,String pic1, String[] pic2, String[] pic3, String lei_xing,
 			String jia_ge) {
-
-		Apartment apartment = apartmentService.add(jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao,
-				dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai,
-				reng_shu, chuang, miao_su, te_se, jia_ju, wei_yu, can_chu, pei_tao, zou_bian, qi_ta, pic1, pic2, pic3,
-				lei_xing, jia_ge);
+		
+		Apartment apartment = apartmentService.add(jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, te_se_class, jia_ju, jia_ju_class, wei_yu, wei_yu_class, can_chu, can_chu_class, pei_tao, pei_tao_class, zhou_bian, zhou_bian_class, qi_ta, qi_ta_class, pic1, pic2, pic3, lei_xing, jia_ge);
 		
 		return "redirect:/admin/apartment/update/" + apartment.getId();
 	};
@@ -140,15 +129,14 @@ public class ApartmentController {
 	
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable("id") Long id, String jing_du, String wei_du, String bd_wei_zhi, String xa_wei_zhi, String jie_dao,
+	public String update(@PathVariable("id") Long id,String jing_du, String wei_du, String bd_wei_zhi, String xa_wei_zhi, String jie_dao,
 			String xiao_qu, String lou_hao, String dan_yuan, String lou_ceng, String zong_lou_ceng, String men_pai,
 			String suo_di_zhi, String cao_xiang, String mian_ji, String shi, String ting, String wei, String yang_tai,
-			String reng_shu, String chuang, String miao_su, String te_se, String jia_ju, String wei_yu, String can_chu,
-			String pei_tao, String zou_bian, String qi_ta, String pic1, String[] pic2, String[] pic3, String lei_xing,
+			String reng_shu, String chuang, String miao_su, String te_se,String te_se_class, String jia_ju,String jia_ju_class, String wei_yu,String wei_yu_class, String can_chu,String can_chu_class,
+			String pei_tao,String pei_tao_class, String zhou_bian,String zhou_bian_class, String qi_ta, String qi_ta_class,String pic1, String[] pic2, String[] pic3, String lei_xing,
 			String jia_ge) {
 
-    	Apartment apartment = apartmentService.update(id, jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, jia_ju, wei_yu, can_chu, pei_tao, zou_bian, qi_ta, pic1, pic2, pic3, lei_xing, jia_ge);
-
+    	Apartment apartment = apartmentService.update(id, jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, te_se_class, jia_ju, jia_ju_class, wei_yu, wei_yu_class, can_chu, can_chu_class, pei_tao, pei_tao_class, zhou_bian, zhou_bian_class, qi_ta, qi_ta_class, pic1, pic2, pic3, lei_xing, jia_ge);
 		return "redirect:/admin/apartment/update/" + apartment.getId();
 	}
 
@@ -171,8 +159,16 @@ public class ApartmentController {
 		session.setAttribute("wei_yu", formatJSONArrayString(apartment.getWei_yu()));
 		session.setAttribute("can_chu", formatJSONArrayString(apartment.getCan_chu()));
 		session.setAttribute("pei_tao", formatJSONArrayString(apartment.getPei_tao()));
-		session.setAttribute("zou_bian", formatJSONArrayString(apartment.getZou_bian()));
+		session.setAttribute("zhou_bian", formatJSONArrayString(apartment.getZou_bian()));
 		session.setAttribute("qi_ta", formatJSONArrayString(apartment.getQi_ta()));
+		
+		session.setAttribute("te_se_class", formatJSONArrayString(apartment.getTe_se_class()));
+		session.setAttribute("jia_ju_class", formatJSONArrayString(apartment.getJia_ju_class()));
+		session.setAttribute("wei_yu_class", formatJSONArrayString(apartment.getWei_yu_class()));
+		session.setAttribute("can_chu_class", formatJSONArrayString(apartment.getCan_chu_class()));
+		session.setAttribute("pei_tao_class", formatJSONArrayString(apartment.getPei_tao_class()));
+		session.setAttribute("zhou_bian_class", formatJSONArrayString(apartment.getZou_bian_class()));
+		session.setAttribute("qi_ta_class", formatJSONArrayString(apartment.getQi_ta_class()));
 		
 		return "/admin/apartment/update";
 	}
@@ -187,7 +183,6 @@ public class ApartmentController {
 
 	@RequestMapping(value = "/price/set", method = RequestMethod.POST)
 	public String priceSet(Long apartmentId, String date, String price) {
-		Apartment apartment = apartmentService.findById(apartmentId);
 		Price sp = apartmentService.getSpPrice(apartmentId, TimeUtil.getDateLong(date));
 		if (sp != null) {
 			sp.setPrice(Double.valueOf(price));

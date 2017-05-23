@@ -2,12 +2,8 @@ package com.xfhotel.hotel.controller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,24 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.JsonArray;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
-import com.xfhotel.hotel.entity.Banner;
 import com.xfhotel.hotel.entity.Blog;
-import com.xfhotel.hotel.entity.Feature;
-import com.xfhotel.hotel.entity.Order;
-import com.xfhotel.hotel.entity.Price;
-import com.xfhotel.hotel.entity.Room;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CommentService;
-import com.xfhotel.hotel.service.FeatureService;
-import com.xfhotel.hotel.service.OrderService;
-import com.xfhotel.hotel.service.RoomService;
 import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.Area;
-import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
 import com.xfhotel.hotel.support.LeasePrice;
 import com.xfhotel.hotel.support.LeaseType;
@@ -48,7 +34,6 @@ import com.xfhotel.hotel.support.RoomStatus;
 import com.xfhotel.hotel.support.SearchForm;
 import com.xfhotel.hotel.support.TimeUtil;
 
-import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 

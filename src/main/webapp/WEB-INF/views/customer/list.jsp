@@ -160,7 +160,7 @@
 						</dt>
 					</dl>
 					<!--因此处的选中样式与其它不一样，此处的选中样<span class="srh_all_no">，全部的选中是统一的。-->
-					<dl class="srh_list">
+					<dl class="srh_list" style="display: none;">
 						<dd>特色：</dd>
 						<dt>
 							<ul id="features_ul">
@@ -234,49 +234,49 @@
 					<div class="list_box">
 						<dl class="b_dl">
 							<dd>
-								<a href="info/${apartment.rooms[0].id}"
-									title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
+								<a href="info/${apartment.id}"
+									title="${apartment.position.xa_wei_zhi}-${apartment.position.xiao_qu}-${apartment.basic_info.cao_xiang}朝向"
 									target="_blank"><img class="readyload"
-									src="<%=basePath%>/images/${apartment.pic2[0]}" width="450"
+									src="<%=basePath%>/images/${apartment.fang_jian_tu[0]}" width="450"
 									height="276" style="display: inline;"></a>
 								<!---->
 							</dd>
 							<dt>
 								<div class="b_list_tit" style="margin-top: 15px;">
 									<span
-										title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
+										title="${apartment.position.xa_wei_zhi}-${apartment.position.xiao_qu}-${apartment.basic_info.cao_xiang}朝向"
 										class="duibi" style="display: none;"><i></i>加入对比</span><span
 										class="shoucang" style="display: none; cursor: pointer;"><i></i>加入收藏</span>
 									<h3 >
-										<a href="<%=basePath%>/info/${apartment.rooms[0].id}"
-											title="${apartment.community}-${apartment.address_square}-${apartment.direction}朝向"
-											target="_blank" rel="nofollow">${apartment.community}-${apartment.address_square}-${apartment.direction}朝向</a>
+										<a href="<%=basePath%>/info/${apartment.id}"
+											title="${apartment.position.xiao_qu}-${apartment.address_square}-${apartment.direction}朝向"
+											target="_blank" rel="nofollow">${apartment.position.xa_wei_zhi}-${apartment.position.xiao_qu}-${apartment.basic_info.cao_xiang}朝向</a>
 									</h3>
 								</div>
 								<div class="b_txt">
-									<p>类型：${apartment.apartmenttype}&nbsp;&nbsp;&nbsp;&nbsp;</p>
-									<p>面积：${apartment.square}㎡&nbsp;&nbsp;朝向：${apartment.direction}</p>
+									<p>类型：${apartment.basic_info.lei_xing}&nbsp;&nbsp;&nbsp;&nbsp;</p>
+									<p>面积：${apartment.basic_info.mian_ji}㎡&nbsp;&nbsp;朝向：${apartment.basic_info.cao_xiang}</p>
 									<p>
-										地址：${apartment.location}${apartment.address}<a class="f_map"
-											data-longitude="${apartment.longitude}"
-											data-latitude="${apartment.latitude}"
+										地址：${apartment.position.bd_wei_zhi}-${apartment.position.jie_dao}<a class="f_map"
+											data-longitude="${apartment.position.jing_du}"
+											data-latitude="${apartment.position.wei_du}"
 											href="javascript:void(0);" title=""><i></i></a>
 									</p>
-									<ul>
+									<ul style="display: none;">
 										<c:forEach items="${apartment.facilityEntity}" var="f">
 											<li>${f.description}</li>
 										</c:forEach>
 									</ul>
 									<div class="money">
-										<em>${apartment.dayPrice}</em>元/天
+										<em>${apartment.basic_info.jia_ge}</em>元/天
 									</div>
 								</div>
 								<div class="jieshao">
-									<a href="info/${apartment.rooms[0].id}"
-										title="${apartment.community}-${apartment.num_building}-${apartment.direction}朝向-${apartment.num_door}房间"
+									<a href="info/${apartment.id}"
+										title="${apartment.position.xiao_qu}-${apartment.position.lou_hao}-${apartment.basic_info.cao_xiang}朝向"
 										target="_blank" rel="nofollow"> <i class="quotes"></i> <i
 										class="quotes1"></i> <span
-										title="${apartment.rooms[0].descriptionPersonal}">[房间特色]<br>${apartment.rooms[0].descriptionPersonal}
+										title="${apartment.description}">[房间特色]<br>${apartment.description}
 									</span></a>
 								</div>
 							</dt>

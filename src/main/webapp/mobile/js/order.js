@@ -200,7 +200,7 @@ function addpartenr(){
         var frontURL=Constant.URL+'/mobile/modulePost';
         var postData={
             "roomId":_id,//房屋ID
-            "cusId":2,//用户ID
+            "cusId":_uid,//用户ID
             "startTime":_startTime,//入住时间
             "endTime":_endTime,//离开时间
             "totalDay":_oTotalDay,//总天数
