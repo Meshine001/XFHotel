@@ -29,19 +29,18 @@ public class LockOperater implements LockService {
 
 	public final static int POST_TYPE_NEED_HEADER = 1;
 	public final static int POST_TYPE_NO_HEADER = 0;
-	
+
 	public static final String LOCK_TEST_BASE_URL = "http://test.ops.huohetech.com:80";
 	public static final String LOCK_BASE_URL = "http://ops.huohetech.com:80";
-	
+
 	public static final String LOCK_DES_KEY = "5DD319E4";
 	public static final String LOCK_ACCOUNT = "13072983237";
 	public static final String LOCK_PASSWORD = "yiyun3237";
-	
+
 	public static final String LOCK_MSG_SUCCESS = "HH0000";
 	public static final String LOCK_MSG_TOKEN_OUT_OF_DATE = "OPS04110";
 	public static final String LOCK_MSG_TOKEN_INVALIDATE = "OPS04100";
 	public static final String LOCK_MSG_TOKEN_NOT_EXIST = "OPS00003";
-	
 
 	public static String ACCESS_TOKEN = "";
 
@@ -58,28 +57,28 @@ public class LockOperater implements LockService {
 	private static LockOperater instance = null;
 
 	public static LockOperater getInstance() {
-		if (instance == null) {
-			synchronized (LockOperater.class) {
-				if (instance == null){
-					instance = new LockOperater();
-				}
-					
+		
+		synchronized (LockOperater.class) {
+			if (instance == null) {
+				instance = new LockOperater();
 			}
+
 		}
+
 		return instance;
 	}
-	
+
 	@SuppressWarnings("static-access")
-	public LockOperater(){
-				
+	public LockOperater() {
+
 		JSONObject result = login("", "", LOCK_ACCOUNT, LOCK_PASSWORD);
-		
-		System.out.println("新建单例："+result.getString("rlt_msg"));
-		
-		if(result.getString("rlt_code").equals(LOCK_MSG_SUCCESS)){
+
+		System.out.println("新建单例：" + result.getString("rlt_msg"));
+
+		if (result.getString("rlt_code").equals(LOCK_MSG_SUCCESS)) {
 			this.ACCESS_TOKEN = result.getJSONObject("data").getString("access_token");
-		}else{
-			
+		} else {
+
 		}
 	}
 
@@ -138,12 +137,6 @@ public class LockOperater implements LockService {
 		return JSONObject.fromObject(result);
 	}
 
-	
-
-	
-
-
-
 	@Override
 	public JSONObject login(String version, String s_id, String account, String password) {
 		String url = baseUrl + "/login";
@@ -153,15 +146,12 @@ public class LockOperater implements LockService {
 		JSONObject response = sendPost(url, param, POST_TYPE_NO_HEADER);
 		return response;
 	}
-	
-	
 
 	@Override
 	public JSONObject pwdAdd(String version, String access_token, String s_id, String lock_no, String pwd_text,
 			String valid_time_start, String valid_time_end, String pwd_user_name, String pwd_user_mobile,
 			String pwd_user_idcard, String description, String extra) {
-		
-		
+
 		return null;
 	}
 
@@ -256,9 +246,9 @@ public class LockOperater implements LockService {
 		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
 		return response;
 	}
-	
-	public JSONObject lockdetails(String lock_no){
-		return lockdetails("", "","", lock_no);
+
+	public JSONObject lockdetails(String lock_no) {
+		return lockdetails("", "", "", lock_no);
 	}
 
 	@Override
@@ -300,6 +290,7 @@ public class LockOperater implements LockService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	public static void main(String[] args) {
 		System.out.println(getInstance().lockdetails("11.1.116.166"));
 	}
