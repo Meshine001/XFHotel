@@ -172,7 +172,6 @@ public class AdminController {
 		System.out.println(type);
 		try {
 			List<Long> list = Arrays.asList(Id);
-			System.out.println();
 			for(Long uId : list){
 				Coupon coupon = new Coupon();
 				coupon.setcValue(cValue);
@@ -204,12 +203,14 @@ public class AdminController {
 				}
 			}else if(sex!=null){
 				List<CustomerDetails> cd = customerService.getlist();
+				
 				for(CustomerDetails customer2 : cd){
-					if(customer2.getSex().equals(sex)){
-						System.out.println("dsds");
-						Customer customer=  customerService.getCustomer(customer2.getId());
-						map.put(customer.getTel(), customer);	
-						
+					if(customer2.getSex()!=null){
+						if(customer2.getSex().equals(sex)){
+							System.out.println("dsds");
+							Customer customer=  customerService.getCustomer(customer2.getId());
+							map.put(customer.getTel(), customer);	
+						}
 					}
 				}
 			}else if(time!=null){

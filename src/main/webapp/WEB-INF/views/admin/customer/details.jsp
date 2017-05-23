@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>title-青舍都市公寓-西安租房_西安合租</title>
+<title>title-333青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
 </head>
 <body>
@@ -34,7 +34,7 @@
 				</div>
 				<div class="form-group">
 					<label>性别</label> <input class="form-control" name="sex" id="men"
-						value="男" readonly="readonly" checked="checked">
+						value="${c.details.sex}" readonly="readonly" checked="checked">
 				</div>
 				<div class="form-group" style="display: none;">
 					<label>生日</label> <input class="form-control" name="birthday"
@@ -55,7 +55,7 @@
 		<div class="col-md-6">
 			<div id="crop-avatar" class="col-md-6">
 				<div class="avatar-view" title="" data-original-title="修改头像">
-					<img src="<%=basePath %>/images/${c.details.avatar}" alt="">
+					<img style="width:300px;margin-left:60px" src="<%=basePath %>/images/${c.details.avatar}" alt="">
 				</div>
 			</div>
 		</div>

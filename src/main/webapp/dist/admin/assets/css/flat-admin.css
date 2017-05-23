@@ -8520,3 +8520,76 @@ footer.app-footer .footer-copyright {
   	   margin-left:0px;
    }
 }
+
+
+a:hover{text-decoration: none;}
+*{list-style:none}
+/*复选组建*/
+.informers{
+	width:100%;
+	height:auto;
+	border:none;
+/*	border:1px solid #66afe9;
+	height:300px;
+*/
+	position:realtive;
+}
+.informers input{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.informers .confirm{
+	display:block;
+	width:60px;
+	height:30px;
+	text-align:center;
+	line-height:30px;
+	border:1px solid #009688;
+	color:#fff;
+	position: absolute;
+    bottom: 6px;
+    right: 17px;
+    background:#009688;
+    border-radius:3px;
+    display:none;
+}
+.informers .confirm:hover{
+	background:#067937;
+	text-decoration: none;
+}
+.informers .checkBox{
+	width:100%;
+	height:200px;
+	display:none;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+.informers .checkBox ul{margin:0;padding:0;}
+.informers .checkBox ul li{
+	width:22.6%;
+	heigth:30px;
+	line-height:30px;
+	float:left;
+	border:1px solid #ccc;
+	padding-left:4px;
+	margin:6px;
+	position:relative;
+	cursor: pointer;
+}
+.informers .checkBox ul li span{
+    width: 16px;
+    height: 8px;
+    position: absolute;
+    top: 6px;
+    right: 4px;
+    border: 1px solid #067937;
+    border-width: 0px 0px 2px 3px;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    display:none;
+}
+.informers .checkBox ul li.actives{border-color:#067937;}
+.informers .checkBox ul li.actives sapn{display: block}

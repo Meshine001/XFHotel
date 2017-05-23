@@ -185,50 +185,141 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">特色</label>
 							<div class="col-md-9">
-								<textarea name="te_se" class="form-control"
-									placeholder="如：智能门锁，自动售货机，遥控窗帘等；用中文输入法“，”分隔"></textarea>
+								<div class="informers">
+								  <input type="text" class="form-control" placeholder="可选的特色" name="te_se" >
+								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <div class="checkBox">
+								  		<ul>
+								  			<li data-icon="icon-smartlock">智能门锁<span></span></li>
+								  			<li data-icon="icon-projector">投影电视<span></span></li>
+								  			<li data-icon="icon-Fitness">健身器材<span></span></li>
+								  			<li data-icon="icon-mahjong">麻将桌<span></span></li>
+								  			<li data-icon="icon-tea">茶桌<span></span></li>
+								  			
+								  		</ul>
+								  </div>
+								  <p><a href="javascript:;" class="confirm">确定</a></p>
+								</div>  
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">家居</label>
 							<div class="col-md-9">
-								<textarea name="jia_ju" class="form-control"
-									placeholder="如：无线网络，电视，冰箱等；用中文输入法“，”分隔"></textarea>
+								<div class="informers">
+								  <input type="text" class="form-control" placeholder="可选的家居" name="te_se">
+								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <div class="checkBox">
+								  		<ul>
+								  			<li data-icon="icon-wifi">无线网<span></span></li>
+								  			<li data-icon="icon-tv">电视<span></span></li>
+								  			<li data-icon="icon-icebox">冰箱<span></span></li>
+								  			<li data-icon="icon-airconditioner">空调<span></span></li>
+								  			<li data-icon="icon-washingmachine">洗衣机<span></span></li>
+								  			<li data-icon="icon-hatwort">热水器<span></span></li>
+								  		</ul>
+								  </div>
+								  <p><a href="javascript:;" class="confirm">确定</a></p>
+								</div>  
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">卫浴</label>
 							<div class="col-md-9">
-								<textarea name="wei_yu" class="form-control"
-									placeholder="如：淋浴，毛巾，浴巾等；用中文输入法“，”分隔"></textarea>
+								<div class="informers">
+								  <input type="text" class="form-control" placeholder="可选的卫浴" name="te_se">
+								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <div class="checkBox">
+								  		<ul>
+								  			<li data-icon="icon-hairandbodylotion">淋浴<span></span></li>
+								  			<li data-icon="icon-towel">毛巾<span></span></li>
+								  			<li data-icon="icon-slipper">拖鞋<span></span></li>
+								  			<li data-icon="icon-liquidshampoo">洗发露<span></span></li>
+								  			<li data-icon="icon-toiletthings">牙具<span></span></li>
+								  			<li data-icon="icon-tissues">卫生纸<span></span></li>
+								  			<li data-icon="icon-hairdryer">电吹风<span></span></li>
+								  		</ul>
+								  </div>
+								  <p><a href="javascript:;" class="confirm">确定</a></p>
+								</div>  
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">餐厨</label>
 							<div class="col-md-9">
-								<textarea name="can_chu" class="form-control"
-									placeholder="如：燃气灶，烹饪锅具，刀具案板等；用中文输入法“，”分隔"></textarea>
+								<div class="informers">
+								  <input type="text" class="form-control" placeholder="可选的餐厨" name="te_se">
+								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <div class="checkBox">
+								  		<ul>								  
+								  			<li data-icon="icon-cookingpots">烹饪锅具<span></span></li>
+								  			<li data-icon="icon-atableware">餐具<span></span></li>
+								  			<li data-icon="icon-electriccooker">电饭煲<span></span></li>
+								  			<li data-icon="icon-wbl">微波炉<span></span></li>
+								  		</ul>
+								  </div>
+								  <p><a href="javascript:;" class="confirm">确定</a></p>
+								</div>  
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">配套</label>
 							<div class="col-md-9">
-								<textarea name="pei_tao" class="form-control"
-									placeholder="如：楼宇门禁，小区保安，停车位等；用中文输入法“，”分隔"></textarea>
+								<div class="informers">
+								  <input type="text" class="form-control" placeholder="可选的配套" name="te_se">
+								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <div class="checkBox">
+								  		<ul>
+								  			<li data-icon="icon-accesscontrol">楼宇门禁<span></span></li>
+								  			<li data-icon="icon-publicsecurity">小区保安<span></span></li>
+								  			<li data-icon="icon-elevator">电梯<span></span></li>
+								  			<li data-icon="icon-heating">市政暖气<span></span></li>
+								  		</ul>
+								  </div>
+								  <p><a href="javascript:;" class="confirm">确定</a></p>
+								</div>  
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">周边</label>
 							<div class="col-md-9">
-								<textarea name="zou_bian" class="form-control"
-									placeholder="如：地铁，公交站，餐馆等；用中文输入法“，”分隔"></textarea>
+								<div class="informers">
+								  <input type="text" class="form-control" placeholder="周边" name="te_se">
+								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <div class="checkBox">
+								  		<ul>
+								  			<li data-icon="icon-metro">地铁<span></span></li>
+								  			<li data-icon="icon-BUS">公交站<span></span></li>
+								  			<li data-icon="icon-restaurant">餐馆<span></span></li>
+								  			<li data-icon="icon-market">商场<span></span></li>
+								  			<li data-icon="icon-bank">银行<span></span></li>
+								  			<li data-icon="icon-svs">便利店<span></span></li>
+								  			<li data-icon="icon-infirmary">医院<span></span></li>
+								  			<li data-icon="icon-drugstore">药店<span></span></li>
+								  			<li data-icon="icon-cinema">电影院<span></span></li>
+								  			<li data-icon="icon-KTV">KTV<span></span></li>
+								  			<li data-icon="icon-recreation">娱乐场所<span></span></li>
+								  			<li data-icon="icon-sightspot">景点<span></span></li>
+								  		</ul>
+								  </div>
+								  <p><a href="javascript:;" class="confirm">确定</a></p>
+								</div>  
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">其他</label>
 							<div class="col-md-9">
-								<textarea name="qi_ta" class="form-control"
-									placeholder="如：可做饭，可吸烟，可聚会等；用中文输入法“，”分隔"></textarea>
+								<div class="informers">
+								  <input type="text" class="form-control" placeholder="其他" name="te_se">
+								  <input type="text" class="form-control-class" placeholder="" name="te_se_class" style="display:none">
+								  <div class="checkBox">
+								  		<ul>
+								  			<li data-icon="icon-Cooking">可做饭<span></span></li>
+								  			<li data-icon="icon-smoke">可吸烟<span></span></li>
+								  			<li data-icon="icon-dinetogether">可聚会<span></span></li>
+								  		</ul>
+								  </div>
+								  <p><a href="javascript:;" class="confirm">确定</a></p>
+								</div>  
 							</div>
 						</div>
 
@@ -322,7 +413,7 @@
 				</div>
 			</div>
 			<script type="text/javascript">
-				$('.btn-submit').click(function() {
+				$('.btn-submit').click(function(){
 					$('.form-add-apartment').submit();
 				});
 			</script>
@@ -342,6 +433,8 @@
 	<my_script> <script
 		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
 		type="text/javascript"></script> <script type="text/javascript"
-		src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script> </my_script>
+		src="<%=basePath%>/dist/admin/assets/js/add-apartment.js"></script> 
+			
+	</my_script>
 </body>
 </html>

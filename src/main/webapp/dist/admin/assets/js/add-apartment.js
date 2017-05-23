@@ -108,4 +108,45 @@ function getaddress(lng, lat) {
 				$('#lng').val(lng);
 				$('#lat').val(lat);
 			});
+	
+//	复选
+	$(".informers input").click(function(){
+		$(this).parent().css({'height':'300px','border':'1px solid #009688'});
+		$(this).parent().find('.checkBox,.confirm').show();
+		
+	})
+	
+	$(".informers .checkBox ul li").on('click',function(){
+		if($(this).hasClass('actives')==true){
+			$(this).removeClass('actives');
+			$(this).find('span').hide();
+		}else{
+			$(this).addClass('actives');
+			$(this).find('span').show();
+		}
+	})
+	var Puttingdata='';
+	$('.informers .confirm').click(function(){
+		var coupon='', classdata=new Array();
+		var otherdata='';
+		var thisData=$(this).parent().parent().find('.checkBox ul li');
+		var strarlist=new Array();
+		for(var i=0;i<thisData.length;i++){
+			if(thisData.eq(i).hasClass('actives')==true){
+				strarlist.push(thisData.eq(i).text());
+				classdata.push(thisData.eq(i).attr('data-icon'));
+			}
+			coupon=classdata.join('，');
+			Puttingdata=strarlist.join('，');
+		}
+		$(this).parent().parent().find('.form-control').val(Puttingdata);//名字
+		$(this).parent().parent().find('.form-control-classl').val(coupon);//icon class
+		$(this).parent().parent().css({'height':'auto','border':'none'});
+		$(this).parent().parent().find('.checkBox').hide();
+		$(this).hide();
+	})
+	
+	
 }
+
+

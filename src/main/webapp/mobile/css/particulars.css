@@ -126,19 +126,251 @@
 .deploy .facility{width:100%;transition: all .3s}
 .deploy .facility li{width: 100%;margin-bottom: 0.03rem;height:auto;}
 .deploy .facility li .pNames{font-size:0.14rem;font-weight:400;display:block;}
-.deploy .facility li .facility-list{width:80%;height:auto;margin:0 auto;}
+.deploy .facility li .facility-list{width:100%;height:auto;margin:0 auto;}
 .deploy .facility li .facility-list i{
     display: inline-block;
-    width: 24%;
-    height: 0.3rem;
-    border: 1px solid #ccc;
+    width: 22.5%;
+    height: 0.6rem;
+    /*border: 1px solid #ccc;*/
     text-align: center;
-    line-height: 0.3rem;
+    line-height: 0.88rem;
     margin-bottom: 0.02rem;
     overflow: hidden;
     white-space: nowrap;
     font-size: 0.1rem;
     margin-left: 0.02rem;
+    position: relative;
+    color: orangered;
+}
+.deploy .facility li .facility-list i em{
+    width: 28px;
+    height: 26px;
+    display: block;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    margin-left: -14px;
+    overflow: hidden;
+}
+.deploy .facility li .facility-list .icon-tv em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -50px 0px;
+}
+.deploy .facility li .facility-list .icon-wifi em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position:2px 0px;
+}
+.deploy .facility li .facility-list .icon-airconditioner em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -76px 0px;
+}
+.deploy .facility li .facility-list .icon-icebox em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -102px 0px;
+}
+.deploy .facility li .facility-list .icon-washingmachine em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -128px 0px;
+}
+.deploy .facility li .facility-list .icon-heating em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -155px 0px;
+}
+.deploy .facility li .facility-list .icon-smartlock em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1089px 0px;
+}
+.deploy .facility li .facility-list .icon-accesscontrol em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1168px 0px;
+}
+.deploy .facility li .facility-list .icon-hairandbodylotion em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -414px 0px;
+}
+.deploy .facility li .facility-list .icon-KTV em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -855px 0px;
+}
+.deploy .facility li .facility-list .icon-wbl em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -596px 0px;
+}
+.deploy .facility li .facility-list .icon-towel em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -206px 0px;
+}
+.deploy .facility li .facility-list .icon-tissues em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -336px 0px;
+}
+.deploy .facility li .facility-list .icon-atableware em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -648px 0px;
+}
+.deploy .facility li .facility-list .icon-cookingpots em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -517px 0px;
+}
+.deploy .facility li .facility-list .icon-hairdryer em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1142px 0px;
+}
+.deploy .facility li .facility-list .icon-infirmary em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -960px 0px;
+}
+.deploy .facility li .facility-list .icon-elevator em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1193px 0px;
+}
+.deploy .facility li .facility-list .icon-electriccooker em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -622px 0px;
+}
+.deploy .facility li .facility-list .icon-hatwort em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -180px 0px;
+}
+.deploy .facility li .facility-list .icon-mahjong em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -934px 0px;
+}
+.deploy .facility li .facility-list .icon-slipper em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -310px 0px;
+}
+.deploy .facility li .facility-list .icon-liquidshampoo em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -283px 0px;
+}
+.deploy .facility li .facility-list .icon-toiletthings em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -258px 0px;
+}
+.deploy .facility li .facility-list .icon-bank em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1246px 0px;
+}
+.deploy .facility li .facility-list .icon-metro em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1272px 0px;
+}
+.deploy .facility li .facility-list .icon-BUS em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1299px 0px;
+}
+.deploy .facility li .facility-list .icon-restaurant em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1324px 0px;
+}
+.deploy .facility li .facility-list .icon-metro em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1349px 0px;
+}
+.deploy .facility li .facility-list .icon-market em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1350px 0px;
+}
+.deploy .facility li .facility-list .icon-svs em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1380px 0px;
+}
+.deploy .facility li .facility-list .icon-drugstore em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1408px 0px;
+}
+.deploy .facility li .facility-list .icon-metro em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1272px 0px;
+}
+.deploy .facility li .facility-list .icon-cinema em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1466px 0px;
+}
+.deploy .facility li .facility-list .icon-recreation em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1439px 0px;
+}
+.deploy .facility li .facility-list .icon-sightspot em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1782px 0px;
+}
+.deploy .facility li .facility-list .icon-Fitness em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1498px 0px;
+}
+.deploy .facility li .facility-list .icon-tea em{
+     background: url("../images/icons_detail_facility.png") no-repeat;
+     background-size: 2494px 26px;
+     background-position: -1524px 0px;
+ }
+.deploy .facility li .facility-list .icon-slotmachine em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1556px 0px;
+}
+.deploy .facility li .facility-list .icon-publicsecurity em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1586px 0px;
+}
+.deploy .facility li .facility-list .icon-projector em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1617px 0px;
+}
+.deploy .facility li .facility-list .icon-smoke em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1652px 0px;
+}
+.deploy .facility li .facility-list .icon-Cooking em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1683px 0px;
+}
+.deploy .facility li .facility-list .icon-dinetogether em{
+    background: url("../images/icons_detail_facility.png") no-repeat;
+    background-size: 2494px 26px;
+    background-position: -1712px 0px;
 }
 /*户型图*/
 .describe .hu_xing_tu img{width: 100%;height: 2rem;}

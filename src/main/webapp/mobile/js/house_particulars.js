@@ -72,7 +72,7 @@ $(document).ready(function(){
             $(".deploy .facility li:eq(0)").find('.facility-list').html('');
             var str='';
             for(var i=0;i<data.te_se.length;i++){
-                str+='<i>'+data.te_se[i]+'</i>';
+                str+='<i class="'+data.te_se[i]._class+'">'+data.te_se[i]+'</i>';
             }
             $(".deploy .facility li:eq(0)").find('.facility-list').append(str);
             //2---居家
