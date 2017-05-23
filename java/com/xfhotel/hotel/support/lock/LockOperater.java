@@ -141,9 +141,7 @@ public class LockOperater implements LockService {
 
 	
 
-	public static void main(String[] args) {
-		getInstance();
-	}
+
 
 	@Override
 	public JSONObject login(String version, String s_id, String account, String password) {
@@ -151,15 +149,18 @@ public class LockOperater implements LockService {
 		JSONObject param = new JSONObject();
 		param.put("account", account);
 		param.put("password", DES.encrypt(password.getBytes()));
-		JSONObject response = sendPost(url, param, 0);
+		JSONObject response = sendPost(url, param, POST_TYPE_NO_HEADER);
 		return response;
 	}
+	
+	
 
 	@Override
 	public JSONObject pwdAdd(String version, String access_token, String s_id, String lock_no, String pwd_text,
 			String valid_time_start, String valid_time_end, String pwd_user_name, String pwd_user_mobile,
 			String pwd_user_idcard, String description, String extra) {
-		// TODO Auto-generated method stub
+		
+		
 		return null;
 	}
 
@@ -248,8 +249,15 @@ public class LockOperater implements LockService {
 
 	@Override
 	public JSONObject lockdetails(String version, String access_token, String s_id, String lock_no) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = baseUrl + "/lock/view";
+		JSONObject param = new JSONObject();
+		param.put("lock_no", lock_no);
+		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
+		return response;
+	}
+	
+	public JSONObject lockdetails(String lock_no){
+		return lockdetails("", "","", lock_no);
 	}
 
 	@Override
@@ -291,5 +299,7 @@ public class LockOperater implements LockService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	public static void main(String[] args) {
+		System.out.println(getInstance().lockdetails("11.1.116.166"));
+	}
 }
