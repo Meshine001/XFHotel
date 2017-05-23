@@ -97,10 +97,11 @@ public class LockOperater implements LockService {
 			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
 			conn.setRequestProperty("Content-Type", "application/json");
 			if (type != 0) {
+				System.out.println(LockOperater.ACCESS_TOKEN);
 				conn.setRequestProperty("access_token", LockOperater.ACCESS_TOKEN);
 				UUID uuid = UUID.randomUUID();
 				conn.setRequestProperty("s_id", uuid.toString());
-				conn.setRequestProperty("version", "1.1");
+				conn.setRequestProperty("version", "1.5.0");
 			}
 			// 发送POST请求必须设置如下两行
 			conn.setDoOutput(true);
