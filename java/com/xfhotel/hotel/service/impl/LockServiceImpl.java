@@ -24,77 +24,32 @@ public class LockServiceImpl implements LockService {
 	LockDAOImpl lockDAOImpl;
 
 	@Override
-	@Transactional
 	public Message changePassword(String phone, String lock_no, String password) {
 		// TODO Auto-generated method stub
 		Object[] values = new Object[2];
 		values[0] = phone;
 		values[1] = lock_no;
-		Lock lock = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
 
-		JSONObject result = LockOperater.getInstance().pwdUpdate("", "", "", lock_no, password, ""+lock.getValid_time_start(), ""+lock.getValid_time_end(), "");
+		Lock lock = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
 		try {
+			JSONObject result = LockOperater.getInstance().pwdUpdate("", "", "", lock_no, "",
+					"" + lock.getValid_time_start(), "" + lock.getValid_time_end(), "", "");
 			if (result.getString("rlt_code").equals("HH0000")) {
 				result = result.getJSONObject("data");
 				lock.setBusiness_id(result.getString("business_id"));
 				lock.setPwd_no(result.getInt("pwd_no"));
-				lock.setPwd_text(password);
+				lock.setPwd_text(DES.decrypt(result.getString("pwd_text")));
 				lock.setAvailiable(0);
 				lockDAOImpl.update(lock);
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, "成功");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			
+
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "失败");
 	}
 
-
-	@Override
-	@Transactional
-	public String viewPassword(String phone, String lock_no) {
-		
-			// TODO Auto-generated method stub
-			Object[] values = new Object[2];
-			values[0] = phone;
-			values[1] = lock_no;
-			Lock lock = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
-			return lock.getPwd_text();
-	}
-
-	@Override
-	@Transactional
-	public void deletePassword(String phone, String lock_no) {
-		// TODO Auto-generated method stub
-		Object[] values = new Object[2];
-		values[0] = phone;
-		values[1] = lock_no;
-		Lock lock = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
-
-		lockDAOImpl.delete(lock);
-	}
-
-	@Override
-	@Transactional
-	public int verify(String business_id, String lock_no, int pwd_no, String pwd_user_mobile) {
-		// TODO Auto-generated method stub
-		Object[] values = new Object[3];
-		values[0] = pwd_user_mobile;
-		values[1] = lock_no;
-		values[2] = pwd_no;
-		Lock lock = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ? and l.pwd_no = ?",
-				values);
-		if (lock == null || lock.getAvailiable() == 1)
-			return 0;
-		else {
-			lock.setAvailiable(1);
-			lockDAOImpl.update(lock);
-			return 1;
-		}
-	}
-
-	@Transactional
 	@Override
 	public Message addPassword(String phone, String lock_no, String time_start, String time_end) {
 		try {
@@ -134,7 +89,43 @@ public class LockServiceImpl implements LockService {
 			e.printStackTrace();
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "失败");
+	}
 
+	@Override
+	public String viewPassword(String phone, String lock_no) {
+		Object[] values = new Object[2];
+		values[0] = phone;
+		values[1] = lock_no;
+		Lock lock = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
+		return lock.getPwd_text();
+	}
+
+	@Override
+	public void deletePassword(String phone, String lock_no) {
+		Object[] values = new Object[2];
+		values[0] = phone;
+		values[1] = lock_no;
+		Lock lock = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
+
+		lockDAOImpl.delete(lock);
+
+	}
+
+	@Override
+	public int verify(String business_id, String lock_no, int pwd_no, String pwd_user_mobile) {
+		Object[] values = new Object[3];
+		values[0] = pwd_user_mobile;
+		values[1] = lock_no;
+		values[2] = pwd_no;
+		Lock lock = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ? and l.pwd_no = ?",
+				values);
+		if (lock == null || lock.getAvailiable() == 1)
+			return 0;
+		else {
+			lock.setAvailiable(1);
+			lockDAOImpl.update(lock);
+			return 1;
+		}
 	}
 
 }
