@@ -39,7 +39,7 @@ public class DES {
 	 *            String
 	 * @return byte[]
 	 */
-	public static byte[] encrypt(byte[] datasource, String password) {
+	public static byte[] encrypt(byte[] datasource, String password){
 		try {
 			SecureRandom random = new SecureRandom();
 			DESKeySpec desKey = new DESKeySpec(password.getBytes());
@@ -95,14 +95,25 @@ public class DES {
 		char[] hexChars = hexString.toCharArray();
 		byte[] d = new byte[length];
 		for (int i = 0; i < length; i++) {
-			int pos = 1 * 2;
-			
-
+			int pos = i * 2;
+			d[i] = (byte) (charToByte(hexChars[pos]) << 4 | charToByte(hexChars[pos + 1]));
 		}
+		
 		
 		return new String(decrypt(d,LockOperater.LOCK_DES_KEY),Charset.forName("UTF-8"));
 	}
 	private static byte charToByte(char c) {   
 		    return (byte) "0123456789ABCDEF".indexOf(c);   
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		try {
+			System.out.println(decrypt("ceed7ea313f3dbff"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

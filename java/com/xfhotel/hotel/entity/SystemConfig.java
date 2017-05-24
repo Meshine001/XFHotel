@@ -16,6 +16,17 @@ public class SystemConfig {
 	private long id;
 	
 	private Double ya_jin;
+	
+	private String sms;
+	
+
+	public String getSms() {
+		return sms;
+	}
+
+	public void setSms(String sms) {
+		this.sms = sms;
+	}
 
 	public long getId() {
 		return id;
