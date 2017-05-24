@@ -26,11 +26,11 @@
         <div class="middle_content" >
             <label>上传头像</label>
             <p class="fl">
-                <img src="" id="avatar" class="upload" onclick="getElementById('inputfile').click()">
+                <img  id="avatar" class="upload" onclick="getElementById('inputfile').click()">
                 <input type="file" onchange="preview(this)" id="inputfile" style="display: none">
             </p>
             <!--图片上传-->
-            <script type="text/javascript">
+           <script type="text/javascript">
                 function preview(file)
                 {
                     var prevDiv = document.getElementById('avatar');
@@ -44,7 +44,8 @@
                     }
                     else
                     {
-                        prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+                    	prevDiv.attr('src', $('#inputfile').val() )
+                       
                     }
                 }
             </script>

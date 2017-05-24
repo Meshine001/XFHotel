@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.SpinnerListModel;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -37,6 +38,7 @@ import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.pay.WechatPaySDK;
+import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 import com.xfhotel.hotel.support.wechat.WechatOrderUtils;
 
 import net.sf.json.JSONObject;
@@ -68,33 +70,7 @@ public class OrderController {
 	@RequestMapping(value = "/outLease", method = RequestMethod.POST)
 	@ResponseBody
 	public Message outLease(Long orderId) {
-		try {
-			Order o = orderservice.get(orderId);
-			// TODO 退押金,
-			String[] prices = o.getPrice().split("@");
-			String refundFee = prices[prices.length - 1];
-			// 若是微信支付的
-			if (Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
-					|| Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())) {
-				JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), refundFee);
-				if ("success".equals(result.getString("status"))) {
-					o.setStatus(Order.STATUS_COMPLETE);
-					orderservice.update(o);
-					return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
-				} else {
-					return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
-				}
-			} else {
-				o.setStatus(Order.STATUS_COMPLETE);
-				orderservice.update(o);
-				return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
-			return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
-		}
+		return orderservice.outLease(orderId);
 	}
 
 	/**
@@ -158,7 +134,7 @@ public class OrderController {
 	 */
 	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
 	public String orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
-			String otherCusName, String otherCusIdCard, String cusIdCard, String personal, String startTime,
+			String otherCusName[], String otherCusIdCard[], String cusIdCard, String personal, String startTime,
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
 			String apartmentType) {
 		Order o = new Order();
@@ -169,8 +145,8 @@ public class OrderController {
 		o.setCusTel(cusTel);
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
-		o.setOtherCusName(otherCusName);
-		o.setOtherCusIdCard(otherCusIdCard);
+		o.setOtherCusName(StringSplitUtil.buildStrGroup(otherCusName));
+		o.setOtherCusIdCard(StringSplitUtil.buildStrGroup(otherCusIdCard));
 		try {
 			o.setStartTime(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
 			o.setEndTime(DateUtil.parse(endTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
@@ -230,6 +206,44 @@ public class OrderController {
 		}
 
 	}
+	
+	/**
+	 * 确认退房订单
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/comfirmOutLease", method = RequestMethod.POST)
+	@ResponseBody
+	public Message comfirmOutleaseOrder(Long id){
+		try {
+			Order o = orderservice.get(id);
+			
+			// TODO 退押金,
+			String[] prices = o.getPrice().split("@");
+			String refundFee = prices[prices.length - 1];
+			// 若是微信支付的
+			if (Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
+					|| Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())) {
+				JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), refundFee);
+				if ("success".equals(result.getString("status"))) {
+					o.setStatus(Order.STATUS_COMPLETE);
+					orderservice.update(o);
+					return new Message(Constants.MESSAGE_SUCCESS_CODE, "确认成功");
+				} else {
+					return new Message(Constants.MESSAGE_ERR_CODE, "确认失败");
+				}
+			} else {
+				o.setStatus(Order.STATUS_COMPLETE);
+				orderservice.update(o);
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, "确认成功");
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
+		}
+	}
 
 	/**
 	 * 管理员确认订单
@@ -249,7 +263,9 @@ public class OrderController {
 				// 发送门锁密码
 				Long roomId = o.getRoomId();
 				String lock_no = apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
-				Message result = lockService.addPassword(o.getCusTel(), lock_no, ""+o.getStartTime(), ""+o.getEndTime());
+				System.out.println("send pass to "+lock_no);
+				Message result = lockService.addPassword(o.getCusTel(), lock_no, DateUtil.format(new Date(o.getStartTime()), "yyyyMMddHHmmss"),
+						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddHHmmss"));
 				if(result.getStatusCode() == Constants.MESSAGE_SUCCESS_CODE){
 					o.setStatus(Order.STATUS_ON_LEASE);
 					orderservice.update(o);

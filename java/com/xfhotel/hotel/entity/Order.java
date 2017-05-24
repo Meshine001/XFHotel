@@ -29,6 +29,7 @@ public class Order {
 	public final static int STATUS_TIME_OUT = 5;//超时
 	public final static int STATUS_CHARGEBACK = 6;//退款
 	public final static int STATUS_ON_COMFIRM = 7;//需要管理员确认
+	public final static int STATUS_ON_OUT_LEASE = 8;//退房等待管理员确认
 
 	public final static String PAY_PLATFORM_WECHAT_NATIVE = "微信扫码";
 	public final static String PAY_PLATFORM_WECHAT_JSAPI = "微信公共号";

@@ -2,7 +2,6 @@
 $(document).ready(function(){
 	var _uid = fnBase.huoqu(0, "uid");
 	var _id = decodeURIComponent(fnBase.request("id"));
-	console.log(fnBase.URL);
 	$.ajax({
 		type:'GET',
 		dataType:'json',
