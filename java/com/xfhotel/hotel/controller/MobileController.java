@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
@@ -32,6 +33,8 @@ import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.FileService;
+import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
@@ -56,6 +59,11 @@ import net.sf.json.JSONObject;
 @RequestMapping("mobile")
 public class MobileController  {
 
+	@Autowired
+	LockService lockService;
+	
+	@Autowired
+	FileService fileService;
 
 	@Autowired
 	ApartmentService apartmentService;
@@ -354,7 +362,7 @@ public class MobileController  {
 	public @ResponseBody Message modify(
 			long customerId ,String nick,String tel,String idCard,
 			String sex,String birthday,String job,
-			String education,String declaration,String hobby) {
+			String education,String declaration,String hobby,String avatar) {
 		Customer customer = customerService.getCustomer(customerId);
 		CustomerDetails c = customer.getDetails();
 		c.setNick(nick);
@@ -365,7 +373,8 @@ public class MobileController  {
 		c.setDeclaration(declaration);
 		c.setHobby(hobby); 
 		c.setEducation(education);
-		System.out.println(c);
+		c.setAvatar(avatar);
+		
 		try {
 			Customer c1 = customerService.modify(c, customerId);
 			session.setAttribute("c", c1);
@@ -523,4 +532,28 @@ public class MobileController  {
 		return info;
 	}
 
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public @ResponseBody Message upload(MultipartFile file, HttpServletRequest request) {
+
+		if (file != null) {
+			StringBuffer sb = new StringBuffer();
+			sb.append(request.getSession().getServletContext().getRealPath("/"));
+			System.out.println(sb.toString());
+			String fullPath = fileService.saveFile(file, sb.toString());
+			if (fullPath != null)
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, fullPath);
+		}
+		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");
+	}
+	@RequestMapping( value = "/viewpassword", method = RequestMethod.POST)
+	public String viewPassword(HttpServletRequest request,Long oId) {
+		Order order = orderService.get(oId);
+		JSONObject a = apartmentService.getApartmentById(order.getRoomId());
+		JSONObject basic =a.getJSONObject("basic_info");
+		String phone = order.getCusTel();
+		JSONObject suo_di_zhi = basic.getJSONObject("suo_di_zhi");
+		String lock_no = suo_di_zhi.toString();
+		request.setAttribute("lock_password", lockService.viewPassword(phone, lock_no));
+		return "";
+	}
 }

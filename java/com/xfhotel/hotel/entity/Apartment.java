@@ -72,7 +72,6 @@ public class Apartment {
 		this.basic_info = basic_info;
 	}
 
-	
 
 	public JSONArray getTe_se() {
 		return JSONArray.fromObject(te_se);
