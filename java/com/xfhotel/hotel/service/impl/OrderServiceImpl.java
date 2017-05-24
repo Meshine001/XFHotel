@@ -89,15 +89,15 @@ public class OrderServiceImpl implements OrderService {
 			return orderDAO.getListByHQL("from Order", null);
 		}
 		String hql = "from Order where type=?";
-		Integer[] values = new Integer[1];
-		switch (type) {
-		case Apartment.TYPE_APARTMENT:
-			values[0] = Apartment.TYPE_APARTMENT;
-		case Apartment.TYPE_PLAY_ROOM:
-			values[0] = Apartment.TYPE_PLAY_ROOM;
-		default:
-			values[0] = Apartment.TYPE_HOTEL;
-		}
+		String[] values = { Apartment.getTypeDescription(type)};
+//		switch (type) {
+//		case Apartment.TYPE_APARTMENT:
+//			values[0] = Apartment.getTypeDescription(type);
+//		case Apartment.TYPE_PLAY_ROOM:
+//			values[0] = Apartment.TYPE_PLAY_ROOM;
+//		default:
+//			values[0] = Apartment.TYPE_HOTEL;
+//		}
 
 		return orderDAO.getListByHQL(hql, values);
 	}
