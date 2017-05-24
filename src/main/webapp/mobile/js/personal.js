@@ -21,6 +21,7 @@ $(document).ready(function(){
         }else{
             $(".vip_info img").attr("src",Constant.URL+'/images/'+data.details.avatar);
         }
+       
         //未支付的订单数
         var toPaid=fnBase.huoqu(0,"toPaid");
         if(toPaid=="0"){
