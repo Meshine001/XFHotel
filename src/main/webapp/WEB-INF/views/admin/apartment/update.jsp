@@ -14,7 +14,7 @@
 <body>
 	<my_body>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-7">
 			<div class="card">
 				<div class="card-header">修改房源</div>
 				<div class="card-body">
@@ -472,7 +472,7 @@
 				});
 			</script>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-5">
 			<div id="map" style="width: 500px; height: 500px"></div>
 		</div>
 		<!-- 上传图片 -->

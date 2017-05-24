@@ -2,7 +2,6 @@
 $(document).ready(function(){
 	var _uid = fnBase.huoqu(0, "uid");
 	var _id = decodeURIComponent(fnBase.request("id"));
-	console.log(fnBase.URL);
 	$.ajax({
 		type:'GET',
 		dataType:'json',
@@ -72,49 +71,49 @@ $(document).ready(function(){
             $(".deploy .facility li:eq(0)").find('.facility-list').html('');
             var str='';
             for(var i=0;i<data.te_se.length;i++){
-                str+='<i class="'+data.te_se[i]._class+'">'+data.te_se[i]+'</i>';
+                str+='<i class="'+data.te_se_class[i]+'"><em></em>'+data.te_se[i]+'</i>';
             }
             $(".deploy .facility li:eq(0)").find('.facility-list').append(str);
             //2---居家
             $(".deploy .facility li:eq(1)").find('.facility-list').html('');
             var str='';
             for(var i=0;i<data.jia_ju.length;i++){
-                str+='<i>'+data.jia_ju[i]+'</i>';
+                str+='<i class="'+data.jia_ju_class[i]+'"><em></em>'+data.jia_ju[i]+'</i>';
             }
             $(".deploy .facility li:eq(1)").find('.facility-list').append(str);
             //3---卫浴
             $(".deploy .facility li:eq(2)").find('.facility-list').html('');
             var str='';
             for(var i=0;i<data.wei_yu.length;i++){
-                str+='<i>'+data.wei_yu[i]+'</i>';
+                str+='<i class="'+data.wei_yu_class[i]+'"><em></em>'+data.wei_yu[i]+'</i>';
             }
             $(".deploy .facility li:eq(2)").find('.facility-list').append(str);
             //4---厨房
             $(".deploy .facility li:eq(3)").find('.facility-list').html('');
             var str='';
             for(var i=0;i<data.can_chu.length;i++){
-                str+='<i>'+data.can_chu[i]+'</i>';
+                str+='<i class="'+data.can_chu_class[i]+'"><em></em>'+data.can_chu[i]+'</i>';
             }
             $(".deploy .facility li:eq(3)").find('.facility-list').append(str);
             //5---周边
             $(".deploy .facility li:eq(4)").find('.facility-list').html('');
             var str='';
             for(var i=0;i<data.zou_bian.length;i++){
-                str+='<i>'+data.zou_bian[i]+'</i>';
+                str+='<i class="'+data.zou_bian_class[i]+'"><em></em>'+data.zou_bian[i]+'</i>';
             }
             $(".deploy .facility li:eq(4)").find('.facility-list').append(str);
             //6---配套
             $(".deploy .facility li:eq(5)").find('.facility-list').html('');
             var str='';
             for(var i=0;i<data.pei_tao.length;i++){
-                str+='<i>'+data.pei_tao[i]+'</i>';
+                str+='<i class="'+data.pei_tao_class[i]+'"><em></em>'+data.pei_tao[i]+'</i>';
             }
             $(".deploy .facility li:eq(5)").find('.facility-list').append(str);
             //7---其他
             $(".deploy .facility li:eq(6)").find('.facility-list').html('');
             var str='';
             for(var i=0;i<data.qi_ta.length;i++){
-                str+='<i>'+data.qi_ta[i]+'</i>';
+                str+='<i class="'+data.qi_ta_class[i]+'"><em></em>'+data.qi_ta[i]+'</i>';
             }
 
             $(".deploy .facility li:eq(6)").find('.facility-list').append(str);
