@@ -61,15 +61,18 @@ function addpartenr(){
     $(".alert-content ._confirm").click(function(){
         var opifo='';
         var strList=new Array();
+        var pidlist=new Array();
         var obj=$(".alert-content .oldpartenr li");
         for(var i=0;i<obj.length;i++){
             if(obj.eq(i).hasClass("selected")){
                 strList.push(obj.eq(i).find('._pName').text());
+                pidlist.push(obj.eq(i).find('.numbId').text());
             }
         }
+        console.log(strList)
         $(".addpartenr").html('');
         for(var j=0;j<strList.length;j++){
-            opifo+='<li>'+strList[j]+'<i>X</i></li>'
+            opifo+='<li pid="'+pidlist[j]+'"><span>'+strList[j]+'</span><i>X</i></li>'
         }
         $(".addpartenr").append(opifo);
         $(".alert-content").animate({bottom:'-5.6rem'},200);
@@ -178,6 +181,15 @@ function addpartenr(){
     
     //    提交订单
     $(".navbar a").click(function(){
+        var otherCusName=new Array();
+        var otherCusIdCard=new Array();
+        for(var i=0;i<$('.addpartenr li').length;i++){
+            otherCusName.push($('.addpartenr li').eq(i).find('span').text());
+            otherCusIdCard.push($('.addpartenr li').eq(i).attr('pid'))
+        }
+        var _otherCusName=otherCusName.join("，");
+        var _otherCusIdCard=otherCusIdCard.join(",");
+       
         var _userName=$("#userName").val();
         var _tel=$("#tel").val();
         var _identity=$("#identity").val();
@@ -215,12 +227,9 @@ function addpartenr(){
             "personal":$("#presonal").val(),
             "description":_description,
             "id":couponid,
-            "otherCusName":$("#pName").val(),
-        	"otherCusIdCard":$("#pId").val()
+            "otherCusName":_otherCusName,
+        	"otherCusIdCard":_otherCusIdCard
         };
-        
-        console.log(postData);
-
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             fnBase.keep(1,'oTotalPrices',data.order.totalPrice);

@@ -88,12 +88,12 @@ public class AdminController {
 
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public String orderPage() {
-//		List<Order> list = orderservice.list(Apartment.TYPE_HOTEL);
-//		List<Map> orders = new ArrayList<Map>();
-//		for (Order o : list) {
-//			orders.add(o.toMap());
-//		}
-//		session.setAttribute("orders", orders);
+		List<Order> list = orderservice.list(Apartment.TYPE_HOTEL);
+		List<Map> orders = new ArrayList<Map>();
+		for (Order o : list) {
+			orders.add(o.toMap());
+		}
+		session.setAttribute("orders", orders);
 		return "/admin/order/order";
 	}
 

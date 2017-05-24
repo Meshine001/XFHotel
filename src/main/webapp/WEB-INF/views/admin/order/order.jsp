@@ -20,7 +20,7 @@
 						<h3>订单列表</h3>
 					</div>
 				</div>
-				<!-- 
+				<!--  
 				<ul class="nav nav-tabs">
 					<li role="0"><a href="javascript:;">全部订单</a></li>
 					<li role="1" class="active"><a href="">已完成订单</a></li>
@@ -28,7 +28,7 @@
 					<li role="3"><a href="javascript:;">超时订单</a></li>
 					<li role="4"><a href="javascript:;"></a></li>
 				</ul>
-				 -->
+				-->
 				<table class="table">
 			
 					<thead>
@@ -71,11 +71,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<!-- 
-				<ul id="pagecontroller" class="pagination">
-					
+				<!--  <ul id="pagecontroller" class="pagination">
+					-->
 				</ul>
-				-->
 			</div>
 		</div>
 	</div>

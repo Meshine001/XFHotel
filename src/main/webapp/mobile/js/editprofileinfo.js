@@ -18,9 +18,14 @@ $(document).ready(function(){
         sexbtn.find('.fl').text(sexVal);
         return sexVal;
     });
-    
+    var personpic='';
+    $("#avatar").live('change',function(){
+    	personpic=$(this).attr('src');
+    	personpic=$('#inputfile').val();
+    	return personpic;
+    })
     $(".infobtn").click(function(){
-
+    	console.log($('#inputfile').val())
         var _uid = fnBase.huoqu(0, "uid");
         var _nickNameInput=$("#fillNick").val();
         var frontURL=Constant.URL+'/mobile/modify';
