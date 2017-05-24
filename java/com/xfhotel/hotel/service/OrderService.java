@@ -3,6 +3,7 @@ package com.xfhotel.hotel.service;
 import java.util.List;
 
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.support.Message;
 
 public interface OrderService {
 	
@@ -23,4 +24,5 @@ public interface OrderService {
 	public void refreshAll();
 	public void refresh(Long cId);
 	public List<Order> search(Long cId, int category, int type, String startDate, String endDate, int range);
+	public Message outLease(Long id);
 }

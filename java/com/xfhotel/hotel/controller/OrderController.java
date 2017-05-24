@@ -38,6 +38,7 @@ import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.pay.WechatPaySDK;
+import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 import com.xfhotel.hotel.support.wechat.WechatOrderUtils;
 
 import net.sf.json.JSONObject;
@@ -69,33 +70,7 @@ public class OrderController {
 	@RequestMapping(value = "/outLease", method = RequestMethod.POST)
 	@ResponseBody
 	public Message outLease(Long orderId) {
-		try {
-			Order o = orderservice.get(orderId);
-			// TODO 退押金,
-			String[] prices = o.getPrice().split("@");
-			String refundFee = prices[prices.length - 1];
-			// 若是微信支付的
-			if (Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
-					|| Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())) {
-				JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), refundFee);
-				if ("success".equals(result.getString("status"))) {
-					o.setStatus(Order.STATUS_COMPLETE);
-					orderservice.update(o);
-					return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
-				} else {
-					return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
-				}
-			} else {
-				o.setStatus(Order.STATUS_COMPLETE);
-				orderservice.update(o);
-				return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功");
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
-			return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
-		}
+		return orderservice.outLease(orderId);
 	}
 
 	/**
@@ -230,6 +205,44 @@ public class OrderController {
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "关闭订单成功");
 		}
 
+	}
+	
+	/**
+	 * 确认退房订单
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/comfirmOutLease", method = RequestMethod.POST)
+	@ResponseBody
+	public Message comfirmOutleaseOrder(Long id){
+		try {
+			Order o = orderservice.get(id);
+			
+			// TODO 退押金,
+			String[] prices = o.getPrice().split("@");
+			String refundFee = prices[prices.length - 1];
+			// 若是微信支付的
+			if (Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
+					|| Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())) {
+				JSONObject result = WechatOrderUtils.refund(o.getPayNo(), o.getPayNo(), o.getTotalPrice(), refundFee);
+				if ("success".equals(result.getString("status"))) {
+					o.setStatus(Order.STATUS_COMPLETE);
+					orderservice.update(o);
+					return new Message(Constants.MESSAGE_SUCCESS_CODE, "确认成功");
+				} else {
+					return new Message(Constants.MESSAGE_ERR_CODE, "确认失败");
+				}
+			} else {
+				o.setStatus(Order.STATUS_COMPLETE);
+				orderservice.update(o);
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, "确认成功");
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "退租失败");
+		}
 	}
 
 	/**
