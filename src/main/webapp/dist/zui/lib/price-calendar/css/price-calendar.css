@@ -4,7 +4,7 @@
  * Author: Angtian
  * E-mail: Angtian.fgm@taobao.com
  */
-.price-calendar-bounding-box{position: absolute;font:12px/1.5 Arial;z-index: 999;top: 190px;left: 400px;box-shadow: 0 0 10px 1px #333;min-width:975px;background:#FFF;}
+.price-calendar-bounding-box{position: absolute;font:12px/1.5 Arial;z-index: 999;top: 190px;left:50%;margin-left:-480px;box-shadow: 0 0 10px 1px #333;min-width:975px;background:#FFF;}
 .price-calendar-bounding-box .disabled{cursor:not-allowed;}
 .price-calendar-bounding-box .hidden{display:none;}
 .price-calendar-bounding-box .blue{background-color:#03F;}

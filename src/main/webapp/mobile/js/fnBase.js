@@ -6,8 +6,8 @@ console.log(baseUrl);
 var clientIp = getIp();
 
 var Constant = {
-       URL: "192.168.1.114"
- 
+       URL: "http://192.168.1.114"
+       
 //        URL: baseUrl,
         //CLIENT_IP:clientIp
 };

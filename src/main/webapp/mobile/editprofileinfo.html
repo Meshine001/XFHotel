@@ -24,14 +24,12 @@
 <div id="Myscroll-body">
     <section>
         <div class="middle_content" >
-            <form action="./mobile/upload" method="post" id="formid">
-            <label>上传头像</label>
-            <p class="fl">
-
-	                <img  id="avatar" class="upload" onclick="getElementById('inputfile').click()">
-	                <input type="file" onchange="preview(this)" id="inputfile" style="display: none">
-
-            </p>
+            <form action="http://192.168.1.114/mobile/upload" method="post" id="formid" enctype="multipart/form-data">
+                <label>上传头像</label>
+                <p class="fl">
+                    <img  id="avatar" class="upload" onclick="getElementById('inputfile').click()">
+                    <input type="file" name="file" onchange="preview(this)" id="inputfile" style="display: none">
+                </p>
             </form>
             <!--图片上传-->
            <script type="text/javascript">

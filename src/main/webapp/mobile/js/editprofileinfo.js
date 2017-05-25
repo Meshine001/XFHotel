@@ -23,13 +23,6 @@ $(document).ready(function(){
     $('#formid #inputfile').change(function(){
        $('#formid').submit();
     });
-    $('.upload').live('change',function(){
-        var frontURL=Constant.URL+'/mobile/upload';
-        var postdata={"avatar":$('.upload').attr('src')};
-       fnBase.commonAjax(frontURL,postdata,function(data){
-           alert(data.msg)
-       })
-    });
 
     $(".infobtn").click(function(){
     	console.log($('#inputfile').val());
