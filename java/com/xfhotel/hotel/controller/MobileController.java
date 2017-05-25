@@ -538,7 +538,7 @@ public class MobileController  {
 		if (file != null) {
 			StringBuffer sb = new StringBuffer();
 			sb.append(request.getSession().getServletContext().getRealPath("/"));
-			System.out.println(sb.toString());
+//			System.out.println(sb.toString());
 			String fullPath = fileService.saveFile(file, sb.toString());
 			if (fullPath != null)
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, fullPath);
@@ -552,20 +552,19 @@ public class MobileController  {
 	 * @return
 	 */
 	@RequestMapping( value = "/viewpassword", method = RequestMethod.POST)
-	public @ResponseBody String viewPassword(HttpServletRequest request,Long oId) {
+	public @ResponseBody Map viewPassword(Long oId) {
 		Order order = orderService.get(oId);
 		JSONObject a = apartmentService.getApartmentById(order.getRoomId());
 		JSONObject basic =a.getJSONObject("basic_info");
 		String phone = order.getCusTel();
-		JSONObject suo_di_zhi = basic.getJSONObject("suo_di_zhi");
-		String lock_no = suo_di_zhi.toString();
-		request.setAttribute("lock_password", lockService.viewPassword(phone, lock_no));
-		
-		return "";
+		String lock_no = basic.getString("suo_di_zhi");
+		 lockService.viewPassword(phone, lock_no);
+		Map< String, Object> map = new HashMap<String, Object>();
+		map.put("pwd_text",  lockService.viewPassword(phone, lock_no));
+		return map ;
 	}
 	/**
 	 * 退租
-	 * 
 	 * @param orderId
 	 * @return
 	 */

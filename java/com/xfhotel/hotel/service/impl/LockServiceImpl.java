@@ -108,7 +108,6 @@ public class LockServiceImpl implements LockService {
 		values[0] = phone;
 		values[1] = lock_no;
 		Lock lock = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
-
 		lockDAOImpl.delete(lock);
 
 	}
