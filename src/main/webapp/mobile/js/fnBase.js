@@ -6,10 +6,10 @@ console.log(baseUrl);
 var clientIp = getIp();
 
 var Constant = {
-       URL: "192.168.1.114"
+//       URL: "192.168.1.114"
  
-//        URL: baseUrl,
-        //CLIENT_IP:clientIp
+        URL: baseUrl,
+        CLIENT_IP:clientIp
 };
 //zzzz
 /**

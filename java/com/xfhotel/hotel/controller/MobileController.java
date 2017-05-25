@@ -552,7 +552,7 @@ public class MobileController  {
 	 * @return
 	 */
 	@RequestMapping( value = "/viewpassword", method = RequestMethod.POST)
-	public String viewPassword(HttpServletRequest request,Long oId) {
+	public @ResponseBody String viewPassword(HttpServletRequest request,Long oId) {
 		Order order = orderService.get(oId);
 		JSONObject a = apartmentService.getApartmentById(order.getRoomId());
 		JSONObject basic =a.getJSONObject("basic_info");
@@ -570,9 +570,7 @@ public class MobileController  {
 	 * @return
 	 */
 	@RequestMapping(value = "/outLease", method = RequestMethod.POST)
-	@ResponseBody
-	public Message outLease(Long orderId) {
-		
+	public @ResponseBody Message outLease(Long orderId) {
 		return orderservice.outLease(orderId);
 	}
 }
