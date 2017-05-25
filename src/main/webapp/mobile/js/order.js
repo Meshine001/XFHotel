@@ -189,7 +189,7 @@ function addpartenr(){
         }
         var _otherCusName=otherCusName.join("，");
         var _otherCusIdCard=otherCusIdCard.join(",");
-       
+
         var _userName=$("#userName").val();
         var _tel=$("#tel").val();
         var _identity=$("#identity").val();

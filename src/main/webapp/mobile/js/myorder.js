@@ -4,12 +4,10 @@ $(document).ready(function(){
 
     var _status='';
     var _uid=fnBase.huoqu(0,"uid");
-    console.log(_uid);
     var daty={
         currentdate:'',
         _startDate:''
     };
-    console.log(_uid);
     if(_uid==null||_uid=="undefined"||_uid==""){
         window.location.href="login.html";
         return;
@@ -83,11 +81,11 @@ $(document).ready(function(){
                     _str+='<div class="pay_content"><p class="list_bigsize">'+data.content[i].description+'</p><p class="p_list">'+data.content[i].type+'<span>支付<i style="color: orange">'+data.content[i].totalPrice+'</i>元</span></p><p class="p_list">'+data.content[i].startTime+"--"+data.content[i].endTime+'<span>共'+data.content[i].totalDay+'天</span></p></div>';
 
                     if(data.content[i].status=="等待支付"){
-                        _str+='<p class="total"><span class="fl payment">支付</span></p>'
+                        _str+='<p class="total"><span class="fl payment">支付</span></p>';
                     }else if(data.content[i].status=="退款订单"){
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
                     }else if(data.content[i].status=="进行中"){
-                        _str+='<p class="total"><span class="fl cancel">退房</span><span class="fl cancel">查看密码</span></p>'
+                        _str+='<p class="total"><span class="fl cancel check-out">退房</span><span class="fl cancel lockpassword">查看密码</span></p>'
                     }else if(data.content[i].status=="已完成"){
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
                     }
@@ -120,9 +118,28 @@ $(document).ready(function(){
         var _roomID=$(this).parent().parent().attr('roomid');
         window.location.href="evaluate.html?orderId="+encodeURIComponent(_orderID)+"&roomId="+encodeURIComponent(_roomID);
     });
-    $(".cancel").live('click',function(){
-        window.location.href="checkout.html";
+    //$(".cancel").live('click',function(){
+    //    window.location.href="checkout.html";
+    //});
+
+    $(".check-out").live('click',function(){
+        var _orderID=$(this).parent().parent().attr('_orderID');
+        var postData={"orderId":_orderID};
+        var frontURL=Constant.URL+'/mobile/outLease';
+        fnBase.commonAjax(postData,frontURL,function(data){
+            console.log(data);
+            //fnBase.myalert(data.XXXXXXXX)
+        })
     });
+
+    //$(".lockpassword").live('click',function(){
+    //    var postData=$(this).parent().parent().attr('_orderID');
+    //    var frontURL=Constant.URL+'/mobile/XXXXXXXXX';
+    //    fnBase.commonAjax(postData,frontURL,function(){
+    //        fnBase.myalert(data.XXXXXXXX)
+    //    })
+    //});
+
     ////删除超时订单
     //$(".removeLi").live('click',function(){
     //    var isId=$(this).parent().parent().parent().find('li');

@@ -19,17 +19,25 @@ $(document).ready(function(){
         return sexVal;
     });
     var personpic='';
-    $("#avatar").live('change',function(){
-    	personpic=$(this).attr('src');
-    	personpic=$('#inputfile').val();
-    	return personpic;
-    })
+
+    $('#formid #inputfile').change(function(){
+       $('#formid').submit();
+    });
+    $('.upload').live('change',function(){
+        var frontURL=Constant.URL+'/mobile/upload';
+        var postdata={"avatar":$('.upload').attr('src')};
+       fnBase.commonAjax(frontURL,postdata,function(data){
+           alert(data.msg)
+       })
+    });
+
     $(".infobtn").click(function(){
-    	console.log($('#inputfile').val())
+    	console.log($('#inputfile').val());
         var _uid = fnBase.huoqu(0, "uid");
         var _nickNameInput=$("#fillNick").val();
         var frontURL=Constant.URL+'/mobile/modify';
         var postData={
+            "avatar":$('#inputfile').val(),
             "customerId":_uid,
             "nick":_nickNameInput,
             "sex":sexVal,
