@@ -20,9 +20,41 @@ $(document).ready(function(){
     });
     var personpic='';
 
-    $('#formid #inputfile').change(function(){
-       $('#formid').submit();
-    });
+    //$('#formid #inputfile').change(function(){
+    //   $('#formid').submit();
+    //});
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+    $("#inputfile").change(function(){
+        var formData = new FormData($( "#uploadFile" )[0]);
+         $.ajax({
+             url: 'http://192.168.1.114/mobile/upload' ,
+             type: 'POST',
+             data: formData,
+             async: false,
+             cache: false,
+             contentType: false,
+             processData: false,
+             success: function (returndata) {
+                 console.log(returndata);
+             },
+             error: function (returndata) {
+                 console.log(returndata);
+             }
+         });
+
+         console.log("assa");
+     });
+
+
+
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
 
     $(".infobtn").click(function(){
     	console.log($('#inputfile').val());

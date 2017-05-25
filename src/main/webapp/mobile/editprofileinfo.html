@@ -24,7 +24,7 @@
 <div id="Myscroll-body">
     <section>
         <div class="middle_content" >
-            <form action="http://192.168.1.114/mobile/upload" method="post" id="formid" enctype="multipart/form-data">
+            <form  name="uploadFile" method="post" id="uploadFile" enctype="multipart/form-data">
                 <label>上传头像</label>
                 <p class="fl">
                     <img  id="avatar" class="upload" onclick="getElementById('inputfile').click()">
@@ -33,21 +33,16 @@
             </form>
             <!--图片上传-->
            <script type="text/javascript">
-                function preview(file)
-                {
+                function preview(file){
                     var prevDiv = document.getElementById('avatar');
-                    if (file.files && file.files[0])
-                    {
+                    if (file.files && file.files[0]){
                         var reader = new FileReader();
                         reader.onload = function(evt){
                             prevDiv.src = evt.target.result
                         };
                         reader.readAsDataURL(file.files[0]);
-                    }
-                    else
-                    {
+                    }else{
                     	prevDiv.attr('src', $('#inputfile').val() )
-                       
                     }
                 }
             </script>
