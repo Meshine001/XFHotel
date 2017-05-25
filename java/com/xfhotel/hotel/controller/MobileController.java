@@ -545,6 +545,12 @@ public class MobileController  {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");
 	}
+	/**
+	 * 查看密码
+	 * @param request
+	 * @param oId
+	 * @return
+	 */
 	@RequestMapping( value = "/viewpassword", method = RequestMethod.POST)
 	public String viewPassword(HttpServletRequest request,Long oId) {
 		Order order = orderService.get(oId);
@@ -554,6 +560,19 @@ public class MobileController  {
 		JSONObject suo_di_zhi = basic.getJSONObject("suo_di_zhi");
 		String lock_no = suo_di_zhi.toString();
 		request.setAttribute("lock_password", lockService.viewPassword(phone, lock_no));
+		
 		return "";
+	}
+	/**
+	 * 退租
+	 * 
+	 * @param orderId
+	 * @return
+	 */
+	@RequestMapping(value = "/outLease", method = RequestMethod.POST)
+	@ResponseBody
+	public Message outLease(Long orderId) {
+		
+		return orderservice.outLease(orderId);
 	}
 }
