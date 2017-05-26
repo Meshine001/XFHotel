@@ -303,6 +303,8 @@ public class Order {
 			return "进行中";
 		case STATUS_ON_COMFIRM:
 			return "确认中";
+		case STATUS_ON_OUT_LEASE:
+			return "退租确认中";
 		}
 		return "已完成";
 	}

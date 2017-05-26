@@ -69,6 +69,9 @@
 									<a href="javascript:;" class="btn comfirm-order" data-id="${order.id}">确认订单</a><br>
 									<a href="javascript:;" class="btn close-order" data-id="${order.id}">关闭订单</a>
 									</c:if>
+									<c:if test="${order.status=='退租确认中'}">
+									<a href="javascript:;" class="btn comfirm-order" data-id="${order.id}">确认退租</a><br>
+									</c:if>
 								</td>
 							</tr>
 						</c:forEach>
