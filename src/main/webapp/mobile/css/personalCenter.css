@@ -5,7 +5,7 @@ html,body{background: #fff}
     background:#fff;
     text-align: center;
 }
-.vip_info img{width: 0.7rem;;border-radius: 50%;border: 2px solid #fff}
+.vip_info img{width: 0.7rem;height: 0.7rem;border-radius: 50%;border: 2px solid #fff}
 .vip_info span{display: block;text-align: center;font-size: 0.14rem;height: 0.2rem;margin-top: 0.05rem;color: #666}
 .vip_info_list{margin-bottom: 0.15rem;width: 100%;overflow: hidden;background: #fff;padding: 0 0.1rem;border-bottom: 1px solid #ddd}
 .vip_info_list li{line-height: 0.45rem;border-bottom: 1px solid #ddd;font-size: 0.14rem;background: url("../images/add_right_c.png") no-repeat center right 0.1rem;background-size: 0.1rem}

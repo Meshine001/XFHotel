@@ -24,8 +24,10 @@ import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.DateUtil;
+import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
+import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -311,6 +313,28 @@ public class OrderServiceImpl implements OrderService {
 		add(o);
 		
 		return o;
+	}
+
+	@Transactional
+	@Override
+	public Message outLease(Long id) {
+		try {
+			Order o = get(id);
+			//TODO
+			//发短信给管理员
+			//【青舍都市】您有新订单需要确认，请及时处理。{1}
+//			String[] p = {o.getDescription()};
+//			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, systemConfiService.getConfig().getSms(), p);
+//			
+			o.setStatus(Order.STATUS_ON_OUT_LEASE);
+			update(o);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功，等待管理员确认");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "退租失败，系统错误");
+		}
+		
 	}
 
 	

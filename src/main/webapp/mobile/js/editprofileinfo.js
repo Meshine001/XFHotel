@@ -26,27 +26,27 @@ $(document).ready(function(){
 
     //~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-    $("#inputfile").change(function(){
-        var formData = new FormData($( "#uploadFile" )[0]);
-         $.ajax({
-             url: 'http://192.168.1.114/mobile/upload' ,
-             type: 'POST',
-             data: formData,
-             async: false,
-             cache: false,
-             contentType: false,
-             processData: false,
-             success: function (returndata) {
-                 console.log(returndata);
-             },
-             error: function (returndata) {
-                 console.log(returndata);
-             }
-         });
-
-         console.log("assa");
-     });
+    var commersrc='';
+    $("#file").change(function(){
+        var formData = new FormData($( "#uploadForm" )[0]);
+        $.ajax({
+            url: 'http://localhost/mobile/upload' ,
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                commersrc=data.content;
+                $("#avatar").attr('src',Constant.Constant.URL+'/images/'+data.content);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    })
 
 
 
@@ -57,12 +57,12 @@ $(document).ready(function(){
 
 
     $(".infobtn").click(function(){
-    	console.log($('#inputfile').val());
+    	fnBase.loadShow();
         var _uid = fnBase.huoqu(0, "uid");
         var _nickNameInput=$("#fillNick").val();
         var frontURL=Constant.URL+'/mobile/modify';
         var postData={
-            "avatar":$('#inputfile').val(),
+            "avatar":commersrc,
             "customerId":_uid,
             "nick":_nickNameInput,
             "sex":sexVal,
@@ -73,15 +73,17 @@ $(document).ready(function(){
             "declaration":$("#declaration").val(),
             "hobby":$("#hobby").val()
         };
+
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             if(data.customerId=="1"){
+            	fnBase.loadHide();
                 fnBase.myalert(data.content)
             }else{
                 fnBase.myalert(data.content)
             }
         })
-    })
+    });
     
     //
     function getData(){
@@ -94,7 +96,7 @@ $(document).ready(function(){
         var postData={};
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
-            $("#avatar").attr('src','/images/'+data.details.avatar);
+            $("#avatar").attr('src',Constant.Constant.URL+'/images/'+data.details.avatar);
             $("#fillNick").val(data.details.nick);
             $("#Sex").text(data.details.sex);
             $("#tel").val(data.details.tel);

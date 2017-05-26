@@ -29,8 +29,11 @@
 					<li role="4"><a href="javascript:;"></a></li>
 				</ul>
 				-->
+				
+				
+				<div id="topscroll" style="width:100%;height:auto;overflow-x:auto">
 				<table class="table">
-			
+
 					<thead>
 						<tr>
 							<th>订单号</th>
@@ -71,13 +74,20 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<!--  <ul id="pagecontroller" class="pagination">
-					-->
+				
+				
+				<ul id="pagecontroller" class="pagination">
+					
 				</ul>
+				
+				</div>
+				
+				
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
+	
 		//确认订单
 		$('.comfirm-order').click(function(){
 			var url = '../order/comfirm';

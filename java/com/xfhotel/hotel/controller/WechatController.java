@@ -35,6 +35,7 @@ import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.QRCode;
@@ -62,6 +63,9 @@ public class WechatController {
 	ApartmentService apartmentService;
 	@Autowired
 	CustomerService customerService;
+	
+	@Autowired
+	SystemConfService systemConfService;
 
 	/**
 	 * 查询订单是否已经支付
@@ -364,7 +368,7 @@ public class WechatController {
 				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
 				//发短信给管理员
 				//【青舍都市】您有新订单需要确认，请及时处理。{1}
-				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, Constants.ADMIN_TEL, p);
+				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, systemConfService.getConfig().getSms(), p);
 					
 			} else if ("FAIL".equals(result_code)) {
 				

@@ -49,7 +49,8 @@ public class LockServiceImpl implements LockService {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "失败");
 	}
-
+	
+	@Transactional
 	@Override
 	public Message addPassword(String phone, String lock_no, String time_start, String time_end) {
 		try {
@@ -70,7 +71,6 @@ public class LockServiceImpl implements LockService {
 
 			JSONObject result = LockOperater.getInstance().pwdAdd(lock.getLock_no(), "", lock.getValid_time_start(),
 					lock.getValid_time_end(), "", lock.getPwd_user_mobile(), "", lock.getDescription(), "");
-
 			if (result.getString("rlt_code").equals(LockOperater.LOCK_MSG_SUCCESS)) {
 				result = result.getJSONObject("data");
 				lock.setBusiness_id(result.getString("business_id"));
@@ -78,7 +78,7 @@ public class LockServiceImpl implements LockService {
 				lock.setPwd_text(DES.decrypt(result.getString("pwd_text")));
 				lock.setAvailiable(0);
 				lockDAOImpl.save(lock);
-				return new Message(Constants.MESSAGE_SUCCESS_CODE, "成功");
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加锁密码成功");
 			}
 
 		} catch (ParseException e) {
@@ -88,9 +88,10 @@ public class LockServiceImpl implements LockService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new Message(Constants.MESSAGE_ERR_CODE, "失败");
+		return new Message(Constants.MESSAGE_ERR_CODE, "设置锁密码失败");
 	}
 
+	@Transactional
 	@Override
 	public String viewPassword(String phone, String lock_no) {
 		Object[] values = new Object[2];
@@ -100,17 +101,18 @@ public class LockServiceImpl implements LockService {
 		return lock.getPwd_text();
 	}
 
+	@Transactional
 	@Override
 	public void deletePassword(String phone, String lock_no) {
 		Object[] values = new Object[2];
 		values[0] = phone;
 		values[1] = lock_no;
 		Lock lock = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
-
 		lockDAOImpl.delete(lock);
 
 	}
 
+	@Transactional
 	@Override
 	public int verify(String business_id, String lock_no, int pwd_no, String pwd_user_mobile) {
 		Object[] values = new Object[3];

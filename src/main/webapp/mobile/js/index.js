@@ -43,9 +43,11 @@ var alertSearch = {
 
 
 function getData() {
+	fnBase.loadShow();
     var frontURL = Constant.URL + '/mobile/home';
     var postData = {};
     fnBase.commonAjax(frontURL, postData, function (data) {
+    	fnBase.loadHide();
         console.log(data);
         //if(data.status==1){
         //   轮播

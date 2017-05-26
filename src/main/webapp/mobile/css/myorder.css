@@ -44,18 +44,18 @@
     float: left;
     margin-top: 0.085rem;
 }
-/*ÍË·¿*/
+/*ï¿½Ë·ï¿½*/
 .total .cancel{background: #666;color: #e4d0d0}
-/*ÆÀ¼Û*/
+/*ï¿½ï¿½ï¿½ï¿½*/
 .total .evaluate{background: orange;color: #FFFFFF}
-/*ÔÙ´ÎÔ¤¶¨*/
+/*ï¿½Ù´ï¿½Ô¤ï¿½ï¿½*/
 .total .reserve{background: #1fc8a1;color: #fff}
-/*Ö§¸¶*/
+/*Ö§ï¿½ï¿½*/
 .total .payment{background: #0cbb08;color: #FFF}
-/*³¬Ê± É¾³ý¶©µ¥*/
+/*ï¿½ï¿½Ê± É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .total .removeLi{background: red;color: #fff}
 
-    /*Ã»ÓÐ¶©µ¥Êý¾Ý*/
+    /*Ã»ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .geterror{width: 100%;text-align: center;
     border-radius: 0.05rem;
     margin-top: 1rem;
@@ -68,3 +68,49 @@
 .geterror h1{text-align: center;font-size: 0.2rem;padding-top: 0.3rem;color: #ccc;
 }
 .geterror .resiger{margin: 0.2rem auto;display: inline-block;padding: 0.06rem 0.15rem;border-radius: 0.05rem;font-size: 0.16rem;border: 1px solid #098ae2; color: #1686d2;}
+
+
+ #myArert{
+ 	width: 3rem;
+    height: 2rem;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -1rem;
+    margin-left: -1.5rem;
+    z-index: 10000000;
+    border-radius: 0.15rem;
+    overflow: hidden;
+        }
+        #diaTitle{font-size: 0.18rem;text-align: center;line-height: 0.5rem;height: 0.5rem;border-top: 1px solid #888;width: 100%;position: absolute;bottom: 0}
+        #diaTitle em{
+            width: 49%;
+            float: left;
+            line-height: 0.5rem;
+            text-align: center;
+            font-size: 0.18rem;
+            color: #888;
+        }
+        #diaTitle em:first-child{border-right: 1px solid #888}
+        #diaBody{font-size: 0.18rem;line-height: 0.4rem;color: #666;text-align: center;margin: 0.35rem}
+        /*åŠ¨ç”»*/
+        #myArert{
+            transform: scale(0);
+            -webkit-transform: scale(0);
+            -moz-transform: scale(0);
+            -ms-transform: scale(0);
+            -o-transform: scale(0);
+            transition: transform .3s ease-in-out;
+            -webkit-transition: transform .3s ease-in-out;
+            -moz-transition: transform .3s ease-in-out;
+            -ms-transition: transform .3s ease-in-out;
+            -o-transition: transform .3s ease-in-out;
+        }
+        #myArert.animate{
+            transform: scale(1);
+            -webkit-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+        }

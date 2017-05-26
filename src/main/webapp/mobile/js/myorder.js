@@ -56,6 +56,7 @@ $(document).ready(function(){
     }
 
     function getData(_status){
+    	fnBase.loadShow();
         getNowFormatDate();
         var frontURL=Constant.URL+'/mobile/search';
         var postData={
@@ -69,6 +70,7 @@ $(document).ready(function(){
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             if(data.statusCode=="1"){
+            	fnBase.loadHide();
                 var _str='';
                 $(".orderlist").html("");
                 for(var i=0;i<data.content.length;i++){
@@ -135,11 +137,17 @@ $(document).ready(function(){
             url:Constant.URL+'/mobile/viewpassword',
             success:function(data){
                 console.log(data);
-               fnBase.myalert('您的密码是：'+data.pwd_text)
+                $("#masking").show();
+                $("#myArert").addClass('animate');
+                $("#diaBody").text('房间密码：'+data.pwd_text);
+//               fnBase.myalert('您的密码是：'+data.pwd_text)
             }
         })
     });
-
+    $("#diaTitle em").click(function(){
+        $("#myArert").removeClass('animate');
+        $("#masking").hide();
+    })
 });
 
 
