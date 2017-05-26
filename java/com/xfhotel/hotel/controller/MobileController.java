@@ -492,6 +492,7 @@ public class MobileController  {
 		return list;
 	}
 	/**
+	 * 
 	 * 获取用户优惠券
 	 * @param uId
 	 * @return
