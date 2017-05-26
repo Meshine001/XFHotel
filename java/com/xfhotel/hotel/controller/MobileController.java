@@ -363,6 +363,7 @@ public class MobileController  {
 			long customerId ,String nick,String tel,String idCard,
 			String sex,String birthday,String job,
 			String education,String declaration,String hobby,String avatar) {
+		System.out.println(avatar);
 		Customer customer = customerService.getCustomer(customerId);
 		CustomerDetails c = customer.getDetails();
 		c.setNick(nick);
@@ -534,17 +535,19 @@ public class MobileController  {
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public @ResponseBody Message upload(MultipartFile file, HttpServletRequest request) {
-
+		System.out.println(file);
 		if (file != null) {
 			StringBuffer sb = new StringBuffer();
 			sb.append(request.getSession().getServletContext().getRealPath("/"));
-//			System.out.println(sb.toString());
+			System.out.println(sb.toString());
 			String fullPath = fileService.saveFile(file, sb.toString());
 			if (fullPath != null)
+				System.out.println(fullPath);
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, fullPath);
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");
 	}
+	
 	/**
 	 * 查看密码
 	 * @param request

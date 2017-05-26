@@ -7,12 +7,12 @@
     <link rel="shortcut icon" href="images/bitbug_favicon.ico" />
     <link href="css/common.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/editprofileinfo.css" />
-    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/fnBase.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script type="text/javascript" src="js/editprofileinfo.js"></script>
 </head>
-<body>
+<body style="display:none">
 <div class="header">
     <header class="header-mobile">
         <a href="#" onclick="javascript:history.back();" class="cell link-home"><img src="images/black-1.png" class="img-home"></a>
@@ -24,34 +24,27 @@
 <div id="Myscroll-body">
     <section>
         <div class="middle_content" >
-            <form action="./mobile/upload" method="post" id="formid">
-            <label>上传头像</label>
-            <p class="fl">
-
-	                <img  id="avatar" class="upload" onclick="getElementById('inputfile').click()">
-	                <input type="file" onchange="preview(this)" id="inputfile" style="display: none">
-
-            </p>
+            <form id="uploadForm">
+                <label>上传头像</label>
+                <p class="fl">
+                    <img  id="avatar" class="upload" onclick="getElementById('file').click()">
+                    <input type="file" name="file" onchange="preview(this)" id="file" style="display: none">
+                </p>
             </form>
             <!--图片上传-->
            <script type="text/javascript">
-                function preview(file)
-                {
-                    var prevDiv = document.getElementById('avatar');
-                    if (file.files && file.files[0])
-                    {
-                        var reader = new FileReader();
-                        reader.onload = function(evt){
-                            prevDiv.src = evt.target.result
-                        };
-                        reader.readAsDataURL(file.files[0]);
-                    }
-                    else
-                    {
-                    	prevDiv.attr('src', $('#inputfile').val() )
-                       
-                    }
-                }
+//                function preview(file){
+//                    var prevDiv = document.getElementById('avatar');
+//                    if (file.files && file.files[0]){
+//                        var reader = new FileReader();
+//                        reader.onload = function(evt){
+//                            prevDiv.src = evt.target.result
+//                        };
+//                        reader.readAsDataURL(file.files[0]);
+//                    }else{
+//                    	prevDiv.attr('src', $('#file').val() )
+//                    }
+//                }
             </script>
             <!--图片上传end-->
         </div>

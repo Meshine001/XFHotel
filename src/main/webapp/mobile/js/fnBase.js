@@ -6,10 +6,10 @@ console.log(baseUrl);
 var clientIp = getIp();
 
 var Constant = {
-//       URL: "192.168.1.114"
+//       URL: "http://localhost/",
  
         URL: baseUrl,
-        CLIENT_IP:clientIp
+//        CLIENT_IP:clientIp
 };
 //zzzz
 /**
@@ -82,6 +82,7 @@ $(document).ready(function(){
         loadShow:function(){
                 $("<div class='black_loading' style='display: block'><div class='ldbg'><img src='images/loading.gif' ><p>正在载入，请稍后...</p></div></div>").appendTo($('body'))
         },
+        
         loadHide:function(){
                 $('.black_loading').remove();
         },

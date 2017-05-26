@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+<form id= "uploadForm">
+    <p >指定文件名： <input type="text" name="filename" value= ""/></p >
+    <p >上传文件： <input type="file" name="file" id="file"/></p>
+    <input type="button" value="上传" id="doUpload">
+</form>
+<script>
+    $(document).ready(function(){
+        $("#doUpload").click(function(){
+        var value = "C:\\fakepath\\agencyperFormance.xlsx";
+        var name = value.substring(value.lastIndexOf("\\")+1);
+        alert(name);
+
+        })
+
+        $("#file").change(function(){
+            var formData = new FormData($( "#uploadForm" )[0]);
+            console.log(formData)
+            $.ajax({
+                url: 'http://localhost/mobile/upload' ,
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (returndata) {
+                    console.log(returndata);
+                },
+                error: function (returndata) {
+                    console.log(returndata);
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>

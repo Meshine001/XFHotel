@@ -8,15 +8,15 @@ $(document).ready(function(){
         currentdate:'',
         _startDate:''
     };
-    if(_uid==null||_uid=="undefined"||_uid==""){
-        window.location.href="login.html";
-        return;
-    }
-
-    var menu=fnBase.request("menu");
-    if(menu==undefined){
-        menu=0;
-    }
+    //if(_uid==null||_uid=="undefined"||_uid==""){
+    //    window.location.href="login.html";
+    //    return;
+    //}
+    //
+    //var menu=fnBase.request("menu");
+    //if(menu==undefined){
+    //    menu=0;
+    //}
     $("#nav a").click(function(){
         menuBar=$(this).index();
         reloadPage($(this).index())
@@ -56,6 +56,7 @@ $(document).ready(function(){
     }
 
     function getData(_status){
+    	fnBase.loadShow();
         getNowFormatDate();
         var frontURL=Constant.URL+'/mobile/search';
         var postData={
@@ -69,6 +70,7 @@ $(document).ready(function(){
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             if(data.statusCode=="1"){
+            	fnBase.loadHide();
                 var _str='';
                 $(".orderlist").html("");
                 for(var i=0;i<data.content.length;i++){
@@ -118,41 +120,34 @@ $(document).ready(function(){
         var _roomID=$(this).parent().parent().attr('roomid');
         window.location.href="evaluate.html?orderId="+encodeURIComponent(_orderID)+"&roomId="+encodeURIComponent(_roomID);
     });
-    //$(".cancel").live('click',function(){
-    //    window.location.href="checkout.html";
-    //});
+
 
     $(".check-out").live('click',function(){
-        var _orderID=$(this).parent().parent().attr('_orderID');
-        var postData={"orderId":_orderID};
-        var frontURL=Constant.URL+'/mobile/outLease';
-        fnBase.commonAjax(postData,frontURL,function(data){
-            console.log(data);
-            //fnBase.myalert(data.XXXXXXXX)
-        })
+        var _orderID=$(this).parent().parent().attr('orderid');
+        window.location.href="checkout.html?id="+encodeURIComponent(_orderID);;
     });
 
-    //$(".lockpassword").live('click',function(){
-    //    var postData=$(this).parent().parent().attr('_orderID');
-    //    var frontURL=Constant.URL+'/mobile/XXXXXXXXX';
-    //    fnBase.commonAjax(postData,frontURL,function(){
-    //        fnBase.myalert(data.XXXXXXXX)
-    //    })
-    //});
-
-    ////删除超时订单
-    //$(".removeLi").live('click',function(){
-    //    var isId=$(this).parent().parent().parent().find('li');
-    //    var postData=isId.attr('orderid');
-    //    var frontURL=Constant.URL+'/mobile/ ';
-    //    fnBase.commonAjax(frontURL,postData,function(data){
-    //        if(data.status=='1'){
-    //            isId.remove();
-    //            fnBase.myalert('订单删除成功')
-    //        }
-    //    })
-    //})
-
+    $(".lockpassword").live('click',function(){
+        var Data=$(this).parent().parent().attr('orderid');
+        var postData={"oId":Data};
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:postData,
+            url:Constant.URL+'/mobile/viewpassword',
+            success:function(data){
+                console.log(data);
+                $("#masking").show();
+                $("#myArert").addClass('animate');
+                $("#diaBody").text('房间密码：'+data.pwd_text);
+//               fnBase.myalert('您的密码是：'+data.pwd_text)
+            }
+        })
+    });
+    $("#diaTitle em").click(function(){
+        $("#myArert").removeClass('animate');
+        $("#masking").hide();
+    })
 });
 
 

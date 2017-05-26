@@ -107,10 +107,12 @@ $(document).ready(function(){
     
     
    function uploadData(){
+	   fnBase.loadShow();
 	   var frontURL=Constant.URL+'/mobile/home';
 	    var postData={};
 	    fnBase.commonAjax(frontURL,postData,function(data){
 	        console.log(data);
+	    	fnBase.loadHide();
 	        var str='';
 	        var isoffers;
 	        $('.goodlist').html("");

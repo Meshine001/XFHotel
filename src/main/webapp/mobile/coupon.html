@@ -15,7 +15,7 @@
         #Myscroll-body{top: 0.4rem;bottom: 0}
     </style>
 </head>
-<body>
+<body style="display:none">
 <article class="sx_filter">
 <!--头部-->
     <div class="header">
@@ -31,33 +31,12 @@
     <div id="Myscroll-body">
         <div class="service">
             <ul class="goodlist">
-                <li cuid='+data.id[i]+'>
-                    <h1>'+data.type[i]+'</h1>
-                    <p>消费满：<span>'+data.rule[i]+'</span></p>
-                    <p>有效期：<span>'+data.startTime[i]+"-"+data.endTime[i]+'</span></p>
-                    <i class="_pic">￥'+data.cValue[i]+'</i>
-                </li>
-                <li>
-                    <h1>住房代金卷</h1>
-                    <p>消费满：<span>500可用</span></p>
-                    <p>有效期：<span>2017.5.21-2017.5.22</span></p>
-                    <i class="_pic">￥30</i>
-                </li>
-                <li>
-                    <h1>住房代金卷</h1>
-                    <p>有效期：<span>2017.5.21-2017.5.22</span></p>
-                    <i class="_pic">￥20</i>
-                </li>
+
             </ul>
         </div>
         <div id="zanwu"></div>
     </div>
 </article>
 
-    <script>
-        $("document").ready(function(){
-
-        })
-    </script>
 </body>
 </html>

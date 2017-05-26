@@ -7,12 +7,12 @@
     <link rel="shortcut icon" href="images/bitbug_favicon.ico" />
     <link href="css/common.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/myorder.css" />
-    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script charset="gb2312" language="javascript" type="text/javascript" src="js/myorder.js"></script>
 </head>
-<body>
+<body style="display:none;">
 <div class="header">
     <header class="header-mobile">
         <a href="#" onclick="javascript:history.back();" class="cell link-home"><img src="images/black-1.png" class="img-home"></a>
@@ -65,5 +65,22 @@
         <!--</li>-->
     </ul>
 </div>
+	<div id="masking" style="overflow: hidden; display: none;"></div>
+	<div id="myArert">
+        <p id="diaTitle"><em>确地</em><em>返回</em></p>
+        <p id="diaBody">房门密码：198669</p>
+    </div>
+    <!-- 
+    <script>
+        $(document).ready(function(){
+            $(".btn").click(function(){
+                $("#myArert").addClass('animate');
+            });
+            $("#diaTitle em").click(function(){
+                $("#myArert").removeClass('animate');
+            })
+        })
+    </script>
+     -->
 </body>
 </html>

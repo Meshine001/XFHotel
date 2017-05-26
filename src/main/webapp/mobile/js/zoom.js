@@ -9,5 +9,6 @@ $(document).ready(
 			}
 			zoom();
 			window.onresize = zoom;
+			$("body").show();
 	}
 );

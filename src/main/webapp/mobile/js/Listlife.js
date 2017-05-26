@@ -7,10 +7,12 @@ $(document).ready(function(){
     var currentPage='';
 
     function getdata(){
+    	   fnBase.loadShow();
         currentPage='1';
         var frontURL=Constant.URL+'/mobile/story';
         var postData={"page":currentPage};
         fnBase.commonAjax(frontURL,postData,function(data){
+        	fnBase.loadHide();
             console.log(data);
             currentPage=data.sp;
             totalPage=data.ep;
