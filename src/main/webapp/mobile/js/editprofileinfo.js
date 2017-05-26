@@ -40,7 +40,7 @@ $(document).ready(function(){
             success: function (data) {
                 console.log(data);
                 commersrc=data.content;
-                $("#avatar").attr('src',Constant.Constant.URL+'/images/'+data.content);
+                $("#avatar").attr('src','http://localhost/images/'+data.content);
             },
             error: function (data) {
                 console.log(data);
@@ -96,7 +96,7 @@ $(document).ready(function(){
         var postData={};
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
-            $("#avatar").attr('src',Constant.Constant.URL+'/images/'+data.details.avatar);
+            $("#avatar").attr('src','http://localhost/images/'+data.details.avatar);
             $("#fillNick").val(data.details.nick);
             $("#Sex").text(data.details.sex);
             $("#tel").val(data.details.tel);

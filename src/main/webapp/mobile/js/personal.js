@@ -1,6 +1,9 @@
 ﻿
 $(document).ready(function(){
-    //$(".vip_info_list li .per-order-status .tip-size").css("display","none");
+	fnBase.loadShow();
+	$(".vip_info #personMan div img").click(function(){
+		window.location.href='editprofileinfo.html'
+	})
     var _uid=fnBase.huoqu(0,"uid");
     if(_uid==null || _uid=="undefined" || _uid==""){
         window.location.href="login.html";
@@ -10,16 +13,16 @@ $(document).ready(function(){
     var postData={};
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
-
+        fnBase.loadHide();
         if(data.details.nick==""||data.details.nick==null){
-            $("#nickname").text(data.details.tel);
+            $("#nickName").text(data.details.tel);
         }else{
-            $("#nickname").text(data.details.nick);
+            $("#nickName").text(data.details.nick);
         }
         if(data.details.avatar==""||data.details.avatar==null){
-            $(".vip_info img").attr("src",Constant.URL+"/images/face-90x90.png");
+            $(".vip_info #personMan div img").attr("src",Constant.URL+"/images/face-90x90.png");
         }else{
-            $(".vip_info img").attr("src",Constant.URL+'/images/'+data.details.avatar);
+        	$(".vip_info #personMan div img").attr("src",Constant.URL+'/images/'+data.details.avatar);
         }
        
         //未支付的订单数
@@ -36,17 +39,28 @@ $(document).ready(function(){
     });
 
 
+//  商品配送  餐饮配送 暂时没有做；
+    $("#zanwu1,#zanwu2,#zanwu3").click(
+    		function(){
+    	    	fnBase.myalert('正在开发,敬请期待')
+    	    }	
+    )
+    
 
-
-    //退出登录
-    $(".logout").click(
-        function(){
-            sessionStorage.clear();
-            localStorage.clear();
-            setTimeout(function(){
-                window.location.href="login.html";
-            },300)
-
-        }
-    );
+//
+//    //退出登录
+//    $(".logout").click(
+//        function(){
+//            sessionStorage.clear();
+//            localStorage.clear();
+//            setTimeout(function(){
+//                window.location.href="login.html";
+//            },300)
+//
+//        }
+//    );
+    
+    
+    
+    
 });

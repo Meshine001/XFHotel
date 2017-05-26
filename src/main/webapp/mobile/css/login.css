@@ -36,6 +36,7 @@ html,body{background: -webkit-linear-gradient(135deg,#029253,#00887b);width: 100
     border: 1px solid #45e3be;
     border-radius: 0.05rem;
     font-size: 0.16rem;
+    background: linear-gradient(360deg, #ace, #f96);
 }
 .btn-block{transition: all .5s;}
 .btn-block:hover{color: #ffffff;text-shadow: 0 0 5px #fff}

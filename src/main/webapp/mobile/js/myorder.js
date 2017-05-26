@@ -140,7 +140,6 @@ $(document).ready(function(){
                 $("#masking").show();
                 $("#myArert").addClass('animate');
                 $("#diaBody").text('房间密码：'+data.pwd_text);
-//               fnBase.myalert('您的密码是：'+data.pwd_text)
             }
         })
     });

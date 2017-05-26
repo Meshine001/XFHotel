@@ -6,10 +6,10 @@ console.log(baseUrl);
 var clientIp = getIp();
 
 var Constant = {
-//       URL: "http://localhost/",
+       URL: "http://localhost/",
  
-        URL: baseUrl,
-//        CLIENT_IP:clientIp
+        //URL: baseUrl,
+        CLIENT_IP:clientIp
 };
 //zzzz
 /**
