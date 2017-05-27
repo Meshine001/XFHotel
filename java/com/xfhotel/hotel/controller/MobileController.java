@@ -2,7 +2,6 @@ package com.xfhotel.hotel.controller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,8 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.xfhotel.hotel.common.Constants;
-import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Blog;
+import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
@@ -30,6 +29,7 @@ import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
+import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
@@ -37,7 +37,6 @@ import com.xfhotel.hotel.service.FileService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.support.Area;
-import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
 import com.xfhotel.hotel.support.LeasePrice;
 import com.xfhotel.hotel.support.LeaseType;
@@ -58,7 +57,9 @@ import net.sf.json.JSONObject;
 @Controller
 @RequestMapping("mobile")
 public class MobileController  {
-
+	@Autowired
+	CleanService cleanservice;
+	
 	@Autowired
 	LockService lockService;
 	
@@ -549,6 +550,7 @@ public class MobileController  {
 		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");
 	}
 	
+	
 	/**
 	 * 查看密码
 	 * @param request
@@ -576,4 +578,53 @@ public class MobileController  {
 	public @ResponseBody Message outLease(Long orderId) {
 		return orderservice.outLease(orderId);
 	}
+	
+	
+	@RequestMapping(value = "/Clean", method = RequestMethod.POST)
+	public @ResponseBody  Message Clean(Long uId ,int type){
+		if(uId==null){
+			return new Message(Constants.MESSAGE_ERR_CODE, "无订单"); 
+		}
+		List<Order> o = orderservice.getCustomerOrders(uId, type);
+		Map<String, Object> map = new HashMap<String, Object>();
+	for(Order d : o){
+		if( d.getStatus()==2){
+			map.put(d.getCusName(), d);
+		}
+	}
+	ArrayList<Object> list = new ArrayList<Object>();
+	  for(String key : map.keySet()){
+	   list.add(map.get(key));
+	  }
+	  return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+		
+	}
+	
+	@RequestMapping(value = "/cleanAdd", method = RequestMethod.POST)
+	public @ResponseBody Message cleanAdd (String demand,Long oederId , int content1[],int cleanTime) {
+		System.out.println(content1+"速度是孤独孤独"+demand+oederId+cleanTime);
+		if(content1==null){
+			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
+		}
+		try {
+			Order o = orderservice.get(oederId);
+			Clean clean = new Clean();
+			clean.setDemand(demand);
+			clean.setCleanTime(Clean.getcleanTime(cleanTime));
+			clean.setContent(Clean.getTypeDescription(content1));
+			clean.setRoomId(o.getRoomId());
+			clean.setOederId(oederId);
+			clean.setTime(new Date().getTime());
+			clean.setStatus(Clean.STATUS_NOT_AFFIRM);
+			cleanservice.add(clean);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
+		}
+		
+		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
+	}
+	
 }
+

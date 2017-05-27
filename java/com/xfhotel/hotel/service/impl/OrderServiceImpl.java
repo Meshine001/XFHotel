@@ -323,8 +323,8 @@ public class OrderServiceImpl implements OrderService {
 			//TODO
 			//发短信给管理员
 			//【青舍都市】您有新订单需要确认，请及时处理。{1}
-//			String[] p = {o.getDescription()};
-//			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, systemConfiService.getConfig().getSms(), p);
+			String[] p = {o.getDescription()};
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, systemConfiService.getConfig().getSms(), p);
 //			
 			o.setStatus(Order.STATUS_ON_OUT_LEASE);
 			update(o);

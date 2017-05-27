@@ -1,0 +1,71 @@
+package com.xfhotel.hotel.controller;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Clean;
+import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.service.CleanService;
+import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.support.Message;
+
+@Controller
+@RequestMapping("/center")
+public class ServiceCenterController {
+	@Autowired
+	OrderService orderservice;
+
+	@Autowired
+	CleanService cleanservice;
+
+	@RequestMapping(value = "/Clean", method = RequestMethod.GET)
+	public @ResponseBody  ArrayList<Object> Clean(Long uId ,int type){
+		List<Order> o = orderservice.getCustomerOrders(uId, type);
+		Map<String, Object> map = new HashMap<String, Object>();
+	for(Order d : o){
+		if( d.getStatus()==2){
+			map.put(d.getCusName(), d);
+		}
+	}
+	ArrayList<Object> list = new ArrayList<Object>();
+	  for(String key : map.keySet()){
+	   list.add(map.get(key));
+	  }
+	  return list;
+		
+	}
+	
+	@RequestMapping(value = "/cleanAdd", method = RequestMethod.POST)
+	public @ResponseBody Message cleanAdd (String demand,Long oederId , int[] content1,int cleanTime) {
+		try {
+			Order o = orderservice.get(oederId);
+			Clean clean = new Clean();
+			clean.setDemand(demand);
+			clean.setCleanTime(Clean.getcleanTime(cleanTime));
+			clean.setContent(Clean.getTypeDescription(content1));
+			clean.setRoomId(o.getRoomId());
+			clean.setOederId(oederId);
+			clean.setTime(new Date().getTime());
+			clean.setStatus(Clean.STATUS_NOT_AFFIRM);
+			cleanservice.add(clean);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
+		}
+		
+		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
+	}
+
+
+}

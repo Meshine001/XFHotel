@@ -6,6 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.log4j.chainsaw.Main;
+
+import com.xfhotel.hotel.support.StringSplitUtil;
+
 /**
  * 保洁
  * @author Jing
@@ -15,19 +19,30 @@ import javax.persistence.Table;
 @Table(name = "t_clean")
 public class Clean {
 	
-	public final static String getTypeDescription(int content){
-		switch(content){
-		case 0:
-			return "地面卫生打扫 ";
-		case 1:
-			return "清理室内垃圾";
-		case 2:
-			return "换洗床上用品";
-		case 3:
-			return "室内全面保洁";
-		default:
-			return "室内全面保洁";
+	public final static String getTypeDescription(int[] content1){
+		String[] s = new String[4];
+		for(int content: content1){
+			switch(content){
+			case 0:
+				s[content] ="地面卫生打扫 ";
+				break;
+			case 1:
+				s[content] ="清理室内垃圾";
+				break;
+			case 2:
+				s[content] ="换洗床上用品";
+
+				break;
+			case 3:
+				s[content] = "室内全面保洁";
+				
+				break;
+				
+			}
 		}
+		String content= StringSplitUtil.buildStrGroup(s);
+		return content;
+		
 	}
 	public final static String getcleanTime(int cleanTime){
 		switch(cleanTime){
@@ -52,8 +67,8 @@ public class Clean {
 	private Long oederId;//订单id
 	private int status;// 状态
 	private Long time;//下单时间
-	private int content;//保洁项目
-	private int cleanTime;//打扫时间
+	private String content;//保洁项目
+	private String cleanTime;//打扫时间
 	private String demand;//其他需求
 	public Long getId() {
 		return id;
@@ -85,18 +100,24 @@ public class Clean {
 	public void setTime(Long time) {
 		this.time = time;
 	}
-	public int getContent() {
+	
+	public String getContent() {
 		return content;
 	}
-	public void setContent(int content) {
+
+	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getCleanTime() {
+
+
+	public String getCleanTime() {
 		return cleanTime;
 	}
-	public void setCleanTime(int cleanTime) {
+
+	public void setCleanTime(String cleanTime) {
 		this.cleanTime = cleanTime;
 	}
+
 	public String getDemand() {
 		return demand;
 	}
@@ -113,6 +134,22 @@ public class Clean {
 		return "Clean [id=" + id + ", roomId=" + roomId + ", oederId=" + oederId + ", status=" + status + ", time="
 				+ time +",content="+content +",cleanTime="+ cleanTime+",demand="+ demand+ "]";
 	}
-
+	String getStatusString(int status) {
+		switch (status) {
+		case STATUS_NOT_AFFIRM:
+			return "等待管理员呼叫保洁";
+		case STATUS_CONDUCT:
+			return "正在清扫";
+		case STATUS_COMPLETE:
+			return "完成";
 	
+		}
+		return "已完成";
+	}
+	public static void main(String[] args) {
+		int i = 2;
+		System.out.println(getcleanTime(i));
+	}
 }
+
+

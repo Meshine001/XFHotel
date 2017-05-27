@@ -17,5 +17,4 @@ public interface CouponService extends BaseService<Coupon,Long>{
 	
 	public void deleteById(long Id);
 	
-
 }

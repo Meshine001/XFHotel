@@ -53,6 +53,7 @@ public class Constants {
 	public static final String SMS_INFORM_LOCK_CODE = "156532";
 	public static final String SMS_INFORM_OVER_PAY = "174009";
 	public static final String SMS_INFORM_COMFIRM_ORDER = "174007";
+	public static final String SMS_INFORM_COMFIRM_CLEAN_ORDER = "178589";
 	
 	public static final String SMS_AVAILBEL_TIME_STR = "2分钟";
 	public static final Long SMS_AVAILBEL_TIME = Long.valueOf(1000*60*2);
