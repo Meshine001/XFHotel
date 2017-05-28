@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿<!--<!DOCTYPE html>-->
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -7,10 +7,11 @@
     <link rel="shortcut icon" href="images/bitbug_favicon.ico" />
     <link href="css/common.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/Cleaning_service.css" />
-    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script type="text/javascript" src="js/fnBase.js"></script>
-    <script type="text/javascript" src="js/personal.js"></script>
+    <script charset="gb2312" language="javascript"  type="text/javascript" src="js/personal.js"></script>
+    <script charset="gb2312" type="text/javascript" src="js/cleaning_service.js"></script>
 </head>
 <body style="background: #FFF;display:none">
 
@@ -32,22 +33,28 @@
     <ul class="vip_info_list">
         <li><a href="javascript:;" style="color: #333;font-weight: bold;">保洁服务</a></li>
         <li>
-            <div class="per-order-status">
+            <div class="per-order-status house-status">
+                <labler class="labler" style="font-weight: bold;color: #0c4b38">选择房间</labler>
+                <ol>
+
+                </ol>
+                <p id="atl" style="font-size: 0.14rem;color:orangered;display: none">您暂时还没有在住的房间。</p>
+            </div>
+            <div class="per-order-status content-status">
                <labler>服务项目</labler>
                <ol>	
-               		<dd class="active">地面卫生打扫</dd>
-               		<dd>清理室内垃圾</dd>	
-               		<dd>换洗床上用品</dd>
-               		<dd>室内全面保洁</dd>
-               		
+               		<dd paid='0'>地面卫生打扫</dd>
+               		<dd paid='1'>清理室内垃圾</dd>	
+               		<dd paid='2'>换洗床上用品</dd>
+               		<dd paid='3'>室内全面保洁</dd>
                </ol> 
             </div>
-             <div class="per-order-status">
+             <div class="per-order-status time-status">
                <labler>时间</labler>
                <ol>	
-               		<dd>当天随时</dd>
-               		<dd>两小时内</dd>	
-               		<dd class="active">两小时后</dd>
+               		<dd tid='0'>当天随时</dd>
+               		<dd tid='1'>两小时内</dd>	
+               		<dd tid='2'>两小时后</dd>
                		
                </ol> 
             </div>
@@ -60,16 +67,6 @@
     <p class="account-login-width">
         <a href="javascript:;">提交</a>
     </p>
-   <!-- 
-   <ul class="vip_info_list">
-        <li><a href="myorder.html">其他服务</a></li>
-        <li>
-            <div class="per-order-status">
-            	
-            </div>
-        </li>
-    </ul>
-     -->
 </div>
 
 <script>

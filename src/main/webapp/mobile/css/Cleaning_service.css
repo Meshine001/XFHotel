@@ -93,11 +93,16 @@ html,body{background: #fff}
     margin-bottom: 0.1rem;
     line-height:0.3rem;
 }
-.per-order-status ol dd.active{
+.per-order-status ol dd._active{
 	background: #343a39;
     border-radius: 0.25rem 0 0.25rem 0;
     color: #eeeae7;
 }
+/*选择房间*/
+.house-status ol dd{
+    width: 100%;
+}
+
 .per-order-status ._textarea{
 	width: 100%;
     min-height: 1rem;

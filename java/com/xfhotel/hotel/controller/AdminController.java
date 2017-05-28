@@ -71,7 +71,13 @@ public class AdminController {
 	public String loginPage() {
 		return "/admin/login";
 	}
-
+	//..2.28保洁服务...
+	@RequestMapping(value = "/customer_baojie", method = RequestMethod.GET)
+	public String baojie() {
+		return "/admin/customer/baojie";
+	}
+	
+	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardPage() {
 		session.setAttribute("apartmentCount", apartmentService.list().size());

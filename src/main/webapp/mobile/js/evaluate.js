@@ -10,9 +10,11 @@
         var index = $(this).index();
         $('.price_info li i:lt('+index+')').addClass('hover');
         num = $('.price_info li .hover').length;
-        return num;
+
     });
     $(".navbar a").click(function(){
+        var arr=[num,5,5,5,5,5];
+        var oplist=arr.join(',');
         var _orderID=fnBase.request('orderId');
         var _roomID=fnBase.request('roomId');
         var _uid=fnBase.huoqu(0,"uid");
@@ -20,17 +22,17 @@
         var postData ={
             "roomId":_roomID,
             "orderId":_orderID,
-            "pics":'',
-            "feel":evaluate,
-            "c_score":num,
-            "form":_uid,
+            "pics":'null',
+            "feel":$("#comment").val(),
+            "c_score":oplist,
+            "from":_uid,
             "to":0
         };
+
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             if(data.statusCode=="1"){
                 fnBase.myalert(data.content)
-
             }else{
                 fnBase.myalert(data.content);
             }

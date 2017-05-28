@@ -93,6 +93,11 @@ html,body{background: #fff}
     overflow: hidden;
     display: none;!important;
 }
+.per-order-status ol dd._active{
+	background: #343a39;
+    border-radius: 0.25rem 0 0.25rem 0;
+    color: #eeeae7;
+}
 .logout{
     display: block;
     width: 80%;

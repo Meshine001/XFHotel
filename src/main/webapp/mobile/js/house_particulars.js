@@ -3,7 +3,7 @@ $(document).ready(function(){
 	fnBase.loadShow();
 	var _uid = fnBase.huoqu(0, "uid");
 	var _id = decodeURIComponent(fnBase.request("id"));
-	
+
 	$.ajax({
 		type:'GET',
 		dataType:'json',
@@ -233,22 +233,23 @@ $(document).ready(function(){
 	});
 
     //    评价列表显示
-    var frontURL=Constant.URL+'/mobile/getRoomRates';
-    var postData={"roomId":_id};
-    fnBase.commonAjax(frontURL,postData,function(data){
-    	$("#pingjia span").text(data.pingjun+"星")
-    })
+    //var frontURL=Constant.URL+'/mobile/getRoomRates';
+    //var postData={"roomId":_id};
+    //fnBase.commonAjax(frontURL,postData,function(data){
+    //    console.log(data);
+    //	$("#pingjia span").text(data.pingjun+"星")
+    //})
     
     var frontURL=Constant.URL+'/mobile/get';
     var postData={"roomId":_id,"page":1};
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
-        
+            $("#pingjia span").text(data.results[1].score[0]+"星");
             $(".criticism ul").html("");
             var plStr = '';
             for(var i=0;i<data.results.length;i++){
-                plStr+='<li><p class="appInfo"><span class="appName">'+data.results[i].fromWho+'</span><i>入住时间：'+data.results[i].time+'</i></p><p class="appText">'+data.results[i].feel+'</p><p class="pl-pic">';
-                if(data.results[i].pics.length>0){
+                plStr+='<li><p class="appInfo"><span class="appName">匿名</span><i>入住时间：'+data.results[i].time+'</i></p><p class="appText">'+data.results[i].feel+'</p><p class="pl-pic">';
+                if(data.results[i].pics.length>1){
                 	$(".panel .pl-pic").show();
                 	for(var j=0;j<data.results[i].pics.length;j++){
                 		plStr+='<img src="/images/' + data.results[i].pics[0] +'">'
