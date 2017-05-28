@@ -1,5 +1,4 @@
 package com.xfhotel.hotel.controller;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
@@ -26,6 +26,7 @@ import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
+import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.OrderService;
@@ -55,6 +56,8 @@ public class AdminController {
 	ApartmentService apartmentService;
 	@Autowired
 	BlogService blogService;
+	@Autowired
+	CleanService cleanService;
 	
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -95,6 +98,16 @@ public class AdminController {
 		}
 		session.setAttribute("orders", orders);
 		return "/admin/order/order";
+	}
+	@RequestMapping(value = "/clean", method = RequestMethod.GET)
+	public String clean() {
+		List<Clean> list = cleanService.list();
+		List<Map> orders = new ArrayList<Map>();
+		for (Clean o : list) {
+			orders.add(o.toMap());
+		}
+		session.setAttribute("list", list);
+		return "/admin/Clean";
 	}
 
 	@RequestMapping(value = "/system", method = RequestMethod.GET)

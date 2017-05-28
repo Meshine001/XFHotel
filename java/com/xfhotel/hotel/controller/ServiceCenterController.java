@@ -66,6 +66,48 @@ public class ServiceCenterController {
 		
 		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
 	}
+	@RequestMapping(value = "/cleanOrder", method = RequestMethod.POST)
+	@ResponseBody
+	public Message cleanOrder(Long id) {
+		Clean c = cleanservice.get(id);
+		if (c == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+		if (c.getStatus() == Clean.STATUS_NOT_AFFIRM) {
+			try {
+					c.setStatus(Clean.STATUS_CONDUCT);
+					cleanservice.update(c);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+			}
 
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
+
+	}
+	
+	@RequestMapping(value = "/cleanOrders", method = RequestMethod.POST)
+	@ResponseBody
+	public Message cleanOrders(Long id) {
+		Clean c = cleanservice.get(id);
+		if (c == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+		if (c.getStatus() == Clean.STATUS_CONDUCT) {
+			try {
+					c.setStatus(Clean.STATUS_COMPLETE);
+					cleanservice.update(c);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+			}
+
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "打扫完成");
+
+	}
 
 }

@@ -71,7 +71,7 @@ public class CleanServiceImpl implements CleanService {
 	@Override
 	public List<Clean> list() {
 		// TODO Auto-generated method stub
-		return null;
+		return CleanDAO.getListByHQL("from Clean", null);
 	}
 
 	@Transactional

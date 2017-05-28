@@ -1,5 +1,9 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +12,8 @@ import javax.persistence.Table;
 
 import org.apache.log4j.chainsaw.Main;
 
+import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.StringSplitUtil;
 
 /**
@@ -129,10 +135,17 @@ public class Clean {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	@Override
-	public String toString() {
-		return "Clean [id=" + id + ", roomId=" + roomId + ", oederId=" + oederId + ", status=" + status + ", time="
-				+ time +",content="+content +",cleanTime="+ cleanTime+",demand="+ demand+ "]";
+	public Map toMap(){
+		Map info = new HashMap();
+		info.put("id", id);
+		info.put("roomId", roomId);
+		info.put("oederId", oederId);
+		info.put("status", getStatusString(status));
+		info.put("time", DateUtil.format(new Date(time), "yyyy-MM-dd"));
+		info.put("content", content);
+		info.put("cleanTime",  DateUtil.format(new Date(cleanTime), "yyyy-MM-dd"));
+		info.put("demand", demand);
+		return info;
 	}
 	String getStatusString(int status) {
 		switch (status) {
@@ -146,10 +159,8 @@ public class Clean {
 		}
 		return "已完成";
 	}
-	public static void main(String[] args) {
-		int i = 2;
-		System.out.println(getcleanTime(i));
-	}
+
+	
 }
 
 

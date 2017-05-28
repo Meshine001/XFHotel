@@ -70,7 +70,7 @@
 									<a href="javascript:;" class="btn close-order" data-id="${order.id}">关闭订单</a>
 									</c:if>
 									<c:if test="${order.status=='退租确认中'}">
-									<a href="javascript:;" class="btn comfirm-order" data-id="${order.id}">确认退租</a><br>
+									<a href="javascript:;" class="btn comfirmOutLease-order" data-id="${order.id}">确认退租</a><br>
 									</c:if>
 								</td>
 							</tr>
@@ -138,6 +138,32 @@
 				}
 			});
 		});
+		//确认订单
+		$('.comfirmOutLease-order').click(function(){
+			var url = '../order/comfirmOutLease';
+			var id = $(this).attr('data-id');
+			$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					'id' : id,
+				},
+				url : url,
+				error : function(data) {
+					
+				},
+				success : function(data) {
+					console.log(data)
+					if(data.statusCode == 1){
+						
+						window.location.href = '../admin/order';
+					}else{
+						alert(data.content);
+					}
+				}
+			});
+		});
+		
 	</script>
 	</my_body>
 </body>

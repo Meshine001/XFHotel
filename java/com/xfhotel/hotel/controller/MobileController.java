@@ -162,6 +162,7 @@ public class MobileController  {
 	@RequestMapping(value = "/getRoomRates", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> getRoomRates(Long roomId){
 		return commentService.getRoomRates(roomId);
+		
 	}
 
 	
@@ -286,6 +287,8 @@ public class MobileController  {
 	@RequestMapping(value = "/comment", method = RequestMethod.POST)
 	public @ResponseBody Message postComment(Long roomId, Long orderId, Long from, Long to, String[] c_score,
 			String feel, String[] pics) {
+		System.out.println(pics+"sadhausdhiah");
+		System.out.println(from);
 		try {
 			Comment comment = new Comment();
 			comment.setFromWho(from);
@@ -345,6 +348,7 @@ public class MobileController  {
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order.toMap());
+//		System.out.println(info);
 		return info;
 	}
 	
@@ -364,7 +368,7 @@ public class MobileController  {
 			long customerId ,String nick,String tel,String idCard,
 			String sex,String birthday,String job,
 			String education,String declaration,String hobby,String avatar) {
-		System.out.println(avatar);
+//		System.out.println(avatar);
 		Customer customer = customerService.getCustomer(customerId);
 		CustomerDetails c = customer.getDetails();
 		c.setNick(nick);
@@ -474,16 +478,14 @@ public class MobileController  {
 	public ArrayList<Object> getMyCoupons(Long uId ,Double totalPrice){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Coupon> coupon = couponService.getCoupon(uId);
-		
 		for(Coupon coupon2:coupon){
 			long startTime = TimeUtil.getDateLong(coupon2.getStartTime());
 			long endTime = TimeUtil.getDateLong(coupon2.getEndTime());
 			Double rule = Double.valueOf(coupon2.getRule()); 
 			long time = new Date().getTime();
 			boolean usable = coupon2.isUsed();
-//			System.out.println(usable);
 			if(startTime<=time&&time<=endTime&&totalPrice>=rule&&usable!=true){
-				map.put(coupon2.getEndTime(), coupon2);
+				map.put(String.valueOf(coupon2.getId()), coupon2);
 			}
 		}
 		ArrayList<Object> list = new ArrayList<Object>();
@@ -541,7 +543,7 @@ public class MobileController  {
 		if (file != null) {
 			StringBuffer sb = new StringBuffer();
 			sb.append(request.getSession().getServletContext().getRealPath("/"));
-			System.out.println(sb.toString());
+//			System.out.println(sb.toString());
 			String fullPath = fileService.saveFile(file, sb.toString());
 			if (fullPath != null)
 				System.out.println(fullPath);
@@ -624,6 +626,24 @@ public class MobileController  {
 		}
 		
 		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
+	}
+	/*
+	 * 获取订单
+	 */
+	@RequestMapping(value = "/getOrder", method = RequestMethod.POST)
+	public @ResponseBody ArrayList<Object> getOrder(Long id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		Order order = orderservice.get(id);
+		String  i= TimeUtil.getDateStr(order.getStartTime());
+		String  d= TimeUtil.getDateStr(order.getEndTime());
+		map.put("开始时间", i);
+		map.put("结束时间", d);
+		map.put("全部", order);
+		ArrayList<Object> list = new ArrayList<Object>();
+		  for(String key : map.keySet()){
+		   list.add(map.get(key));
+		  }
+		return list;
 	}
 	
 }
