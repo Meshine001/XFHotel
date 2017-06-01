@@ -233,7 +233,7 @@
             
             // If top + modal height > doc height, increase doc height
             $('.dw-persp', dw).height(0).height(t + mh > $(document).height() ? t + mh : $(document).height());
-            
+
             // Scroll needed
             if (scroll && ((t + mh > st + wh) || (at > st + wh))) {
                 $(window).scrollTop(t + mh - wh);

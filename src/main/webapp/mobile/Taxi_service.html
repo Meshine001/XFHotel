@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>汽车服务</title>
+    <link rel="shortcut icon" href="images/bitbug_favicon.ico" />
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/Cleaning_service.css" />
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script type="text/javascript" src="js/fnBase.js"></script>
+    <script type="text/javascript" src="js/personal.js"></script>
+    <style>
+    	.per-order-status ol dd{width:100%;}
+    </style>
+</head>
+<body style="background: #FFF;display:none">
+
+<div id="Myscroll-body">
+	
+    <div  class="vip_info">
+    	<p class="tit"><a href="index.html" style="float:left">首页</a><a href="editprofileinfo.html" style="float:right">个人信息</a></p>
+    	<div id="personMan">
+    		<div style="width:0.7rem;height:0.7rem;border-radius:50%;float:left;overflow: hidden;margin-left:0.45rem">
+	        	<img src="images/face-90x90.png">
+  			</div>
+  			<div class="ctxt">
+  				<p id="nickName">匿名7976</p>
+		    	<p id="">信用积分：999</p>
+			</div>
+        </div>
+    </div>
+ 
+    <ul class="vip_info_list">
+        <li><a href="javascript:;" style="color: #333;font-weight: bold;">叫车服务</a></li>
+        <li>
+            <div class="per-order-status">
+               <labler>接送站服务</labler>
+               <ol>	
+               		<dd cat="100">西安北站100元/单次</dd>
+               		<dd cat="150">飞机场150元/单次</dd>	
+               		<dd cat="500">临潼旅游专线500元/天</dd>
+               </ol> 
+            </div>
+             <div class="per-order-status">
+               <labler>短程包车</labler>
+               <ol>	
+               		<dd>三环内300/天</dd>
+               </ol> 
+            </div>
+            <div class="per-order-status">
+               <labler>其他要求</labler>
+               <textarea class="_textarea" placeholder="您还有什么要求尽管提;"></textarea>
+            </div>
+        </li>
+    </ul>
+    <p class="account-login-width">
+        <a href="javascript:;">提交</a>
+    </p>
+    <script>
+        $(document).ready(function(){
+            $(".account-login-width").click(function(){
+                fnBase.myalert('此服务正在维护！')
+            })
+        })
+    </script>
+</div>
+
+<script>
+	
+</script>
+</body>
+</html>

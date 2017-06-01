@@ -10,6 +10,7 @@ import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.dao.impl.CleanDAOImpl;
 import com.xfhotel.hotel.dao.impl.OrderDAOImpl;
 import com.xfhotel.hotel.entity.Clean;
+import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.SystemConfService;
@@ -37,19 +38,17 @@ public class CleanServiceImpl implements CleanService {
 	@Override
 	public void add(Clean t) {
 		// TODO Auto-generated method stub
-		
-//		Order o = orderDAO.get(t.getOederId());
-		//TODO
-		//发短信给管理员
-		//【青舍都市】您有新订单需要确认，请及时处理。{1}
-//		String[] p = {o.getDescription()};
-//		SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, systemConfiService.getConfig().getSms(), p);
-////		
+	
 		CleanDAO.save(t);
 	
-		
-		
 	}
+	@Transactional
+	@Override
+	public List<Clean> getClean(Long oederId) {
+		String hql = "from Clean where oederId=?";
+		Object[] v = {oederId};
+		return CleanDAO.getListByHQL(hql, v);
+		}
 
 
 	@Transactional
@@ -73,7 +72,6 @@ public class CleanServiceImpl implements CleanService {
 		// TODO Auto-generated method stub
 		return CleanDAO.getListByHQL("from Clean", null);
 	}
-
 	@Transactional
 	@Override
 	public Clean get(Long id) {

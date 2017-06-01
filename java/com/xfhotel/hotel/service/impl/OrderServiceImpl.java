@@ -25,6 +25,7 @@ import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
+import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
@@ -324,8 +325,8 @@ public class OrderServiceImpl implements OrderService {
 			//TODO
 			//发短信给管理员
 			//【青舍都市】您有新订单需要确认，请及时处理。{1}
-//			String[] p = {o.getDescription()};
-//			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, systemConfiService.getConfig().getSms(), p);
+			String[] p = {o.getDescription()};
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, systemConfiService.getConfig().getSms(), p);
 			
 			o.setStatus(Order.STATUS_ON_OUT_LEASE);
 			update(o);
@@ -336,6 +337,12 @@ public class OrderServiceImpl implements OrderService {
 			return new Message(Constants.MESSAGE_ERR_CODE, "退租失败，系统错误");
 		}
 		
+	}
+	@Transactional
+	@Override
+	public PageResults<Order> listPage(int page) {
+		// TODO Auto-generated method stub
+		return orderDAO.findPageByFetchedHql("from Order", "select count(*) from Order", page, 10, null);
 	}
 
 	

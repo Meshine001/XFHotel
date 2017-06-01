@@ -2,14 +2,13 @@
 console.log(baseUrl);
 //  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 
-
 var clientIp = getIp();
 
 var Constant = {
-//       URL: "http://localhost/",
+//       URL: "http://192.168.1.108/",
  
         URL: baseUrl,
-//        CLIENT_IP:clientIp
+        CLIENT_IP:clientIp
 };
 //zzzz
 /**
@@ -67,17 +66,9 @@ $(document).ready(function(){
             setTimeout(function(){$(".Masking-out").hide()},500)
         });
     }
-    ////轮播
-    //var mySwiper = new Swiper ('.swiper-container',{
-    //    loop: true,
-    //    autoplay: 1800,
-    //    pagination: '.swiper-pagination',
-    //    autoplayDisableOnInteraction: false
-    //});
-})
 
-    //var shebei_type=0;//0网页 1安卓 2ios
-    //var load_flag = false; // 数据记载标识 数据未加载
+});
+
     var fnBase={
         loadShow:function(){
                 $("<div class='black_loading' style='display: block'><div class='ldbg'><img src='images/loading.gif' ><p>正在载入，请稍后...</p></div></div>").appendTo($('body'))
@@ -87,9 +78,9 @@ $(document).ready(function(){
                 $('.black_loading').remove();
         },
         commonAjax : function(url, data,fn){
-            //fnBase.loadShow();
+            fnBase.loadShow();
             $.ajax({
-//                cache : true,
+                //cache : true,
                 data : data,
                 url : url,
                 timeout:30000,

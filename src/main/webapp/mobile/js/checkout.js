@@ -10,7 +10,7 @@ $(document).ready(function(){
            data:{"orderId":_id},
            url:Constant.URL+'/mobile/outLease',
            success:function(data){
-               console.log(data)
+               console.log(data);
                if(data.statusCode==1){
                    fnBase.myalert(data.content);
                    window.location.href = 'myorder.html?id=' + decodeURIComponent(fnBase.request("id"));

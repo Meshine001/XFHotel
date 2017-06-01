@@ -103,12 +103,11 @@ function addpartenr(){
     var _price=fnBase.huoqu(1,"dayPrice");
     var _apartmenttype=fnBase.huoqu(1,"roomType");
     var _YJpic=fnBase.huoqu(1,"YJpic");
-
     $(".order_info .roomName").text(_community);
     $(".order_info .roomTime").html(_startTime+"入住"+_endTime+"离开"+"<i class='date'>共（"+_oTotalDay+"）天</i>");
     $(".order_info .roompYJ").html("押金:<span style='color: #666'>"+_YJpic+"</span>");
-    $(".order_info .roompPic").html("订单总额:<span class='money'>￥"+_oTotalPrice+"</span><a>优惠劵</a>");
-
+    $(".order_info .roompPic").html("订单总额:<span class='money'>￥"+Number(_oTotalPrice).toFixed(2)+"</span><a>优惠劵</a>");
+    
     $("#needpic i").click(function(){
        if($(this).hasClass('active')==true){
            $(this).removeClass('active');
@@ -134,7 +133,8 @@ function addpartenr(){
     	}else{
     		$(this).find('.ifrader').removeClass('hat')
     	}
-    })
+
+    });
    
     /**
 	 * 获取可用优惠卷
@@ -148,16 +148,17 @@ function addpartenr(){
     	var postData={
     			'uId':_uid,
     			'totalPrice':_oTotalPrice
-    	}
+    	};
+        console.log(postData);
     	 fnBase.commonAjax(frontURL,postData,function(data){
-    		 console.log(data)
+    		 console.log(data);
     		 if(data.length=='0'||data.length==''){
     			 $('#zanwu').show();
     		 }else{
     			 var _data='';
         		 $('#usecoupon ul').html('');
         		 for(var j=0;j<data.length;j++){
-        			 _data+='<li usid="'+data[j].id+'"><div class="usemsg"><h1>'+data[j].type+'</h1><p>消费满：<span>'+data[j].rule+'</span></p><p>有效期：<span>'+data[j].startTime+"-"+data[j].endTime+'</span></p><span class="ifrader"><i></i></span></div><i class="_pic">￥'+data[j].cValue+'</i></li>'
+        			 _data+='<li usid="'+data[j].id+'"  used="'+data[j].cValue+'"><div class="usemsg"><h1>'+data[j].type+'</h1><p>消费满：<span>'+data[j].rule+'</span></p><p>有效期：<span>'+data[j].startTime+"-"+data[j].endTime+'</span></p><span class="ifrader"><i></i></span></div><i class="_pic">￥'+data[j].cValue+'</i></li>'
         			
         		 }
         		 $('#usecoupon ul').append(_data)
@@ -165,18 +166,22 @@ function addpartenr(){
     	 })
     });
 //    选取优惠劵
-    
+    var used='';
     $("#usecoupon header ._confirm").click(function(){
     	var strList=new Array();
+        var used='';
         var obj=$(this).parent().parent().find('li');
         for(var i=0;i<obj.length;i++){
             if(obj.eq(i).find('.usemsg .ifrader').hasClass("hat")){
-                strList.push(obj.eq(i).attr('usid'));
+                //strList.push(obj.eq(i).attr('usid'));
+                couponid=obj.eq(i).attr('usid');
+                used=_oTotalPrice-obj.eq(i).attr('used');
+                used=used.toFixed(2);
             }
         }
-        couponid=strList.join(",");
+        //couponid=strList.join(",");
+        $(".order_info .roompPic").html("订单总额:<span class='money'>￥"+used+"</span><a>优惠劵</a>");
         return couponid;
-        
     });
     
     //    提交订单
@@ -232,12 +237,12 @@ function addpartenr(){
         };
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
-            fnBase.keep(1,'oTotalPrices',data.order.totalPrice);
-
+            console.log(data.order.id);
             if(data.order.id != '' && data.order.id != undefined){
-                location.href = Constant.URL + '/wx/payment.html?id='+data.order.id;
+                //location.href = Constant.URL + '/wx/payment.html?id='+encodeURIComponent(data.order.id);
+                window.location.href="payment.html?id="+encodeURIComponent(data.order.id);
             }else {
-                window.location.href = Constant.URL + '/wx/login.html';
+                window.location.href = 'login.html';
             }
         })
     })

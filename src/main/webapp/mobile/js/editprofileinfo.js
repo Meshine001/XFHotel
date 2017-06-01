@@ -30,7 +30,7 @@ $(document).ready(function(){
     $("#file").change(function(){
         var formData = new FormData($( "#uploadForm" )[0]);
         $.ajax({
-            url: 'http://localhost/mobile/upload' ,
+            url: Constant.URL+'/mobile/upload' ,
             type: 'POST',
             data: formData,
             async: false,
@@ -40,7 +40,7 @@ $(document).ready(function(){
             success: function (data) {
                 console.log(data);
                 commersrc=data.content;
-                $("#avatar").attr('src',Constant.Constant.URL+'/images/'+data.content);
+                $("#avatar").attr('src',Constant.URL+'/images/'+data.content);
             },
             error: function (data) {
                 console.log(data);
@@ -96,7 +96,7 @@ $(document).ready(function(){
         var postData={};
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
-            $("#avatar").attr('src',Constant.Constant.URL+'/images/'+data.details.avatar);
+            $("#avatar").attr('src',Constant.URL+'images/'+data.details.avatar);
             $("#fillNick").val(data.details.nick);
             $("#Sex").text(data.details.sex);
             $("#tel").val(data.details.tel);

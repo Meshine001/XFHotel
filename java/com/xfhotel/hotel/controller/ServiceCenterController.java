@@ -20,7 +20,7 @@ import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.support.Message;
 
 @Controller
-@RequestMapping("/center")
+@RequestMapping("/ServiceCenter")
 public class ServiceCenterController {
 	@Autowired
 	OrderService orderservice;
@@ -46,10 +46,17 @@ public class ServiceCenterController {
 	}
 	
 	@RequestMapping(value = "/cleanAdd", method = RequestMethod.POST)
-	public @ResponseBody Message cleanAdd (String demand,Long oederId , int[] content1,int cleanTime) {
+	public @ResponseBody Message cleanAdd (String demand,Long oederId , int content1[],int cleanTime) {
+		System.out.println("那还好9");
+		if(content1==null){
+			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
+		}
 		try {
+			System.out.println("那还好0");
 			Order o = orderservice.get(oederId);
+			System.out.println("那还好1");
 			Clean clean = new Clean();
+			System.out.println("那还好2");
 			clean.setDemand(demand);
 			clean.setCleanTime(Clean.getcleanTime(cleanTime));
 			clean.setContent(Clean.getTypeDescription(content1));
@@ -57,7 +64,9 @@ public class ServiceCenterController {
 			clean.setOederId(oederId);
 			clean.setTime(new Date().getTime());
 			clean.setStatus(Clean.STATUS_NOT_AFFIRM);
+			System.out.println("那还好");
 			cleanservice.add(clean);
+			System.out.println("那还好6");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

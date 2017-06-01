@@ -69,6 +69,9 @@ $(document).ready(function(){
         };
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
+
+
+
             if(data.statusCode=="1"){
             	fnBase.loadHide();
                 var _str='';
@@ -88,7 +91,7 @@ $(document).ready(function(){
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
                     }else if(data.content[i].status=="进行中"){
                         _str+='<p class="total"><span class="fl cancel check-out">退房</span><span class="fl cancel lockpassword">查看密码</span></p>'
-                    }else if(data.content[i].status=="已完成"){
+                    }else if(data.content[i].status=="已完成"||data.content[i].status=="退租确认中"){
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
                     }
                     _str+='</li>';
@@ -113,7 +116,13 @@ $(document).ready(function(){
     });
     $(".payment").live('click',function(){
         var _orderID=$(this).parent().parent().attr('orderid');
+        //var frontURL=Constant.URL+'/mobile/getOrder';
+        //var postData={id:_orderID};
+        //fnBase.commonAjax(frontURL,postData,function(data){
+        //    console.log(data)
+        //});
         window.location.href="payment.html?id="+_orderID;
+
     });
     $(".evaluate").live('click',function(){
         var _orderID=$(this).parent().parent().attr('orderid');
@@ -124,7 +133,7 @@ $(document).ready(function(){
 
     $(".check-out").live('click',function(){
         var _orderID=$(this).parent().parent().attr('orderid');
-        window.location.href="checkout.html?id="+encodeURIComponent(_orderID);;
+        window.location.href="checkout.html?id="+encodeURIComponent(_orderID);
     });
 
     $(".lockpassword").live('click',function(){
@@ -140,7 +149,6 @@ $(document).ready(function(){
                 $("#masking").show();
                 $("#myArert").addClass('animate');
                 $("#diaBody").text('房间密码：'+data.pwd_text);
-//               fnBase.myalert('您的密码是：'+data.pwd_text)
             }
         })
     });

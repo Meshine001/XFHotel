@@ -75,15 +75,13 @@ public class CommentServiceImpl implements CommentService{
 		Double jiaotong = 5.0;
 		Double anquan = 5.0;
 		Double xingjiabi = 5.0;
+		
 		for(Comment c:comments){
 			String[] scores = c.getScore();
 			weisheng = (weisheng+Double.valueOf(scores[0]))/2;
 			miaoshu = (miaoshu+Double.valueOf(scores[1]))/2;
-			System.out.println(miaoshu);
 			jiaotong = (jiaotong+Double.valueOf(scores[2]))/2;
-			System.out.println(jiaotong);
 			anquan = (anquan+Double.valueOf(scores[3]))/2;
-			
 			xingjiabi = (xingjiabi+Double.valueOf(scores[4]))/2;
 		}
 		pingjun = (weisheng + miaoshu+jiaotong+anquan+xingjiabi)/5;

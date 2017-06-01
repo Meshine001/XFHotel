@@ -26,7 +26,7 @@ import com.xfhotel.hotel.support.StringSplitUtil;
 public class Clean {
 	
 	public final static String getTypeDescription(int[] content1){
-		String[] s = new String[4];
+		String[] s = new String[content1.length];
 		for(int content: content1){
 			switch(content){
 			case 0:
@@ -37,13 +37,10 @@ public class Clean {
 				break;
 			case 2:
 				s[content] ="换洗床上用品";
-
 				break;
 			case 3:
 				s[content] = "室内全面保洁";
-				
 				break;
-				
 			}
 		}
 		String content= StringSplitUtil.buildStrGroup(s);
@@ -143,7 +140,7 @@ public class Clean {
 		info.put("status", getStatusString(status));
 		info.put("time", DateUtil.format(new Date(time), "yyyy-MM-dd"));
 		info.put("content", content);
-		info.put("cleanTime",  DateUtil.format(new Date(cleanTime), "yyyy-MM-dd"));
+		info.put("cleanTime", cleanTime);
 		info.put("demand", demand);
 		return info;
 	}
@@ -160,7 +157,6 @@ public class Clean {
 		return "已完成";
 	}
 
-	
 }
 
 

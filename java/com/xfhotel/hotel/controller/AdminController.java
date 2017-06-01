@@ -74,7 +74,20 @@ public class AdminController {
 	public String loginPage() {
 		return "/admin/login";
 	}
-
+	//..2.28保洁服务...
+	@RequestMapping(value = "/customer_baojie", method = RequestMethod.GET)
+	public String baojie() {
+		List<Clean> list = cleanService.list();
+		List<Map> orders = new ArrayList<Map>();
+		for (Clean o : list) {
+			orders.add(o.toMap());
+			
+		}
+		session.setAttribute("orders", orders);
+		return "/admin/customer/baojie";
+	}
+	
+	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardPage() {
 		session.setAttribute("apartmentCount", apartmentService.list().size());
@@ -99,16 +112,7 @@ public class AdminController {
 		session.setAttribute("orders", orders);
 		return "/admin/order/order";
 	}
-	@RequestMapping(value = "/clean", method = RequestMethod.GET)
-	public String clean() {
-		List<Clean> list = cleanService.list();
-		List<Map> orders = new ArrayList<Map>();
-		for (Clean o : list) {
-			orders.add(o.toMap());
-		}
-		session.setAttribute("list", list);
-		return "/admin/Clean";
-	}
+	
 
 	@RequestMapping(value = "/system", method = RequestMethod.GET)
 	public String systemPage() {

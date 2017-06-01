@@ -214,6 +214,7 @@ public class OrderController {
 			// TODO 退押金,
 			String[] prices = o.getPrice().split("@");
 			String refundFee = prices[prices.length - 1];
+			
 			// 若是微信支付的
 			if (Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
 					|| Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())) {
@@ -462,4 +463,5 @@ public class OrderController {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "打扫完成");
 
 	}
+
 }

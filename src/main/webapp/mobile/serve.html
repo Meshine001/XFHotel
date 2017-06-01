@@ -9,45 +9,100 @@
     <link rel="stylesheet" href="css/serve.css" />
     <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
-    <script type="text/javascript" src="js/fnBase.js"></script>
-    <script type="text/javascript" src="js/personal.js"></script>
+    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/fnBase.js"></script>
+    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/personal.js"></script>
 </head>
 <body style="background: #FFF;display:none">
-<div class="header">
-        <header class="header-mobile">
-            <a href="javascript:;" class="cell link-home"><img src="images/home.png" class="img-home"></a>
-            
-            <a href="personalCenter.html" class="cell link-btn"><img src="images/my_h.png" class="img-btn"></a>
-        </header>
-    </div>
+
 <div id="Myscroll-body">
+	
     <div  class="vip_info">
-        <img src="images/face-90x90.png">
-        <span id="nickname"></span>
+    	<p class="tit"><a href="index.html" style="float:left">首页</a><a href="editprofileinfo.html" style="float:right">个人信息</a></p>
+    	<div id="personMan">
+    		<div style="width:0.7rem;height:0.7rem;border-radius:50%;float:left;overflow: hidden;margin-left:0.45rem">
+	        	<img src="images/face-90x90.png">
+  			</div>
+  			<div class="ctxt">
+  				<p id="nickName">匿名7976</p>
+		    	<p id="">信用积分：999</p>
+			</div>
+        </div>
     </div>
     <ul class="vip_info_list">
-        <li><a href="myorder.html">我的订单</a></li>
+        <li><a href="javascript:;">我的服务</a></li>
         <li>
             <div class="per-order-status">
                 <a href="myorder.html">
                     <i class="tip-size" style="display: none"></i>
                     <i class="icon payment_icon"></i>
-                    <span>待支付</span>
+                    <span>我的订单</span>
                 </a>
-                <a href="myorder.html">
+                <a href="coupon.html">
                     <i class="icon delivery_icon"></i>
-                    <span>已完成</span>
+                    <span>我的优惠卷</span>
+                </a>
+                <a href="editprofileinfo.html">
+                    <i class="icon set_icon"></i>
+                    <span>设置</span>
+                </a>
+                <a href="javascript:;">
+                    <i class="icon gj_icon"></i>
+                    <span>在线管家</span>
                 </a>
             </div>
         </li>
     </ul>
     <ul class="vip_info_list">
-        <li><a href="coupon.html">我的优惠卷</a></li>
-        <li><a href="comment.html">意见反馈</a></li>
-        <li><a href="about.html">关于青舍</a></li>
-        <li><a href="editprofileinfo.html">设置</a></li>
+        <li><a href="javascript:;">专属服务</a></li>
+        <li>
+            <div class="per-order-status">
+                <a href="Cleaning_service.html">
+                    <i class="icon baojie_icon"></i>
+                    <span>保洁服务</span>
+                </a>
+                <a href="Taxi_service.html">
+                    <i class="icon tesc_icon"></i>
+                    <span>用车出行</span>
+                </a>
+                <a href="Addfacilities_service.html">
+                    <i class="icon add_icon"></i>
+                    <span>添加设施</span>
+                </a>
+                <a href="breakdown_service.html">
+                    <i class="icon wx_icon"></i>
+                    <span>故障维修</span>
+                </a>
+           
+                <a href="javascript:;" id="zanwu1">
+                    <i class="icon fl_icon"></i>
+                    <span>商品配送</span>
+                </a>
+                <a href="javascript:;" id="zanwu2">
+                    <i class="icon cy_icon"></i>
+                    <span>餐饮配送</span>
+                </a>
+               
+            </div>
+        </li>
     </ul>
-    <a href="login.html" class="logout">退出登录</a>
+   
+   <ul class="vip_info_list">
+        <li><a href="javascript:;">其他服务</a></li>
+        <li>
+            <div class="per-order-status">
+            	
+                <a href="javascript:;" id="zanwu3">
+                    <i class="icon payment_icon"></i>
+                    <span>正在开发</span>
+                </a>
+               
+            </div>
+        </li>
+    </ul>
 </div>
+
+<script>
+	
+</script>
 </body>
 </html>

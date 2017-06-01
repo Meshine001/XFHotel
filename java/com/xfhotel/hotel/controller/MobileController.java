@@ -36,6 +36,7 @@ import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.FileService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.LayoutType;
 import com.xfhotel.hotel.support.LeasePrice;
@@ -89,6 +90,8 @@ public class MobileController  {
 	@Autowired
 	BlogService blogService;
 
+	@Autowired
+	SystemConfService systemConfiService;
 	
 	@RequestMapping(value = "/home",method = RequestMethod.POST)
 	public @ResponseBody Map home(){
@@ -270,6 +273,7 @@ public class MobileController  {
 	 */
 	@RequestMapping(value = "/detailsData", method = RequestMethod.POST)
 	public @ResponseBody Customer getCustomerDetails(Long id){
+		
 		return customerService.getCustomer(id);
 	}
 	/**
@@ -287,8 +291,6 @@ public class MobileController  {
 	@RequestMapping(value = "/comment", method = RequestMethod.POST)
 	public @ResponseBody Message postComment(Long roomId, Long orderId, Long from, Long to, String[] c_score,
 			String feel, String[] pics) {
-		System.out.println(pics+"sadhausdhiah");
-		System.out.println(from);
 		try {
 			Comment comment = new Comment();
 			comment.setFromWho(from);
@@ -604,7 +606,6 @@ public class MobileController  {
 	
 	@RequestMapping(value = "/cleanAdd", method = RequestMethod.POST)
 	public @ResponseBody Message cleanAdd (String demand,Long oederId , int content1[],int cleanTime) {
-		System.out.println(content1+"速度是孤独孤独"+demand+oederId+cleanTime);
 		if(content1==null){
 			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
 		}
@@ -619,6 +620,19 @@ public class MobileController  {
 			clean.setTime(new Date().getTime());
 			clean.setStatus(Clean.STATUS_NOT_AFFIRM);
 			cleanservice.add(clean);
+			List<Clean> c = cleanservice.getClean(oederId);
+			Long id = null;
+			for(Clean l:c){
+				id = l.getId();
+			}
+			Clean o1 = cleanservice.get(id);
+//			TODO
+//			发短信给管理员
+//			【青舍都市】您有新订单需要确认，请及时处理。{1}
+			String[] p = {o1.getContent()};
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, systemConfiService.getConfig().getSms(), p);	
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -645,6 +659,39 @@ public class MobileController  {
 		  }
 		return list;
 	}
+	
+	@RequestMapping(value = "/order", method = RequestMethod.GET)
+	public @ResponseBody Map orderPage(int page) {
+		PageResults<Order> pr = orderservice.listPage(page);
+		List cl = new ArrayList();
+		for(Order c:pr.getResults()){
+			cl.add(c.toMap());
+		}
+		int sp = pr.getCurrentPage();
+		int ep = pr.getPageCount();
+		if ( (sp-Constants.pagesize/2) > 0){
+			sp = sp-Constants.pagesize/2;
+		}
+		else{
+			sp=1;
+		}
+		if( (sp+Constants.pagesize-1) < ep ){
+			ep = sp+Constants.pagesize-1;
+		}
+		if( (ep-Constants.pagesize+1) < ep ){
+			sp = ep-Constants.pagesize+1;
+			if( sp<1 )
+				sp=1;
+		}
+		Map map = new HashMap();
+		map.put("results",cl);
+		map.put("currentPage",pr.getCurrentPage());
+		map.put("pageCount", pr.getPageCount());
+		map.put("sp",sp);
+		map.put("ep", ep);
+		return map;
+	}
+
 	
 }
 
