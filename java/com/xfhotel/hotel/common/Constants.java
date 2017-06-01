@@ -54,14 +54,10 @@ public class Constants {
 	public static final String SMS_INFORM_OVER_PAY = "174009";
 	public static final String SMS_INFORM_COMFIRM_ORDER = "174007";
 	public static final String SMS_INFORM_COMFIRM_CLEAN_ORDER = "179153";
-	
 	public static final String SMS_AVAILBEL_TIME_STR = "2分钟";
 	public static final Long SMS_AVAILBEL_TIME = Long.valueOf(1000*60*2);
 	public static final String SMS_TEMPLATE_REG = "160686";//注册短信验证码模板编号
 	public static final String SMS_TEMPLATE_SEND_LOCK = "156532";//发送密码锁短信模板编号
-	
-	
-	
 	//支付宝签约账号
 	public static final String ALIPAY_PARTNER = "";
 	

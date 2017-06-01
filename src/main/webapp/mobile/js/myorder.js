@@ -8,15 +8,15 @@ $(document).ready(function(){
         currentdate:'',
         _startDate:''
     };
-    //if(_uid==null||_uid=="undefined"||_uid==""){
-    //    window.location.href="login.html";
-    //    return;
-    //}
-    //
-    //var menu=fnBase.request("menu");
-    //if(menu==undefined){
-    //    menu=0;
-    //}
+    if(_uid==null||_uid=="undefined"||_uid==""){
+        window.location.href="login.html";
+        return;
+    }
+
+    var menu=fnBase.request("menu");
+    if(menu==undefined){
+        menu=0;
+    }
     $("#nav a").click(function(){
         menuBar=$(this).index();
         reloadPage($(this).index())

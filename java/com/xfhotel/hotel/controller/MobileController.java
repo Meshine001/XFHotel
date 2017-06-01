@@ -660,38 +660,6 @@ public class MobileController  {
 		return list;
 	}
 	
-	@RequestMapping(value = "/order", method = RequestMethod.GET)
-	public @ResponseBody Map orderPage(int page) {
-		PageResults<Order> pr = orderservice.listPage(page);
-		List cl = new ArrayList();
-		for(Order c:pr.getResults()){
-			cl.add(c.toMap());
-		}
-		int sp = pr.getCurrentPage();
-		int ep = pr.getPageCount();
-		if ( (sp-Constants.pagesize/2) > 0){
-			sp = sp-Constants.pagesize/2;
-		}
-		else{
-			sp=1;
-		}
-		if( (sp+Constants.pagesize-1) < ep ){
-			ep = sp+Constants.pagesize-1;
-		}
-		if( (ep-Constants.pagesize+1) < ep ){
-			sp = ep-Constants.pagesize+1;
-			if( sp<1 )
-				sp=1;
-		}
-		Map map = new HashMap();
-		map.put("results",cl);
-		map.put("currentPage",pr.getCurrentPage());
-		map.put("pageCount", pr.getPageCount());
-		map.put("sp",sp);
-		map.put("ep", ep);
-		return map;
-	}
-
 	
 }
 

@@ -58,8 +58,6 @@ public class AdminController {
 	BlogService blogService;
 	@Autowired
 	CleanService cleanService;
-	
-
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String homePage() {
 		return "redirect:/admin/login";
@@ -81,13 +79,10 @@ public class AdminController {
 		List<Map> orders = new ArrayList<Map>();
 		for (Clean o : list) {
 			orders.add(o.toMap());
-			
 		}
 		session.setAttribute("orders", orders);
 		return "/admin/customer/baojie";
 	}
-	
-	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardPage() {
 		session.setAttribute("apartmentCount", apartmentService.list().size());
@@ -96,30 +91,78 @@ public class AdminController {
 		session.setAttribute("blogCount", blogService.list().size());
 		return "/admin/dashboard";
 	}
-
 	@RequestMapping(value = "/customer", method = RequestMethod.GET)
 	public String customerPage() {
 		return "/admin/customer/customer";
 	}
-
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
-	public String orderPage() {
-		List<Order> list = orderservice.list(Apartment.TYPE_HOTEL);
-		List<Map> orders = new ArrayList<Map>();
-		for (Order o : list) {
-			orders.add(o.toMap());
+	public String orderPage(int page) {
+		PageResults<Order> pr = orderservice.listPage(page);
+		List cl = new ArrayList();
+		for(Order c:pr.getResults()){
+			cl.add(c.toMap());
 		}
-		session.setAttribute("orders", orders);
+		int sp = pr.getCurrentPage();
+		int ep = pr.getPageCount();
+		if ( (sp-Constants.pagesize/2) > 0){
+			sp = sp-Constants.pagesize/2;
+		}
+		else{
+			sp=1;
+		}
+		if( (sp+Constants.pagesize-1) < ep ){
+			ep = sp+Constants.pagesize-1;
+		}
+		if( (ep-Constants.pagesize+1) < ep ){
+			sp = ep-Constants.pagesize+1;
+			if( sp<1 )
+				sp=1;
+		}
+		Map map = new HashMap();
+		map.put("results",cl);
+		map.put("currentPage",pr.getCurrentPage());
+		map.put("pageCount", pr.getPageCount());
+		map.put("sp",sp);
+		map.put("ep", ep);
+		session.setAttribute("map", map);
 		return "/admin/order/order";
 	}
-	
+	@RequestMapping(value = "/order_page", method = RequestMethod.GET)
+	public @ResponseBody Map order(int page) {
+		PageResults<Order> pr = orderservice.listPage(page);
+		List cl = new ArrayList();
+		for(Order c:pr.getResults()){
+			cl.add(c.toMap());
+		}
+		int sp = pr.getCurrentPage();
+		int ep = pr.getPageCount();
+		if ( (sp-Constants.pagesize/2) > 0){
+			sp = sp-Constants.pagesize/2;
+		}
+		else{
+			sp=1;
+		}
+		if( (sp+Constants.pagesize-1) < ep ){
+			ep = sp+Constants.pagesize-1;
+		}
+		if( (ep-Constants.pagesize+1) < ep ){
+			sp = ep-Constants.pagesize+1;
+			if( sp<1 )
+				sp=1;
+		}
+		Map map = new HashMap();
+		map.put("results",cl);
+		map.put("currentPage",pr.getCurrentPage());
+		map.put("pageCount", pr.getPageCount());
+		map.put("sp",sp);
+		map.put("ep", ep);
+		return map;
+	}
 
 	@RequestMapping(value = "/system", method = RequestMethod.GET)
 	public String systemPage() {
-		
 		return "/admin/system";
 	}
-
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(User user,HttpSession session){
 		User u = userService.getUser(user.getUsername(),user.getPassword());
@@ -246,7 +289,6 @@ public class AdminController {
 						if(time1.before(date)||time1.equals(date)){
 //							System.out.println(ddd+customer.getRegTime());
 							map.put(customer.getTel(), customer);
-							
 						}
 				    }
 				}else{
@@ -275,13 +317,10 @@ public class AdminController {
 		  for(String key : map.keySet()){
 		   list.add(map.get(key));
 		  }
-		  
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
 	}
 	private long dateToLong(Date date) {
 		// TODO Auto-generated method stub
 		return 0;
 	} 
-
-
 }
