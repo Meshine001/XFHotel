@@ -56,7 +56,7 @@ $(document).ready(function(){
 
 
 
-    $(".infobtn").click(function(){
+    $(".baocun_btn").click(function(){
     	fnBase.loadShow();
         var _uid = fnBase.huoqu(0, "uid");
         var _nickNameInput=$("#fillNick").val();
@@ -84,7 +84,15 @@ $(document).ready(function(){
             }
         })
     });
-    
+    //退出
+    $(".quit_btn").click(function(){
+        sessionStorage.clear();
+        localStorage.clear();
+        setTimeout(function(){
+            window.location.href="login.html";
+        },300)
+    });
+
     //
     function getData(){
         var _uid = fnBase.huoqu(0, "uid");

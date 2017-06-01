@@ -53,8 +53,7 @@ $(document).ready(function(){
     }
 //查询；
     $("#confirm").click(function(){
-    	
-    	
+
     	_layou=$("#house-layou ul .active").attr('la');
     	_features=$("#house-features ul .active").attr('fa');
     	if($("#area").html()=='全城'){
@@ -72,24 +71,25 @@ $(document).ready(function(){
     			'enterTime':0,
     			'leaseType':0,
     			'sortType':0
-    	}
+    	};
     	var frontURL=Constant.URL+'/mobile/list';
     	fnBase.commonAjax(frontURL,postData,function(data){
-    		console.log(data)
+    		console.log(data);
+
     		$('.goodlist').html("");
     		var str='';
     		for(var i=0;i<data.page.results.length;i++){
-    			 str+='<li proID='+data.page.results[i].id+'><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="'+Constant.URL+"/images/"+data.page.results[i].pic3[1]+'"></a><h1 class="text-ellipsis"><a href="">'+data.page.results[i].community+'</a></h1><h2 class="text-ellipsis">'+data.page.results[i].bedroom+"室"+data.page.results[i].balcony+"厅"+
-    			 data.page.results[i].bathroom+"卫"+"-"+data.page.results[i].direction+'</h2><p class="text-ellipsis address">'+data.page.results[i].location+data.page.results[i].address+'</p><p class="label-group"><i class="label-type1">'+data.page.results[i].apartmenttype+'</i></p><span class="label-price">'+data.page.results[i].dayPrice+'<small>/天</small></span></div></li>';
+    			 str+='<li proID='+data.page.results[i].id+'><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="'+Constant.URL+"/images/"+data.page.results[i].fang_jian_tu[1]+'"></a><h1 class="text-ellipsis"><a href="">'+data.page.results[i].position.xiao_qu+'</a></h1><h2 class="text-ellipsis">'+data.page.results[i].basic_info.shi+"室"+data.page.results[i].basic_info.ting+"厅"+
+    			 data.page.results[i].basic_info.wei+"卫"+" "+'</h2><p class="text-ellipsis address">'+data.page.results[i].position.bd_wei_zhi+'</p><p class="label-group"><i class="label-type1">'+data.page.results[i].basic_info.lei_xing+'</i></p><span class="label-price">'+data.page.results[i].basic_info.jia_ge+'<small>/天</small></span></div></li>';
              }
     		 $('.goodlist').append(str);
     		 $(".sx_filter").show();
     		 $("#filter").hide();
-    		 
+
     		  var len = $('.goodlist li').length;
     	        if(len==0){
     	            $('#zanwu').show();
-    	            $("#Myscroll-body").css('background','#FFF')
+    	            $("#Myscroll-body").css('background','#FFF');
     	            $('body').addClass('wingBg');
     	        }
     	        $('.goodlist li').unbind('click').click(

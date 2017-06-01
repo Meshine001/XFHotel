@@ -1,9 +1,9 @@
 var _id;
 $(document).ready(function(){
 
-    var _orderID=decodeURIComponent(fnBase.request('id'));
+    var _id=decodeURIComponent(fnBase.request('id'));
     var frontURL=Constant.URL+'/mobile/getOrder';
-    var postData={id:_orderID};
+    var postData={id:_id};
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
         $(".p_msg li .addres").text(data[1].description);
@@ -31,22 +31,22 @@ var payment={
                 ip:Constant.CLIENT_IP//客户端ip
             };
             console.log(data);
-            fnBase.commonAjax(url,data,function (data) {
-                if(data.status == 'success'){
-                    console.log(data);
-                    var payData = {
-                      appId: data.obj.appId,
-                        timeStamp:  data.obj.timeStamp,
-                        nonceStr: data.obj.nonceStr,
-                        package:data.obj.package,
-                        signType: data.obj.signType,
-                        paySign:data.obj.paySign
-                    };
-                    callPay(payData);
-                }else {
-                    fnBase.myalert('支付失败');
-                }
-            });
+//            fnBase.commonAjax(url,data,function (data) {
+//                if(data.status == 'success'){
+//                    console.log(data);
+//                    var payData = {
+//                      appId: data.obj.appId,
+//                        timeStamp:  data.obj.timeStamp,
+//                        nonceStr: data.obj.nonceStr,
+//                        package:data.obj.package,
+//                        signType: data.obj.signType,
+//                        paySign:data.obj.paySign
+//                    };
+//                    callPay(payData);
+//                }else {
+//                    fnBase.myalert('支付失败');
+//                }
+//            });
         });
     }
 };
