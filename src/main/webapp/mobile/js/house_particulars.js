@@ -123,7 +123,7 @@ $(document).ready(function(){
             //    房源描述
             $(".describe #serviceIntro2").text(data.description);
             //    户型图
-            $(".describe .hu_xing_tu img").attr('src',Constant.URL+'/images/'+data.hu_xing_tu);
+//            $(".describe .hu_xing_tu img").attr('src',Constant.URL+'/images/'+data.hu_xing_tu);
 
         // 房屋位置；
             //创建和初始化地图函数：

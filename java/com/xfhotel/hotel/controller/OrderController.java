@@ -3,19 +3,12 @@ package com.xfhotel.hotel.controller;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.SpinnerListModel;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
-import com.xfhotel.hotel.dao.impl.SystemConfDAOImpl;
-import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Order;
-import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.service.ApartmentService;
+import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
@@ -37,8 +29,6 @@ import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
-import com.xfhotel.hotel.support.pay.WechatPaySDK;
-import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 import com.xfhotel.hotel.support.wechat.WechatOrderUtils;
 
 import net.sf.json.JSONObject;
@@ -55,6 +45,9 @@ public class OrderController {
 	CommentService commentService;
 	@Autowired
 	LockService lockService;
+	
+	@Autowired
+	CleanService cleanService;
 	@Autowired
 	SystemConfService systemConfiService;
 
@@ -221,6 +214,7 @@ public class OrderController {
 			// TODO 退押金,
 			String[] prices = o.getPrice().split("@");
 			String refundFee = prices[prices.length - 1];
+			
 			// 若是微信支付的
 			if (Order.PAY_PLATFORM_WECHAT_JSAPI.equals(o.getPayPlatform())
 					|| Order.PAY_PLATFORM_WECHAT_NATIVE.equals(o.getPayPlatform())) {
@@ -426,4 +420,48 @@ public class OrderController {
 		session.setAttribute("orderMsg", sb.toString());
 		return "customer/orderMessage";
 	}
+	@RequestMapping(value = "/cleanOrder", method = RequestMethod.POST)
+	@ResponseBody
+	public Message cleanOrder(Long id) {
+		Clean c = cleanService.get(id);
+		if (c == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+		if (c.getStatus() == Clean.STATUS_NOT_AFFIRM) {
+			try {
+					c.setStatus(Clean.STATUS_CONDUCT);
+					cleanService.update(c);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+			}
+
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
+
+	}
+	
+	@RequestMapping(value = "/cleanOrders", method = RequestMethod.POST)
+	@ResponseBody
+	public Message cleanOrders(Long id) {
+		Clean c = cleanService.get(id);
+		if (c == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+		if (c.getStatus() == Clean.STATUS_CONDUCT) {
+			try {
+					c.setStatus(Clean.STATUS_COMPLETE);
+					cleanService.update(c);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+			}
+
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "打扫完成");
+
+	}
+
 }

@@ -50,7 +50,8 @@
 							<th>操作</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="list">
+					<!-- 
 						<c:forEach items="${orders}" var="order">
 							<tr>
 								<td>${order.payNo}</td>
@@ -69,10 +70,13 @@
 									<a href="javascript:;" class="btn comfirm-order" data-id="${order.id}">确认订单</a><br>
 									<a href="javascript:;" class="btn close-order" data-id="${order.id}">关闭订单</a>
 									</c:if>
+									<c:if test="${order.status=='退租确认中'}">
+									<a href="javascript:;" class="btn comfirmOutLease-order" data-id="${order.id}">确认退租</a><br>
+									</c:if>
 								</td>
 							</tr>
 						</c:forEach>
-						
+						 -->
 					</tbody>
 				</table>
 				
@@ -82,61 +86,23 @@
 				</ul>
 				
 				</div>
-				
-				
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
 	
-		//确认订单
-		$('.comfirm-order').click(function(){
-			var url = '../order/comfirm';
-			var id = $(this).attr('data-id');
-			$.ajax({
-				type : 'POST',
-				dataType : 'json',
-				data : {
-					'id' : id,
-				},
-				url : url,
-				error : function(data) {
-					
-				},
-				success : function(data) {
-					if(data.statusCode == 1){
-						window.location.href = '../admin/order';
-					}else{
-						alert(data.content);
-					}
-				}
-			});
-		});
+	
+	
+	
 		
-		//关闭订单
-		$('.close-order').click(function(){
-			var url = '../order/close';
-			var id = $(this).attr('data-id');
-			$.ajax({
-				type : 'POST',
-				dataType : 'json',
-				data : {
-					'id' : id,
-				},
-				url : url,
-				error : function(data) {
-					
-				},
-				success : function(data) {
-					if(data.statusCode == 1){
-						window.location.href = '../admin/order';
-					}else{
-						alert(data.content);
-					}
-				}
-			});
-		});
+		
+		
+		
 	</script>
 	</my_body>
+	<my_script>
+		<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/orderList.js"></script> 
+	
+	</my_script>
 </body>
 </html>

@@ -2,7 +2,6 @@ package com.xfhotel.hotel.controller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,8 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.xfhotel.hotel.common.Constants;
-import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Blog;
+import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
@@ -30,14 +29,15 @@ import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
+import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.FileService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.Area;
-import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
 import com.xfhotel.hotel.support.LeasePrice;
 import com.xfhotel.hotel.support.LeaseType;
@@ -58,7 +58,9 @@ import net.sf.json.JSONObject;
 @Controller
 @RequestMapping("mobile")
 public class MobileController  {
-
+	@Autowired
+	CleanService cleanservice;
+	
 	@Autowired
 	LockService lockService;
 	
@@ -88,6 +90,8 @@ public class MobileController  {
 	@Autowired
 	BlogService blogService;
 
+	@Autowired
+	SystemConfService systemConfiService;
 	
 	@RequestMapping(value = "/home",method = RequestMethod.POST)
 	public @ResponseBody Map home(){
@@ -161,6 +165,7 @@ public class MobileController  {
 	@RequestMapping(value = "/getRoomRates", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> getRoomRates(Long roomId){
 		return commentService.getRoomRates(roomId);
+		
 	}
 
 	
@@ -268,6 +273,7 @@ public class MobileController  {
 	 */
 	@RequestMapping(value = "/detailsData", method = RequestMethod.POST)
 	public @ResponseBody Customer getCustomerDetails(Long id){
+		
 		return customerService.getCustomer(id);
 	}
 	/**
@@ -344,6 +350,7 @@ public class MobileController  {
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order.toMap());
+//		System.out.println(info);
 		return info;
 	}
 	
@@ -363,7 +370,7 @@ public class MobileController  {
 			long customerId ,String nick,String tel,String idCard,
 			String sex,String birthday,String job,
 			String education,String declaration,String hobby,String avatar) {
-		System.out.println(avatar);
+//		System.out.println(avatar);
 		Customer customer = customerService.getCustomer(customerId);
 		CustomerDetails c = customer.getDetails();
 		c.setNick(nick);
@@ -473,16 +480,14 @@ public class MobileController  {
 	public ArrayList<Object> getMyCoupons(Long uId ,Double totalPrice){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Coupon> coupon = couponService.getCoupon(uId);
-		
 		for(Coupon coupon2:coupon){
 			long startTime = TimeUtil.getDateLong(coupon2.getStartTime());
 			long endTime = TimeUtil.getDateLong(coupon2.getEndTime());
 			Double rule = Double.valueOf(coupon2.getRule()); 
 			long time = new Date().getTime();
 			boolean usable = coupon2.isUsed();
-//			System.out.println(usable);
 			if(startTime<=time&&time<=endTime&&totalPrice>=rule&&usable!=true){
-				map.put(coupon2.getEndTime(), coupon2);
+				map.put(String.valueOf(coupon2.getId()), coupon2);
 			}
 		}
 		ArrayList<Object> list = new ArrayList<Object>();
@@ -492,6 +497,7 @@ public class MobileController  {
 		return list;
 	}
 	/**
+	 * 
 	 * 获取用户优惠券
 	 * @param uId
 	 * @return
@@ -539,7 +545,7 @@ public class MobileController  {
 		if (file != null) {
 			StringBuffer sb = new StringBuffer();
 			sb.append(request.getSession().getServletContext().getRealPath("/"));
-			System.out.println(sb.toString());
+//			System.out.println(sb.toString());
 			String fullPath = fileService.saveFile(file, sb.toString());
 			if (fullPath != null)
 				System.out.println(fullPath);
@@ -547,6 +553,8 @@ public class MobileController  {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");
 	}
+	
+	
 	/**
 	 * 查看密码
 	 * @param request
@@ -574,4 +582,86 @@ public class MobileController  {
 	public @ResponseBody Message outLease(Long orderId) {
 		return orderservice.outLease(orderId);
 	}
+	
+	
+	@RequestMapping(value = "/Clean", method = RequestMethod.POST)
+	public @ResponseBody  Message Clean(Long uId ,int type){
+		if(uId==null){
+			return new Message(Constants.MESSAGE_ERR_CODE, "无订单"); 
+		}
+		List<Order> o = orderservice.getCustomerOrders(uId, type);
+		Map<String, Object> map = new HashMap<String, Object>();
+	for(Order d : o){
+		if( d.getStatus()==2){
+			map.put(d.getCusName(), d);
+		}
+	}
+	ArrayList<Object> list = new ArrayList<Object>();
+	  for(String key : map.keySet()){
+	   list.add(map.get(key));
+	  }
+	  return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+		
+	}
+	
+	@RequestMapping(value = "/cleanAdd", method = RequestMethod.POST)
+	public @ResponseBody Message cleanAdd (String demand,Long oederId , int content1[],int cleanTime) {
+		if(content1==null){
+			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
+		}
+		try {
+			Order o = orderservice.get(oederId);
+			Clean clean = new Clean();
+			clean.setDemand(demand);
+			clean.setCleanTime(Clean.getcleanTime(cleanTime));
+			clean.setContent(Clean.getTypeDescription(content1));
+			clean.setRoomId(o.getRoomId());
+			clean.setOederId(oederId);
+			clean.setTime(new Date().getTime());
+			clean.setStatus(Clean.STATUS_NOT_AFFIRM);
+			cleanservice.add(clean);
+			List<Clean> c = cleanservice.getClean(oederId);
+			Long id = null;
+			for(Clean l:c){
+				id = l.getId();
+			}
+			Clean o1 = cleanservice.get(id);
+//			TODO
+//			发短信给管理员
+//			【青舍都市】您有新订单需要确认，请及时处理。{1}
+			String[] p = {o1.getContent()};
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, systemConfiService.getConfig().getSms(), p);	
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
+		}
+		
+		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
+	}
+	/*
+	 * 获取订单
+	 */
+	@RequestMapping(value = "/getOrder", method = RequestMethod.POST)
+	public @ResponseBody ArrayList<Object> getOrder(Long id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		Order order = orderservice.get(id);
+		String  i= TimeUtil.getDateStr(order.getStartTime());
+		String  d= TimeUtil.getDateStr(order.getEndTime());
+		map.put("开始时间", i);
+		map.put("结束时间", d);
+		map.put("全部", order);
+		ArrayList<Object> list = new ArrayList<Object>();
+		  for(String key : map.keySet()){
+		   list.add(map.get(key));
+		  }
+		return list;
+	}
+	
+
+
+	
 }
+

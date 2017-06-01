@@ -2,8 +2,10 @@ package com.xfhotel.hotel.service;
 
 import java.util.List;
 
+import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.support.Message;
+import com.xfhotel.hotel.support.PageResults;
 
 public interface OrderService {
 	
@@ -17,6 +19,7 @@ public interface OrderService {
 			String apartmentType,Long counponId);
 	public Order getByPayNo(String payNo);
 	public List<Order> list(int type);
+	public PageResults<Order> listPage(int page);
 	public List<Order> listDiedOrders(int type);
 	public List<Order> getCustomerOrders(Long cId,int type);
 	public List<Order> checkAvailable(Long id,String startTime,String endTime);

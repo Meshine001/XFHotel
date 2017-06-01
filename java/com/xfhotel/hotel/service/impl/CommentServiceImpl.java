@@ -70,12 +70,12 @@ public class CommentServiceImpl implements CommentService{
 		sb.append(roomId);
 		List<Comment> comments = commentDAO.getListByHQL(sb.toString(), null);
 		Double pingjun = 5.0;
-		
 		Double weisheng = 5.0;
 		Double miaoshu = 5.0;
 		Double jiaotong = 5.0;
 		Double anquan = 5.0;
 		Double xingjiabi = 5.0;
+		
 		for(Comment c:comments){
 			String[] scores = c.getScore();
 			weisheng = (weisheng+Double.valueOf(scores[0]))/2;

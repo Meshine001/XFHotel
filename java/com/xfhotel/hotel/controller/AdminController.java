@@ -1,5 +1,4 @@
 package com.xfhotel.hotel.controller;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
@@ -26,6 +26,7 @@ import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
+import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.OrderService;
@@ -55,6 +56,8 @@ public class AdminController {
 	ApartmentService apartmentService;
 	@Autowired
 	BlogService blogService;
+	@Autowired
+	CleanService cleanService;
 	
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -74,6 +77,13 @@ public class AdminController {
 	//..2.28保洁服务...
 	@RequestMapping(value = "/customer_baojie", method = RequestMethod.GET)
 	public String baojie() {
+		List<Clean> list = cleanService.list();
+		List<Map> orders = new ArrayList<Map>();
+		for (Clean o : list) {
+			orders.add(o.toMap());
+			
+		}
+		session.setAttribute("orders", orders);
 		return "/admin/customer/baojie";
 	}
 	
@@ -94,14 +104,47 @@ public class AdminController {
 
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public String orderPage() {
-		List<Order> list = orderservice.list(Apartment.TYPE_HOTEL);
-		List<Map> orders = new ArrayList<Map>();
-		for (Order o : list) {
-			orders.add(o.toMap());
-		}
-		session.setAttribute("orders", orders);
+//		List<Order> list = orderservice.list(Apartment.TYPE_HOTEL);
+//		List<Map> orders = new ArrayList<Map>();
+//		for (Order o : list) {
+//			orders.add(o.toMap());
+//		}
+//		session.setAttribute("orders", orders);
 		return "/admin/order/order";
 	}
+	@RequestMapping(value = "/order_page", method = RequestMethod.POST)
+	public  @ResponseBody Map order1(int page) {
+		
+		PageResults<Order> pr = orderservice.listPage(page);
+		List cl = new ArrayList();
+		for(Order c:pr.getResults()){
+			cl.add(c.toMap());
+		}
+		int sp = pr.getCurrentPage();
+		int ep = pr.getPageCount();
+		if ( (sp-Constants.pagesize/2) > 0){
+			sp = sp-Constants.pagesize/2;
+		}
+		else{
+			sp=1;
+		}
+		if( (sp+Constants.pagesize-1) < ep ){
+			ep = sp+Constants.pagesize-1;
+		}
+		if( (ep-Constants.pagesize+1) < ep ){
+			sp = ep-Constants.pagesize+1;
+			if( sp<1 )
+				sp=1;
+		}
+		Map map = new HashMap();
+		map.put("results",cl);
+		map.put("currentPage",pr.getCurrentPage());
+		map.put("pageCount", pr.getPageCount());
+		map.put("sp",sp);
+		map.put("ep", ep);
+		return map;
+	}
+	
 
 	@RequestMapping(value = "/system", method = RequestMethod.GET)
 	public String systemPage() {

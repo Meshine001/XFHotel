@@ -40,7 +40,7 @@ $(document).ready(function(){
             success: function (data) {
                 console.log(data);
                 commersrc=data.content;
-                $("#avatar").attr('src',Constant.URL+'images/'+data.content);
+                $("#avatar").attr('src',Constant.URL+'/images/'+data.content);
             },
             error: function (data) {
                 console.log(data);

@@ -94,6 +94,7 @@
             cleanTime:_cleanTime,
             demand:$('.per-order-status ._textarea').val()
         };
+        console.log(postData);
         var frontURL=Constant.URL+'/mobile/cleanAdd';
         $.ajax({
             type:'post',
@@ -104,11 +105,15 @@
                 cleanTime:_cleanTime,
                 demand:$('.per-order-status ._textarea').val()
             },
+           
             url:frontURL,
             success:function(data){
                 console.log(data);
                 fnBase.myalert('提交成功');
-
+                setTimeout(function(){
+                	window.location.href='serve.html';
+                },300)
+                
             }
         });
     });

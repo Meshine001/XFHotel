@@ -103,12 +103,11 @@ function addpartenr(){
     var _price=fnBase.huoqu(1,"dayPrice");
     var _apartmenttype=fnBase.huoqu(1,"roomType");
     var _YJpic=fnBase.huoqu(1,"YJpic");
-
     $(".order_info .roomName").text(_community);
     $(".order_info .roomTime").html(_startTime+"入住"+_endTime+"离开"+"<i class='date'>共（"+_oTotalDay+"）天</i>");
     $(".order_info .roompYJ").html("押金:<span style='color: #666'>"+_YJpic+"</span>");
-    $(".order_info .roompPic").html("订单总额:<span class='money'>￥"+_oTotalPrice+"</span><a>优惠劵</a>");
-
+    $(".order_info .roompPic").html("订单总额:<span class='money'>￥"+Number(_oTotalPrice).toFixed(2)+"</span><a>优惠劵</a>");
+    
     $("#needpic i").click(function(){
        if($(this).hasClass('active')==true){
            $(this).removeClass('active');

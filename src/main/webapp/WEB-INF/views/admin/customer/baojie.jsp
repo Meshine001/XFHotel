@@ -36,37 +36,35 @@
 
 					<thead>
 						<tr>
-							<th>订单号</th>
+							<th>保洁ID</th>
 							<th>下单时间</th>
-							<th>订单状态</th>
-							<th>下单人</th>
-							<th>联系手机</th>
-							<th>房间</th>
-							<th>住房时间</th>
-							<th>总天数</th>
-							<th>单价</th>
-							<th>总价</th>
-							<th>优惠</th>
+							<th>服务订单状态</th>
+							<th>服务内容</th>
+							<th>房间ID</th>
+							<th>打扫时间</th>
+							<th>订单ID</th>
+							<th>需求</th>
 							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${orders}" var="order">
 							<tr>
-								<td>${order.payNo}</td>
-								<td>${order.timeStr}</td>
+								<td>${order.id}</td>
+								<td>${order.time}</td>
 								<td>${order.status}</td>
-								<td>${order.cusName}</td>
-								<td>${order.cusTel}</td>
-								<td>${order.description}</td>
-								<td>${order.startTime}至${order.endTime}</td>
-								<td>${order.totalDay}</td>
-								<td>${order.price}</td>
-								<td>${order.totalPrice}</td>
-								<td>${order.preferential}</td>
+								<td>${order.content}</td>
+								<td>${order.roomId}</td>
+								<td>${order.cleanTime}</td>
+								<td>${order.oederId}</td>
+								<td>${order.demand}</td>
 								<td>
-									<a href="javascript:;" style="display:block">确定服务</a>
-									<a href="javascript:;" style="display:block">确定完成</a>
+								<c:if test="${order.status=='等待管理员呼叫保洁'}">
+									<a href="javascript:;" class="comfirm-order" order-id="${order.id}" style="display:block">确定服务</a>
+									</c:if>
+									<c:if test="${order.status=='正在清扫'}">
+									<a href="javascript:;" class="success-order" order-id="${order.id}" style="display:block">确定完成</a>
+									</c:if>
 									<!-- 
 									<c:if test="${order.status=='确认中'}">
 									<a href="javascript:;" class="btn comfirm-order" data-id="${order.id}">确认订单</a><br>
@@ -94,8 +92,8 @@
 	
 		//确认订单
 		$('.comfirm-order').click(function(){
-			var url = '../order/comfirm';
-			var id = $(this).attr('data-id');
+			var url = '../order/cleanOrder';
+			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
 				dataType : 'json',
@@ -107,8 +105,9 @@
 					
 				},
 				success : function(data) {
+					console.log(data)
 					if(data.statusCode == 1){
-						window.location.href = '../admin/order';
+						window.location.href = '../admin/customer_baojie';
 					}else{
 						alert(data.content);
 					}
@@ -117,9 +116,9 @@
 		});
 		
 		//关闭订单
-		$('.close-order').click(function(){
-			var url = '../order/close';
-			var id = $(this).attr('data-id');
+		$('.success-order').click(function(){
+			var url = '../order/cleanOrders';
+			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
 				dataType : 'json',
@@ -131,11 +130,16 @@
 					
 				},
 				success : function(data) {
+					console.log(data)
+				
+					
+					
 					if(data.statusCode == 1){
-						window.location.href = '../admin/order';
+						window.location.href = '../admin/customer_baojie';
 					}else{
 						alert(data.content);
 					}
+					
 				}
 			});
 		});

@@ -160,7 +160,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.." />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
@@ -281,7 +281,7 @@
     <option name="totallyTimeSpent" value="6574000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="262" y="66" width="1585" height="840" extended-state="1" />
+    <frame x="262" y="66" width="1585" height="840" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20777565" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -551,7 +551,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="229" column="22" selection-start-line="229" selection-start-column="9" selection-end-line="229" selection-end-column="22" />
           <folding>
-            <marker date="1496219354443" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1496283388974" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -569,7 +569,7 @@
         <state vertical-scroll-proportion="-18.564102">
           <caret line="225" column="122" selection-start-line="225" selection-start-column="122" selection-end-line="225" selection-end-column="122" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#section#5;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#section#4;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -587,7 +587,7 @@
         <state vertical-scroll-proportion="0.38406828">
           <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
           <folding>
-            <marker date="1496282862517" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1496283454958" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
