@@ -201,11 +201,10 @@ public class ApartmentServiceImpl implements ApartmentService {
 		} else {
 			allDates.addAll(TimeUtil.getAllDateInMonth(curY, curM + 1));
 		}
-
+		JSONArray prices = new JSONArray();
 		List<Order> availableOrders = orderService.checkAvailable(id, TimeUtil.getDateStr(start),
 				TimeUtil.getDateStr(end));
-
-		JSONArray prices = new JSONArray();
+		
 		for (Date d : allDates) {
 			JSONObject info = new JSONObject();
 			JSONObject details = new JSONObject();
@@ -213,7 +212,6 @@ public class ApartmentServiceImpl implements ApartmentService {
 			details.put("start", DateUtil.format(d, "yyyy-MM-dd"));
 			details.put("pricetype", "normal");
 			details.put("roomNum", "1");
-
 			for (Price m : sp) {
 				if (DateUtil.format(d, "yyyy-MM-dd").equals(m.getDate())) {
 					details.put("price", m.getPrice());
@@ -221,7 +219,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 			}
 			for (Order o : availableOrders) {
 				Long tt = d.getTime() + 1000 * 60 * 60 * 12;
-				if (tt > o.getStartTime() && tt < o.getEndTime()) {
+				if (tt >= o.getStartTime() && tt < o.getEndTime()) {
 					details.put("roomNum", "0");
 				}
 			}

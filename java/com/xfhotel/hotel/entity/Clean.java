@@ -1,7 +1,10 @@
 package com.xfhotel.hotel.entity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Entity;
@@ -10,9 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.apache.log4j.chainsaw.Main;
-
-import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.StringSplitUtil;
 
@@ -26,35 +26,38 @@ import com.xfhotel.hotel.support.StringSplitUtil;
 public class Clean {
 	
 	public final static String getTypeDescription(int[] content1){
-		String[] s = new String[content1.length];
+		List<String> list = new ArrayList<String>();
 		for(int content: content1){
 			switch(content){
 			case 0:
-				s[content] ="地面卫生打扫 ";
+				list.add("地面卫生打扫 ");
 				break;
 			case 1:
-				s[content] ="清理室内垃圾";
+				list.add("清理室内垃圾");
 				break;
 			case 2:
-				s[content] ="换洗床上用品";
+				list.add("换洗床上用品");
 				break;
 			case 3:
-				s[content] = "室内全面保洁";
+				list.add("室内全面保洁");
 				break;
+			
 			}
 		}
-		String content= StringSplitUtil.buildStrGroup(s);
+	        String[] arr = new String[list.size()];    
+	        list.toArray(arr); 
+		String content= StringSplitUtil.buildStrGroup(arr);
 		return content;
 		
 	}
 	public final static String getcleanTime(int cleanTime){
 		switch(cleanTime){
 		case 0:
-			return "2小时内 ";
+			return "当天随时 ";
 		case 1:
-			return "2小时后";
+			return "2小时内 ";
 		case 2:
-			return "当天随时";
+			return "2小时后";
 		default:
 			return "当天随时";
 		}
@@ -111,8 +114,6 @@ public class Clean {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-
 	public String getCleanTime() {
 		return cleanTime;
 	}
@@ -144,6 +145,7 @@ public class Clean {
 		info.put("demand", demand);
 		return info;
 	}
+	
 	String getStatusString(int status) {
 		switch (status) {
 		case STATUS_NOT_AFFIRM:

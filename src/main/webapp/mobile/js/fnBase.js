@@ -6,11 +6,9 @@ var clientIp = getIp();
 
 var Constant = {
 //       URL: "http://192.168.1.108/",
- 
         URL: baseUrl,
         CLIENT_IP:clientIp
 };
-//zzzz
 /**
  * 获取ip
  */

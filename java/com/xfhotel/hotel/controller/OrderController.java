@@ -258,6 +258,7 @@ public class OrderController {
 				Long roomId = o.getRoomId();
 				String lock_no = apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
 				System.out.println("send pass to "+lock_no);
+				System.out.println("上海市护手霜");
 				Message result = lockService.addPassword(o.getCusTel(), lock_no, DateUtil.format(new Date(o.getStartTime()), "yyyyMMddHHmmss"),
 						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddHHmmss"));
 				if(result.getStatusCode() == Constants.MESSAGE_SUCCESS_CODE){

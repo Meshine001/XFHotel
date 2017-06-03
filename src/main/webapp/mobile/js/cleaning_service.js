@@ -109,8 +109,11 @@
             url:frontURL,
             success:function(data){
                 console.log(data);
-//                fnBase.myalert('提交成功');
-
+                fnBase.myalert('提交成功');
+                setTimeout(function(){
+                	window.location.href='serve.html';
+                },300)
+                
             }
         });
     });

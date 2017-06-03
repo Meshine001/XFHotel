@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -148,15 +149,13 @@ public class MobileController  {
 		c.setDetails(details);
 		c.setRegTime(new Date().getTime());
 		c.setLevel(0);
-
 		if (customerService.register(c, details) == true) {
 			session.setAttribute("c", c);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c.getId());
 		}
-
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
-	
+
 	@RequestMapping(value = "/get", method = RequestMethod.POST)
 	public @ResponseBody PageResults<Comment> getRoomComments(Long roomId,Integer page){
 		return commentService.getComments(roomId, page);
@@ -165,11 +164,7 @@ public class MobileController  {
 	@RequestMapping(value = "/getRoomRates", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> getRoomRates(Long roomId){
 		return commentService.getRoomRates(roomId);
-		
 	}
-
-	
-	
 	@RequestMapping(value="/checkVCode")  
 	public @ResponseBody Message checkVCode(String tel,String vCode){
 		System.out.println(session.getId());
@@ -178,11 +173,9 @@ public class MobileController  {
 			String sTel = (String) sVCode.get("tel");
 			long diedLine = (Long) sVCode.get("diedLine");
 			String code = (String) sVCode.get("code");
-
 			if(sTel.equals(tel) && code.equals(vCode)){
 				if(diedLine < new Date().getTime()){
 					return new Message(Constants.MESSAGE_ERR_CODE, "验证超时");
-					
 				}
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, "验证成功");
 			}
@@ -195,7 +188,6 @@ public class MobileController  {
 //		System.out.println("123");
 		return new Message(Constants.MESSAGE_ERR_CODE, "验证失败");
 	}
-	
 	/**
 	 * 请求发送注册手机验证码
 	 * @param tel
@@ -484,9 +476,10 @@ public class MobileController  {
 			long startTime = TimeUtil.getDateLong(coupon2.getStartTime());
 			long endTime = TimeUtil.getDateLong(coupon2.getEndTime());
 			Double rule = Double.valueOf(coupon2.getRule()); 
+			Double yf = Double.valueOf(coupon2.getcValue());
 			long time = new Date().getTime();
 			boolean usable = coupon2.isUsed();
-			if(startTime<=time&&time<=endTime&&totalPrice>=rule&&usable!=true){
+			if(startTime<=time&&time<=endTime&&totalPrice>=rule&&usable!=true&&totalPrice>yf){
 				map.put(String.valueOf(coupon2.getId()), coupon2);
 			}
 		}
@@ -494,6 +487,7 @@ public class MobileController  {
 		  for(String key : map.keySet()){
 		   list.add(map.get(key));
 		  }
+		
 		return list;
 	}
 	/**
@@ -516,7 +510,13 @@ public class MobileController  {
 				couponService.delete(couponService.getCoupon2(coupon2.getId()));
 			}
 		}
-		return couponService.getCoupon(uId);
+		long i=3;
+			JSONObject a = apartmentService.getApartmentById(i)
+					.getJSONObject("position");
+			String f= a.getString("bd_wei_zhi")+","+a.getString("xiao_qu")+","+a.getString("lou_hao")+"号楼,"+
+					a.getString("dan_yuan")+"单元,"+a.getString("lou_ceng")+"层,"+a.getString("men_pai")+"号";
+			System.out.println(f);
+			return couponService.getCoupon(uId);
 	}
 
 	@RequestMapping(value = "list", method = RequestMethod.POST)
@@ -606,6 +606,7 @@ public class MobileController  {
 	
 	@RequestMapping(value = "/cleanAdd", method = RequestMethod.POST)
 	public @ResponseBody Message cleanAdd (String demand,Long oederId , int content1[],int cleanTime) {
+	System.out.println(content1);
 		if(content1==null){
 			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
 		}
@@ -620,19 +621,15 @@ public class MobileController  {
 			clean.setTime(new Date().getTime());
 			clean.setStatus(Clean.STATUS_NOT_AFFIRM);
 			cleanservice.add(clean);
-			List<Clean> c = cleanservice.getClean(oederId);
-			Long id = null;
-			for(Clean l:c){
-				id = l.getId();
-			}
-			Clean o1 = cleanservice.get(id);
 //			TODO
 //			发短信给管理员
 //			【青舍都市】您有新订单需要确认，请及时处理。{1}
-			String[] p = {o1.getContent()};
+			JSONObject a = apartmentService.getApartmentById(o.getRoomId())
+					.getJSONObject("position");
+			String f= a.getString("xiao_qu")+","+a.getString("lou_hao")+"号楼,"+
+					a.getString("dan_yuan")+"单元,"+a.getString("lou_ceng")+"层,"+a.getString("men_pai")+"号";
+			String[] p = {f};
 			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, systemConfiService.getConfig().getSms(), p);	
-			
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -646,7 +643,7 @@ public class MobileController  {
 	 */
 	@RequestMapping(value = "/getOrder", method = RequestMethod.POST)
 	public @ResponseBody ArrayList<Object> getOrder(Long id){
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap   <String, Object>();
 		Order order = orderservice.get(id);
 		String  i= TimeUtil.getDateStr(order.getStartTime());
 		String  d= TimeUtil.getDateStr(order.getEndTime());
@@ -659,7 +656,16 @@ public class MobileController  {
 		  }
 		return list;
 	}
-	
+	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.POST)
+	public @ResponseBody JSONObject getRangePrices(@PathVariable("id") Long id,
+			@PathVariable("startDate") String startDate) {
+		JSONArray prices = apartmentService.get2MonthPrices(id, startDate);
+		JSONObject data = new JSONObject();
+		for (Object obj : prices) {
+			String key = (String) JSONObject.fromObject(obj).keys().next();
+			data.put(key, JSONObject.fromObject(obj).get(key));
+		}
+		return data;
+	}
 	
 }
-

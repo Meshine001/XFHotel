@@ -2,13 +2,11 @@ package com.xfhotel.hotel.service.impl;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,7 @@ import com.xfhotel.hotel.dao.impl.OrderDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
@@ -30,12 +29,17 @@ import com.xfhotel.hotel.support.StringSplitUtil;
 import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 
+import net.sf.json.JSONObject;
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	OrderDAOImpl orderDAO;
 	
+	@Autowired
+	ApartmentService apartmentService;
+	 
 	@Autowired
 	SystemConfService systemConfiService;
 	
@@ -325,7 +329,11 @@ public class OrderServiceImpl implements OrderService {
 			//TODO
 			//发短信给管理员
 			//【青舍都市】您有新订单需要确认，请及时处理。{1}
-			String[] p = {o.getDescription()};
+			JSONObject a = apartmentService.getApartmentById(o.getRoomId())
+					.getJSONObject("position");
+			String f= a.getString("xiao_qu")+","+a.getString("lou_hao")+"号楼,"+
+					a.getString("dan_yuan")+"单元,"+a.getString("lou_ceng")+"层,"+a.getString("men_pai")+"号";
+			String[] p = {f};
 			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, systemConfiService.getConfig().getSms(), p);
 			
 			o.setStatus(Order.STATUS_ON_OUT_LEASE);

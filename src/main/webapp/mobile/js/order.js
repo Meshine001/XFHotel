@@ -94,6 +94,10 @@ function addpartenr(){
     var cood='';
     var _span='';
     var _uid = fnBase.huoqu(0, "uid");
+    if (_uid == null || _uid == "undefined" || _uid == "") {
+        window.location.href = "login.html";
+        return;
+    }
     var _community=fnBase.huoqu(1,"community");
     var _startTime = fnBase.huoqu(1, "startTime");
     var _endTime=fnBase.huoqu(1,"endTime");
