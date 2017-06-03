@@ -80,8 +80,8 @@ public class AdminController {
 		List<Clean> list = cleanService.list();
 		List<Map> orders = new ArrayList<Map>();
 		for (Clean o : list) {
-			orders.add(o.toMap());
-			
+			orders.add(o.toMap());	
+			Order order = orderservice.get(o.getOederId());
 		}
 		session.setAttribute("orders", orders);
 		return "/admin/customer/baojie";

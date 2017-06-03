@@ -103,6 +103,7 @@ $('#list').on('click','tr .comfirm-order',function(){
 			
 		},
 		success : function(data) {
+			console.log(data)
 			if(data.statusCode == 1){
 				window.location.href = '../admin/order';
 			}else{

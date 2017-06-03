@@ -5,7 +5,7 @@ console.log(baseUrl);
 var clientIp = getIp();
 
 var Constant = {
-       //URL: "http://192.168.1.108/",
+//       URL: "http://192.168.1.108/",
         URL: baseUrl,
         CLIENT_IP:clientIp
 };
@@ -99,7 +99,7 @@ $(document).ready(function(){
         myalert:function(txt){
             var str='<div id="alertMC"><p>'+txt+'</p></div>';
             $("body").append(str);
-            setTimeout(function(){$("#alertMC").remove();},2500)
+            setTimeout(function(){$("#alertMC").remove();},1500)
         },
         keep:function(type,key,value){
             if(type==0){

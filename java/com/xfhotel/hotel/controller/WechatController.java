@@ -362,7 +362,11 @@ public class WechatController {
 				o.setStatus(Order.STATUS_ON_COMFIRM);
 				orderService.update(o);
 				String pwd_user_mobile = o.getCusTel();
-				String[] p = {o.getDescription()};
+				JSONObject a = apartmentService.getApartmentById(o.getRoomId())
+						.getJSONObject("position");
+				String f= a.getString("xiao_qu")+","+a.getString("lou_hao")+"号楼,"+
+						a.getString("dan_yuan")+"单元,"+a.getString("lou_ceng")+"层,"+a.getString("men_pai")+"号";
+				String[] p = {f};
 				//发短信给顾客
 				//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。
 				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);

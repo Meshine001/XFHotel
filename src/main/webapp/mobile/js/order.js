@@ -94,12 +94,10 @@ function addpartenr(){
     var cood='';
     var _span='';
     var _uid = fnBase.huoqu(0, "uid");
-
     if (_uid == null || _uid == "undefined" || _uid == "") {
         window.location.href = "login.html";
         return;
     }
-    
     var _community=fnBase.huoqu(1,"community");
     var _startTime = fnBase.huoqu(1, "startTime");
     var _endTime=fnBase.huoqu(1,"endTime");
@@ -220,16 +218,6 @@ function addpartenr(){
             fnBase.myalert("请输您的身份证号");
             return;
         }
-        //_identity 身份证验证
-        //身份证验证
-        var isIDCard2=/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
-        if(isIDCard2.test(_identity)){
-          
-        }else{
-            fnBase.myalert('身份证号码输入有误');
-            return false;
-        }
-        
         var frontURL=Constant.URL+'/mobile/modulePost';
         var postData={
             "roomId":_id,//房屋ID
@@ -251,7 +239,6 @@ function addpartenr(){
             "otherCusName":_otherCusName,
         	"otherCusIdCard":_otherCusIdCard
         };
-        console.log(postData);
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             console.log(data.order.id);
