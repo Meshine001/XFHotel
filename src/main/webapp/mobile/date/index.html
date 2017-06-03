@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+<body>
+  
+  <!-- 入住时间选择 -->
+    <div class="row select-time">
+      <input type="text" class="input-enter none" style="display: block">
+      <span>入住</span>
+      <input type="text" class="input-leave none" style="display: block">
+      <span>离店</span>
+      <span class="night">共1晚</span>
+    </div>
+</body>
+
+  <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+  <script src="./js/date.js"></script>
+  <script>
+    $('.select-time').hotelDate();
+  </script>
+
+</html>

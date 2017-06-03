@@ -113,8 +113,8 @@ display:none;
 }
 #alertMC{
 position:fixed;
-z-index:20000;
-font-size:0.16rem;
+z-index:20000000;
+font-size:0.14rem;
 background:url(../images/block80.png);
 border-radius:0.06rem;
 height:0.45rem;

@@ -1,15 +1,17 @@
 var _id;
 $(document).ready(function(){
 
-    var _id=decodeURIComponent(fnBase.request('id'));
+    _id=decodeURIComponent(fnBase.request('id'));
     var frontURL=Constant.URL+'/mobile/getOrder';
     var postData={id:_id};
+    var _totalprice='';
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
+        _totalprice=Number((data[1].totalPrice).toFixed(2));
         $(".p_msg li .addres").text(data[1].description);
         $(".p_msg li ._date").html(data[0]+"入住"+data[2]+"离开"+"<i class='date'>共（"+data[1].totalDay+"）天</i>");
         //$(".p_msg li ._cash").html("押金:<span style='color: #666'>"+_YJpic+"</span>");
-        $(".p_msg li .toal").html("订单总额:<span class='money'>￥"+data[1].totalPrice+"</span>");
+        $(".p_msg li .toal").html("订单总额:<span class='money'>￥"+_totalprice+"</span>");
 
     });
 
@@ -31,22 +33,22 @@ var payment={
                 ip:Constant.CLIENT_IP//客户端ip
             };
             console.log(data);
-//            fnBase.commonAjax(url,data,function (data) {
-//                if(data.status == 'success'){
-//                    console.log(data);
-//                    var payData = {
-//                      appId: data.obj.appId,
-//                        timeStamp:  data.obj.timeStamp,
-//                        nonceStr: data.obj.nonceStr,
-//                        package:data.obj.package,
-//                        signType: data.obj.signType,
-//                        paySign:data.obj.paySign
-//                    };
-//                    callPay(payData);
-//                }else {
-//                    fnBase.myalert('支付失败');
-//                }
-//            });
+            fnBase.commonAjax(url,data,function (data) {
+                if(data.status == 'success'){
+                    console.log(data);
+                    var payData = {
+                      appId: data.obj.appId,
+                        timeStamp:  data.obj.timeStamp,
+                        nonceStr: data.obj.nonceStr,
+                        package:data.obj.package,
+                        signType: data.obj.signType,
+                        paySign:data.obj.paySign
+                    };
+                    callPay(payData);
+                }else {
+                    fnBase.myalert('支付失败');
+                }
+            });
         });
     }
 };

@@ -2125,6 +2125,11 @@
 	display: block;
 	padding: 5px 30px;
 	color: #999;
+	 display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+     word-break: break-all;
+     overflow:hidden;	
 }
 
 .money {
