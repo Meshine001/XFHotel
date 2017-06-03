@@ -73,7 +73,7 @@ $(document).ready(function(){
             "declaration":$("#declaration").val(),
             "hobby":$("#hobby").val()
         };
-
+        console.log(postData)
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             if(data.customerId=="1"){
@@ -104,7 +104,7 @@ $(document).ready(function(){
         var postData={};
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
-            $("#avatar").attr('src',Constant.URL+'images/'+data.details.avatar);
+            $("#avatar").attr('src',Constant.URL+'/images/'+data.details.avatar);
             $("#fillNick").val(data.details.nick);
             $("#Sex").text(data.details.sex);
             $("#tel").val(data.details.tel);
