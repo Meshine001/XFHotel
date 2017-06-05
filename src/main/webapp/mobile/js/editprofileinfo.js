@@ -73,7 +73,7 @@ $(document).ready(function(){
             "declaration":$("#declaration").val(),
             "hobby":$("#hobby").val()
         };
-
+        console.log(postData)
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             if(data.customerId=="1"){

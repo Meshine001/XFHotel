@@ -7,7 +7,7 @@ $(document).ready(function(){
     var _totalprice='';
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
-        _totalprice=Number((data[1].totalPrice)).toFixed(2);
+        _totalprice=Number(data[1].totalPrice).toFixed(2);
         $(".p_msg li .addres").text(data[1].description);
         $(".p_msg li ._date").html(data[0]+"入住"+data[2]+"离开"+"<i class='date'>共（"+data[1].totalDay+"）天</i>");
         //$(".p_msg li ._cash").html("押金:<span style='color: #666'>"+_YJpic+"</span>");
@@ -34,7 +34,7 @@ var payment={
             };
             console.log(data);
             fnBase.commonAjax(url,data,function (data) {
-            	 console.log(data);
+                console.log(data);
                 if(data.status == 'success'){
                     console.log(data);
                     var payData = {

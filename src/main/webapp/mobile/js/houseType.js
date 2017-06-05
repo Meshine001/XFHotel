@@ -79,7 +79,7 @@ $(document).ready(function(){
     		$('.goodlist').html("");
     		var str='';
     		for(var i=0;i<data.page.results.length;i++){
-    			 str+='<li proID='+data.page.results[i].id+'><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="'+Constant.URL+"/images/"+data.page.results[i].fang_jian_tu[1]+'"></a><h1 class="text-ellipsis"><a href="">'+data.page.results[i].position.xiao_qu+'</a></h1><h2 class="text-ellipsis">'+data.page.results[i].basic_info.shi+"室"+data.page.results[i].basic_info.ting+"厅"+
+    			 str+='<li proID='+data.page.results[i].id+'><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="'+Constant.URL+"/images/"+data.page.results[i].fang_jian_tu[1]+'"></a><h1 class="text-ellipsis"><a href="javascript:;">'+data.page.results[i].position.xiao_qu+'</a></h1><h2 class="text-ellipsis">'+data.page.results[i].basic_info.shi+"室"+data.page.results[i].basic_info.ting+"厅"+
     			 data.page.results[i].basic_info.wei+"卫"+" "+'</h2><p class="text-ellipsis address">'+data.page.results[i].position.bd_wei_zhi+'</p><p class="label-group"><i class="label-type1">'+data.page.results[i].basic_info.lei_xing+'</i></p><span class="label-price">'+data.page.results[i].basic_info.jia_ge+'<small>/天</small></span></div></li>';
              }
     		 $('.goodlist').append(str);

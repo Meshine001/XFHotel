@@ -260,6 +260,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 			sevenDaysPrices.add(m);
 			i++;
 		}
+		
 
 		return sevenDaysPrices;
 	}

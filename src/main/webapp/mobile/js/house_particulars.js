@@ -232,6 +232,7 @@ $(document).ready(function(){
 
 	});
 
+
     //    评价列表显示
     //var frontURL=Constant.URL+'/mobile/getRoomRates';
     //var postData={"roomId":_id};
@@ -282,11 +283,16 @@ $(document).ready(function(){
 
 //  选好日期进行下一步操作：
     $(".alert-content .but-success").click(function(){
+        if (_uid == null || _uid == "undefined" || _uid == "") {
+            window.location.href = "login.html";
+            return;
+        }
         $("#masking").hide(10,function(){
             $(".alert-content").animate({bottom:'-3.7rem'},300);
         });
         var checkIn= $(".input-enter").val();
         var leave= $(".input-leave").val();
+
         var _id = decodeURIComponent(fnBase.request("id"));
         var frontURL=Constant.URL+'/mobile/module';
         var postData={"startTime":checkIn,"endTime":leave,"apartmentId":_id};

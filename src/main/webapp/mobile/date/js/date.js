@@ -108,7 +108,7 @@ var date = function ($) {
                   if(gg[date].roomNum=='0'){
                     status="满房";
                     template = '<li index=\'' + listIndex + '\' date-date="' + dateArr[index].getFullYear() + '-' + (dateArr[index].getMonth() + 1) + '-' + (i - nowweek + 1) + '">' +'<span>'+(i - nowweek + 1)+
-                        '</span>'+'<br><i style="color: #a323f2">'+status+'</i>'+ '</li>';
+                        '</span>'+'<br><i style="color: #e48435">'+status+'</i>'+ '</li>';
                   }else if(gg[date].roomNum=='1'){
                     template = '<li index=\'' + listIndex + '\' date-date="' + dateArr[index].getFullYear() + '-' + (dateArr[index].getMonth() + 1) + '-' + (i - nowweek + 1) + '">' +'<span>'+(i - nowweek + 1)+
                         '</span>'+'<br><i>￥'+gg[date].price+'</i>'+ '</li>';
@@ -125,8 +125,6 @@ var date = function ($) {
         });
 
       };
-
-
 
 
       $(".action ").on('click','.day .disable',function(){
@@ -154,6 +152,7 @@ var date = function ($) {
         var night = Number($('.leave').attr('index')) - Number($('.enter').attr('index'));
         $('.date').remove(); // 移除插件
         $('body').css({ overflow: 'auto' });
+        $('.select-time').show();
         $('.entertime').text(enterTime); // 显示
         $('.leavetime').text(leaveTime);
         $('.input-enter').val(enterYear + '-' + enterTime);

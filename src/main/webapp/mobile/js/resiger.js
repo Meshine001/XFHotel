@@ -26,16 +26,6 @@ var resiger={
             var frontURL=Constant.URL+"/mobile/sendVCode";
             var postData={"tel":phoneNumber};
 
-            //$.ajax({
-            //    type: 'get',
-            //    url:'http://192.168.1.109:8080/hotel/mobile/sendVCode',
-            //    dataType:'json',
-            //    data:{"tel":phoneNumber},
-            //    success:function(data){
-            //        console.log(data);
-            //        fnBase.myalert("短信发送成功")
-            //    }
-            //});
             fnBase.commonAjax(frontURL,postData,function(data){
                 console.log(data);
                 if(data.statusCode=="1"){
@@ -102,8 +92,6 @@ var resiger={
                 return;
             }
 
-
-
             //
             var frontURL=Constant.URL+"/mobile/reg";
             var postDatat={"tel":phoneNumber,"password":password};
@@ -113,7 +101,7 @@ var resiger={
                     fnBase.myalert("恭喜您注册成功");
                     sessionStorage.clear();
                     localStorage.clear();
-                    fnBase.keep(0,"uid",data.id);
+                    fnBase.keep(0,"uid",data.content);
                     //若还未经过微信授权
                     if(data.wechatOpenId == null || data.wechatOpenId == undefined){
                         var redirect = 'https://open.weixin.qq.com/connect/oauth2/authorize?'+
