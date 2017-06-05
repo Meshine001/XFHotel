@@ -4,11 +4,8 @@
         window.location.href="login.html";
         return;
     }
-    $(".house-status .labler").click(function(){
-        if(_uid==null || _uid=="undefined" || _uid==""){
-            window.location.href="login.html";
-            return;
-        }
+    //$(".house-status .labler").click(function(){
+
         var postData={uId:_uid,type:0 };
         var frontURL=Constant.URL+'/mobile/Clean';
         fnBase.commonAjax(frontURL,postData,function(data){
@@ -24,7 +21,7 @@
             $(".house-status ol").append(str);
         });
 
-    })
+    //})
     /*
     * ��������ύ����
     * demand  $('.per-order-status ._textarea').val();

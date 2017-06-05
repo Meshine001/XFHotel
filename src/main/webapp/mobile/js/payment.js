@@ -4,12 +4,14 @@ $(document).ready(function(){
     _id=decodeURIComponent(fnBase.request('id'));
     var frontURL=Constant.URL+'/mobile/getOrder';
     var postData={id:_id};
+    var _totalprice='';
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
+        _totalprice=Number((data[1].totalPrice)).toFixed(2);
         $(".p_msg li .addres").text(data[1].description);
         $(".p_msg li ._date").html(data[0]+"入住"+data[2]+"离开"+"<i class='date'>共（"+data[1].totalDay+"）天</i>");
         //$(".p_msg li ._cash").html("押金:<span style='color: #666'>"+_YJpic+"</span>");
-        $(".p_msg li .toal").html("订单总额:<span class='money'>￥"+data[1].totalPrice+"</span>");
+        $(".p_msg li .toal").html("订单总额:<span class='money'>￥"+_totalprice+"</span>");
 
     });
 
@@ -32,6 +34,7 @@ var payment={
             };
             console.log(data);
             fnBase.commonAjax(url,data,function (data) {
+            	 console.log(data);
                 if(data.status == 'success'){
                     console.log(data);
                     var payData = {

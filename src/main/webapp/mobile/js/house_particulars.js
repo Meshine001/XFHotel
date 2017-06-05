@@ -244,7 +244,12 @@ $(document).ready(function(){
     var postData={"roomId":_id,"page":1};
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
+        if(data.results.length>0){
             $("#pingjia span").text(data.results[1].score[0]+"星");
+        }else{
+            $("#pingjia").text("暂无评论")
+        }
+
             $(".criticism ul").html("");
             var plStr = '';
             for(var i=0;i<data.results.length;i++){
@@ -275,40 +280,13 @@ $(document).ready(function(){
         });
     });
 
-    //判断有房没房
-    $("#appDate2").on('change',function(){
-
-        var checkIn= $("#appDate").val();
-        var leave= $("#appDate2").val();
-        if(checkIn>=leave){
-            fnBase.myalert("请重新选择时间");
-            $("#appDate").val("");
-            $("#appDate2").val("");
-            return;
-        }else{
-            var frontURL=Constant.URL+'/mobile/checkAvailable';
-            var postData={"startTime":checkIn,"endTime":leave,"roomId":_id};
-            fnBase.commonAjax(frontURL,postData,function(data){
-                console.log(data);
-                if(data.content.length>0){
-                    $(".alert-content .hint").html("<i>!</i>您所选时间内没有空房,请重新选择日期").css("color","red").show();
-                    $(".but-success").hide();
-                }else{
-                    $(".alert-content .hint").html("");
-                    $(".but-success").show();
-                }
-            })
-        }
-
-    });
-
 //  选好日期进行下一步操作：
     $(".alert-content .but-success").click(function(){
         $("#masking").hide(10,function(){
             $(".alert-content").animate({bottom:'-3.7rem'},300);
         });
-        var checkIn= $("#appDate").val();
-        var leave= $("#appDate2").val();
+        var checkIn= $(".input-enter").val();
+        var leave= $(".input-leave").val();
         var _id = decodeURIComponent(fnBase.request("id"));
         var frontURL=Constant.URL+'/mobile/module';
         var postData={"startTime":checkIn,"endTime":leave,"apartmentId":_id};

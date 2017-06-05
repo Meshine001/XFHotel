@@ -150,7 +150,6 @@ public class MobileController  {
 		c.setRegTime(new Date().getTime());
 		c.setLevel(0);
 		if (customerService.register(c, details) == true) {
-			session.setAttribute("c", c);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c.getId());
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
@@ -168,6 +167,9 @@ public class MobileController  {
 	@RequestMapping(value="/checkVCode")  
 	public @ResponseBody Message checkVCode(String tel,String vCode){
 		System.out.println(session.getId());
+		if(tel==null||vCode==null){
+			return new Message(Constants.MESSAGE_ERR_CODE, "验证失败");
+		}
 		try {
 			Map<String, Object> sVCode = (Map<String, Object>) session.getAttribute("vCode");
 			String sTel = (String) sVCode.get("tel");
@@ -208,7 +210,7 @@ public class MobileController  {
 			vCode.put("diedLine", new Date().getTime()+Constants.SMS_AVAILBEL_TIME);
 			vCode.put("code", vCodeStr);
 			session.setAttribute("vCode", vCode);
-			//System.out.println("send vcode==>"+vCode);
+			System.out.println("send vcode==>"+vCode);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -362,10 +364,10 @@ public class MobileController  {
 			long customerId ,String nick,String tel,String idCard,
 			String sex,String birthday,String job,
 			String education,String declaration,String hobby,String avatar) {
-//		System.out.println(avatar);
 		Customer customer = customerService.getCustomer(customerId);
 		CustomerDetails c = customer.getDetails();
 		c.setNick(nick);
+		c.setSex(sex);
 		c.setTel(tel);
 		c.setIdCard(idCard);
 		c.setBirthday(birthday);
