@@ -73,6 +73,11 @@ $(document).ready(function(){
 
 
             if(data.statusCode=="1"){
+                if(data.content.length=='0'){
+                    $("#zanWu").show();
+                }else{
+                    $("#zanWu").hide();
+                }
             	fnBase.loadHide();
                 var _str='';
                 $(".orderlist").html("");
