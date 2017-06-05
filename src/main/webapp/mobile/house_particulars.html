@@ -34,55 +34,7 @@
     <!--日历插件-->
     <script>
 
-$(function () {
-    var currYear = (new Date()).getFullYear();
-    var opt={};
-    opt.date = {preset : 'date'};
-    opt.datetime = {preset : 'datetime'};
-    opt.time = {preset : 'time'};
-    opt.default = {
-        theme: 'android-ics', //皮肤样式
-        display: 'modal', //显示方式
-        mode: 'scroller', //日期选择模式
-        dateFormat: 'yyyy-mm-dd',
-        lang: 'zh',
-        showNow: true,
-        nowText: "今天",
-        startYear: currYear, //开始年份
-        endYear: currYear + 10 //结束年份
-    };
 
-    $("#appDate").mobiscroll($.extend(opt['date'], opt['default']));
-    var optDateTime = $.extend(opt['datetime'], opt['default']);
-    var optTime = $.extend(opt['time'], opt['default']);
-    $("#appDateTime").mobiscroll(optDateTime).datetime(optDateTime);
-    $("#appTime").mobiscroll(optTime).time(optTime);
-});
-$(function () {
-    var currYear = (new Date()).getFullYear();
-    var opt={};
-    opt.date = {preset : 'date'};
-    opt.datetime = {preset : 'datetime'};
-    opt.time = {preset : 'time'};
-    opt.default = {
-        theme: 'android-ics', //皮肤样式
-        display: 'modal', //显示方式
-        mode: 'scroller', //日期选择模式
-        dateFormat: 'yyyy-mm-dd',
-        lang: 'zh',
-        showNow: true,
-        nowText: "今天",
-        startYear: currYear, //开始年份
-        endYear: currYear + 10 //结束年份
-    };
-
-    $("#appDate2").mobiscroll($.extend(opt['date'], opt['default']));
-    var optDateTime = $.extend(opt['datetime'], opt['default']);
-    var optTime = $.extend(opt['time'], opt['default']);
-    $("#appDateTime").mobiscroll(optDateTime).datetime(optDateTime);
-    $("#appTime").mobiscroll(optTime).time(optTime);
-
-});
     </script>
    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
     <style>
@@ -179,7 +131,7 @@ $(function () {
                 <h1 class="ic_house">房间描述</h1>
                 <p id="serviceIntro2"></p>
             </section>
-            <!--  
+            <!--
             <section class="panel describe ">
                 <h1 class="ic_house">户型图</h1>
                 <div class="i_inf hu_xing_tu">
@@ -213,12 +165,7 @@ $(function () {
                 <h1 class="ic_house">房客评论</h1>
                 <p id="pingjia">总评价：<span></span></p>
                 <ul class="appraise">
-                    <!--<li>-->
-                        <!--<p class="appInfo"><span class="appName">阿卡丽</span><i>入住时间：2017.20.10</i></p>-->
-                        <!--<p class="appText">陪老婆出来玩，发现有这么好玩的短租公寓，真是太好了，老婆很喜欢，</p>-->
-                        <!--<p class="pl-pic"><img src="images/未标题-1.jpg"><img src="images/icnet1.jpg"><img src="images/icnet1.jpg"><img src="images/icnet1.jpg"></p>-->
-                        <!--<p class="appDate"><span style="font-weight: bold;">房东回复：</span><span>嗯，感谢您的入住感谢您的入感谢您的入感谢您的入感谢您的入感谢您的入感谢您的入</span></p>-->
-                    <!--</li>-->
+
                 </ul>
                 <div style="clear:both"></div>
             </section>
@@ -234,8 +181,6 @@ $(function () {
 <div class="alert-content">
     <header>请选择起止时间</header>
     <ul class="select-time">
-        <!--<li><input value="" class="" readonly="readonly" placeholder="入住时间" name="appDate" id="appDate" type="text"></li>-->
-        <!--<li><input value="" class="" readonly="readonly" name="appDate" placeholder="离开时间" id="appDate2" type="text"></li>-->
         <li><input type="text" id="startTime" class="input-enter none" style="display: block;font-weight:400"></li>
         <li><input type="text" id="endTime" class="input-leave none" style="display: block;font-weight:400"></li>
     </ul>
