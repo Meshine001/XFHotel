@@ -637,7 +637,7 @@ public class MobileController  {
 		return info;
 	}
 /**
- * 上传照片
+ * 
  * @param file
  * @param request
  * @return
@@ -686,12 +686,7 @@ public class MobileController  {
 		return orderservice.outLease(orderId);
 	}
 	
-	/**
-	 * 保洁
-	 * @param uId
-	 * @param type
-	 * @return
-	 */
+	
 	@RequestMapping(value = "/Clean", method = RequestMethod.POST)
 	public @ResponseBody  Message Clean(Long uId ,int type){
 		if(uId==null){
@@ -709,15 +704,9 @@ public class MobileController  {
 	   list.add(map.get(key));
 	  }
 	  return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+		
 	}
-	/**
-	 * 呼叫保洁
-	 * @param demand
-	 * @param oederId
-	 * @param content1
-	 * @param cleanTime
-	 * @return
-	 */
+	
 	@RequestMapping(value = "/cleanAdd", method = RequestMethod.POST)
 	public @ResponseBody Message cleanAdd (String demand,Long oederId , int content1[],int cleanTime) {
 	System.out.println(content1);
@@ -749,9 +738,9 @@ public class MobileController  {
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
 		}
+		
 		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
 	}
-	
 	/*
 	 * 获取订单
 	 */
@@ -770,12 +759,6 @@ public class MobileController  {
 		  }
 		return list;
 	}
-	/**
-	 * 获取房屋状态及价格
-	 * @param id
-	 * @param startDate
-	 * @return
-	 */
 	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.POST)
 	public @ResponseBody JSONObject getRangePrices(@PathVariable("id") Long id,
 			@PathVariable("startDate") String startDate) {
