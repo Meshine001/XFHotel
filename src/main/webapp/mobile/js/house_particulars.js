@@ -283,6 +283,7 @@ $(document).ready(function(){
 
 //  选好日期进行下一步操作：
     $(".alert-content .but-success").click(function(){
+        var _uid = fnBase.huoqu(0, "uid");
         if (_uid == null || _uid == "undefined" || _uid == "") {
             window.location.href = "login.html";
             return;

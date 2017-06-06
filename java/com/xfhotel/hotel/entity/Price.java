@@ -22,13 +22,9 @@ public class Price {
 	@GeneratedValue(generator="facilitygenerator")
 	@GenericGenerator(name="facilitygenerator",strategy="increment")
 	private long id;
-	
 	private long apartment_id;
-	
 	private long date;
 	private Double price;
-	
-	
 	public Price() {
 		super();
 		// TODO Auto-generated constructor stub

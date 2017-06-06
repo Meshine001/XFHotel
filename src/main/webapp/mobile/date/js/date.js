@@ -46,7 +46,7 @@ var date = function ($) {
           id:_id,
           startDate:startDate
         };
-        var frontURL=Constant.URL+'mobile/price/'+_id+'/'+startDate;
+        var frontURL=Constant.URL+'/mobile/price/'+_id+'/'+startDate;
         $.ajax({
           type:'POST',
           dataType:'json',

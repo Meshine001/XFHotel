@@ -1,9 +1,4 @@
 ﻿$(document).ready(function(){
-    var _uid = fnBase.huoqu(0, "uid");
-    if (_uid == null || _uid == "undefined" || _uid == "") {
-        window.location.href = "login.html";
-        return;
-    }
     addpartenr();
     var sexVal='';
     var couponid='';
@@ -12,7 +7,7 @@
             $(".alert-content").animate({bottom:0},300);
         });
     });
-    $(".alert-content ._black,#usecoupon ._black,#usecoupon header ._confirm").live('click',function(){
+    $(".alert-content ._black,#usecoupon ._black").live('click',function(){
         $("#masking").hide(10,function(){
             $(".alert-content, #usecoupon").animate({bottom:'-5.7rem'},300);
         });
@@ -128,31 +123,26 @@ function addpartenr(){
        
     });
  
-    //使用优惠劵；
-    $(".order_info .roompPic a").live('click',function(){
-    	 $("#masking").show(10,function(){
-             $("#usecoupon").animate({bottom:0},300);
-         });
-    })
 
-    $("#usecoupon ul li").live('click',function(){
-    	if($(this).find('.ifrader').hasClass('hat')==false){
-    		$(this).find('.ifrader').addClass('hat');
-			$(this).siblings().find('.ifrader').removeClass('hat')
-    	}else{
-    		$(this).find('.ifrader').removeClass('hat')
-    	}
 
-    });
-   
+
+
+
+
     /**
 	 * 获取可用优惠卷
 	 * @param uId  _uid
 	 * @param totalPrice
 	 * @return 
 	 */
-     
-    $(".order_info .roompPic a").live('click',function(){
+    function get(){
+
+    }
+   $(".order_info .roompPic a").click(function(){
+        $("#masking").show(10,function(){
+            $("#usecoupon").animate({bottom:0},300);
+        });
+
     	var frontURL=Constant.URL+'/mobile/getMyCoupons';
     	var postData={
     			'uId':_uid,
@@ -168,30 +158,39 @@ function addpartenr(){
         		 $('#usecoupon ul').html('');
         		 for(var j=0;j<data.length;j++){
         			 _data+='<li usid="'+data[j].id+'"  used="'+data[j].cValue+'"><div class="usemsg"><h1>'+data[j].type+'</h1><p>消费满：<span>'+data[j].rule+'</span></p><p>有效期：<span>'+data[j].startTime+"-"+data[j].endTime+'</span></p><span class="ifrader"><i></i></span></div><i class="_pic">￥'+data[j].cValue+'</i></li>'
-        			
         		 }
         		 $('#usecoupon ul').append(_data)
     		 }
     	 })
     });
-//    选取优惠劵
+    $("#usecoupon ul li").live('click',function(){
+        if($(this).find('.ifrader').hasClass('hat')==false){
+            $(this).find('.ifrader').addClass('hat');
+            $(this).siblings().find('.ifrader').removeClass('hat')
+        }else{
+            $(this).find('.ifrader').removeClass('hat')
+        }
+    });
+//    选取优惠劵11
     var used='';
     $("#usecoupon header ._confirm").click(function(){
-    	var strList=new Array();
-        //var used='';
+        $("#masking").hide(10,function(){
+            $(".alert-content, #usecoupon").animate({bottom:'-5.7rem'},300);
+        });
         var obj=$(this).parent().parent().find('li');
         for(var i=0;i<obj.length;i++){
             if(obj.eq(i).find('.usemsg .ifrader').hasClass("hat")){
-                couponid=obj.eq(i).attr('usid');
-                console.log(couponid)
-                //if(couponid=='')
-                //used=_oTotalPrice-obj.eq(i).attr('used');
-                //used=used.toFixed(2);
+                couponid=obj.eq(i).attr('used');
             }
         }
-        //couponid=strList.join(",");
+        if(couponid==""){
+            couponid=0;
+        }
+        used=_oTotalPrice-couponid;
+        used=Number(used).toFixed(2);
         $(".order_info .roompPic").html("订单总额:<span class='money'>￥"+used+"</span><a>优惠劵</a>");
         return couponid;
+
     });
     
     //    提交订单

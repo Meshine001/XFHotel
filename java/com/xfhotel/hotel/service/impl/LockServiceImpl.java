@@ -55,10 +55,10 @@ public class LockServiceImpl implements LockService {
 	public Message addPassword(String phone, String lock_no, String time_start, String time_end) {
 		try {
 			String[] values = { phone, lock_no };
-			Lock lock_check = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
-			if (lock_check != null) {
-				return new Message(Constants.MESSAGE_ERR_CODE, "已有密码");
-			}
+//			Lock lock_check = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
+//			if (lock_check != null) {
+//				return new Message(Constants.MESSAGE_ERR_CODE, "已有密码");
+//			}
 			Calendar start = Calendar.getInstance();
 			start.setTime(new SimpleDateFormat("yyyyMMddHHmmss").parse(time_start));
 			Calendar end = Calendar.getInstance();
@@ -68,7 +68,6 @@ public class LockServiceImpl implements LockService {
 			lock.setLock_no(lock_no);
 			lock.setValid_time_end(end.getTimeInMillis());
 			lock.setValid_time_start(start.getTimeInMillis());
-
 			JSONObject result = LockOperater.getInstance().pwdAdd(lock.getLock_no(), "", lock.getValid_time_start(),
 					lock.getValid_time_end(), "", lock.getPwd_user_mobile(), "", lock.getDescription(), "");
 			if (result.getString("rlt_code").equals(LockOperater.LOCK_MSG_SUCCESS)) {
@@ -80,7 +79,6 @@ public class LockServiceImpl implements LockService {
 				lockDAOImpl.save(lock);
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加锁密码成功");
 			}
-
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
