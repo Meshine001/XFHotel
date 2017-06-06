@@ -2,6 +2,8 @@
 /* CSS Document */
 body {
 	font: 12px/1.8 \5FAE\8F6F\96C5\9ED1, Arial, \5b8b\4f53;
+	font-family: Verdana,simsun;
+	font-size:14px;
 	background: #fff;
 	color: #333333;
 }
@@ -116,10 +118,11 @@ header {
 	background: #fff;
 	height: 68px;
 	line-height: 68px;
+/*	border-bottom: 4px solid #000;*/
 }
 
 .logo {
-	background: url(../images/LOGO.jpg) no-repeat left;
+	background: url(../images/logo260.png) no-repeat left;
 	width: 450px;
 	height: 70px;
 	display: inline-block;
