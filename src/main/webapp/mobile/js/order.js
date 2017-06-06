@@ -1,4 +1,9 @@
 ﻿$(document).ready(function(){
+    var _uid = fnBase.huoqu(0, "uid");
+    if (_uid == null || _uid == "undefined" || _uid == "") {
+        window.location.href = "login.html";
+        return;
+    }
     addpartenr();
     var sexVal='';
     var couponid='';
@@ -173,14 +178,15 @@ function addpartenr(){
     var used='';
     $("#usecoupon header ._confirm").click(function(){
     	var strList=new Array();
-        var used='';
+        //var used='';
         var obj=$(this).parent().parent().find('li');
         for(var i=0;i<obj.length;i++){
             if(obj.eq(i).find('.usemsg .ifrader').hasClass("hat")){
-                //strList.push(obj.eq(i).attr('usid'));
                 couponid=obj.eq(i).attr('usid');
-                used=_oTotalPrice-obj.eq(i).attr('used');
-                used=used.toFixed(2);
+                console.log(couponid)
+                //if(couponid=='')
+                //used=_oTotalPrice-obj.eq(i).attr('used');
+                //used=used.toFixed(2);
             }
         }
         //couponid=strList.join(",");
