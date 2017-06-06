@@ -55,7 +55,7 @@ public class LockServiceImpl implements LockService {
 	public Message addPassword(String phone, String lock_no, String time_start, String time_end) {
 		try {
 			String[] values = { phone, lock_no };
-			Lock lock_check = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
+//			Lock lock_check = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
 //			if (lock_check != null) {
 //				return new Message(Constants.MESSAGE_ERR_CODE, "已有密码");
 //			}

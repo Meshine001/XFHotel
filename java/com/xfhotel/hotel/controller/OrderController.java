@@ -258,7 +258,6 @@ public class OrderController {
 				Long roomId = o.getRoomId();
 				String lock_no = apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
 				System.out.println("send pass to "+lock_no);
-				System.out.println("上海市护手霜");
 				Message result = lockService.addPassword(o.getCusTel(), lock_no, DateUtil.format(new Date(o.getStartTime()), "yyyyMMddHHmmss"),
 						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddHHmmss"));
 				if(result.getStatusCode() == Constants.MESSAGE_SUCCESS_CODE){
@@ -403,9 +402,8 @@ public class OrderController {
 	@RequestMapping(value = "/msg", method = RequestMethod.GET)
 	public String msg(int msg) {
 		StringBuffer sb = new StringBuffer();
-
+		
 		switch (msg) {
-
 		case Order.STATUS_TIME_OUT:
 			sb.append("订单超时");
 			break;
@@ -421,6 +419,7 @@ public class OrderController {
 		session.setAttribute("orderMsg", sb.toString());
 		return "customer/orderMessage";
 	}
+	
 	@RequestMapping(value = "/cleanOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public Message cleanOrder(Long id) {
@@ -440,7 +439,7 @@ public class OrderController {
 
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
-
+		
 	}
 	
 	@RequestMapping(value = "/cleanOrders", method = RequestMethod.POST)
@@ -459,10 +458,8 @@ public class OrderController {
 				e.printStackTrace();
 				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
 			}
-
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "打扫完成");
-
 	}
 
 }
