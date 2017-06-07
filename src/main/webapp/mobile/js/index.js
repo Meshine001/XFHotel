@@ -125,8 +125,7 @@ function getData() {
 
         $('.service-image .title-serce').unbind('click').click(
             function () {
-                //var id=$(this).attr('proID');
-                window.location.href = "Life.html";
+                window.location.href = "Lifelist.html";
             }
         );
 

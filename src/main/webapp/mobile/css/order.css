@@ -23,7 +23,7 @@
 
 
 .price_info{width: 100%;background: #fff;margin: 0.1rem 0 0 0;overflow: hidden;border-top: 1px solid #ddd}
-.price_info li{padding: 0 0.1rem;height: 0.4rem;line-height: 0.4rem;border-bottom:1px solid #ddd;font-size: 0.14rem;}
+.price_info li{cursor: pointer;padding: 0 0.1rem;height: 0.4rem;line-height: 0.4rem;border-bottom:1px solid #ddd;font-size: 0.14rem;}
 .price_info li span{width: 0.8rem;color: #333;display: inline-block;float: left}
 .price_info li .fl{padding: 0 0.1rem;overflow: hidden;border-left: 1px solid #ddd}
 

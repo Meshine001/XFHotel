@@ -281,10 +281,11 @@ $(document).ready(function(){
     });
 
    //  立即预约
-    $(".navbar a").live('click',function() {
-        $("#masking").show(10, function () {
-            $(".alert-content").animate({bottom: 0}, 300);
-        });
+    $(".navbar a").live('click',function(){
+        //$("#masking").show(10, function (){
+        //    $(".alert-content").animate({bottom: 0}, 300);
+        //});
+        $(".select-time").click();
     });
 
 //  选好日期进行下一步操作：
