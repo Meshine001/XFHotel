@@ -100,22 +100,79 @@
     background-color: #ffeacc;
     color: #ff7200;
 }
-/*�û�����*/
+/*评论*/
+/*
+  查看全部
+*/
+.panel .button-orange{
+    margin: 0.2rem 0 0.2rem;
+    text-align: center;
+}
+.panel .button-orange #commentsInfo{
+    display: inline-block;
+    width: 1.1rem;
+    font-size: 0.14rem;
+    line-height: 0.28rem;
+    color: #333;
+    border: 1px solid #888;
+    cursor: pointer;
+}
 
 .panel .appraise{width: 100%;height: auto}
-.panel .appraise li{border-bottom: 1px solid #e6e6e6;padding: 0.06rem 0;;font-size: 0.14rem}
-.panel .appraise li .appInfo span{display: inline-block;padding: 0 0.06rem;background: #999988;color: #fff;border-radius: 0.05rem}
-.panel .appraise li .appInfo i{padding-left: 0.1rem;color:#999988}
+.panel .appraise li{
+    margin: 0.1rem 0;
+    padding: 0.1rem 0rem 0.1rem 0.5rem;
+    font-size: 0.12rem;
+    background-color: #fff;
+    border-top: 1px solid #cbcaca;
+    border-bottom: 1px solid #cbcaca;
+    display: none;
+}
+.panel .appraise li.showtime{display: block}
+.panel .appraise li .customer .user,.panel .appraise li .customer .time{
+    color: #999;
+    font-size: 0.1rem;
+}
+.customer .pic{
+    width: 0.32rem;
+    height: 0.32rem;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    float: left;
+    margin-left: -0.42rem;
+}
+.panel .appraise li .text{
+    font-size: 0.12rem;
+    word-break: break-all;
+}
+.commentReplay{margin-top: 0.1rem}
+/*管理员回复查看按钮*/
+.commentReplay .folder-title{
+    padding-bottom: 0.05rem;
+    padding-right: 0.27rem;
+    font-size: 0.12rem;
+    text-align: right;
+    color: #0079ff;
+    background-color: #fff;
+    display: none;
+}
+/*管理员回复内容*/
+.commentReplay .folder-content{
+    overflow: hidden;
+    transition: all .5s;
+    margin-right: -0.1rem;
+    font-size: 0.12rem;
+    border-top: 1px solid #cbcaca;
+    display: none;
+}
+.commentReplay .folder-content p{
+    font-size: 0.12rem;
+    padding-right: 0.1rem;
+}
+.commentReplay .folder-content em{
+    color: orangered;
+}
 
-#pingjia{font-size:0.14rem;}
-#pingjia span{display: inline-block;color: #ea644a;padding: 0 0.03rem;border: 1px solid #ea644a;margin-left: 0.1rem;}
-.panel .appDate{background:#e0e0e6}
-.panel .pl-pic img{width:24%;height:0.65rem;margin-left:0.02rem}
-/*
-.panel .pl-pic{display:none}
-
-*/
-.panel .appDate{height:0.6rem;;display:none;border-radius: 0.05rem;padding: 0.03rem}
 /*---------------*/
 .i_inf{width: 100%;height: auto;overflow: hidden}
 .i_inf ul li{width: 50%;float: left;height: 0.3rem;line-height: 0.3rem;}

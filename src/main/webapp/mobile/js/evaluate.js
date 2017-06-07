@@ -32,7 +32,8 @@
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             if(data.statusCode=="1"){
-                fnBase.myalert(data.content)
+                fnBase.myalert(data.content);
+                window.location.href = 'index.html';
             }else{
                 fnBase.myalert(data.content);
             }

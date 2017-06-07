@@ -3,6 +3,8 @@
     getData();
     alertSearch.info();
 
+
+
     $('.header-mobile .input-search').focus(function () {
         fnBase.keep(1, "mode", 0);
         window.location.href="houseType.html";
@@ -142,7 +144,7 @@ function life() {
         var ad_str = '';
         var ad_length = data.blogs.results.length;
         for (var i = 0; i < ad_length; i++) {
-            ad_str += '<a pId="' + data.blogs.results[i].id + '"><img src="' + data.blogs.results[i].pic + '"></a>';
+            ad_str += '<a pId="' + data.blogs.results[i].id + '"><img src="'+Constant.URL+ data.blogs.results[i].pic + '"><p class="mask">'+data.blogs.results[i].title+'</p><div class="content-mob"><p>'+data.blogs.results[i].abs_text+'</p><img src="'+Constant.URL+data.blogs.results[i].pic+'"></div></a>';
         }
         $(".service-image").append(ad_str);
     });

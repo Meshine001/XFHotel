@@ -52,6 +52,7 @@
     z-index: 1003;
     bottom: -5.6rem;
     box-shadow: 0 0 0.2rem #333;
+    overflow: scroll;
 }
 .alert-content header,#usecoupon header{
     width: 100%;
@@ -65,8 +66,8 @@
     font-weight: normal;
     position: relative;
 }
-.alert-content header ._black,#usecoupon header ._black{float: left;padding: 0 0.2rem;font-size: 0.3rem}
-.alert-content header ._confirm,#usecoupon header ._confirm{float: right;padding: 0 0.2rem;color: orangered}
+.alert-content header ._black,#usecoupon header ._black{cursor: pointer;float: left;padding: 0 0.2rem;font-size: 0.3rem}
+.alert-content header ._confirm,#usecoupon header ._confirm{float: right;padding: 0 0.2rem;color: orangered;cursor: pointer}
 
 .alert-content ul{width: 90%;margin: 0 auto;}
 .alert-content ul li{position: relative;line-height: 0.4rem;font-size: 0.14rem;border-bottom: 1px solid #ddd;text-indent: 0.25rem}

@@ -24,18 +24,6 @@
     <script type="text/javascript" src="date/js/date.js"></script>
     <!-- 6.1日历-->
 
-
-
-
-<!--日历插件-->
-    <link href="css/mobiscroll_002.css" rel="stylesheet" type="text/css">
-    <script src="js/mobiscroll_002.js" type="text/javascript"></script>
-    <script src="js/mobiscroll.js" type="text/javascript"></script>
-    <!--日历插件-->
-    <script>
-
-
-    </script>
    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
     <style>
         .iw_poi_title {color:#13cf15;font-size:0.2rem;font-weight:bold;overflow:hidden;padding-right:0.13rem;white-space:nowrap}
@@ -162,11 +150,29 @@
                 </div>
             </section>
             <section class="panel criticism">
-                <h1 class="ic_house">房客评论</h1>
-                <p id="pingjia">总评价：<span></span></p>
+                <h1 class="ic_house">房客评论<em style="font-weight: 400;color: #000"></em></h1>
+                <p id="pingjia"></p>
                 <ul class="appraise">
+                    <!--<li>-->
+                        <!--<div class="customer">-->
+                            <!--<img src="images/" class="pic">-->
+                            <!--<p class="user">【'+data[i].tel+'】<span>'+data[i].comment.score[0]+'分</span></p>-->
+                            <!--<p class="time">'+data[i].comment.time+'入住</p>-->
+                        <!--</div>-->
+                        <!--<p class="text">'+data[i].comment.feel+'</p>-->
 
+                    <!--</li>-->
+                    <!-- 回复内容暂时保留-->
+                    <!--<div class="commentReplay">-->
+                    <!--<div class="folder-title">管理员回复</div>-->
+                    <!--<div class="folder-content">-->
+                    <!--<p><em>房东回复:</em>很开心的一次接待，房客棒棒的，推荐。</p>-->
+                    <!--</div>-->
+                    <!--</div>-->
                 </ul>
+                <div class="button-orange">
+                    <span id="commentsInfo">全部</span>
+                </div>
                 <div style="clear:both"></div>
             </section>
         </div>
