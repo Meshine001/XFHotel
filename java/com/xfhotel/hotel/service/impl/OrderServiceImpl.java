@@ -243,27 +243,6 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 	}
-	
-	
-	public static void main(String[] args) {
-		Long start = DateUtil.getStartTime();
-		Long end = DateUtil.getEndTime();
-		System.out.println(start);
-		System.out.println(end);
-		
-		System.out.println(DateUtil.format(new Date(start), "yyyy-MM-dd HH:mm:ss"));
-		
-		System.out.println(DateUtil.format(new Date(end), "yyyy-MM-dd HH:mm:ss"));
-		
-//		String str= "1";
-//		int len = str.length();
-//		StringBuffer sb = new StringBuffer();
-//		for(int i=len;i<5;i++){
-//			sb.append("0");
-//		}
-//		sb.append(str);
-//		System.out.println(sb.toString());
-	}
 
 	@Transactional
 	@Override
@@ -278,7 +257,6 @@ public class OrderServiceImpl implements OrderService {
 			String[] otherCusName, String[] otherCusIdCard, String cusIdCard, String personal, String startTime,
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
 			String apartmentType,Long counponId) {
-		
 		if(null != counponId){
 			Coupon coupon =couponService.getCoupon2(counponId);
 			boolean isUsed = true;
@@ -287,9 +265,7 @@ public class OrderServiceImpl implements OrderService {
 			double favorable = coupon.getcValue();
 			Double totalPrice2 = Double.parseDouble(totalPrice);
 			totalPrice = String.valueOf(totalPrice2 -favorable); 
-			
 		}
-		
 		
 		Order o = new Order();
 		o.setCusId(cusId);
@@ -335,7 +311,6 @@ public class OrderServiceImpl implements OrderService {
 					a.getString("dan_yuan")+"单元,"+a.getString("lou_ceng")+"层,"+a.getString("men_pai")+"号";
 			String[] p = {f};
 			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, systemConfiService.getConfig().getSms(), p);
-			
 			o.setStatus(Order.STATUS_ON_OUT_LEASE);
 			update(o);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "退租成功，等待管理员确认");
@@ -352,7 +327,5 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderDAO.findPageByFetchedHql("from Order", "select count(*) from Order", page, 10, null);
 	}
-
-	
 
 }

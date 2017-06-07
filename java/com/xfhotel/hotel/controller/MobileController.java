@@ -179,14 +179,25 @@ public class MobileController  {
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
 /**
- * 获取房源
+ *
  * @param roomId
  * @param page
  * @return
  */
 	@RequestMapping(value = "/get", method = RequestMethod.POST)
-	public @ResponseBody PageResults<Comment> getRoomComments(Long roomId,Integer page){
-		return commentService.getComments(roomId, page);
+	public @ResponseBody ArrayList<Object> getRoomComments(Long roomId){
+		ArrayList<Object> list = new ArrayList<Object>();
+		List<Comment> comment = commentService.getCommentsByRoom(roomId);
+		for(Comment comment1:comment){
+			Customer customer = customerService.getCustomer(comment1.getFromWho());
+			CustomerDetails f = customer.getDetails();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("tel", customer.getTel());
+			map.put("comment", comment1);
+			map.put("Avatar", f.getAvatar());
+			list.add(map);
+		}
+		return list;
 	}
 	/**
 	 * 获取价格
@@ -361,7 +372,6 @@ public class MobileController  {
 			comment.setHasRead(false);
 			Order o = orderservice.get(orderId);
 			comment.setEntryTime(o.getStartTime());
-
 			commentService.add(comment);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "评论成功");
 		} catch (Exception e) {
@@ -656,8 +666,6 @@ public class MobileController  {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");
 	}
-	
-	
 	/**
 	 * 查看密码
 	 * @param request
@@ -685,7 +693,6 @@ public class MobileController  {
 	public @ResponseBody Message outLease(Long orderId) {
 		return orderservice.outLease(orderId);
 	}
-	
 	
 	@RequestMapping(value = "/Clean", method = RequestMethod.POST)
 	public @ResponseBody  Message Clean(Long uId ,int type){
@@ -759,6 +766,7 @@ public class MobileController  {
 		  }
 		return list;
 	}
+	
 	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.POST)
 	public @ResponseBody JSONObject getRangePrices(@PathVariable("id") Long id,
 			@PathVariable("startDate") String startDate) {
