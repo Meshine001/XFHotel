@@ -1,7 +1,14 @@
 ﻿$(document).ready(function(){
+    $(".link-home").attr("href","javascript:void(0);").click(function(){
+        if (/(iPhone|iPad|iPod)/i.test(navigator.userAgent)) {
+            window.location.href = window.document.referrer;
+        } else { window.history.go("-1"); }
+    });
+
     addpartenr();
     var sexVal='';
     var couponid='';
+    var yhjid='';
     $("#addfriend").live('click',function(){
         $("#masking").show(10,function(){
             $(".alert-content").animate({bottom:0},300);
@@ -139,15 +146,16 @@ function addpartenr(){
 
     }
    $(".order_info .roompPic a").click(function(){
+       console.log('我要用优惠卷')
         $("#masking").show(10,function(){
             $("#usecoupon").animate({bottom:0},300);
         });
 
-    	var frontURL=Constant.URL+'/mobile/getMyCoupons';
-    	var postData={
+        var frontURL=Constant.URL+'/mobile/getMyCoupons';
+        var postData={
     			'uId':_uid,
     			'totalPrice':_oTotalPrice
-    	};
+        };
         console.log(postData);
     	 fnBase.commonAjax(frontURL,postData,function(data){
     		 console.log(data);
@@ -171,9 +179,12 @@ function addpartenr(){
             $(this).find('.ifrader').removeClass('hat')
         }
     });
+
+
+
 //    选取优惠劵11
     var used='';
-    $("#usecoupon header ._confirm").click(function(){
+    $("#usecoupon header ._confirm").live('click',function(){
         $("#masking").hide(10,function(){
             $(".alert-content, #usecoupon").animate({bottom:'-5.7rem'},300);
         });
@@ -181,18 +192,37 @@ function addpartenr(){
         for(var i=0;i<obj.length;i++){
             if(obj.eq(i).find('.usemsg .ifrader').hasClass("hat")){
                 couponid=obj.eq(i).attr('used');
+                yhjid=obj.eq(i).attr('usid')
             }
         }
         if(couponid==""){
             couponid=0;
         }
         used=_oTotalPrice-couponid;
-        used=Number(used).toFixed(2);
+        used=Number(used).toFixed(0);
         $(".order_info .roompPic").html("订单总额:<span class='money'>￥"+used+"</span><a>优惠劵</a>");
-        return couponid;
-
+        return yhjid;
     });
-    
+
+    //登录用户；默认显示信息；
+    getData();
+    function getData(){
+        var _uid = fnBase.huoqu(0, "uid");
+        if (_uid == null || _uid == "undefined" || _uid == "") {
+            window.location.href = "login.html";
+            return;
+        }
+        var frontURL=Constant.URL+'/mobile/detailsData?id='+_uid;
+        var postData={};
+        fnBase.commonAjax(frontURL,postData,function(data){
+            console.log(data);
+            $("#userName").attr('value',data.details.nick);
+            $("#tel").attr('value',data.details.tel);
+            $("#identity").attr('value',data.details.idCard);
+        });
+
+    }
+
     //    提交订单
     $(".navbar a").click(function(){
         var otherCusName=new Array();
@@ -240,10 +270,11 @@ function addpartenr(){
             "preferential":_span,//优惠
             "personal":$("#presonal").val(),
             "description":_description,
-            "id":couponid,
+            "id":yhjid,
             "otherCusName":_otherCusName,
         	"otherCusIdCard":_otherCusIdCard
         };
+        console.log(postData);
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             console.log(data.order.id);

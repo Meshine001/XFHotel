@@ -233,46 +233,52 @@ $(document).ready(function(){
 	});
 
 
-    //    评价列表显示
-    //var frontURL=Constant.URL+'/mobile/getRoomRates';
-    //var postData={"roomId":_id};
-    //fnBase.commonAjax(frontURL,postData,function(data){
-    //    console.log(data);
-    //	$("#pingjia span").text(data.pingjun+"星")
-    //})
     
     var frontURL=Constant.URL+'/mobile/get';
-    var postData={"roomId":_id,"page":1};
+    var postData={"roomId":_id};
+    console.log(postData);
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
-        if(data.results.length>0){
-            $("#pingjia span").text(data.results[1].score[0]+"星");
+        $(".criticism .ic_house em").text("("+data.length+"条评论"+")");
+        if(data.length>0){
+
         }else{
-            $("#pingjia").text("暂无评论")
+            $("#pingjia").text("暂无评论");
+            $(".panel .button-orange").hide();
         }
 
             $(".criticism ul").html("");
             var plStr = '';
-            for(var i=0;i<data.results.length;i++){
-                plStr+='<li><p class="appInfo"><span class="appName">匿名</span><i>入住时间：'+data.results[i].time+'</i></p><p class="appText">'+data.results[i].feel+'</p><p class="pl-pic">';
-                if(data.results[i].pics.length>1){
-                	$(".panel .pl-pic").show();
-                	for(var j=0;j<data.results[i].pics.length;j++){
-                		plStr+='<img src="/images/' + data.results[i].pics[0] +'">'
-                	}
+            for(var i=0;i<data.length;i++){
+                //电话号码****代替
+                var str=data[i].tel;
+                var str2 = str.substr(0,3)+"****"+str.substr(7);
+                // 日期转换
+                var da = data[i].comment.time;
+                da = new Date(da);
+                var year = da.getFullYear()+'年';
+                var month = da.getMonth()+1+'月';
+                var date = da.getDate()+'日';
+                var dates=year+month+date;
+                var _date=new Array();
+                for(var u=0;u<dates.length;u++){
+                    _date.push(dates)
                 }
-                if(data.results[i].reply==null){
-                	$(".panel .appDate").hide();
-                }else{
-                	$(".panel .appDate").show();
-                	plStr+='</p><p class="appDate" ><span style="font-weight: bold;">房东回复：</span><span>'+data.results[i].reply+'</span></p>'
-                }
+                plStr+='<li><div class="customer"><img src="'+Constant.URL+'/images/'+data[i].Avatar+'" class="pic"><p class="user">【'+str2+'】<span>'+data[i].comment.score[0]+'分</span></p><p class="time">'+_date[i]+' 点评</p></div><p class="text">'+data[i].comment.feel+'</p>';
                 plStr+='</li>';
+
             }
-            $(".criticism ul").append(plStr)
-       
+            $(".criticism ul").append(plStr);
+        $(".criticism ul li").eq(0).addClass('showtime');
+
     });
-    //    评价
+   // 查看全部点评
+    $("#commentsInfo").toggle(function(){
+        $(".criticism ul li").addClass('showtime')
+    },function(){
+        $(".criticism ul li").removeClass('showtime');
+        $(".criticism ul li").eq(0).addClass('showtime');
+    });
 
    //  立即预约
     $(".navbar a").live('click',function() {

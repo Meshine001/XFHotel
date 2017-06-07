@@ -66,7 +66,11 @@ $(document).ready(function(){
     }
 
 });
-
+$(".link-home").attr("href","javascript:void(0);").click(function(){
+    if (/(iPhone|iPad|iPod)/i.test(navigator.userAgent)) {
+        window.location.href = window.document.referrer;
+    } else { window.history.go("-1"); }
+});
     var fnBase={
         loadShow:function(){
                 $("<div class='black_loading' style='display: block'><div class='ldbg'><img src='images/loading.gif' ><p>正在载入，请稍后...</p></div></div>").appendTo($('body'))
