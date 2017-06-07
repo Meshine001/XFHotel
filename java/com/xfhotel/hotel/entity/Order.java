@@ -224,14 +224,10 @@ public class Order {
 		this.needFapiao = needFapiao;
 	}
 	
-	
-
 	public String getPayPlatform() {
 		return payPlatform;
 	}
 	
-	
-
 	public String getWxQRCode() {
 		return wxQRCode;
 	}
@@ -240,8 +236,6 @@ public class Order {
 		this.wxQRCode = wxQRCode;
 	}
 	
-	
-
 	public String getOtherCusName() {
 		return otherCusName;
 	}
@@ -288,7 +282,6 @@ public class Order {
 		return info;
 	}
 	
-
 	String getStatusString(int status) {
 		switch (status) {
 		case STATUS_NOT_COMPLETE:

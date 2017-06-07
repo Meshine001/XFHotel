@@ -243,7 +243,25 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 	}
-
+//	public static void main(String[] args) {
+//		Long start = DateUtil.getStartTime();
+//		Long end = DateUtil.getEndTime();
+//		System.out.println(start);
+//		System.out.println(end);
+//		
+//		System.out.println(DateUtil.format(new Date(start), "yyyy-MM-dd HH:mm:ss"));
+//		
+//		System.out.println(DateUtil.format(new Date(end), "yyyy-MM-dd HH:mm:ss"));
+//		
+////		String str= "1";
+////		int len = str.length();
+////		StringBuffer sb = new StringBuffer();
+////		for(int i=len;i<5;i++){
+////			sb.append("0");
+////		}
+////		sb.append(str);
+////		System.out.println(sb.toString());
+//	}
 	@Transactional
 	@Override
 	public Order getByPayNo(String payNo) {
@@ -293,10 +311,9 @@ public class OrderServiceImpl implements OrderService {
 		o.setStatus(Order.STATUS_ON_PAY);
 		o.setNeedFapiao(needFapiao);
 		add(o);
-		
 		return o;
 	}
-
+	
 	@Transactional
 	@Override
 	public Message outLease(Long id) {
