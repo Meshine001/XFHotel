@@ -150,7 +150,7 @@ var date = function ($) {
         leaveDay.length === 1 ? leaveDay = '0' + leaveDay : false;
         var leaveTime = leaveMonth + '-' + leaveDay;
         var night = Number($('.leave').attr('index')) - Number($('.enter').attr('index'));
-        $('.date').remove(); // 移除插件
+
         $('body').css({ overflow: 'auto' });
         $('.select-time').show();
         $('.entertime').text(enterTime); // 显示
@@ -174,11 +174,11 @@ var date = function ($) {
           fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             if(data.content.length>0){
-              $(".alert-content .hint").html("<i>!</i>您所选时间内没有空房,请重新选择日期").css("color","red").show();
-              $(".but-success").hide();
+                fnBase.myalert('您所选时间段内没有空房，请重新选择');
+                return;
             }else{
-              $(".alert-content .hint").html("");
-              $(".but-success").show();
+              $(".alert-content .but-success").click();
+              $('.date').remove(); // 移除插件
             }
           })
         }

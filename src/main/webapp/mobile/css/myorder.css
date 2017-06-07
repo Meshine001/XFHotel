@@ -32,6 +32,7 @@
 .pay_content .p_list span{float: right;}
 .total{text-align: right;line-height: 0.45rem;font-size: 0.14rem;display: block;height: 0.45rem}
 .total .fl{
+    cursor: pointer;
     margin-left:0.03rem;
     display:inline-block;
     padding: 0 0.2rem;
