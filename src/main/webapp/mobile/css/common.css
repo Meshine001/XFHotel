@@ -171,8 +171,8 @@ white-space: nowrap;
     font-size: 0.14rem;
     background-size: 0.16rem;
     border-radius: 0.14rem;
-    border: 1px solid #efeff4;
-    color: #1fc8a1;
+    border: 1px solid #4d4d4d;
+    color: #4d4d4d;
 
 }
 .header-mobile .img-btn{width: 0.18rem;margin:auto 0.18rem;vertical-align: middle}
@@ -182,7 +182,7 @@ white-space: nowrap;
     top: 0.4rem;
     bottom: 0.4rem;
     width: 100%;
-    background: #efeff4;
+    background: #f4f4f4;
 }
 .main {
     margin-bottom: 0.45rem;

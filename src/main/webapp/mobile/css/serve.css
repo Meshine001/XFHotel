@@ -153,6 +153,10 @@ html,body{background: #fff}
     background: url(../images/txyzm.png) no-repeat center bottom;
     background-size: 100%;
 }
+.per-order-status .ings_icon {
+    background: url(../images/terminal.png) no-repeat center bottom;
+    background-size: 100%;
+}
 /*&&&&&&&&&&&&&&&&&&&&&&& ������� &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
 
 #comment{
