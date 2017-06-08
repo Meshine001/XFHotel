@@ -160,6 +160,13 @@ public class ApartmentServiceImpl implements ApartmentService {
 		List<Apartment> apartments = apartmentDAO.getListByHQL("from Apartment where show_home=true", null);
 		return JSONArray.fromObject(apartments);
 	}
+	@Transactional
+	@Override
+	public JSONArray getHomeApartments1() {
+		List<Apartment> apartments = apartmentDAO.getListByHQL("from Apartment" , null);
+		return JSONArray.fromObject(apartments);
+	}
+
 
 	/**
 	 * 获取更详细的信息

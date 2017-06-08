@@ -31,6 +31,8 @@ public interface ApartmentService extends BaseService<Apartment, Long> {
 			String jia_ge);
 
 	public JSONArray getHomeApartments();
+	
+	public JSONArray getHomeApartments1();
 
 	public JSONObject getApartmentById(Long id);
 

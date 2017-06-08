@@ -103,8 +103,14 @@ public class MobileController  {
 		JSONArray homeRooms = apartmentService.getHomeApartments();
 		Map<String,Object> info = new HashMap<String, Object>();
 		info.put("homeRooms",homeRooms);
-		return info;
-		
+		return info;	
+	}
+	@RequestMapping(value = "/homeTherefore",method = RequestMethod.POST)
+	public @ResponseBody Map homeTherefore(){
+		JSONArray homeRooms = apartmentService.getHomeApartments1();
+		Map<String,Object> info = new HashMap<String, Object>();
+		info.put("homeRooms",homeRooms);
+		return info;	
 	}
 	
 	@RequestMapping(value = "/info",method = RequestMethod.GET)
@@ -151,7 +157,6 @@ public class MobileController  {
 		}
 			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
 		
-
 	}
 
 	/**
@@ -319,7 +324,6 @@ public class MobileController  {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range)
 	{
-		
 		try {
 			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
@@ -736,8 +740,8 @@ public class MobileController  {
 //			【青舍都市】您有新订单需要确认，请及时处理。{1}
 			JSONObject a = apartmentService.getApartmentById(o.getRoomId())
 					.getJSONObject("position");
-			String f= a.getString("xiao_qu")+","+a.getString("lou_hao")+"号楼,"+
-					a.getString("dan_yuan")+"单元,"+a.getString("lou_ceng")+"层,"+a.getString("men_pai")+"号";
+			String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
+					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 			String[] p = {f};
 			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, systemConfiService.getConfig().getSms(), p);	
 		} catch (Exception e) {
