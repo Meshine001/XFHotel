@@ -6,16 +6,55 @@
 #Myscroll-body .f12 i{color: #000000}
 #Myscroll-body .ptxt{text-indent: 0.25rem;}
 #Myscroll-body .ptxt img{width: 100%;padding: 0.1rem 0}
-#Myscroll-body p{padding: 0 0.2rem}
+
 
 #content{min-height:5.6rem}
 
 /*�б�*/
 .content-ul{min-height: 0.5rem;padding: 0}
-.content-ul li{padding: 0.1rem;border-top:#48484c;border-bottom: #48484c;overflow: hidden}
-.content-ul li .pic{width: 100%;height:2.3rem;overflow: hidden;}
-.content-ul li .pic img{width: 100%}
-.content-ul li ._title{font-size: 0.15rem;text-align: center;padding-top:0.1rem;text-overflow: ellipsis;white-space: nowrap;overflow: hidden}
+.content-ul li{margin-bottom: 0.2rem;border-top:#48484c;border-bottom: #48484c;overflow: hidden;position: relative}
+.content-ul li .pic{width: 100%;height:2.4rem;overflow: hidden;position: relative}
+.content-ul li .pic img{width: 100%;height: 2.4rem}
+.content-ul li .pic .mask{
+    position: absolute;
+    bottom: 0rem;
+    display: block;
+    width: 100%;
+    height: 0.4rem;
+    background: url(../images/black40.png);
+    color: #fff;
+    font-size: 0.12rem;
+    padding: 0.1rem;
+    line-height: 0.2rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.content-ul li .content-mob{
+    width: 100%;
+    height: 0.8rem;
+    background: #fff;
+    font-size: 0.12rem;
+    padding: 0.1rem;
+    line-height: 0.2rem;
+}
+.content-ul li .content-mob p{
+    width: 80%;
+    float: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    overflow:hidden;
+}
+.content-ul li .content-mob img{
+    width: 0.6rem;
+    height: 0.6rem;
+    float: right;
+    overflow: hidden;
+}
+
+
 #page{width: 100%;height:0.4rem;line-height: 0.4rem;text-align: right;padding-right: 0.15rem;margin: 0.2rem auto 0.1rem auto}
 #page a{font-size: 0.14rem;padding: 0.06rem;border: 1px solid #ccc;color:#767675;box-shadow: 1px 1px #333}
 

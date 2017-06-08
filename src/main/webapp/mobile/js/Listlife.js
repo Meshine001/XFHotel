@@ -19,7 +19,7 @@ $(document).ready(function(){
             var str='';
             $(".content-ul").html('');
             for(var i=0;i<data.blogs.results.length;i++){
-                str+='<li link="'+data.blogs.results[i].id+'"><div class="pic"><img src="'+data.blogs.results[i].pic+'"></div><h3 class="_title">'+data.blogs.results[i].title+'</h3></li>';
+                str+='<li link="'+data.blogs.results[i].id+'"><div class="pic"><img src="'+Constant.URL+ data.blogs.results[i].pic+'"><p class="mask">'+data.blogs.results[i].title+'</p></div><div class="content-mob"><p>'+data.blogs.results[i].abs_text+'</p><img src="'+Constant.URL+ data.blogs.results[i].pic+'"></div></li>';
             }
             $(".content-ul").append(str);
             var len = $('.content-ul li').length;

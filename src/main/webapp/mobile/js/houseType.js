@@ -108,7 +108,7 @@ $(document).ready(function(){
     
    function uploadData(){
 	   fnBase.loadShow();
-	   var frontURL=Constant.URL+'/mobile/home';
+	   var frontURL=Constant.URL+'/mobile/homeTherefore';
 	    var postData={};
 	    fnBase.commonAjax(frontURL,postData,function(data){
 	        console.log(data);
