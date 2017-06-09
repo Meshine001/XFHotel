@@ -51,39 +51,14 @@ function getData() {
     fnBase.commonAjax(frontURL, postData, function (data) {
     	fnBase.loadHide();
         console.log(data);
-        //if(data.status==1){
-        //   轮播
-
-        //var lunboStr='';
-        //var lunbo_length=data.homeRooms[0].pic3.length;
-        //
-        //$(".swiper-container .swiper-wrapper").html("");
-        //if(lunbo_length>0){
-        //    for (var i = 0; i < lunbo_length; i++) {
-        //        lunboStr += '<div class="swiper-slide"> <a href="javascript:void(0)"><img src="'+Constant.URL+data.homeRooms[0].pic3[i]+'"/></a></div>';
-        //    }
-        //    $(".swiper-container .swiper-wrapper").append(lunboStr);
         var mySwiper = new Swiper('.swiper-container', {
             loop: true,
             autoplay: 1800,
             pagination: '.swiper-pagination',
             autoplayDisableOnInteraction: false
         });
-        //}
-        //}else{
-        //    fnBase.myalert(data.msg)
-        //}
-        //房间分类
-        //   $(".hot-issue").html("");
+
         var category_str = '';
-        //var categoryLength=data.info.category.length;
-        //if(categoryLength>4){
-        //    categoryLength=4;
-        //}
-        //for(var i=0;i<categoryLength;i++){
-        //    category_str+='<a href="house_particulars.html?cate='+data.info.category[i].id+'"><div class="img-wrapper"><img src="'+data.info.category[i].attach+'"/></div><div>'+data.info.category[i].title+'</div></a>';
-        //}
-        //$(".hot-issue").append(category_str);
         $('.goodlist li').unbind('click').click(
             function () {
                 var id = $(this).attr('proID');
@@ -91,15 +66,13 @@ function getData() {
                 window.location.href = "house_particulars.html?id=" + encodeURIComponent(id) + "&offer=" + encodeURIComponent(isoff);
             }
         );
-
-
         // 热门房源
         var str = '';
         var isoffers;
         $('.plCon .goodlist').html("");
         for (var i = 0; i < data.homeRooms.length; i++) {
-            str += '<li proID=' + data.homeRooms[i].id + '><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="' + Constant.URL+'/images/' + data.homeRooms[i].fang_jian_tu[0] + '"></a><h1 class="text-ellipsis"><a href="">'+data.homeRooms[i].position.xa_wei_zhi+"-" + data.homeRooms[i].position.xiao_qu + '</a></h1><h2 class="text-ellipsis">' + data.homeRooms[i].basic_info.shi + "室" + data.homeRooms[i].basic_info.ting + "厅" +
-                data.homeRooms[i].basic_info.wei + "卫" + '</h2><p class="text-ellipsis address">'+data.homeRooms[i].position.bd_wei_zhi+'-'+data.homeRooms[i].position.xiao_qu + '</p><p class="label-group"><i class="label-type1">' + data.homeRooms[i].basic_info.lei_xing + '</i></p><span class="label-price">' + data.homeRooms[i].basic_info.jia_ge + '<small>/天</small></span></div></li>';
+            str += '<li proID=' + data.homeRooms[i].id + '><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="' + Constant.URL+'/images/' + data.homeRooms[i].fang_jian_tu[0] + '"></a><div class="right-content"><h1 class="text-ellipsis"><a href="">'+data.homeRooms[i].position.xa_wei_zhi+"-" + data.homeRooms[i].position.xiao_qu + '</a></h1><h2 class="text-ellipsis">' + data.homeRooms[i].basic_info.shi + "室" + data.homeRooms[i].basic_info.ting + "厅" +
+                data.homeRooms[i].basic_info.wei + "卫" + '</h2><p class="text-ellipsis address">'+data.homeRooms[i].position.bd_wei_zhi+'-'+data.homeRooms[i].position.xiao_qu + '</p><p class="label-group"><i class="label-type1">' + data.homeRooms[i].basic_info.lei_xing + '</i></p><span class="label-price">' + data.homeRooms[i].basic_info.jia_ge + '<small>/天</small></span></div></div></li>';
         }
         $('.plCon .goodlist').append(str);
 
@@ -133,6 +106,28 @@ function getData() {
 
 
 }
+
+var _uid=fnBase.huoqu(0,"uid");
+if(_uid==null || _uid=="undefined" || _uid==""){
+    $(".header-mobile .link-btn img").attr('src',"/images/my-index.png");
+}else{
+    getmsg();
+}
+
+function getmsg(){
+    var frontURL=Constant.URL+'/mobile/detailsData';
+    var postData={id:_uid};
+    fnBase.commonAjax(frontURL,postData,function(data){
+        console.log(data);
+        if(data.details.avatar==""||data.details.avatar==null){
+            $(".header-mobile .link-btn img").attr("src","/images/my-index.png");
+        }else{
+            $(".header-mobile .link-btn img").attr("src",Constant.URL+'/images/'+data.details.avatar);
+        }
+    });
+}
+
+
 //青舍生活
 function life() {
     var frontURL = Constant.URL + '/mobile/story';

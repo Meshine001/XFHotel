@@ -146,10 +146,8 @@ function addpartenr(){
 
     }
    $(".order_info .roompPic a").click(function(){
-       console.log('我要用优惠卷')
-        $("#masking").show(10,function(){
-            $("#usecoupon").animate({bottom:0},300);
-        });
+       $("#masking").show();
+       $("#usecoupon").addClass('show');
 
         var frontURL=Constant.URL+'/mobile/getMyCoupons';
         var postData={
@@ -171,23 +169,13 @@ function addpartenr(){
     		 }
     	 })
     });
-    $("#usecoupon ul li").live('click',function(){
-        if($(this).find('.ifrader').hasClass('hat')==false){
-            $(this).find('.ifrader').addClass('hat');
-            $(this).siblings().find('.ifrader').removeClass('hat')
-        }else{
-            $(this).find('.ifrader').removeClass('hat')
-        }
-    });
-
-
 
 //    选取优惠劵11
     var used='';
     $("#usecoupon header ._confirm").live('click',function(){
-        $("#masking").hide(10,function(){
-            $(".alert-content, #usecoupon").animate({bottom:'-5.7rem'},300);
-        });
+        $("#masking").hide();
+        $("#usecoupon").removeClass('show');
+
         var obj=$(this).parent().parent().find('li');
         for(var i=0;i<obj.length;i++){
             if(obj.eq(i).find('.usemsg .ifrader').hasClass("hat")){
@@ -203,6 +191,16 @@ function addpartenr(){
         $(".order_info .roompPic").html("订单总额:<span class='money'>￥"+used+"</span><a>优惠劵</a>");
         return yhjid;
     });
+
+    $("#usecoupon ul li").live('click',function(){
+        if($(this).find('.ifrader').hasClass('hat')==false){
+            $(this).find('.ifrader').addClass('hat');
+            $(this).siblings().find('.ifrader').removeClass('hat')
+        }else{
+            $(this).find('.ifrader').removeClass('hat')
+        }
+    });
+
 
     //登录用户；默认显示信息；
     getData();
