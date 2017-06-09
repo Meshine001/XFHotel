@@ -91,6 +91,7 @@ public class MessageController {
 	public void lockSuccess(String business_id, String lock_no, Integer pwd_no, String pwd_user_mobile) {
 		int check = lockService.verify(business_id, lock_no, Integer.valueOf(pwd_no), pwd_user_mobile);
 		String pwd_text = lockService.viewPassword(pwd_user_mobile, lock_no);
+		
 		if (check == 1) {
 			String[] param = new String[2];
 			param[0] = "";

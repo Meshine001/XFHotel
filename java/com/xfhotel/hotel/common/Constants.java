@@ -50,9 +50,9 @@ public class Constants {
 	public static final String SMS_APP_ID = "8a216da85a362949015a7e315fb51724";
 	public static final String SMS_VALIDATE_REGISTER = "156526";
 	public static final String SMS_VALIDATE_MODIFY_PASSWORD = "156527";
-	public static final String SMS_INFORM_LOCK_CODE = "156532";
-	public static final String SMS_INFORM_OVER_PAY = "174009";
-	public static final String SMS_INFORM_COMFIRM_ORDER = "174007";
+	public static final String SMS_INFORM_LOCK_CODE = "181496";
+	public static final String SMS_INFORM_OVER_PAY = "181493";
+	public static final String SMS_INFORM_COMFIRM_ORDER = "181659";
 	public static final String SMS_INFORM_COMFIRM_CLEAN_ORDER = "181355";
 	public static final String SMS_AVAILBEL_TIME_STR = "2分钟";
 	public static final Long SMS_AVAILBEL_TIME = Long.valueOf(1000*60*2);
@@ -60,7 +60,6 @@ public class Constants {
 	public static final String SMS_TEMPLATE_SEND_LOCK = "156532";//发送密码锁短信模板编号
 	//支付宝签约账号
 	public static final String ALIPAY_PARTNER = "";
-	
 	
 	//微信订单描述
 	public static final String WECAT_ORDER_BODY = "青舍都市-房间预订";
