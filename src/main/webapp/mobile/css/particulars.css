@@ -124,8 +124,8 @@
     padding: 0.1rem 0rem 0.1rem 0.5rem;
     font-size: 0.12rem;
     background-color: #fff;
-    border-top: 1px solid #cbcaca;
-    border-bottom: 1px solid #cbcaca;
+    border-top: 1px solid #f1eded;
+    border-bottom: 1px solid #f1eded;
     display: none;
 }
 .panel .appraise li.showtime{display: block}

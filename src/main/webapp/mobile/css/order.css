@@ -53,6 +53,11 @@
     bottom: -5.6rem;
     box-shadow: 0 0 0.2rem #333;
     overflow: scroll;
+    transition: all .5s;
+}
+
+#usecoupon.show{
+    bottom: 0;
 }
 .alert-content header,#usecoupon header{
     width: 100%;
