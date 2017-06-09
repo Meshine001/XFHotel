@@ -146,9 +146,9 @@ function addpartenr(){
 
     }
    $(".order_info .roompPic a").click(function(){
-       $("#masking").show();
-       $("#usecoupon").addClass('show');
-
+       $("#masking").show(10,function(){
+           $("#usecoupon").animate({bottom:'0rem'},300);
+       });
         var frontURL=Constant.URL+'/mobile/getMyCoupons';
         var postData={
     			'uId':_uid,
@@ -173,9 +173,9 @@ function addpartenr(){
 //    选取优惠劵11
     var used='';
     $("#usecoupon header ._confirm").live('click',function(){
-        $("#masking").hide();
-        $("#usecoupon").removeClass('show');
-
+        $("#masking").hide(10,function(){
+            $("#usecoupon").animate({bottom:'-5.7rem'},300);
+        });
         var obj=$(this).parent().parent().find('li');
         for(var i=0;i<obj.length;i++){
             if(obj.eq(i).find('.usemsg .ifrader').hasClass("hat")){
