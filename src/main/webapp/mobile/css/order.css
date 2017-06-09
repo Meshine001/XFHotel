@@ -56,9 +56,7 @@
     transition: all .5s;
 }
 
-#usecoupon.show{
-    bottom: 0;
-}
+
 .alert-content header,#usecoupon header{
     width: 100%;
     height: 0.4rem;
@@ -101,7 +99,9 @@
 .alert-content .news-msg button{display: block;width: 1.6rem;height: 0.35rem;background: orangered;margin: 0.2rem auto;color: #fff;font-size: 0.14rem}
 
 
-
+#usecoupon.show{
+    bottom: 0;
+}
 /*优惠劵*/
 #usecoupon ul{width:100%;padding:0.1rem 0.1rem 0 0.1rem;}
 #usecoupon ul li{cursor: pointer;margin-bottom: 0.1rem;;width:100%;height:0.8rem;border:1px solid red;position:relative;border-radius: 0 0.2rem;overflow: hidden;}
