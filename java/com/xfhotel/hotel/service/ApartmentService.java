@@ -58,4 +58,7 @@ public interface ApartmentService extends BaseService<Apartment, Long> {
 	public Map<String, Object> caculatePrice(String startTime, String endTime, Long apartmentId);
 	
 	public JSONObject createOrderMoudle(String startTime, String endTime, Long apartmentId);
+	
+	public Apartment modify(Apartment c, long id);
+	
 }

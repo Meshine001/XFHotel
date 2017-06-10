@@ -386,5 +386,12 @@ public class ApartmentServiceImpl implements ApartmentService {
 		moudle.put("capacity", priceInfo.get("capacity"));
 		return moudle;
 	}
+	@Transactional
+	@Override
+	public Apartment modify(Apartment c, long id) {
+		// TODO Auto-generated method stub
+		apartmentDAO.saveOrUpdate(c);
+		return apartmentDAO.get(id);
+	}
 
 }

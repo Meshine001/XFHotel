@@ -121,7 +121,7 @@ public class MessageController {
 	        return new BigInteger(1, md.digest()).toString(16);
 	    } catch (Exception e) {
 	       //
-	    }
+	    } 
 		return null;
 	}
 

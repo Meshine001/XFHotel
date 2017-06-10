@@ -132,7 +132,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void updateBaseInfo(Customer c) {
 		// TODO Auto-generated method stub
-		customerDAO.update(c);
+		customerDAO.saveOrUpdate(c);
 	}
 	@Transactional
 	@Override

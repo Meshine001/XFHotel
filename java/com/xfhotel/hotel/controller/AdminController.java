@@ -2,6 +2,7 @@ package com.xfhotel.hotel.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
-import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
@@ -115,6 +115,7 @@ public class AdminController {
 	public  @ResponseBody Map order1(int page) {
 		
 		PageResults<Order> pr = orderservice.listPage(page);
+
 		List cl = new ArrayList();
 		for(Order c:pr.getResults()){
 			cl.add(c.toMap());

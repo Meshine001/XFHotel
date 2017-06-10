@@ -60,7 +60,6 @@ public class Constants {
 	public static final String SMS_TEMPLATE_SEND_LOCK = "156532";//发送密码锁短信模板编号
 	//支付宝签约账号
 	public static final String ALIPAY_PARTNER = "";
-	
 	//微信订单描述
 	public static final String WECAT_ORDER_BODY = "青舍都市-房间预订";
 	

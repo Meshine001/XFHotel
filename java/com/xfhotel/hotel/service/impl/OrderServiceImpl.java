@@ -342,7 +342,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public PageResults<Order> listPage(int page) {
 		// TODO Auto-generated method stub
-		return orderDAO.findPageByFetchedHql("from Order", "select count(*) from Order", page, 10, null);
+		return orderDAO.findPageByFetchedHql("from Order order by id desc", "select count(*) from Order", page, 10, null);
 	}
 
 }
