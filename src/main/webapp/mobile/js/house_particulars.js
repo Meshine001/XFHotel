@@ -9,7 +9,7 @@ $(document).ready(function(){
 		dataType:'json',
 		url:Constant.URL+'/mobile/info',
 		data:{
-            'apartmentId':_id,
+            'apartmentId':_id
 		},
 		success:function(data){
 			fnBase.loadHide();
@@ -282,9 +282,6 @@ $(document).ready(function(){
 
    //  立即预约
     $(".navbar a").live('click',function(){
-        //$("#masking").show(10, function (){
-        //    $(".alert-content").animate({bottom: 0}, 300);
-        //});
         $(".select-time").click();
     });
 
