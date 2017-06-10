@@ -7,7 +7,7 @@
 
     addpartenr();
     var sexVal='';
-    var couponid='';
+
     var yhjid='';
     $("#addfriend").live('click',function(){
         $("#masking").show(10,function(){
@@ -171,6 +171,7 @@ function addpartenr(){
     });
 
 //    选取优惠劵11
+    var couponid='';
     var used='';
     $("#usecoupon header ._confirm").live('click',function(){
         $("#masking").hide(10,function(){
@@ -188,7 +189,7 @@ function addpartenr(){
         }
         used=_oTotalPrice-couponid;
         used=Number(used).toFixed(0);
-        $(".order_info .roompPic").html("订单总额:<span class='money'>￥"+used+"</span><a>优惠劵</a>");
+        $(".order_info .o_pay .money").html("￥"+used);
         return yhjid;
     });
 
