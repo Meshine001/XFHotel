@@ -180,7 +180,6 @@ public class ApartmentController {
 		return "forward:/admin/apartment";
 	}
 
-
 	@RequestMapping(value = "/price/set", method = RequestMethod.POST)
 	public String priceSet(Long apartmentId, String date, String price) {
 		Price sp = apartmentService.getSpPrice(apartmentId, TimeUtil.getDateLong(date));
@@ -189,9 +188,7 @@ public class ApartmentController {
 		} else {
 			sp = new Price(apartmentId, TimeUtil.getDateLong(date), Double.valueOf(price));
 		}
-		
 		apartmentService.setSpPrice(sp);
-
 		return "redirect:/admin/apartment/price/" + apartmentId;
 	}
 
@@ -209,6 +206,15 @@ public class ApartmentController {
 		session.setAttribute("apartment", apartment);
 		session.setAttribute("spPrices", prices);
 		return "admin/apartment/price";
+	}
+	
+	@RequestMapping(value = "/alter")
+	public String alter(Long id , String[] pic2,String[] pic3) {
+		Apartment apartment = apartmentService.findById(id);
+		apartment.setFang_jian_tu(JSONArray.fromObject(pic2).toString());
+		apartment.setXiao_qu_tu(JSONArray.fromObject(pic3).toString());
+		apartmentService.modify(apartment, id);
+		return "/admin/apartment/alter";
 	}
 
 }

@@ -2,6 +2,7 @@ package com.xfhotel.hotel.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
-import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
@@ -86,7 +86,6 @@ public class AdminController {
 		session.setAttribute("orders", orders);
 		return "/admin/customer/baojie";
 	}
-	
 	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardPage() {

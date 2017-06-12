@@ -3,6 +3,8 @@ package com.xfhotel.hotel.service.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,8 +97,18 @@ public class LockServiceImpl implements LockService {
 		Object[] values = new Object[2];
 		values[0] = phone;
 		values[1] = lock_no;
-		Lock lock = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
-		return lock.getPwd_text();
+		List<Lock> lock = lockDAOImpl.getListByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
+		String getPwd_text=null;
+		for(Lock lock1 : lock){
+			Date date = new Date(System.currentTimeMillis());
+		Date time1 = new Date(lock1.getValid_time_end());
+		Date time2 = new Date(lock1.getValid_time_start());
+		if(date.before(time1)&&date.after(time2)){
+			getPwd_text =lock1.getPwd_text();
+			}
+		}
+		return getPwd_text;
+//		return lock.getPwd_text();
 	}
 
 	@Transactional

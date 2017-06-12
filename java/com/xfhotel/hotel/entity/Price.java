@@ -25,16 +25,17 @@ public class Price {
 	private long apartment_id;
 	private long date;
 	private Double price;
+//	private int status;
 	public Price() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Price(Long apartment_id, long date, Double price) {
+	public Price(Long apartment_id, long date, Double price ) {
 		super();
 		this.apartment_id = apartment_id;
 		this.date = date;
-		this.price = price;
+//		this.status = status;
 	}
 	
 	public long getId() {
@@ -66,10 +67,20 @@ public class Price {
 		this.apartment_id = apartment_id;
 	}
 
+//	
+//	public int getStatus() {
+//		return status;
+//	}
+//
+//	public void setStatus(int status) {
+//		this.status = status;
+//	}
+
 	public Map<String, Object> toMap(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("date", TimeUtil.getDateStr(date));
 		map.put("price", price);
+//		map.put("status", status);
 		return map;
 	}
 	

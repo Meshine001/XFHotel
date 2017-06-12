@@ -163,7 +163,9 @@
 									name="chuang">
 							</div>
 						</div>
+						<!--  
 						<div class="form-group">
+						
 							<label class="col-md-3 control-label">户型图</label>
 							<div class="col-md-9">
 								<ul>
@@ -175,7 +177,9 @@
 								</ul>
 							</div>
 						</div>
+						-->
 						<div class="form-group">
+						 
 							<label class="col-md-3 control-label">综合描述</label>
 							<div class="col-md-9">
 								<textarea name="miao_su" rows="3" class="form-control"

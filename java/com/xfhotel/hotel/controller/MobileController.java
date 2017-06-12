@@ -103,8 +103,14 @@ public class MobileController  {
 		JSONArray homeRooms = apartmentService.getHomeApartments();
 		Map<String,Object> info = new HashMap<String, Object>();
 		info.put("homeRooms",homeRooms);
-		return info;
-		
+		return info;	
+	}
+	@RequestMapping(value = "/homeTherefore",method = RequestMethod.POST)
+	public @ResponseBody Map homeTherefore(){
+		JSONArray homeRooms = apartmentService.getHomeApartments1();
+		Map<String,Object> info = new HashMap<String, Object>();
+		info.put("homeRooms",homeRooms);
+		return info;	
 	}
 	
 	@RequestMapping(value = "/info",method = RequestMethod.GET)
@@ -122,7 +128,6 @@ public class MobileController  {
 	public @ResponseBody  Message login(String tel, String password) {
 		Customer c = customerService.login(tel, password);
 		if (c != null) {
-			session.setAttribute("c", c);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c);
 		} else {
 			return new Message(Constants.MESSAGE_ERR_CODE, "账号或密码错误");
@@ -151,7 +156,6 @@ public class MobileController  {
 		}
 			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
 		
-
 	}
 
 	/**
@@ -174,19 +178,31 @@ public class MobileController  {
 		c.setRegTime(new Date().getTime());
 		c.setLevel(0);
 		if (customerService.register(c, details) == true) {
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, c.getId());
+			Customer c1 = customerService.getCustomer(c.getId());
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, c1);
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
 /**
- * 获取房源
+ *
  * @param roomId
  * @param page
  * @return
  */
 	@RequestMapping(value = "/get", method = RequestMethod.POST)
-	public @ResponseBody PageResults<Comment> getRoomComments(Long roomId,Integer page){
-		return commentService.getComments(roomId, page);
+	public @ResponseBody ArrayList<Object> getRoomComments(Long roomId){
+		ArrayList<Object> list = new ArrayList<Object>();
+		List<Comment> comment = commentService.getCommentsByRoom(roomId);
+		for(Comment comment1:comment){
+			Customer customer = customerService.getCustomer(comment1.getFromWho());
+			CustomerDetails f = customer.getDetails();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("tel", customer.getTel());
+			map.put("comment", comment1);
+			map.put("Avatar", f.getAvatar());
+			list.add(map);
+		}
+		return list;
 	}
 	/**
 	 * 获取价格
@@ -308,7 +324,6 @@ public class MobileController  {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range)
 	{
-		
 		try {
 			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
@@ -361,7 +376,6 @@ public class MobileController  {
 			comment.setHasRead(false);
 			Order o = orderservice.get(orderId);
 			comment.setEntryTime(o.getStartTime());
-
 			commentService.add(comment);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "评论成功");
 		} catch (Exception e) {
@@ -637,7 +651,7 @@ public class MobileController  {
 		return info;
 	}
 /**
- * 上传照片
+ * 
  * @param file
  * @param request
  * @return
@@ -656,8 +670,6 @@ public class MobileController  {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");
 	}
-	
-	
 	/**
 	 * 查看密码
 	 * @param request
@@ -686,12 +698,6 @@ public class MobileController  {
 		return orderservice.outLease(orderId);
 	}
 	
-	/**
-	 * 保洁
-	 * @param uId
-	 * @param type
-	 * @return
-	 */
 	@RequestMapping(value = "/Clean", method = RequestMethod.POST)
 	public @ResponseBody  Message Clean(Long uId ,int type){
 		if(uId==null){
@@ -709,15 +715,9 @@ public class MobileController  {
 	   list.add(map.get(key));
 	  }
 	  return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+		
 	}
-	/**
-	 * 呼叫保洁
-	 * @param demand
-	 * @param oederId
-	 * @param content1
-	 * @param cleanTime
-	 * @return
-	 */
+	
 	@RequestMapping(value = "/cleanAdd", method = RequestMethod.POST)
 	public @ResponseBody Message cleanAdd (String demand,Long oederId , int content1[],int cleanTime) {
 	System.out.println(content1);
@@ -740,8 +740,8 @@ public class MobileController  {
 //			【青舍都市】您有新订单需要确认，请及时处理。{1}
 			JSONObject a = apartmentService.getApartmentById(o.getRoomId())
 					.getJSONObject("position");
-			String f= a.getString("xiao_qu")+","+a.getString("lou_hao")+"号楼,"+
-					a.getString("dan_yuan")+"单元,"+a.getString("lou_ceng")+"层,"+a.getString("men_pai")+"号";
+			String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
+					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 			String[] p = {f};
 			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, systemConfiService.getConfig().getSms(), p);	
 		} catch (Exception e) {
@@ -749,9 +749,9 @@ public class MobileController  {
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
 		}
+		
 		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
 	}
-	
 	/*
 	 * 获取订单
 	 */
@@ -770,12 +770,7 @@ public class MobileController  {
 		  }
 		return list;
 	}
-	/**
-	 * 获取房屋状态及价格
-	 * @param id
-	 * @param startDate
-	 * @return
-	 */
+	
 	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.POST)
 	public @ResponseBody JSONObject getRangePrices(@PathVariable("id") Long id,
 			@PathVariable("startDate") String startDate) {

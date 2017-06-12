@@ -160,6 +160,13 @@ public class ApartmentServiceImpl implements ApartmentService {
 		List<Apartment> apartments = apartmentDAO.getListByHQL("from Apartment where show_home=true", null);
 		return JSONArray.fromObject(apartments);
 	}
+	@Transactional
+	@Override
+	public JSONArray getHomeApartments1() {
+		List<Apartment> apartments = apartmentDAO.getListByHQL("from Apartment" , null);
+		return JSONArray.fromObject(apartments);
+	}
+
 
 	/**
 	 * 获取更详细的信息
@@ -378,6 +385,13 @@ public class ApartmentServiceImpl implements ApartmentService {
 		moudle.put("oPreferential", "");
 		moudle.put("capacity", priceInfo.get("capacity"));
 		return moudle;
+	}
+	@Transactional
+	@Override
+	public Apartment modify(Apartment c, long id) {
+		// TODO Auto-generated method stub
+		apartmentDAO.saveOrUpdate(c);
+		return apartmentDAO.get(id);
 	}
 
 }

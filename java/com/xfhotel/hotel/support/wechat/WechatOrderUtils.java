@@ -233,12 +233,12 @@ public class WechatOrderUtils {
 		if ("SUCCESS".equals(refund.getReturn_code()) && "SUCCESS".equals(refund.getResult_code())) {
 			Log.info("微信支申请退款请求成功：" + refund.getRefund_id(), null);
 		} else {
-			Log.error("微信支申请退款请求错误：" + refund.getErr_code()+","+refund.getErr_code_des(), null);
+			Log.error("微信支申请退款请求错误:" + refund.getErr_code()+","+refund.getErr_code_des(), null);
 			result.put("status", "error");
 			result.put("msg", refund.getErr_code_des());
 			return result;
 		}
-
+		
 		HashMap<String, String> back = new HashMap<String, String>();
 		back.put("appid", refund.getAppid());
 		back.put("mch_id", refund.getMch_id());

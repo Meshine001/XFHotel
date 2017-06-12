@@ -31,6 +31,8 @@ public interface ApartmentService extends BaseService<Apartment, Long> {
 			String jia_ge);
 
 	public JSONArray getHomeApartments();
+	
+	public JSONArray getHomeApartments1();
 
 	public JSONObject getApartmentById(Long id);
 
@@ -56,4 +58,7 @@ public interface ApartmentService extends BaseService<Apartment, Long> {
 	public Map<String, Object> caculatePrice(String startTime, String endTime, Long apartmentId);
 	
 	public JSONObject createOrderMoudle(String startTime, String endTime, Long apartmentId);
+	
+	public Apartment modify(Apartment c, long id);
+	
 }
