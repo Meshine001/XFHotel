@@ -128,7 +128,6 @@ public class MobileController  {
 	public @ResponseBody  Message login(String tel, String password) {
 		Customer c = customerService.login(tel, password);
 		if (c != null) {
-			session.setAttribute("c", c);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c);
 		} else {
 			return new Message(Constants.MESSAGE_ERR_CODE, "账号或密码错误");
@@ -179,7 +178,8 @@ public class MobileController  {
 		c.setRegTime(new Date().getTime());
 		c.setLevel(0);
 		if (customerService.register(c, details) == true) {
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, c.getId());
+			Customer c1 = customerService.getCustomer(c.getId());
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, c1);
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}

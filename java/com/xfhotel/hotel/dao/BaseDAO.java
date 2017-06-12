@@ -12,7 +12,7 @@ public interface BaseDAO<T, ID extends Serializable> {
 	 * 
 	 * @param t
 	 *            实体参数
-	 */
+	 */ 
 	public abstract void save(T t);
 
 	/**

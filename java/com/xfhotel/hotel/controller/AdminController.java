@@ -115,7 +115,6 @@ public class AdminController {
 	public  @ResponseBody Map order1(int page) {
 		
 		PageResults<Order> pr = orderservice.listPage(page);
-
 		List cl = new ArrayList();
 		for(Order c:pr.getResults()){
 			cl.add(c.toMap());
