@@ -25,6 +25,7 @@
 					</ul>
 
 				</div>
+				<div style="overflow: scroll;width:100%;height:auto">
 				<table class="table">
 					<thead>
 						<tr>
@@ -73,6 +74,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				</div>
 			</div>
 		</div>
 	</div>

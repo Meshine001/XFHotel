@@ -21,6 +21,7 @@
 						<h3>用户列表</h3>
 					</div>
 				</div>
+				<div style="overflow: scroll;width:100%;height:auto">
 				<table class="table">
 				<thead>
 						<th>
@@ -65,6 +66,7 @@
 					<tbody id="list">
 					</tbody>
 				</table>
+				</div>
 				<ul id="pagecontroller" class="pagination">
 				</ul>
 			</div>

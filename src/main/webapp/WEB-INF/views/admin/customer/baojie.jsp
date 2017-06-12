@@ -31,7 +31,7 @@
 				-->
 				
 				
-				<div id="topscroll" style="width:100%;height:auto;overflow-x:auto">
+				<div style="overflow: scroll;width:100%;height:auto">
 				<table class="table">
 
 					<thead>

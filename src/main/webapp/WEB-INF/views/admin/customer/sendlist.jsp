@@ -68,6 +68,7 @@
 						<li><a href="javascript:;" class="btn" id="delivery" style="background:#18aa4a;color:#FFF">发送</a></li>
 					</ul>
 				</div>
+				<div style="overflow: scroll;width:100%;height:auto">
 				<table class="table">
 					<thead>
 						<th>
@@ -115,6 +116,7 @@
 						
 					</tbody>
 				</table>
+				</div>
 				<ul id="pagecontroller" class="pagination">
 					
 				</ul>
