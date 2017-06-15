@@ -307,8 +307,9 @@ $(document).ready(function(){
             fnBase.keep(1,'endTime',data.oEnd);
             fnBase.keep(1,'oTotalDay',data.oTotalDay);
             fnBase.keep(1,'oTotalPrice',data.oTotalPrice);
-            window.location.href="order.html?id="+encodeURIComponent(_id);
             fnBase.keep(1,"YJpic",data.oCashPledge);
+			fnBase.keep(1,"_price",data.price);
+			window.location.href="order.html?id="+encodeURIComponent(_id);
         })
     });
     //Click anywhere to close #masking;
