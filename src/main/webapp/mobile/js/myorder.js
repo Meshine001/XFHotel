@@ -103,6 +103,13 @@ $(document).ready(function(){
 
                 }
                 $(".orderlist").append(_str);
+				var sz=$(".orderlist li");
+				for(var j=0;j<sz.length;j++){
+					if(sz.eq(j).find('.total .fl').length==0){
+						$(".orderlist li").eq(j).find('.pay_content').css('border','none')
+					}
+				}
+				
                 var s=$(".total .payment").length;
                 fnBase.keep(0,"toPaid",s);
             }else{

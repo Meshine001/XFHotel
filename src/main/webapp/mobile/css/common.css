@@ -149,7 +149,6 @@ white-space: nowrap;
     padding-top: 0.06rem;
     padding-bottom: 0.06rem;
     line-height: 0.26rem;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
     justify-content: space-between;
     display: flex;
     font-size: 0.18rem;
@@ -171,8 +170,8 @@ white-space: nowrap;
     font-size: 0.14rem;
     background-size: 0.16rem;
     border-radius: 0.14rem;
-    border:1px solid #7f7f7f;
-    color: #7f7f7f;
+    border:1px solid #fff;
+    color: #fff;
 
 }
 .header-mobile .img-btn{width: 0.18rem;margin:auto 0.18rem;vertical-align: middle}

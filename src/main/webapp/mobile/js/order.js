@@ -114,6 +114,7 @@ function addpartenr(){
     var _price=fnBase.huoqu(1,"dayPrice");
     var _apartmenttype=fnBase.huoqu(1,"roomType");
     var _YJpic=fnBase.huoqu(1,"YJpic");
+	var _getYHJprice=fnBase.huoqu(1,"_price");
     $(".order_info .roomName").text(_community);
     $(".order_info .roomTime").html(_startTime+"入住"+_endTime+"离开"+"<i class='date'>共（"+_oTotalDay+"）天</i>");
     $(".order_info .roompYJ").html("押金:<span style='color: #666'>"+_YJpic+"</span>");
@@ -140,11 +141,12 @@ function addpartenr(){
 	 * 获取可用优惠卷
 	 * @param uId  _uid
 	 * @param totalPrice
-	 * @return 
+	 * @return Number(_oTotalPrice-_YJpic).toFixed(2)
 	 */
     function get(){
 
     }
+	
    $(".order_info .roompPic a").click(function(){
        $("#masking").show(10,function(){
            $("#usecoupon").animate({bottom:'0rem'},300);
@@ -152,7 +154,7 @@ function addpartenr(){
         var frontURL=Constant.URL+'/mobile/getMyCoupons';
         var postData={
     			'uId':_uid,
-    			'totalPrice':_oTotalPrice
+    			'price':_getYHJprice
         };
         console.log(postData);
     	 fnBase.commonAjax(frontURL,postData,function(data){
