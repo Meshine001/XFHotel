@@ -217,7 +217,6 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/sendlist", method = RequestMethod.POST)
 	public @ResponseBody Message sendlist(String startTime,String endTime,int type,Double cValue,String rule,Long Id[]) {
-		System.out.println(type);
 		try {
 			List<Long> list = Arrays.asList(Id);
 			for(Long uId : list){
@@ -255,7 +254,6 @@ public class AdminController {
 				for(CustomerDetails customer2 : cd){
 					if(customer2.getSex()!=null){
 						if(customer2.getSex().equals(sex)){
-							System.out.println("dsds");
 							Customer customer=  customerService.getCustomer(customer2.getId());
 							map.put(customer.getTel(), customer);	
 						}
@@ -306,13 +304,11 @@ public class AdminController {
 		  for(String key : map.keySet()){
 		   list.add(map.get(key));
 		  }
-		  
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
 	}
 	private long dateToLong(Date date) {
 		// TODO Auto-generated method stub
 		return 0;
 	} 
-
 
 }

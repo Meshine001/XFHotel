@@ -94,6 +94,7 @@ public class MobileController  {
 	@Autowired
 	SystemConfService systemConfiService;
 	
+	
 	/**
 	 * 房屋
 	 * @return
@@ -105,6 +106,8 @@ public class MobileController  {
 		info.put("homeRooms",homeRooms);
 		return info;	
 	}
+	
+	
 	@RequestMapping(value = "/homeTherefore",method = RequestMethod.POST)
 	public @ResponseBody Map homeTherefore(){
 		JSONArray homeRooms = apartmentService.getHomeApartments1();
@@ -118,6 +121,7 @@ public class MobileController  {
 		return apartmentService.getApartmentById(apartmentId);
 		
 	}
+	
 	/**
 	 * 登录
 	 * @param tel
@@ -134,6 +138,8 @@ public class MobileController  {
 		}
 
 	}
+	
+	
 	/**
 	 * 修改密码
 	 * @param tel
@@ -142,8 +148,7 @@ public class MobileController  {
 	 */
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
 	public @ResponseBody  Message find(String tel ,String psd) {
-		
-		if (customerService.checkTel(tel)) {
+			if (customerService.checkTel(tel)) {
 			Customer c = customerService.getFind(tel);
 			String content = customerService.changePsd(c.getPassword(), psd, c.getId());
 			if ("修改成功".equals(content)) {
@@ -152,12 +157,11 @@ public class MobileController  {
 			} else {
 				return new Message(Constants.MESSAGE_ERR_CODE, content);
 			}
-			
 		}
 			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
-		
 	}
 
+	
 	/**
 	 * 注册
 	 * @param tel
@@ -183,6 +187,8 @@ public class MobileController  {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
+	
+	
 /**
  *
  * @param roomId
@@ -204,6 +210,8 @@ public class MobileController  {
 		}
 		return list;
 	}
+	
+	
 	/**
 	 * 获取价格
 	 * @param roomId
@@ -213,6 +221,8 @@ public class MobileController  {
 	public @ResponseBody Map<String, Object> getRoomRates(Long roomId){
 		return commentService.getRoomRates(roomId);
 	}
+	
+	
 	/**
 	 * 验证短信验证码
 	 * @param tel
@@ -221,7 +231,6 @@ public class MobileController  {
 	 */
 	@RequestMapping(value="/checkVCode")  
 	public @ResponseBody Message checkVCode(String tel,String vCode){
-		System.out.println(session.getId());
 		if(tel==null||vCode==null){
 			return new Message(Constants.MESSAGE_ERR_CODE, "验证失败");
 		}
@@ -245,6 +254,8 @@ public class MobileController  {
 //		System.out.println("123");
 		return new Message(Constants.MESSAGE_ERR_CODE, "验证失败");
 	}
+	
+	
 	/**
 	 * 请求发送注册手机验证码
 	 * @param tel
@@ -252,7 +263,6 @@ public class MobileController  {
 	 */
 	@RequestMapping(value="/sendVCode")  
 	public @ResponseBody Message sendTelValidateCode(String tel){
-		System.out.println(session.getId());
 		try {
 			String vCodeStr= SendTemplateSMS.generateValidateCode();
 			String[] args = {vCodeStr,Constants.SMS_AVAILBEL_TIME_STR};
@@ -265,7 +275,7 @@ public class MobileController  {
 			vCode.put("diedLine", new Date().getTime()+Constants.SMS_AVAILBEL_TIME);
 			vCode.put("code", vCodeStr);
 			session.setAttribute("vCode", vCode);
-			System.out.println("send vcode==>"+vCode);
+//			System.out.println("send vcode==>"+vCode);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -274,6 +284,8 @@ public class MobileController  {
 		}
 		
 	}
+	
+	
 	/**
 	 * 触发订单
 	 * @param startTime
@@ -288,6 +300,7 @@ public class MobileController  {
 		
 		return apartmentService.createOrderMoudle(startTime, endTime, apartmentId);
 	}
+	
 	/**
 	 * 查询房屋状态
 	 * @param roomId
@@ -309,8 +322,8 @@ public class MobileController  {
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "查询失败");
 		}
-
 	}
+	
 	/**
 	 * 获取房源
 	 * @param cId
@@ -321,6 +334,7 @@ public class MobileController  {
 	 * @param range
 	 * @return
 	 */
+	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public @ResponseBody Message search(Long cId, int category, int type, String startDate, String endDate, int range)
 	{
@@ -341,14 +355,17 @@ public class MobileController  {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");
 	}
+	
 	/*
 	 * 获取用户资料
 	 */
+	
 	@RequestMapping(value = "/detailsData", method = RequestMethod.POST)
 	public @ResponseBody Customer getCustomerDetails(Long id){
 		
 		return customerService.getCustomer(id);
 	}
+	
 	/**
 	 * 评论
 	 * 
@@ -361,6 +378,7 @@ public class MobileController  {
 	 * @param pics
 	 * @return
 	 */
+	
 	@RequestMapping(value = "/comment", method = RequestMethod.POST)
 	public @ResponseBody Message postComment(Long roomId, Long orderId, Long from, Long to, String[] c_score,
 			String feel, String[] pics) {
@@ -384,6 +402,7 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "评论失败");
 		}
 	}
+	
 	/**
 	 * 用户提交订单 房间详细信息页，确认订单触发
 	 * @param cusId
@@ -418,13 +437,13 @@ public class MobileController  {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
-		
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order.toMap());
 //		System.out.println(info);
 		return info;
 	}
+	
 	/**
 	 * 修改密码
 	 * @param oldPsd
@@ -443,6 +462,7 @@ public class MobileController  {
 		}
 
 	}
+	
 	/**
 	 * 修改个人资料
 	 * @param customerId
@@ -475,7 +495,6 @@ public class MobileController  {
 		c.setHobby(hobby); 
 		c.setEducation(education);
 		c.setAvatar(avatar);
-		
 		try {
 			Customer c1 = customerService.modify(c, customerId);
 			session.setAttribute("c", c1);
@@ -494,7 +513,7 @@ public class MobileController  {
 	 */
 	@RequestMapping(value = "/story",method = RequestMethod.POST)
 	public @ResponseBody Map storyPage(HttpServletRequest request, int page){
-		System.out.println(page);
+//		System.out.println(page);
 		PageResults<Blog> pr = blogService.show_blog(page);
 		int sp = pr.getCurrentPage();
 		int ep = pr.getPageCount();
@@ -514,9 +533,10 @@ public class MobileController  {
 		
 		info.put("blogs",pr);
 		info.put("sp",sp);
-		info.put("ep",ep);
-		
+		info.put("ep",ep);	
 		return info;
+		
+		
 	}
 	/**
 	 * 青客生活
@@ -567,6 +587,8 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
 		}
 	}
+	
+	
 	/**
 	 * 获取可用优惠卷
 	 * @param uId
@@ -576,7 +598,7 @@ public class MobileController  {
 	
 	@RequestMapping("getMyCoupons")
 	@ResponseBody
-	public ArrayList<Object> getMyCoupons(Long uId ,Double totalPrice){
+	public ArrayList<Object> getMyCoupons(Long uId ,Double price){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Coupon> coupon = couponService.getCoupon(uId);
 		for(Coupon coupon2:coupon){
@@ -586,7 +608,7 @@ public class MobileController  {
 			Double yf = Double.valueOf(coupon2.getcValue());
 			long time = new Date().getTime();
 			boolean usable = coupon2.isUsed();
-			if(startTime<=time&&time<=endTime&&totalPrice>=rule&&usable!=true&&totalPrice>yf){
+			if(startTime<=time&&time<=endTime&&price>=rule&&usable!=true&&price>yf){
 				map.put(String.valueOf(coupon2.getId()), coupon2);
 			}
 		}
@@ -597,6 +619,8 @@ public class MobileController  {
 		
 		return list;
 	}
+	
+	
 	/**
 	 * 
 	 * 获取用户优惠券
@@ -606,7 +630,6 @@ public class MobileController  {
 	@RequestMapping("getCoupons")
 	@ResponseBody
 	public List<Coupon>  getCouponsByUser(Long uId ){
-		System.out.println(uId);
 		List<Coupon> coupon = couponService.getCoupon(uId);
 		for(Coupon coupon2:coupon){
 			long endTime = TimeUtil.getDateLong(coupon2.getEndTime());
@@ -617,14 +640,10 @@ public class MobileController  {
 				couponService.delete(couponService.getCoupon2(coupon2.getId()));
 			}
 		}
-		long i=3;
-			JSONObject a = apartmentService.getApartmentById(i)
-					.getJSONObject("position");
-			String f= a.getString("bd_wei_zhi")+","+a.getString("xiao_qu")+","+a.getString("lou_hao")+"号楼,"+
-					a.getString("dan_yuan")+"单元,"+a.getString("lou_ceng")+"层,"+a.getString("men_pai")+"号";
-			System.out.println(f);
 			return couponService.getCoupon(uId);
 	}
+	
+	
 /**
  * 获取房屋详情
  * @param searchData
@@ -636,7 +655,6 @@ public class MobileController  {
 		if(null == currentPage){
 			currentPage = 1;
 		}
-		System.out.println(searchData);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("searchData", searchData);
 		info.put("areas", Area.getAreas());
@@ -650,6 +668,8 @@ public class MobileController  {
 		session.setAttribute("info", info);
 		return info;
 	}
+	
+	
 /**
  * 
  * @param file
@@ -658,18 +678,18 @@ public class MobileController  {
  */
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public @ResponseBody Message upload(MultipartFile file, HttpServletRequest request) {
-		System.out.println(file);
 		if (file != null) {
 			StringBuffer sb = new StringBuffer();
 			sb.append(request.getSession().getServletContext().getRealPath("/"));
 //			System.out.println(sb.toString());
 			String fullPath = fileService.saveFile(file, sb.toString());
 			if (fullPath != null)
-				System.out.println(fullPath);
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, fullPath);
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");
 	}
+	
+	
 	/**
 	 * 查看密码
 	 * @param request
@@ -688,6 +708,8 @@ public class MobileController  {
 		map.put("pwd_text",  lockService.viewPassword(phone, lock_no));
 		return map ;
 	}
+	
+	
 	/**
 	 * 退租
 	 * @param orderId
@@ -698,11 +720,13 @@ public class MobileController  {
 		return orderservice.outLease(orderId);
 	}
 	
+	
 	@RequestMapping(value = "/Clean", method = RequestMethod.POST)
 	public @ResponseBody  Message Clean(Long uId ,int type){
 		if(uId==null){
 			return new Message(Constants.MESSAGE_ERR_CODE, "无订单"); 
 		}
+		
 		List<Order> o = orderservice.getCustomerOrders(uId, type);
 		Map<String, Object> map = new HashMap<String, Object>();
 	for(Order d : o){
@@ -718,9 +742,9 @@ public class MobileController  {
 		
 	}
 	
+	
 	@RequestMapping(value = "/cleanAdd", method = RequestMethod.POST)
 	public @ResponseBody Message cleanAdd (String demand,Long oederId , int content1[],int cleanTime) {
-	System.out.println(content1);
 		if(content1==null){
 			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
 		}
@@ -749,7 +773,6 @@ public class MobileController  {
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
 		}
-		
 		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
 	}
 	/*
@@ -771,6 +794,7 @@ public class MobileController  {
 		return list;
 	}
 	
+	
 	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.POST)
 	public @ResponseBody JSONObject getRangePrices(@PathVariable("id") Long id,
 			@PathVariable("startDate") String startDate) {
@@ -784,3 +808,4 @@ public class MobileController  {
 	}
 	
 }
+

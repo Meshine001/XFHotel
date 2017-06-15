@@ -171,6 +171,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 	/**
 	 * 获取更详细的信息
 	 */
+	
 	@Transactional
 	@Override
 	public JSONObject getApartmentById(Long id) {
@@ -323,6 +324,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 			}
 			sum += pp;
 		}
+		info.put("Price", sum);
 		sum += cashPledge;
 		sb.append("@"+cashPledge);
 		info.put("price", sb.toString());
@@ -372,7 +374,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		moudle.put("oStart", startTime);
 		moudle.put("oEnd", endTime);
 		Map<String, Object> priceInfo = caculatePrice(startTime, endTime, apartmentId);
-		System.out.println(priceInfo);
+//		System.out.println(priceInfo);
 		try {
 			moudle.put("oTotalDay", TimeUtil.daysBetween(startTime, endTime));
 		} catch (ParseException e) {
@@ -383,9 +385,11 @@ public class ApartmentServiceImpl implements ApartmentService {
 		moudle.put("oTotalPrice", priceInfo.get("totalPrice"));
 		moudle.put("oCashPledge", priceInfo.get("cashPledge"));
 		moudle.put("oPreferential", "");
+		moudle.put("price", priceInfo.get("Price"));
 		moudle.put("capacity", priceInfo.get("capacity"));
 		return moudle;
 	}
+	
 	@Transactional
 	@Override
 	public Apartment modify(Apartment c, long id) {
