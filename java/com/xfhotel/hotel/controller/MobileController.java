@@ -139,7 +139,6 @@ public class MobileController  {
 
 	}
 	
-	
 	/**
 	 * 修改密码
 	 * @param tel
@@ -161,7 +160,6 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
 	}
 
-	
 	/**
 	 * 注册
 	 * @param tel
@@ -188,7 +186,6 @@ public class MobileController  {
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
 	
-	
 /**
  *
  * @param roomId
@@ -211,7 +208,6 @@ public class MobileController  {
 		return list;
 	}
 	
-	
 	/**
 	 * 获取价格
 	 * @param roomId
@@ -221,7 +217,6 @@ public class MobileController  {
 	public @ResponseBody Map<String, Object> getRoomRates(Long roomId){
 		return commentService.getRoomRates(roomId);
 	}
-	
 	
 	/**
 	 * 验证短信验证码
@@ -245,6 +240,7 @@ public class MobileController  {
 				}
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, "验证成功");
 			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -536,7 +532,6 @@ public class MobileController  {
 		info.put("ep",ep);	
 		return info;
 		
-		
 	}
 	/**
 	 * 青客生活
@@ -568,7 +563,6 @@ public class MobileController  {
 		return map;
 	}
 	
-
 	/**
 	 * 查询微信支付的状态
 	 * @param id
@@ -587,7 +581,6 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
 		}
 	}
-	
 	
 	/**
 	 * 获取可用优惠卷
@@ -616,7 +609,6 @@ public class MobileController  {
 		  for(String key : map.keySet()){
 		   list.add(map.get(key));
 		  }
-		
 		return list;
 	}
 	
@@ -643,7 +635,6 @@ public class MobileController  {
 			return couponService.getCoupon(uId);
 	}
 	
-	
 /**
  * 获取房屋详情
  * @param searchData
@@ -669,7 +660,6 @@ public class MobileController  {
 		return info;
 	}
 	
-	
 /**
  * 
  * @param file
@@ -688,7 +678,6 @@ public class MobileController  {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");
 	}
-	
 	
 	/**
 	 * 查看密码
@@ -709,7 +698,6 @@ public class MobileController  {
 		return map ;
 	}
 	
-	
 	/**
 	 * 退租
 	 * @param orderId
@@ -719,7 +707,6 @@ public class MobileController  {
 	public @ResponseBody Message outLease(Long orderId) {
 		return orderservice.outLease(orderId);
 	}
-	
 	
 	@RequestMapping(value = "/Clean", method = RequestMethod.POST)
 	public @ResponseBody  Message Clean(Long uId ,int type){

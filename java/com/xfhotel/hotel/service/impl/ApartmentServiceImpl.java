@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.impl.ApartmentDAOImpl;
 import com.xfhotel.hotel.dao.impl.PriceDAOImpl;
-import com.xfhotel.hotel.dao.impl.SystemConfDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Price;
@@ -42,7 +41,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 	
 	@Autowired
 	OrderService orderService;
-
+	
 	@Transactional
 	@Override
 	public Apartment findById(Long id) {
@@ -189,7 +188,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		jo.put("pic_show", picShow);
 		return jo;
 	}
-
+	
 	@Transactional
 	@Override
 	public JSONArray get2MonthPrices(Long id, String startDate) {
@@ -244,7 +243,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		Object[] values = { id, start, end };
 		return priceDAO.getListByHQL(hqlString, values);
 	}
-
+	
 	@Transactional
 	@Override
 	public JSONArray get7DaysPrices(Long id, String startDate) {
@@ -269,7 +268,6 @@ public class ApartmentServiceImpl implements ApartmentService {
 			i++;
 		}
 		
-
 		return sevenDaysPrices;
 	}
 

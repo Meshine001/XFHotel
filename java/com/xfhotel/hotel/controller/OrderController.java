@@ -141,7 +141,9 @@ public class OrderController {
 		o.setOtherCusName(StringSplitUtil.buildStrGroup(otherCusName));
 		o.setOtherCusIdCard(StringSplitUtil.buildStrGroup(otherCusIdCard));
 		try {
-			o.setStartTime(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
+			o.setStartTime(DateUtil.parse(startTime + " 14:00", "yyyy-MM-dd HH:mm").getTime());
+//			System.out.println(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime()+"啥");
+//			System.out.println(DateUtil.parse(startTime, "yyyy-MM-dd HH:mm").getTime()+"sdha");
 			o.setEndTime(DateUtil.parse(endTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

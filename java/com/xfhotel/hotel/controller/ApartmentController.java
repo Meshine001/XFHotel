@@ -191,7 +191,8 @@ public class ApartmentController {
 		apartmentService.setSpPrice(sp);
 		return "redirect:/admin/apartment/price/" + apartmentId;
 	}
-
+	
+	
 	/**
 	 * 设置特殊价格
 	 * @param id
@@ -218,3 +219,4 @@ public class ApartmentController {
 	}
 
 }
+

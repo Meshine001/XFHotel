@@ -72,6 +72,8 @@ public class LockServiceImpl implements LockService {
 			lock.setValid_time_start(start.getTimeInMillis());
 			JSONObject result = LockOperater.getInstance().pwdAdd(lock.getLock_no(), "", lock.getValid_time_start(),
 					lock.getValid_time_end(), "", lock.getPwd_user_mobile(), "", lock.getDescription(), "");
+			System.out.println(result.getString("rlt_code")+"...."+LockOperater.LOCK_MSG_SUCCESS);
+			System.out.println(result.getString("rlt_code").equals(LockOperater.LOCK_MSG_SUCCESS));
 			if (result.getString("rlt_code").equals(LockOperater.LOCK_MSG_SUCCESS)) {
 				result = result.getJSONObject("data");
 				lock.setBusiness_id(result.getString("business_id"));
@@ -90,6 +92,7 @@ public class LockServiceImpl implements LockService {
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "设置锁密码失败");
 	}
+
 
 	@Transactional
 	@Override
