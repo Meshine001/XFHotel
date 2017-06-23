@@ -12,7 +12,7 @@ function appendComments(comment) {
 
 	var h6 = $('<h6/>').appendTo(dp_con);
 	$.ajax({
-		url : $('.comment_list').attr('data-url') + "/customer/detailsData?id="
+		url : $('.').attr('data-url') + "/customer/detailsData?id="
 				+ comment.fromWho,
 		method : 'GET',
 		dataType : 'json',
@@ -58,6 +58,7 @@ function appendComments(comment) {
  * @param page
  * @returns
  */
+
 function jumpToPage(page) {
 	$('.comment_list').attr('data-page', page);
 	$('.comment_list').html('');

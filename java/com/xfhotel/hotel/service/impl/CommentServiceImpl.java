@@ -95,11 +95,11 @@ public class CommentServiceImpl implements CommentService{
 		rates.put("xingjiabi", df.format(xingjiabi));
 		return rates;
 	}
-
+	@Transactional
 	@Override
 	public Comment findById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return commentDAO.get(id);
 	}
 
 

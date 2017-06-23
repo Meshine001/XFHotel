@@ -116,10 +116,10 @@ public class MobileController  {
 		return info;	
 	}
 	
+	
 	@RequestMapping(value = "/info",method = RequestMethod.GET)
 	public @ResponseBody JSONObject info(Long apartmentId){
 		return apartmentService.getApartmentById(apartmentId);
-		
 	}
 	
 	/**
@@ -497,7 +497,6 @@ public class MobileController  {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
 			return new Message(Constants.MESSAGE_ERR_CODE, "内部错误");
 		}
 		session.setAttribute(Constants.PAGE, Constants.PAGE_DETAILS);
@@ -611,7 +610,6 @@ public class MobileController  {
 		  }
 		return list;
 	}
-	
 	
 	/**
 	 * 
@@ -762,6 +760,7 @@ public class MobileController  {
 		}
 		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
 	}
+	
 	/*
 	 * 获取订单
 	 */
@@ -781,7 +780,6 @@ public class MobileController  {
 		return list;
 	}
 	
-	
 	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.POST)
 	public @ResponseBody JSONObject getRangePrices(@PathVariable("id") Long id,
 			@PathVariable("startDate") String startDate) {
@@ -793,6 +791,6 @@ public class MobileController  {
 		}
 		return data;
 	}
-	
+
 }
 

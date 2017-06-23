@@ -211,7 +211,6 @@ public class ApartmentServiceImpl implements ApartmentService {
 		JSONArray prices = new JSONArray();
 		List<Order> availableOrders = orderService.checkAvailable(id, TimeUtil.getDateStr(start),
 				TimeUtil.getDateStr(end));
-		
 		for (Date d : allDates) {
 			JSONObject info = new JSONObject();
 			JSONObject details = new JSONObject();
@@ -225,7 +224,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 				}
 			}
 			for (Order o : availableOrders) {
-				Long tt = d.getTime() + 1000 * 60 * 60 * 12;
+				Long tt = d.getTime() + 1000 * 60 * 60 * 14;
 				if (tt >= o.getStartTime() && tt < o.getEndTime()) {
 					details.put("roomNum", "0");
 				}

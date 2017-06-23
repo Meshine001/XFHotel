@@ -144,7 +144,6 @@ public class AdminController {
 		return map;
 	}
 	
-
 	@RequestMapping(value = "/system", method = RequestMethod.GET)
 	public String systemPage() {
 		

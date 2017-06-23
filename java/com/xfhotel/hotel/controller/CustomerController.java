@@ -144,7 +144,6 @@ public class CustomerController {
 			session.setAttribute("c", c);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "注册成功");
 		}
-
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
 
@@ -160,7 +159,6 @@ public class CustomerController {
 		model.addAttribute("forword", forword);
 		return "/customer/login-reg";
 	}
-
 
 	@RequestMapping(value = "/details", method = RequestMethod.GET)
 	public String detailsPage(Model model) {
