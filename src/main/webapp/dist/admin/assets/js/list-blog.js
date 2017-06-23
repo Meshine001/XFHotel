@@ -80,10 +80,10 @@ function list(page) {
 						'./edit?id=' + value.id);
 				var td_title = $('<td></td>').append(a_title);
 				var td_status = $('<td></td>');
-				var a_del = $('<a></a>').attr('onclick',
+				var a_del = $('<a class="btn"></a>').attr('onclick',
 						'del(' + value.id + ",'" + value.title + "')").attr(
 						'href', 'javascript:void(0);').append('删除');
-				var a_change = $('<a></a>').attr('onclick',
+				var a_change = $('<a class="btn"></a>').attr('onclick',
 						'change(' + value.id + ",'" + value.status + "')")
 						.attr('href', 'javascript:void(0);');
 				if (value.status == '0'){

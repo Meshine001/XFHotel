@@ -22,7 +22,15 @@
 }
 
 .service{margin: 0.2rem auto}
-.service .goodlist li{position: relative;width: 100%;height: 1.4rem;margin-bottom: 0.15rem;background: #dddada;background-size: 100%}
-.service .goodlist li h1{text-align: center;font-size: 0.3rem;color: #e1b82a}
-.service .goodlist li p{font-size: 0.1rem;color: #956d18;position: relative;top:0.59rem;text-indent: 0.2rem}
-.service .goodlist li ._pic{width:1.2rem;height: 0.5rem;position: absolute;right: 0.2rem;bottom: 0.1rem;line-height: 0.6rem;;color:#956d18;font-size: 0.4rem }
+.service .goodlist li{
+    position: relative;
+    width: 100%;
+    height: 1.4rem;
+    margin-bottom: 0.15rem;
+    background: #dddada;
+    background-size: 100% ;
+    background: url("../images/youhuijuan-bg2.png") no-repeat center center;
+}
+.service .goodlist li h1{text-align: center;font-size: 0.3rem;color: #fff}
+.service .goodlist li p{font-size: 0.1rem;color: #fff;position: relative;top:0.59rem;text-indent: 0.4rem;}
+.service .goodlist li ._pic{width:1.2rem;height: 0.5rem;position: absolute;left: 0.3rem;bottom: 0.5rem;line-height: 0.6rem;;color:#fff;font-size: 0.5rem }

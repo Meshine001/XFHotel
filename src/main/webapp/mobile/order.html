@@ -8,6 +8,7 @@
     <link href="css/doubleDate.css" rel="stylesheet" type="text/css">
     <link href="css/common.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/order.css" />
+    <link rel="stylesheet" href="iconcaomei/style.css" />
     <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="js/doubleDate2.0.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
@@ -17,20 +18,40 @@
 <body  style="display:none;">
 <div class="header">
     <header class="header-mobile">
-        <a href="#" onclick="javascript:history.back();" class="cell link-home"><img src="images/black-1.png" class="img-home"></a>
+        <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
         <span class="cell">填写订单</span>
-        <a href="serve.html" class="cell link-btn"><img src="images/my_h.png" class="img-btn"></a>
+        <a href="serve.html" class="cell link-btn"><span class="czs-user-l"></span></a>
     </header>
 </div>
 
+<div class="gratis">
+    <h1>免租金说明<span style="cursor: pointer;" class="czs-close-l"></span></h1>
+    <div class="content">
+        <p>免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+            免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+            免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+            免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+            免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+            免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+            免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+            免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+            免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+            免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+            免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+            免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+            免租金说明免租金说明免租金说明免租免租金说明免租金说明免租金说明免租金说明免租金说明
+        </p>
+    </div>
+    <div></div>
+</div>
 
 <div id="Myscroll-body">
     <div class="main">
         <div class="order_info">
             <h1 class="r_name roomName">福邸铭门(22楼)</h1>
             <h1 class="r_name roomTime"><i>2017-04-26入住</i><i>2017-04-30离开</i> </h1>
-            <h1 class="o_pay roompYJ">押金：<span class="money">￥280</span></h1>
-            <h1 class="o_pay roompPic">订单总额：<span class="money">￥598</span><a onclick="getYouhuijuan()" data=1>优惠劵23</a></h1>
+            <h1 class="o_pay roompYJ">押金：<span class="money"></span><a class="free" href="javascript:;" style="cursor: pointer;font-size: 0.12rem;float: right;padding-right: 0.1rem">免押金说明</a></h1>
+            <h1 class="o_pay roompPic">订单总额：<span class="money"></span><a onclick="getYouhuijuan()" data=1></a></h1>
         </div>
 
         <ul class="price_info">
@@ -39,6 +60,7 @@
             <li><span>身份证号</span><input class="fl" id="identity" type="text" placeholder="入住人身份证号"></li>
             <li><span>您的需求</span><input class="fl" id="presonal" type="text" placeholder="您还有什么需求？"></li>
             <li style="display: none"><span>是否开发票</span><div class="fl" id="needpic"><i class="" cod="true">是</i><i cod="false" class="active">否</i></div></li>
+            <li><span style="cursor: pointer;color: #00b38a;text-align: center;line-height: 0.4rem" class="czs-circle-l czs-circle-o"></span>我同意<a style="cursor: pointer;color:#00b38a" href="protocol.html">《房屋短租协议》</a></li>
         </ul>
         <ul class="price_info addpartenr">
 
@@ -48,6 +70,7 @@
         </ul>
         <div class="prompt_info">
             <h1>* 预定提示</h1>
+            <p class="form_strl"></p>
             <p class="form_ctrl "> 1、本公寓属于智能管理，为了方便您的入住，我们将会把您定好的房间门密码用短信的形式发送到你的手机号上，在填写订单的时候请认真填写。</p>
             <p class="form_ctrl "> 2、在您入住的时候请文明使用物品，如需要服务请在客服管理联系我们，谢谢。</p>
             <p class="form_ctrl "> 3、本酒店最晚保留到18点,超过18点请在特殊要求内注明具体到达时间及原因</p>

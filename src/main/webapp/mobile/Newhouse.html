@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>青舍都市公寓</title>
+    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/Application.css" />
+    <link rel="stylesheet" href="iconcaomei/style.css" />
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script type="text/javascript" src="js/fnBase.js"></script>
+
+</head>
+<body style="background: #FFF">
+    <div id="Myscroll-body">
+        <div class="content">
+            <h1>发布新房源</h1>
+            <p><span class="czs-mobile-l"></span><input type="text" placeholder="电话号码"></p>
+            <p><span class="czs-location-l"></span><input type="text" placeholder="新房源地址"></p>
+            <p style="font-size: 0.14rem">*填写完信息并提交后、我们会及时安排专业人士、去房源和您审核房屋状况、请保持24小时正常通话。</p>
+            <p style="padding-top: 0.2rem"><button class="login_submit">提交</button></p>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $(".login_submit").click(function(){
+                fnBase.myalert('提交成功、等待确认');
+                setTimeout(function(){
+                    window.location.href='platformInit.html'
+                },1500)
+            })
+        })
+    </script>
+</body>
+</html>

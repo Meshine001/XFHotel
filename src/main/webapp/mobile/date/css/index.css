@@ -28,16 +28,15 @@ body,html {
 }
 
 .date {
-  
   position:fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  height: 100%;
+  width: 100%;
   background: #fff;
-  z-index: 1000000;
+  z-index: 10000;
   overflow:auto;
-  overflow-x:hidden;
+  overflow-x: hidden;
   text-align: center;
   -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
@@ -81,22 +80,22 @@ body,html {
   color: #777;
 }
 .day .enter {
-  background-color:#26d70b;
-  color: #fff
+  background: url("../en.png") no-repeat center center;
+  color: #0e8f45;
 }
 .day .enter i{
-  color:#fff;
+  color:#0e8f45;
 }
 .day .leave {
-  background-color: #554e4d;
-  color: #fff
+  background: url("../likai.png") no-repeat center center;
+  color: #037935;
 }
 
 .day .leave i{
-  color: #fff
+  color: #037935;
 }
 .day .disable {
-  background: #ebecf2;
+  background:#e1e1ea;
 }
 /*
 开始到结束日期的样式；

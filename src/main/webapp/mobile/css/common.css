@@ -159,11 +159,18 @@ white-space: nowrap;
 .header-mobile .img-home {width: 0.12rem;margin-top: 0.04rem;}
 
 
-.header-mobile .cell{height: 0.28rem;vertical-align: top;text-align: center;line-height: 0.28rem}
+.header-mobile .cell{height: 0.28rem;vertical-align: top;text-align: center;line-height: 0.28rem;position: relative}
 
 .header-mobile .link-home{ width: 0.5rem;}
 .header-mobile .group-search{width: 2.75rem}
-.header-mobile .link-btn{width: 0.5rem}
+.header-mobile .link-btn{width: 0.5rem;}
+.header-mobile .cell span{
+    color: #fff;
+    font-size: 0.2rem;
+    position: absolute;
+    margin-top: 0.049rem;
+    left: 0.15rem;
+}
 .header-mobile .input-search{
     vertical-align: top;padding: 5px 8px 5px 0.15rem;
     width: 100%;height: 0.28rem;line-height: 0.28rem;

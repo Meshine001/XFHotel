@@ -45,7 +45,7 @@ html,body{background: #fff}
     padding: 0.1rem;
 	
 }
-.vip_info img{float:left;width: 0.7rem;height: 0.7rem;border-radius: 50%;border: 2px solid #fff}
+.vip_info img{float:left;width: 0.7rem;height: 0.7rem;border-radius: 50%;}
 .vip_info span{
 	display: block;
     width: 1.25rem;
@@ -62,7 +62,7 @@ html,body{background: #fff}
 .vip_info_list{margin-bottom: 0.15rem;width: 100%;overflow: hidden;background: #fff;padding: 0 0.1rem;border-bottom: 1px solid #ddd}
 .vip_info_list li{line-height: 0.45rem;border-bottom: 1px solid #ddd;font-size: 0.14rem;}
 .vip_info_list li:last-child{border: 0}
-.vip_info_list li a{display: block;}
+.vip_info_list li a{display: block;color: #777;}
 
 .vip_info_list li .per-order-status{width: 100%}
 .vip_info_list li .per-order-status a{float: left;display:block;
@@ -73,6 +73,7 @@ html,body{background: #fff}
     text-align: center;
     font-size: 0.14rem;
     margin: 0px ;
+    color: #777;
     /*
     border-left: 1px solid #ddd ;
     */
@@ -118,6 +119,7 @@ html,body{background: #fff}
     float: none;
     display: block;
     margin: 0.15rem auto 0.05rem auto;
+    font-size: 0.3rem;
 }
 .per-order-status .payment_icon{background: url("../images/nomor.png") no-repeat center bottom;background-size: 100% }
 .per-order-status .delivery_icon{background: url("../images/yesmor.png") no-repeat center bottom;background-size: 100% }

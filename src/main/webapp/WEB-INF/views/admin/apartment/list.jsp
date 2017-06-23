@@ -42,9 +42,9 @@
 							<th>操作</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="h-table">
 						<c:forEach items="${apartments}" var="apartment">
-							<tr>
+							<tr roomId="${apartment.id}">
 								<td>${apartment.id}</td>
 								<td>${apartment.basic_info.lei_xing}</td>
 								<td>${apartment.position.men_pai}</td>
@@ -69,7 +69,12 @@
 									首页显示
 									</c:if>
 									</a><br>
-									<a href="<%=basePath %>/admin/apartment/delete/${apartment.id}" class="btn">删除</a></th>
+									<a href="<%=basePath %>/admin/apartment/delete/${apartment.id}" class="btn">删除</a>
+								
+								<!-- 房客留言操作begin -->	
+									<br><a href="<%=basePath%>/admin/leavemsglist" class="btn evalpinglun">查看评论</a>
+								<!-- 房客留言操作end -->	
+								</th>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -79,5 +84,14 @@
 		</div>
 	</div>
 	</my_body>
+	<my_script>
+		
+	    <script>
+	    $("#h-table").on('click','tr .evalpinglun',function(){
+			var roomid=$(this).parent().parent().attr('roomid');
+			window.sessionStorage.setItem('roomId',roomid);
+		})
+	    </script>
+	</my_script>
 </body>
 </html>

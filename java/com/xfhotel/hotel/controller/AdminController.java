@@ -2,7 +2,6 @@ package com.xfhotel.hotel.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Clean;
+import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
@@ -27,6 +27,7 @@ import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CleanService;
+import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.OrderService;
@@ -58,6 +59,8 @@ public class AdminController {
 	BlogService blogService;
 	@Autowired
 	CleanService cleanService;
+	@Autowired 
+	CommentService commentService;
 	
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -86,6 +89,31 @@ public class AdminController {
 		session.setAttribute("orders", orders);
 		return "/admin/customer/baojie";
 	}
+	
+	
+//	// 6.21 评论 begin
+	@RequestMapping(value = "/leavemsglist", method = RequestMethod.GET)
+	public String leavemsglist() {
+		return "/admin/apartment/leavemsglist";
+	}
+//	// 6.21 评论 end
+	
+	@RequestMapping(value = "/get", method = RequestMethod.POST)
+	public @ResponseBody ArrayList<Object> getRoomComments(Long roomId){
+		ArrayList<Object> list = new ArrayList<Object>();
+		List<Comment> comment = commentService.getCommentsByRoom(roomId);
+		for(Comment comment1:comment){
+			Customer customer = customerService.getCustomer(comment1.getFromWho());
+			CustomerDetails f = customer.getDetails();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("tel", customer.getTel());
+			map.put("comment", comment1);
+			map.put("Avatar", f.getAvatar());
+			list.add(map);
+		}
+		return list;
+	}
+	
 	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardPage() {
