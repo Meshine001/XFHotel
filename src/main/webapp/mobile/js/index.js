@@ -3,6 +3,15 @@
     getData();
     alertSearch.info();
     
+    // 托管
+    $(".hot-issue .tuoguan").click(function(){
+    	fnBase.myalert('正在开发中...')
+    })
+    
+    
+    // 新注册礼包
+    $(".Masking-out,.newUser").hide();
+    
     if(fnBase.huoqu(0, "newUser")==1){
     	$(".Masking-out,.newUser").show();
     }

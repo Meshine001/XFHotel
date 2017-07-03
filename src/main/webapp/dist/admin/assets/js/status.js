@@ -4,7 +4,7 @@ $(document).ready(function(){
 	
 	$(".status-time input").on('change',function(){
 		_time=$(".status-time input").val();
-		_time= (new Date(_time)).getTime();
+		_time= (new Date(_time)).getTime()+ 1000 * 60 * 60 * 4;
 	})
 	$(".status-house a").click(function(){
 		$(this).addClass('hat').siblings().removeClass('hat');
@@ -22,23 +22,23 @@ $(document).ready(function(){
 			return;
 		}
 		console.log(_status+"&"+_time+"&"+ID);
-//		$.ajax({
-//			type : 'post',
-//			dataType : 'json',
-//			url:'/comment/getComments',
-//			data : {
-//				'roomId' : _status,
-//				'page':_time,
-//				'id':ID
-//			},
-//			error:function(e){
-//				alert('修改错误')
-//			},
-//			success:function(data){
-//				console.log(data)
-//				alert('修改成功')
-//			}
-//		})
+		$.ajax({
+			type : 'post',
+			dataType : 'json',
+			url:'/admin/house',
+			data : {
+				'state' : _status,
+				'data':_time,
+				'apartmentId':ID
+			},
+			error:function(e){
+				alert('修改错误')
+			},
+			success:function(data){
+				console.log(data)
+				alert('修改成功')
+			}
+		})
 	})
 	
 })

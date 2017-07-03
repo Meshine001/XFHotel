@@ -69,7 +69,6 @@ public class MessageController {
 		try {
 			str = getMD5(str).toUpperCase();
 //			System.out.println(str+"========="+validate_code);
-			
 			if (str.equals(validate_code) || true) {//校验有问题，暂时就这样吧
 				if (event.equals("PUSH_LOCK_SET_PWD_SUCCESS")) {
 					lockSuccess(business_id, lock_no, pwd_no, pwd_user_mobile);
@@ -91,7 +90,6 @@ public class MessageController {
 	public void lockSuccess(String business_id, String lock_no, Integer pwd_no, String pwd_user_mobile) {
 		int check = lockService.verify(business_id, lock_no, Integer.valueOf(pwd_no), pwd_user_mobile);
 		String pwd_text = lockService.viewPassword(pwd_user_mobile, lock_no);
-		
 		if (check == 1) {
 			String[] param = new String[2];
 			param[0] = "";
@@ -123,8 +121,9 @@ public class MessageController {
 	       //
 	    } 
 		return null;
+		
 	}
-
+		
 	public static void main(String[] args) {
 		System.out.println(getMD5("ADFF@8866#HHDF159753rest_lock"));
 	}

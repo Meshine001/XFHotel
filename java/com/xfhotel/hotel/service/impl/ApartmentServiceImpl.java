@@ -1,6 +1,7 @@
 package com.xfhotel.hotel.service.impl;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,13 +15,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.impl.ApartmentDAOImpl;
+import com.xfhotel.hotel.dao.impl.HouseDAOImpl;
 import com.xfhotel.hotel.dao.impl.PriceDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
+
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.SearchForm;
@@ -37,11 +41,12 @@ public class ApartmentServiceImpl implements ApartmentService {
 	@Autowired
 	PriceDAOImpl priceDAO;
 	@Autowired
+	HouseDAOImpl houseDAO;
+	@Autowired
 	SystemConfService systemConfService;
 	
 	@Autowired
 	OrderService orderService;
-	
 	@Transactional
 	@Override
 	public Apartment findById(Long id) {
@@ -197,6 +202,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		Long end = TimeUtil.getDatePlusMonth(new Date(start), 2).getTime();
 		// 获得特殊价格
 		List<Price> sp = getSpPrices(start, end, id);
+		List<House> house = getSpHouse(start, end, id);
 		// 构造价格序列
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date(start));
@@ -223,8 +229,21 @@ public class ApartmentServiceImpl implements ApartmentService {
 					details.put("price", m.getPrice());
 				}
 			}
+			for(House h :house){
+				Long tt = d.getTime() + 1000 * 60 * 60 * 12;
+//				System.out.println(tt+"d"+h.getDate());
+//				Date date = new Date(tt);  
+//				SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//				System.out.println(sd.format(date));
+				if(h.getState()== 0 && h.getDate().equals(tt)){
+					details.put("roomNum", "0");
+				}
+			}
 			for (Order o : availableOrders) {
 				Long tt = d.getTime() + 1000 * 60 * 60 * 14;
+				Date date = new Date(tt);  
+				SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				System.out.println(sd.format(date));
 				if (tt >= o.getStartTime() && tt < o.getEndTime()) {
 					details.put("roomNum", "0");
 				}
@@ -393,6 +412,14 @@ public class ApartmentServiceImpl implements ApartmentService {
 		// TODO Auto-generated method stub
 		apartmentDAO.saveOrUpdate(c);
 		return apartmentDAO.get(id);
+	}
+	@Transactional
+	@Override
+	public List<House> getSpHouse(Long start, Long end, Long id) {
+		// TODO Auto-generated method stub
+		String hqlString = "from House where apartmentId=? and date >=? and date <=?";
+		Object[] values = { id, start, end };
+		return houseDAO.getListByHQL(hqlString, values);
 	}
 
 }

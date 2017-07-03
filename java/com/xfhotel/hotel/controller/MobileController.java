@@ -27,6 +27,7 @@ import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
@@ -35,6 +36,7 @@ import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.FileService;
+import com.xfhotel.hotel.service.HouseService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
@@ -59,7 +61,7 @@ import net.sf.json.JSONObject;
 @Controller
 @RequestMapping("mobile")
 public class MobileController  {
-	@Autowired
+ 	@Autowired
 	CleanService cleanservice;
 	
 	@Autowired
@@ -73,6 +75,8 @@ public class MobileController  {
 
 	@Autowired
 	CustomerService customerService;
+	
+	
 	@Autowired
 	CouponService couponService;
 	
@@ -94,7 +98,8 @@ public class MobileController  {
 	@Autowired
 	SystemConfService systemConfiService;
 	
-	
+	@Autowired
+	HouseService houseService;
 	/**
 	 * 房屋
 	 * @return
@@ -433,12 +438,14 @@ public class MobileController  {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
+		
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order.toMap());
 //		System.out.println(info);
 		return info;
 	}
+	
 	
 	/**
 	 * 修改密码
@@ -458,6 +465,7 @@ public class MobileController  {
 		}
 
 	}
+	
 	
 	/**
 	 * 修改个人资料
@@ -562,6 +570,7 @@ public class MobileController  {
 		return map;
 	}
 	
+	
 	/**
 	 * 查询微信支付的状态
 	 * @param id
@@ -627,6 +636,7 @@ public class MobileController  {
 //			System.out.println(time + endTime);
 			boolean usable = coupon2.isUsed();
 			if(time>=endTime||usable==true){
+				
 				couponService.delete(couponService.getCoupon2(coupon2.getId()));
 			}
 		}
@@ -652,10 +662,11 @@ public class MobileController  {
 		info.put("layoutTypes", LayoutType.getLayouts());
 		info.put("enterTimes", RoomStatus.getStatusArray());
 		info.put("leaseTypes", LeaseType.getLeaseTypes());
-		
 		info.put("page",  apartmentService.getApartmentPage(apartmentService.sort(apartmentService.list(),searchData), currentPage));
 		session.setAttribute("info", info);
+		
 		return info;
+		
 	}
 	
 /**
@@ -719,6 +730,7 @@ public class MobileController  {
 			map.put(d.getCusName(), d);
 		}
 	}
+	
 	ArrayList<Object> list = new ArrayList<Object>();
 	  for(String key : map.keySet()){
 	   list.add(map.get(key));
@@ -734,7 +746,7 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
 		}
 		try {
-			Order o = orderservice.get(oederId);
+ 			Order o = orderservice.get(oederId);
 			Clean clean = new Clean();
 			clean.setDemand(demand);
 			clean.setCleanTime(Clean.getcleanTime(cleanTime));
@@ -766,7 +778,7 @@ public class MobileController  {
 	 */
 	@RequestMapping(value = "/getOrder", method = RequestMethod.POST)
 	public @ResponseBody ArrayList<Object> getOrder(Long id){
-		Map<String, Object> map = new HashMap   <String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		Order order = orderservice.get(id);
 		String  i= TimeUtil.getDateStr(order.getStartTime());
 		String  d= TimeUtil.getDateStr(order.getEndTime());
@@ -780,6 +792,7 @@ public class MobileController  {
 		return list;
 	}
 	
+	
 	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.POST)
 	public @ResponseBody JSONObject getRangePrices(@PathVariable("id") Long id,
 			@PathVariable("startDate") String startDate) {
@@ -791,6 +804,7 @@ public class MobileController  {
 		}
 		return data;
 	}
+	
 
 }
 

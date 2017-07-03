@@ -18,18 +18,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Clean;
-import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CleanService;
-import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.HouseService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
@@ -59,8 +59,10 @@ public class AdminController {
 	BlogService blogService;
 	@Autowired
 	CleanService cleanService;
-	@Autowired 
-	CommentService commentService;
+	@Autowired
+	HouseService houseService;
+//	@Autowired
+//	VacancyService vacancyService;
 	
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -73,6 +75,23 @@ public class AdminController {
 		return "/admin/customer/sendlist";
 	}
    //..5.8优惠卷结束...
+	
+	// 7.2 查看评论
+	@RequestMapping(value = "/leavemsglist", method = RequestMethod.GET)
+	public String leavemsglist() {
+	
+		return "/admin/apartment/leavemsglist";
+	}
+	// 7.2 查看评论 end
+	// 7.2房态
+	@RequestMapping(value = "/status", method = RequestMethod.GET)
+	public String status() {
+	
+		return "/admin/apartment/status";
+	}
+	// 7.2房态end
+	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() {
 		return "/admin/login";
@@ -89,40 +108,6 @@ public class AdminController {
 		session.setAttribute("orders", orders);
 		return "/admin/customer/baojie";
 	}
-	
-	
-//	// 6.21 评论 begin
-	@RequestMapping(value = "/leavemsglist", method = RequestMethod.GET)
-	public String leavemsglist() {
-		return "/admin/apartment/leavemsglist";
-	}
-//	// 6.21 评论 end
-	
-//	// 6.23房态 begin
-	@RequestMapping(value = "/status", method = RequestMethod.GET)
-	public String status() {
-		return "/admin/apartment/status";
-	}
-//	// 6.23 房态 end
-	
-	
-	
-	@RequestMapping(value = "/get", method = RequestMethod.POST)
-	public @ResponseBody ArrayList<Object> getRoomComments(Long roomId){
-		ArrayList<Object> list = new ArrayList<Object>();
-		List<Comment> comment = commentService.getCommentsByRoom(roomId);
-		for(Comment comment1:comment){
-			Customer customer = customerService.getCustomer(comment1.getFromWho());
-			CustomerDetails f = customer.getDetails();
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("tel", customer.getTel());
-			map.put("comment", comment1);
-			map.put("Avatar", f.getAvatar());
-			list.add(map);
-		}
-		return list;
-	}
-	
 	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardPage() {
@@ -243,7 +228,28 @@ public class AdminController {
 		request.getSession().setAttribute("c", customerService.getCustomer(id));
 		return "/admin/customer/details";
 	}
-	
+//	@RequestMapping(value = "Vacancy")
+//	public Message addVacancy( long id ,long data ,long apartmentId,int state){
+//		Vacancy vacancy = vacancyService.getVacancy(apartmentId, data);
+//		try{
+//		if(vacancy!=null){
+//			vacancy.setState(state);
+//			vacancyService.update(vacancy);
+//		}else{
+//			Vacancy vacancy1 = new Vacancy();
+//			vacancy1.setApartmentId(apartmentId);
+//			vacancy1.setData(data);
+//			vacancy1.setState(state);
+//			vacancyService.add(vacancy1);
+//		}
+//	} catch (Exception e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//		return new Message(Constants.MESSAGE_ERR_CODE, "设置失败");
+//		}
+//		return new Message(Constants.MESSAGE_SUCCESS_CODE, "设置成功");
+//	}
+//	
 	public String login(User user) {
 		User u = userService.getUser(user.getUsername(), user.getPassword());
 		if (null == u)
@@ -341,6 +347,28 @@ public class AdminController {
 		   list.add(map.get(key));
 		  }
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+	}
+	
+	@RequestMapping(value = "/house", method = RequestMethod.POST)
+	public @ResponseBody Message addHouse(Long data ,Long apartmentId,int state){
+		House house = houseService.getHouse(apartmentId, data);
+		try{
+		if(house!=null){
+			house.setState(state);
+			houseService.update(house);
+		}else{
+			House house1 = new House();
+			house1.setApartmentId(apartmentId);
+			house1.setDate(data);
+			house1.setState(state);
+			houseService.add(house1);
+		}
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "设置失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "设置成功");
 	}
 	private long dateToLong(Date date) {
 		// TODO Auto-generated method stub

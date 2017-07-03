@@ -40,9 +40,10 @@ $(document).ready(function(){
 
     });
     }
-   $("#Credit").click(function(){
-   	 window.location.href='integral.html'
-   });
+    // 积分
+//   $("#Credit").click(function(){
+//   	 window.location.href='integral.html'
+//   });
    
 
 
@@ -52,8 +53,10 @@ $(document).ready(function(){
             fnBase.myalert('正在开发,敬请期待')
         }
     );
+    // 托管
     $("#zanwu3").click(function(){
-    	window.location.href="platform.html"
+    	fnBase.myalert('正在开发,敬请期待')
+//    	window.location.href="platform.html"
     })
     
     $(".per-order-status ol dd").live('click',function(){
