@@ -325,6 +325,8 @@ public class OrderController {
 		return new Message(Constants.MESSAGE_ERR_CODE, "获取失败");
 	}
 
+	
+	
 	/**
 	 * 跳转到订单评价页面
 	 * 
@@ -363,7 +365,6 @@ public class OrderController {
 			comment.setPics(StringSplitUtil.buildStrGroup(pics));
 			comment.setTime(new Date().getTime());
 			comment.setHasRead(false);
-
 			Order o = orderservice.get(orderId);
 			comment.setEntryTime(o.getStartTime());
 
@@ -400,6 +401,7 @@ public class OrderController {
 		return "/customer/success";
 	}
 
+	
 
 	@RequestMapping(value = "/msg", method = RequestMethod.GET)
 	public String msg(int msg) {

@@ -2,7 +2,6 @@ package com.xfhotel.hotel.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +21,7 @@ import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
@@ -29,6 +29,7 @@ import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.HouseService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
@@ -58,6 +59,10 @@ public class AdminController {
 	BlogService blogService;
 	@Autowired
 	CleanService cleanService;
+	@Autowired
+	HouseService houseService;
+//	@Autowired
+//	VacancyService vacancyService;
 	
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -206,7 +211,28 @@ public class AdminController {
 		request.getSession().setAttribute("c", customerService.getCustomer(id));
 		return "/admin/customer/details";
 	}
-	
+//	@RequestMapping(value = "Vacancy")
+//	public Message addVacancy( long id ,long data ,long apartmentId,int state){
+//		Vacancy vacancy = vacancyService.getVacancy(apartmentId, data);
+//		try{
+//		if(vacancy!=null){
+//			vacancy.setState(state);
+//			vacancyService.update(vacancy);
+//		}else{
+//			Vacancy vacancy1 = new Vacancy();
+//			vacancy1.setApartmentId(apartmentId);
+//			vacancy1.setData(data);
+//			vacancy1.setState(state);
+//			vacancyService.add(vacancy1);
+//		}
+//	} catch (Exception e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//		return new Message(Constants.MESSAGE_ERR_CODE, "设置失败");
+//		}
+//		return new Message(Constants.MESSAGE_SUCCESS_CODE, "设置成功");
+//	}
+//	
 	public String login(User user) {
 		User u = userService.getUser(user.getUsername(), user.getPassword());
 		if (null == u)
@@ -304,6 +330,28 @@ public class AdminController {
 		   list.add(map.get(key));
 		  }
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+	}
+	
+	@RequestMapping(value = "/house", method = RequestMethod.GET)
+	public @ResponseBody Message addHouse(Long data ,Long apartmentId,int state){
+		House house = houseService.getHouse(apartmentId, data);
+		try{
+		if(house!=null){
+			house.setState(state);
+			houseService.update(house);
+		}else{
+			House house1 = new House();
+			house1.setApartmentId(apartmentId);
+			house1.setDate(data);
+			house1.setState(state);
+			houseService.add(house1);
+		}
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "设置失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "设置成功");
 	}
 	private long dateToLong(Date date) {
 		// TODO Auto-generated method stub

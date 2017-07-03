@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.SearchForm;
@@ -27,6 +28,8 @@ public interface ApartmentService extends BaseService<Apartment, Long> {
 			String pei_tao,String pei_tao_class, String zou_bian,String zou_bian_class, String qi_ta, String qi_ta_class,String pic1, String[] pic2, String[] pic3, String lei_xing,
 			String jia_ge);
 
+	public List<House> getSpHouse(Long start, Long end, Long id);
+	
 	public JSONArray getHomeApartments();
 	
 	public JSONArray getHomeApartments1();
@@ -36,7 +39,7 @@ public interface ApartmentService extends BaseService<Apartment, Long> {
 	public JSONArray get2MonthPrices(Long id, String startDate);
 
 	public JSONArray get7DaysPrices(Long id, String startDate);
-
+	
 	public List<Price> getSpPrices(Long start, Long end, Long id);
 
 	public Price getSpPrice(Long id, Long date);

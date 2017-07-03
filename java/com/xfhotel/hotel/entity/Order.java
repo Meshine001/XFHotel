@@ -35,7 +35,6 @@ public class Order {
 	public final static String PAY_PLATFORM_WECHAT_JSAPI = "微信公共号";
 	public final static String PAY_PLATFORM_ALIPAY = "支付宝";
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -70,6 +69,8 @@ public class Order {
 		this.payNo = payNo;
 	}
 
+	
+	
 	public void setPayPlatform(String payPlatform) {
 		this.payPlatform = payPlatform;
 	}
@@ -246,7 +247,7 @@ public class Order {
 
 	public String getOtherCusIdCard() {
 		return otherCusIdCard;
-	}
+		}
 
 	public void setOtherCusIdCard(String otherCusIdCard) {
 		this.otherCusIdCard = otherCusIdCard;
