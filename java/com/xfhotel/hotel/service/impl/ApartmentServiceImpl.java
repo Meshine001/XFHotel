@@ -231,6 +231,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 			}
 			for(House h :house){
 				Long tt = d.getTime() + 1000 * 60 * 60 * 12;
+//				System.out.println(tt);
 //				System.out.println(tt+"d"+h.getDate());
 //				Date date = new Date(tt);  
 //				SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
