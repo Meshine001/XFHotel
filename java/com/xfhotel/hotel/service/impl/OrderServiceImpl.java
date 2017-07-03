@@ -275,6 +275,7 @@ public class OrderServiceImpl implements OrderService {
 			String[] otherCusName, String[] otherCusIdCard, String cusIdCard, String personal, String startTime,
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
 			String apartmentType,Long counponId) {
+	
 		if(null != counponId){
 			Coupon coupon =couponService.getCoupon2(counponId);
 			boolean isUsed = true;
@@ -296,8 +297,16 @@ public class OrderServiceImpl implements OrderService {
 		o.setOtherCusName(StringSplitUtil.buildStrGroup(otherCusName));
 		o.setOtherCusIdCard(StringSplitUtil.buildStrGroup(otherCusIdCard));
 		try {
-			o.setStartTime(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
+//			System.out.println(DateUtil.parse(startTime + " 14:00", "yyyy-MM-dd HH:mm").getTime());
+			o.setStartTime(DateUtil.parse(startTime + " 14:00", "yyyy-MM-dd HH:mm").getTime());
 			o.setEndTime(DateUtil.parse(endTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
+//			System.out.println(DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime());
+//			System.out.println(DateUtil.parse(endTime+ " 12:00", "yyyy-MM-dd HH:mm").getTime());
+//			long i = DateUtil.parse(startTime + " 14:00", "yyyy-MM-dd HH:mm").getTime();
+//			long d = DateUtil.parse(endTime+ " 12:00", "yyyy-MM-dd HH:mm").getTime();
+//			SimpleDateFormat sdf= new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");  
+//			 System.out.println(sdf.format(new Date(i)));
+//			 System.out.println(sdf.format(new Date(d)));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

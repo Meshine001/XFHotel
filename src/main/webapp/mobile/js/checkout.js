@@ -12,8 +12,13 @@ $(document).ready(function(){
            success:function(data){
                console.log(data);
                if(data.statusCode==1){
-                   fnBase.myalert(data.content);
-                   window.location.href = 'myorder.html?id=' + decodeURIComponent(fnBase.request("id"));
+                   setTimeout(function(){
+                	   fnBase.myalert('退房成功、押金在24小时内退还到你的账号上。')
+                	   window.location.href = 'myorder.html?id=' + decodeURIComponent(fnBase.request("id"));
+                   },2000)
+                   
+               }else{
+            	   fnBase.myalert(data.content);
                }
            }
        })

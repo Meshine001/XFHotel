@@ -18,7 +18,7 @@
 .order_info .h_date li .doubledate{width: 100%;color: orange}
 .order_info .h_date li:nth-child(even){border-left: 0;padding-left: 0}
 .order_info .o_pay{height: 0.4rem;line-height: 0.4rem;font-size: 0.14rem;text-align: left;padding-left: 0.1rem}
-.order_info .o_pay .money{font-size: 0.18rem;color:orangered}
+.order_info .o_pay .money{font-size: 0.18rem;color:orangered;font-weight: 100;}
 .order_info .roomTime .date{float: right}
 
 

@@ -33,6 +33,7 @@ html,body{background: #fff}
     height: 0.75rem;
     float: left;
     margin-left: 0.1rem;
+    line-height: 0.23rem;
 }
 .vip_info .tit{
 	position: absolute;
@@ -177,3 +178,10 @@ html,body{background: #fff}
     text-align: right;
     padding-right: 0.1rem;
     color: #666666}
+    
+    
+/*信用积分*/
+#Credit{
+	cursor: pointer;    
+}        
+    

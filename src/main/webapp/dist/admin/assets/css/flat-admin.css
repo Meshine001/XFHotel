@@ -8617,3 +8617,14 @@ a:hover{text-decoration: none;}
 	}
 }
 #mymassage{width:100%;min-height:200px;padding:12px;resize:none;border:1px solid #ddd}
+
+/*房态*/
+.form-group{clear:both}
+.status-house{padding: 20px 15px;margin-bottom: 10px;}
+.status-house a{
+	font-size:16px;
+	padding:6px;
+	border:1px solid #ddd;
+	color:#ddd;
+}
+.status-house a.hat{color:#fff;background: #29c75f;}

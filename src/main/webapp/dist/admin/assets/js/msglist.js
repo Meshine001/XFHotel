@@ -41,7 +41,7 @@ var ID=window.sessionStorage.getItem('roomId');
 				for(var i=1;i<data.length;i++){
 					var str;
 								
-				   str+='<tr msgid="'+data[i].comment.id+'"><td class="name">'+data[i].tel+'</td><td>'+data[i].comment.entryTime+'</td><td style="max-width:400px;min-width:280px">'+data[i].comment.feel+'</td><td>'+data[i].comment.score[1]+'</td><th><a href="javascript:;" class="btn reply">回复</a><br><a href="javascript:;" class="btn removes" >删除</a></th></tr>'
+				   str+='<tr msgid="'+data[i].comment.id+'"><td class="name">'+data[i].tel+'</td><td>'+data[i].comment.time+'</td><td style="max-width:400px;min-width:280px">'+data[i].comment.feel+'</td><td>'+data[i].comment.score[1]+'</td><th><a href="javascript:;" class="btn reply">回复</a><br><a href="javascript:;" class="btn removes" >删除</a></th></tr>'
 				
 				}
 				$("#list").append(str);
@@ -53,32 +53,34 @@ var ID=window.sessionStorage.getItem('roomId');
 			}
 		});
 	};
-	
+	var _this='';
 	// 删除评论
 	$("#list").on('click','tr th .removes',function(){
-		var thisID=$(this).parent().parent().attr('msgid');
+		_this=$(this).parent().parent().attr('msgid');
 		$(this).parent().parent().remove();
-//		$.ajax({
-//			type : 'get',
-//			dataType : 'json',
-//			url:'/comment/get',
-//			data : {
-//				'id' : thisID
-//			},
-//			error:function(e){
-//				alert('数据请求失败')
-//			},
-//			success:function(data){
-//				console.log(data)
-//				$(this).parent().parent().remove();
-//			}
-//		})
+		$.ajax({
+			type : 'post',
+			dataType : 'json',
+			url:'/comment/deleteComment',
+			data : {
+				'id' : _this
+			},
+			error:function(e){
+				alert('数据请求失败')
+			},
+			success:function(data){
+				console.log(data)
+				
+			}
+		})
 	})
 
 //	回复评论 begin
 	$("#list").on('click','tr th .reply',function(){
+		_this=$(this).parent().parent().attr('msgid');
 		$("#masking").show();
-		$(".myalert").addClass('ace')
+		$(".myalert").addClass('ace');
+		$("#mymassage").val('');
 	})
 	
 	$(".myalert .close").click(function(){
@@ -87,23 +89,28 @@ var ID=window.sessionStorage.getItem('roomId');
 		$(".myalert").removeClass('ace');
 	})
 	$(".myalert .verify").click(function(){
-		var thisID=$(this).parent().parent().attr('msgid');
+			if($("#mymassage").val()==""){
+				$("#masking").hide();
+				$(".myalert").removeClass('ace');
+				return
+			}
+		
 			$.ajax({
-			type : 'post',
+			type : 'POST',
 			dataType : 'json',
 			url:'/comment/reply',
 			data : {
 				'reply' : $("#mymassage").val(),
-				'id':thisID
+				'id':_this
 			},
 			error:function(e){
 				alert('回复失败')
 			},
 			success:function(data){
 				console.log(data)
-				alert('回复成功')
 				$(".myalert").removeClass('ace');
 				$("#masking").hide();
+				alert('回复成功')
 			}
 		})
 	})

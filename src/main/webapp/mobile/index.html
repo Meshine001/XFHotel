@@ -4,19 +4,21 @@
     <!-- 图标库参考http://chuangzaoshi.com/icon/-->
     <meta charset="UTF-8">
     <title>青舍都市公寓</title>
-    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
-    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+	<link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/swiper-3.3.1.min.css" />
     <link rel="stylesheet" href="iconcaomei/style.css" />
-    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
     <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
     <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
     <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/autoZoomLoadImage.js"></script>
-    <script charset="gb2312" language="javascript" type="text/javascript" src="js/index.js"></script>
+    <script charset="gb2312" language="javascript" type="text/javascript" src="js/index.js"></script> 
     <script charset="gb2312" language="javascript"   type="text/javascript" src="js/fastclick.js"></script>
+	<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/iscroll.js"></script>
     <style>
         .swiper-container { width: 3.75rem; height: 2.1rem; }
         .swiper-container .swiper-slide{ width: 3.75rem; height: 2.1rem; }
@@ -31,6 +33,9 @@
             margin: 0;
             vertical-align: top;
         }
+		
+		
+
     </style>
 
 
@@ -50,7 +55,11 @@
         </ul>
         <h3 class="_logo"><img src="images/logo1.png"></h3>
     </div>
-    <div class="Masking-out"></div>
+    <div class="Masking-out" style="display: block"></div>
+    <div class="newUser">
+       <img src="img/newp.png">
+       <i>+</i>
+    </div>
 <!--Address-search-->
 
 
@@ -71,47 +80,47 @@
         <!-- 轮播-->
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/auto1.png"/></a></div>
-                <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/auto2.png"/></a></div>
-                <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/auto3.png"/></a></div>
+                <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA11.png"/></a></div>
+                <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA2.png"/></a></div>
+                <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA3.png"/></a></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
+		
         <!--主页内容 酒店型公寓 | 短租型公寓 | 在线找房 | 青客生活 -->
-        <div class="hot-issue">
-            <a href="houseType.html">
-                <div class="img-wrapper"><img src="images/jd.png"></div>
-                <div style="color: #4d4d4d;">酒店型公寓</div>
-            </a>
-            <a href="map.html">
-                <div class="img-wrapper"><img src="images/jd2.png"></div>
-                <div style="color: #4d4d4d;">地图找房</div>
-            </a>
-            <a href="serve.html" id="_fw">
-                <div class="img-wrapper"><img src="images/jd5.png" style="height: 0.41rem"></div>
-                <div style="color: #4d4d4d;">服务中心</div>
-            </a>
-            <a href="Lifelist.html">
-                <div class="img-wrapper"><img src="images/jd3.png"></div>
-                <div style="color: #4d4d4d;">青客生活</div>
-            </a>
-        </div>
+		
+			<div id="proSort">
+				<div class="fancybox"> 
+					<div class="actionoce hot-issue">
+						<a href="houseType.html">
+			                <div class="img-wrapper"><img src="images/jd.png"></div>
+			                <div style="color: #4d4d4d;">我要找房</div>
+            			</a>
+			            <a href="map.html">
+			                <div class="img-wrapper"><img src="images/jd2.png"></div>
+			                <div style="color: #4d4d4d;">地图找房</div>
+			            </a>
+			            <a href="serve.html" id="_fw">
+			                <div class="img-wrapper"><img src="images/jd5.png" style="height: 0.41rem"></div>
+			                <div style="color: #4d4d4d;">服务中心</div>
+			            </a>
+			           
+			            <a href="Lifelist.html">
+			                <div class="img-wrapper"><img src="images/jd3.png"></div>
+			                <div style="color: #4d4d4d;">青客生活</div>
+			            </a>
+			             <a href="platformInit.html">
+			                <div class="img-wrapper"><img src="images/jd6.png"></div>
+			                <div style="color: #4d4d4d;">房屋托管</div>
+			            </a>
+					</div>
+				</div>
+			</div>
+
         <!-- service-->
         <div class="service plCon">
             <h2 class="title-serce">热门房源<a href="houseType.html">更多</a></h2>
             <ul class="goodlist">
-                <!--+"http://192.168.1.109:8080/hotel/images/"-->
-                <!--<li>-->
-                    <!--<div class="item-room">-->
-                        <!--<a href="javascript:;"class="img-wrapper"><img src="'+data.homeRooms[i].pic3[0]+'"></a>-->
-                        <!--<h1 class="text-ellipsis"><a href="">'+data.homeRooms[i].community+'</a></h1>-->
-                        <!--<h2 class="text-ellipsis">'+data.homeRooms[i].balcony+"-"+data.homeRooms[i].bathroom+"-"+-->
-                            <!--data.homeRooms[i].bedroom+"-"+"-"+data.homeRooms[i].direction+'</h2>-->
-                        <!--<p class="text-ellipsis address">'+data.homeRooms[i].location+data.homeRooms[i].address+'</p>-->
-                        <!--<p class="label-group"><i class="label-type1">'+data.homeRooms[i].apartmenttype+'</i></p>-->
-                        <!--<span class="label-price">'+data.homeRooms[i].dayPrice+'<small>/天</small></span>-->
-                    <!--</div>-->
-                <!--</li>-->
 
             </ul>
             <div id="zanwu"></div>
@@ -126,11 +135,6 @@
 
         </div>
 
-        <!--<div class="service service-image">-->
-            <!--<h2 class="title-serce">青舍生活<a href="">更多</a></h2>-->
-            <!--<a href="+data.info.indexPush[i].url+"><img src="'+data.info.indexPush[i].attach+'"></a>-->
-        <!--</div>-->
-
         <!-- my-footer-->
         <div class="my-footer">
             <p>全国服务热线：029-63018977</p>
@@ -138,7 +142,6 @@
             <p><img src="images/beianbgss.png">青舍都市公寓</p>
         </div>
     </div>
-
 
 </body>
 </html>

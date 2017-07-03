@@ -4,9 +4,11 @@ $(document).ready(function(){
     $(".vip_info #personMan div img").click(function(){
         window.location.href='editprofileinfo.html'
     });
+    
     var _uid=fnBase.huoqu(0,"uid");
     if(_uid==null || _uid=="undefined" || _uid==""){
        $("#nickName,#Credit").hide();
+       $("#_login").show();
     }else{
         $("#_login").hide();
         getmsg();
@@ -18,9 +20,9 @@ $(document).ready(function(){
         console.log(data);
         fnBase.loadHide();
         if(data.details.nick==""||data.details.nick==null){
-            $("#nickName").text(data.details.tel);
+            $("#nickName").html(data.details.tel);
         }else{
-            $("#nickName").text(data.details.nick);
+            $("#nickName").html(data.details.nick);
         }
         if(data.details.avatar==""||data.details.avatar==null){
             $(".vip_info #personMan div img").attr("src",Constant.URL+"/images/face-90x90.png");
@@ -38,16 +40,22 @@ $(document).ready(function(){
 
     });
     }
-
+   $("#Credit").click(function(){
+   	 window.location.href='integral.html'
+   });
+   
 
 
 //  商品配送  餐饮配送 暂时没有做；
-    $("#zanwu1,#zanwu2,#zanwu3").click(
+    $("#zanwu1,#zanwu2").click(
         function(){
             fnBase.myalert('正在开发,敬请期待')
         }
     );
-
+    $("#zanwu3").click(function(){
+    	window.location.href="platform.html"
+    })
+    
     $(".per-order-status ol dd").live('click',function(){
         if($(this).hasClass('_active')==false){
             $(this).addClass('_active')

@@ -89,14 +89,13 @@ html,body{background: #fff}
 	text-align:center;
 	color: #999;
 	background: #eeecec;
-    border-radius: 0.25rem 0 0.25rem 0;
     margin-right: 0.1rem;
     margin-bottom: 0.1rem;
+    border:1px solid #dddddd;
     line-height:0.3rem;
 }
 .per-order-status ol dd._active{
-	background: #343a39;
-    border-radius: 0.25rem 0 0.25rem 0;
+	background:#00b38a;
     color: #eeeae7;
 }
 /*选择房间*/

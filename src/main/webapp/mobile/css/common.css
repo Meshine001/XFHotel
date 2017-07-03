@@ -162,7 +162,7 @@ white-space: nowrap;
 .header-mobile .cell{height: 0.28rem;vertical-align: top;text-align: center;line-height: 0.28rem;position: relative}
 
 .header-mobile .link-home{ width: 0.5rem;}
-.header-mobile .group-search{width: 2.75rem}
+.header-mobile .group-search{width: 2.65rem}
 .header-mobile .link-btn{width: 0.5rem;}
 .header-mobile .cell span{
     color: #fff;
@@ -172,14 +172,18 @@ white-space: nowrap;
     left: 0.15rem;
 }
 .header-mobile .input-search{
-    vertical-align: top;padding: 5px 8px 5px 0.15rem;
-    width: 100%;height: 0.28rem;line-height: 0.28rem;
+    vertical-align: top;
+    padding: 5px 8px 5px 0.3rem;
+    width: 100%;
+    height: 0.28rem;
+    line-height: 0.28rem;
     font-size: 0.14rem;
     background-size: 0.16rem;
     border-radius: 0.14rem;
-    border:1px solid #fff;
+    border: 1px solid #fff;
     color: #fff;
-
+    background: rgba(255, 255, 255, 0.7) url(../images/readys.png) no-repeat 0.08rem center;
+    background-size: 0.18rem;
 }
 .header-mobile .img-btn{width: 0.18rem;margin:auto 0.18rem;vertical-align: middle}
 
@@ -232,6 +236,7 @@ white-space: nowrap;
     bottom: 0;
     left: 0;
     background: url("../images/block50.png");
+    background:rgba(0,0,0,0.75);
     z-index: 1002;
     display: none;
 }

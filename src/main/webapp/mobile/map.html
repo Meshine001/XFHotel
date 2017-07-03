@@ -28,30 +28,65 @@
         .BMap_pop div:nth-child(1){
             border-radius:0.1rem 0 0 0;
         }
-
+		 .BMap_pop div:nth-child(2){
+		    width:300px !important;
+        }
         .BMap_pop div:nth-child(3){
             border-radius:0 0.1rem 0 0;
-            background:#ABABAB;;
+            background:#fff !important;
+            left:320px !important;
         }
         .BMap_pop div:nth-child(3) div{
-            border-radius:0.1rem;
+           border-radius:0 0.1rem 0 0;
+      
         }
+        .BMap_pop div:nth-child(4){
+        	width:343.5px !important;
+        }
+        
         .BMap_pop div:nth-child(5){
             border-radius:0 0 0 0.1rem;
         }
         .BMap_pop div:nth-child(5) div{
-            border-radius:0.1rem;
+           border-radius:0 0 0 0.1rem;
         }
         .BMap_pop div:nth-child(7){
             border-radius:0 0 0.1rem 0 ;
+            width:25px !important;
+            left:320px;
         }
         .BMap_pop div:nth-child(7) div{
-            border-radius:0.1rem ;
+            border-radius:0 0 0.1rem 0 ;
         }
-        .roomId{font-size: 0.15rem;font-weight: bold}
+         .BMap_pop div:nth-child(8){
+                left: 113px !important;
+    			top: 161px !important;
+			    width: 0 !important;
+			    height: 0 !important;
+			    border-left: 25px solid transparent;
+			    border-right: 25px solid transparent;
+			    border-top: 50px solid #fff;
+        }
+         .BMap_pop div:nth-child(9){
+         	width:314px !important;
+         }
+          .BMap_pop div:nth-child(9) table{
+         	width:100%;
+         }
+         .BMap_pop div:nth-child(9) + img{
+         	color:red !important;
+         }
+        .roomId{font-size: 0.15rem;font-weight: bold;}
         .addres{font-size: 0.15rem}
         .roomTime{font-size: 0.15rem}
-        .roomTime a{color:red;text-decoration: none;}
+        .roomTime a{ color: rgb(61, 109, 204);;text-decoration: none;}
+        
+        .roomId,.addres,.roomTime a{
+        	    overflow: hidden;
+			    text-overflow: ellipsis;
+			    white-space: nowrap;
+        }
+        
     </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?ak=m0QLQpDkATE2Q8WR1NPXRarUrWaA2eNi&v=2.0&services=false"></script>
     <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
@@ -75,7 +110,7 @@
         map.addControl(new BMap.ScaleControl());
         map.addControl(new BMap.MapTypeControl());
 
-        var icon = new BMap.Icon("images/storeIco.png",new BMap.Size(100,160));
+        var icon = new BMap.Icon("images/map-marker-marker-outside-chartreuse.png",new BMap.Size(100,100));
         function loadwz(jd,wd,id,addres,time){
 
             var marker = new BMap.Marker(new BMap.Point(jd,wd),{icon:icon});
@@ -84,7 +119,7 @@
             var content = "<table>";
             content = content + "<tr><td><div class='roomId'>"+id+"</div></td></tr>";
             content = content + "<tr><td class='addres'>价格："+addres+"/天</td></tr>";
-            content = content + "<tr><td class='roomTime'><a href='"+time+"'>查看详情</a></td></tr>";
+            content = content + "<tr><td class='roomTime'><a href='"+time+"'>查看详情»</a></td></tr>";
             content += "</table>";
             var infowindow = new BMap.InfoWindow(content);
 //            mouseover

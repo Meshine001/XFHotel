@@ -2,9 +2,20 @@
 .main{margin-bottom: 0.45rem}
 
 
-
-
-
+.pop div:nth-child(4){
+	 width:252px !important;
+}
+.pop div:nth-child(6){
+	 height:25px !important;
+}
+.BMapLabel{
+	background: orange !important;
+    color: #000;
+    padding:4px !important;
+}
+.BMap_Marker{
+	bacground:red !important;
+}
 
 .navbar{
     position: fixed;
@@ -47,7 +58,7 @@
     font-size: 0.16rem;
     color: #000000;
     border-left: 4px solid #ed494a;
-    line-height: 0.2rem;
+    line-height: 0.22rem;
     padding-left: 0.1rem;
     margin: 0.12rem 0 0.1rem 0;
     overflow: hidden;
@@ -56,11 +67,10 @@
 .panel p{
     font-size: 0.14rem;
     margin: 3px 0;
-    color: #878787;
-    /*line-height: 0.23rem;*/
+    color: #484848 !important;
 }
 .panel .info_L24{
-    padding-left: 0.24rem;
+    padding-left: 0.14rem;
 
 }
 .panel .info_L24,.ic_house{
@@ -79,9 +89,18 @@
 }
 
 .label-adders{
-    background: url("../images/laber-adders.png") no-repeat center left 0.24rem;
+    background: url("../images/laber-adders.png") no-repeat center left 0.14rem;
     text-indent: 0.18rem;!important;
 }
+
+.map-minute{
+	line-height: 0.3rem;
+    color: #12b77c !important;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
 .label-price{
     font-size: 0.23rem;
     top: 0.17rem;
@@ -121,17 +140,18 @@
 .panel .appraise{width: 100%;height: auto}
 .panel .appraise li{
     margin: 0.1rem 0;
-    padding: 0.1rem 0rem 0.1rem 0.5rem;
+    padding: 0.1rem 0rem 0.1rem 0.4rem;
     font-size: 0.12rem;
     background-color: #fff;
     border-top: 1px solid #f1eded;
     border-bottom: 1px solid #f1eded;
     display: none;
+    color: #484848 !important;
 }
 .panel .appraise li.showtime{display: block}
 .panel .appraise li .customer .user,.panel .appraise li .customer .time{
-    color: #999;
-    font-size: 0.1rem;
+        color: #484848 !important;
+    font-size: 0.14rem;
 }
 .customer .pic{
     width: 0.32rem;
@@ -142,9 +162,28 @@
     margin-left: -0.42rem;
 }
 .panel .appraise li .text{
-    font-size: 0.12rem;
+    font-size: 0.14rem;
     word-break: break-all;
+    line-height: 0.2rem;
+    padding: 0.035rem 0;
+    color: #484848 !important;
 }
+
+.panel .appraise li .huifu{
+	background: #efefef;
+    padding: 0.03rem 0.08rem;
+    position: relative;
+}
+.panel .appraise li .huifu .sro{
+	width: 0;
+    height: 0;
+    border-left: 0.07rem solid transparent;
+    border-right: 0.07rem solid transparent;
+    border-bottom: 0.07rem solid #efefef;
+    position: absolute;
+    top: -0.06rem;
+}
+
 .commentReplay{margin-top: 0.1rem}
 /*管理员回复查看按钮*/
 .commentReplay .folder-title{
@@ -177,7 +216,7 @@
 .i_inf{width: 100%;height: auto;overflow: hidden}
 .i_inf ul li{width: 50%;float: left;height: 0.3rem;line-height: 0.3rem;}
 .i_inf ul li span{font-size: 0.14rem;color: #878787;line-height: 0.3rem;display: block;float: left;}
-.i_inf .inf_sp{color: #aaa;margin-right: 0.1rem;}
+.i_inf .inf_sp{color: #484848 !important;margin-right: 0.1rem;}
 
 /*deploy ����*/
 .deploy .facility{width:100%;transition: all .3s}
@@ -464,3 +503,51 @@
 .alert-content .hint{clear: both;font-size: 0.16rem;line-height: 0.6rem;padding: 0 0.1rem}
 .alert-content .hint i{padding-right: 0.1rem;font-weight: bold;color: red}
 .alert-content .but-success{width: 66%;height: 0.4rem;color: #FFF;border-radius: 0.2rem;box-shadow: 0 0.025rem 0.1rem #5f0d0d;position: absolute;bottom: 0.2rem;background: #ea644a;left: 50%;margin-left: -33%}
+
+
+.gratis{
+    position: fixed;
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    background: #fff;
+    background:none;
+    border-radius: 0.1rem;
+    z-index: 2000;
+    left: 50%;
+    margin-left: -40%;
+    top: 10%;
+	transition:0.2s;
+	transform: scale(0);
+
+}
+.gratis.scale{
+	transform: scale(1);  
+}
+.gratis .czs-close-l{
+	position: absolute;
+    top:0.13rem;
+    right: -0.2rem;
+    font-size: 0.15rem;
+    color:#fff;
+}
+.gratis .swiper-container{
+	width: 100%;
+    height: 80%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    top:10%;
+    vertical-align: middle !important;
+}
+.gratis .swiper-container .swiper-slide{
+	height:100%;
+	position: relative;
+	
+}
+.gratis .swiper-container .swiper-slide img{
+	width:100%;
+	height:auto !important;
+	position: absolute;
+    vertical-align:middle
+}

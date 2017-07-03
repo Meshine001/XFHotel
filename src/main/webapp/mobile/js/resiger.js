@@ -102,6 +102,7 @@ var resiger={
                     sessionStorage.clear();
                     localStorage.clear();
                     fnBase.keep(0,"uid",data.content);
+                    fnBase.keep(1,"newUser",1);
                     //若还未经过微信授权
                     if(data.wechatOpenId == null || data.wechatOpenId == undefined){
                     	var redirect = 'https://open.weixin.qq.com/connect/oauth2/authorize?'+

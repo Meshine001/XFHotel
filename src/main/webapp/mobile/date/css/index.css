@@ -4,6 +4,8 @@ body,html {
   font-size:0.14rem;
 }
 
+
+
 .container  ul{
   margin: 0;
   padding: 0;
@@ -28,14 +30,14 @@ body,html {
 }
 
 .date {
-  position:fixed;
+  position:absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
   background: #fff;
   z-index: 10000;
-  overflow:auto;
+  overflow:scroll;
   overflow-x: hidden;
   text-align: center;
   -webkit-overflow-scrolling: touch;

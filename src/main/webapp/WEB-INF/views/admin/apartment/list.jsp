@@ -74,6 +74,11 @@
 								<!-- 房客留言操作begin -->	
 									<br><a href="<%=basePath%>/admin/leavemsglist" class="btn evalpinglun">查看评论</a>
 								<!-- 房客留言操作end -->	
+								
+								<!-- 房态修改begin -->	
+									<br><a href="<%=basePath%>/admin/status" class="btn houseStatus">房态设置</a>
+								<!-- 房态修改end -->	
+								
 								</th>
 							</tr>
 						</c:forEach>
@@ -87,10 +92,11 @@
 	<my_script>
 		
 	    <script>
-	    $("#h-table").on('click','tr .evalpinglun',function(){
+	    $("#h-table").on('click','tr .evalpinglun,tr .houseStatus',function(){
 			var roomid=$(this).parent().parent().attr('roomid');
 			window.sessionStorage.setItem('roomId',roomid);
 		})
+		
 	    </script>
 	</my_script>
 </body>

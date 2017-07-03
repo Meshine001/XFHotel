@@ -13,6 +13,16 @@
 
     });
     $(".navbar a").click(function(){
+    	if(uname==''){
+    		fnBase.myalert('请填写手机号码')
+    		return
+    	}
+  
+    	if($("#comment").val()==''){
+    		fnBase.myalert('请留言后再提交')
+    		return
+    	}
+    	
         var arr=[num,5,5,5,5,5];
         var oplist=arr.join(',');
         var _orderID=fnBase.request('orderId');
@@ -28,7 +38,7 @@
             "from":_uid,
             "to":0
         };
-
+     
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             if(data.statusCode=="1"){

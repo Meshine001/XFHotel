@@ -2,8 +2,19 @@
     scrollNav();
     getData();
     alertSearch.info();
-
-
+    
+    if(fnBase.huoqu(0, "newUser")==1){
+    	$(".Masking-out,.newUser").show();
+    }
+    $(".newUser i").click(function(){
+    	$(".Masking-out,.newUser").hide();
+    })
+    
+//    横向滚动begin
+    var myScroll;
+	 myScroll = new IScroll('#proSort', { eventPassthrough: true, scrollX: true, scrollY: false, preventDefault: false });
+    myScroll.refresh(); 
+//  横向滚动end
 
     $('.header-mobile .input-search').focus(function () {
         fnBase.keep(1, "mode", 0);

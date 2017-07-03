@@ -261,7 +261,6 @@ public class WechatController {
 			}
 			
 			orderService.update(order);
-			
 			return response;
 		}else{
 			response = new JSONObject();

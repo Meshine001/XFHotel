@@ -9,7 +9,6 @@ public class Constants {
 	public static final String ADMIN_SESSION_ATTR = "admin-session";
 	public static final String CUSTOMER_SESSION_ATTR = "c";
 	
-	
 	public static final String DEFAULT_AVATAR = "avatar_default.jpg";
 	
 	public static final String PAGE = "page";
@@ -62,5 +61,4 @@ public class Constants {
 	public static final String ALIPAY_PARTNER = "";
 	//微信订单描述
 	public static final String WECAT_ORDER_BODY = "青舍都市-房间预订";
-	
 }

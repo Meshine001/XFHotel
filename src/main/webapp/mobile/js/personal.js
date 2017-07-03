@@ -38,6 +38,10 @@ $(document).ready(function(){
 
     });
 
+	$("#Credit").click(function(){
+	   	 window.location.href='integral.html'
+	});
+    
 
 //  商品配送  餐饮配送 暂时没有做；
     $("#zanwu1,#zanwu2,#zanwu3").click(

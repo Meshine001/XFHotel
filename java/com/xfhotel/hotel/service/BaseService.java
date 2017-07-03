@@ -2,6 +2,7 @@ package com.xfhotel.hotel.service;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public interface BaseService<T, ID extends Serializable>{
 	public abstract T findById(ID id);

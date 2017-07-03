@@ -1,10 +1,7 @@
 package com.xfhotel.hotel.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Price;
@@ -45,12 +42,12 @@ public interface ApartmentService extends BaseService<Apartment, Long> {
 	public Price getSpPrice(Long id, Long date);
 
 	public void setSpPrice(Price price);
-
+	
 	public List<Apartment> sort(List<Apartment> list, SearchForm searchData);
 
 	PageResults<JSONObject> getApartmentPage(List<Apartment> list, int currentPage);
 	// public JSONObject search(String content,Apartment apartment);
-	//
+	
 	// public List findApartment(String content, Apartment apartment);
 
 	// public PageResults<Map> getPage(int page);
@@ -60,5 +57,6 @@ public interface ApartmentService extends BaseService<Apartment, Long> {
 	public JSONObject createOrderMoudle(String startTime, String endTime, Long apartmentId);
 	
 	public Apartment modify(Apartment c, long id);
+	
 	
 }
