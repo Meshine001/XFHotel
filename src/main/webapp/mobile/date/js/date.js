@@ -5,7 +5,8 @@
 var date = function ($) {
 
   $.fn.hotelDate = function (options) {
-
+	  
+	
 
     var nowdate = new Date(); // 获取当前时间
     var dateArr = new Array(); // 获取到的时间数据集合
@@ -23,13 +24,16 @@ var date = function ($) {
       });
       // 主容器模板
       var dateTemplate = '\n        <div class =\'date container c-gray\'>\n          <h4 class="tac bold" >\u8BF7\u9009\u62E9<span class=\'c-blue\'>\u5165\u4F4F</span>\u548C<span class=\'c-red\'>\u79BB\u5F00</span>\u65F6\u95F4</h4>\n          <div class=\'close-btn\'>\u786E\u5B9A</div>\n        </div>      \n      ';
-
+      setTimeout(function(){$(".date").show()},1000);
       $('body').append(dateTemplate); // 向body添加插件
-
+      $("#Myscroll-body,.header").hide();  
+      
       // action容器模板
       dateArr.forEach(function (item, index) {
         var template = '\n          <div class=\'action mt10\'>\n            <div class=\'title tac c-blue\'><div class="y">' + item.getFullYear() + '</div>\u5E74<div class="m">' + (item.getMonth() + 1) + '</div>\u6708</div>\n            <ul class=\'week border-bottom\'><li>\u65E5</li><li>\u4E00</li><li>\u4E8C</li><li>\u4E09</li><li>\u56DB</li><li>\u4E94</li><li>\u516D</li></ul>\n            <ul class=\'day f-small\'></ul>\n          </div>        \n        ';
         $('.date').append(template);
+        $("#Myscroll-body,.header").show();  
+        $("#Myscroll-body,.header").hide(); 
       });
 
       getPrice();
@@ -159,6 +163,8 @@ var date = function ($) {
         $('.input-leave').val(leaveYear + '-' + leaveTime);
         $('.night').text('共' + night + '晚');
 
+        
+        
         //判断有房没房
         var _id = decodeURIComponent(fnBase.request("id"));
         var checkIn= $(".input-enter").val();
@@ -179,11 +185,37 @@ var date = function ($) {
             }else{
               $(".alert-content .but-success").click();
               $('.date').remove(); // 移除插件
+              msgdata()
             }
           })
         }
       });
 
+      function msgdata(){
+    	  var _uid = fnBase.huoqu(0, "uid");
+          if (_uid == null || _uid == "undefined" || _uid == "") {
+              window.location.href = "login.html";
+              return;
+          }
+          var checkIn= $(".input-enter").val();
+          var leave= $(".input-leave").val();
+
+          var _id = decodeURIComponent(fnBase.request("id"));
+          var frontURL=Constant.URL+'/mobile/module';
+          var postData={"startTime":checkIn,"endTime":leave,"apartmentId":_id};
+          fnBase.commonAjax(frontURL,postData,function(data){
+              console.log(data);
+              fnBase.keep(1,'startTime',data.oStart);
+              fnBase.keep(1,'endTime',data.oEnd);
+              fnBase.keep(1,'oTotalDay',data.oTotalDay);
+              fnBase.keep(1,'oTotalPrice',data.oTotalPrice);
+              fnBase.keep(1,"YJpic",data.oCashPledge);
+  			  fnBase.keep(1,"_price",data.price);
+ 			window.location.href="order.html?id="+encodeURIComponent(_id);
+          })
+      }
+      
+      
       var num = 0;
       // 时间选择
       $('.day').on('click','li', function () {

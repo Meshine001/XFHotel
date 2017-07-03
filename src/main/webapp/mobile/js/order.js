@@ -117,8 +117,10 @@ function addpartenr(){
 	var _getYHJprice=fnBase.huoqu(1,"_price");
     $(".order_info .roomName").text(_community);
     $(".order_info .roomTime").html(_startTime+"入住"+_endTime+"离开"+"<i class='date'>共（"+_oTotalDay+"）天</i>");
-    $(".order_info .roompYJ").html("押金:<span style='color: #666'>"+_YJpic+"</span>");
-    $(".order_info .roompPic").html("订单总额:<span class='money'>￥"+Number(_oTotalPrice).toFixed(2)+"</span><a>优惠劵</a>");
+    $(".order_info .roompDJ .money").text(_price+"元");
+    $(".order_info .roompYJ .money").text(_YJpic+"元");
+    
+    $(".order_info .roompPic").html("订单总额:<span class='money'>"+Number(_oTotalPrice).toFixed(0)+"元</span><a>优惠劵</a>");
     
     $("#needpic i").click(function(){
        if($(this).hasClass('active')==true){
@@ -188,10 +190,14 @@ function addpartenr(){
         }
         if(couponid==""){
             couponid=0;
+            $(".order_info .roompYHJ .money").text(couponid+"元");
+        }else{
+        	$(".order_info .roompYHJ .money").text("-"+couponid+"元");
         }
+        $(".order_info .roompYHJ").show();
         used=_oTotalPrice-couponid;
         used=Number(used).toFixed(0);
-        $(".order_info .o_pay .money").html("￥"+used);
+        $(".order_info .roompPic .money").html(used+"元");
         return yhjid;
     });
 
@@ -223,6 +229,17 @@ function addpartenr(){
         });
 
     }
+    
+ // 免押金说明
+    $("#masking").hide();
+	$(".order_info .roompYJ .free").click(function(){	
+		 $(".gratis").addClass('scale');
+		 $("#masking").show();
+	});
+	$(".gratis h1 span").click(function(){
+		 $(".gratis").removeClass('scale');
+		 $("#masking").hide();		
+    });	
 
     //    提交订单
     $(".navbar a").click(function(){

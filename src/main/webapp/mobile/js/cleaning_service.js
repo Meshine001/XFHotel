@@ -1,4 +1,7 @@
 ﻿$(document).ready(function(){
+	
+
+	
     var _uid=fnBase.huoqu(0,"uid");
     if(_uid==null || _uid=="undefined" || _uid==""){
         window.location.href="login.html";

@@ -82,9 +82,9 @@ function list(page) {
 								value.consumptionTimes);
 						var td_details = $('<td></td>').append(
 								getStatus(value.status));
-						var a_detail = $('<a></a>').append('查看详情');
+						var a_detail = $('<a class="btn"></a>').append('查看详情');
 						a_detail.attr('href', './view_customer?id='+value.id);
-						var a_op = $('<a></a>').append(getOp(value.status));
+						var a_op = $('<a class="btn"></a>').append(getOp(value.status));
 						a_op.attr('onclick',
 										'change(' + value.id + ','
 												+ value.status +','

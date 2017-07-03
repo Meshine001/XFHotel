@@ -30,7 +30,7 @@ $(document).ready(function(){
             $(".swiper-container .swiper-wrapper").append(lunbo_str);
             var mySwiper = new Swiper ('.swiper-container',{
                 loop: true,
-                autoplay: 1800,
+                autoplay: 3000,
                 pagination: '.swiper-pagination',
                 autoplayDisableOnInteraction: false
             });
@@ -123,8 +123,9 @@ $(document).ready(function(){
             //    房源描述
             $(".describe #serviceIntro2").text(data.description);
             //    户型图
-//            $(".describe .hu_xing_tu img").attr('src',Constant.URL+'/images/'+data.hu_xing_tu);
 
+            $(".hu_xing_tu div:nth-child(1)").css('border','none')
+            
         // 房屋位置；
             //创建和初始化地图函数：
             function initMap(){
@@ -223,10 +224,13 @@ $(document).ready(function(){
             }
             //创建一个Icon
             function createIcon(json){
-                var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+        
+                var icon = new BMap.Icon("images/6f0c8a0667355b02db381735725d2044.gif",new BMap.Size(15,15));
                 return icon;
+                
             }
 
+            
             initMap();//创建和初始化地图
 		}
 
@@ -239,6 +243,7 @@ $(document).ready(function(){
     console.log(postData);
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
+        
         $(".criticism .ic_house em").text("("+data.length+"条评论"+")");
         if(data.length>0){
 
@@ -246,10 +251,12 @@ $(document).ready(function(){
             $("#pingjia").text("暂无评论");
             $(".panel .button-orange").hide();
         }
-
             $(".criticism ul").html("");
             var plStr = '';
             for(var i=0;i<data.length;i++){
+            	if(data.length<=1){
+            		$(".button-orange").hide();
+            	}
                 //电话号码****代替
                 var str=data[i].tel;
                 var str2 = str.substr(0,3)+"****"+str.substr(7);
@@ -259,64 +266,60 @@ $(document).ready(function(){
                 var year = da.getFullYear()+'年';
                 var month = da.getMonth()+1+'月';
                 var date = da.getDate()+'日';
-                var dates=year+month+date;
+                var dates=year+month;
                 var _date=new Array();
                 for(var u=0;u<dates.length;u++){
                     _date.push(dates)
                 }
-                plStr+='<li><div class="customer"><img src="'+Constant.URL+'/images/'+data[i].Avatar+'" class="pic"><p class="user">【'+str2+'】<span>'+data[i].comment.score[0]+'分</span></p><p class="time">'+_date[i]+' 点评</p></div><p class="text">'+data[i].comment.feel+'</p>';
+                plStr+='<li>';
+          
+                if(data[i].Avatar==''){
+                	plStr+='<div class="customer"><img src="/images/face-90x90.png" class="pic"><p class="user">用户：'+str2+'<span style="float:right">评价：'+data[i].comment.score[0]+'分</span></p><p class="time">'+_date[i]+' 入住</p></div>'
+                }else{
+                	plStr+='<div class="customer"><img src="'+Constant.URL+'/images/'+data[i].Avatar+'" class="pic"><p class="user">用户：'+str2+'<span style="float:right">评价：'+data[i].comment.score[0]+'分</span></p><p class="time">'+_date[i]+' 入住</p></div>'
+                }
+                plStr+='<p class="text">'+data[i].comment.feel+'</p>';
+                if(data[i].comment.reply != null){
+            	   plStr+='<div class="huifu"><span class="sro"></span><p style="font-size:0.14rem;line-height: 0.2rem;color:#484848"><i style="color:#000;">管家回复：</i>'+data[i].comment.reply+'</p></div>'
+               }
+              
                 plStr+='</li>';
 
             }
+        
             $(".criticism ul").append(plStr);
+            
+            
         $(".criticism ul li").eq(0).addClass('showtime');
 
     });
    // 查看全部点评
     $("#commentsInfo").toggle(function(){
-        $(".criticism ul li").addClass('showtime')
+        $(".criticism ul li").addClass('showtime');
+        $(this).text('收起')
     },function(){
         $(".criticism ul li").removeClass('showtime');
         $(".criticism ul li").eq(0).addClass('showtime');
-    });
+        $(this).text('全部')
+    });  
 
-   //  立即预约
-    $(".navbar a").live('click',function(){
-        $(".select-time").click();
-    });
+    $(".swiper-container .videovr").click(function(){
+    	fnBase.myalert('正在开发中...')
+    })
+    
+    
+    
 
-//  选好日期进行下一步操作：
-    $(".alert-content .but-success").click(function(){
-        var _uid = fnBase.huoqu(0, "uid");
-        if (_uid == null || _uid == "undefined" || _uid == "") {
-            window.location.href = "login.html";
-            return;
-        }
-        $("#masking").hide(10,function(){
-            $(".alert-content").animate({bottom:'-3.7rem'},300);
-        });
-        var checkIn= $(".input-enter").val();
-        var leave= $(".input-leave").val();
-
-        var _id = decodeURIComponent(fnBase.request("id"));
-        var frontURL=Constant.URL+'/mobile/module';
-        var postData={"startTime":checkIn,"endTime":leave,"apartmentId":_id};
-        fnBase.commonAjax(frontURL,postData,function(data){
-            console.log(data);
-            fnBase.keep(1,'startTime',data.oStart);
-            fnBase.keep(1,'endTime',data.oEnd);
-            fnBase.keep(1,'oTotalDay',data.oTotalDay);
-            fnBase.keep(1,'oTotalPrice',data.oTotalPrice);
-            fnBase.keep(1,"YJpic",data.oCashPledge);
-			fnBase.keep(1,"_price",data.price);
-			window.location.href="order.html?id="+encodeURIComponent(_id);
-        })
-    });
-    //Click anywhere to close #masking;
-    $("#masking").click(function(){
-        $(this).hide(10,function(){
-            $(".alert-content").animate({bottom:'-3.7rem'},300);
-        });
-    });
-
+    // 全屏大图轮播显示
+    $(".swiper-container").on('click','.swiper-slide',function(){
+    	$("#masking").show();
+    	$(".gratis").addClass('scale');
+    	
+    })
+    
+    $(".gratis .czs-close-l").click(function(){
+    	$(".gratis").removeClass('scale')
+    	$("#masking").hide();
+    })
+    
 });

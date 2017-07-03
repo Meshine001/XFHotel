@@ -312,9 +312,9 @@ public class MobileController  {
 	
 	@RequestMapping(value = "/checkAvailable", method = RequestMethod.POST)
 	public @ResponseBody Message checkAvailable(Long roomId, String startTime, String endTime) {
-//		System.out.println(startTime);
-//		System.out.println(roomId);
-//		System.out.println(endTime);
+		System.out.println(startTime);
+		System.out.println(roomId);
+		System.out.println(endTime);
 		try {
 			List<Order> availableOders = orderservice.checkAvailable(roomId, startTime, endTime);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, availableOders);

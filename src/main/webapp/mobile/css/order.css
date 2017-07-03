@@ -18,7 +18,7 @@
 .order_info .h_date li .doubledate{width: 100%;color: orange}
 .order_info .h_date li:nth-child(even){border-left: 0;padding-left: 0}
 .order_info .o_pay{height: 0.4rem;line-height: 0.4rem;font-size: 0.14rem;text-align: left;padding-left: 0.1rem}
-.order_info .o_pay .money{font-size: 0.18rem;color:orangered}
+.order_info .o_pay .money{font-size: 0.18rem;color:orangered;font-weight: 100;}
 .order_info .roomTime .date{float: right}
 
 
@@ -122,3 +122,49 @@
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
 }
+/*免押金说明*/
+
+#masking{display: none;transition: all .3s}
+.gratis{
+    position: fixed;
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 0.1rem;
+    z-index: 2000;
+    left: 50%;
+    margin-left: -40%;
+    top: 10%;
+	transition:0.2s;
+	transform: scale(0);
+}
+.gratis.scale{
+	transform: scale(1);  
+}
+.gratis h1{
+    padding: 0.05rem;
+    width: 100%;
+    text-align: center;
+    font-size: 0.15rem;
+    line-height: 0.3rem;
+    font-weight: 400;
+    position: relative;
+}
+.gratis h1 span{
+    float: right;
+    position: absolute;
+    top:0.13rem;
+    right: 0.1rem;
+}
+.gratis .content{
+    width: 85%;
+    margin: 0 auto;
+    overflow-y: scroll;
+    height: 86%;
+    font-size: 0.14rem;
+	 -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+}
+.czs-circle-o{font-size: 0.1rem}
+.czs-circle-l{font-size: 0.15rem}

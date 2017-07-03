@@ -1,17 +1,50 @@
 /*�ɰ�Masking-out*/
-.Masking-out{display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: url("../images/block50.png");
+.Masking-out{display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,.8);
     -webkit-transition: all 0.5s;
     transition: all 1.5s;; z-index: 10002;
 }
+.newUser{
+	position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 10003;
+}
+.newUser img{
+	width:95%;
+	position:absolute;
+	top:50%;
+	left:2.5%;
+	margin-top:-1.2rem;
+}
+.newUser i{
+	font-style: normal;
+    font-size: 0.4rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 2em;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    text-align: center;
+    line-height: 0.5rem;
+    top: 0.1rem;
+    right: 0.1rem;
+    position: absolute;
+    color: #ead8d7;
+    z-index: 999;
+    cursor: pointer;
+}
+
 .menuBar{position: fixed;width: 2.6rem;height: 100%;left: -2.6rem;background: #FFF;transition: all .5s;z-index: 10003}
 .menuBar ul{margin: 0.1rem 0.15rem}
-.menuBar ul li{height: 0.6rem;border-bottom: 1px solid #b5b2ab}
-.menuBar ul li a{line-height: 0.6rem;display: block;font-size: 0.16rem;color: #666;padding-left: 0.1rem;
-    /*background: url("../images/right.png") no-repeat center right;background-size: 0.1rem;*/
-}
+.menuBar ul li{height: 0.6rem;border-bottom: 1px solid #b5b2ab;position: relative;text-align: left}
+.menuBar ul li span{position: absolute;font-size: 0.18rem;margin-top: 0.2rem;}
+.menuBar ul li a{line-height: 0.6rem;font-size: 0.16rem;color: #666;margin-left: 0.35rem}
 .menuBar.menuOpen{left: 0rem}
 .menuBar ._logo{display: block;width: 100%;position: absolute;bottom: 0.15rem;text-align: center;font-size: 0.25rem;color: #B9A05D;height: 0.33rem}
 .menuBar ._logo img{width: 1.25rem;margin: 0 auto}
+/*icon*/
+
+
+
+
+
 .service .title-serce a{margin:0}
 
 .header-mobile {
@@ -29,12 +62,98 @@
 .swiper-container .swiper-slide img{width: 100%;height: 2.4rem; }
 .swiper-container .swiper-pagination-bullet{ width: 0.1rem; height: 0.05rem;border-radius: 0.05rem; background: rgba(255,255,255,0.9);}
 .swiper-container .swiper-pagination-bullet-active{ background: #fff;}
-
+.swiper-container .videovr{
+    position: absolute;
+    z-index: 18;
+    font-size: 0.14rem;
+    display: block;
+    background: url("../images/black40.png");
+    color: #fff;
+    text-align: center;
+    right: 0;
+    bottom: 0;
+    width: 1rem;
+    height: 0.35rem;
+    line-height: 0.35rem;
+    cursor: pointer;
+    z-index:100;
+}
 /*hot-issue*/
+
+#proSort{
+	width: 100%;
+	height: 1rem;
+	border-bottom: 1px solid #dddedd;
+	background: #fff;
+	position: relative;
+	overflow: hidden;
+	-ms-touch-action: none;
+}
+
+
+
+
+#proSort .fancybox{
+	width:4.8rem;
+	height: 1rem;
+	position: absolute;
+	z-index: 1000;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-o-text-size-adjust: none;
+	text-size-adjust: none;
+}
+#proSort .fancybox .actionoce{
+	width: 100%;
+	height:1rem;
+	margin: 0;
+	padding: 0;
+}
+
+#proSort .proIcon{
+	width: 100%;
+	height: 1rem;
+	padding-top: 0.15rem;
+}
+#proSort .proIcon .ico{
+    width:1rem;
+    height:1rem;
+	border-radius: 50%;
+}
+
+#proSort .proName{
+	font-size: 0.14rem;
+	color: #333;
+	text-align: center;
+	line-height:0.28rem;
+	margin-top: 0.09rem;
+}
+		
+		
+
 .hot-issue{text-align: center;overflow: hidden; padding: 0.2rem 0.1rem; background-color: white; margin-bottom: 0.1rem; border-bottom: 1px solid #f3ecec; font-size: 0.12rem;}
-.hot-issue a{display: inline-block;width: 25%;float: left;text-align: center;color: #000000;border-right: 1px solid #ece9e9}
+.hot-issue a{
+	width: 0.96rem;
+    height: 1rem;
+    float: left;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+}
 .hot-issue a:last-child{border: none}
-.hot-issue .img-wrapper{height: 0.36rem;margin: 0 auto 0.1rem; position: relative;}
+.hot-issue .img-wrapper{height: 0.36rem;margin: 0 auto 0.1rem; position: relative;margin-top: 0.2rem;}
 .hot-issue .img-wrapper img{width: 0.4rem}
 
 /*service*/

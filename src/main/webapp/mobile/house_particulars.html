@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/particulars.css" />
     <link rel="stylesheet" href="css/swiper-3.3.1.min.css" />
+    <link rel="stylesheet" href="iconcaomei/style.css" />
     <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
@@ -26,8 +27,8 @@
 
    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
     <style>
-        .iw_poi_title {color:#13cf15;font-size:0.2rem;font-weight:bold;overflow:hidden;padding-right:0.13rem;white-space:nowrap}
-        .iw_poi_content {font:0.12rem arial,sans-serif;overflow:visible;white-space:-moz-pre-wrap;word-wrap:break-word}
+        .iw_poi_title {color:#00b38a;font-size:0.2rem;font-weight:bold;overflow:hidden;padding-right:0.13rem;white-space:nowrap}
+        .iw_poi_content {padding-top: 0.06rem;;font:0.14rem arial,sans-serif;overflow:visible;white-space:-moz-pre-wrap;word-wrap:break-word}
     </style>
 
 </head>
@@ -35,9 +36,11 @@
 <!--头部-->
     <div class="header">
         <header class="header-mobile">
-            <a href="#" onclick="javascript:history.back();" class="cell link-home"><img src="images/black-1.png" class="img-home"></a>
+            <a href="#" onclick="javascript:history.back();" class="cell link-home">
+                <span class="czs-angle-left-l"></span>
+            </a>
             <span class="cell">房屋详情</span>
-            <a href="serve.html" class="cell link-btn"><img src="images/my_h.png" class="img-btn"></a>
+            <a href="serve.html" class="cell link-btn"><span class="czs-user-l"></span></a>
         </header>
     </div>
 <!--内容区域-->
@@ -47,9 +50,10 @@
             <!-- 轮播-->
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    
+                
                 </div>
-                <div class="swiper-pagination"></div>
+                <div class="swiper-pagination" style="display:none"></div>
+                <i class="videovr">VR实景查看</i>
             </div>
 
 
@@ -132,6 +136,7 @@
                 <div class="i_inf hu_xing_tu">
                     <div style="width:100%;height:2rem;border:#aaa solid 1px;" id="dituContent"></div>
                 </div>
+               <!--  <a href="" class="map-minute">查看地图</a> -->
             </section>
             <section class="panel describe ">
                 <h1 class="ic_house">费用事项</h1>
@@ -153,22 +158,7 @@
                 <h1 class="ic_house">房客评论<em style="font-weight: 400;color: #000"></em></h1>
                 <p id="pingjia"></p>
                 <ul class="appraise">
-                    <!--<li>-->
-                        <!--<div class="customer">-->
-                            <!--<img src="images/" class="pic">-->
-                            <!--<p class="user">【'+data[i].tel+'】<span>'+data[i].comment.score[0]+'分</span></p>-->
-                            <!--<p class="time">'+data[i].comment.time+'入住</p>-->
-                        <!--</div>-->
-                        <!--<p class="text">'+data[i].comment.feel+'</p>-->
-
-                    <!--</li>-->
-                    <!-- 回复内容暂时保留-->
-                    <!--<div class="commentReplay">-->
-                    <!--<div class="folder-title">管理员回复</div>-->
-                    <!--<div class="folder-content">-->
-                    <!--<p><em>房东回复:</em>很开心的一次接待，房客棒棒的，推荐。</p>-->
-                    <!--</div>-->
-                    <!--</div>-->
+                  
                 </ul>
                 <div class="button-orange">
                     <span id="commentsInfo">全部</span>
@@ -180,27 +170,32 @@
         <div class="navbar">
             <a href="javascript:;"><img src="images/icon-bottom-book.png">立即预约</a>
         </div>
+		<div id="w100"></div>
 
     </div>
 <!--弹窗-->
 <div id="masking"></div>
 <div class="alert-content">
-    <header>请选择起止时间</header>
     <ul class="select-time">
         <li><input type="text" id="startTime" class="input-enter none" style="display: block;font-weight:400"></li>
         <li><input type="text" id="endTime" class="input-leave none" style="display: block;font-weight:400"></li>
     </ul>
-    <p  style="font-size:0.16rem;line-height:50px;text-align:center"><span class="night">共1晚</span></p>
-    <p class="hint" style="clear: both;display: none"><i>!</i>您选的时间段内，有满房，请重新选择时间</p>
-    <button class="but-success">确定</button>
 </div>
+
+<div class="gratis">
+   <span class="czs-close-l"></span>
+    <div class="swiper-container">
+            <div class="swiper-wrapper">
+            
+            </div>
+            <div class="swiper-pagination" style="display:none"></div>
+    </div>
+</div>
+
 <script>
-    $(document).ready(function(){
-        $('.select-time').click(function(){
-            $(this).hide();
-        });
-        $('.select-time').hotelDate();
-    });
+(function(){
+	$('.navbar a').hotelDate();
+})()
 </script>
 </body>
 </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>青舍都市公寓</title>
+    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/Application.css" />
+    <link rel="stylesheet" href="iconcaomei/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script type="text/javascript" src="js/fnBase.js"></script>
+    <style>
+        .content p span{
+            width: 26%;
+            font-size: 0.16rem;
+            margin-top: 0.08rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .content p input{
+            width: 74%;
+            font-size: 0.16rem;
+        }
+    </style>
+</head>
+<body style="background: #FFF">
+    <div id="Myscroll-body">
+        <div class="content">
+            <h1>实名认证</h1>
+            <p><span>真实姓名:</span><input type="text" placeholder="您的姓名"></p>
+            <p><span>身份证号:</span><input type="text" placeholder="身份证号码"></p>
+            <p><span>收款账号:</span><input type="text" placeholder="请输入支付宝账号"></p>
+            <p style="font-size: 0.14rem">*收款账号支持：支付宝</p>
+            <p style="padding-top: 0.2rem"><button class="login_submit">提交</button></p>
+        </div>
+    </div>
+<script>
+    $(document).ready(function(){
+        $(".login_submit").click(function(){
+           window.location.href='Newhouse.html'
+        })
+    })
+</script>
+</body>
+</html>

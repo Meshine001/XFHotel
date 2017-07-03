@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>青舍都市公寓</title>
+    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <!--<link href="css/common.css" rel="stylesheet" type="text/css">-->
+    <style type="text/css">
+        body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+        #container{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: auto;
+        }
+        /*地图标题*/
+        .anchorBL{
+            display:none;
+        }
+        .BMap_bubble_title{
+            color:black;
+            font-size:0.13rem;
+            font-weight: bold;
+            text-align:left;
+        }
+        .BMap_pop div:nth-child(1){
+            border-radius:0.1rem 0 0 0;
+        }
+		 .BMap_pop div:nth-child(2){
+		    width:300px !important;
+        }
+        .BMap_pop div:nth-child(3){
+            border-radius:0 0.1rem 0 0;
+            background:#fff !important;
+            left:320px !important;
+        }
+        .BMap_pop div:nth-child(3) div{
+           border-radius:0 0.1rem 0 0;
+      
+        }
+        .BMap_pop div:nth-child(4){
+        	width:343.5px !important;
+        }
+        
+        .BMap_pop div:nth-child(5){
+            border-radius:0 0 0 0.1rem;
+        }
+        .BMap_pop div:nth-child(5) div{
+           border-radius:0 0 0 0.1rem;
+        }
+        .BMap_pop div:nth-child(7){
+            border-radius:0 0 0.1rem 0 ;
+            width:25px !important;
+            left:320px;
+        }
+        .BMap_pop div:nth-child(7) div{
+            border-radius:0 0 0.1rem 0 ;
+        }
+         .BMap_pop div:nth-child(8){
+                left: 113px !important;
+    			top: 161px !important;
+			    width: 0 !important;
+			    height: 0 !important;
+			    border-left: 25px solid transparent;
+			    border-right: 25px solid transparent;
+			    border-top: 50px solid #fff;
+        }
+         .BMap_pop div:nth-child(9){
+         	width:314px !important;
+         }
+          .BMap_pop div:nth-child(9) table{
+         	width:100%;
+         }
+         .BMap_pop div:nth-child(9) + img{
+         	color:red !important;
+         }
+        .roomId{font-size: 0.15rem;font-weight: bold;}
+        .addres{font-size: 0.15rem}
+        .roomTime{font-size: 0.15rem}
+        .roomTime a{ color: rgb(61, 109, 204);;text-decoration: none;}
+        
+        .roomId,.addres,.roomTime a{
+        	    overflow: hidden;
+			    text-overflow: ellipsis;
+			    white-space: nowrap;
+        }
+        
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?ak=m0QLQpDkATE2Q8WR1NPXRarUrWaA2eNi&v=2.0&services=false"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/fastclick.js"></script>
+    <script type="text/javascript" src="js/fnBase.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+
+</head>
+<body>
+<div id="content" class="content">
+    <div id="container"></div>
+    <script type="text/javascript">
+
+        var map = new BMap.Map("container");
+        var point = new BMap.Point(108.998795,34.245567);
+        map.centerAndZoom(point,15);
+        map.enableScrollWheelZoom(true);
+        map.addControl(new BMap.OverviewMapControl({isOpen:true,anchor:BMAP_ANCHOR_BOTTOM_RIGHT}));
+        map.addControl(new BMap.NavigationControl());
+        map.addControl(new BMap.ScaleControl());
+        map.addControl(new BMap.MapTypeControl());
+
+        var icon = new BMap.Icon("images/map-marker-marker-outside-chartreuse.png",new BMap.Size(100,100));
+        function loadwz(jd,wd,id,addres,time){
+
+            var marker = new BMap.Marker(new BMap.Point(jd,wd),{icon:icon});
+
+            map.addOverlay(marker);
+            var content = "<table>";
+            content = content + "<tr><td><div class='roomId'>"+id+"</div></td></tr>";
+            content = content + "<tr><td class='addres'>价格："+addres+"/天</td></tr>";
+            content = content + "<tr><td class='roomTime'><a href='"+time+"'>查看详情»</a></td></tr>";
+            content += "</table>";
+            var infowindow = new BMap.InfoWindow(content);
+//            mouseover
+            marker.addEventListener("click",function(){
+                this.openInfoWindow(infowindow);
+            });
+        }
+
+    </script>
+
+</div>
+</body>
+</html>

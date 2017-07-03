@@ -17,6 +17,7 @@ function appendComments(comment) {
 		method : 'GET',
 		dataType : 'json',
 		success : function(data) {
+			console.log(data)
 			$(img).attr(
 					'src',
 					$('.comment_list').attr('data-url') + '/images/'

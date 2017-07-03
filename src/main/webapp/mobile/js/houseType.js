@@ -126,7 +126,7 @@ $(document).ready(function(){
 	        var len = $('.goodlist li').length;
 	        if(len==0){
 	            $('#zanwu').show();
-	            $("#Myscroll-body").css('background','#FFF')
+	            $("#Myscroll-body").css('background','#FFF');
 	            $('body').addClass('wingBg');
 	        }
 	        $('.goodlist li').unbind('click').click(

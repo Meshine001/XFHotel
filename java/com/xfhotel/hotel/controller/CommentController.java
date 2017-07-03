@@ -43,6 +43,12 @@ public class CommentController {
 	public @ResponseBody ArrayList<Object> getComments(Long roomId,Integer page){
 		ArrayList<Object> list = new ArrayList<Object>();
 		PageResults<Comment> comments = commentService.getComments(roomId, page);
+		Map<String, Object> map1 = new HashMap<String, Object>();
+		map1.put("CurrentPage", comments.getCurrentPage());
+		map1.put("PageCount", comments.getPageCount());
+		map1.put("PageNo", comments.getPageNo());
+		map1.put("PageSize",comments.getPageSize());
+		list.add(map1);
 		for(Comment comment1:comments.getResults()){
 			Customer customer = customerService.getCustomer(comment1.getFromWho());
 			CustomerDetails f = customer.getDetails();
@@ -53,12 +59,7 @@ public class CommentController {
 			map.put("nick", f.getNick());
 			list.add(map);
 		}
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("CurrentPage", comments.getCurrentPage());
-		map.put("PageCount", comments.getPageCount());
-		map.put("PageNo", comments.getPageNo());
-		map.put("PageSize",comments.getPageSize());
-		list.add(map);
+		
 		return list;
 	}
 	
