@@ -6237,6 +6237,8 @@ ui-view>.app-messaging-container {
 	box-shadow: 0 2px 3px rgba(223, 230, 232, 0.3);
 	margin-bottom: 5px;
 	transition: all .3s ease;
+	background: #009688;
+    color: #fff;
 }
 
 .btn:hover {
@@ -8628,3 +8630,15 @@ a:hover{text-decoration: none;}
 	color:#ddd;
 }
 .status-house a.hat{color:#fff;background: #29c75f;}
+
+.statistics{
+	padding:15px 0;
+}
+.statistics div{
+	padding:8px 15px;
+}
+.statistics div span{
+	margin-left:10px;
+	color: #f15305;
+    font-size: 20px;
+}

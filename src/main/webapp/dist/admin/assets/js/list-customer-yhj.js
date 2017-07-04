@@ -49,6 +49,7 @@ function list(page) {
 			alert("获取数据失败！");
 		},
 		success : function(data) {
+			console.log(data)
 			$('#pagecontroller').html('');
 			var a_f = $('<a></a>').attr('href','#').append('&laquo;').attr('onclick', 'list(1)').attr('href',
 			'javascript:void(0);');
@@ -81,8 +82,11 @@ function list(page) {
 								value.consumptionCount);
 						var td_consumptionTimes = $('<td></td>').append(
 								value.consumptionTimes);
-						var td_details = $('<td></td>').append(
-								getStatus(value.status));
+						var td_yhj="<a href='javascript:void(0)'>查看</a>";
+						var td_details = $('<td></td>').append(td_yhj);
+						//原来的状态现在改成优惠卷使用情况；
+						
+						
 						var td_input="<i></i>";
 						var a_detail = $('<a></a>').append(td_input);
 //						a_detail.attr('href', './view_customer?id='+value.id);

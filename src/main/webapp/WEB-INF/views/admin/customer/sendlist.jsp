@@ -69,7 +69,25 @@
 					</ul>
 				</div>
 				<div style="overflow: scroll;width:100%;height:auto">
-				<table class="table">
+				<div class="col-md-12 statistics">
+				    <div class="col-md-2 col-xs-6">
+				       <laber>总金额<span>3000</span>元</laber> 
+				    </div>
+				    <div class="col-md-2 col-xs-6">
+				    	<laber>总数量<span>1500</span>个</laber> 
+				    </div>
+				    <div class="col-md-2 col-xs-6">
+				    	<laber>未使用<span>1500</span>个</laber> 
+				    </div>
+				    <div class="col-md-2 col-xs-6">
+				    	<laber>已使用<span>0</span>个</laber> 
+				    </div>
+				    <div class="col-md-2 col-xs-6">
+				    	<laber>已过期<span>0</span>个</laber> 
+				    </div>
+				</div>
+				<table class="table" style="border-top:1px solid #dfe6e8">
+					
 					<thead>
 						<th>
 							注册时间
@@ -109,7 +127,8 @@
 						<th>注册时间</th>
 						<th>消费总额</th>
 						<th>消费次数</th>
-						<th>状态</th>
+						<!-- <th>状态</th> -->
+						<th>优惠卷使用情况</th>
 						<th>优惠卷选择</th>
 					</thead>
 					<tbody id="list">
