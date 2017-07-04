@@ -374,5 +374,37 @@ public class AdminController {
 		// TODO Auto-generated method stub
 		return 0;
 	} 
+	
+	@RequestMapping(value = "/Coupon", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object>  getCoupon( ){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Coupon> coupon1 = couponService.list();
+		ArrayList<Object> list1 = new ArrayList<Object>();
+		ArrayList<Object> list2= new ArrayList<Object>();
+		double sun =0;
+		map.put("sumTotal", coupon1.size());//总数量
+		for(Coupon coupon2:coupon1){
+			double jing = coupon2.getcValue();
+			sun +=jing;
+			map.put("money", sun);//总金额
+			long endTime = TimeUtil.getDateLong(coupon2.getEndTime());
+			long time = new Date().getTime();
+//			System.out.println(time + endTime);
+			boolean usable = coupon2.isUsed();
+			if(time>=endTime){
+				list1.add(coupon2);
+				map.put("stale", list1.size());//过期
+			}
+			if(usable!=true){
+				list2.add(coupon2);
+				map.put("unused", list2.size());//未使用
+//				couponService.delete(couponService.getCoupon2(coupon2.getId()));
+			}
+			map.put("fresh", coupon1.size()-list1.size());//未过期
+			map.put("used", coupon1.size()-list2.size());//使用
+		}
+			return map;
+	}
 
 }
