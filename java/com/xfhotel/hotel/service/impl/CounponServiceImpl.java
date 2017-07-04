@@ -35,7 +35,7 @@ public class CounponServiceImpl implements CouponService{
 		couponDAO.update(t);
 		
 	}
-
+	@Transactional
 	@Override
 	public List<Coupon> list() {
 		// TODO Auto-generated method stub

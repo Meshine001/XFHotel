@@ -172,6 +172,7 @@ public class MobileController  {
 	 * @param model
 	 * @return
 	 */
+	
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	public @ResponseBody Message reg(String tel, String password,Model model) {
 		if (customerService.checkTel(tel)) {
@@ -360,6 +361,7 @@ public class MobileController  {
 	/*
 	 * 获取用户资料
 	 */
+	
 	
 	@RequestMapping(value = "/detailsData", method = RequestMethod.POST)
 	public @ResponseBody Customer getCustomerDetails(Long id){
@@ -628,20 +630,25 @@ public class MobileController  {
 	 */
 	@RequestMapping("getCoupons")
 	@ResponseBody
-	public List<Coupon>  getCouponsByUser(Long uId ){
-		List<Coupon> coupon = couponService.getCoupon(uId);
-		for(Coupon coupon2:coupon){
+	public ArrayList<Object>  getCouponsByUser(Long uId ){
+
+		List<Coupon> coupon1 = couponService.getCoupon(uId);
+
+		ArrayList<Object> list = new ArrayList<Object>();
+		for(Coupon coupon2:coupon1){
 			long endTime = TimeUtil.getDateLong(coupon2.getEndTime());
 			long time = new Date().getTime();
 //			System.out.println(time + endTime);
 			boolean usable = coupon2.isUsed();
-			if(time>=endTime||usable==true){
-				
-				couponService.delete(couponService.getCoupon2(coupon2.getId()));
+			if(time<=endTime&&usable==false){
+				list.add(coupon2);
+//				couponService.delete(couponService.getCoupon2(coupon2.getId()));
 			}
 		}
-			return couponService.getCoupon(uId);
+			return list;
 	}
+	
+	
 	
 /**
  * 获取房屋详情
