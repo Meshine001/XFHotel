@@ -12,6 +12,15 @@
 </head>
 <body>
 	<my_body>
+	<!-- 订单详情 -->
+	<div class="masking" style=""></div>
+	
+	
+	
+	
+	
+	
+	
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card card-mini">
@@ -20,17 +29,6 @@
 						<h3>订单列表</h3>
 					</div>
 				</div>
-				<!--  
-				<ul class="nav nav-tabs">
-					<li role="0"><a href="javascript:;">全部订单</a></li>
-					<li role="1" class="active"><a href="">已完成订单</a></li>
-					<li role="2"><a href="javascript:;">进行中订单</a></li>
-					<li role="3"><a href="javascript:;">超时订单</a></li>
-					<li role="4"><a href="javascript:;"></a></li>
-				</ul>
-				-->
-				
-				
 				<div id="topscroll" style="width:100%;height:auto;overflow-x:auto">
 				<table class="table">
 
@@ -51,32 +49,7 @@
 						</tr>
 					</thead>
 					<tbody id="list">
-					<!-- 
-						<c:forEach items="${orders}" var="order">
-							<tr>
-								<td>${order.payNo}</td>
-								<td>${order.timeStr}</td>
-								<td>${order.status}</td>
-								<td>${order.cusName}</td>
-								<td>${order.cusTel}</td>
-								<td>${order.description}</td>
-								<td>${order.startTime}至${order.endTime}</td>
-								<td>${order.totalDay}</td>
-								<td>${order.price}</td>
-								<td>${order.totalPrice}</td>
-								<td>${order.preferential}</td>
-								<td>
-									<c:if test="${order.status=='确认中'}">
-									<a href="javascript:;" class="btn comfirm-order" data-id="${order.id}">确认订单</a><br>
-									<a href="javascript:;" class="btn close-order" data-id="${order.id}">关闭订单</a>
-									</c:if>
-									<c:if test="${order.status=='退租确认中'}">
-									<a href="javascript:;" class="btn comfirmOutLease-order" data-id="${order.id}">确认退租</a><br>
-									</c:if>
-								</td>
-							</tr>
-						</c:forEach>
-						 -->
+						
 					</tbody>
 				</table>
 				

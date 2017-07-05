@@ -380,6 +380,7 @@ public class AdminController {
 	@RequestMapping(value = "/Coupon", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object>  getCoupon( ){
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Coupon> coupon1 = couponService.list();
 		ArrayList<Object> list1 = new ArrayList<Object>();
@@ -400,11 +401,10 @@ public class AdminController {
 			}
 			if(usable!=true){
 				list2.add(coupon2);
-				map.put("unused", list2.size());//未使用
+				map.put("used", list2.size());//使用
 //				couponService.delete(couponService.getCoupon2(coupon2.getId()));
 			}
-			map.put("fresh", coupon1.size()-list1.size());//未过期
-			map.put("used", coupon1.size()-list2.size());//使用
+			map.put("unused", coupon1.size()-list2.size());//未使用
 		}
 			return map;
 	}
@@ -414,4 +414,9 @@ public class AdminController {
 			return couponService.getCoupon(uId);
 	}
 
+	@RequestMapping(value = "/getCouponsId", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Coupon>  getCouponsByUser(Long uId ){
+			return couponService.getCoupon(uId);
+	}
 }

@@ -83,18 +83,20 @@ body,html {
 }
 .day .enter {
   background: url("../en.png") no-repeat center center;
-  color: #0e8f45;
+  background-size: 0.5rem;
+  color: #0cf507;
 }
 .day .enter i{
-  color:#0e8f45;
+  color:#0cf507;
 }
 .day .leave {
   background: url("../likai.png") no-repeat center center;
-  color: #037935;
+  background-size: 0.5rem;
+  color: #0cf507;
 }
 
 .day .leave i{
-  color: #037935;
+  color: #0cf507;
 }
 .day .disable {
   background:#e1e1ea;

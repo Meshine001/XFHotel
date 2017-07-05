@@ -34,7 +34,17 @@ function change(id, status,cp) {
 	});
 };
 
-list(1)
+function setItem(key,value) {
+	window.sessionStorage.setItem(key,value);
+};
+function getItem(key) {
+	return window.sessionStorage.getItem(key);
+};
+
+
+
+
+
 function list(page) {
 	$.ajax({
 		type : 'POST',
@@ -48,6 +58,9 @@ function list(page) {
 		},
 		success : function(data) {
 			console.log(data)
+			
+			
+			
 //			分页
 			$('#pagecontroller').html('');
 			var a_f = $('<a></a>').attr('href','#').append('&laquo;').attr('onclick', 'list(1)').attr('href',
@@ -70,6 +83,11 @@ function list(page) {
 			$("#list").html('');
 			var str='';
 			for(var i=0;i<data.results.length;i++){
+				
+				setItem('data',data.results[i].id)
+				console.log(getItem('data'))
+				
+				
 				str+='<tr data-id="'+data.results[i].id+'"><td>'+data.results[i].id+'</td><td>'+data.results[i].timeStr+'</td><td>'+data.results[i].status+
 				'</td><td>'+data.results[i].cusName+'</td><td>'+data.results[i].cusTel+'</td><td>'+data.results[i].description+'</td><td>'+data.results[i].startTime+"至"+
 				data.results[i].endTime+'</td><td>'+data.results[i].totalDay+'</td><td>'+data.results[i].price+'</td><td>'+data.results[i].totalPrice+'</td><td>'+data.results[i].preferential+'</td>'
@@ -80,12 +98,13 @@ function list(page) {
 					str+='<td><a href="javascript:;" class="btn comfirmOutLease-order" data-id="'+data.results[i].id+'">确认退租</a></td>';
 				}
 				str+='</tr>'
+					
 			}
 			$("#list").append(str)
 		}
 	});
 };
-
+	
 //确认订单
 
 $('#list').on('click','tr .comfirm-order',function(){
@@ -284,4 +303,13 @@ $("#sex").on('change',function(){
 		}
 	})
 })
+
+
+//订单详情
+
+$('.masking').show();
+
+
+
+
 $(document).ready(list(1));

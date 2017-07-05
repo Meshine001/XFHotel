@@ -25,7 +25,7 @@
 					</ul>
 
 				</div>
-				<div style="overflow: scroll;width:100%;height:auto">
+				<div style="overflow: hidden;width:100%;height:auto;overflow-x:auto;">
 				<table class="table">
 					<thead>
 						<tr>

@@ -22,37 +22,44 @@
 					</div>
 				</div>
 				<div style="overflow: scroll;width:100%;height:auto">
-				<table class="table">
-				<thead>
-						<th>
-							注册时间
-								<select id="longtime">
+				<!-- 筛选 -->
+				<div class="col-md-12 statistics">
+				    <div class="col-md-3 col-xs-6">
+				       		<label class="col-md-3"  style="padding:0;line-height:36px;">注册时间</label>
+				       		<div class="col-md-6" style="padding:0">
+								<select id="longtime"  class="form-control">
 									<option tid="3">全部</option>
 									<option tid="0">新用户注册</option>
 									<option tid="1">注册满一年</option>
 								</select>
-						</th>
-						<th>
-							消费金额筛选
-								<select id="monetary">
+							</div>	
+				    </div>
+				    <div class="col-md-3 col-xs-6">
+				    	<label class="col-md-3" style="padding:0;line-height:36px;">消费金额</label>
+				    	<div class="col-md-6" style="padding:0">
+								<select id="monetary"  class="form-control">
 									<option value="0">全部</option>
 									<option value="200">满200</option>
 									<option value="400">满400</option>
 									<option value="600">满600</option>
 								</select>
-						</th>
-						<th> 性别
-								<select id="sex">
+						</div>			
+				    </div>
+				    <div class="col-md-3 col-xs-6">
+				    	<label class="col-md-3" style="padding:0;line-height:36px;">性别</label>
+				    	<div class="col-md-6" style="padding:0">
+								<select id="sex"  class="form-control">
 								    <option>全部</option>
 									<option>男</option>
 									<option>女</option>
-								</select>       
-						</th>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-					</thead>
+								</select>  
+						</div>				
+				    </div>
+				   
+				</div>
+				
+				
+				<table class="table">
 					<thead>
 						<th>序号</th>
 						<th>等级</th>

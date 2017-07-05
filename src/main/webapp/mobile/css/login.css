@@ -41,3 +41,35 @@ html,body{background: -webkit-linear-gradient(135deg,#029253,#00887b);width: 100
 .btn-block:hover{color: #ffffff;text-shadow: 0 0 5px #fff}
 .f14{text-align: left;font-size: 0.14rem;}
 .f14 a{color: #45e3be}
+
+/*第三方登录*/
+.quick-login{
+	margin-top: 0.5rem;
+    height: 1rem;
+    position: relative;
+    padding: 0.2rem .1rem 0 .1rem;
+    border-top: 1px solid #45e3be;
+}
+.quick-login h1{
+	position: absolute;
+    top: -.15rem;
+    left: 50%;
+    background-color: #018f5d;
+    padding: .05rem .06rem;
+    color: #45e3be;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    font-size:0.14rem;
+}
+.quick-login a span{
+	font-size:0.4rem;
+}
+.quick-login a{
+	display: block;
+    position: relative;
+    width: 1.2rem;
+    color: #0ac599;
+    margin: 0 auto;
+    font-size: .14rem;
+    text-align: center;
+}

@@ -49,6 +49,7 @@ function list(page) {
 			alert("获取数据失败！");
 		},
 		success : function(data) {
+			console.log(data)
 			$('#pagecontroller').html('');
 			var a_f = $('<a></a>').attr('href','#').append('&laquo;').attr('onclick', 'list(1)').attr('href',
 			'javascript:void(0);');
@@ -81,8 +82,11 @@ function list(page) {
 								value.consumptionCount);
 						var td_consumptionTimes = $('<td></td>').append(
 								value.consumptionTimes);
-						var td_details = $('<td></td>').append(
-								getStatus(value.status));
+						var td_yhj="<a href='javascript:void(0)' class='lock'>查看</a>";
+						var td_details = $('<td></td>').append(td_yhj);
+						//原来的状态现在改成优惠卷使用情况；
+						
+						
 						var td_input="<i></i>";
 						var a_detail = $('<a></a>').append(td_input);
 //						a_detail.attr('href', './view_customer?id='+value.id);
@@ -292,13 +296,67 @@ $("#keepbtn").click(function(){
 		success :function(data){
 			console.log(data)
 			alert("发送成功")
+			location=location ;
 		}
 	})
 	
 //	222
 })
 
+// 优惠卷统计
+$.ajax({
+		type : 'POST',
+		dataType : 'json',
+		data : {},
+		url:"./Coupon",
+		success :function(data){
+			console.log(data)
+			$(".statistics div").eq(0).find('span').text(data.money);
+			$(".statistics div").eq(1).find('span').text(data.sumTotal);
+			$(".statistics div").eq(2).find('span').text(data.used)
+			$(".statistics div").eq(3).find('span').text(data.unused)
+			$(".statistics div").eq(4).find('span').text(data.stale)
+		}
+})
 
+// 个人优惠卷列表；
 
+	$(".Volume-list .close").click(
+		function(){
+			$(".Volume-list,.masking").hide();
+		}	
+	)
+
+    $(".Volume-list,.masking").hide();
+	$("#list").on('click','tr .lock',function(){
+		var uId=$(this).parent().parent().attr('uid');
+		$.ajax({
+			type : 'POST',
+			dataType : 'json',
+			data : {'uId':uId},
+			url:"./getCouponsId",
+			success :function(data){
+				console.log(data)
+				var str='';
+				for(var i=0;i<data.length;i++){
+					$(".Volume-list ul").html("");
+					str+='<li><i>'+data[i].type+'</i><i>'+data[i].cValue+'</i><i>'+data[i].startTime+'<br>'+data[i].endTime+'</i><i>'+data[i].rule+'</i></li>';
+					$(".Volume-list ul").append(str);
+					$(".Volume-list,.masking").show();
+					$(".Volume-list #zanwu").hide();
+				}
+				
+				if(data.length==0){
+					alert('暂时没有可用优惠卷')
+				}
+				
+				
+			}
+	})
+	})
+//日历CSS
+	
+	
+	
 
 $(document).ready(list(1));
