@@ -291,7 +291,7 @@ public class OrderServiceImpl implements OrderService {
 		o.setDescription(description);
 		o.setRoomId(roomId);
 		o.setCusName(cusName);
-		o.setCusTel(cusTel);
+		o.setCusTel(cusTel); 
 		o.setCusIdCard(cusIdCard);
 		o.setPersonal(personal);
 		o.setOtherCusName(StringSplitUtil.buildStrGroup(otherCusName));

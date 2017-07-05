@@ -96,6 +96,7 @@ public class AdminController {
 	public String loginPage() {
 		return "/admin/login";
 	}
+	
 	//..2.28保洁服务...
 	@RequestMapping(value = "/customer_baojie", method = RequestMethod.GET)
 	public String baojie() {
@@ -370,6 +371,7 @@ public class AdminController {
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "设置成功");
 	}
+	
 	private long dateToLong(Date date) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -405,6 +407,11 @@ public class AdminController {
 			map.put("used", coupon1.size()-list2.size());//使用
 		}
 			return map;
+	}
+	@RequestMapping(value = "/getCouponsId", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Coupon>  getCouponsByUser(Long uId ){
+			return couponService.getCoupon(uId);
 	}
 
 }

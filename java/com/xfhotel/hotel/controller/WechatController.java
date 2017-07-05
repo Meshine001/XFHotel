@@ -357,6 +357,7 @@ public class WechatController {
 				// 此处放防止重复提交操作
 				String out_trade_no = map.get("out_trade_no");
 				Order o = orderService.getByPayNo(out_trade_no);
+				
 				//更改订单状态
 				o.setStatus(Order.STATUS_ON_COMFIRM);
 				orderService.update(o);
