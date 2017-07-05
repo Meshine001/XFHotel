@@ -172,7 +172,8 @@
     margin: 0;
 }
 .service .title-serce a{margin:0}
-.goodlist{width: 100%;height: auto;margin-top: -0.1rem}
+.goodlist{width: 100%;height: auto;margin-top: -0.1rem;max-height: 7.85rem;
+    overflow: hidden;}
 .goodlist li{border-bottom: 1px solid #f7f5f5;padding: 0 0.1rem}
 .goodlist li:last-child{border: none}
 .goodlist .item-room{

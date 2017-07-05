@@ -90,12 +90,10 @@ function getData() {
         var str = '';
         var isoffers;
         $('.plCon .goodlist').html("");
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < data.homeRooms.length; i++) {
             str += '<li proID=' + data.homeRooms[i].id + '><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="' + Constant.URL+'/images/' + data.homeRooms[i].fang_jian_tu[0] + '"></a><div class="right-content"><h1 class="text-ellipsis"><a href="">'+data.homeRooms[i].position.xa_wei_zhi+"-" + data.homeRooms[i].position.xiao_qu + '</a></h1><h2 class="text-ellipsis">' + data.homeRooms[i].basic_info.shi + "室" + data.homeRooms[i].basic_info.ting + "厅" +
                 data.homeRooms[i].basic_info.wei + "卫" + '</h2><p class="text-ellipsis address">'+data.homeRooms[i].position.bd_wei_zhi+'-'+data.homeRooms[i].position.xiao_qu + '</p><p class="label-group"><i class="label-type1">' + data.homeRooms[i].basic_info.lei_xing + '</i></p><span class="label-price">' + data.homeRooms[i].basic_info.jia_ge + '<small>/天</small></span></div></div></li>';
-            //if(i==6){
-            //    return;
-            //}
+           
         }
         $('.plCon .goodlist').append(str);
 

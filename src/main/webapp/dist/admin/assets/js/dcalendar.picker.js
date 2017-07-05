@@ -10,11 +10,15 @@
  * -- DO NOT REMOVE --
  */
 
-$(".calendar td").hover(function(){
-	$(this).css({"background":'coral',"color":'#FFF'})
-},function(){
-	$(this).css({"background":'#666',"color":'#FFF'})
-})
+//$(".calendar td").hover(function(){
+//	$(this).css({"background":'coral',"color":'#FFF'})
+//},function(){
+//	$(this).css({"background":'#666',"color":'#FFF'})
+//})
+
+
+	
+
 
 if (typeof jQuery === 'undefined') { throw new Error('DCalendar.Picker: This plugin requires jQuery'); }
  
@@ -44,7 +48,7 @@ if (typeof jQuery === 'undefined') { throw new Error('DCalendar.Picker: This plu
 			this.maxDate = this.calendar.prev().data('maxdate');
 			
 			if(options.mode === 'calendar')
-				this.tHead = $('<thead><tr><th id="prev">&lsaquo;</th><th colspan="5" id="currM"></th><th id="next">&rsaquo;</th></tr><tr><th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th></tr></thead>');
+				this.tHead = $('<thead><tr><th style="text-align:center" id="prev">&lsaquo;</th><th style="text-align:center" colspan="5" id="currM"></th><th id="next">&rsaquo;</th></tr><tr><th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th></tr></thead>');
 			else if (options.mode === 'datepicker')
 				this.tHead = $('<thead><tr><th id="prev">&lsaquo;</th><th colspan="5" id="currM"></th><th id="next">&rsaquo;</th></tr><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr></thead>');
 			this.tHead.find('#currM').text(months[this.today.getMonth()] +" " + this.today.getFullYear());
@@ -261,7 +265,7 @@ if (typeof jQuery === 'undefined') { throw new Error('DCalendar.Picker: This plu
 				var sysDate = "今天是: " + daysofweek[that.today.getDay()] + ", " + months[that.today.getMonth()] + " " + that.today.getDate() + ", " + that.today.getFullYear();
 				tBody.append('<tr><td colspan="7" id="today">' + sysDate + '</td></tr>').appendTo(that.calendar);
 			} else {
-				this.tHead = $('<thead><tr><th id="prev">&lsaquo;</th><th colspan="2" id="currM"></th><th id="next">&rsaquo;</th></tr>');
+				this.tHead = $('<thead><tr><th style="text-align:center" id="prev">&lsaquo;</th><th colspan="2" style="text-align:center" id="currM"></th><th style="text-align:center" id="next">&rsaquo;</th></tr>');
 				that.tHead.find('#currM').text(that.date.getFullYear());
 				that.tHead.appendTo(that.calendar);
 				var currI = 0;
@@ -352,5 +356,5 @@ if (typeof jQuery === 'undefined') { throw new Error('DCalendar.Picker: This plu
 			}
 		});
 	}
-
+	
 }(jQuery);

@@ -8517,12 +8517,14 @@ footer.app-footer .footer-copyright {
 
 @media screen and (max-width:900px){
    #sending{
-  	   width:100%;
-  	   left:0;
-  	   margin-left:0px;
+  	   width:90%;
+  	   margin-left:-45%;
    }
 }
-
+.plo{
+	display: block;
+    height: 62px;
+}
 
 a:hover{text-decoration: none;}
 *{list-style:none}
@@ -8611,6 +8613,11 @@ a:hover{text-decoration: none;}
 		min-width:90%;
 		margin-left:-45%;
 	}
+	.plo{
+	display: block;
+    height: auto;
+    margin-bottom:12px;
+	}
 }
 @media ( min-width : 768px) {
 	.myalert{
@@ -8633,12 +8640,99 @@ a:hover{text-decoration: none;}
 
 .statistics{
 	padding:15px 0;
+	clear:both;
 }
 .statistics div{
 	padding:8px 15px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .statistics div span{
 	margin-left:10px;
+	margin-right:10px;
 	color: #f15305;
-    font-size: 20px;
+    font-size: 36px;
+}
+
+/*个人优惠卷列表*/
+i{font-style:normal}
+.Volume-list{
+	width: 800px;
+    background: #FFF;
+    position: fixed;
+    left: 50%;
+    top: 10%;
+    bottom:10%;
+    margin-left: -400px;
+    z-index: 1000000002;
+	display:none;
+	overflow: hidden;
+	border-radius: 10px;
+}
+.Volume-list .close{
+	position: absolute;
+	right:10px;
+	top:10px;
+	color: #d82e2e;
+    opacity: 1;
+    cursor: pointer;
+}
+.Volume-list ul{
+	width: 100%;
+    padding: 10px;
+    overflow: hidden;
+    height: auto;
+    position: absolute;
+    overflow-y: auto;
+    bottom: 0;
+    top: 60px;
+}
+.Volume-list ul li{
+	border-bottom:1px solid #ddd;
+}
+.Volume-list ul li i{
+	width:25%;
+	display: inline-block;
+    font-size: 14px;
+    overflow: hidden;
+    text-align: center;
+}
+.Volume-list .volume i{
+	width:25%;
+	display: inline-block;
+    font-size: 14px;
+    overflow: hidden;
+    text-align: center;
+    font-weight: bold;
+}
+.Volume-list .volume{
+	border-bottom:1px solid #ddd;
+	    margin-top: 34px;
+}
+#zanwu{
+	font-size: 24px;
+    text-align: center;
+    padding-top: 20px;
+    color: #ddd;
+}
+
+@media screen and (max-width: 900px){
+	.Volume-list {
+	    width: 90%;
+	    margin-left:-45%;
+	}
+}
+.calendar tr td,.calendar tr th{
+	text-align:center !important;
+	cursor:pointer !important;
+}
+.calendar tr td:hover{
+	background:#38de25 !important;
+}
+.calendar{
+	z-index:2000 !important;
+}
+.masking{
+	
 }
