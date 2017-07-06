@@ -154,7 +154,9 @@ var date = function ($) {
         leaveDay.length === 1 ? leaveDay = '0' + leaveDay : false;
         var leaveTime = leaveMonth + '-' + leaveDay;
         var night = Number($('.leave').attr('index')) - Number($('.enter').attr('index'));
-
+        
+      
+        
         $('body').css({ overflow: 'auto' });
         $('.select-time').show();
         $('.entertime').text(enterTime); // 显示
@@ -163,7 +165,7 @@ var date = function ($) {
         $('.input-leave').val(leaveYear + '-' + leaveTime);
         $('.night').text('共' + night + '晚');
 
-        
+        console.log($(".input-enter").val()+'---'+$(".input-leave").val());
         
         //判断有房没房
         var _id = decodeURIComponent(fnBase.request("id"));

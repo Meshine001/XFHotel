@@ -113,7 +113,7 @@
 				    	<laber>已过期<span></span>张</laber> 
 				    </div>
 				    <div class="col-md-2 col-xs-12">
-				    	<laber>抵用金额<span>600</span>元</laber> 
+				    	<laber>抵用金额<span></span>元</laber> 
 				    </div>
 				</div>
 				<!-- 筛选 -->
