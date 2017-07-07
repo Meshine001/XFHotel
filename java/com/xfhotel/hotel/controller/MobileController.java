@@ -313,10 +313,18 @@ public class MobileController  {
 	
 	@RequestMapping(value = "/checkAvailable", method = RequestMethod.POST)
 	public @ResponseBody Message checkAvailable(Long roomId, String startTime, String endTime) {
-		System.out.println(startTime);
-		System.out.println(roomId);
-		System.out.println(endTime);
+		Long start = TimeUtil.getDateLong(startTime);
+		Long start1 = TimeUtil.getDateLong(endTime);
+		System.out.println(start);
 		try {
+			List<House> house = houseService.getHouseId(roomId);
+			for(House house1 : house){
+				if(start<house1.getDate()&&start1>house1.getDate()&&house1.getState()==0){
+					ArrayList<Object> list = new ArrayList<Object>();
+					list.add(1);
+					return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+				}
+			}
 			List<Order> availableOders = orderservice.checkAvailable(roomId, startTime, endTime);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, availableOders);
 		} catch (Exception e) {
@@ -812,6 +820,5 @@ public class MobileController  {
 		return data;
 	}
 	
-
 }
 

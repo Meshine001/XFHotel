@@ -141,6 +141,7 @@ public class AdminController {
 		List cl = new ArrayList();
 		for(Order c:pr.getResults()){
 			cl.add(c.toMap());
+			
 		}
 		int sp = pr.getCurrentPage();
 		int ep = pr.getPageCount();
@@ -400,7 +401,7 @@ public class AdminController {
 				map.put("stale", list1.size());//过期
 			}
 			if(usable!=true){
-				list2.add(coupon2);
+				list2.add(coupon2);            
 				map.put("used", list2.size());//使用
 //				couponService.delete(couponService.getCoupon2(coupon2.getId()));
 			}
@@ -411,12 +412,7 @@ public class AdminController {
 	@RequestMapping(value = "/getCouponsId", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Coupon>  getCouponsByUser(Long uId ){
-			return couponService.getCoupon(uId);
-	}
-
-	@RequestMapping(value = "/getCouponsId", method = RequestMethod.POST)
-	@ResponseBody
-	public List<Coupon>  getCouponsByUser(Long uId ){
+		
 			return couponService.getCoupon(uId);
 	}
 }
