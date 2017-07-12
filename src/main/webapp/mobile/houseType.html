@@ -10,13 +10,8 @@
     <link rel="stylesheet" href="css/housetype.css" />
     <link rel="stylesheet" href="css/swiper-3.3.1.min.css" />
     <link rel="stylesheet" href="iconcaomei/style.css" />
-    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="js/zoom.js"></script>
-    <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
-    <script type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
-    <script type="text/javascript" src="js/autoZoomLoadImage.js"></script>
-    <script charset="gb2312" language="javascript" type="text/javascript" src="js/houseType.js"></script>
-    <script type="text/javascript" src="js/fastclick.js"></script>
+    
+
     <style>
         #Myscroll-body{top: 0.4rem;bottom: 0}
     </style>
@@ -37,10 +32,12 @@
             <a href="#" onclick="javascript:history.back();" class="cell link-home">
                 <span class="czs-angle-left-l"></span>
             </a>
-            <span class="cell">酒店式公寓</span>
-        <a href="serve.html" class="cell link-btn">
-            <span class="czs-user-l"></span>
-        </a>
+            <span class="cell group-search">
+                <input type="text" placeholder="搜索房屋"  class="input-search">
+            </span>
+	        <a href="javscript:;" class="cell link-btn">
+	            <span class="czs-search-l"></span>
+	        </a>
         </header>
     </div>
 <!--内容区域-->
@@ -51,15 +48,8 @@
         </div>
         <div id="zanwu"></div>
         <!-- 排序-->
-        <input type="button" value="筛选与排序" id="filterbtn">
-
-
-        <!-- my-footer-->
-        <!--<div class="my-footer">-->
-            <!--<p>全国服务热线：400-060-6868</p>-->
-            <!--<p>Copyright ©西安易云智能科技有限公司</p>-->
-            <!--<p><img src="images/beianbgss.png">青舍都市公寓</p>-->
-        <!--</div>-->
+        <div id="filterbtn"><p><sapn class="czs-choose-list-l"></sapn>筛选</p></div>
+        <div id="nearby"><p><sapn class="czs-location-l"></sapn>附近</p></div>
     </div>
 </article>
 <!---------------------------------------------隐藏区域1结束-->
@@ -141,7 +131,7 @@
                 <!--<li>面积由小到大</li>-->
             <!--</ul>-->
         </div>
-        <input value="确定" type="button" id="confirm">
+        <input value="确定" type="button" style="width:100%" id="confirm">
     </div>
 <!-- -----------------------------------------排序弹窗filter2-->
 <!--quyu隐藏区域3开始-->
@@ -169,13 +159,12 @@
     </article>
 <!--quyu隐藏区域3结束-->
 
-
-
-
-    <script>
-        $("document").ready(function(){
-
-        })
-    </script>
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
+    <script type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/autoZoomLoadImage.js"></script>
+    <script charset="gb2312" language="javascript" type="text/javascript" src="js/houseType.js"></script>
+    <script type="text/javascript" src="js/fastclick.js"></script>
 </body>
 </html>

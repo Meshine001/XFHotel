@@ -5,8 +5,8 @@
 var date = function ($) {
 
   $.fn.hotelDate = function (options) {
-	  
-	
+
+
 
     var nowdate = new Date(); // 获取当前时间
     var dateArr = new Array(); // 获取到的时间数据集合
@@ -26,14 +26,14 @@ var date = function ($) {
       var dateTemplate = '\n        <div class =\'date container c-gray\'>\n          <h4 class="tac bold" >\u8BF7\u9009\u62E9<span class=\'c-blue\'>\u5165\u4F4F</span>\u548C<span class=\'c-red\'>\u79BB\u5F00</span>\u65F6\u95F4</h4>\n          <div class=\'close-btn\'>\u786E\u5B9A</div>\n        </div>      \n      ';
       setTimeout(function(){$(".date").show()},1000);
       $('body').append(dateTemplate); // 向body添加插件
-      $("#Myscroll-body,.header").hide();  
-      
+      $("#Myscroll-body,.header").hide();
+
       // action容器模板
       dateArr.forEach(function (item, index) {
         var template = '\n          <div class=\'action mt10\'>\n            <div class=\'title tac c-blue\'><div class="y">' + item.getFullYear() + '</div>\u5E74<div class="m">' + (item.getMonth() + 1) + '</div>\u6708</div>\n            <ul class=\'week border-bottom\'><li>\u65E5</li><li>\u4E00</li><li>\u4E8C</li><li>\u4E09</li><li>\u56DB</li><li>\u4E94</li><li>\u516D</li></ul>\n            <ul class=\'day f-small\'></ul>\n          </div>        \n        ';
         $('.date').append(template);
-        $("#Myscroll-body,.header").show();  
-        $("#Myscroll-body,.header").hide(); 
+        $("#Myscroll-body,.header").show();
+        $("#Myscroll-body,.header").hide();
       });
 
       getPrice();
@@ -77,7 +77,7 @@ var date = function ($) {
 
               var nowweek = dateArr[index].getDay();
 
-
+              console.log(days + nowweek)
               for (var i = 0; i < days + nowweek; i++) {
                 var Month=dateArr[index].getMonth() + 1;
 
@@ -154,9 +154,9 @@ var date = function ($) {
         leaveDay.length === 1 ? leaveDay = '0' + leaveDay : false;
         var leaveTime = leaveMonth + '-' + leaveDay;
         var night = Number($('.leave').attr('index')) - Number($('.enter').attr('index'));
-        
-      
-        
+
+
+
         $('body').css({ overflow: 'auto' });
         $('.select-time').show();
         $('.entertime').text(enterTime); // 显示
@@ -166,7 +166,7 @@ var date = function ($) {
         $('.night').text('共' + night + '晚');
 
         console.log($(".input-enter").val()+'---'+$(".input-leave").val());
-        
+
         //判断有房没房
         var _id = decodeURIComponent(fnBase.request("id"));
         var checkIn= $(".input-enter").val();
@@ -216,8 +216,8 @@ var date = function ($) {
  			window.location.href="order.html?id="+encodeURIComponent(_id);
           })
       }
-      
-      
+
+
       var num = 0;
       // 时间选择
       $('.day').on('click','li', function () {

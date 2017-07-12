@@ -25,7 +25,16 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/admin/assets/css/theme/yellow.css">
 	 -->
-<script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
+	
+	
+	 <script src="<%=basePath%>/dist/commons/jquery/jquery-3.1.1.js"></script>
+	 <!-- 
+	   <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/jquery-1.7.1.min.js"></script>
+ -->
+
+
+  
 <sitemesh:write property='my_header' />
 </head>
 <body>
@@ -222,6 +231,7 @@
 	</div>
 	<script type="text/javascript"
 		src="<%=basePath%>/dist/admin/assets/js/vendor.js"></script>
+		
 	<script type="text/javascript"
 		src="<%=basePath%>/dist/admin/assets/js/app.js"></script>
 	<sitemesh:write property='my_script' />

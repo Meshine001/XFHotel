@@ -9,12 +9,27 @@
 <head>
 <title>title-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
+
 </head>
 <body>
 	<my_body>
 	<div class="row">
-		
-		<div class="col-md-12">
+		<!-- 
+		<div class="col-md-6">
+			<div class="card card-mini">
+				<div class="card-header">
+					<div class="card-title">
+						<h3>房屋状态</h3>
+					</div>
+				</div>
+				<div class="card-body" id="statusDate" style="position:relative;height:356px;"> 
+					 <div id="time" style="display:none"></div>
+					
+				</div>
+			</div>
+		</div>
+		 -->
+		<div class="col-md-6">
 			<div class="card card-mini">
 				<div class="card-header">
 					<div class="card-title">
@@ -48,9 +63,25 @@
 				</div>
 			</div>
 		</div>
+		
+		
+		
 	</my_body>
+	
 	<my_script>
-		<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/status.js"></script> 
+	    <!-- 
+	     <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/jquery-1.7.1.min.js"></script>  
+			 <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/status.js"></script> 
+		 -->
+	
+		 <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/date.js"></script> 
+
+
+		 <script>
+		 	$('#time').hotelDate();
+			$('#time').click();
+  		 </script>
 	</my_script>
+	
 </body>
 </html>

@@ -3,7 +3,7 @@ $(document).ready(function(){
 	fnBase.loadShow();
 	var _uid = fnBase.huoqu(0, "uid");
 	var _id = decodeURIComponent(fnBase.request("id"));
-
+	$("#Myscroll-body .main").hide();
 	$.ajax({
 		type:'GET',
 		dataType:'json',
@@ -13,6 +13,7 @@ $(document).ready(function(){
 		},
 		success:function(data){
 			fnBase.loadHide();
+			$("#Myscroll-body .main").show();
 			console.log(data);
             fnBase.keep(1,"community",data.position.xiao_qu);
             fnBase.keep(1,"dayPrice",data.basic_info.jia_ge);
@@ -321,5 +322,8 @@ $(document).ready(function(){
     	$(".gratis").removeClass('scale')
     	$("#masking").hide();
     })
-    
+
+    //日历
+
+
 });

@@ -1,5 +1,8 @@
 
-.main{margin-bottom: 0.45rem}
+.main{margin-bottom: 0.45rem;display: block;
+    width: 100%;
+    height: ahto;
+    height: auto;}
 
 
 .pop div:nth-child(4){
