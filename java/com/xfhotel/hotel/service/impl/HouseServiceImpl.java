@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.impl.HouseDAOImpl;
+import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.service.HouseService;
 
@@ -51,5 +52,12 @@ public class HouseServiceImpl implements HouseService {
 		Object[] values = { apartmentId, data};
 		return houseDAO.getByHQL(hql, values);
 	}
+	@Transactional
+	@Override
+	public List<House> getHouseId(Long apartmentId) {
+		String hql = "from House where apartmentId=?";
+		Object[] v = {apartmentId};
+		return houseDAO.getListByHQL(hql, v);
+		}
 
 }

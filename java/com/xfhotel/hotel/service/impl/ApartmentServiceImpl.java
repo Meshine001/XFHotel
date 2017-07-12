@@ -1,7 +1,6 @@
 package com.xfhotel.hotel.service.impl;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,7 +23,6 @@ import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
-
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.SearchForm;
@@ -47,16 +45,26 @@ public class ApartmentServiceImpl implements ApartmentService {
 	
 	@Autowired
 	OrderService orderService;
+	
+	
+	private static double EARTH_RADIUS = 6371.393;  
+    private static double rad(double d)  
+    {  
+       return d * Math.PI / 180.0;  
+    } 
+	
 	@Transactional
 	@Override
 	public Apartment findById(Long id) {
 		return apartmentDAO.get(id);
 	}
+	
 	@Transactional
 	@Override
 	public void add(Apartment t) {
 		apartmentDAO.save(t);
 	}
+	
 	@Transactional
 	@Override
 	public void delete(Apartment t) {
@@ -164,13 +172,13 @@ public class ApartmentServiceImpl implements ApartmentService {
 		List<Apartment> apartments = apartmentDAO.getListByHQL("from Apartment where show_home=true", null);
 		return JSONArray.fromObject(apartments);
 	}
+	
 	@Transactional
 	@Override
 	public JSONArray getHomeApartments1() {
 		List<Apartment> apartments = apartmentDAO.getListByHQL("from Apartment" , null);
 		return JSONArray.fromObject(apartments);
 	}
-
 
 	/**
 	 * 获取更详细的信息
@@ -277,6 +285,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 				i++;
 				continue;
 			}
+			
 			JSONObject info = JSONObject.fromObject(iterator.next());
 			String date = (String) info.keys().next();
 			JSONObject m = new JSONObject();
@@ -356,6 +365,18 @@ public class ApartmentServiceImpl implements ApartmentService {
 	 */
 	@Override
 	public List<Apartment> sort(List<Apartment> list, SearchForm searchData) {
+//		ArrayList<Object> list1 = new ArrayList<Object>();
+//		for(Apartment apartment :list ){
+//			
+//			if(searchData.getLayout()==0){
+//				list.add(apartment);
+//			} else if(apartment.getBasic_info().get("shi")==searchData.getLayout()){
+//				list.add(apartment);
+//			} else if(apartment.getBasic_info().get("shi")==searchData.getArea()){
+//				list.add(apartment);
+//			}
+//		}
+		
 		// TODO Auto-generated method stub
 		 return list;
 	}
@@ -384,6 +405,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		page.setResults(results);
 		return page;
 	}
+	
 	@Transactional
 	@Override
 	public JSONObject createOrderMoudle(String startTime, String endTime, Long apartmentId) {
@@ -414,6 +436,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		apartmentDAO.saveOrUpdate(c);
 		return apartmentDAO.get(id);
 	}
+	
 	@Transactional
 	@Override
 	public List<House> getSpHouse(Long start, Long end, Long id) {
@@ -423,4 +446,18 @@ public class ApartmentServiceImpl implements ApartmentService {
 		return houseDAO.getListByHQL(hqlString, values);
 	}
 
+	@Override
+	public double GetDistance(double lat1, double lng1, double lat2, double lng2) {
+		// TODO Auto-generated method stub
+		 double radLat1 = rad(lat1);  
+	       double radLat2 = rad(lat2);  
+	       double a = radLat1 - radLat2;      
+	       double b = rad(lng1) - rad(lng2);  
+	       double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) +   
+	        Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));  
+	       s = s * EARTH_RADIUS;  
+	       s = Math.round(s * 1000);  
+	       return s;
+	}
+	
 }

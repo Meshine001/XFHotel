@@ -229,7 +229,7 @@ public class WechatController {
 		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, type);
 		return result;
 	}
-
+	
 	/**
 	 * 二维码支付
 	 * @param id
@@ -255,7 +255,6 @@ public class WechatController {
 			String type = "NATIVE";
 			response = WechatOrderUtils.createOrder(detail, desc, "", ip, goodSn, orderSn, amount, type);
 			order.setPayPlatform(Order.PAY_PLATFORM_WECHAT_NATIVE);
-			
 			if("success".equals(response.getString("status"))){
 				order.setWxQRCode(((JSONObject)response.get("obj")).getString("url"));
 			}
@@ -271,7 +270,6 @@ public class WechatController {
 			return response;
 		}
 
-		
 	}
 
 	/**
@@ -353,6 +351,7 @@ public class WechatController {
 		try {
 
 			if ("SUCCESS".equals(result_code)) {
+				
 				// 由于微信后台会同时回调多次，所以需要做防止重复提交操作的判断
 				// 此处放防止重复提交操作
 				String out_trade_no = map.get("out_trade_no");

@@ -61,5 +61,7 @@ public interface ApartmentService extends BaseService<Apartment, Long> {
 	
 	public Apartment modify(Apartment c, long id);
 	
+	public double GetDistance(double lat1, double lng1, double lat2, double lng2) ;
+	
 	
 }
