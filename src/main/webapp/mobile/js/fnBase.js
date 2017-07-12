@@ -104,7 +104,7 @@ $(".link-home").attr("href","javascript:void(0);").click(function(){
         myalert:function(txt){
             var str='<div id="alertMC"><p>'+txt+'</p></div>';
             $("body").append(str);
-            setTimeout(function(){$("#alertMC").remove();},2000)
+            setTimeout(function(){$("#alertMC").remove();},3000)
         },
         keep:function(type,key,value){
             if(type==0){

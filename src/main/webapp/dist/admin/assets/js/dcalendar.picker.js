@@ -280,7 +280,7 @@ if (typeof jQuery === 'undefined') { throw new Error('DCalendar.Picker: This plu
 					tBody.append(row);
 				}
 				var sysDate = "Today: " + daysofweek[that.today.getDay()] + ", "+ months[that.today.getMonth()] + " " + that.today.getDate() + ", " + that.today.getFullYear();
-				tBody.append('<tr><td colspan="4" id="today">' + sysDate + '</td></tr>').appendTo(that.calendar);
+				tBody.append('<tr><td colspan="4" id="today">' + sysDate + '@@@</td></tr>').appendTo(that.calendar);
 			}
 		}
 	}

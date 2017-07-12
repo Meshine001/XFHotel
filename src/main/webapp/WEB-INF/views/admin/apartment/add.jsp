@@ -14,7 +14,7 @@
 <body>
 	<my_body>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-8">
 			<div class="card">
 				<div class="card-header">添加房源</div>
 				<div class="card-body">
@@ -126,25 +126,25 @@
 							<label class="col-md-3 control-label">户型</label>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="number" class="form-control" placeholder=""
+									<input style="padding: 10px 6px;" min="0" type="number" class="form-control" placeholder=""
 										name="shi"> <span class="input-group-addon">室</span>
 								</div>
 							</div>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="number" class="form-control" placeholder=""
+									<input style="padding: 10px 6px;" min="0" type="number" class="form-control" placeholder=""
 										name="ting"> <span class="input-group-addon">厅</span>
 								</div>
 							</div>
 							<div class="col-sm-2">
 								<div class="input-group">
-									<input type="number" class="form-control" placeholder=""
+									<input style="padding: 10px 6px;" min="0"  type="number" class="form-control" placeholder=""
 										name="wei"> <span class="input-group-addon">卫</span>
 								</div>
 							</div>
 							<div class="col-sm-3">
 								<div class="input-group">
-									<input type="number" class="form-control" placeholder=""
+									<input style="padding: 10px 6px;"  min="0" type="number" class="form-control" placeholder=""
 										name="yang_tai"> <span class="input-group-addon">阳台</span>
 								</div>
 							</div>
@@ -422,7 +422,7 @@
 				});
 			</script>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div id="map" style="width: 500px; height: 500px"></div>
 		</div>
 		<!-- 上传图片 -->

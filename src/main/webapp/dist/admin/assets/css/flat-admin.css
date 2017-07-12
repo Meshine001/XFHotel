@@ -8698,7 +8698,10 @@ i{font-style:normal}
     font-size: 14px;
     overflow: hidden;
     text-align: center;
+    height:40px;
+    line-height:40px;
 }
+.Volume-list ul li i:first-child+i+i{line-height:20px;}
 .Volume-list .volume i{
 	width:25%;
 	display: inline-block;
@@ -8805,4 +8808,94 @@ i{font-style:normal}
 }
 .detailWraper tr .fl50{width:50%;}
 .detailWraper tr td span{font-weight:400;color: #dd4a4a;}
+
+/*日历*/
+.date {
+  position:absolute;
+  /*暂时用这个*/
+  top: 0;
+  left: 0;
+  bottom:0;
+  width: 100%;
+  background: #fff;
+  z-index: 10000000000;
+  overflow:auto;
+ 
+  text-align: center;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+.date .title div{
+  display: inline;
+}
+
+.tac{
+	font-size:14px;
+	line-height:25px;
+	color:#333;
+    clear: both;
+}
+.date ul{padding:0}
+.date ul li {
+  float: left;
+  width: 14.285%;
+  text-align: center;
+  border-bottom: 1px solid #ebecf2;
+  border-left: 1px solid #ebecf2;
+  background: #fff;
+}
+
+.week li {
+  background-color: #f1f1f1;
+  height: 40px;
+  line-height: 40px;
+  border-top: 1px solid #ebecf2;
+}
+.day li{
+  height: 50px;
+  line-height: 25px;
+}
+.day li i{
+  color: #777;
+}
+.day .enter {
+  background: url("../en.png") no-repeat center center;
+  background-size: 0.5rem;
+  color: #0cf507;
+}
+.day .enter i{
+  color:#0cf507;
+}
+.day .leave {
+  background: url("../likai.png") no-repeat center center;
+  background-size: 0.5rem;
+  color: #0cf507;
+}
+
+.day.leave i{
+  color: #0cf507;
+}
+.day li.disable {
+  background:#e1e1ea;
+}
+/*
+开始到结束日期的样式；
+*/
+.day .selected-range{
+  background: darkgrey;
+}
+
+.close-btn {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  display:block;
+  background: #383436;
+  color: #fff;
+  width:45px;
+  height:45px;
+  border-radius: 50%;
+  line-height:45px;
+}
 

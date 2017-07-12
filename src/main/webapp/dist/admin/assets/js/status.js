@@ -37,6 +37,7 @@ $(document).ready(function(){
 			success:function(data){
 				console.log(data)
 				alert('修改成功')
+				location=location
 			}
 		})
 	})
