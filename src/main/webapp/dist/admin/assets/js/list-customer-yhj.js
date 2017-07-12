@@ -313,9 +313,11 @@ $.ajax({
 			console.log(data)
 			$(".statistics div").eq(0).find('span').text(data.money);
 			$(".statistics div").eq(1).find('span').text(data.sumTotal);
-			$(".statistics div").eq(2).find('span').text(data.used)
-			$(".statistics div").eq(3).find('span').text(data.unused)
-			$(".statistics div").eq(4).find('span').text(data.stale)
+			$(".statistics div").eq(2).find('span').text(data.used);
+			$(".statistics div").eq(3).find('span').text(data.unused);
+			$(".statistics div").eq(4).find('span').text(data.stale);
+			$(".statistics div").eq(5).find('span').text(data.usedMoney);
+		
 		}
 })
 

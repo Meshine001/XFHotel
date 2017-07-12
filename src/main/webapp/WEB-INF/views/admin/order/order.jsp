@@ -13,8 +13,38 @@
 <body>
 	<my_body>
 	<!-- 订单详情 -->
-	<div class="masking" style=""></div>
-	
+	<div class="masking" style="display:none"></div>
+	<div class="orderDetail">
+		<div class="detailTitle">订单详情<span class="close">X</span></div>
+		<div class="detailWraper">
+			<table class="zfhouse">
+			
+				<!-- 
+				<tr>
+					<td>查看每日房价</td>
+					<td style="clear:both;width:100%">
+						<ul id="everyDateprice">
+							<li><span>2017-06-20</span><span>￥200</span></li>
+							<li><span>2017-06-20</span><span>￥200</span></li>
+							<li><span>2017-06-20</span><span>￥200</span></li>
+							<li><span>2017-06-20</span><span>￥200</span></li>
+						</ul>
+					</td>
+				</tr>
+				 -->
+				
+			
+			</table>
+			
+			<table class="clean">
+				<tr>
+					<td style="width:100%;border-bottom:1px solid #ccc;font-size: 18px;">保洁订单</td>
+				</tr>
+				<tr class="zanwu" style="display:none;color:#dd4a4a"><td>暂时没有保洁服务订单</td></tr>
+			</table>
+			
+		</div>	
+	</div>
 	
 	
 	

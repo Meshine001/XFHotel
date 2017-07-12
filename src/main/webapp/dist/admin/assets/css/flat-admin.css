@@ -99,6 +99,7 @@ none
 }
 body {
 	font-size: 14px;
+	 transition: all .3s;
 }
 
 .no-padding {
@@ -8733,6 +8734,75 @@ i{font-style:normal}
 .calendar{
 	z-index:2000 !important;
 }
+
+/*订单详情*/
 .masking{
+	position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: black;
+    opacity: 0.8;
+    z-index: 1000000001;
+}
+.orderDetail{
+	width: 800px;
+    background: #FFF;
+    position: fixed;
+    left: 50%;
+    top: 10%;
+    bottom: 10%;
+    margin-left: -400px;
+    z-index: 1000000002;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: all .3s;
+    transform:scale(0)
+}
+.orderDetail.hover{
+	transform:scale(1);
+}
+.orderDetail .close{
+	position: absolute;
+    right: 16px;
+    top: 10px;
+    color: #d82e2e;
+    opacity: 1;
+    cursor: pointer;
+}
+.detailWraper{
+	padding:15px;
+	font-size: 16px;
+	position: absolute;
+	width: 100%;
+    top: 40px;
+    bottom: 0px;
+    overflow: hidden;
+    overflow-y: auto;
+    transition: all .3s;
+}
+@media screen and (max-width: 900px){
+	.orderDetail {
+	    width: 90%;
+	    margin-left: -45%;
+	}
+	.detailWraper{
+	 padding-top:0;
+	font-size: 14px;
+	}
+}
+.detailTitle{text-align:center;line-height: 40px;font-size: 18px;color: #444444;font-weight: 600;}
+.detailWraper ul{padding:0}
+.detailWraper ul li span{width:50%;display: inline-block;}
+.detailWraper table{width:100%;}
+.detailWraper table tr{margin-bottom:20px;}
+.detailWraper tr td{
+	font-weight:600;
+	float:left;
+	line-height: 40px;
 	
 }
+.detailWraper tr .fl50{width:50%;}
+.detailWraper tr td span{font-weight:400;color: #dd4a4a;}
+

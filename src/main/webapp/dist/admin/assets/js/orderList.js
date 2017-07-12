@@ -83,11 +83,7 @@ function list(page) {
 			$("#list").html('');
 			var str='';
 			for(var i=0;i<data.results.length;i++){
-				
-				setItem('data',data.results[i].id)
-				console.log(getItem('data'))
-				
-				
+			
 				str+='<tr data-id="'+data.results[i].id+'"><td>'+data.results[i].id+'</td><td>'+data.results[i].timeStr+'</td><td>'+data.results[i].status+
 				'</td><td>'+data.results[i].cusName+'</td><td>'+data.results[i].cusTel+'</td><td>'+data.results[i].description+'</td><td>'+data.results[i].startTime+"至"+
 				data.results[i].endTime+'</td><td>'+data.results[i].totalDay+'</td><td>'+data.results[i].price+'</td><td>'+data.results[i].totalPrice+'</td><td>'+data.results[i].preferential+'</td>'
@@ -306,8 +302,99 @@ $("#sex").on('change',function(){
 
 
 //订单详情
+$(".orderDetail .close").click(
+		function(){
+			$('.masking,.orderDetail').hide();
+			location=location;
+		}
+)
 
-$('.masking').show();
+$("#list").on('click','tr',function(){
+	
+	/*住房订单*/
+	var uid=$(this).attr('data-id');
+	 $.ajax({
+			type:'POST',
+			dataType:'json',
+			url:'/mobile/getOrder',
+			data:{'id':uid},
+			success:function(data){
+				console.log(data);
+				var unixTimestamp = new Date( data[1].time ) ;
+				commonTime = unixTimestamp.toLocaleString();
+				 
+				var dj=data[1].price.split('@');
+				/*计算总价*/
+				var total=eval(dj.join("+"));
+				/*押金*/
+			    var jajin=Number(dj[dj.length-1]);
+			   
+			    /*总房费 */
+				var _price=total-jajin;
+			    /*优惠卷*/
+			    var yhj=total-Number(data[1].totalPrice);
+			    yhj=Number(yhj).toFixed(0);
+			    if(yhj != 0){
+			    	yhj==yhj;
+			    }else{
+			    	yhj=0;
+			    }
+			 
+			    $(".detailWraper .zfhouse").html('');
+			    var kule='<tr><td style="width:100%;border-bottom:1px solid #ccc;font-size: 18px;">住房订单</td><td>预订房屋：<span>'+data[1].description+
+			              '</span></td></tr><tr><td class="fl50">入住时间：<span>'+data[0]+'</span></td><td>离开时间：<span>'+data[2]+
+			              '</span></td></tr><tr><td class="fl50">天数：<span>'+data[1].totalDay+'</span></td><td>订单状态：<span>'+data[1].status+
+			              '</span></td></tr><tr><td>下单时间：<span>'+commonTime+'</span></td></tr><tr><td>入住人：<span>'+data[1].cusName+
+			              '</span></td></tr><tr><td>联系电话：<span>'+data[1].cusTel+
+			              '</span></td></tr><tr><td class="fl50">总房费：<span>￥'+_price+'</span></td><td>押金：<span>￥'+jajin+
+			              '</span></td><td class="fl50">优惠卷：<span>减'+yhj+
+			              '元</span></td><td>合计：<span>￥'+Number(data[1].totalPrice).toFixed(0)+'</span></td></tr>';
+			    
+			    
+			    $(".detailWraper .zfhouse").append(kule)
+			    
+			    
+			}
+			
+	 })
+	 
+	/*保洁订单*/
+	  $.ajax({
+			type:'POST',
+			dataType:'json',
+			url:'/admin/getClean',
+			data:{'oederId':uid},
+			success:function(data){
+				console.log(data);
+				var state = new Date( data.content.time ) ;
+				statetime = state.toLocaleString();
+				var stuse;
+				if(data.content.status==0){
+					stuse='等待保洁';
+				}else if(data.content.status==1){
+					stuse='正在打扫';
+				}else if(data.content.status==2){
+					stuse='完成';
+				}
+				
+				if(data.statusCode==1){
+					var content=data.content.content;
+					content=content.replace(/@/g,'、');
+					
+					$(".detailWraper .clean").html('');
+					var sty='<tr><td style="width:100%;border-bottom:1px solid #ccc;font-size: 18px;">保洁订单</td></tr><tr><td style="width:100%">下单时间：<span>'+statetime+
+					'</span></td><td class="fl50">订单状态：<span>'+stuse+'</span></td><td class="fl50">打扫时间：<span>'+data.content.cleanTime+
+					'</span></td></tr><tr><td>服务内容：<span>'+content+'</span></td></tr>'
+					$(".detailWraper .clean").append(sty)
+				};
+				if(data.content=='为空'){
+					 $(".detailWraper .clean .zanwu").show();
+				};
+			}
+	  })
+	 $('.masking').show();
+	 $(".orderDetail").addClass('hover');
+})
 
 
 

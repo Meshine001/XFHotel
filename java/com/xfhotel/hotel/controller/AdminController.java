@@ -96,7 +96,6 @@ public class AdminController {
 	public String loginPage() {
 		return "/admin/login";
 	}
-	
 	//..2.28保洁服务...
 	@RequestMapping(value = "/customer_baojie", method = RequestMethod.GET)
 	public String baojie() {
@@ -141,7 +140,6 @@ public class AdminController {
 		List cl = new ArrayList();
 		for(Order c:pr.getResults()){
 			cl.add(c.toMap());
-			
 		}
 		int sp = pr.getCurrentPage();
 		int ep = pr.getPageCount();
@@ -372,7 +370,6 @@ public class AdminController {
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "设置成功");
 	}
-	
 	private long dateToLong(Date date) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -387,7 +384,15 @@ public class AdminController {
 		ArrayList<Object> list1 = new ArrayList<Object>();
 		ArrayList<Object> list2= new ArrayList<Object>();
 		double sun =0;
+		double figure= 0;
 		map.put("sumTotal", coupon1.size());//总数量
+		if(coupon1.size()==0){
+			map.put("money", 0);
+			map.put("stale", 0);
+			map.put("used", 0);
+			map.put("unused", 0);
+			map.put("usedMoney", 0);
+		}
 		for(Coupon coupon2:coupon1){
 			double jing = coupon2.getcValue();
 			sun +=jing;
@@ -401,18 +406,34 @@ public class AdminController {
 				map.put("stale", list1.size());//过期
 			}
 			if(usable!=true){
-				list2.add(coupon2);            
-				map.put("used", list2.size());//使用
+				 figure+=coupon2.getcValue();
+				list2.add(coupon2);
+				map.put("used", list2.size());//未使用
 //				couponService.delete(couponService.getCoupon2(coupon2.getId()));
 			}
-			map.put("unused", coupon1.size()-list2.size());//未使用
+			map.put("usedMoney",  sun-figure);
+			map.put("unused", coupon1.size()-list2.size());//使用
+		}
+		if(list1.size()==0){
+			map.put("stale", 0);
+		} else if(list2.size()==0){
+			map.put("used", 0);
 		}
 			return map;
 	}
+
 	@RequestMapping(value = "/getCouponsId", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Coupon>  getCouponsByUser(Long uId ){
-		
 			return couponService.getCoupon(uId);
+	}
+	
+	@RequestMapping(value = "/getClean", method = RequestMethod.POST)
+	@ResponseBody
+	public Message getClean(Long oederId ){
+		if(cleanService.getClean(oederId)==null){
+			return new Message(Constants.MESSAGE_ERR_CODE, "为空");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, cleanService.getClean(oederId));
 	}
 }
