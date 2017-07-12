@@ -268,7 +268,6 @@ public class OrderController {
 				}else{
 					return result;
 				}
-				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -279,7 +278,57 @@ public class OrderController {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
 
 	}
+	
+	
+//	@RequestMapping(value = "/comfirm", method = RequestMethod.POST)
+//	@ResponseBody
+//	public Message comfirmOrder(Long id) {
+//		Order o = orderservice.get(id);
+//		if (o == null) {
+//			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+//		}
+//		if (o.getStatus() == Order.STATUS_ON_COMFIRM) {
+//			try {
+//					o.setStatus(Order.STATUS_ON_LEASE);
+//					orderservice.update(o);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+//			}
+//
+//		}
+//		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
+//
+//	}
 
+	@RequestMapping(value = "/comfirmPw", method = RequestMethod.POST)
+	@ResponseBody
+	public Message comfirmPw(Long id) {
+		Order o = orderservice.get(id);
+		if (o == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+			try {
+				// 发送门锁密码
+				Long roomId = o.getRoomId();
+				String lock_no = apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
+				System.out.println("send pass to "+lock_no);
+				Message result = lockService.addPassword(o.getCusTel(), lock_no, DateUtil.format(new Date(o.getStartTime()), "yyyyMMddHHmmss"),
+						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddHHmmss"));
+				if(result.getStatusCode() == Constants.MESSAGE_SUCCESS_CODE){
+					return new Message(Constants.MESSAGE_SUCCESS_CODE, "发送密码成功");
+				}else{
+					return result;
+				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new Message(Constants.MESSAGE_ERR_CODE, "发送密码失败");
+			}
+	}
+	
 	/**
 	 * 用户查看房间密码
 	 * 
