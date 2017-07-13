@@ -58,6 +58,7 @@ var resiger={
          
         });
         resiger.btnList[1].click(function(){
+
             var phoneNumber=resiger.inputList[0].val();
             if(phoneNumber==""){
                 fnBase.myalert("请填写手机号码");
@@ -97,12 +98,11 @@ var resiger={
             var postDatat={"tel":phoneNumber,"password":password};
             fnBase.commonAjax(frontURL,postDatat,function(data){
                 console.log(data);
+               
                 if(data.statusCode=="1"){
                     fnBase.myalert("恭喜您注册成功");
-                    sessionStorage.clear();
-                    localStorage.clear();
                     fnBase.keep(0,"uid",data.content);
-                    fnBase.keep(1,"newUser",1);
+                    fnBase.keep(1,"newUser",'1');
                     //若还未经过微信授权
                     if(data.wechatOpenId == null || data.wechatOpenId == undefined){
                     	var redirect = 'https://open.weixin.qq.com/connect/oauth2/authorize?'+
@@ -112,7 +112,7 @@ var resiger={
                             'state=index.html?id=#wechat_redirect ';
                         window.location.href = redirect;
                     }
-                    window.location.href="index.html";
+                   window.location.href="index.html";
                 }else{
                     fnBase.myalert(data.content)
                 }

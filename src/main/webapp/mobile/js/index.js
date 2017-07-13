@@ -1,4 +1,20 @@
 ﻿$(document).ready(function () {
+	   
+    // 新注册礼包
+	 $(".Masking-out,.newUser").hide();
+    var _of=fnBase.huoqu(1,"newUser");
+    console.log(_of)
+	if(_of==1){
+    	$(".Masking-out,.newUser").show();
+    };
+	 $(".newUser i").click(function(){
+		fnBase.keep(1,"newUser",0);
+		$(".Masking-out,.newUser").hide();
+		console.log(fnBase.huoqu(1,"newUser"))
+	})
+    
+    
+    
     scrollNav();
     getData();
     alertSearch.info();
@@ -9,15 +25,7 @@
     })
     
     
-    // 新注册礼包
-    $(".Masking-out,.newUser").hide();
-    
-    if(fnBase.huoqu(0, "newUser")==1){
-    	$(".Masking-out,.newUser").show();
-    }
-    $(".newUser i").click(function(){
-    	$(".Masking-out,.newUser").hide();
-    })
+   
     
 //    横向滚动begin
     var myScroll;

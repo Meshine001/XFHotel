@@ -224,8 +224,8 @@ function addpartenr(){
         var postData={};
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
-//            fnBase.keep(1,"uname",data.details.nick);
-//            fnBase.keep(1,"usfz",data.details.idCard);
+            fnBase.keep(1,"uname",data.details.nick);
+            fnBase.keep(1,"usfz",data.details.idCard);
             $("#userName").attr('value',data.details.nick);
             $("#tel").attr('value',data.details.tel);
             $("#identity").attr('value',data.details.idCard);

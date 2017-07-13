@@ -172,7 +172,7 @@ public class MobileController  {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/reg", method = RequestMethod.GET)
+	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	public @ResponseBody Message reg(String tel, String password) {
 		if (customerService.checkTel(tel)) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "手机号已使用");
@@ -184,13 +184,15 @@ public class MobileController  {
 		c.setDetails(details);
 		c.setRegTime(new Date().getTime());
 		c.setLevel(0);
+		
 		if (customerService.register(c, details) == true) {
+			Customer c1 = customerService.getCustomer(c.getId());
 			Calendar calendar = Calendar.getInstance();
 	        Date date = new Date(System.currentTimeMillis());
 	        calendar.setTime(date);
 	        calendar.add(Calendar.MONTH, +6);
 	        date = calendar.getTime();
-			Customer c1 = customerService.getCustomer(c.getId());
+			
 			List<Double> list = new ArrayList<Double>();
 			list.add(20.0);
 			list.add(30.0);
@@ -199,8 +201,10 @@ public class MobileController  {
 			list1.add("200");
 			list1.add("300");
 			list1.add("500");
+			int d = 0;
 			for(double cValue : list){
-				for(String rule :list1){
+				for(int i =0;list1.size()>i;i++){
+					String rule = list1.get(d);
 					Coupon coupon = new Coupon();
 					coupon.setcValue(cValue);
 					coupon.setStartTime(new Date().getTime());
@@ -209,10 +213,11 @@ public class MobileController  {
 					coupon.setRule(rule);
 					coupon.setuId(c1.getId());
 					couponService.add(coupon);
+					d++;
 					break;
 				}
 			}
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, c1);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, c1.getId());
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
@@ -303,7 +308,7 @@ public class MobileController  {
 			vCode.put("diedLine", new Date().getTime()+Constants.SMS_AVAILBEL_TIME);
 			vCode.put("code", vCodeStr);
 			session.setAttribute("vCode", vCode);
-//			System.out.println("send vcode==>"+vCode);
+			System.out.println("send vcode==>"+vCode);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -475,6 +480,21 @@ public class MobileController  {
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order.toMap());
+		
+		Long data = new Date().getTime();
+		data+=1000*60*60*12;
+		House house = houseService.getHouse(roomId, data);
+		int state =1;
+		if(house!=null){
+			house.setState(state);
+			houseService.update(house);
+		}else{
+			House house1 = new House();
+			house1.setApartmentId(roomId);
+			house1.setDate(data);
+			house1.setState(state);
+			houseService.add(house1);
+		}
 //		System.out.println(info);
 		return info;
 	}
