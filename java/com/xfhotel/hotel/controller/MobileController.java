@@ -185,12 +185,12 @@ public class MobileController  {
 		c.setRegTime(new Date().getTime());
 		c.setLevel(0);
 		if (customerService.register(c, details) == true) {
+			Customer c1 = customerService.getCustomer(c.getId());
 			Calendar calendar = Calendar.getInstance();
 	        Date date = new Date(System.currentTimeMillis());
 	        calendar.setTime(date);
 	        calendar.add(Calendar.MONTH, +6);
 	        date = calendar.getTime();
-			Customer c1 = customerService.getCustomer(c.getId());
 			List<Double> list = new ArrayList<Double>();
 			list.add(20.0);
 			list.add(30.0);
