@@ -193,14 +193,12 @@ public class MobileController  {
 			list1.add("200");
 			list1.add("300");
 			list1.add("500");
-			long i= new Date().getTime();
-			i=i+1000 * 60 * 60 * 24 * 30 *6;
 			for(double cValue : list){
 				for(String rule :list1){
 					Coupon coupon = new Coupon();
 					coupon.setcValue(cValue);
 					coupon.setStartTime(new Date().getTime());
-					coupon.setEndTime(i);
+					coupon.setEndTime(new Date().getTime()+1000 * 60 * 60 * 24 * 30 *6);
 					coupon.setType(1);
 					coupon.setRule(rule);
 					coupon.setuId(c1.getId());
