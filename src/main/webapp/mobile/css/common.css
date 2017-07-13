@@ -62,7 +62,7 @@ background:#56216f;
 }
 .black_loading,.dw_loading{
     width: 3.75rem;
-    background: url(../images/mt0.png);
+    background: rgba(0,0,0,.3);
     position: fixed;
     bottom: 0;
     top:0;
@@ -81,10 +81,10 @@ background:#56216f;
     -webkit-transform: translateY(-50%);
 }
 .black_loading .ldbg img,.dw_loading .ldbg img{
-    width:0.25rem;
-    height:0.25rem;
-    margin-left:0.15rem;
-    margin-top:0.15rem;
+    width: 0.2rem;
+    height: 0.2rem;
+    margin-left: 0.2rem;
+    margin-top: 0.2rem;
     float:left;
 }
 .black_loading .ldbg p,.dw_loading .ldbg p{

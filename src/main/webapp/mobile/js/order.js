@@ -1,4 +1,5 @@
 ﻿$(document).ready(function(){
+	 getData();
     $(".link-home").attr("href","javascript:void(0);").click(function(){
         if (/(iPhone|iPad|iPod)/i.test(navigator.userAgent)) {
             window.location.href = window.document.referrer;
@@ -212,7 +213,7 @@ function addpartenr(){
 
 
     //登录用户；默认显示信息；
-    getData();
+   
     function getData(){
         var _uid = fnBase.huoqu(0, "uid");
         if (_uid == null || _uid == "undefined" || _uid == "") {
@@ -223,12 +224,34 @@ function addpartenr(){
         var postData={};
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
+//            fnBase.keep(1,"uname",data.details.nick);
+//            fnBase.keep(1,"usfz",data.details.idCard);
             $("#userName").attr('value',data.details.nick);
             $("#tel").attr('value',data.details.tel);
             $("#identity").attr('value',data.details.idCard);
         });
 
     }
+  // 住房协议
+
+    
+    $("#contract").click(function(){
+    	var is=$(this).find('span');
+    	if(is.hasClass('czs-circle-o')==true){
+    		is.removeClass('czs-circle-o')
+    	}else{
+    		is.addClass('czs-circle-o')
+    	}
+    })
+    
+    $("#userName").bind('input onchange',function(){
+    	console.log($(this).val())
+    })
+    
+    $("#contract a").click(function(){
+    	fnBase.keep(1,"uname",$("#userName").val());
+    	fnBase.keep(1,"usfz",$("#identity").val());
+    })
     
  // 免押金说明
     $("#masking").hide();
@@ -260,16 +283,20 @@ function addpartenr(){
         var num_door=fnBase.huoqu(1,'num_door');
         var _description=_community+"-"+roonWz+"-"+roomCX+"-"+num_door+'';
         if(_userName==''){
-            fnBase.myalert("请输入入住人姓名");
+            fnBase.myalert("请输入您的姓名");
             return;
         }
         if(_tel==''){
-            fnBase.myalert("请输入入住人电话号码");
+            fnBase.myalert("请输入您的电话号码");
             return;
         }
         if(_identity==''){
             fnBase.myalert("请输您的身份证号");
             return;
+        }
+        if($("#contract span").hasClass('czs-circle-o')!=true){
+        	 fnBase.myalert("同意住房协议之后才可以提交");
+        	 return;
         }
         var frontURL=Constant.URL+'/mobile/modulePost';
         var postData={

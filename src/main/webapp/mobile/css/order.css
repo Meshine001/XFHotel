@@ -4,8 +4,11 @@
 /*优惠劵*/
 .order_info .roompPic a{float:right;color:orangered;font-weight: 400;font-size: 0.12rem;padding-right: 0.1rem;}
     
+/*住房协议样式*/
 
-
+#contract span{
+	cursor: pointer;color: #00b38a;text-align: center;line-height: 0.4rem
+}
 
 
 

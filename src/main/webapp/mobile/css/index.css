@@ -185,6 +185,13 @@
 .item-room .label-price{position: absolute;right: 0;bottom: 0rem;font-size: 0.15rem;color: red;font-weight: 600}
 .item-room .img-wrapper{float: left;width: 1.5rem;height: 1rem;margin-right:0.1rem ;overflow: hidden}
 .item-room .img-wrapper img{width: 1.5rem;height: 1rem}
+.item-room .myaddres{
+    position: absolute;
+    right: 0;
+    top: 0.035rem;
+    font-size: 0.13rem;
+    color: #c3b4b4;
+}
 
 .item-room .right-content{
     height: 1rem;

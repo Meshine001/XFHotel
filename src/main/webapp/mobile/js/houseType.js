@@ -51,6 +51,13 @@ $(document).ready(function(){
             $("#area").html("全部");
         })
     }
+    function lock(){
+   	 $('.goodlist').on('click','li',function(){
+	        	var id=$(this).attr('proID');
+             var isoff= $(this).attr('offer');
+             window.location.href="house_particulars.html?id="+encodeURIComponent(id)+"";
+	        })
+   }
 //查询；
     $("#confirm").click(function(){
 
@@ -92,15 +99,11 @@ $(document).ready(function(){
     	            $("#Myscroll-body").css('background','#FFF');
     	            $('body').addClass('wingBg');
     	        }
-    	        $('.goodlist li').unbind('click').click(
-    	            function(){
-    	                var id=$(this).attr('proID');
-    	                var isoff= $(this).attr('offer');
-    	                window.location.href="house_particulars.html?id="+encodeURIComponent(id)+"&offer="+encodeURIComponent(isoff);
-    	            }
-    	        );
+    	      lock();
     	})
     });
+    
+    
     
     /*搜索*/
     $(".header-mobile .link-btn").click(function(){
@@ -136,18 +139,23 @@ $(document).ready(function(){
 	            $("#Myscroll-body").css('background','#FFF');
 	            $('body').addClass('wingBg');
 	        }
-	        $('.goodlist li').unbind('click').click(
-	            function(){
-	                var id=$(this).attr('proID');
-	                var isoff= $(this).attr('offer');
-	                window.location.href="house_particulars.html?id="+encodeURIComponent(id)+"";
-	            }
-	        );
+	        lock();
     }
     
     /*定位附近的*/
-    $("#nearby").unbind('click').click(function(){
-    	
+    $("#nearby").on('click',function(){
+    	if($("#filisted").hasClass('show')==true){
+    		$("#filisted").removeClass('show')
+    	}else{
+    		$("#filisted").addClass('show')
+    	}
+    })
+    
+    
+    
+    
+    $("#filisted ul li").click(function(){
+    	var mi=$(this).attr('add');
     	if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
     		   getLocation();
     		}else{
@@ -163,7 +171,8 @@ $(document).ready(function(){
            fnBase.loadShow();
            navigator.geolocation.getCurrentPosition(mapIt,locationError);
         }
-        
+    	$("#filisted").removeClass('show')
+    	mapIt();
         function mapIt(position){ 
         	var lon=position.coords.longitude;
         	var lat=position.coords.latitude;  
@@ -171,14 +180,31 @@ $(document).ready(function(){
         	var frontURL=Constant.URL+'/mobile/distance';
         	var postdata={
         			'lng1':lon,
-        			'lat1':lat
+        			'lat1':lat,
+        			'mi':mi
+//        			'lng1':109.022892,
+//        			'lat1':34.264563
         	};
+        	
+        	console.log(postdata)
         	fnBase.commonAjax(frontURL,postdata,function(data){
         		console.log(data);
-        		alert('经度lng1'+lon+"<br>纬度lat1"+lat)
-        		
+        		var dl='符合您要求的房屋有 '+data.length+' 个';
+        		var str='';
+        		var mi,km;
+        		$('.goodlist').html("");
+     	        for(var i=0;i<data.length;i++){
+     	        	mi=data[i].distance;
+     	        	km=mi/1000;
+     	            str+='<li proID='+data[i].apartment.id+'><div class="item-room"><a href="javascript:;"class="img-wrapper"><img src="'+Constant.URL+"/images/"+data[i].apartment.fang_jian_tu[0]+'"></a><div class="right-content"><h1 class="text-ellipsis"><a href="">'+data[i].apartment.position.xiao_qu+'</a></h1><h2 class="text-ellipsis">'+data[i].apartment.basic_info.shi+"室"+data[i].apartment.basic_info.ting+"厅"+
+     	            data[i].apartment.basic_info.wei+"卫"+"-"+data[i].apartment.basic_info.cao_xiang+'</h2><p class="text-ellipsis address">'+data[i].apartment.position.bd_wei_zhi+' '+data[i].apartment.position.jie_dao+'</p><p class="label-group"><i class="label-type1">'+data[i].apartment.basic_info.lei_xing+'</i></p><span class="label-price">'+data[i].apartment.basic_info.jia_ge+
+     	            '<small>/天</small></span><span class="myaddres"><'+km.toFixed(2)+'km</span></div></div></li>';
+     	        }
+     	        $('.goodlist').append(str);
+     	       fnBase.myalert(dl);
+     	     
         	})
-        	
+        	 lock();
         };
        
         

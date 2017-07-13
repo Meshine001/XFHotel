@@ -825,8 +825,8 @@ public class MobileController  {
 	}
 	
 	@RequestMapping(value = "/distance",method = RequestMethod.POST)
-	public @ResponseBody ArrayList<Object> distance(double lat1 , double lng1){
-		JSONArray homeRooms = apartmentService.getHomeApartments();
+	public @ResponseBody ArrayList<Object> distance(double lat1 , double lng1 ,Long mi){
+		JSONArray homeRooms = apartmentService.getHomeApartments1();
 		ArrayList<Object> list = new ArrayList<Object>();
 	     for (int i = 0; i < homeRooms.size(); i++) {
 	    		Map<String, Object> map = new HashMap<String, Object>();
@@ -835,9 +835,12 @@ public class MobileController  {
 				String a2 = jo.getJSONObject("position").getString("wei_du");
 				  double lng2=Double.parseDouble(a1);
 				  double lat2=Double.parseDouble(a2);
-				  map.put("apartment", jo);
-				  map.put("distance", apartmentService.GetDistance(lat1,lat2,lng1,lng2));
-				  list.add(map);
+				  if(apartmentService.GetDistance(lat1,lng1,lat2,lng2)<=mi){
+					  map.put("apartment", jo);
+					  map.put("distance", apartmentService.GetDistance(lat1,lng1,lat2,lng2));
+					  list.add(map); 
+				  }
+				  
 	     }
 		return list;	
 	}

@@ -112,7 +112,7 @@ var resiger={
                             'state=index.html?id=#wechat_redirect ';
                         window.location.href = redirect;
                     }
-                    window.location.href="login.html";
+                    window.location.href="index.html";
                 }else{
                     fnBase.myalert(data.content)
                 }
