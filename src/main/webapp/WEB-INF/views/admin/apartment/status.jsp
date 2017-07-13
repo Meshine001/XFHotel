@@ -71,9 +71,9 @@
 	<my_script>
 	    <!-- 
 	     <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/jquery-1.7.1.min.js"></script>  
-			 <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/status.js"></script> 
+			
 		 -->
-	
+	 <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/status.js"></script> 
 		 <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/date.js"></script> 
 
 

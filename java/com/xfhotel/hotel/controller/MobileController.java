@@ -11,8 +11,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.chainsaw.Main;
-import org.hibernate.service.jta.platform.internal.SynchronizationRegistryBasedSynchronizationStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,11 +61,6 @@ import net.sf.json.JSONObject;
 @Controller
 @RequestMapping("mobile")
 public class MobileController  {
-	 private static double EARTH_RADIUS = 6371.393;  
-	    private static double rad(double d)  
-	    {  
-	       return d * Math.PI / 180.0;  
-	    }
  	@Autowired
 	CleanService cleanservice;
 	
@@ -190,7 +183,6 @@ public class MobileController  {
 		c.setDetails(details);
 		c.setRegTime(new Date().getTime());
 		c.setLevel(0);
-	
 		if (customerService.register(c, details) == true) {
 			Customer c1 = customerService.getCustomer(c.getId());
 			List<Double> list = new ArrayList<Double>();
@@ -856,7 +848,7 @@ public class MobileController  {
 	}
 	
 	@RequestMapping(value = "/distance",method = RequestMethod.POST)
-	public @ResponseBody  ArrayList<Object> distance(double lat1 , double lng1){
+	public @ResponseBody ArrayList<Object> distance(double lat1 , double lng1 ,Long mi){
 		JSONArray homeRooms = apartmentService.getHomeApartments1();
 		ArrayList<Object> list = new ArrayList<Object>();
 	     for (int i = 0; i < homeRooms.size(); i++) {
@@ -866,16 +858,14 @@ public class MobileController  {
 				String a2 = jo.getJSONObject("position").getString("wei_du");
 				  double lng2=Double.parseDouble(a1);
 				  double lat2=Double.parseDouble(a2);
-				  map.put("apartment", jo);
-				  map.put("distance", apartmentService.GetDistance(lat1,lng1,lat2,lng2));
-				  list.add(map);
+				  if(apartmentService.GetDistance(lat1,lng1,lat2,lng2)<=mi){
+					  map.put("apartment", jo);
+					  map.put("distance", apartmentService.GetDistance(lat1,lng1,lat2,lng2));
+					  list.add(map); 
+				  }
+				  
 	     }
-	     
 		return list;	
-	}
-	
-	public static void main(String[] args) {
-
 	}
 
 }

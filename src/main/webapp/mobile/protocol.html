@@ -13,7 +13,7 @@
     <script type="text/javascript" src="js/fnBase.js"></script>
     <style>
         .about{font-size: 0.14rem;line-height: 0.3rem;padding: 0.1rem}
-        h1{font-size:0.14rem;text-align:center;line-height:0.3rem;color:#333}
+        h1{font-size:0.15rem;text-align:center;line-height:0.3rem;color:#333}
         .label,.textcon{font-size:0.14rem;line-height: 0.3rem;padding: 0 0.1rem;color:#333}
         .textcon{margin-bottom:0.08rem}
         .label i{color:#878787}
@@ -32,8 +32,8 @@
 <div id="Myscroll-body">
 	<h1>青舍都市公寓短租合同</h1>
     <p class="label">出租方(甲方)：<i>青舍都市公寓</i></p>
-    <p class="label">承租方(乙方)：<i>张三</i></p>
-    <p class="label"> 身份证号码：<i>612323199112146811</i></p>
+    <p class="label" id="username">承租方(乙方)：<i></i></p>
+    <p class="label" id="userid"> 身份证号码：<i></i></p>
     <p class="textcon">经双方协商，乙方同意租用甲方所有的青舍都市公寓，并订以下合同，共同遵守:</p>
     <p class="textcon"> 第一条 甲方出租的公寓为居住功能，配置必备的家具、家电及生活用品，符合国家公寓居住的有关法律的规定。乙方保证在公寓入住期间不改变公寓用途，不破坏房子结构，保证自己的行为符合法律、法规和有关政策的规定。</p>
 	<p class="textcon">第二条 租用期限：具体租用日期、价格及押金等事宜按实际订单执行。房费和押金先交后用，合同期满，甲方验收无误后，将押金退还乙方</p>
@@ -43,5 +43,14 @@
 	<p class="textcon">第六条 其它未尽事宜，由甲乙双方协商解决。</p>
 	<p class="textcon">第七条 本协议一式两份，甲、乙双方各执一份，签字后即行生效。</p>
 </div>
+<script>
+(function(){
+	var _uname=fnBase.huoqu(1,"uname");
+	var _usfz=fnBase.huoqu(1,"usfz");
+	
+	$("#username i").text(_uname);
+	$("#userid i").text(_usfz);
+})(jQuery)
+</script>
 </body>
 </html>
