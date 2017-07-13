@@ -11,6 +11,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.chainsaw.Main;
+import org.hibernate.service.jta.platform.internal.SynchronizationRegistryBasedSynchronizationStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,6 +63,11 @@ import net.sf.json.JSONObject;
 @Controller
 @RequestMapping("mobile")
 public class MobileController  {
+	 private static double EARTH_RADIUS = 6371.393;  
+	    private static double rad(double d)  
+	    {  
+	       return d * Math.PI / 180.0;  
+	    }
  	@Autowired
 	CleanService cleanservice;
 	
@@ -183,8 +190,32 @@ public class MobileController  {
 		c.setDetails(details);
 		c.setRegTime(new Date().getTime());
 		c.setLevel(0);
+	
 		if (customerService.register(c, details) == true) {
 			Customer c1 = customerService.getCustomer(c.getId());
+			List<Double> list = new ArrayList<Double>();
+			list.add(20.0);
+			list.add(30.0);
+			list.add(50.0);
+			List<String> list1 = new ArrayList<String>();
+			list1.add("200");
+			list1.add("300");
+			list1.add("500");
+			long i= new Date().getTime();
+			i=i+1000 * 60 * 60 * 24 * 30 *6;
+			for(double cValue : list){
+				for(String rule :list1){
+					Coupon coupon = new Coupon();
+					coupon.setcValue(cValue);
+					coupon.setStartTime(new Date().getTime());
+					coupon.setEndTime(i);
+					coupon.setType(1);
+					coupon.setRule(rule);
+					coupon.setuId(c1.getId());
+					couponService.add(coupon);
+					break;
+				}
+			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c1);
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
@@ -825,8 +856,8 @@ public class MobileController  {
 	}
 	
 	@RequestMapping(value = "/distance",method = RequestMethod.POST)
-	public @ResponseBody ArrayList<Object> distance(double lat1 , double lng1){
-		JSONArray homeRooms = apartmentService.getHomeApartments();
+	public @ResponseBody  ArrayList<Object> distance(double lat1 , double lng1){
+		JSONArray homeRooms = apartmentService.getHomeApartments1();
 		ArrayList<Object> list = new ArrayList<Object>();
 	     for (int i = 0; i < homeRooms.size(); i++) {
 	    		Map<String, Object> map = new HashMap<String, Object>();
@@ -836,10 +867,15 @@ public class MobileController  {
 				  double lng2=Double.parseDouble(a1);
 				  double lat2=Double.parseDouble(a2);
 				  map.put("apartment", jo);
-				  map.put("distance", apartmentService.GetDistance(lat1,lat2,lng1,lng2));
+				  map.put("distance", apartmentService.GetDistance(lat1,lng1,lat2,lng2));
 				  list.add(map);
 	     }
+	     
 		return list;	
+	}
+	
+	public static void main(String[] args) {
+
 	}
 
 }
