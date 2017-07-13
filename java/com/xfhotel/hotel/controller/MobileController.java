@@ -185,6 +185,27 @@ public class MobileController  {
 		c.setLevel(0);
 		if (customerService.register(c, details) == true) {
 			Customer c1 = customerService.getCustomer(c.getId());
+			List<Double> list = new ArrayList<Double>();
+			list.add(20.0);
+			list.add(30.0);
+			list.add(50.0);
+			List<String> list1 = new ArrayList<String>();
+			list1.add("200");
+			list1.add("300");
+			list1.add("500");
+			for(double cValue : list){
+				for(String rule :list1){
+					Coupon coupon = new Coupon();
+					coupon.setcValue(cValue);
+					coupon.setStartTime(new Date().getTime());
+					coupon.setEndTime(new Date().getTime()+1000 * 60 * 60 * 24 * 30 *6);
+					coupon.setType(1);
+					coupon.setRule(rule);
+					coupon.setuId(c1.getId());
+					couponService.add(coupon);
+					break;
+				}
+			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c1);
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");

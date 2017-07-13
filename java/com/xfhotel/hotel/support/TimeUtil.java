@@ -223,4 +223,9 @@ public class TimeUtil {
 		System.out.println(getBetweenDays("2017-03-16", "2017-03-30"));
 
 	}
+
+	public static Long getDateLong(long time) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
