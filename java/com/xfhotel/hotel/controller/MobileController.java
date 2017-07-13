@@ -2,7 +2,9 @@ package com.xfhotel.hotel.controller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -171,8 +172,8 @@ public class MobileController  {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-	public @ResponseBody Message reg(String tel, String password,Model model) {
+	@RequestMapping(value = "/reg", method = RequestMethod.GET)
+	public @ResponseBody Message reg(String tel, String password) {
 		if (customerService.checkTel(tel)) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "手机号已使用");
 		}
@@ -184,6 +185,11 @@ public class MobileController  {
 		c.setRegTime(new Date().getTime());
 		c.setLevel(0);
 		if (customerService.register(c, details) == true) {
+			Calendar calendar = Calendar.getInstance();
+	        Date date = new Date(System.currentTimeMillis());
+	        calendar.setTime(date);
+	        calendar.add(Calendar.MONTH, +6);
+	        date = calendar.getTime();
 			Customer c1 = customerService.getCustomer(c.getId());
 			List<Double> list = new ArrayList<Double>();
 			list.add(20.0);
@@ -198,7 +204,7 @@ public class MobileController  {
 					Coupon coupon = new Coupon();
 					coupon.setcValue(cValue);
 					coupon.setStartTime(new Date().getTime());
-					coupon.setEndTime(new Date().getTime()+1000 * 60 * 60 * 24 * 30 *6);
+					coupon.setEndTime(date.getTime());
 					coupon.setType(1);
 					coupon.setRule(rule);
 					coupon.setuId(c1.getId());
@@ -866,5 +872,20 @@ public class MobileController  {
 		return list;	
 	}
 
+	public static void main(String[] args) {
+//		long date = new Date().getTime(); 
+//		Long res = 0L;
+//		  Date date = new Date(System.currentTimeMillis());
+//		Calendar calendar = Calendar.getInstance();//日历对象
+//		calendar.setTime(date);
+//		 calendar.add(Calendar.MONTH, -6);//月份减一为-1，加一为1
+//		 res=calendar.getTime().getTime();
+//		 //System.out.println(sdf.format());
+//		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		System.out.println(sd.format(date));
+//		System.out.println();
+//		  Date date = new Date(System.currentTimeMillis());
+        
+	}
 }
 
