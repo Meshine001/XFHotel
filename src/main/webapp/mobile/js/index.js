@@ -10,7 +10,7 @@
     
     
     // 新注册礼包
-    $(".Masking-out,.newUser").show();
+    $(".Masking-out,.newUser").hide();
     
     if(fnBase.huoqu(0, "newUser")==1){
     	$(".Masking-out,.newUser").show();
