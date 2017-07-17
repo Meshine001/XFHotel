@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonArray;
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
@@ -35,6 +37,8 @@ import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.TimeUtil;
+
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/admin")
@@ -431,9 +435,28 @@ public class AdminController {
 	@RequestMapping(value = "/getClean", method = RequestMethod.POST)
 	@ResponseBody
 	public Message getClean(Long oederId ){
-		if(cleanService.getClean(oederId)==null){
-			return new Message(Constants.MESSAGE_ERR_CODE, "为空");
-		}
+		try {
+			if(cleanService.getClean(oederId)==null){
+				return new Message(Constants.MESSAGE_ERR_CODE, "为空");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "失败");
+			}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, cleanService.getClean(oederId));
+	}
+	
+	@RequestMapping(value = "/roomSort", method = RequestMethod.POST)
+	public @ResponseBody Message  roomSort(Long roomId , int sort){
+		try{
+			Apartment apartment = apartmentService.findById(roomId);
+			apartment.setSort(sort);
+			apartmentService.update(apartment);
+	} catch (Exception e) {
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "设置失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,"设置成功");
 	}
 }

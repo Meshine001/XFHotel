@@ -170,7 +170,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 	@Transactional
 	@Override
 	public JSONArray getHomeApartments() {
-		List<Apartment> apartments = apartmentDAO.getListByHQL("from Apartment where show_home=true", null);
+		List<Apartment> apartments = apartmentDAO.getListByHQL("from Apartment where show_home=true order by sort asc", null);
 		return JSONArray.fromObject(apartments);
 	}
 	
@@ -224,8 +224,8 @@ public class ApartmentServiceImpl implements ApartmentService {
 			allDates.addAll(TimeUtil.getAllDateInMonth(curY, curM + 1));
 		}
 		JSONArray prices = new JSONArray();
-		List<Order> availableOrders = orderService.checkAvailable(id, TimeUtil.getDateStr(start),
-				TimeUtil.getDateStr(end));
+//		List<Order> availableOrders = orderService.checkAvailable(id, TimeUtil.getDateStr(start),
+//				TimeUtil.getDateStr(end));
 		for (Date d : allDates) {
 			JSONObject info = new JSONObject();
 			JSONObject details = new JSONObject();
@@ -249,15 +249,15 @@ public class ApartmentServiceImpl implements ApartmentService {
 					details.put("roomNum", "0");
 				}
 			}
-			for (Order o : availableOrders) {
-				Long tt = d.getTime() + 1000 * 60 * 60 * 14;
-//				Date date = new Date(tt);  
-//				SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//				System.out.println(sd.format(date));
-				if (tt >= o.getStartTime() && tt < o.getEndTime()) {
-					details.put("roomNum", "0");
-				}
-			}
+//			for (Order o : availableOrders) {
+//				Long tt = d.getTime() + 1000 * 60 * 60 * 14;
+////				Date date = new Date(tt);  
+////				SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+////				System.out.println(sd.format(date));
+//				if (tt >= o.getStartTime() && tt < o.getEndTime()) {
+//					details.put("roomNum", "0");
+//				}
+//			}
 			info.put(DateUtil.format(d, "yyyy-MM-dd"), details);
 			prices.add(info);
 		}

@@ -172,7 +172,7 @@ public class MobileController  {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/reg", method = RequestMethod.GET)
+	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	public @ResponseBody Message reg(String tel, String password) {
 		if (customerService.checkTel(tel)) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "手机号已使用");
@@ -184,6 +184,7 @@ public class MobileController  {
 		c.setDetails(details);
 		c.setRegTime(new Date().getTime());
 		c.setLevel(0);
+		
 		if (customerService.register(c, details) == true) {
 			Customer c1 = customerService.getCustomer(c.getId());
 			Calendar calendar = Calendar.getInstance();
@@ -199,8 +200,10 @@ public class MobileController  {
 			list1.add("200");
 			list1.add("300");
 			list1.add("500");
+			int d = 0;
 			for(double cValue : list){
-				for(String rule :list1){
+				for(int i =0;list1.size()>i;i++){
+					String rule = list1.get(d);
 					Coupon coupon = new Coupon();
 					coupon.setcValue(cValue);
 					coupon.setStartTime(new Date().getTime());
@@ -209,10 +212,11 @@ public class MobileController  {
 					coupon.setRule(rule);
 					coupon.setuId(c1.getId());
 					couponService.add(coupon);
+					d++;
 					break;
 				}
 			}
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, c1);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, c1.getId());
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
@@ -224,6 +228,7 @@ public class MobileController  {
  * @param page
  * @return
  */
+	
 	@RequestMapping(value = "/get", method = RequestMethod.POST)
 	public @ResponseBody ArrayList<Object> getRoomComments(Long roomId){
 		ArrayList<Object> list = new ArrayList<Object>();
@@ -303,7 +308,7 @@ public class MobileController  {
 			vCode.put("diedLine", new Date().getTime()+Constants.SMS_AVAILBEL_TIME);
 			vCode.put("code", vCodeStr);
 			session.setAttribute("vCode", vCode);
-//			System.out.println("send vcode==>"+vCode);
+			System.out.println("send vcode==>"+vCode);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -381,7 +386,6 @@ public class MobileController  {
 				maps.add(m);
 				 
 			}
-			
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -395,10 +399,8 @@ public class MobileController  {
 	 */
 	@RequestMapping(value = "/detailsData", method = RequestMethod.POST)
 	public @ResponseBody Customer getCustomerDetails(Long id){
-		
 		return customerService.getCustomer(id);
 	}
-	
 	
 	/**
 	 * 评论
@@ -475,6 +477,21 @@ public class MobileController  {
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order.toMap());
+		
+		Long data = new Date().getTime();
+		data+=1000*60*60*12;
+		House house = houseService.getHouse(roomId, data);
+		int state =1;
+		if(house!=null){
+			house.setState(state);
+			houseService.update(house);
+		}else{
+			House house1 = new House();
+			house1.setApartmentId(roomId);
+			house1.setDate(data);
+			house1.setState(state);
+			houseService.add(house1);
+		}
 //		System.out.println(info);
 		return info;
 	}
@@ -542,6 +559,7 @@ public class MobileController  {
 		session.setAttribute(Constants.PAGE, Constants.PAGE_DETAILS);
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
 	}
+	
 	
 	/*
 	 * 青舍生活
@@ -702,7 +720,6 @@ public class MobileController  {
 		if(null == currentPage){
 			currentPage = 1;
 		}
-		
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("searchData", searchData);
 		info.put("areas", Area.getAreas());
@@ -753,7 +770,6 @@ public class MobileController  {
 		return map ;
 	}
 	
-	
 	/**
 	 * 退租
 	 * @param orderId
@@ -789,7 +805,6 @@ public class MobileController  {
 		if(content1==null){
 			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
 		}
-		
 		try {
  			Order o = orderservice.get(oederId);
 			Clean clean = new Clean();
@@ -839,6 +854,7 @@ public class MobileController  {
 		return list;
 	}
 	
+	
 	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.POST)
 	public @ResponseBody JSONObject getRangePrices(@PathVariable("id") Long id,
 			@PathVariable("startDate") String startDate) {
@@ -850,6 +866,7 @@ public class MobileController  {
 		}
 		return data;
 	}
+	
 	
 	@RequestMapping(value = "/distance",method = RequestMethod.POST)
 	public @ResponseBody ArrayList<Object> distance(double lat1 , double lng1 ,Long mi){

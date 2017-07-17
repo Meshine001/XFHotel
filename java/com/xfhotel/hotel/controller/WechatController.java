@@ -269,7 +269,6 @@ public class WechatController {
 			response.put("obj", obj);
 			return response;
 		}
-
 	}
 
 	/**

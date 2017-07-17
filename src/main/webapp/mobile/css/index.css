@@ -7,11 +7,11 @@
 	position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 10003;
 }
 .newUser img{
-	width:95%;
-	position:absolute;
-	top:50%;
-	left:2.5%;
-	margin-top:-1.2rem;
+	width: 65%;
+    position: absolute;
+    top: 50%;
+    left: 16%;
+    margin-top: -1.725rem;
 }
 .newUser i{
 	font-style: normal;
