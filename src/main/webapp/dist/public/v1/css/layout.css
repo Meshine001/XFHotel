@@ -239,10 +239,16 @@
 	line-height: 51px;
 	text-align: center;
 	display: inline-block;
-	background: url(../images/more.jpg);
+/*  background: url(../images/more.jpg);*/	
 	background-size: 100%;
+	border:1px solid #000;
+	transition: all .5s;
 }
-
+.more a:hover{
+	background:#333;
+	color:#fff;
+	border-color:#5bcecc;
+}
 .hai {
 	background: white;
 	padding: 10px 0;
@@ -601,7 +607,9 @@ div#index_list_calendar-box {
 }
 
 .service {
-	background-color: #e6e6e6;
+	
+/*	background-color: #e6e6e6;
+	border-bottom: 1px solid #ccc;*/
 	padding: 10px 0;
 }
 

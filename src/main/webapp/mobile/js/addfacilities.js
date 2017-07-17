@@ -1,120 +1,98 @@
 ﻿$(document).ready(function(){
 	
-
+	var totalPrice=0;
+	var selectProList=new Array();
+	$(".account-login-width").click(function(){
+		 var liListStr=selectProList.join(",");
+        console.log(liListStr)
+    })
 	
-    var _uid=fnBase.huoqu(0,"uid");
-    if(_uid==null || _uid=="undefined" || _uid==""){
-        window.location.href="login.html";
-        return;
-    }
-    var postData={uId:_uid,type:0 };
-    var frontURL=Constant.URL+'/mobile/Clean';
-    fnBase.commonAjax(frontURL,postData,function(data){
-        console.log(data);
-        if(data.content.length==0){
-            $("#atl").show();
-        }
-        var str='';
-        $(".house-status ol").html('');
-        for(var i=0;i<data.content.length;i++){
-            str+='<dd hid="'+data.content[i].id+'">'+data.content[i].description+'</dd>'
-        }
-        $(".house-status ol").append(str);
-    });
-        
+	
 
-
-    /*
-    * ��������ύ����
-    * demand  $('.per-order-status ._textarea').val();
-    * oederId  _oederId
-    * content _content
-    * cleanTime _cleanTime
-    *
-    * */
-    var _oederId='';
-    $(".house-status ol dd").live('click',function(){
-        $(this).addClass('_active').siblings().removeClass('_active');
-        if($(this).hasClass('_active')==true){
-            _oederId=$(this).attr('hid');
-        }
-        return _oederId;
-    });
-
-    var _content='';
-
-    $(".content-status ol dd").live('click',function(){
-        if($(this).hasClass('_active')==false){
-            $(this).addClass('3213213');
-        }else{
-            $(this).removeClass('12312312');
-        }
-        var houseList=new Array();
-        for(var i=0;i<$(".content-status ol dd").length;i++){
-            if($(".content-status ol dd").eq(i).hasClass('_active')==true){
-                houseList.push($(".content-status ol dd").eq(i).attr('paid'));
-            }
-        }
-        _content=houseList.join(',');
-        return _content;
-    });
-
-    var _cleanTime='';
-    $(".time-status ol dd").live('click',function(){
-        $(this).addClass('_active').siblings().removeClass('_active');
-       if($(this).hasClass('_active')==true){
-           _cleanTime=$(this).attr('tid');
-       }
-        return _cleanTime;
-    });
-
-
-
-
-
-    //�ύ����
-    $(".account-login-width  a").click(function(){
-
-       if(_oederId==''){
-           fnBase.myalert('请选择要服务的房间');
-           return;
-       }
-        if(_content==''){
-            fnBase.myalert('请选择服务的项目内容');
+var addfacilities={
+    house:function(){//判断房间
+    	var _uid=fnBase.huoqu(0,"uid");
+        if(_uid==null || _uid=="undefined" || _uid==""){
+            window.location.href="login.html";
             return;
         }
-        if(_cleanTime==''){
-            fnBase.myalert('请选择服务的时间');
-            return;
-        }
-        var postData={
-            oederId:_oederId,
-            content1:_content,
-            cleanTime:_cleanTime,
-            demand:$('.per-order-status ._textarea').val()
-        };
-        console.log(postData);
-        var frontURL=Constant.URL+'/mobile/cleanAdd';
-        $.ajax({
-            type:'post',
-            dataType:'json',
-            data:{
-                oederId:_oederId,
-                content1:_content,
-                cleanTime:_cleanTime,
-                demand:$('.per-order-status ._textarea').val()
-            },
-           
-            url:frontURL,
-            success:function(data){
-                console.log(data);
-                fnBase.myalert('提交成功');
-                setTimeout(function(){
-                	window.location.href='serve.html';
-                },300)
-                
+        var postData={uId:_uid,type:0 };
+        var frontURL=Constant.URL+'/mobile/Clean';
+        fnBase.commonAjax(frontURL,postData,function(data){
+            console.log(data);
+            if(data.content.length==0){
+                $("#atl").show();
             }
+            var str='';
+            $(".house-status ol").html('');
+            for(var i=0;i<data.content.length;i++){
+                str+='<dd hid="'+data.content[i].id+'">'+data.content[i].description+'</dd>'
+            }
+            $(".house-status ol").append(str);
         });
-    });
+    },
+    acquisition:function(){ //添加物品
+    	$('.per-order-status .toll .toll-c').click(function(){ 
+    		if($(this).hasClass('active')==true){
+    			$(this).removeClass('active')
+    		}else{
+    			$(this).addClass('active')
+    		}
+    		countPrice();
+    	})
+    	
+    	$(".vip_info_list li .per-order-status .toll .numContainer .riNum").click(function(){
+    		//fnBase.myalert('增加')
+    		var currentLi=$(this).parent().parent();
+			var num=parseInt(currentLi.attr("num"),10);		
+			num=num+1;
+			currentLi.attr("num",num);
+			currentLi.find('input').val(num);
+			countPrice()
+    	})
+    	$(".vip_info_list li .per-order-status .toll .numContainer .leNum").click(function(){
+    		//fnBase.myalert('减少')
+    		var currentLi=$(this).parent().parent();
+			var num=parseInt(currentLi.attr("num"),10);		
+			if(num<=1){
+				  num=1;
+				  fnBase.myalert("数量不能小于1");
+				  return;
+				}
+			num=num-1;
+			currentLi.attr("num",num);
+			currentLi.find('input').val(num);
+			countPrice()
+    	})
+    	//计算价格
+		function countPrice(){
+		    totalPrice=0;
+		    var liLength=$(".vip_info_list li .per-order-status .toll").length;
+			var myts=0;
+			selectProList=[];
+		    for(var i=0;i<liLength;i++){
+				var danjia=$(".vip_info_list li .per-order-status .toll").eq(i).attr("price");
+				var shuliang=$(".vip_info_list li .per-order-status .toll").eq(i).attr("num");
+				if($(".vip_info_list li .per-order-status .toll").eq(i).find('.toll-c').hasClass('active')==true){
+				  totalPrice=fnBase.accAdd(totalPrice, fnBase.accMul(danjia, shuliang));
+				  selectProList.push($(".vip_info_list li .per-order-status .toll").eq(i).attr("cartid"));
+				}
+		   }
+		    $(".bottomContainer span").text(totalPrice);
+		  
+		}
+    	
+    	
+    	
+    }
+
+
+}
+	
+addfacilities.house();   
+addfacilities.acquisition();        
+
+
+    
 
 });

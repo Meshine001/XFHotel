@@ -3995,9 +3995,24 @@ a:hover {
 	{
 	background-color: #29c75f;
 }
+select.form-control{
+    border-radius: 2px;
+    padding: 10px 15px;
+    height: auto;
+    font-size: 1em;
+    line-height: auto;
+    border: 1px solid #c8d1d3;
+    background-color: transparent;
+    box-shadow: none;
+    margin-bottom: 15px;
+}
+
+
+
+
 
 aside.app-sidebar {
-	position: absolute;
+	position: fixed;
 	top: auto;
 	left: 0;
 	bottom: auto;
@@ -8807,95 +8822,82 @@ i{font-style:normal}
 	
 }
 .detailWraper tr .fl50{width:50%;}
-.detailWraper tr td span{font-weight:400;color: #dd4a4a;}
+.detailWraper tr td span{font-weight:400;color: #999;}
 
-/*日历*/
-.date {
-  position:absolute;
-  /*暂时用这个*/
-  top: 0;
-  left: 0;
-  bottom:0;
-  width: 100%;
-  background: #fff;
-  z-index: 10000000000;
-  overflow:auto;
- 
-  text-align: center;
-  -webkit-overflow-scrolling: touch;
-  overflow-scrolling: touch;
+#h-table .btn{
+	width: 92px;
+    height: 36px;
+    text-align: center;
+    padding: 0;
+    line-height: 36px;
+    border-radius: 6px;
+    background: #656262;
+    color: #eae7e7;
 }
-
-.date .title div{
-  display: inline;
+#h-table .btn:hover{background:#f98d08;color:#fff}
+#h-table .paixu:hover{border-color:#f98d08:background:none;color:black;}
+#h-table .paixu{
+	width: 92px;
+    height: 36px;
+    padding: 0;
+    line-height: 36px;
+    border-radius: 6px;
+    border:1px solid #29c75f;
+    color: #656262;
+    position:relative;
 }
-
-.tac{
-	font-size:14px;
-	line-height:25px;
-	color:#333;
-    clear: both;
+#h-table .paixu input{
+	width:45%;
+	heigth:30px;
+	position:absolute;
+	left:0;
+	top:2px;
+	text-align:center;
+	line-height:28px;
+	color:block;
+	transition:0s;
+	border-radius: 3px;
+	border:none;
 }
-.date ul{padding:0}
-.date ul li {
-  float: left;
-  width: 14.285%;
-  text-align: center;
-  border-bottom: 1px solid #ebecf2;
-  border-left: 1px solid #ebecf2;
-  background: #fff;
-}
-
-.week li {
-  background-color: #f1f1f1;
-  height: 40px;
-  line-height: 40px;
-  border-top: 1px solid #ebecf2;
-}
-.day li{
-  height: 50px;
-  line-height: 25px;
-}
-.day li i{
-  color: #777;
-}
-.day .enter {
-  background: url("../en.png") no-repeat center center;
-  background-size: 0.5rem;
-  color: #0cf507;
-}
-.day .enter i{
-  color:#0cf507;
-}
-.day .leave {
-  background: url("../likai.png") no-repeat center center;
-  background-size: 0.5rem;
-  color: #0cf507;
+#h-table .stb{
+	cursor: pointer;
+	width:55%;
+	position:absolute;
+	right:0;
+	top:0;
+	text-align:center;
+	line-height: 34px;
+	color:#fff;
+	background: #29c75f;
+	border-radius: 0 6px 6px 0;
 }
 
-.day.leave i{
-  color: #0cf507;
-}
-.day li.disable {
-  background:#e1e1ea;
-}
-/*
-开始到结束日期的样式；
-*/
-.day .selected-range{
-  background: darkgrey;
-}
 
-.close-btn {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  display:block;
-  background: #383436;
-  color: #fff;
-  width:45px;
-  height:45px;
-  border-radius: 50%;
-  line-height:45px;
-}
+/*2017-7-14日历样式begin*/
+.choosecal{ width:100%; margin:3% auto; overflow:hidden;margin-top:0;}
 
+.caltline1{ width:94%; background-color:#F90; overflow:hidden; padding:2% 3%;}
+.caltline1 p{ float:left; width:10%; font-weight:700; text-align:right;}
+.caltline1 .bookdate{ width:90%; text-align:left;}
+
+.inputdate{ color:#F60;}
+.calender{ width:100%; overflow:hidden;}
+.selectmouth{ background-color:#F30; width:100%; 
+overflow:hidden;padding:2% 3%;border-radius:5px 5px 0 0;}
+.selectmouth p{ float:left; width:33%; color:#FFF;margin:0;
+font-weight:700; cursor:pointer;}
+.selectmouth .selectdate{ width:100%; background-color:#F30; 
+border:none; color:#FFF; font-weight:700; text-align:center;} 
+.data_table{ width:100%;border:1px solid #cccccc;
+border-collapse:collapse; }
+.data_table thead{ background-color:#333;}
+.data_table thead td{ color:#FFF; text-align:center;
+border:1px solid #333;border-collapse:collapse; padding:1% 0;
+}
+.data_table tbody td{border:1px solid #aaaaaa;
+border-collapse:collapse;
+text-align:center;color:#0C6;padding:1% 0;
+}
+.data_table tbody td.orderdate{ color:#000;}
+.data_table tbody td.tdselect{ color:#fff;background-color:#999}
+/*2017-7-14日历样式end*/

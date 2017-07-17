@@ -190,3 +190,66 @@ html,body{background: #fff}
     text-align: right;
     padding-right: 0.1rem;
     color: #666666}
+    
+    
+/*添加收费*/
+.vip_info_list li .per-order-status .toll{
+	height:0.3rem;
+	line-height:0.3rem;
+	clear:both;
+	margin-bottom:0.05rem;
+	padding: 0 0.2rem;
+}
+ .vip_info_list li .per-order-status .toll div{float:left}
+ .vip_info_list li .per-order-status .toll .toll-c{
+	width:1rem;
+	background: #eeecec;
+    padding: 0 0.1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}   
+ .vip_info_list li .per-order-status .toll .numContainer{
+ 	width: 1.2rem;
+    height: 0.3rem;
+    background:url(../img/numAdd.png) no-repeat;
+    background-size:100% 100%;
+    float: right;
+ }
+  .vip_info_list li .per-order-status .toll .numContainer .fl{
+  	float:left;
+  	    line-height: 0.3rem;
+  }
+  .vip_info_list li .per-order-status .toll .numContainer .leNum{
+  	width:0.36rem;
+  	height:0.3rem;
+  	cursor: pointer;
+  }
+   .vip_info_list li .per-order-status .toll .numContainer .ceText{
+  	width:0.475rem;
+  	height:0.3rem;
+  	background: #eeecec;
+  }
+   .vip_info_list li .per-order-status .toll .numContainer .riNum{
+  	width:0.36rem;
+  	height:0.3rem;
+  	cursor: pointer;
+  }
+    .vip_info_list li .per-order-status .toll .numContainer .ceText input{
+  	width:0.25rem;
+  	text-align:center;
+  }
+  
+  .bottomContainer{
+  	height:0.3rem;
+	line-height:0.3rem;
+	clear:both;
+	margin-bottom:0.05rem;
+	border-bottom: 1px solid #ccc;
+  }
+  .bottomContainer span{color:red}
+  
+.active{
+   background: #00b38a !important;
+    color: #eeeae7;
+ }

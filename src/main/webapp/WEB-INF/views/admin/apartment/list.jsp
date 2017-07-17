@@ -9,6 +9,7 @@
 <head>
 <title>公寓列表-青舍都市公寓-西安租房_西安合租</title>
 <meta charset="utf-8">
+
 </head>
 <body>
 	<my_body>
@@ -56,18 +57,13 @@
 								<td>${apartment.basic_info.cao_xiang}</td>
 								<td>${apartment.basic_info.mian_ji}</td>
 								<th><a class="btn"
-									href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a>&nbsp;&nbsp;<br>
+									href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a><br>
 									<a class="btn"
-									href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格</a>&nbsp;&nbsp;<br>
+									href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格</a><br>
 									
 									<a href="<%=basePath %>/admin/apartment/showHome/${apartment.id}" class="btn" >
-									<c:if test="${apartment.show_home == true }">
-									首页隐藏
-									</c:if>
-									
-									<c:if test="${apartment.show_home == false }">
-									首页显示
-									</c:if>
+										<c:if test="${apartment.show_home == true }">首页隐藏</c:if>
+										<c:if test="${apartment.show_home == false }">首页显示</c:if>
 									</a><br>
 									<a href="<%=basePath %>/admin/apartment/delete/${apartment.id}" class="btn">删除</a>
 								
@@ -78,7 +74,10 @@
 								<!-- 房态修改begin -->	
 									<br><a href="<%=basePath%>/admin/status" class="btn houseStatus">房态设置</a>
 								<!-- 房态修改end -->	
-								
+								    
+								<!-- 排序begin -->
+									<br><div class="paixu"><input type="text"><a class="stb">排序</a></div>
+								<!-- 排序begin -->
 								</th>
 							</tr>
 						</c:forEach>
@@ -92,11 +91,32 @@
 	<my_script>
 		
 	    <script>
-	    $("#h-table").on('click','tr .evalpinglun,tr .houseStatus',function(){
-			var roomid=$(this).parent().parent().attr('roomid');
-			window.sessionStorage.setItem('roomId',roomid);
-		})
-		
+		    
+			$(document).ready(function(){
+				$("#h-table").on('click','tr .evalpinglun,tr .houseStatus',function(){
+					var roomid=$(this).parent().parent().attr('roomid');
+					window.sessionStorage.setItem('roomId',roomid);
+				})
+				$("#h-table").on('click','tr .paixu .stb',function(){
+					var roomid=$(this).parent().parent().parent().attr('roomid');
+					var sort=$(this).parent().find('input').val();
+					console.log(roomid+'-'+sort);
+					$.ajax({
+						type : 'post',
+						dataType : 'json',
+						url:'/admin/roomSort',
+						data : {
+							'roomid' : roomid,
+							'sort':sort
+						},
+						success:function(data){
+							console.log(data)
+						}
+					})
+					
+				})
+				
+			})
 	    </script>
 	</my_script>
 </body>

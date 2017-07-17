@@ -36,7 +36,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">位置</label>
 							<div class="col-md-9">
-								<select name="xa_wei_zhi" class="">
+								<select name="xa_wei_zhi" class="form-control">
 									<option value="城东">城东</option>
 									<option value="城西">城西</option>
 									<option value="城南">城南</option>
@@ -106,7 +106,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">朝向</label>
 							<div class="col-md-9">
-								<select name="cao_xiang" class="">
+								<select name="cao_xiang" class="form-control">
 									<option value="南北">南北</option>
 									<option value="东西">东西</option>
 								</select>
@@ -331,7 +331,7 @@
 							<label class="col-md-3 control-label">公寓展示</label>
 							<!-- Button trigger modal -->
 							<div class="col-md-9">
-								<ul>
+								<ul style="padding:0;">
 									<li><input type="hidden" name="pic2" id="pic2-1-input">
 										<img alt="" src="" class="img-thumbnail" width="120px"
 										height="80px" id="pic2-1-img"><span
@@ -364,7 +364,7 @@
 							<label class="col-md-3 control-label">小区图片</label>
 							<!-- Button trigger modal -->
 							<div class="col-md-9">
-								<ul>
+								<ul style="padding:0;">
 									<li><input type="hidden" name="pic3" id="pic3-1-input">
 										<img alt="" src="" class="img-thumbnail" width="120px"
 										height="80px" id="pic3-1-img"><span
@@ -387,7 +387,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
-								<select name="lei_xing" id="apartment-type">
+								<select name="lei_xing" class="form-control" id="apartment-type">
 									<option value="酒店型">酒店型</option>
 									<option value="休闲型">休闲型</option>
 								</select>
@@ -398,12 +398,19 @@
 							<label class="col-md-3 control-label">价格</label>
 							<div class="col-md-9">
 								<div class="input-group">
-									<input type="text" name=jia_ge class="price-day"> <span
+									<input type="text" name=jia_ge class="price-day form-control"> <span
 										class="input-group-addon">元/天</span>
 								</div>
 							</div>
 						</div>
-
+						<div class="form-group">
+							<label class="col-md-3 control-label">VR房屋实景地址</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control"
+									placeholder="VR房屋实景链接地址" name="suo_di_zhi">
+							</div>
+						</div>
+						
 						<br>
 						<div class="form-footer">
 							<div class="form-group">

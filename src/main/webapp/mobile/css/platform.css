@@ -7,7 +7,7 @@
     color: #1d1d1d;
     border-bottom:1px solid #dcd8d8;
 }
-.header h1{font-size: 0.25rem}
+.header h1{font-size: 0.25rem;margin-top: 0.1rem;}
 .header p{line-height: 0.35rem;padding-bottom: 0.25rem;}
 .header p i{padding-left: 0.1rem;font-size: 0.14rem;color: #d0d2d1;cursor: pointer}
 .header p i.success{color: #2dec7b}
@@ -20,13 +20,9 @@
 }
 #Myscroll-body{top: 1.8rem;bottom: 0rem;background: #fff;overflow-y: scroll;padding: 0.25rem;font-size: 0.14rem;line-height: 0.35rem}
 .footer{
-    background: #fff;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 0.8rem;
-    padding: 0.25rem;
+	margin-top: 1.2rem;
     font-size: 0.16rem;
+    color: black;
 }
 #Myscroll-body ul li{font-size: 0.22rem;line-height: 0.55rem}
 #Myscroll-body .init{

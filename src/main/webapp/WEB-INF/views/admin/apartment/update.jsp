@@ -38,7 +38,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">位置</label>
 							<div class="col-md-9">
-								<select name="xa_wei_zhi" class="xa_wei_zhi"
+								<select name="xa_wei_zhi" class="form-control xa_wei_zhi"
 									data-value="${apartment.position.xa_wei_zhi}">
 									<option value="城东">城东</option>
 									<option value="城西">城西</option>
@@ -125,7 +125,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">朝向</label>
 							<div class="col-md-9">
-								<select name="cao_xiang" class="cao_xiang"
+								<select name="cao_xiang" class="form-control cao_xiang"
 									data-value="${apartment.basic_info.cao_xiang}">
 									<option value="南北">南北</option>
 									<option value="东西">东西</option>
@@ -200,7 +200,7 @@
 									name="chuang" value="${apartment.basic_info.chuang}">
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group" style="display:none">
 							<label class="col-md-3 control-label">户型图</label>
 							<div class="col-md-9">
 								<ul>
@@ -396,7 +396,7 @@
 							<label class="col-md-3 control-label">公寓展示</label>
 							<!-- Button trigger modal -->
 							<div class="col-md-9">
-								<ul>
+								<ul style="padding:0;">
 									<c:forEach items="${apartment.fang_jian_tu}" var="img" varStatus="p">
 										<li><input type="hidden" name="pic2" id="pic2-${p.index}-input" value="${img}">
 											<img alt="" src="<%=basePath%>/images/${img}" class="img-thumbnail" width="120px"
@@ -411,7 +411,7 @@
 							<label class="col-md-3 control-label">小区图片</label>
 							<!-- Button trigger modal -->
 							<div class="col-md-9">
-								<ul>
+								<ul style="padding:0;">
 									<c:forEach items="${apartment.xiao_qu_tu}" var="img" varStatus="p">
 										<li><input type="hidden" value="${img}" name="pic3" id="pic3-${p.index}-input">
 										<img alt="" src="<%=basePath%>/images/${img}" class="img-thumbnail" width="120px"
@@ -426,7 +426,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
-								<select name="lei_xing" id="apartment-type" class="lei_xing" data-value = "${apartment.basic_info.lei_xing}">
+								<select name="lei_xing" id="apartment-type" class="lei_xing form-control" data-value = "${apartment.basic_info.lei_xing}">
 									<option value="酒店型">酒店型</option>
 									<option value="休闲型">休闲型</option>
 								</select>
@@ -448,12 +448,20 @@
 							<label class="col-md-3 control-label">价格</label>
 							<div class="col-md-9">
 								<div class="input-group">
-									<input type="text" name=jia_ge class="price-day" value="${apartment.basic_info.jia_ge}"> <span
+									<input type="text" name=jia_ge class="price-day form-control" value="${apartment.basic_info.jia_ge}"> <span
 										class="input-group-addon">元/天</span>
 								</div>
 							</div>
 						</div>
-
+						<div class="form-group">
+							<label class="col-md-3 control-label">VR房屋实景地址</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control"
+									placeholder="VR房屋实景链接地址" name="suo_di_zhi"
+									value="${apartment.basic_info.suo_di_zhi}">
+							</div>
+						</div>
+						
 						<br>
 						<div class="form-footer">
 							<div class="form-group">

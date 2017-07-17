@@ -14,7 +14,7 @@
 <body>
 	<my_body>
 	<div class="row">
-		<!-- 
+		
 		<div class="col-md-6">
 			<div class="card card-mini">
 				<div class="card-header">
@@ -22,13 +22,55 @@
 						<h3>房屋状态</h3>
 					</div>
 				</div>
-				<div class="card-body" id="statusDate" style="position:relative;height:356px;"> 
-					 <div id="time" style="display:none"></div>
+				<div class="card-body" id="statusDate" style="position:relative"> 
 					
+					<!-- 2017-7-14日历 --> 
+					
+ <div class="choosecal">
+
+ <div class="calender">
+  <div class="selectmouth">
+  <p style="text-align:right" class="lastmonth"><</p>
+  <p><input type="text" class="selectdate" value="2014年2月" readonly=readonly /></p>
+  <p class="nextmonth">></p>
+  </div>
+  <table class="data_table" cellspacing="0px">
+  <thead>
+   <tr>
+   <td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+   <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+   </tr>
+   <tr>
+   <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+   </tr>
+   <tr>
+   <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+   </tr>
+   <tr>
+   <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+   </tr>
+   <tr>
+   <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+   </tr>
+   <tr>
+   <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+   </tr>
+   </tbody>
+  </table>
+ </div>
+ </div>
+					
+				
+			<!-- 2017-7-14日历 --> 
+		
 				</div>
 			</div>
 		</div>
-		 -->
+		
 		<div class="col-md-6">
 			<div class="card card-mini">
 				<div class="card-header">
@@ -47,7 +89,7 @@
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">状态选择</label>
-							<div class="col-md-3 status-house">
+							<div class="col-md-4 status-house">
 								<a href="javascript:;" stag="0">无房</a>
 								<a href="javascript:;" stag="1">有房</a>
 							</div>
@@ -69,18 +111,11 @@
 	</my_body>
 	
 	<my_script>
-	    <!-- 
-	     <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/jquery-1.7.1.min.js"></script>  
-			
-		 -->
-	 <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/status.js"></script> 
+	    
+	     <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/jquery-1.7.1.min.js"></script>  		
+	     <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/status.js"></script> 
 		 <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/date.js"></script> 
 
-
-		 <script>
-		 	$('#time').hotelDate();
-			$('#time').click();
-  		 </script>
 	</my_script>
 	
 </body>

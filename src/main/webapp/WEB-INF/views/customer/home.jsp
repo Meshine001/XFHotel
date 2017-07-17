@@ -248,7 +248,7 @@
 					name="fangjian_id_4" id="fangjian_id_4"
 					value="2273,1188,2119,913,158,1154">
 				<div class="more">
-					<a title="查看更多房源" href=""></a>
+					<a title="查看更多房源" href="">查看更多房源</a>
 				</div>
 			</div>
 		</div>
@@ -398,7 +398,7 @@
 					</div>
 				</div>
 				<div class="more">
-					<a title="查看更多房源" href=""></a>
+					<a title="浏览更多" href="">浏览更多</a>
 				</div>
 			</div>
 		</div>

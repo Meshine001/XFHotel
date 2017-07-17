@@ -95,7 +95,7 @@ function list(page) {
 					a_change.append('显示');
 				}
 				var td_op = $('<td></td>').append(a_change).append(
-						'&nbsp;&nbsp;').append(a_del);
+						'<br>').append(a_del);
 				tr.append(td_date).append(td_title).append(td_status).append(td_op);
 				$('#t_body').append(tr);
 			});

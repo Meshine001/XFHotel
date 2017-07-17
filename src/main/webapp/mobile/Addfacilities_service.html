@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script type="text/javascript" src="js/fnBase.js"></script>
-    <script type="text/javascript" src="js/personal.js"></script>
+  <!--  <script type="text/javascript" src="js/personal.js"></script> --> 
     <script type="text/javascript" src="js/addfacilities.js"></script>
 </head>
 <body style="background: #FFF;display:none">
@@ -44,20 +44,43 @@
             <div class="per-order-status">
                <labler>免费添加</labler>
                <ol>	
-               		<dd class="active">被子</dd>
+               		<dd>被子</dd>
                		<dd>枕头</dd>	
                		<dd>洗漱用品</dd>
                </ol> 
             </div>
              <div class="per-order-status">
                <labler>收费添加</labler>
-               <ol>	
-               		<dd>床/100/张</dd>
-               		<dd>投影仪/80/天</dd>	
-               		<dd class="active">电脑/30/天</dd>
-               		
-               </ol> 
+               <div class="toll" cartid="1" price="100" num="1">
+               		<div class="toll-c"><i>床</i><i>/100</i><i>/张</i></div>
+               		<div class="numContainer">
+               			<div class="fl leNum"></div>
+               			<div class="fl ceText"><input type='text' disabled value='1'>张</div>
+               			<div class="fr riNum"></div>
+               		</div>	
+               </div>
+               <div class="toll" cartid="2" price="80" num="1">
+               		<div class="toll-c"><i>投影仪</i><i>/80</i><i>/天</i></div>
+               		<div class="numContainer">
+               			<div class="fl leNum"></div>
+               			<div class="fl ceText"><input type='text' disabled value='1'>天</div>
+               			<div class="fr riNum"></div>
+               		</div>	
+               </div>
+                <div class="toll" cartid="3" price="30" num="1">
+               		<div  class="toll-c"><i>电脑</i><i>/30</i><i>/天</i></div>
+               		<div class="numContainer">
+               			<div class="fl leNum"></div>
+               			<div class="fl ceText"><input type='text' disabled value='1'>天</div>
+               			<div class="fr riNum"></div>
+               		</div>	
+               </div>
+               <!-- 结算 -->
+               <div class="bottomContainer">
+               		<p>合计：<span></span>元</p>
+               </div>
             </div>
+            
             <div class="per-order-status">
                <labler>其他要求</labler>
                <textarea class="_textarea" placeholder="您还有什么要求尽管提;"></textarea>
@@ -65,7 +88,7 @@
         </li>
     </ul>
     <p class="account-login-width">
-        <a href="javascript:;">提交</a>
+        <a href="javascript:;">结算提交</a>
     </p>
     <script>
         $(document).ready(function(){
