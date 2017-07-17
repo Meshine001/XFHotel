@@ -21,8 +21,5 @@ public class StringSplitUtil {
 		return sb.toString();
 	}
 
-	public static void main(String[] args) {
-		String[] ss = { "123", null, "1213", "1242" };
-		System.out.println(buildStrGroup(ss));
-	}
+
 }

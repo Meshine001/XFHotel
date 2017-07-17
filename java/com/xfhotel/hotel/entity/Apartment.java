@@ -1,5 +1,6 @@
 ﻿ package com.xfhotel.hotel.entity;
 
+import javax.management.loading.PrivateClassLoader;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -55,6 +56,8 @@ public class Apartment {
 	private String xiao_qu_tu;
 	
 	private boolean show_home;
+	
+	private int sort;
 	
 	public long getId() {
 		return id;
@@ -180,6 +183,14 @@ public class Apartment {
 		this.show_home = show_home;
 	}
 	
+	public int getSort() {
+		return sort;
+	}
+
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
+
 
 	public JSONArray getTe_se_class() {
 		return JSONArray.fromObject(te_se_class);
@@ -236,6 +247,8 @@ public class Apartment {
 	public void setQi_ta_class(String qi_ta_class) {
 		this.qi_ta_class = qi_ta_class;
 	}
+
+	
 
 	public JSONObject toJson(){
 		return JSONObject.fromObject(this);

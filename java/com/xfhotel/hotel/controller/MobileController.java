@@ -192,7 +192,6 @@ public class MobileController  {
 	        calendar.setTime(date);
 	        calendar.add(Calendar.MONTH, +6);
 	        date = calendar.getTime();
-			
 			List<Double> list = new ArrayList<Double>();
 			list.add(20.0);
 			list.add(30.0);
@@ -229,6 +228,7 @@ public class MobileController  {
  * @param page
  * @return
  */
+	
 	@RequestMapping(value = "/get", method = RequestMethod.POST)
 	public @ResponseBody ArrayList<Object> getRoomComments(Long roomId){
 		ArrayList<Object> list = new ArrayList<Object>();
@@ -386,7 +386,6 @@ public class MobileController  {
 				maps.add(m);
 				 
 			}
-			
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -400,10 +399,8 @@ public class MobileController  {
 	 */
 	@RequestMapping(value = "/detailsData", method = RequestMethod.POST)
 	public @ResponseBody Customer getCustomerDetails(Long id){
-		
 		return customerService.getCustomer(id);
 	}
-	
 	
 	/**
 	 * 评论
@@ -562,6 +559,7 @@ public class MobileController  {
 		session.setAttribute(Constants.PAGE, Constants.PAGE_DETAILS);
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
 	}
+	
 	
 	/*
 	 * 青舍生活
@@ -722,7 +720,6 @@ public class MobileController  {
 		if(null == currentPage){
 			currentPage = 1;
 		}
-		
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("searchData", searchData);
 		info.put("areas", Area.getAreas());
@@ -773,7 +770,6 @@ public class MobileController  {
 		return map ;
 	}
 	
-	
 	/**
 	 * 退租
 	 * @param orderId
@@ -809,7 +805,6 @@ public class MobileController  {
 		if(content1==null){
 			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
 		}
-		
 		try {
  			Order o = orderservice.get(oederId);
 			Clean clean = new Clean();
@@ -859,6 +854,7 @@ public class MobileController  {
 		return list;
 	}
 	
+	
 	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.POST)
 	public @ResponseBody JSONObject getRangePrices(@PathVariable("id") Long id,
 			@PathVariable("startDate") String startDate) {
@@ -870,6 +866,7 @@ public class MobileController  {
 		}
 		return data;
 	}
+	
 	
 	@RequestMapping(value = "/distance",method = RequestMethod.POST)
 	public @ResponseBody ArrayList<Object> distance(double lat1 , double lng1 ,Long mi){
