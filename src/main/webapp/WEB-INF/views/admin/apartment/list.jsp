@@ -76,8 +76,9 @@
 								<!-- 房态修改end -->	
 								    
 								<!-- 排序begin -->
-									<br><div class="paixu"><input type="text"><a class="stb">排序</a></div>
+									<br><div class="paixu"><input type="text" placeholder="${apartment.sort}"><a class="stb">排序</a></div>
 								<!-- 排序begin -->
+								
 								</th>
 							</tr>
 						</c:forEach>
@@ -106,11 +107,12 @@
 						dataType : 'json',
 						url:'/admin/roomSort',
 						data : {
-							'roomid' : roomid,
+							'roomId' : roomid,
 							'sort':sort
 						},
 						success:function(data){
-							console.log(data)
+							console.log(data);
+							alert(data.content)
 						}
 					})
 					
