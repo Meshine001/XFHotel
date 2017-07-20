@@ -180,6 +180,11 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("table th,table td").css('min-width','120px');
+		})
+	</script>
 	</my_body>
 	<my_script> 
 		<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/list-customer-yhj.js"></script> 

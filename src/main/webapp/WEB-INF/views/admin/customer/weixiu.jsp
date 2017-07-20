@@ -13,36 +13,40 @@
 <body>
 	<my_body>
 	<div class="row">
+		<div class="col-md-6">
+			<div class="card card-mini">
+				<div class="card-header">
+					<div class="card-title">
+						<h4>设置维修项</h4>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="col-md-6">
+			
+		</div>
+	</div>
+	
+	<div class="row">
 		<div class="col-md-12">
 			<div class="card card-mini">
 				<div class="card-header">
 					<div class="card-title">
-						<h3>保洁服务</h3>
+						<h4>故障维修</h4>
 					</div>
 				</div>
-				<!--  
-				<ul class="nav nav-tabs">
-					<li role="0"><a href="javascript:;">全部订单</a></li>
-					<li role="1" class="active"><a href="">已完成订单</a></li>
-					<li role="2"><a href="javascript:;">进行中订单</a></li>
-					<li role="3"><a href="javascript:;">超时订单</a></li>
-					<li role="4"><a href="javascript:;"></a></li>
-				</ul>
-				-->
-				
-				
+		
 				<div style="overflow: auto;width:100%;height:auto">
 				<table class="table">
 
 					<thead>
 						<tr>
-							<th>保洁ID</th>
+							<th>订单id</th>
 							<th>下单时间</th>
-							<th>服务订单状态</th>
-							<th>服务内容</th>
-							<th>房间ID</th>
-							<th>打扫时间</th>
-							<th>订单ID</th>
+							<th>房间</th>
+							<th>状态</th>
+							<th>维修内容</th>
 							<th>需求</th>
 							<th>操作</th>
 						</tr>
@@ -89,7 +93,8 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	
+	    $("table th,table td").css('min-width','200px')
+		
 		//确认订单
 		$('.comfirm-order').click(function(){
 			var url = '../order/cleanOrder';
@@ -143,11 +148,6 @@
 				}
 			});
 		});
-	</script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("table th,table td").css('min-width','120px');
-		})
 	</script>
 	</my_body>
 </body>

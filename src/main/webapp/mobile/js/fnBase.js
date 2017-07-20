@@ -74,7 +74,7 @@ $(".link-home").attr("href","javascript:void(0);").click(function(){
 
     var fnBase={
         loadShow:function(){
-                $("<div class='black_loading' style='display: block'><div class='ldbg'><img src='images/loading.gif' ><p>正在载入，请稍后...</p></div></div>").appendTo($('body'))
+                $("<div class='black_loading' style='display: block'><div class='ldbg'><img src='images/ajax-loader.gif' ><p>正在载入，请稍后...</p></div></div>").appendTo($('body'))
         },
         
         loadHide:function(){

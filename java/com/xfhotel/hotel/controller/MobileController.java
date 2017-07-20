@@ -480,8 +480,12 @@ public class MobileController  {
 		
 		Long data = new Date().getTime();
 		data+=1000*60*60*12;
+		System.out.println(data);
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		System.out.println(sd.format(data));
 		House house = houseService.getHouse(roomId, data);
-		int state =1;
+		int state =0;
+		System.out.println("sd");
 		if(house!=null){
 			house.setState(state);
 			houseService.update(house);

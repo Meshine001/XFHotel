@@ -41,9 +41,9 @@ $(document).ready(function(){
     });
     }
     // 积分
-//   $("#Credit").click(function(){
-//   	 window.location.href='integral.html'
-//   });
+   $("#Credit").click(function(){
+   	 window.location.href="integral.html?int="+encodeURIComponent($(this).find('i').text())+"&id="+encodeURIComponent(_uid)+"";
+   });
    
 
 

@@ -56,23 +56,23 @@
 								<td>${apartment.position.lou_ceng}/${apartment.position.zong_lou_ceng}</td>
 								<td>${apartment.basic_info.cao_xiang}</td>
 								<td>${apartment.basic_info.mian_ji}</td>
-								<th><a class="btn"
+								<th><a class="btn btn-success"
 									href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a><br>
-									<a class="btn"
-									href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格</a><br>
+									<a class="btn btn-success price_s"
+									href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格/折扣</a><br>
 									
-									<a href="<%=basePath %>/admin/apartment/showHome/${apartment.id}" class="btn" >
+									<a href="<%=basePath %>/admin/apartment/showHome/${apartment.id}" class="btn btn-success" >
 										<c:if test="${apartment.show_home == true }">首页隐藏</c:if>
 										<c:if test="${apartment.show_home == false }">首页显示</c:if>
 									</a><br>
-									<a href="<%=basePath %>/admin/apartment/delete/${apartment.id}" class="btn">删除</a>
+									<a href="<%=basePath %>/admin/apartment/delete/${apartment.id}" title="删除" class="btn btn-danger">删除</a>
 								
 								<!-- 房客留言操作begin -->	
-									<br><a href="<%=basePath%>/admin/leavemsglist" class="btn evalpinglun">查看评论</a>
+									<br><a href="<%=basePath%>/admin/leavemsglist" class="btn btn-info evalpinglun">查看评论</a>
 								<!-- 房客留言操作end -->	
 								
 								<!-- 房态修改begin -->	
-									<br><a href="<%=basePath%>/admin/status" class="btn houseStatus">房态设置</a>
+									<br><a href="<%=basePath%>/admin/status" class="btn btn-warning houseStatus">房态设置</a>
 								<!-- 房态修改end -->	
 								    
 								<!-- 排序begin -->
@@ -94,10 +94,18 @@
 	    <script>
 		    
 			$(document).ready(function(){
+				$("table th,table td").css('min-width','80px')
+				
 				$("#h-table").on('click','tr .evalpinglun,tr .houseStatus',function(){
 					var roomid=$(this).parent().parent().attr('roomid');
 					window.sessionStorage.setItem('roomId',roomid);
 				})
+				$("#h-table").on('click','tr .price_s',function(){
+					var roomid=$(this).parent().parent().attr('roomid');
+					window.sessionStorage.setItem('roomId',roomid);
+				})
+				
+				
 				$("#h-table").on('click','tr .paixu .stb',function(){
 					var roomid=$(this).parent().parent().parent().attr('roomid');
 					var sort=$(this).parent().find('input').val();

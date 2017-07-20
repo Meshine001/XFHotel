@@ -2966,7 +2966,7 @@ html, body {
 
 body {
 	min-height: 100vh;
-	background-color: #e7edee;
+	background-color: #EDEDED;
 	overflow-x: hidden;
 }
 
@@ -4031,7 +4031,7 @@ aside.app-sidebar {
 	justify-content: flex-start;
 	z-index: 100108;
 	min-height: 100vh;
-	background-color: #FFF;
+	background-color: #3E3E3E;
 	box-shadow: 0 2px 2px rgba(68, 68, 68, 0.2);
 	transition: all 0.3s ease;
 }
@@ -4041,6 +4041,8 @@ aside.app-sidebar .sidebar-header {
 	width: 180px;
 	padding: 0 10px;
 	position: relative;
+	background:#F36A5A;
+	color:#fff;
 }
 
 aside.app-sidebar .sidebar-header .sidebar-brand {
@@ -4055,9 +4057,9 @@ aside.app-sidebar .sidebar-header .sidebar-brand {
 	-ms-flex-pack: center;
 	justify-content: center;
 	height: 90px;
-	font-size: 1.2em;
+	font-size: 1.4em;
 	font-weight: 300;
-	color: #444;
+	color: #fff;
 }
 
 aside.app-sidebar .sidebar-header .sidebar-brand .highlight {
@@ -4122,7 +4124,9 @@ aside.app-sidebar .sidebar-menu ul.sidebar-nav {
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li {
 	width: 100%;
 }
-
+aside.app-sidebar .sidebar-menu ul.sidebar-nav>li.active{
+	
+}
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li>a {
 	padding: 1rem 0;
 	display: block;
@@ -4373,6 +4377,7 @@ aside.app-sidebar .sidebar-footer ul.menu {
 	align-items: flex-start;
 	-ms-flex-pack: center;
 	justify-content: center;
+	background: #3e3e3e;
 }
 
 aside.app-sidebar .sidebar-footer ul.menu>li>a {
@@ -4570,11 +4575,11 @@ aside.app-sidebar.active {
 }
 
 aside.app-sidebar {
-	background-color: #FFF;
+	background-color: #3E3E3E;
 }
 
 aside.app-sidebar .sidebar-header .sidebar-brand .highlight {
-	background-color: #a94442;
+/*	background-color: #a94442;*/
 }
 
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li>a .icon {
@@ -4589,10 +4594,15 @@ aside.app-sidebar .sidebar-menu ul.sidebar-nav>li>a .title {
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li.active>a .icon {
 	background-color: rgba(41, 199, 95, 0.25);
 	color: rgba(41, 199, 95, 0.75);
+	outline:0;
+	 
+background: #575757;
+	 
+color: #F36A5A;
 }
 
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li.active>a .title {
-	color: #29c75f;
+	color: #F36A5A !important;
 }
 
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li.dropdown>.dropdown-menu>ul>li.section
@@ -6064,7 +6074,202 @@ ui-view>.app-messaging-container {
 	background-color: #29c75f;
 	color: #29c75f;
 }
+/*------------*/
+.card.card-crimson-light {
+	background-color: #FFF;
+}
 
+.card.card-crimson-light .card-body .icon {
+	color: crimson;
+	background-color: rgba(57, 195, 218, 0.05);
+}
+
+.card.card-crimson-light .card-body .content .value {
+	color: crimson;
+}
+
+.card.card-crimson-light:hover {
+	background-color: crimson;
+}
+
+.card.card-crimson-light:hover .card-body .icon {
+	color: #FFF;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card.card-crimson-light:hover .card-body .content .title, .card.card-crimson-light:hover .card-body .content .value
+	{
+	color: #FFF;
+}
+
+.card.card-crimson-light.card-chart .card-header {
+	background-color: crimson;
+	color: crimson;
+}
+/*------------*/
+
+/*------------*/
+.card.card-violet-light {
+	background-color: #FFF;
+}
+
+.card.card-violet-light .card-body .icon {
+	color: violet;
+	background-color: rgba(57, 195, 218, 0.05);
+}
+
+.card.card-violet-light .card-body .content .value {
+	color: violet;
+}
+
+.card.card-violet-light:hover {
+	background-color: violet;
+}
+
+.card.card-violet-light:hover .card-body .icon {
+	color: #FFF;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card.card-violet-light:hover .card-body .content .title, .card.card-violet-light:hover .card-body .content .value
+	{
+	color: #FFF;
+}
+
+.card.card-violet-light.card-chart .card-header {
+	background-color: violet;
+	color: violet;
+}
+/*------------*/
+
+.card.card-gray-light {
+	background-color: #FFF;
+}
+
+.card.card-gray-light .card-body .icon {
+	color: gray;
+	background-color: rgba(57, 195, 218, 0.05);
+}
+
+.card.card-gray-light .card-body .content .value {
+	color: gray;
+}
+
+.card.card-gray-light:hover {
+	background-color: gray;
+}
+
+.card.card-gray-light:hover .card-body .icon {
+	color: #FFF;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card.card-gray-light:hover .card-body .content .title, .card.card-gray-light:hover .card-body .content .value
+	{
+	color: #FFF;
+}
+
+.card.card-gray-light.card-chart .card-header {
+	background-color: gray;
+	color: gray;
+}
+/*------------*/
+.card.card-dodgerblue-light {
+	background-color: #FFF;
+}
+
+.card.card-dodgerblue-light .card-body .icon {
+	color: dodgerblue;
+	background-color: rgba(57, 195, 218, 0.05);
+}
+
+.card.card-dodgerblue-light .card-body .content .value {
+	color: dodgerblue;
+}
+
+.card.card-dodgerblue-light:hover {
+	background-color: dodgerblue;
+}
+
+.card.card-dodgerblue-light:hover .card-body .icon {
+	color: #FFF;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card.card-dodgerblue-light:hover .card-body .content .title, .card.card-dodgerblue-light:hover .card-body .content .value
+	{
+	color: #FFF;
+}
+
+.card.card-dodgerblue-light.card-chart .card-header {
+	background-color: dodgerblue;
+	color: dodgerblue;
+}
+/*------------*/
+.card.card-darkviolet-light {
+	background-color: #FFF;
+}
+
+.card.card-darkviolet-light .card-body .icon {
+	color: darkviolet;
+	background-color: rgba(57, 195, 218, 0.05);
+}
+
+.card.card-darkviolet-light .card-body .content .value {
+	color: darkviolet;
+}
+
+.card.card-darkviolet-light:hover {
+	background-color: darkviolet;
+}
+
+.card.card-darkviolet-light:hover .card-body .icon {
+	color: #FFF;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card.card-darkviolet-light:hover .card-body .content .title, .card.card-darkviolet-light:hover .card-body .content .value
+	{
+	color: #FFF;
+}
+
+.card.card-darkviolet-light.card-chart .card-header {
+	background-color: darkviolet;
+	color: darkviolet;
+}
+/*------------*/
+.card.card-sandybrown-light {
+	background-color: #FFF;
+}
+
+.card.card-sandybrown-light .card-body .icon {
+	color: sandybrown;
+	background-color: rgba(57, 195, 218, 0.05);
+}
+
+.card.card-sandybrown-light .card-body .content .value {
+	color: sandybrown;
+}
+
+.card.card-sandybrown-light:hover {
+	background-color: sandybrown;
+}
+
+.card.card-sandybrown-light:hover .card-body .icon {
+	color: #FFF;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card.card-sandybrown-light:hover .card-body .content .title, .card.card-sandybrown-light:hover .card-body .content .value
+	{
+	color: #FFF;
+}
+
+.card.card-sandybrown-light.card-chart .card-header {
+	background-color: sandybrown;
+	color: sandybrown;
+}
+/*--------------------*/
 .card.card-blue {
 	background-color: #39c3da;
 }
@@ -8501,7 +8706,7 @@ footer.app-footer .footer-copyright {
 .media.social-post .media-body .media-comment input {
 	padding: 7.5px 15px;
 }
-
+#list td{vertical-align: middle;}
 #list tr{ cursor: pointer; transition: all .3s;border-bottom:1px solid #dddddd}
 #list tr:hover{background: #f2f2f2;}
 #list tr td i,#about i{
@@ -8824,17 +9029,23 @@ i{font-style:normal}
 .detailWraper tr .fl50{width:50%;}
 .detailWraper tr td span{font-weight:400;color: #999;}
 
-#h-table .btn{
+#h-table tr td{
+	width:200px;
+	height:300px;
+    overflow: hidden;
+        vertical-align: middle;
+}
+
+#h-table .btn,#list .btn{
 	width: 92px;
     height: 36px;
     text-align: center;
     padding: 0;
     line-height: 36px;
     border-radius: 6px;
-    background: #29c75f;
     color: #eae7e7;
 }
-#h-table .btn:hover{background:#f98d08;color:#fff}
+#h-table .btn:hover{color:#fff}
 #h-table .paixu:hover{border-color:#f98d08:background:none;color:black;}
 #h-table .paixu{
 	width: 92px;
