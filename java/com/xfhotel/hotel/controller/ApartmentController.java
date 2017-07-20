@@ -94,9 +94,9 @@ public class ApartmentController {
 			String suo_di_zhi, String cao_xiang, String mian_ji, String shi, String ting, String wei, String yang_tai,
 			String reng_shu, String chuang, String miao_su, String te_se,String te_se_class, String jia_ju,String jia_ju_class, String wei_yu,String wei_yu_class, String can_chu,String can_chu_class,
 			String pei_tao,String pei_tao_class, String zhou_bian,String zhou_bian_class, String qi_ta, String qi_ta_class,String pic1, String[] pic2, String[] pic3, String lei_xing,
-			String jia_ge) {
+			String jia_ge ,String VR_di_zhi) {
 		
-		Apartment apartment = apartmentService.add(jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, te_se_class, jia_ju, jia_ju_class, wei_yu, wei_yu_class, can_chu, can_chu_class, pei_tao, pei_tao_class, zhou_bian, zhou_bian_class, qi_ta, qi_ta_class, pic1, pic2, pic3, lei_xing, jia_ge);
+		Apartment apartment = apartmentService.add(jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, te_se_class, jia_ju, jia_ju_class, wei_yu, wei_yu_class, can_chu, can_chu_class, pei_tao, pei_tao_class, zhou_bian, zhou_bian_class, qi_ta, qi_ta_class, pic1, pic2, pic3, lei_xing, jia_ge ,VR_di_zhi);
 		
 		return "redirect:/admin/apartment/update/" + apartment.getId();
 	};
@@ -134,9 +134,9 @@ public class ApartmentController {
 			String suo_di_zhi, String cao_xiang, String mian_ji, String shi, String ting, String wei, String yang_tai,
 			String reng_shu, String chuang, String miao_su, String te_se,String te_se_class, String jia_ju,String jia_ju_class, String wei_yu,String wei_yu_class, String can_chu,String can_chu_class,
 			String pei_tao,String pei_tao_class, String zhou_bian,String zhou_bian_class, String qi_ta, String qi_ta_class,String pic1, String[] pic2, String[] pic3, String lei_xing,
-			String jia_ge) {
+			String jia_ge,String VR_di_zhi) {
 
-    	Apartment apartment = apartmentService.update(id, jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, te_se_class, jia_ju, jia_ju_class, wei_yu, wei_yu_class, can_chu, can_chu_class, pei_tao, pei_tao_class, zhou_bian, zhou_bian_class, qi_ta, qi_ta_class, pic1, pic2, pic3, lei_xing, jia_ge);
+    	Apartment apartment = apartmentService.update(id, jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, te_se_class, jia_ju, jia_ju_class, wei_yu, wei_yu_class, can_chu, can_chu_class, pei_tao, pei_tao_class, zhou_bian, zhou_bian_class, qi_ta, qi_ta_class, pic1, pic2, pic3, lei_xing, jia_ge,VR_di_zhi);
 		return "redirect:/admin/apartment/update/" + apartment.getId();
 	}
 
