@@ -785,6 +785,7 @@ public class MobileController  {
 		if(uId==null){
 			return new Message(Constants.MESSAGE_ERR_CODE, "无订单"); 
 		}
+		System.out.println(type);
 		List<Order> o = orderservice.getCustomerOrders(uId, type);
 		Map<String, Object> map = new HashMap<String, Object>();
 	for(Order d : o){
@@ -854,6 +855,13 @@ public class MobileController  {
 		return list;
 	}
 	
+	@RequestMapping(value = "/getIntegral", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> getIntegral(Long id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		Customer customer = customerService.getCustomer(id);
+		map.put("integral", customer.getConsumptionCount());
+		return map;
+	}
 	
 	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.POST)
 	public @ResponseBody JSONObject getRangePrices(@PathVariable("id") Long id,
