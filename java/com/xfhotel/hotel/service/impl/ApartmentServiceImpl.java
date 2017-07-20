@@ -89,7 +89,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 			String suo_di_zhi, String cao_xiang, String mian_ji, String shi, String ting, String wei, String yang_tai,
 			String reng_shu, String chuang, String miao_su, String te_se,String te_se_class, String jia_ju,String jia_ju_class, String wei_yu,String wei_yu_class, String can_chu,String can_chu_class,
 			String pei_tao,String pei_tao_class, String zou_bian,String zou_bian_class, String qi_ta, String qi_ta_class,String pic1, String[] pic2, String[] pic3, String lei_xing,
-			String jia_ge) {
+			String jia_ge ,String  VR_di_zhi) {
 
 		Apartment apartment;
 		if (null == id) {// add
@@ -110,6 +110,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		basic_info.put("lei_xing", lei_xing);
 		basic_info.put("jia_ge", jia_ge);
 		basic_info.put("yang_tai", yang_tai);
+		basic_info.put("String  VR_di_zhi",VR_di_zhi);
 
 		apartment.setBasic_info(basic_info.toString());
 
@@ -162,9 +163,9 @@ public class ApartmentServiceImpl implements ApartmentService {
 			String suo_di_zhi, String cao_xiang, String mian_ji, String shi, String ting, String wei, String yang_tai,
 			String reng_shu, String chuang, String miao_su, String te_se,String te_se_class, String jia_ju,String jia_ju_class, String wei_yu,String wei_yu_class, String can_chu,String can_chu_class,
 			String pei_tao,String pei_tao_class, String zou_bian,String zou_bian_class, String qi_ta, String qi_ta_class,String pic1, String[] pic2, String[] pic3, String lei_xing,
-			String jia_ge) {
+			String jia_ge ,String VR_di_zhi) {
 
-		return saveOrUpdate(null, jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, te_se_class, jia_ju, jia_ju_class, wei_yu, wei_yu_class, can_chu, can_chu_class, pei_tao, pei_tao_class, zou_bian, zou_bian_class, qi_ta, qi_ta_class, pic1, pic2, pic3, lei_xing, jia_ge);
+		return saveOrUpdate(null, jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, te_se_class, jia_ju, jia_ju_class, wei_yu, wei_yu_class, can_chu, can_chu_class, pei_tao, pei_tao_class, zou_bian, zou_bian_class, qi_ta, qi_ta_class, pic1, pic2, pic3, lei_xing, jia_ge,VR_di_zhi);
 	}
 
 	@Transactional
@@ -250,12 +251,12 @@ public class ApartmentServiceImpl implements ApartmentService {
 				}
 			}
 //			for (Order o : availableOrders) {
-//				Long tt = d.getTime() + 1000 * 60 * 60 * 14;
+//			//	Long tt = d.getTime() + 1000 * 60 * 60 * 14;
 ////				Date date = new Date(tt);  
 ////				SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 ////				System.out.println(sd.format(date));
-//				if (tt >= o.getStartTime() && tt < o.getEndTime()) {
-//					details.put("roomNum", "0");
+//				if (o.getStatus()==0&&o.getStatus()==3&&o.getStatus()==5) {
+//					details.put("roomNum", "1");
 //				}
 //			}
 			info.put(DateUtil.format(d, "yyyy-MM-dd"), details);
@@ -307,9 +308,9 @@ public class ApartmentServiceImpl implements ApartmentService {
 			String suo_di_zhi, String cao_xiang, String mian_ji, String shi, String ting, String wei, String yang_tai,
 			String reng_shu, String chuang, String miao_su, String te_se,String te_se_class, String jia_ju,String jia_ju_class, String wei_yu,String wei_yu_class, String can_chu,String can_chu_class,
 			String pei_tao,String pei_tao_class, String zou_bian,String zou_bian_class, String qi_ta, String qi_ta_class,String pic1, String[] pic2, String[] pic3, String lei_xing,
-			String jia_ge) {
+			String jia_ge ,String VR_di_zhi) {
 		
-		return saveOrUpdate(id, jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, te_se_class, jia_ju, jia_ju_class, wei_yu, wei_yu_class, can_chu, can_chu_class, pei_tao, pei_tao_class, zou_bian, zou_bian_class, qi_ta, qi_ta_class, pic1, pic2, pic3, lei_xing, jia_ge);
+		return saveOrUpdate(id, jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, te_se_class, jia_ju, jia_ju_class, wei_yu, wei_yu_class, can_chu, can_chu_class, pei_tao, pei_tao_class, zou_bian, zou_bian_class, qi_ta, qi_ta_class, pic1, pic2, pic3, lei_xing, jia_ge ,VR_di_zhi);
 
 	}
 	

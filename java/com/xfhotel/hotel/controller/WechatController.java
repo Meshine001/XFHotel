@@ -27,10 +27,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mysql.jdbc.Field;
 import com.swetake.util.Qrcode;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.entity.SystemConfig;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.LockService;
@@ -214,9 +216,9 @@ public class WechatController {
 			jo.put("obj", null);
 			return jo;
 		}
+		
 		order.setPayPlatform(Order.PAY_PLATFORM_WECHAT_JSAPI);
 		orderService.update(order);
-
 		String detail = order.getDescription();
 		String desc = "青舍都市";
 		Customer c = customerService.getCustomer(order.getCusId());
@@ -225,7 +227,6 @@ public class WechatController {
 		String orderSn = order.getPayNo();
 		String amount = order.getTotalPrice();
 		String type = "JSAPI";
-		
 		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, type);
 		return result;
 	}
@@ -258,7 +259,6 @@ public class WechatController {
 			if("success".equals(response.getString("status"))){
 				order.setWxQRCode(((JSONObject)response.get("obj")).getString("url"));
 			}
-			
 			orderService.update(order);
 			return response;
 		}else{
@@ -324,7 +324,7 @@ public class WechatController {
 		List<Element> list = root.elements();
 		for (Element e : list) {
 			if (e.getName().trim().equals("payType")) {
-				payType = e.getText().trim();
+				payType = e.getText().trim();	
 			} else if (e.getName().trim().equals("memberId")) {
 				memberId = e.getText().trim();
 			} else {
@@ -355,6 +355,11 @@ public class WechatController {
 				// 此处放防止重复提交操作
 				String out_trade_no = map.get("out_trade_no");
 				Order o = orderService.getByPayNo(out_trade_no);
+				Customer customer = customerService.getCustomer(o.getCusId());
+				SystemConfig system = systemConfService.getConfig();
+				Float sum = (float) (customer.getConsumptionCount()+Float.parseFloat(o.getTotalPrice())-system.getYa_jin());
+				customer.setConsumptionCount(sum);
+				customerService.updateBaseInfo(customer);
 				//更改订单状态
 				o.setStatus(Order.STATUS_ON_COMFIRM);
 				orderService.update(o);

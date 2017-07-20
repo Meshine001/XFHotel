@@ -2,13 +2,14 @@ package com.xfhotel.hotel.controller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,6 +43,7 @@ import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.Area;
+import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
 import com.xfhotel.hotel.support.LeasePrice;
 import com.xfhotel.hotel.support.LeaseType;
@@ -439,7 +441,7 @@ public class MobileController  {
 		}
 	}
 	
-	
+	 
 	/**
 	 * 用户提交订单 房间详细信息页，确认订单触发
 	 * @param cusId
@@ -461,12 +463,13 @@ public class MobileController  {
 	 * @param apartmentType
 	 * @param id
 	 * @return
+	 * @throws ParseException 
 	 */
 	@RequestMapping(value = "/modulePost", method = RequestMethod.POST)
 	public @ResponseBody Map orderModulePost(Long cusId, String description, Long roomId, String cusName, String cusTel,
 			String otherCusName[], String otherCusIdCard[], String cusIdCard, String personal, String startTime,
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
-			String apartmentType,String id) {
+			String apartmentType,String id) throws ParseException {
 		Long couponId = null;
 		try {
 			couponId = Long.valueOf(id);
@@ -476,12 +479,9 @@ public class MobileController  {
 		}
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
-		info.put("order", order.toMap());
-		
-		Long data = new Date().getTime();
-		data+=1000*60*60*12;
+		Long data = DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime();
 		House house = houseService.getHouse(roomId, data);
-		int state =1;
+		int state =0;
 		if(house!=null){
 			house.setState(state);
 			houseService.update(house);
@@ -604,6 +604,7 @@ public class MobileController  {
 		StringBuffer content = new StringBuffer();
 		FileReader fr;
 		try {
+			
 			fr = new FileReader(path);
 			BufferedReader br=new BufferedReader(fr);
 			String str;
@@ -669,7 +670,6 @@ public class MobileController  {
 		  }
 		return list;
 	}
-	
 	
 	/**
 	 * 

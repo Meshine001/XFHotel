@@ -35,7 +35,7 @@ public class Price {
 		super();
 		this.apartment_id = apartment_id;
 		this.date = date;
-//		this.status = status;
+		this.price = price;
 	}
 	
 	public long getId() {
