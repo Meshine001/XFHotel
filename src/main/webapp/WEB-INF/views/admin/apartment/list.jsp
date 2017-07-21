@@ -59,7 +59,7 @@
 								<th><a class="btn btn-success"
 									href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a><br>
 									<a class="btn btn-success price_s"
-									href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格/折扣</a><br>
+									href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格</a><br>
 									
 									<a href="<%=basePath %>/admin/apartment/showHome/${apartment.id}" class="btn btn-success" >
 										<c:if test="${apartment.show_home == true }">首页隐藏</c:if>

@@ -16,15 +16,6 @@ $(document).ready(function(){
 		}else{
 			$("#nickName i").text(int)
 		}
-		 var frontURL=Constant.URL+'/mobile/detailsData';
-		 var postData={id:id};
-		 fnBase.commonAjax(frontURL,postData,function(data){
-			 console.log(data);
-			 
-			 
-			 
-		 })
-		
 	}
 	
 	

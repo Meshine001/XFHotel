@@ -12,6 +12,7 @@ $(document).ready(function(){
     }else{
         $("#_login").hide();
         getmsg();
+        jifendata();
     }
     function getmsg(){
     var frontURL=Constant.URL+'/mobile/detailsData';
@@ -41,6 +42,16 @@ $(document).ready(function(){
     });
     }
     // 积分
+    function jifendata(){
+    	var frontURL=Constant.URL+'/mobile/getIntegral';
+    	var postData={id:_uid};
+    	 fnBase.commonAjax(frontURL,postData,function(data){
+    		 console.log(data)
+    		 $("#Credit i").text(data.integral);
+    	 })
+    }
+    
+    
    $("#Credit").click(function(){
    	 window.location.href="integral.html?int="+encodeURIComponent($(this).find('i').text())+"&id="+encodeURIComponent(_uid)+"";
    });

@@ -457,8 +457,8 @@
 							<label class="col-md-3 control-label">VR房屋实景地址</label>
 							<div class="col-md-9">
 								<input type="text" class="form-control"
-									placeholder="VR房屋实景链接地址" name="suo_di_zhi"
-									value="${apartment.basic_info.suo_di_zhi}">
+									placeholder="VR房屋实景链接地址" name="VR_di_zhi"
+									value="${apartment.basic_info.VR_di_zhi}">
 							</div>
 						</div>
 						

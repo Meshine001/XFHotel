@@ -110,7 +110,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		basic_info.put("lei_xing", lei_xing);
 		basic_info.put("jia_ge", jia_ge);
 		basic_info.put("yang_tai", yang_tai);
-		basic_info.put("String  VR_di_zhi",VR_di_zhi);
+		basic_info.put("VR_di_zhi",VR_di_zhi);
 
 		apartment.setBasic_info(basic_info.toString());
 

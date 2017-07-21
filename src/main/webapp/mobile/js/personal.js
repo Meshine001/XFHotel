@@ -5,10 +5,25 @@ $(document).ready(function(){
 		window.location.href='editprofileinfo.html'
 	});
     var _uid=fnBase.huoqu(0,"uid");
+    
     if(_uid==null || _uid=="undefined" || _uid==""){
         window.location.href="login.html";
         return;
+    }else{
+    	jifendata();
     }
+    
+    // 积分
+    function jifendata(){
+    	var frontURL=Constant.URL+'/mobile/getIntegral';
+    	var postData={id:_uid};
+    	 fnBase.commonAjax(frontURL,postData,function(data){
+    		 console.log(data)
+    		 $("#Credit i").text(data.integral);
+    	 })
+    }
+    
+    
     var frontURL=Constant.URL+'/mobile/detailsData';
     var postData={id:_uid};
     fnBase.commonAjax(frontURL,postData,function(data){

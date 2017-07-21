@@ -12,6 +12,7 @@
 </head>
 <body>
 	<my_body>
+	<!-- 
 	<div class="row">
 		<div class="col-md-6">
 			<div class="card card-mini">
@@ -27,7 +28,7 @@
 			
 		</div>
 	</div>
-	
+	 -->
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card card-mini">
