@@ -56,7 +56,7 @@
 							<div class="title">控制面板</div>
 					</a></li>
 
-					<li><a href="<%=basePath%>/admin/system">
+					<li style="display:none;"><a href="<%=basePath%>/admin/system">
 							<div class="icon">
 								<i class="fa fa-cog" aria-hidden="true"></i>
 							</div>

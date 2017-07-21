@@ -21,7 +21,7 @@
 						<h3>用户列表</h3>
 					</div>
 				</div>
-				<div style="overflow: scroll;width:100%;height:auto">
+				<div style="overflow: auto;width:100%;height:auto">
 				<!-- 筛选 -->
 				<div class="col-md-12 statistics">
 				    <div class="col-md-3 col-xs-6">
@@ -79,7 +79,15 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("table th,table td").css('min-width','120px');
+		})
+	</script>
 	</my_body>
+	
+	
+	
 	<my_script>
 		<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/list-customer.js"></script> 
 	

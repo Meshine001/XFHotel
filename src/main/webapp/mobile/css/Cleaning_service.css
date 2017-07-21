@@ -74,9 +74,15 @@ html,body{background: #fff}
     text-align: center;
     font-size: 0.14rem;
     margin: 0px ;
-    /*
-    border-left: 1px solid #ddd ;
-    */
+}
+.vip_info_list .time{text-align:center;}
+.vip_info_list .time input{
+	width:45%;
+	text-align:center;
+	height: 0.35rem;
+	line-height: 0.35rem;
+    border-radius: 6px;
+    background: #f3f2f2;	
 }
 
 .per-order-status ol{
@@ -88,11 +94,13 @@ html,body{background: #fff}
 	float:left;
 	text-align:center;
 	color: #999;
-	background: #eeecec;
+/*	background: #eeecec; */
     margin-right: 0.1rem;
     margin-bottom: 0.1rem;
     border:1px solid #dddddd;
     line-height:0.3rem;
+    border-radius: 2rem;
+    cursor: pointer;
 }
 .per-order-status ol dd._active{
 	background:#00b38a;
@@ -202,13 +210,15 @@ html,body{background: #fff}
 }
  .vip_info_list li .per-order-status .toll div{float:left}
  .vip_info_list li .per-order-status .toll .toll-c{
-	width:1rem;
-	background: #eeecec;
+	width: 1.5rem;
+    background: #eeecec;
     padding: 0 0.1rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
+    border-radius: 0.3rem;
 }   
+.vip_info_list li .per-order-status .toll .toll-c i{padding:0 0.04rem;}
  .vip_info_list li .per-order-status .toll .numContainer{
  	width: 1.2rem;
     height: 0.3rem;

@@ -24,8 +24,8 @@
 	        	<img src="images/face-90x90.png">
   			</div>
   			<div class="ctxt">
-  				<p id="nickName">匿名7976</p>
-		    	<p id="Credit">信用积分：999</p>
+  				<p id="nickName">匿名</p>
+		    	<p id="Credit">信用积分：<i></i></p>
 			</div>
         </div>
     </div>
@@ -40,15 +40,15 @@
                 </ol>
                 <p id="atl" style="font-size: 0.14rem;color:orangered;display: none">您暂时还没有在住的房间。</p>
             </div>
-            <div class="per-order-status">
+            <div class="per-order-status content-status">
                <labler>维修项</labler>
                <ol>	
-               		<dd class="active">水电气</dd>
-               		<dd>网络</dd>	
-               		<dd>电视</dd>
-               		<dd>空调</dd>
-               		<dd>热水器</dd>
-               		<dd>冰箱</dd>
+               		<dd paid="0">水电气</dd>
+               		<dd paid="1">网络</dd>	
+               		<dd paid="2">电视</dd>
+               		<dd paid="3">空调</dd>
+               		<dd paid="4">热水器</dd>
+               		<dd paid="5">冰箱</dd>
                </ol> 
             </div>
        
@@ -63,9 +63,9 @@
     </p>
     <script>
         $(document).ready(function(){
-            $(".account-login-width").click(function(){
-                fnBase.myalert('此服务正在维护！')
-            })
+   //         $(".account-login-width").click(function(){
+     //           fnBase.myalert('此服务正在维护！')
+       //     })
         })
     </script>
 </div>

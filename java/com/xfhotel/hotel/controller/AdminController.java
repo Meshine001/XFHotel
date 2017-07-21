@@ -113,6 +113,56 @@ public class AdminController {
 		return "/admin/customer/baojie";
 	}
 	
+	//..7.18故障维修...
+		@RequestMapping(value = "/customer_weixiu", method = RequestMethod.GET)
+		public String weixiu() {
+			List<Clean> list = cleanService.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (Clean o : list) {
+				orders.add(o.toMap());	
+				Order order = orderservice.get(o.getOederId());
+			}
+			session.setAttribute("orders", orders);
+			return "/admin/customer/weixiu";
+		}
+	//..7.18添加设施...
+		@RequestMapping(value = "/customer_addfacility", method = RequestMethod.GET)
+		public String addfacility() {
+			List<Clean> list = cleanService.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (Clean o : list) {
+				orders.add(o.toMap());	
+				Order order = orderservice.get(o.getOederId());
+			}
+			session.setAttribute("orders", orders);
+			return "/admin/customer/addfacility";
+		}
+		
+	//..7.18叫车服务...
+		@RequestMapping(value = "/customer_DialogueCar", method = RequestMethod.GET)
+		public String DialogueCar() {
+			List<Clean> list = cleanService.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (Clean o : list) {
+				orders.add(o.toMap());	
+				Order order = orderservice.get(o.getOederId());
+			}
+			session.setAttribute("orders", orders);
+			return "/admin/customer/DialogueCar";
+		}			
+	//..7.18叫车服务...
+				@RequestMapping(value = "/customer_collocation", method = RequestMethod.GET)
+				public String collocation() {
+					List<Clean> list = cleanService.list();
+					List<Map> orders = new ArrayList<Map>();
+					for (Clean o : list) {
+						orders.add(o.toMap());	
+						Order order = orderservice.get(o.getOederId());
+					}
+					session.setAttribute("orders", orders);
+					return "/admin/customer/collocation";
+				}						
+	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardPage() {
 		session.setAttribute("apartmentCount", apartmentService.list().size());

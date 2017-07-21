@@ -14,6 +14,10 @@
     <script type="text/javascript" src="js/comment.js"></script>
     <style>
     	.per-order-status ol dd{width:100%;}
+    	.per-order-status ol dd i{padding:0 0.1rem;}
+    	.per-order-status ol dd i:first-child{float:left;}
+    	.per-order-status ol dd i:first-child+i{float:right;}
+    	.per-order-status .teltaxi{border-radius: 6px;line-height: 0.3rem;background: #f3f2f2;padding: 0 0.1rem;}
     </style>
 </head>
 <body style="background: #FFF;display:none">
@@ -28,32 +32,45 @@
   			</div>
   			<div class="ctxt">
   				<p id="nickName"></p>
-		    	<p id="Credit">信用积分：999</p>
+		    	<p id="Credit">信用积分：<i></i></p>
 			</div>
         </div>
     </div>
  
     <ul class="vip_info_list">
         <li><a href="javascript:;" style="color: #333;font-weight: bold;">叫车服务</a></li>
+        
         <li>
             <div class="per-order-status">
                <labler>接送站服务</labler>
                <ol>	
-               		<dd cat="100">西安北站100元/单次</dd>
-               		<dd cat="150">飞机场150元/单次</dd>	
-               		<dd cat="500">临潼旅游专线500元/天</dd>
-               </ol> 
+               		<dd cat="100"><i>西安北站</i><i>100元/单次</i></dd>
+               		<dd cat="150"><i>飞机场</i><i>150元/单次</i></dd>	
+               </ol>
+               <p class="time"><input placeholder="-年-月-日" class="textbox-n" type="text" onfocus="(this.type='date')"  id="stateDate">~<input placeholder="-时-分" type="text" onfocus="(this.type='time')"></p> 
             </div>
              <div class="per-order-status">
                <labler>短程包车</labler>
                <ol>	
-               		<dd>三环内300/天</dd>
+               		<dd cat="500"><i>临潼旅游专线</i><i>500元/天</i></dd>
+               		<dd cat="300"><i>三环内</i><i>300/天</i></dd>
                </ol> 
+               <p class="time"><input placeholder="开始日期" class="textbox-n" type="text" onfocus="(this.type='date')"  id="stateDate">~<input placeholder="结束日期" class="textbox-n" type="text" onfocus="(this.type='date')"  id="endDate"></p>	
             </div>
+             <!-- 结算 -->
+               <div class="bottomContainer">
+               		<p>合计：<span></span>元</p>
+               </div>
             <div class="per-order-status">
-               <labler>其他要求</labler>
-               <textarea class="_textarea" placeholder="您还有什么要求尽管提;"></textarea>
+               <labler>联系电话：</labler>
+               <input class="teltaxi" type="text" maxlength="11" placeholder="请输入手机号码">
             </div>
+            
+            <div class="per-order-status">
+               <labler>备注</labler>
+               <textarea class="_textarea" placeholder="您还有其他什么需求"></textarea>
+            </div>
+             
         </li>
     </ul>
     <p class="account-login-width">
@@ -61,15 +78,12 @@
     </p>
     <script>
         $(document).ready(function(){
-            $(".account-login-width").click(function(){
-                fnBase.myalert('此服务正在维护！')
-            })
+      //      $(".account-login-width").click(function(){
+      //          fnBase.myalert('此服务正在维护！')
+      //      })
         })
     </script>
 </div>
-
-<script>
-	
-</script>
+ <script type="text/javascript" src="js/Taxi.js"></script>
 </body>
 </html>

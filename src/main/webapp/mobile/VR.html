@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>青舍都市公寓</title>
+    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/personalCenter.css" />
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script type="text/javascript" src="js/fnBase.js"></script>
+    <style>
+        .about{font-size: 0.16rem;line-height: 0.3rem;padding: 0.1rem}
+        html,body,.header-mobile{background:black;}
+     
+    </style>
+</head>
+<body style="background: #FFF">
+<div class="header">
+    <header class="header-mobile">
+        <a href="#" onclick="javascript:history.back();" class="cell link-home"><img src="images/black-1.png" class="img-home"></a>
+        <span class="cell">实景体验</span>
+        <span class="cell link-btn">
+            <!--<img src="images/my_h.png" class="img-btn">-->
+        </span>
+    </header>
+</div>
+<div id="Myscroll-body">
+   <iframe src="" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+</div>
+<script>
+	$(document).ready(function(){
+		var VR_di_zhi = decodeURIComponent(fnBase.request("VR_di_zhi"));
+		
+		$("#Myscroll-body iframe").attr('src',fnBase.huoqu(1,'VR'));
+	})
+	
+</script>
+
+</body>
+</html>

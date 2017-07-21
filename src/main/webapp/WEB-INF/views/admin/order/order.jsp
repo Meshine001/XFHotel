@@ -93,14 +93,9 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	
-	
-	
-	
-		
-		
-		
-		
+		$(document).ready(function(){
+			$("table th,table td").css('min-width','120px');
+		})
 	</script>
 	</my_body>
 	<my_script>

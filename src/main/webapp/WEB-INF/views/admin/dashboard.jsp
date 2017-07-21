@@ -134,7 +134,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 			<a class="card card-banner card-blue-light" href="<%=basePath%>/admin/blog/list">
 				<div class="card-body">
-					<i class="icon fa fa-tags fa-4x"></i>
+					<i class="icon fa fa-chain fa-4x"></i>
 					<div class="content">
 						<div class="title">青舍生活</div>
 						<div class="value">
@@ -146,13 +146,13 @@
 
 		</div>
 		  <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-			<a class="card card-banner card-blue-light" href="<%=basePath%>/admin/customer_sendlist">
+			<a class="card card-banner card-crimson-light" href="<%=basePath%>/admin/customer_sendlist">
 				<div class="card-body">
-					<i class="icon fa fa-tags fa-4x"></i>
+					<i class="icon fa fa-cloud fa-4x"></i>
 					<div class="content"> 
 						<div class="title">优惠卷管理</div>
 						<div class="value">
-							<span class="sign"></span>${blogCount}
+							<span class="sign"></span>
 						</div>
 					</div>
 				</div>
@@ -160,19 +160,78 @@
 
 		</div>
 		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-			<a class="card card-banner card-blue-light" href="<%=basePath%>/admin/customer_baojie">
+			<a class="card card-banner card-violet-light" href="<%=basePath%>/admin/customer_baojie">
 				<div class="card-body">
-					<i class="icon fa fa-tags fa-4x"></i>
+					<i class="icon fa fa-flask fa-4x"></i>
 					<div class="content"> 
 						<div class="title">保洁服务</div>
 						<div class="value">
-							<span class="sign"></span>${blogCount}
+							<span class="sign"></span>
 						</div>
 					</div>
 				</div>
 			</a>
 
 		</div>
+		
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<a class="card card-banner card-gray-light" href="<%=basePath%>/admin/customer_weixiu">
+				<div class="card-body">
+					<i class="icon fa fa-list-ul fa-4x"></i>
+					<div class="content"> 
+						<div class="title">故障维修</div>
+						<div class="value">
+							<span class="sign"></span>
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+		
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<a class="card card-banner card-dodgerblue-light" href="<%=basePath%>/admin/customer_addfacility">
+				<div class="card-body">
+					<i class="icon fa fa-columns fa-4x"></i>
+					<div class="content"> 
+						<div class="title">添加设施</div>
+						<div class="value">
+							<span class="sign"></span>
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+		
+		
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<a class="card card-banner card-darkviolet-light" href="<%=basePath%>/admin/customer_DialogueCar">
+				<div class="card-body">
+					<i class="icon fa fa-linkedin fa-4x"></i>
+					<div class="content"> 
+						<div class="title">叫车服务</div>
+						<div class="value">
+							<span class="sign"></span>
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+		
+		
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<a class="card card-banner card-sandybrown-light" href="<%=basePath%>/admin/customer_collocation">
+				<div class="card-body">
+					<i class="icon fa fa-sitemap fa-4x"></i>
+					<div class="content"> 
+						<div class="title">房源托管</div>
+						<div class="value">
+							<span class="sign"></span>
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+		
 	</div>
 	</my_body>
 </body>

@@ -29,7 +29,7 @@
 					</div>
 					
 				</div>
-				<div style="overflow: scroll;width:100%;height:auto">
+				<div style="overflow: auto;width:100%;height:auto">
 				<table class="table" id="table">
 					<thead>
 						<tr>

@@ -70,7 +70,7 @@
 .panel p{
     font-size: 0.14rem;
     margin: 3px 0;
-    color: #484848 !important;
+    color: #484848;
 }
 .panel .info_L24{
     padding-left: 0.14rem;
@@ -111,6 +111,15 @@
     right: 0.12rem;
     color: red;
 }
+
+.info-zk{
+	position: absolute;
+    right: 0.1rem;
+    bottom: 0.1rem;
+    color: #ffd785 !important;
+}
+
+
 .panel .label-type1{
     height: 0.25rem;
     line-height: 0.25rem;

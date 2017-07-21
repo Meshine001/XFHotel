@@ -110,7 +110,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		basic_info.put("lei_xing", lei_xing);
 		basic_info.put("jia_ge", jia_ge);
 		basic_info.put("yang_tai", yang_tai);
-		basic_info.put("String  VR_di_zhi",VR_di_zhi);
+		basic_info.put("VR_di_zhi",VR_di_zhi);
 
 		apartment.setBasic_info(basic_info.toString());
 
@@ -241,12 +241,13 @@ public class ApartmentServiceImpl implements ApartmentService {
 			}
 			for(House h :house){
 				Long tt = d.getTime() + 1000 * 60 * 60 * 12;
+				
 //				System.out.println(tt);
 //				System.out.println(tt+"d"+h.getDate());
 //				Date date = new Date(tt);  
 //				SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //				System.out.println(sd.format(date));
-				if(h.getState()== 0 && h.getDate().equals(tt)){
+				if(h.getState()==0&& h.getDate().equals(tt)){
 					details.put("roomNum", "0");
 				}
 			}
