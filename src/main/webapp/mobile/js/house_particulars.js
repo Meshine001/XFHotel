@@ -38,24 +38,29 @@ $(document).ready(function(){
             });
             //实景看房
             
-            	if(data.basic_info.VR_di_zhi!=null){
-            		$(".swiper-container").append('<i class="videovr">VR实景查看</i>');
+            	if(data.panorama==null || data.panorama==undefined || data.panorama==""){
+            		
+            	}else{
+            		$("#Myscroll-body .main .swiper-container").append('<i class="videovr">VR实景查看</i>');
             	}
+            	
             	$(".swiper-container .videovr").on('click',function(){
-            		fnBase.keep(1,'VR',data.basic_info.VR_di_zhi);
+            		fnBase.keep(1,'VR',data.panorama);
             		window.location.href="VR.html";
-//            		window.location.href="VR.html?VR_di_zhi="+encodeURIComponent(data.basic_info.VR_di_zhi)+"";
-//        			window.location.href=data.basic_info.VR_di_zhi;
+//            		window.location.href="VR.html?VR_di_zhi="+encodeURIComponent(data.panorama)+"";
+//        			window.location.href=data.panorama;
         		})
             	
             
-            
+          
             //房源概况
+        		var vio=data.position.bd_wei_zhi;
+        		vio=vio.slice(4,vio.length);
+        		
             $(".information").html("");
             var priceStr ='<h1 class="ic_house">'+data.position.xa_wei_zhi+"-" +data.position.xiao_qu+'</h1><p class="info_L24">'+data.basic_info.shi+"室"+data.basic_info.ting+"厅"+
-            data.basic_info.wei+"卫"+"-"+data.basic_info.cao_xiang+'</p>' +
-                '<p class="info_L24 label-adders">'+data.position.bd_wei_zhi+"-"+data.position.jie_dao+data.position.xiao_qu+'</p><p class="info_L24 label-group"><i class="label-type1">'
-                +data.basic_info.lei_xing+'</i></p><span class="label-price">'+data.basic_info.jia_ge+'<small>/天</small></span><p class="info-zk">常住优惠打折</p>'
+            data.basic_info.wei+"卫"+'</p>' +
+                '<p class="info_L24 label-adders"><span class="czs-location-l"></span>'+vio+"-"+data.position.jie_dao+data.position.xiao_qu+'</p><span class="label-price">'+data.basic_info.jia_ge+'<small>/天</small></span><p class="info_L24" style="color: #888;"><span class="czs-label-info-l"></span>满3天9.5折、满7天9折、满30天8折</p>'
             $(".information").append(priceStr);
             //房源信息
             $(".housing .i_inf ul").html("");
