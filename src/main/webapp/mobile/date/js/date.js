@@ -139,6 +139,7 @@ var date = function ($) {
       // 事件监听
       // 关闭插件
       $('.close-btn').on('click', function () {
+    	
         // 获取入住时间
         var enterYear = $('.enter').parents('.day').siblings('.title').find('.y').text();
         var enterMonth = $('.enter').parents('.day').siblings('.title').find('.m').text();
@@ -154,9 +155,8 @@ var date = function ($) {
         leaveDay.length === 1 ? leaveDay = '0' + leaveDay : false;
         var leaveTime = leaveMonth + '-' + leaveDay;
         var night = Number($('.leave').attr('index')) - Number($('.enter').attr('index'));
-
-
-
+        
+ 
         $('body').css({ overflow: 'auto' });
         $('.select-time').show();
         $('.entertime').text(enterTime); // 显示
@@ -165,32 +165,38 @@ var date = function ($) {
         $('.input-leave').val(leaveYear + '-' + leaveTime);
         $('.night').text('共' + night + '晚');
 
-        console.log($(".input-enter").val()+'---'+$(".input-leave").val());
-
-        //判断有房没房
-        var _id = decodeURIComponent(fnBase.request("id"));
-        var checkIn= $(".input-enter").val();
-        var leave= $(".input-leave").val();
-        if(checkIn>=leave){
-          fnBase.myalert("请重新选择时间");
-          $(".input-enter").val();
-          $(".input-leave").val();
-          return;
+        if(enterYear==null || leaveYear==null ||enterYear=="" || leaveYear=="" ){
+        	fnBase.myalert('操作失误：请选择入住和离开时间');
+          	return;
         }else{
-          var frontURL=Constant.URL+'/mobile/checkAvailable';
-          var postData={"startTime":checkIn,"endTime":leave,"roomId":_id};
-          fnBase.commonAjax(frontURL,postData,function(data){
-            console.log(data);
-            if(data.content.length>0){
-                fnBase.myalert('您所选时间段内没有空房，请重新选择');
-                return;
+        	   //判断有房没房
+            
+            var _id = decodeURIComponent(fnBase.request("id"));
+            var checkIn= $(".input-enter").val();
+            var leave= $(".input-leave").val();
+            if(checkIn>=leave){
+              fnBase.myalert("请重新选择时间");
+              $(".input-enter").val();
+              $(".input-leave").val();
+              return;
             }else{
-              $(".alert-content .but-success").click();
-              $('.date').remove(); // 移除插件
-              msgdata()
+              var frontURL=Constant.URL+'/mobile/checkAvailable';
+              var postData={"startTime":checkIn,"endTime":leave,"roomId":_id};
+              fnBase.commonAjax(frontURL,postData,function(data){
+                console.log(data);
+                if(data.content.length>0){
+                    fnBase.myalert('您所选时间段内没有空房，请重新选择');
+                    return;
+                }else{
+                  $(".alert-content .but-success").click();
+                  $('.date').remove(); // 移除插件
+                  msgdata()
+                }
+              })
             }
-          })
         }
+        
+     
       });
 
       function msgdata(){
