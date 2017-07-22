@@ -459,7 +459,7 @@
 							<div class="col-md-9">
 								<input type="text" class="form-control"
 									placeholder="VR房屋实景链接地址" name="VR_di_zhi"
-									value="${apartment.basic_info.VR_di_zhi}">
+									value="${apartment.panorama}">
 							</div>
 						</div>
 						

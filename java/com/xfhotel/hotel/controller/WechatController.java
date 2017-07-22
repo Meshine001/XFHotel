@@ -353,7 +353,7 @@ public class WechatController {
 				
 				// 由于微信后台会同时回调多次，所以需要做防止重复提交操作的判断
 				// 此处放防止重复提交操作
-				String out_trade_no = map.get("out_trade_no");
+ 				String out_trade_no = map.get("out_trade_no");
 				Order o = orderService.getByPayNo(out_trade_no);
 				Customer customer = customerService.getCustomer(o.getCusId());
 				SystemConfig system = systemConfService.getConfig();
