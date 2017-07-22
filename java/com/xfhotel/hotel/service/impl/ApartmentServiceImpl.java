@@ -417,15 +417,33 @@ public class ApartmentServiceImpl implements ApartmentService {
 		moudle.put("oStart", startTime);
 		moudle.put("oEnd", endTime);
 		Map<String, Object> priceInfo = caculatePrice(startTime, endTime, apartmentId);
-//		System.out.println(priceInfo);
+//		System.out.println(priceInfo);0
+		double sum = (Double) priceInfo.get("totalPrice");
+		double yj = (Double) priceInfo.get("cashPledge");
 		try {
-			moudle.put("oTotalDay", TimeUtil.daysBetween(startTime, endTime));
+			int Day = TimeUtil.daysBetween(startTime, endTime);
+			moudle.put("oTotalDay", Day);
+			if(Day==3){
+				sum-=yj;
+				sum*=0.95;
+				sum+=yj;
+			}else if(Day==7){
+				sum-=yj;
+				sum*=0.9;
+				sum+=yj;
+			}else if(Day==30){
+				sum-=yj;
+				sum*=0.8;
+				sum+=yj;
+			};
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		moudle.put("oPrice", priceInfo.get("price"));
-		moudle.put("oTotalPrice", priceInfo.get("totalPrice"));
+		moudle.put("oTotalPrice", sum);
 		moudle.put("oCashPledge", priceInfo.get("cashPledge"));
 		moudle.put("oPreferential", "");
 		moudle.put("price", priceInfo.get("Price"));
