@@ -423,19 +423,19 @@ public class ApartmentServiceImpl implements ApartmentService {
 		try {
 			int Day = TimeUtil.daysBetween(startTime, endTime);
 			moudle.put("oTotalDay", Day);
-			if(Day==3){
+			if(Day>=3&&Day<7){
 				sum-=yj;
 				sum*=0.95;
 				sum+=yj;
-			}else if(Day==7){
+			}else if(Day>=7&&Day<30){
 				sum-=yj;
 				sum*=0.9;
 				sum+=yj;
-			}else if(Day==30){
+			}else if(Day>=30){
 				sum-=yj;
 				sum*=0.8;
 				sum+=yj;
-			};
+			}
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
