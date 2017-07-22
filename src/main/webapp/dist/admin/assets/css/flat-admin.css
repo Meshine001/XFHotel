@@ -9053,7 +9053,7 @@ i{font-style:normal}
     padding: 0;
     line-height: 36px;
     border-radius: 6px;
-    border:1px solid #29c75f;
+    border:1px solid #ccc;
     color: #656262;
     position:relative;
 }
@@ -9070,6 +9070,10 @@ i{font-style:normal}
 	border-radius: 3px;
 	border:none;
 }
+#h-table .paixu input.hover .#h-table .paixu{
+	border-color:#29c75f;
+}
+/*29c75f*/
 #h-table .stb{
 	cursor: pointer;
 	width:55%;
@@ -9079,7 +9083,7 @@ i{font-style:normal}
 	text-align:center;
 	line-height: 34px;
 	color:#fff;
-	background: #29c75f;
+	background: #ccc;
 	border-radius: 0 6px 6px 0;
 }
 

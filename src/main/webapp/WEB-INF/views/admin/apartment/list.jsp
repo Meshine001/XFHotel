@@ -95,6 +95,14 @@
 		    
 			$(document).ready(function(){
 				$("table th,table td").css('min-width','80px')
+				$("#h-table .paixu input").focus(function(){
+					$(this).parent().css('border-color','#29c75f');
+					$(this).parent().find('.stb').css('bakcground','#29c75f');
+				})
+				$("#h-table .paixu input").blur(function(){
+					$(this).parent().css('border-color','#ccc');
+					$(this).parent().find('.stb').css('bakcground','#ccc');
+				})
 				
 				$("#h-table").on('click','tr .evalpinglun,tr .houseStatus',function(){
 					var roomid=$(this).parent().parent().attr('roomid');

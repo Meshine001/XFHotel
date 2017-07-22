@@ -213,7 +213,7 @@ var date = function ($) {
               fnBase.keep(1,'oTotalPrice',data.oTotalPrice);
               fnBase.keep(1,"YJpic",data.oCashPledge);
   			  fnBase.keep(1,"_price",data.price);
- 			window.location.href="order.html?id="+encodeURIComponent(_id);
+ 			  window.location.href="order.html?id="+encodeURIComponent(_id);
           })
       }
 

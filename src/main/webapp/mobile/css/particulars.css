@@ -91,10 +91,7 @@
     display: inline-block;
 }
 
-.label-adders{
-    background: url("../images/laber-adders.png") no-repeat center left 0.14rem;
-    text-indent: 0.18rem;!important;
-}
+
 
 .map-minute{
 	line-height: 0.3rem;
@@ -112,12 +109,7 @@
     color: red;
 }
 
-.info-zk{
-	position: absolute;
-    right: 0.1rem;
-    bottom: 0.1rem;
-    color: #ffd785 !important;
-}
+
 
 
 .panel .label-type1{
