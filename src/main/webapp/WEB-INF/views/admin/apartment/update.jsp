@@ -125,11 +125,13 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">朝向</label>
 							<div class="col-md-9">
+							<!-- 
 								<select name="cao_xiang" class="form-control cao_xiang"
 									data-value="${apartment.basic_info.cao_xiang}">
 									<option value="南北">南北</option>
 									<option value="东西">东西</option>
 								</select>
+								 -->
 								<script type="text/javascript">
 									$.each($('.cao_xiang option'), function(
 											index, item) {

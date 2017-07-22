@@ -100,7 +100,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		JSONObject basic_info = new JSONObject();
 
 		basic_info.put("suo_di_zhi", suo_di_zhi);
-		basic_info.put("cao_xiang", cao_xiang);
+//		basic_info.put("cao_xiang", cao_xiang);
 		basic_info.put("mian_ji", mian_ji);
 		basic_info.put("shi", shi);
 		basic_info.put("ting", ting);
