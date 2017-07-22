@@ -15,9 +15,9 @@
 	<my_body>
 	<div id="masking" style="display:none"></div>
 	<div class="myalert">
-		<p style="font-size:14px;color:#337ab7;line-height:43px;padding-left:10px">留言回复 <a class="btn close " style="float:right;color:#337ab7">X</a></p>
+		<p style="font-size:14px;color:#337ab7;line-height:43px;padding-left:10px">留言回复 <a class="btn close " style="float:right;color:#337ab7;opacity: 1;background: none;box-shadow: none;">X</a></p>
 		<textarea  name="content" id="mymassage"  placeholder="在此处留下你想对评论者的回复内容" ></textarea>
-		<p style="text-align:center"><a href="javascript:;" class="btn verify">确认</a></p>
+		<p style="text-align:center"><a href="javascript:;" style="padding: 7px 35px;" class="btn verify">确认</a></p>
 	</div>
 	
 	<div class="row">

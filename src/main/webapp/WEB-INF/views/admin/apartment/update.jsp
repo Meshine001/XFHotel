@@ -422,8 +422,8 @@
 								</ul>
 							</div>
 						</div>
-
-						<div class="form-group">
+				<!-- 
+						<div class="form-group" style="display:none">
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
 								<select name="lei_xing" id="apartment-type" class="lei_xing form-control" data-value = "${apartment.basic_info.lei_xing}">
@@ -444,6 +444,7 @@
 								</script>
 							</div>
 						</div>
+				 -->	
 						<div class="form-group">
 							<label class="col-md-3 control-label">价格</label>
 							<div class="col-md-9">

@@ -38,9 +38,14 @@ $(document).ready(function(){
             });
             //实景看房
             
-            	if(data.basic_info.VR_di_zhi!=null){
-            		$(".swiper-container").append('<i class="videovr">VR实景查看</i>');
+            	if(data.basic_info.VR_di_zhi == null || data.basic_info.VR_di_zhi == undefined || data.basic_info.VR_di_zhi == ""){
+            		
+            	}else{
+            		$("#Myscroll-body .main .swiper-container").append('<i class="videovr">VR实景查看</i>');
             	}
+            	
+            	
+            	
             	$(".swiper-container .videovr").on('click',function(){
             		fnBase.keep(1,'VR',data.basic_info.VR_di_zhi);
             		window.location.href="VR.html";
@@ -54,8 +59,7 @@ $(document).ready(function(){
             $(".information").html("");
             var priceStr ='<h1 class="ic_house">'+data.position.xa_wei_zhi+"-" +data.position.xiao_qu+'</h1><p class="info_L24">'+data.basic_info.shi+"室"+data.basic_info.ting+"厅"+
             data.basic_info.wei+"卫"+"-"+data.basic_info.cao_xiang+'</p>' +
-                '<p class="info_L24 label-adders">'+data.position.bd_wei_zhi+"-"+data.position.jie_dao+data.position.xiao_qu+'</p><p class="info_L24 label-group"><i class="label-type1">'
-                +data.basic_info.lei_xing+'</i></p><span class="label-price">'+data.basic_info.jia_ge+'<small>/天</small></span><p class="info-zk">常住优惠打折</p>'
+                '<p class="info_L24 label-adders"><span class="czs-location-l"></span>'+data.position.bd_wei_zhi+"-"+data.position.jie_dao+data.position.xiao_qu+'</p><p  class="info_L24"><span class="czs-label-info-l"></span>入住满3天：9.5折、满7天：9折、满3</i></p><span class="label-price">'+data.basic_info.jia_ge+'<small>/天</small></span>'
             $(".information").append(priceStr);
             //房源信息
             $(".housing .i_inf ul").html("");

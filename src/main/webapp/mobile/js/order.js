@@ -118,6 +118,15 @@ function addpartenr(){
 	var _getYHJprice=fnBase.huoqu(1,"_price");
     $(".order_info .roomName").text(_community);
     $(".order_info .roomTime").html(_startTime+"入住"+_endTime+"离开"+"<i class='date'>共（"+_oTotalDay+"）天</i>");
+    if(_oTotalDay<3){
+    	$(".order_info .roomZK").hide();
+    }else if(_oTotalDay>3 && _oTotalDay<7){
+    	$(".order_info .roomZK").html('<i class="zk">9.5</i>折优惠：<span class="money">9.5折优惠</span>');
+    }else if(_oTotalDay>=7 && _oTotalDay<30){
+    	$(".order_info .roomZK").html('<i class="zk">9</i>折优惠：<span class="money">9折优惠</span>');
+    }else if(_oTotalDay>=30){
+    	$(".order_info .roomZK").html('<i class="zk">7.5</i>折优惠：<span class="money">7.5折优惠</span>');
+    }
     $(".order_info .roompDJ .money").text(_price+"元");
     $(".order_info .roompYJ .money").text(_YJpic+"元");
     

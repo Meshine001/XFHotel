@@ -152,7 +152,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">可住几人</label>
 							<div class="col-md-9">
-								<input type="number" class="form-control" placeholder="请填写可住人数"
+								<input type="number" min="0" class="form-control" placeholder="请填写可住人数"
 									name="reng_shu">
 							</div>
 						</div>
@@ -383,7 +383,7 @@
 								</ul>
 							</div>
 						</div>
-
+					<!-- 
 						<div class="form-group">
 							<label class="col-md-3 control-label">出租类型</label>
 							<div class="col-md-9">
@@ -394,6 +394,7 @@
 
 							</div>
 						</div>
+					 -->	
 						<div class="form-group">
 							<label class="col-md-3 control-label">价格</label>
 							<div class="col-md-9">

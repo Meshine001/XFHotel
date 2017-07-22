@@ -91,10 +91,7 @@
     display: inline-block;
 }
 
-.label-adders{
-    background: url("../images/laber-adders.png") no-repeat center left 0.14rem;
-    text-indent: 0.18rem;!important;
-}
+
 
 .map-minute{
 	line-height: 0.3rem;
