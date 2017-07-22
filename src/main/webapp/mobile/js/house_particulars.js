@@ -38,14 +38,14 @@ $(document).ready(function(){
             });
             //实景看房
             
-            	if(data.basic_info.VR_di_zhi!=null){
+            	if(data.panorama!=null){
             		$(".swiper-container").append('<i class="videovr">VR实景查看</i>');
             	}
             	$(".swiper-container .videovr").on('click',function(){
-            		fnBase.keep(1,'VR',data.basic_info.VR_di_zhi);
+            		fnBase.keep(1,'VR',data.panorama);
             		window.location.href="VR.html";
-//            		window.location.href="VR.html?VR_di_zhi="+encodeURIComponent(data.basic_info.VR_di_zhi)+"";
-//        			window.location.href=data.basic_info.VR_di_zhi;
+//            		window.location.href="VR.html?VR_di_zhi="+encodeURIComponent(data.panorama)+"";
+//        			window.location.href=data.panorama;
         		})
             	
             

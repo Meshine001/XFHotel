@@ -358,7 +358,7 @@ public class MobileController  {
 			List<Order> availableOders = orderservice.checkAvailable(roomId, startTime, endTime);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, availableOders);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block 
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "查询失败");
 		}

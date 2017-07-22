@@ -59,6 +59,8 @@ public class Apartment {
 	
 	private int sort;
 	
+	private String panorama;
+	
 	public long getId() {
 		return id;
 	}
@@ -191,6 +193,14 @@ public class Apartment {
 		this.sort = sort;
 	}
 
+
+	public String getPanorama() {
+		return panorama;
+	}
+
+	public void setPanorama(String panorama) {
+		this.panorama = panorama;
+	}
 
 	public JSONArray getTe_se_class() {
 		return JSONArray.fromObject(te_se_class);
