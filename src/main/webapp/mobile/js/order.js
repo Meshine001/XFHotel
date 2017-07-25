@@ -290,7 +290,7 @@ function addpartenr(){
         var roonWz=fnBase.huoqu(1,'roonWz');
         var roomCX=fnBase.huoqu(1,'roomCX');
         var num_door=fnBase.huoqu(1,'num_door');
-        var _description=_community+"-"+roonWz+"-"+roomCX+"-"+num_door+'';
+        var _description=_community+"-"+roonWz+"-"+num_door+'';
         if(_userName==''){
             fnBase.myalert("请输入您的姓名");
             return;

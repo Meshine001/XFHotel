@@ -6037,6 +6037,13 @@ button.close {
   text-align: center;
   background-color: #000;
   border-radius: 4px;
+  width: 92px;
+  max-width: 200px;
+  height: 36px;
+  text-align: center;
+  padding: 0;
+  line-height: 36px;
+  font-size:14px;  
 }
 .tooltip-arrow {
   position: absolute;

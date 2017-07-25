@@ -4,7 +4,7 @@
     -webkit-box-sizing:border-box;-webkit-overflow-scrolling: touch; /* Safari */}
 a{ text-decoration:none;color: #968687;}
 ul,ul li{ list-style:none;}
-html,body{color: #878787;font-size: 0.26rem;font-family:"Helvetica microsoft yahei";background: #f2f4f3;font-family: "Helvetica";}
+html,body{;max-width:640px;margin:0 auto;;color: #878787;font-size: 0.26rem;font-family:"Helvetica microsoft yahei";background: #f2f4f3;font-family: "Helvetica";}
 
 /*样式重置*/
 table{border-collapse:collapse;border-spacing:0}
@@ -153,6 +153,8 @@ white-space: nowrap;
     display: flex;
     font-size: 0.18rem;
     background:#00b38a;color: #ffffff;font-size: 0.18rem;
+    max-width:640px;
+    margin:0 auto;
 }
 
 .header-mobile {}
@@ -193,6 +195,8 @@ white-space: nowrap;
     bottom: 0.4rem;
     width: 100%;
     background: #f4f4f4;
+    max-width:640px;
+    margin:0 auto;
 }
 .main {
     margin-bottom: 0.45rem;
@@ -211,6 +215,8 @@ white-space: nowrap;
     z-index: 10;
     height: 0.45rem;
     background: #00b38a;
+    max-width: 640px;
+    margin: 0 auto;
 }
 .navbar a {
     width: 100%;
