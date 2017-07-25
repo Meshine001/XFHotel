@@ -92,11 +92,13 @@ public class ApartmentServiceImpl implements ApartmentService {
 			String jia_ge ,String  VR_di_zhi) {
 
 		Apartment apartment;
+		
 		if (null == id) {// add
 			apartment = new Apartment();
 		} else {
 			apartment = apartmentDAO.get(id);
 		}
+		
 		JSONObject basic_info = new JSONObject();
 
 		basic_info.put("suo_di_zhi", suo_di_zhi);
@@ -110,11 +112,8 @@ public class ApartmentServiceImpl implements ApartmentService {
 		basic_info.put("lei_xing", lei_xing);
 		basic_info.put("jia_ge", jia_ge);
 		basic_info.put("yang_tai", yang_tai);
-
 		apartment.setPanorama(VR_di_zhi);
-		
 		apartment.setBasic_info(basic_info.toString());
-
 		JSONObject position = new JSONObject();
 		position.put("jing_du", jing_du);
 		position.put("wei_du", wei_du);
@@ -127,9 +126,9 @@ public class ApartmentServiceImpl implements ApartmentService {
 		position.put("lou_ceng", lou_ceng);
 		position.put("zong_lou_ceng", zong_lou_ceng);
 		position.put("men_pai", men_pai);
-
+		
 		apartment.setPosition(position.toString());
-
+		
 		apartment.setDescription(miao_su);
 
 		apartment.setTe_se(JSONArray.fromObject(te_se.trim().split("，")).toString());
@@ -147,13 +146,10 @@ public class ApartmentServiceImpl implements ApartmentService {
 		apartment.setPei_tao_class(JSONArray.fromObject(pei_tao_class.trim().split("，")).toString());
 		apartment.setZou_bian_class(JSONArray.fromObject(zou_bian_class.trim().split("，")).toString());
 		apartment.setQi_ta_class(JSONArray.fromObject(qi_ta_class.trim().split("，")).toString());
-		
 		apartment.setHu_xing_tu(pic1);
 		apartment.setFang_jian_tu(JSONArray.fromObject(pic2).toString());
 		apartment.setXiao_qu_tu(JSONArray.fromObject(pic3).toString());
-
 		apartmentDAO.saveOrUpdate(apartment);
-
 		return apartment;
 	}
 
@@ -165,7 +161,6 @@ public class ApartmentServiceImpl implements ApartmentService {
 			String reng_shu, String chuang, String miao_su, String te_se,String te_se_class, String jia_ju,String jia_ju_class, String wei_yu,String wei_yu_class, String can_chu,String can_chu_class,
 			String pei_tao,String pei_tao_class, String zou_bian,String zou_bian_class, String qi_ta, String qi_ta_class,String pic1, String[] pic2, String[] pic3, String lei_xing,
 			String jia_ge ,String VR_di_zhi) {
-
 		return saveOrUpdate(null, jing_du, wei_du, bd_wei_zhi, xa_wei_zhi, jie_dao, xiao_qu, lou_hao, dan_yuan, lou_ceng, zong_lou_ceng, men_pai, suo_di_zhi, cao_xiang, mian_ji, shi, ting, wei, yang_tai, reng_shu, chuang, miao_su, te_se, te_se_class, jia_ju, jia_ju_class, wei_yu, wei_yu_class, can_chu, can_chu_class, pei_tao, pei_tao_class, zou_bian, zou_bian_class, qi_ta, qi_ta_class, pic1, pic2, pic3, lei_xing, jia_ge,VR_di_zhi);
 	}
 
@@ -410,6 +405,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		return page;
 	}
 	
+	
 	@Transactional
 	@Override
 	public JSONObject createOrderMoudle(String startTime, String endTime, Long apartmentId) {
@@ -441,7 +437,6 @@ public class ApartmentServiceImpl implements ApartmentService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		moudle.put("oPrice", priceInfo.get("price"));
 		moudle.put("oTotalPrice", sum);
 		moudle.put("oCashPledge", priceInfo.get("cashPledge"));
@@ -450,6 +445,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 		moudle.put("capacity", priceInfo.get("capacity"));
 		return moudle;
 	}
+	
 	
 	@Transactional
 	@Override
@@ -482,5 +478,4 @@ public class ApartmentServiceImpl implements ApartmentService {
 	       return s;
 	}
 	
-
 }

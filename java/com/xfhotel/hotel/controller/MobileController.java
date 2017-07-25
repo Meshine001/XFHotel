@@ -381,6 +381,7 @@ public class MobileController  {
 		try {
 			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
+			
 			for (Order o : orders) {
 				Map m = o.toMap();
 				Map apartment = apartmentService.getApartmentById(o.getRoomId());
@@ -389,7 +390,7 @@ public class MobileController  {
 				 
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
-		} catch (Exception e) {
+		} catch (Exception e) {	
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -479,6 +480,7 @@ public class MobileController  {
 		}
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
+		info.put("order", order);
 		Long data = DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime();
 		House house = houseService.getHouse(roomId, data);
 		int state =0;
@@ -732,6 +734,7 @@ public class MobileController  {
 		return info;	
 	}
 	
+	
 /**
  * 
  * @param file
@@ -761,7 +764,7 @@ public class MobileController  {
 	public @ResponseBody Map viewPassword(Long oId) {
 		Order order = orderService.get(oId);
 		JSONObject a = apartmentService.getApartmentById(order.getRoomId());
-		JSONObject basic =a.getJSONObject("basic_info");
+		JSONObject basic =a.getJSONObject("basic_nfo");
 		String phone = order.getCusTel();
 		String lock_no = basic.getString("suo_di_zhi");
 		 lockService.viewPassword(phone, lock_no);
@@ -833,8 +836,6 @@ public class MobileController  {
 		}
 		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
 	}
-	
-	
 	
 	/*
 	 * 获取订单
