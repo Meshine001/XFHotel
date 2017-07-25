@@ -82,10 +82,11 @@ function list(page) {
 //			data
 			$("#list").html('');
 			var str='';
-			for(var i=0;i<data.results.length;i++){
 			
+			for(var i=0;i<data.results.length;i++){
+				var ted=data.results[i].description;
 				str+='<tr data-id="'+data.results[i].id+'"><td>'+data.results[i].id+'</td><td>'+data.results[i].timeStr+'</td><td>'+data.results[i].status+
-				'</td><td>'+data.results[i].cusName+'</td><td>'+data.results[i].cusTel+'</td><td>'+data.results[i].description+'</td><td>'+data.results[i].startTime+"至"+
+				'</td><td>'+data.results[i].cusName+'</td><td>'+data.results[i].cusTel+'</td><td>'+ted.replace(/-undefined-/,"-")+'</td><td>'+data.results[i].startTime+"至"+
 				data.results[i].endTime+'</td><td>'+data.results[i].totalDay+'</td><td>'+data.results[i].price+'</td><td>'+data.results[i].totalPrice+'</td><td>'+data.results[i].preferential+'</td>'
 				if(data.results[i].status=='确认中'){
 					str+='<td><a href="javascript:;" class="btn comfirm-order" data-id="'+data.results[i].id+'">确认订单</a><a href="javascript:;" class="btn close-order" data-id="'+data.results[i].id+'">关闭订单</a></td>'
@@ -341,7 +342,8 @@ $("#list").on('click','tr',function(){
 			    }
 			 
 			    $(".detailWraper .zfhouse").html('');
-			    var kule='<tr><td style="width:100%;border-bottom:1px solid #ccc;font-size: 18px;">住房订单</td><td>预订房屋：<span>'+data[1].description+
+			    var det=data[1].description
+			    var kule='<tr><td style="width:100%;border-bottom:1px solid #ccc;font-size: 18px;">住房订单</td><td>预订房屋：<span>'+det.replace(/-undefined-/,"-")+
 			              '</span></td></tr><tr><td class="fl50">入住时间：<span>'+data[0]+'</span></td><td>离开时间：<span>'+data[2]+
 			              '</span></td></tr><tr><td class="fl50">天数：<span>'+data[1].totalDay+'</span></td><td>订单状态：<span>'+data[1].status+
 			              '</span></td></tr><tr><td>下单时间：<span>'+commonTime+'</span></td></tr><tr><td>入住人：<span>'+data[1].cusName+

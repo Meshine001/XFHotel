@@ -472,6 +472,7 @@ public class MobileController  {
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
 			String apartmentType,String id) throws ParseException {
 		Long couponId = null;
+		System.out.println(description);
 		try {
 			couponId = Long.valueOf(id);
 		} catch (NumberFormatException e) {

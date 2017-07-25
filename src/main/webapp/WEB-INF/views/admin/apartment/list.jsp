@@ -56,23 +56,23 @@
 								<td>${apartment.position.lou_ceng}/${apartment.position.zong_lou_ceng}</td>
 								<td>${apartment.basic_info.cao_xiang}</td>
 								<td>${apartment.basic_info.mian_ji}</td>
-								<th><a class="btn btn-success"
+								<th><a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="编辑详情"
 									href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a><br>
-									<a class="btn btn-success price_s"
+									<a class="btn btn-success price_s" data-toggle="tooltip" data-placement="left" title="编辑价格"
 									href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格</a><br>
 									
-									<a href="<%=basePath %>/admin/apartment/showHome/${apartment.id}" class="btn btn-success" >
+									<a href="<%=basePath %>/admin/apartment/showHome/${apartment.id}" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="隐藏/显示" >
 										<c:if test="${apartment.show_home == true }">首页隐藏</c:if>
 										<c:if test="${apartment.show_home == false }">首页显示</c:if>
 									</a><br>
-									<a href="<%=basePath %>/admin/apartment/delete/${apartment.id}" title="删除" class="btn btn-danger">删除</a>
+									<a href="<%=basePath %>/admin/apartment/delete/${apartment.id}"   data-toggle="tooltip" data-placement="left" title="删除" class="btn btn-danger">删除</a>
 								
 								<!-- 房客留言操作begin -->	
-									<br><a href="<%=basePath%>/admin/leavemsglist" class="btn btn-info evalpinglun">查看评论</a>
+									<br><a href="<%=basePath%>/admin/leavemsglist"  data-toggle="tooltip" data-placement="left" title="查看评论" class="btn btn-info evalpinglun">查看评论</a>
 								<!-- 房客留言操作end -->	
 								
 								<!-- 房态修改begin -->	
-									<br><a href="<%=basePath%>/admin/status" class="btn btn-warning houseStatus">房态设置</a>
+									<br><a href="<%=basePath%>/admin/status"  data-toggle="tooltip" data-placement="left" title="房态设置" class="btn btn-warning houseStatus">房态设置</a>
 								<!-- 房态修改end -->	
 								    
 								<!-- 排序begin -->
@@ -90,10 +90,15 @@
 	</div>
 	</my_body>
 	<my_script>
+	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script> 
+		<script type="text/javascript"
+		src="<%=basePath%>/dist/admin/assets/js/vendor.js"></script>
 		
 	    <script>
 		    
 			$(document).ready(function(){
+				$("[data-toggle='tooltip']").tooltip();  
+				
 				$("table th,table td").css('min-width','80px')
 				$("#h-table .paixu input").focus(function(){
 					$(this).parent().css('border-color','#29c75f');

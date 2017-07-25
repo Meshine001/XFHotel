@@ -10,6 +10,8 @@
     overflow: hidden;
     background: #fff;
     z-index: 88;
+    max-width: 640px;
+    margin: 0 auto;
 }
 #nav a{
     display: block;
