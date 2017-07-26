@@ -288,7 +288,6 @@ function addpartenr(){
         var _tel=$("#tel").val();
         var _identity=$("#identity").val();
         var roonWz=fnBase.huoqu(1,'roonWz');
-        var roomCX=fnBase.huoqu(1,'roomCX');
         var num_door=fnBase.huoqu(1,'num_door');
         var _description=_community+"-"+roonWz+"-"+num_door+'';
         if(_userName==''){

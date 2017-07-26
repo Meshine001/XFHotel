@@ -381,6 +381,7 @@ public class MobileController  {
 		try {
 			List<Order> orders = orderservice.search(cId, category, type, startDate, endDate, range);
 			List<Map> maps = new ArrayList<Map>();
+			
 			for (Order o : orders) {
 				Map m = o.toMap();
 				Map apartment = apartmentService.getApartmentById(o.getRoomId());
@@ -389,7 +390,7 @@ public class MobileController  {
 				 
 			}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, maps);
-		} catch (Exception e) {
+		} catch (Exception e) {	
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -471,7 +472,6 @@ public class MobileController  {
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
 			String apartmentType,String id) throws ParseException {
 		Long couponId = null;
-		System.out.println(description);
 		try {
 			couponId = Long.valueOf(id);
 		} catch (NumberFormatException e) {
@@ -480,6 +480,7 @@ public class MobileController  {
 		}
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
+		info.put("order", order);
 		Long data = DateUtil.parse(startTime + " 12:00", "yyyy-MM-dd HH:mm").getTime();
 		House house = houseService.getHouse(roomId, data);
 		int state =0;
@@ -733,6 +734,7 @@ public class MobileController  {
 		return info;	
 	}
 	
+	
 /**
  * 
  * @param file
@@ -768,6 +770,7 @@ public class MobileController  {
 		 lockService.viewPassword(phone, lock_no);
 		Map< String, Object> map = new HashMap<String, Object>();
 		map.put("pwd_text",  lockService.viewPassword(phone, lock_no));
+		System.out.println(lockService.viewPassword(phone, lock_no));
 		return map ;
 	}
 	
@@ -834,8 +837,6 @@ public class MobileController  {
 		}
 		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
 	}
-	
-	
 	
 	/*
 	 * 获取订单
