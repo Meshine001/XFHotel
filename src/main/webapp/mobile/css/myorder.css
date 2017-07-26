@@ -77,12 +77,12 @@
  	width: 3rem;
     height: 2rem;
     background: #fff;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     margin-top: -1rem;
     margin-left: -1.5rem;
-    z-index: 10000000;
+    z-index: 10003;
     border-radius: 0.15rem;
     overflow: hidden;
         }
