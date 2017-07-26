@@ -288,7 +288,6 @@ function addpartenr(){
         var _tel=$("#tel").val();
         var _identity=$("#identity").val();
         var roonWz=fnBase.huoqu(1,'roonWz');
-        var roomCX=fnBase.huoqu(1,'roomCX');
         var num_door=fnBase.huoqu(1,'num_door');
         var _description=_community+"-"+roonWz+"-"+num_door+'';
         if(_userName==''){
@@ -331,9 +330,7 @@ function addpartenr(){
         console.log(postData);
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
-            console.log(data.id);
             console.log(data.order.id);
-           
             if(data.order.id != '' && data.order.id != undefined){
                 //location.href = Constant.URL + '/wx/payment.html?id='+encodeURIComponent(data.order.id);
                 window.location.href="payment.html?id="+encodeURIComponent(data.order.id);

@@ -472,7 +472,6 @@ public class MobileController  {
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
 			String apartmentType,String id) throws ParseException {
 		Long couponId = null;
-		System.out.println(description);
 		try {
 			couponId = Long.valueOf(id);
 		} catch (NumberFormatException e) {
@@ -765,12 +764,13 @@ public class MobileController  {
 	public @ResponseBody Map viewPassword(Long oId) {
 		Order order = orderService.get(oId);
 		JSONObject a = apartmentService.getApartmentById(order.getRoomId());
-		JSONObject basic =a.getJSONObject("basic_nfo");
+		JSONObject basic =a.getJSONObject("basic_info");
 		String phone = order.getCusTel();
 		String lock_no = basic.getString("suo_di_zhi");
 		 lockService.viewPassword(phone, lock_no);
 		Map< String, Object> map = new HashMap<String, Object>();
 		map.put("pwd_text",  lockService.viewPassword(phone, lock_no));
+		System.out.println(lockService.viewPassword(phone, lock_no));
 		return map ;
 	}
 	
