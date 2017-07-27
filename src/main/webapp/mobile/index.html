@@ -20,7 +20,7 @@
     <script charset="gb2312" language="javascript"   type="text/javascript" src="js/fastclick.js"></script>
 	<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/iscroll.js"></script>
     <style>
-        .swiper-container { width: 3.75rem; height: 2.1rem; }
+        .swiper-container { width: 3.75rem; height: 2.1rem;overflow: hidden; }
         .swiper-container .swiper-slide{ width: 3.75rem; height: 2.1rem; }
         .swiper-container .swiper-slide img{width: 100%;height: 2.1rem; }
         .swiper-container .swiper-pagination-bullet{ width: 0.1rem; height: 0.05rem;border-radius: 0.05rem; background: rgba(255,255,255,0.9);}
@@ -33,6 +33,10 @@
             margin: 0;
             vertical-align: top;
         }
+     	.swiper-container-life{ width: 3.75rem; height: 3.2rem;overflow: hidden; }
+        .swiper-container-life .swiper-slide{ width: 3.75rem; height: 3.2rem; }
+        
+        
     </style>
     
 </head>
@@ -130,14 +134,25 @@
         <!-- qingshe生活-->
         <div class="service service-image">
             <h2 class="title-serce">青舍生活<a href="Lifelist.html">更多</a></h2>
-
+			 <div class="swiper-container-life">
+				<div class="swiper-wrapper">
+			       <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA11.png"/></a></div>
+			       <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA2.jpg"/></a></div>
+			       <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA3.png"/></a></div>         
+			    </div>      
+			 </div>
         </div>
 
         <!-- my-footer-->
         <div class="my-footer">
-            <p>全国服务热线：029-63018977</p>
-            <p>Copyright ©西安易云智能科技有限公司</p>
-            <p><img src="images/beianbgss.png">青舍都市公寓</p>
+        	<p>青舍都市公寓</p>
+            <div class="ac-footer">
+            	<a href="Lifelist.html">青舍生活</a>
+            	<a href="houseType.html">我要找房</a>
+            	<a href="#" title="platformInit.html">房屋托管</a>
+            	<a href="about.html">关于我们</a>
+            </div>
+            <p>Copyright © 西安易云智能科技有限公司</p>
         </div>
     </div>
 
