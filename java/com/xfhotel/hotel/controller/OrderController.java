@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Comment;
+import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CommentService;
+import com.xfhotel.hotel.service.FaultService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
@@ -51,6 +53,9 @@ public class OrderController {
 	@Autowired
 	SystemConfService systemConfiService;
 
+ 	@Autowired
+	FaultService faultservice;
+ 	
 	@Autowired
 	HttpSession session;
 
@@ -513,6 +518,48 @@ public class OrderController {
 			}
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "打扫完成");
+	}
+
+@RequestMapping(value = "/faultOrder", method = RequestMethod.POST)
+@ResponseBody
+public Message FaultOrder(Long id) {
+	Fault c = faultservice.get(id);
+	if (c == null) {
+		return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+	}
+	if (c.getStatus() == Clean.STATUS_NOT_AFFIRM) {
+		try {
+				c.setStatus(Clean.STATUS_CONDUCT);
+				faultservice.update(c);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+		}
+
+	}
+	return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
+	
+}
+
+@RequestMapping(value = "/faultOrders", method = RequestMethod.POST)
+@ResponseBody
+public Message FaultOrders(Long id) {
+	Fault c = faultservice.get(id);
+	if (c == null) {
+		return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+	}
+	if (c.getStatus() == Clean.STATUS_CONDUCT) {
+		try {
+				c.setStatus(Clean.STATUS_COMPLETE);
+				faultservice.update(c);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+		}
+	}
+	return new Message(Constants.MESSAGE_SUCCESS_CODE, "维修完成");
 	}
 
 }
