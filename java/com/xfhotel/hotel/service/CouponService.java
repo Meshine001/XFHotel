@@ -2,7 +2,6 @@ package com.xfhotel.hotel.service;
 
 import java.util.List;
 
-
 import com.xfhotel.hotel.entity.Coupon;
 
 

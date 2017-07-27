@@ -28,8 +28,6 @@ import javax.imageio.stream.ImageOutputStream;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 
-import antlr.StringUtils;
-
 /**
  * 纯JAVA实现的图片处理工具类
  * 

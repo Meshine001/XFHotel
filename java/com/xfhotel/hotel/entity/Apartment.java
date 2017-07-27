@@ -1,6 +1,5 @@
 ﻿ package com.xfhotel.hotel.entity;
 
-import javax.management.loading.PrivateClassLoader;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

@@ -4,12 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;

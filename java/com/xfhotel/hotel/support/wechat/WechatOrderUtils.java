@@ -1,17 +1,20 @@
 package com.xfhotel.hotel.support.wechat;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-import net.sf.json.JSONObject;
-import org.apache.commons.lang.StringUtils;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
+import net.sf.json.JSONObject;
 
 /**
  * 微信统一下单工具类

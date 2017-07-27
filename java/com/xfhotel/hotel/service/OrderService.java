@@ -2,7 +2,6 @@ package com.xfhotel.hotel.service;
 
 import java.util.List;
 
-import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;

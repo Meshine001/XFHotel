@@ -2,7 +2,6 @@ package com.xfhotel.hotel.service;
 
 import com.xfhotel.hotel.entity.Leaveword;
 import com.xfhotel.hotel.entity.Page;
-import com.xfhotel.hotel.support.PageResults;
 
 public interface LeavewordService {
 	

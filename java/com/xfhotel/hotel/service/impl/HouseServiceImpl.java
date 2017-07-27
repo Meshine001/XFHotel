@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.impl.HouseDAOImpl;
-import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.service.HouseService;
 

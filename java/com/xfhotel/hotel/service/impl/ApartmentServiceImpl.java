@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.chainsaw.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +18,6 @@ import com.xfhotel.hotel.dao.impl.HouseDAOImpl;
 import com.xfhotel.hotel.dao.impl.PriceDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.House;
-import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.OrderService;

@@ -5,9 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mysql.jdbc.Field;
 import com.swetake.util.Qrcode;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Customer;
@@ -38,10 +35,7 @@ import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
-import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
-import com.xfhotel.hotel.support.QRCode;
-import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 import com.xfhotel.hotel.support.wechat.Config;
 import com.xfhotel.hotel.support.wechat.HttpUtils;

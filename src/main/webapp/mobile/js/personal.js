@@ -65,12 +65,12 @@ $(document).ready(function(){
     	    }	
     );
     
-    $(".per-order-status ol dd").live('click',function(){
-    	if($(this).hasClass('_active')==false){
-    		$(this).addClass('_active')
+    $(".per-order-status ol dd").bind('click',function(){
+    	if($(this).hasClass('_active')==true){
+    		$(this).removeClass('_active');
     	}else{
+    		$(this).addClass('_active');
     		console.log($(this).text());
-    		$(this).removeClass('_active')
     	}
     });
     $(".time-status ol dd").live('click',function(){

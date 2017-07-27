@@ -1,20 +1,9 @@
 package com.xfhotel.hotel.controller;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
-import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
-import com.xfhotel.hotel.support.Message;
-import com.xfhotel.hotel.support.QRCode;
-import com.xfhotel.hotel.support.TimeUtil;
 import com.xfhotel.hotel.support.lock.LockOperater;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 

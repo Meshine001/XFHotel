@@ -1,12 +1,11 @@
 ﻿var baseUrl = getRootPath();//调试环境用这个
 console.log(baseUrl);
-  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
+//  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 
 var clientIp = getIp();
 
 var Constant = {
-//     URL: "http://192.168.1.108/",
-         URL: baseUrl,
+        URL: baseUrl,
         CLIENT_IP:clientIp
 };
 /**

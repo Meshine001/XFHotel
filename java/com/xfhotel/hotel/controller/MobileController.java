@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,6 +28,7 @@ import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
@@ -37,6 +37,7 @@ import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.FaultService;
 import com.xfhotel.hotel.service.FileService;
 import com.xfhotel.hotel.service.HouseService;
 import com.xfhotel.hotel.service.LockService;
@@ -66,6 +67,9 @@ import net.sf.json.JSONObject;
 public class MobileController  {
  	@Autowired
 	CleanService cleanservice;
+ 	
+ 	@Autowired
+	FaultService faultservice;
 	
 	@Autowired
 	LockService lockService;
@@ -303,6 +307,7 @@ public class MobileController  {
 			String[] args = {vCodeStr,Constants.SMS_AVAILBEL_TIME_STR};
 			//调试时可注释掉下面
 			//发送短信
+			System.out.println();
 			SendTemplateSMS.sendSMS(Constants.SMS_TEMPLATE_REG, tel, args);
 			//利用session进行验证
 			Map<String, Object> vCode = new HashMap<String, Object>();
@@ -595,7 +600,7 @@ public class MobileController  {
 	 * 青客生活
 	 * @param request
 	 * @param id
-	 * @return
+	 * @return   
 	 */
 	@RequestMapping(value = "blog_content", method = RequestMethod.POST)
 	public @ResponseBody Map  initBlog(HttpServletRequest request,Long id){
@@ -696,7 +701,7 @@ public class MobileController  {
 		}
 			return list;
 	}
-	
+		
 	
 /**
  * 获取房屋详情
@@ -898,21 +903,47 @@ public class MobileController  {
 	     }
 		return list;	
 	}
+/**
+ * 故障维修
+ * @param demand
+ * @param oederId
+ * @param faultItem
+ * @param maintainTime
+ * @return
+ */
+	@RequestMapping(value = "/faultAdd", method = RequestMethod.POST)
+	public @ResponseBody Message faultAdd (String demand,Long oederId , int faultItem[],int maintainTime) {
 
-	public static void main(String[] args) {
-//		long date = new Date().getTime(); 
-//		Long res = 0L;
-//		  Date date = new Date(System.currentTimeMillis());
-//		Calendar calendar = Calendar.getInstance();//日历对象
-//		calendar.setTime(date);
-//		 calendar.add(Calendar.MONTH, -6);//月份减一为-1，加一为1
-//		 res=calendar.getTime().getTime();
-//		 //System.out.println(sdf.format());
-//		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		System.out.println(sd.format(date));
-//		System.out.println();
-//		  Date date = new Date(System.currentTimeMillis());
-        
+		if(faultItem==null){
+			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
+		}
+		try {
+ 			Order o = orderservice.get(oederId);
+ 			Fault fault = new Fault();
+ 			fault.setDemand(demand);
+ 			fault.setFaultItem(Fault.getTypeFaultItem(faultItem));
+ 			fault.setMaintainTime(Fault.getmaintainTime(maintainTime));
+ 			fault.setRoomId(o.getRoomId());
+ 			fault.setOederId(oederId);
+ 			fault.setTime(new Date().getTime());
+ 			fault.setStatus(Clean.STATUS_NOT_AFFIRM);
+ 			faultservice.add(fault);
+//			TODO
+//			发短信给管理员
+//			【青舍都市】您有新订单需要确认，请及时处理。{1}
+			JSONObject a = apartmentService.getApartmentById(o.getRoomId())
+					.getJSONObject("position");
+			String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
+					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
+			String[] p = {f};
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_FAULT_SERVICE, systemConfiService.getConfig().getSms(), p);	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
+		}
+		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
 	}
+	
 }
 

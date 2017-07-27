@@ -1,7 +1,6 @@
 package com.xfhotel.hotel.service;
 
 import com.xfhotel.hotel.entity.Blog;
-import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.support.PageResults;
 
 public interface BlogService extends BaseService<Blog,Long>{
