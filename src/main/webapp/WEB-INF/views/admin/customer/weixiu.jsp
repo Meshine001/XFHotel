@@ -99,7 +99,7 @@
 		$("table th").css('background','#ccc')
 		//确认订单
 		$('.comfirm-order').click(function(){
-			var url = '../order/cleanOrder';
+			var url = '../order/faultOrder';
 			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
@@ -114,7 +114,7 @@
 				success : function(data) {
 					console.log(data)
 					if(data.statusCode == 1){
-						window.location.href = '../admin/customer_baojie';
+						window.location.href = '../admin/customer_weixiu';
 					}else{
 						alert(data.content);
 					}
@@ -124,7 +124,7 @@
 		
 		//关闭订单
 		$('.success-order').click(function(){
-			var url = '../order/cleanOrders';
+			var url = '../order/faultOrders';
 			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
@@ -142,7 +142,7 @@
 					
 					
 					if(data.statusCode == 1){
-						window.location.href = '../admin/customer_baojie';
+						window.location.href = '../admin/customer_weixiu';
 					}else{
 						alert(data.content);
 					}

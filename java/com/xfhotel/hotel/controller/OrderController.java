@@ -527,9 +527,9 @@ public Message FaultOrder(Long id) {
 	if (c == null) {
 		return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
 	}
-	if (c.getStatus() == Clean.STATUS_NOT_AFFIRM) {
+	if (c.getStatus() == Fault.STATUS_NOT_AFFIRM) {
 		try {
-				c.setStatus(Clean.STATUS_CONDUCT);
+				c.setStatus(Fault.STATUS_CONDUCT);
 				faultservice.update(c);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
