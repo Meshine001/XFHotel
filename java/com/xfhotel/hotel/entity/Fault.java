@@ -58,7 +58,7 @@ public class Fault {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private Long roomId;//房间id	
+	private String roomId;//房间id	
 	private Long oederId;//订单id
 	private int status;// 状态
 	private Long time;//下单时间
@@ -79,14 +79,13 @@ public class Fault {
 		this.id = id;
 	}
 
-	public Long getRoomId() {
+	
+	public String getRoomId() {
 		return roomId;
 	}
-
-	public void setRoomId(Long roomId) {
+	public void setRoomId(String roomId) {
 		this.roomId = roomId;
 	}
-
 	public Long getOederId() {
 		return oederId;
 	}

@@ -923,7 +923,7 @@ public class MobileController  {
  			fault.setDemand(demand);
  			fault.setFaultItem(Fault.getTypeFaultItem(faultItem));
  			fault.setMaintainTime(Fault.getmaintainTime(maintainTime));
- 			fault.setRoomId(o.getRoomId());
+ 			fault.setRoomId(o.getDescription());
  			fault.setOederId(oederId);
  			fault.setTime(new Date().getTime());
  			fault.setStatus(Clean.STATUS_NOT_AFFIRM);
