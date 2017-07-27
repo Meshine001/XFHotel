@@ -1,9 +1,6 @@
 package com.xfhotel.hotel.service;
 
-import com.xfhotel.hotel.entity.Lock;
 import com.xfhotel.hotel.support.Message;
-
-import net.sf.json.JSONObject;
 
 public interface LockService {
 	public Message changePassword(String phone, String lock_no,String password);

@@ -6,15 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.dao.impl.CleanDAOImpl;
 import com.xfhotel.hotel.dao.impl.OrderDAOImpl;
 import com.xfhotel.hotel.entity.Clean;
-import com.xfhotel.hotel.entity.Coupon;
-import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.SystemConfService;
-import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 
 @Service
 public class CleanServiceImpl implements CleanService {

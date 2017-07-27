@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.JsonArray;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.User;
@@ -31,14 +31,13 @@ import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.FaultService;
 import com.xfhotel.hotel.service.HouseService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.TimeUtil;
-
-import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/admin")
@@ -47,6 +46,9 @@ public class AdminController {
 	@Autowired
 	HttpSession session;
 
+	@Autowired
+	FaultService faultservice;
+	
 	@Autowired
 	UserService userService;
 	@Autowired
@@ -114,13 +116,12 @@ public class AdminController {
 	}
 	
 	//..7.18故障维修...
-		@RequestMapping(value = "/customer_weixiu", method = RequestMethod.GET)
-		public String weixiu() {
-			List<Clean> list = cleanService.list();
+		@RequestMapping(value = "/Fault", method = RequestMethod.GET)
+		public String Fault() {
+			List<Fault> list = faultservice.list();
 			List<Map> orders = new ArrayList<Map>();
-			for (Clean o : list) {
+			for (Fault o : list) {
 				orders.add(o.toMap());	
-				Order order = orderservice.get(o.getOederId());
 			}
 			session.setAttribute("orders", orders);
 			return "/admin/customer/weixiu";

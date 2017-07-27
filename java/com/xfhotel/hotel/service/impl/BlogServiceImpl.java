@@ -1,7 +1,6 @@
 package com.xfhotel.hotel.service.impl;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
@@ -12,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfhotel.hotel.dao.impl.BlogDAOImpl;
 import com.xfhotel.hotel.entity.Blog;
-import com.xfhotel.hotel.entity.Customer;
-import com.xfhotel.hotel.service.BaseService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.support.BlogUploadUtil;
 import com.xfhotel.hotel.support.PageResults;

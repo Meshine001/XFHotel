@@ -6,22 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
-
-import javax.naming.spi.DirStateFactory.Result;
-
-import org.apache.log4j.chainsaw.Main;
-
-import org.junit.experimental.theories.Theories;
-
-import com.xfhotel.hotel.common.Constants;
 
 import net.sf.json.JSONObject;
 

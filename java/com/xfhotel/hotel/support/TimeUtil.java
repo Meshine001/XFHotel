@@ -187,7 +187,6 @@ public class TimeUtil {
 	 */
 	public static List<Date> getAllDateInMonth(int year, int month) {
 		List<Date> dates = new ArrayList<Date>();
-
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, year);
 		cal.set(Calendar.MONTH, month);
