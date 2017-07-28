@@ -549,7 +549,7 @@ public Message FaultOrders(Long id) {
 	if (c == null) {
 		return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
 	}
-	if (c.getStatus() == Clean.STATUS_CONDUCT) {
+	if (c.getStatus() == Fault.STATUS_CONDUCT) {
 		try {
 				c.setStatus(Clean.STATUS_COMPLETE);
 				faultservice.update(c);
