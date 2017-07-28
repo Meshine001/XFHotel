@@ -79,7 +79,8 @@ public class Fault {
 		this.id = id;
 	}
 
-	
+
+
 	public String getRoomId() {
 		return roomId;
 	}
