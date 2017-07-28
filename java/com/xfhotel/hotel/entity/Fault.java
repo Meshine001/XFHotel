@@ -79,7 +79,8 @@ public class Fault {
 		this.id = id;
 	}
 
-	
+
+
 	public String getRoomId() {
 		return roomId;
 	}
@@ -138,7 +139,7 @@ public class Fault {
 		info.put("roomId", roomId);
 		info.put("oederId", oederId);
 		info.put("status", getStatusString(status));
-		info.put("time", DateUtil.format(new Date(time), "yyyy-MM-dd"));
+		info.put("time", DateUtil.format(new Date(time), "yyyy-MM-dd HH:mm:ss"));
 		info.put("faultItem", faultItem);
 		info.put("maintainTime", maintainTime);
 		info.put("demand", demand);

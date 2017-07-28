@@ -28,6 +28,7 @@ import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Order;
@@ -92,7 +93,7 @@ public class MobileController  {
 	
 	@Autowired
 	HttpSession session;
-	
+
 	@Autowired
 	CommentService commentService;
 	
@@ -627,7 +628,6 @@ public class MobileController  {
 		return map;
 	}
 	
-	
 	/**
 	 * 查询微信支付的状态
 	 * @param id
@@ -779,6 +779,7 @@ public class MobileController  {
 		return map ;
 	}
 	
+
 	/**
 	 * 退租
 	 * @param orderId

@@ -31,6 +31,7 @@ import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FaultService;
 import com.xfhotel.hotel.service.HouseService;
 import com.xfhotel.hotel.service.OrderService;
@@ -46,6 +47,9 @@ public class AdminController {
 	@Autowired
 	HttpSession session;
 
+	@Autowired
+	FacilityService facilityservice;
+	
 	@Autowired
 	FaultService faultservice;
 	
