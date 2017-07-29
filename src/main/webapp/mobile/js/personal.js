@@ -70,7 +70,6 @@ $(document).ready(function(){
     		$(this).removeClass('_active');
     	}else{
     		$(this).addClass('_active');
-    		console.log($(this).text());
     	}
     });
     $(".time-status ol dd").live('click',function(){

@@ -1,7 +1,7 @@
 ﻿$(document).ready(function(){
 	  var _oederId='';
 	  var facilId="";
-	  var days="";
+	  var sp="";
 	  var dayList=new Array();
 	  var lastList=new Array();
 var addfacilities={
@@ -40,27 +40,27 @@ var addfacilities={
 //    	function days(){
 //    		
 //        }
-    	$(".vip_info_list li .per-order-status").on('click','.toll .numContainer .riNum',function(){
+    	$(".per-order-status .list").on('click','.toll .numContainer .riNum',function(){
     		//fnBase.myalert('增加')
     		var currentLi=$(this).parent().parent();
 			var num=parseInt(currentLi.attr("num"),10);		
 			num=num+1;
-			
-			currentLi.find('input').val(num);
+			currentLi.find('input').attr('value',num);
+			currentLi.attr("num",num);
 			countPrice();
-			
-			for(var i=0;i<$(".per-order-status .list .toll").length;i++){
-				
-				if($(this).parent().parent().eq(i).find('.toll-c').hasClass('active')==true){
-					currentLi.attr("num",num);
-//					dayList.push($(".per-order-status .list .toll").eq(i).attr('num'));
-	    		}
-				var lastVue=dayList[dayList.length-1];
-				
-			}
-			lastList.push(lastVue)
+//			if($(this).parent().parent().find('.toll-c').hasClass('active')==true){
+//				sp=$(this).parent().parent().attr('num');
+//				dayList.push(sp);
+//    		}
+//			lastVue=dayList[dayList.length-1];
+//
+//			console.log(lastVue)
     	})
     	
+    	$(".per-order-status .list").on('click','.toll .numContainer  .ceText input',function(){
+    		
+    	})
+   
     	
 		
     	$(".vip_info_list li .per-order-status").on('click','.toll .numContainer .leNum',function(){
@@ -76,7 +76,7 @@ var addfacilities={
 			currentLi.attr("num",num);
 			currentLi.find('input').val(num);
 			countPrice();
-			days();
+			
     	})
     	//计算价格
 		function countPrice(){
@@ -117,7 +117,7 @@ var addfacilities={
 				var srt="";
 				$(".mianfeiList .list").html("");
 				for(var i=0;i<data.length;i++){
-					srt+='<div class="toll" id="'+data[i].id+'" price="'+data[i].price+'" num="1"><div class="toll-c"><i>'+data[i].name+'</i></div><div class="numContainer"><div class="fl leNum"></div><div class="fl ceText"><input type="type" disabled value="1">天</div><div class="fr riNum"></div></div></div>';
+					srt+='<div class="toll" id="'+data[i].id+'" price="'+data[i].price+'" num="1"><div class="toll-c"><i>'+data[i].name+'</i></div><div class="numContainer"><div class="fl leNum"></div><div class="fl ceText"><input type="type"  placeholder="1">天</div><div class="fr riNum"></div></div></div>';
 				};
 				$(".mianfeiList .list").append(srt);
 			}
@@ -153,13 +153,24 @@ var addfacilities={
         }
         return _oederId; //住房订单id
     });
+	var _addtime="";
 	
+	
+	  $(".per-order-status ol").on('click','dd',function(){
+	    	if($(this).hasClass('_active')==true){
+	    		$(this).removeClass('_active');
+	    		_addtime=$(this).attr('tid'); //添加时间
+	    	}else{
+	    		$(this).addClass('_active');
+	    	}
+	    });
+    
     $(".per-order-status .list").on('click','.toll .toll-c',function(){
     	if($(this).hasClass('active')==true){
     		$(this).removeClass('active')
 		}else{
 			$(this).addClass('active');
-			facilId=$(this).parent().attr('id');
+			facilId=$(this).parent().attr('id'); //物品id
 		}
     	var houseList=new Array();
 //    	var dayList=new Array();
@@ -184,8 +195,31 @@ addfacilities.acquisition();
 
 //提交申请  
 $(".account-login-width a").click(function(){
-	console.log(facilId)
-	console.log(lastList)
+	
+	for(var i=0;i<$(".per-order-status .list .toll").length;i++){
+        if($(".per-order-status .list .toll").eq(i).find('.toll-c').hasClass('active')==true){
+        	lastList.push($(".per-order-status .list .toll").eq(i).attr('num')); 
+        }
+    }
+	sp=lastList.join(',');//获取物品使用时间；
+
+	var frontURL=Constant.URL+'/mobile/FacilityOrderAdd/';
+    var postData={
+    		'oederId':_oederId,
+    		'facility':facilId,
+    		'fate':sp,
+    		'addTime':_addtime,
+    		'demand':$(".per-order-status textarea").val()
+    };
+    console.log(postData);
+    fnBase.commonAjax(frontURL,postData,function(data){
+    	console.log(data);
+    	fnBase.myalert('提交成功');
+        setTimeout(function(){
+        	window.location.href='serve.html';
+        },300)
+    })
+	
 }) 
        
 locadMianfeiSheshi();	
