@@ -129,7 +129,7 @@
 				<table class="table table-striped table-condensed">
 					<thead>
 						<tr>
-							<th>id</th>
+							<th>id1</th>
 							<th>下单时间</th>
 							<th>订单ID</th>
 							<th>房间</th>
