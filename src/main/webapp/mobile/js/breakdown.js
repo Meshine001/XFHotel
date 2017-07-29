@@ -7,7 +7,7 @@
         window.location.href="login.html";
         return;
     }
-    // 1 查出要打扫的房间列表
+    // 1 查出需要维修的房间列表
     var postData={uId:_uid,type:0 };
     var frontURL=Constant.URL+'/mobile/Clean';
     fnBase.commonAjax(frontURL,postData,function(data){
@@ -25,15 +25,8 @@
         
 
 
-    /*
-    * ��������ύ����
-    * demand  $('.per-order-status ._textarea').val();
-    * oederId  _oederId
-    * content _content
-    * cleanTime _cleanTime
-    *
-    * */
-    // 2 选择房间
+    
+    // 选择房间
     var _oederId='';
     $(".house-status ol dd").live('click',function(){
         $(this).addClass('_active').siblings().removeClass('_active');
@@ -43,8 +36,8 @@
         return _oederId;
     });
 
+    // 维修内容
     var _content='';
-
     $(".content-status ol dd").live('click',function(){
         var houseList=new Array();
         for(var i=0;i<$(".content-status ol dd").length;i++){
@@ -55,8 +48,16 @@
         _content=houseList.join(',');
         return _content;
     });
+    // 维修时间
+    var _cleanTime='';
+    $(".time-status ol dd").live('click',function(){
+        $(this).addClass('_active').siblings().removeClass('_active');
+       if($(this).hasClass('_active')==true){
+           _cleanTime=$(this).attr('tid');
+       }
+        return _cleanTime;
+    });
 
-  
 
 
 
@@ -75,29 +76,31 @@
    
         var postData={
             oederId:_oederId,
-            content1:_content,
+            faultItem:_content,
+            maintainTime:_cleanTime,
             demand:$('.per-order-status ._textarea').val()
         };
-
-        var frontURL=Constant.URL+'/mobile/cleanAdd';
-//        $.ajax({
-//            type:'post',
-//            dataType:'json',
-//            data:{
-//                oederId:_oederId,
-//                content1:_content,
-//                demand:$('.per-order-status ._textarea').val()
-//            },
-//            url:frontURL,
-//            success:function(data){
-//                console.log(data);
-//                fnBase.myalert('提交成功');
-//                setTimeout(function(){
-//                	window.location.href='serve.html';
-//                },300)
-//                
-//            }
-//        });
+        console.log(postData)
+        var frontURL=Constant.URL+'/mobile/faultAdd';
+        $.ajax({
+            type:'post',
+            dataType:'json',
+            data:{
+            	oederId:_oederId,
+                faultItem:_content,
+                maintainTime:_cleanTime,
+                demand:$('.per-order-status ._textarea').val()
+            },
+            url:frontURL,
+            success:function(data){
+                console.log(data);
+                fnBase.myalert('提交成功');
+                setTimeout(function(){
+                	window.location.href='serve.html';
+                },500)
+                
+            }
+        });
     });
 
 });

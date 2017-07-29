@@ -923,6 +923,7 @@ public class MobileController  {
  */
 	@RequestMapping(value = "/faultAdd", method = RequestMethod.POST)
 	public @ResponseBody Message faultAdd (String demand,Long oederId , int faultItem[],int maintainTime) {
+
 		if(faultItem==null){
 			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
 		}

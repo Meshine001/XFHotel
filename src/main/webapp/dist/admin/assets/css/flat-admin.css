@@ -6620,7 +6620,7 @@ input ::-webkit-input-placeholder {
 	font-size: 1em;
 	width: auto;
 	border: 0;
-	background-color: transparent;
+/*  background-color: transparent;*/	
 	width: 40px;
 	text-align: center;
 }

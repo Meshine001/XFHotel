@@ -125,7 +125,7 @@ public class AdminController {
 	}
 	
 	//..7.18故障维修...
-		@RequestMapping(value = "/Fault", method = RequestMethod.GET)
+		@RequestMapping(value = "/customer_weixiu", method = RequestMethod.GET)
 		public String Fault() {
 			List<Fault> list = faultservice.list();
 			List<Map> orders = new ArrayList<Map>();

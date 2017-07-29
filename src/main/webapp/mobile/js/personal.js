@@ -40,13 +40,13 @@ $(document).ready(function(){
         	$(".vip_info #personMan div img").attr("src",Constant.URL+'/images/'+data.details.avatar);
         }
 
-        //未支付的订单数
-        var toPaid=fnBase.huoqu(0,"toPaid");
-        if(toPaid=="0"){
-            $(".vip_info_list li .per-order-status .tip-size").hide();
-        }else{
-            $(".vip_info_list li .per-order-status .tip-size").text(toPaid).show();
-        }
+//        //未支付的订单数
+//        var toPaid=fnBase.huoqu(0,"toPaid");
+//        if(toPaid=="0"){
+//            $(".vip_info_list li .per-order-status .tip-size").hide();
+//        }else{
+//            $(".vip_info_list li .per-order-status .tip-size").text(toPaid).show();
+//        }
 
     });
     $(".vip_info_list li").eq(0).click(function(){
@@ -65,12 +65,11 @@ $(document).ready(function(){
     	    }	
     );
     
-    $(".per-order-status ol dd").live('click',function(){
-    	if($(this).hasClass('_active')==false){
-    		$(this).addClass('_active')
+    $(".per-order-status ol").on('click','dd',function(){
+    	if($(this).hasClass('_active')==true){
+    		$(this).removeClass('_active');
     	}else{
-    		console.log($(this).text());
-    		$(this).removeClass('_active')
+    		$(this).addClass('_active');
     	}
     });
     $(".time-status ol dd").live('click',function(){
