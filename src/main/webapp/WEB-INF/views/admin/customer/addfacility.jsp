@@ -18,7 +18,7 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				 <button type="button" class="close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title house-title">添加设施<i></i></h4>
+				<h4 class="modal-title house-title">添加设施.<i></i></h4>
 			  </div>
 			  <div class="modal-body">
 				 <div  id="mytable"> 
