@@ -29,6 +29,7 @@ import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.Facility;
+import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Order;
@@ -38,6 +39,8 @@ import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CommentService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.FacilityOrderService;
+import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FaultService;
 import com.xfhotel.hotel.service.FileService;
 import com.xfhotel.hotel.service.HouseService;
@@ -69,8 +72,6 @@ public class MobileController  {
  	@Autowired
 	CleanService cleanservice;
  	
- 	@Autowired
-	FaultService faultservice;
 	
 	@Autowired
 	LockService lockService;
@@ -87,6 +88,9 @@ public class MobileController  {
 	
 	@Autowired
 	CouponService couponService;
+	
+	@Autowired
+	FacilityService facilityservice;
 	
 	@Autowired
 	OrderService orderservice;
@@ -107,8 +111,13 @@ public class MobileController  {
 	SystemConfService systemConfiService;
 	
 	@Autowired
+	FacilityOrderService facilityOrderService;
+	
+	@Autowired
 	HouseService houseService;
 	
+	@Autowired
+	FaultService faultservice;
 
 	/**
 	 * 房屋
@@ -927,7 +936,7 @@ public class MobileController  {
  			fault.setRoomId(o.getDescription());
  			fault.setOederId(oederId);
  			fault.setTime(new Date().getTime());
- 			fault.setStatus(Clean.STATUS_NOT_AFFIRM);
+ 			fault.setStatus(Fault.STATUS_NOT_AFFIRM);
  			faultservice.add(fault);
 //			TODO
 //			发短信给管理员
@@ -938,6 +947,55 @@ public class MobileController  {
 					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 			String[] p = {f};
 			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_FAULT_SERVICE, systemConfiService.getConfig().getSms(), p);	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
+		}
+		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
+	}
+	
+	@RequestMapping(value = "/FacilityOrderAdd", method = RequestMethod.POST)
+	public @ResponseBody Message FacilityOrderAdd (String demand,Long oederId , Long facility[],int addTime ,Long fate[]) {
+		if(facility==null){
+			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
+		}
+		try {
+			int d=0;
+			String pay ;
+			Order o = orderservice.get(oederId);
+			FacilityOrder facilityOrder =new FacilityOrder();
+					for(Long fate1 : fate){
+						facilityOrder.setFate(fate1);
+						for(int i =0;facility.length>i;){
+							Long Facility = facility[d];
+							facilityOrder.setFacility(facilityservice.findById(Facility).getName());
+							facilityOrder.setPrice(facilityservice.findById(Facility).getPrice()*fate1);
+							if(facilityservice.findById(Facility).getClassify()==0){
+								pay="免费";
+							} else {
+								pay="收费";
+							}
+							facilityOrder.setClassify(pay);
+				 			facilityOrder.setAddTime(FacilityOrder.getmaintainTime(addTime));
+				 			facilityOrder.setStatus(FacilityOrder.STATUS_NOT_AFFIRM);
+				 			facilityOrder.setRoomId(o.getDescription());
+				 			facilityOrder.setOederId(oederId);
+				 			facilityOrder.setTime(new Date().getTime());
+				 			facilityOrderService.add(facilityOrder);
+				 			d++;
+						break;
+					}
+				}
+//			TODO
+//			发短信给管理员
+//			【青舍都市】您有新订单需要确认，请及时处理。{1}
+			JSONObject a = apartmentService.getApartmentById(o.getRoomId())
+					.getJSONObject("position");
+			String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
+					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
+			String[] p = {f};
+//			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_FAULT_SERVICE, systemConfiService.getConfig().getSms(), p);	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
