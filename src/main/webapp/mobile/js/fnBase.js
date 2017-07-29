@@ -1,11 +1,12 @@
-﻿var baseUrl = getRootPath();//调试环境用这个
-console.log(baseUrl);
-//  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
+﻿//var baseUrl = getRootPath();//调试环境用这个
+//console.log(baseUrl);
+  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 
 var clientIp = getIp();
 
 var Constant = {
-        URL: baseUrl,
+//     URL: "http://192.168.1.108/",
+         URL: baseUrl,
         CLIENT_IP:clientIp
 };
 /**
@@ -13,7 +14,7 @@ var Constant = {
  */
 function getIp() {
     var ip;
-    var ipInfoUrl = 'http://ipinfo.io/json/';
+    var ipInfoUrl = 'http://ipinfo.io/json';
     $.ajax({
         url:ipInfoUrl,
         async:false,
