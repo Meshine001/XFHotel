@@ -32,12 +32,12 @@
 								<div class="col-md-6">
                         			<div class="input-group">
 									  <span class="input-group-addon">名称</span>
-									  <input type="text" class="form-control" placeholder="免费设施名称" aria-describedby="basic-addon1">
+									  <input type="text" class="form-control" id="mianfeiName" placeholder="免费设施名称" aria-describedby="basic-addon1">
 									</div>
 				 				</div>
 							</div>
 							<div>
-								<button type="button" class="btn btn-success affirm">OK</button>
+								<button type="button" class="btn btn-success affirm" id="mianfeiBtn">OK</button>
 							</div>
 					    </div>
 					    <div role="tabpanel" class="tab-pane" id="etc">
@@ -45,18 +45,18 @@
 									<div class="col-md-6">
 								 		<div class="input-group">
 										  <span class="input-group-addon">名称</span>
-										  <input type="text" class="form-control" placeholder="收费设施名称">
+										  <input type="text" class="form-control" placeholder="收费设施名称" id="shoufeiName">
 										</div>
 								 	</div>
 								 	<div class="col-md-6">
 								 		<div class="input-group">
 								 		  <span class="input-group-addon">价格</span>
-										  <input type="text" class="form-control" placeholder="价格">
+										  <input type="text" class="form-control" placeholder="价格" id="shoufeiPrice">
 										</div>
 								 	</div>	
 							</div>
 							<div>
-								<button type="button" class="btn btn-success affirm">OK</button>
+								<button type="button" class="btn btn-success affirm" id="shoufeiBtn">OK</button>
 							</div>
 					    </div>
 					</div>
@@ -94,23 +94,8 @@
 							</ul>
 						</div>
 						<div class="card-body no-padding table-responsive addlist">
-							<table class="table card-table">
-								<tr>
-									<td><input type="text"  class="form-control" readonly></td>
-									<td>
-										<span class="input-group-btn" style="text-align: right;">
-											<button class="btn btn-danger btn-sm" type="button">删除</button>
-										</span>
-									</td>
-								</tr>
-								<tr>
-									<td><input type="text" class="form-control" readonly></td>
-									<td>
-										<span class="input-group-btn"  style="text-align: right;">
-											<button class="btn btn-danger btn-sm" type="button">删除</button>
-										</span>
-									</td>
-								</tr>
+							<table class="table card-table" id="mianfeiList">
+								
 							</table>
 						</div>
 					</div>
@@ -125,25 +110,8 @@
 							</ul>
 						</div>
 						<div class="card-body no-padding table-responsive addlist">
-							<table class="table card-table">
-								<tr>
-									<td><input type="text" class="form-control" placeholder="" readonly></td>
-									<td><input type="text" class="form-control" placeholder="" readonly></td>
-									<td>
-										<span class="input-group-btn">
-											<button class="btn btn-danger btn-sm" type="button">删除</button>
-										</span>
-									</td>
-								</tr>
-								<tr>
-									<td><input type="text" class="form-control" placeholder="" readonly></td>
-									<td><input type="text" class="form-control" placeholder="" readonly></td>
-									<td>
-										<span class="input-group-btn">
-											<button class="btn btn-danger btn-sm" type="button">删除</button>
-										</span>
-									</td>
-								</tr>
+							<table class="table card-table" id="shoufeiList">
+								
 							</table>
 						</div>
 					</div>
@@ -232,10 +200,148 @@
 	  		$(this).parent().parent().parent().parent().find('.addlist').slideToggle();
 	  	})
 	    //添加设施
+	 	//查询免费
+	    var locadMianfeiSheshi=function(){
+	  		$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					'classify':0
+				},
+				url : '/facility/getFacilityForm',
+				success : function(data) {
+					console.log(data)
+					var srt="";
+					$("#mianfeiList").html("");
+					for(var i=0;i<data.length;i++){
+						srt+='<tr id="'+data[i].id+'" price="'+data[i].price+'"><td style="padding:10px 15px"><input type="text" style="margin:0" class="form-control" value="'+data[i].name+'" readonly></td><td  style="padding:0 15px"><span class="input-group-btn" style="text-align: right;"><button class="btn btn-danger btn-sm" type="button">删除</button></span></td></tr>';
+					};
+					$("#mianfeiList").append(srt);
+				}
+			});
+	  	}
 	    
+	    locadMianfeiSheshi();
+	  //查询收费
+	    var locadShoufeiSheshi=function(){
+	  		$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					'classify':1
+				},
+				url : '/facility/getFacilityForm',
+				success : function(data) {
+					console.log(data)
+					var srt="";
+					$("#shoufeiList").html("");
+					for(var i=0;i<data.length;i++){
+						srt+='<tr id="'+data[i].id+'" price="'+data[i].price+'"><td style="padding:10px 15px"><input type="text" style="margin:0" class="form-control" value="'+data[i].name+'" readonly></td><td style="padding:10px 15px"><input type="text" style="margin:0" class="form-control" value="'+data[i].price+'" readonly></td><td  style="padding:0 15px"><span class="input-group-btn" style="text-align: right;"><button class="btn btn-danger btn-sm" type="button">删除</button></span></td></tr>';
+					};
+					$("#shoufeiList").append(srt);
+				}
+			});
+	  	}
+	    
+	    locadShoufeiSheshi();
+	    
+    //删除收费
+	    
+	    $("#shoufeiList").on('click','tr td .btn-danger',function(){
+	    	var id=$(this).parent().parent().parent().attr('id');
+	    	$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					'id':id
+				},
+				url : '/facility/deleteFacility/',
+				success : function(data) {
+					console.log(data)
+					location=location
+				}
+			});
+	    	
+	    })
+	    
+	    
+	    //删除免费
+	    
+	    $("#mianfeiList").on('click','tr td .btn-danger',function(){
+	    	var id=$(this).parent().parent().parent().attr('id');
+	    	$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					'id':id
+				},
+				url : '/facility/deleteFacility/',
+				success : function(data) {
+					console.log(data)
+					location=location
+				}
+			});
+	    	
+	    })
+	    
+	    //免费
+	    $("#mianfeiBtn").click(function(){
+	    	var mianfeiName=$("#mianfeiName").val();
+	    	if(mianfeiName==""){
+	    		alert("请提交正确信息")
+	    	}else{
+	    		$.ajax({
+					type : 'POST',
+					dataType : 'json',
+					data : {
+						'name' : mianfeiName,
+						'price':0,
+						'classify':0
+					},
+					url : '/facility/addFacility/',
+					success : function(data) {
+						console.log(data)
+						if(data.statusCode == 1){
+							alert(data.content);
+							location=location
+						}else{
+							alert(data.content);
+						}
+					}
+				});
+	    	}
+	    })
+	  	 //收费
+	    $("#shoufeiBtn").click(function(){
+	    	var shoufeiName=$("#shoufeiName").val();
+	    	var shoufeiPrice=$("#shoufeiPrice").val();
+	    	if(shoufeiName=="" || shoufeiPrice==""){
+	    		alert("请提交正确信息")
+	    	}else{
+	    		$.ajax({
+					type : 'POST',
+					dataType : 'json',
+					data : {
+						'name' : shoufeiName,
+						'price':shoufeiPrice,
+						'classify':1
+					},
+					url : '/facility/addFacility/',
+					success : function(data) {
+						console.log(data)
+						if(data.statusCode == 1){
+							alert(data.content);
+							location=location
+						}else{
+							alert(data.content);
+						}
+					}
+				});
+	    	}
+	    })
 	  	
-	  	
-	  	
+	 
+	    
 	  	
 	    
 		//确认订单

@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
     <link href="css/common.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/Cleaning_service.css" />
-    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script type="text/javascript" src="js/fnBase.js"></script>
     <script type="text/javascript" src="js/personal.js"></script> 
@@ -41,46 +41,53 @@
                 </ol>
                 <p id="atl" style="font-size: 0.14rem;color:orangered;display: none">您暂时还没有在住的房间。</p>
             </div>
-            <div class="per-order-status">
+            <div class="per-order-status mianfeiList">
                <labler>免费添加</labler>
-               <ol>	
+               <div class="list">	
                		<dd>被子</dd>
                		<dd>枕头</dd>	
                		<dd>洗漱用品</dd>
-               </ol> 
+               </div> 
             </div>
-             <div class="per-order-status">
+             <div class="per-order-status shoufeiList">
                <labler>收费添加</labler>
-               <div class="toll" cartid="1" price="100" num="1">
-               		<div class="toll-c"><i>床</i><i>/100</i><i>/张</i></div>
-               		<div class="numContainer">
-               			<div class="fl leNum"></div>
-               			<div class="fl ceText"><input type='text' disabled value='1'>张</div>
-               			<div class="fr riNum"></div>
-               		</div>	
-               </div>
-               <div class="toll" cartid="2" price="80" num="1">
-               		<div class="toll-c"><i>投影仪</i><i>/80</i><i>/天</i></div>
-               		<div class="numContainer">
-               			<div class="fl leNum"></div>
-               			<div class="fl ceText"><input type='text' disabled value='1'>天</div>
-               			<div class="fr riNum"></div>
-               		</div>	
-               </div>
-                <div class="toll" cartid="3" price="30" num="1">
-               		<div  class="toll-c"><i>电脑</i><i>/30</i><i>/天</i></div>
-               		<div class="numContainer">
-               			<div class="fl leNum"></div>
-               			<div class="fl ceText"><input type='text' disabled value='1'>天</div>
-               			<div class="fr riNum"></div>
-               		</div>	
+               <div class="list">
+	               <div class="toll" id="'+data[i].id+'" price="'+data[i].price+'" num="1">
+	               		<div class="toll-c"><i>'+data[i].name+'</i><i>/'+data[i].price+'</i><i></i></div>
+	               		<div class="numContainer"><div class="fl leNum"></div><div class="fl ceText"><input type='text' disabled value='1'>张</div><div class="fr riNum"></div></div>	
+	               </div>
+	               <div class="toll" cartid="2" price="80" num="1">
+	               		<div class="toll-c"><i>投影仪</i><i>/80</i><i>/天</i></div>
+	               		<div class="numContainer">
+	               			<div class="fl leNum"></div>
+	               			<div class="fl ceText"><input type='text' disabled value='1'>天</div>
+	               			<div class="fr riNum"></div>
+	               		</div>	
+	               </div>
+	                <div class="toll" cartid="3" price="30" num="1">
+	               		<div  class="toll-c"><i>电脑</i><i>/30</i><i>/天</i></div>
+	               		<div class="numContainer">
+	               			<div class="fl leNum"></div>
+	               			<div class="fl ceText"><input type='text' disabled value='1'>天</div>
+	               			<div class="fr riNum"></div>
+	               		</div>	
+	               </div>
                </div>
                <!-- 结算 -->
                <div class="bottomContainer">
                		<p>合计：<span></span>元</p>
                </div>
+               
             </div>
-            
+             <div class="per-order-status time-status">
+               <labler>时间</labler>
+               <ol>	
+               		<dd tid='0'>当天随时</dd>
+               		<dd tid='1'>两小时内</dd>	
+               		<dd tid='2'>两小时后</dd>
+               		
+               </ol> 
+            </div>
             <div class="per-order-status">
                <labler>其他要求</labler>
                <textarea class="_textarea" placeholder="您还有什么要求尽管提;"></textarea>
@@ -90,17 +97,9 @@
     <p class="account-login-width">
         <a href="javascript:;">结算提交</a>
     </p>
-    <script>
-        $(document).ready(function(){
-            $(".account-login-width").click(function(){
-                fnBase.myalert('此服务正在维护！')
-            })
-        })
-    </script>
+ 
 </div>
 
-<script>
-	
-</script>
+
 </body>
 </html>
