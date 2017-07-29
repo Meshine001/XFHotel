@@ -121,7 +121,7 @@
 			</div>
 				
 				
-				
+				<!-- sd -->>
 			<div class="panel panel-default">
 			 
 			  <div class="panel-heading" style="background:#ffffff">订单列表</div>
@@ -129,14 +129,16 @@
 				<table class="table table-striped table-condensed">
 					<thead>
 						<tr>
-							<th>id1</th>
+							<th>id</th>
 							<th>下单时间</th>
-							<th>订单ID</th>
 							<th>房间</th>
-							<th>状态</th>
-							<th>维修内容</th>
+							<th>类型</th>
+							<th>设施</th>
+							<th>天数</th>
+							<th>价格</th>
+							<th>添加时间</th>
+							<th>当前状态</th>
 							<th>需求</th>
-							<th>维修时间</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -145,17 +147,19 @@
 							<tr>
 								<td>${order.id}</td>
 								<td>${order.time}</td>
-								<td>${order.status}</td>
-								<td>${order.content}</td>
 								<td>${order.roomId}</td>
-								<td>${order.cleanTime}</td>
-								<td>${order.oederId}</td>
+								<td>${order.classify}</td>
+								<td>${order.Facility}</td>
+								<td>${order.fate}</td>
+								<td>${order.price}</td>
+								<td>${order.addTime}</td>
+								<td>${order.status}</td>
 								<td>${order.demand}</td>
 								<td>
-								<c:if test="${order.status=='等待管理员呼叫保洁'}">
+								<c:if test="${order.status=='等待管理员确认'}">
 									<a href="javascript:;" class="comfirm-order" order-id="${order.id}" style="display:block">确定服务</a>
 									</c:if>
-									<c:if test="${order.status=='正在清扫'}">
+									<c:if test="${order.status=='正在路上'}">
 									<a href="javascript:;" class="success-order" order-id="${order.id}" style="display:block">确定完成</a>
 									</c:if>
 									<!-- 
@@ -346,7 +350,7 @@
 	    
 		//确认订单
 		$('.comfirm-order').click(function(){
-			var url = '../order/cleanOrder';
+			var url = '../order/FacilityOrder';
 			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
@@ -361,7 +365,7 @@
 				success : function(data) {
 					console.log(data)
 					if(data.statusCode == 1){
-						window.location.href = '../admin/customer_baojie';
+						window.location.href = '../admin/customer_addfacility';
 					}else{
 						alert(data.content);
 					}
@@ -371,7 +375,7 @@
 		
 		//关闭订单
 		$('.success-order').click(function(){
-			var url = '../order/cleanOrders';
+			var url = '../order/FacilityOrders';
 			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
@@ -389,7 +393,7 @@
 					
 					
 					if(data.statusCode == 1){
-						window.location.href = '../admin/customer_baojie';
+						window.location.href = '../admin/customer_addfacility';
 					}else{
 						alert(data.content);
 					}
