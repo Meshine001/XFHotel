@@ -39,11 +39,11 @@ public class FacilityOrderServiceImpl implements FacilityOrderService{
 		// TODO Auto-generated method stub
 		
 	}
-
+	@Transactional
 	@Override
 	public void update(FacilityOrder t) {
 		// TODO Auto-generated method stub
-		
+		facilityOrderDAO.update(t);
 	}
 
 	@Transactional

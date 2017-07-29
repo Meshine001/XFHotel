@@ -29,6 +29,9 @@
 							<th>订单id</th>
 							<th>下单时间</th>
 							<th>房间</th>
+							<th>状态</th>
+							<th>价格</th>
+							<th>天数</th>
 							<th>添加内容</th>
 							<th>支付状态</th>
 							<th>其他需求</th>
@@ -40,17 +43,18 @@
 							<tr>
 								<td>${order.id}</td>
 								<td>${order.time}</td>
-								<td>${order.status}</td>
-								<td>${order.content}</td>
 								<td>${order.roomId}</td>
-								<td>${order.cleanTime}</td>
-								<td>${order.oederId}</td>
+								<td>${order.classify}</td>
+								<td>${order.price}</td>
+								<td>${order.fate}</td>
+								<td>${order.Facility}</td>
+								<td>${order.status}</td>
 								<td>${order.demand}</td>
 								<td>
-								<c:if test="${order.status=='等待管理员呼叫保洁'}">
+								<c:if test="${order.status=='等待管理员确认'}">
 									<a href="javascript:;" class="comfirm-order" order-id="${order.id}" style="display:block">确定服务</a>
 									</c:if>
-									<c:if test="${order.status=='正在清扫'}">
+									<c:if test="${order.status=='正在路上'}">
 									<a href="javascript:;" class="success-order" order-id="${order.id}" style="display:block">确定完成</a>
 									</c:if>
 									<!-- 
@@ -81,7 +85,7 @@
 		
 		//确认订单
 		$('.comfirm-order').click(function(){
-			var url = '../order/cleanOrder';
+			var url = '../order/FacilityOrder';
 			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
@@ -96,7 +100,7 @@
 				success : function(data) {
 					console.log(data)
 					if(data.statusCode == 1){
-						window.location.href = '../admin/customer_baojie';
+						window.location.href = '../admin/customer_addfacility';
 					}else{
 						alert(data.content);
 					}
@@ -106,7 +110,7 @@
 		
 		//关闭订单
 		$('.success-order').click(function(){
-			var url = '../order/cleanOrders';
+			var url = '../order/FacilityOrders';
 			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
@@ -124,7 +128,7 @@
 					
 					
 					if(data.statusCode == 1){
-						window.location.href = '../admin/customer_baojie';
+						window.location.href = '../admin/customer_addfacility';
 					}else{
 						alert(data.content);
 					}
