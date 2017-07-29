@@ -125,7 +125,7 @@ function addpartenr(){
     }else if(_oTotalDay>=7 && _oTotalDay<30){
     	$(".order_info .roomZK").html('<i class="zk">9</i>折优惠：<span class="money">'+Number(_oTotalPrice).toFixed(2)+'</span>');
     }else if(_oTotalDay>=30){
-    	$(".order_info .roomZK").html('<i class="zk">7.5</i>折优惠：<span class="money">'+Number(_oTotalPrice).toFixed(2)+'</span>');
+    	$(".order_info .roomZK").html('<i class="zk">8</i>折优惠：<span class="money">'+Number(_oTotalPrice).toFixed(2)+'</span>');
     }
     $(".order_info .roompDJ .money").text(_price+"元");
     $(".order_info .roompYJ .money").text(_YJpic+"元");

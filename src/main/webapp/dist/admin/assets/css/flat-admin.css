@@ -4183,8 +4183,11 @@ aside.app-sidebar .sidebar-menu ul.sidebar-nav>li>a .title {
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li>a:hover .icon i.fa,
 	aside.app-sidebar .sidebar-menu ul.sidebar-nav>li>a:hover .icon i.ion {
 	transform: scale(1.25);
+	color:#fff;
 }
-
+aside.app-sidebar .sidebar-menu ul.sidebar-nav>li>a:hover .title{
+	color:#fff;
+}
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li.dropdown .dropdown-toggle
 	{
 	position: relative;
@@ -4599,10 +4602,15 @@ aside.app-sidebar .sidebar-menu ul.sidebar-nav>li.active>a .icon {
 background: #575757;
 	 
 color: #F36A5A;
+color: #dad0cf;
 }
 
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li.active>a .title {
-	color: #F36A5A !important;
+	color: #dad0cf;    transition: transform 0.2s ease;
+}
+aside.app-sidebar .sidebar-menu ul.sidebar-nav>li.active>a:hover .title{color:#fff};
+aside.app-sidebar .sidebar-menu ul.sidebar-nav>li:hover{
+	background:#716c6c;
 }
 
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li.dropdown>.dropdown-menu>ul>li.section
@@ -8829,6 +8837,22 @@ a:hover{text-decoration: none;}
 .myalert.ace{
 	-webkit-transform:scale(1);-moz-transform:scale(1);
 }
+
+#myalerts{
+	position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 105000;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    background:rgba(0,0,0,.6)
+}
+
+
 @media ( max-width : 690px) {
 	.myalert{
 		min-width:90%;

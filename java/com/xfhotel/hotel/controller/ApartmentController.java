@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.FileService;
+import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.TimeUtil;
 
 import net.sf.json.JSONArray;
@@ -175,10 +177,11 @@ public class ApartmentController {
 	}
 
 	@RequestMapping(value = "/delete/{id}")
-	public String delete(@PathVariable("id") Long id) {
+	public Message delete(@PathVariable("id") Long id) {
+		System.out.println(id);
 		Apartment apartment = apartmentService.findById(id);
 		apartmentService.delete(apartment);
-		return "forward:/admin/apartment";
+		return new Message(Clean.STATUS_NOT_AFFIRM, "成功");
 	}
 
 	@RequestMapping(value = "/price/set", method = RequestMethod.POST)

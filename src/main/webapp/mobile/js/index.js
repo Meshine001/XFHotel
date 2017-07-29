@@ -27,10 +27,10 @@
     
    
     
-//    横向滚动begin
+//  横向滚动begin
     var myScroll;
-	 myScroll = new IScroll('#proSort', { eventPassthrough: true, scrollX: true, scrollY: false, preventDefault: false });
-    myScroll.refresh(); 
+	    myScroll = new IScroll('#proSort', { eventPassthrough: true, scrollX: true, scrollY: false, preventDefault: false });
+        myScroll.refresh(); 
 //  横向滚动end
 
     $('.header-mobile .input-search').focus(function () {
@@ -49,7 +49,7 @@
             }
         })
     }
-
+   
 });
 
 var alertSearch = {
@@ -166,13 +166,15 @@ function life() {
     var postData = {"page": 1};
     fnBase.commonAjax(frontURL, postData, function (data) {
         console.log(data);
-        //$(".service-image").html("");
+        
+        $(".swiper-container-life .swiper-wrapper").html("");
         var ad_str = '';
         var ad_length = data.blogs.results.length;
-        for (var i = 0; i < 2; i++) {
-            ad_str += '<a pId="' + data.blogs.results[i].id + '"><img src="'+Constant.URL+ data.blogs.results[i].pic + '"><p class="mask">'+data.blogs.results[i].title+'</p><div class="content-mob"><p>'+data.blogs.results[i].abs_text+'</p><img src="'+Constant.URL+data.blogs.results[i].pic+'"></div></a>';
+        for (var i = 0; i < data.blogs.results.length; i++) {
+            ad_str += '<div class="swiper-slide"><a pId="' + data.blogs.results[i].id + '"><img src="'+Constant.URL+ data.blogs.results[i].pic + '"><p class="mask">'+data.blogs.results[i].title+'</p><div class="content-mob"><p>'+data.blogs.results[i].abs_text+'</p><img src="'+Constant.URL+data.blogs.results[i].pic+'"></div></a></div>';
         }
-        $(".service-image").append(ad_str);
+        $(".swiper-container-life .swiper-wrapper").append(ad_str);
+        var mySwiper = new Swiper('.swiper-container-life');
     });
     $(".service-image a").live('click', function () {
         var _page = $(this).attr("pId");

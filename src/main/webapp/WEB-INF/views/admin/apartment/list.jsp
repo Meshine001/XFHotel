@@ -13,6 +13,25 @@
 </head>
 <body>
 	<my_body>
+
+	<div id="myalerts">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				 <button type="button" class="close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title house-title">删除房源<i></i></h4>
+			  </div>
+			  <div class="modal-body" id="mmb">
+				<p>您确定要删除这个房源吗？确定后此房源的所有信息将不存在。</p>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-danger Del">OK</button>
+			  </div>
+			</div>
+		  </div>
+	</div>
+	
+	
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card card-mini">
@@ -20,7 +39,7 @@
 					<div class="card-title">
 						<h3>公寓列表</h3>
 					</div>
-					<ul class="card-action">
+					<ul class="card-action" style="position:relative;top:14px;">
 						<li><a class="btn btn-success " href="<%=basePath%>/admin/apartment/add">添加</a>
 						</li>
 					</ul>
@@ -43,8 +62,12 @@
 							<th>操作</th>
 						</tr>
 					</thead>
+
 					<tbody id="h-table">
 						<c:forEach items="${apartments}" var="apartment">
+							<!-- Modal -->
+		
+	
 							<tr roomId="${apartment.id}">
 								<td>${apartment.id}</td>
 								<td>${apartment.basic_info.lei_xing}</td>
@@ -56,7 +79,7 @@
 								<td>${apartment.position.lou_ceng}/${apartment.position.zong_lou_ceng}</td>
 								<td>${apartment.basic_info.cao_xiang}</td>
 								<td>${apartment.basic_info.mian_ji}</td>
-								<th><a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="编辑详情"
+								<th><a class="btn btn-success"   data-toggle="tooltip" data-placement="left" title="编辑详情"
 									href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a><br>
 									<a class="btn btn-success price_s" data-toggle="tooltip" data-placement="left" title="编辑价格"
 									href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格</a><br>
@@ -65,8 +88,8 @@
 										<c:if test="${apartment.show_home == true }">首页隐藏</c:if>
 										<c:if test="${apartment.show_home == false }">首页显示</c:if>
 									</a><br>
-									<a href="<%=basePath %>/admin/apartment/delete/${apartment.id}"   data-toggle="tooltip" data-placement="left" title="删除" class="btn btn-danger">删除</a>
-								
+									<a  data-toggle="tooltip" data-placement="left" title="删除" class="btn btn-danger">删除</a>
+							
 								<!-- 房客留言操作begin -->	
 									<br><a href="<%=basePath%>/admin/leavemsglist"  data-toggle="tooltip" data-placement="left" title="查看评论" class="btn btn-info evalpinglun">查看评论</a>
 								<!-- 房客留言操作end -->	
@@ -138,6 +161,31 @@
 					})
 					
 				})
+				
+				
+			
+					var roomIddel="";
+					$("#h-table").on('click','tr th .btn-danger',function(){
+						roomIddel=$(this).parent().parent().attr('roomid');
+						$("#myalerts").fadeIn();
+					})
+					$("#myalerts .Del").click(function(){
+						$.ajax({
+							type:'get',
+							dataType:'json',
+							url:'/admin/apartment/delete/'+roomIddel,
+						})
+						setTimeout(function(){
+							location=location
+						},500)	
+					})
+					$("#myalerts .close").click(function(){
+						$("#myalerts").fadeOut()
+					})
+					
+					
+				
+				
 				
 			})
 	    </script>

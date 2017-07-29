@@ -205,7 +205,7 @@
 .item-room h2{font-size: 0.12rem;margin-bottom: 0.05rem;}
 .item-room p{font-size: 0.12rem;color: #999;}
 .item-room .address{background: url("../images/c_dz.png") no-repeat center left;padding-left: 0.2rem;background-size: 0.14rem}
-.item-room .label-group{ position: absolute;
+.item-room .label-group{ position: absolute;color:red;
     bottom: 0;
     left: 1.6rem;}
 .item-room .label-type1{
@@ -233,8 +233,14 @@
 
 
 
-/*service-image*/
-.service-image a{margin-bottom: 0.2rem;display: block;position: relative;cursor: pointer;color: #999999}
+/*swiper-container-life */
+.swiper-container-life .swiper-wrapper a{
+	margin-bottom: 0.2rem;
+	display: block;
+	position: relative;
+	cursor: pointer;
+	color: #999999;
+}
 .service-image a img{width: 100%;display: block;height:2.4rem;}
 .service-image a .mask{
     position: absolute;
@@ -276,6 +282,3 @@
 
 
 
-/*my-footer*/
-.my-footer{vertical-align: middle;width: 100%;text-align: center;padding-bottom: 0.2rem;padding-top: 0.15rem;background:#00b38a;border-top: 1px solid #e3e3e3;font-size: 0.14rem;color: #FFF}
-.my-footer img{width: 0.2rem;margin-right: 0.1rem;    vertical-align: text-bottom;}
