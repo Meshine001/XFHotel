@@ -2,6 +2,7 @@
 	  var _oederId='';
 	  var facilId="";
 	  var sp="";
+	  var _addtime="";
 	  var dayList=new Array();
 	  var lastList=new Array();
 var addfacilities={
@@ -29,17 +30,15 @@ var addfacilities={
     acquisition:function(){ //添加物品
     	
     	
-//    	$('.shoufeiList').on('click',' .toll .toll-c',function(){ 
-//    		if($(this).find('.toll-c').hasClass('active')==true){
-//    			$(this).find('.toll-c').removeClass('active')
-//    		}else{
-//    			$(this).find('.toll-c').addClass('active')
-//    		}
-//    		countPrice();
-//    	})
-//    	function days(){
-//    		
-//        }
+    	$('.shoufeiList').on('click',' .toll .toll-c',function(){ 
+    		if($(this).find('.toll-c').hasClass('active')==true){
+    			$(this).find('.toll-c').removeClass('active')
+    		}else{
+    			$(this).find('.toll-c').addClass('active')
+    		}
+    		countPrice();
+    	})
+
     	$(".per-order-status .list").on('click','.toll .numContainer .riNum',function(){
     		//fnBase.myalert('增加')
     		var currentLi=$(this).parent().parent();
@@ -48,13 +47,6 @@ var addfacilities={
 			currentLi.find('input').attr('value',num);
 			currentLi.attr("num",num);
 			countPrice();
-//			if($(this).parent().parent().find('.toll-c').hasClass('active')==true){
-//				sp=$(this).parent().parent().attr('num');
-//				dayList.push(sp);
-//    		}
-//			lastVue=dayList[dayList.length-1];
-//
-//			console.log(lastVue)
     	})
     	
     	$(".per-order-status .list").on('click','.toll .numContainer  .ceText input',function(){
@@ -76,7 +68,6 @@ var addfacilities={
 			currentLi.attr("num",num);
 			currentLi.find('input').val(num);
 			countPrice();
-			
     	})
     	//计算价格
 		function countPrice(){
@@ -117,7 +108,7 @@ var addfacilities={
 				var srt="";
 				$(".mianfeiList .list").html("");
 				for(var i=0;i<data.length;i++){
-					srt+='<div class="toll" id="'+data[i].id+'" price="'+data[i].price+'" num="1"><div class="toll-c"><i>'+data[i].name+'</i></div><div class="numContainer"><div class="fl leNum"></div><div class="fl ceText"><input type="type"  placeholder="1">天</div><div class="fr riNum"></div></div></div>';
+					srt+='<div class="toll" id="'+data[i].id+'" price="'+data[i].price+'" num="1"><div class="toll-c"><i>'+data[i].name+'</i></div><div class="numContainer"><div class="fl leNum"></div><div class="fl ceText"><input type="type"  disabled placeholder="1">天</div><div class="fr riNum"></div></div></div>';
 				};
 				$(".mianfeiList .list").append(srt);
 			}
@@ -138,7 +129,7 @@ var addfacilities={
 				var srt="";
 				$(".shoufeiList .list").html("");
 				for(var i=0;i<data.length;i++){
-					srt+='<div class="toll" id="'+data[i].id+'" price="'+data[i].price+'" num="1"><div class="toll-c"><i>'+data[i].name+'</i><i style="color:red">￥'+data[i].price+'</i><i>/天</i></div><div class="numContainer"><div class="fl leNum"></div><div class="fl ceText"><input type="type" disabled value="1">天</div><div class="fr riNum"></div></div></div>';
+					srt+='<div class="toll" id="'+data[i].id+'" price="'+data[i].price+'" num="1"><div class="toll-c"><i>'+data[i].name+'</i><i style="color:red">￥'+data[i].price+'</i><i>/天</i></div><div class="numContainer"><div class="fl leNum"></div><div class="fl ceText"><input type="type" disabled placeholder="1">天</div><div class="fr riNum"></div></div></div>';
 				};
 				$(".shoufeiList .list").append(srt);
 			}
@@ -153,9 +144,7 @@ var addfacilities={
         }
         return _oederId; //住房订单id
     });
-	var _addtime="";
-	
-	
+
 	  $(".per-order-status ol").on('click','dd',function(){
 	    	if($(this).hasClass('_active')==true){
 	    		$(this).removeClass('_active');
@@ -173,7 +162,6 @@ var addfacilities={
 			facilId=$(this).parent().attr('id'); //物品id
 		}
     	var houseList=new Array();
-//    	var dayList=new Array();
         for(var i=0;i<$(".per-order-status .list .toll").length;i++){
             if($(".per-order-status .list .toll").eq(i).find('.toll-c').hasClass('active')==true){
                 houseList.push($(".per-order-status .list .toll").eq(i).attr('id'));
@@ -181,9 +169,7 @@ var addfacilities={
             }
         }
         facilId=houseList.join(',');//获取物品id；
-//        days=dayList.join(',');//获取物品使用时间；
-        
-        
+
     })
     
  
@@ -202,7 +188,14 @@ $(".account-login-width a").click(function(){
         }
     }
 	sp=lastList.join(',');//获取物品使用时间；
-
+	if(facilId=="" || facilId==null){
+		fnBase.myalert('请您选择需要添加的物品再提交！')
+		return
+	}
+	if(_addtime=="" || _addtime==null){
+		fnBase.myalert('请您选择合适的时间')
+		return
+	}
 	var frontURL=Constant.URL+'/mobile/FacilityOrderAdd/';
     var postData={
     		'oederId':_oederId,

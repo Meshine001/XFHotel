@@ -37,7 +37,7 @@ public class FacilityOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String roomId;//房间id	
+	private String roomId;//房间名	
 	private Long oederId;//订单id
 	private int status;// 状态
 	private Long time;//下单时间
@@ -133,7 +133,7 @@ public class FacilityOrder {
 	String getStatusString(int status) {
 		switch (status) {
 		case STATUS_NOT_AFFIRM:
-			return "等待管理员添加";
+			return "等待管理员确认";
 		case STATUS_CONDUCT:
 			return "正在路上";
 		case STATUS_COMPLETE:

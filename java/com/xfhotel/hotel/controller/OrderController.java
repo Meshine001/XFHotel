@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Comment;
+import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CommentService;
+import com.xfhotel.hotel.service.FacilityOrderService;
 import com.xfhotel.hotel.service.FaultService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
@@ -58,6 +60,9 @@ public class OrderController {
  	
 	@Autowired
 	HttpSession session;
+	
+	@Autowired
+	FacilityOrderService facilityOrderService;
 
 	/**
 	 * 退租
@@ -551,7 +556,7 @@ public Message FaultOrders(Long id) {
 	}
 	if (c.getStatus() == Fault.STATUS_CONDUCT) {
 		try {
-				c.setStatus(Clean.STATUS_COMPLETE);
+				c.setStatus(Fault.STATUS_COMPLETE);
 				faultservice.update(c);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -562,4 +567,45 @@ public Message FaultOrders(Long id) {
 	return new Message(Constants.MESSAGE_SUCCESS_CODE, "维修完成");
 	}
 
+@RequestMapping(value = "/FacilityOrder", method = RequestMethod.POST)
+@ResponseBody
+public Message FacilityOrder(Long id) {
+	FacilityOrder c = facilityOrderService.findById(id);
+	if (c == null) {
+		return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+	}
+	if (c.getStatus() == FacilityOrder.STATUS_NOT_AFFIRM) {
+		try {
+				c.setStatus(FacilityOrder.STATUS_CONDUCT);
+				facilityOrderService.update(c);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+		}
+
+	}
+	return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
+	
+}
+
+@RequestMapping(value = "/FacilityOrders", method = RequestMethod.POST)
+@ResponseBody
+public Message FacilityOrders(Long id) {
+	FacilityOrder c = facilityOrderService.findById(id);
+	if (c == null) {
+		return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+	}
+	if (c.getStatus() == FacilityOrder.STATUS_CONDUCT) {
+		try {
+				c.setStatus(FacilityOrder.STATUS_COMPLETE);
+				facilityOrderService.update(c);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+		}
+	}
+	return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加完成");
+	}
 }
