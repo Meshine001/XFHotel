@@ -22,6 +22,7 @@ import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Order;
@@ -31,6 +32,7 @@ import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
+import com.xfhotel.hotel.service.FacilityOrderService;
 import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FaultService;
 import com.xfhotel.hotel.service.HouseService;
@@ -52,6 +54,9 @@ public class AdminController {
 	
 	@Autowired
 	FaultService faultservice;
+	
+	@Autowired
+	FacilityOrderService facilityOrderservice;
 	
 	@Autowired
 	UserService userService;
@@ -133,11 +138,10 @@ public class AdminController {
 	//..7.18添加设施...
 		@RequestMapping(value = "/customer_addfacility", method = RequestMethod.GET)
 		public String addfacility() {
-			List<Clean> list = cleanService.list();
+			List<FacilityOrder> list = facilityOrderservice.list();
 			List<Map> orders = new ArrayList<Map>();
-			for (Clean o : list) {
+			for (FacilityOrder o : list) {
 				orders.add(o.toMap());	
-				Order order = orderservice.get(o.getOederId());
 			}
 			session.setAttribute("orders", orders);
 			return "/admin/customer/addfacility";

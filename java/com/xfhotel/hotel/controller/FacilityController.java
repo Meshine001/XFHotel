@@ -41,7 +41,7 @@ public class FacilityController {
 	
 	@RequestMapping(value = "/getFacility",method = RequestMethod.POST)
 	public @ResponseBody List<Facility> getFacility(){
-		return facilityservice.list();	
+		return facilityservice.list();
 	}
 	@RequestMapping(value = "/deleteFacility",method = RequestMethod.POST)
 	public @ResponseBody Message deleteFacility(Long id ){
@@ -55,6 +55,7 @@ public class FacilityController {
 		}
 	return new Message(Constants.MESSAGE_SUCCESS_CODE, "删除成功");	
 	}
+	 
 	@RequestMapping(value = "/getFacilityForm",method = RequestMethod.POST)
 	public @ResponseBody List<Facility> getFacilityForm(int classify){
 		return facilityservice.list1(classify);	
