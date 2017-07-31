@@ -159,18 +159,7 @@ public class AdminController {
 			session.setAttribute("orders", orders);
 			return "/admin/customer/DialogueCar";
 		}			
-	//..7.18叫车服务...
-				@RequestMapping(value = "/customer_collocation", method = RequestMethod.GET)
-				public String collocation() {
-					List<Clean> list = cleanService.list();
-					List<Map> orders = new ArrayList<Map>();
-					for (Clean o : list) {
-						orders.add(o.toMap());	
-						Order order = orderservice.get(o.getOederId());
-					}
-					session.setAttribute("orders", orders);
-					return "/admin/customer/collocation";
-				}						
+					
 	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardPage() {

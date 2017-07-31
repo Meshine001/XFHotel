@@ -72,7 +72,6 @@ public class MobileController  {
  	@Autowired
 	CleanService cleanservice;
  	
-	
 	@Autowired
 	LockService lockService;
 	
@@ -995,7 +994,7 @@ public class MobileController  {
 			String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
 					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 			String[] p = {f};
-//			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_FAULT_SERVICE, systemConfiService.getConfig().getSms(), p);	
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfiService.getConfig().getSms(), p);	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1003,6 +1002,8 @@ public class MobileController  {
 		}
 		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
 	}
+	
+	
 	
 }
 

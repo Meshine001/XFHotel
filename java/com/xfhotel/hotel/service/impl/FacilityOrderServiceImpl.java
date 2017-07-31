@@ -59,7 +59,7 @@ public class FacilityOrderServiceImpl implements FacilityOrderService{
 	@Override
 	public List<FacilityOrder> list() {
 		// TODO Auto-generated method stub
-		return facilityOrderDAO.getListByHQL("from FacilityOrder", null);
+		return facilityOrderDAO.getListByHQL("from FacilityOrder order by id desc", null);
 	}
 
 

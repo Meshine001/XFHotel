@@ -41,7 +41,7 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public List<House> list() {
 		// TODO Auto-generated method stub
-		return houseDAO.getListByHQL("from House", null);
+		return houseDAO.getListByHQL("from House order by id desc", null);
 	}
 
 	@Transactional

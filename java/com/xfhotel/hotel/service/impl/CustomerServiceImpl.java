@@ -116,7 +116,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> list() {
 		// TODO Auto-generated method stub
-		return customerDAO.getListByHQL("from Customer", null);
+		return customerDAO.getListByHQL("from Customer order by id desc", null);
 	}
 
 	@Transactional
