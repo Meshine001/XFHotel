@@ -20,6 +20,9 @@ $(document).ready(function(){
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
         fnBase.loadHide();
+        fnBase.keep( 1 ,"nick",data.details.nick);
+        fnBase.keep( 1 ,"tel",data.tel);
+        
         if(data.details.nick==""||data.details.nick==null){
             $("#nickName").html(data.details.tel);
         }else{
