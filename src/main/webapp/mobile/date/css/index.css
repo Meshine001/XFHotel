@@ -29,18 +29,20 @@ body,html {
 }
 
 .date {
-  position:absolute;
+/*  position:absolute;
   top: 0;
   left: 0;
+  overflow:scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  */
+  
   height: 100%;
   width: 100%;
   background: #fff;
   z-index: 10000;
-  overflow:scroll;
-  overflow-x: hidden;
   text-align: center;
-  -webkit-overflow-scrolling: touch;
-  overflow-scrolling: touch;
 }
 
 .date .action {

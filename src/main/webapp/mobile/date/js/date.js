@@ -19,9 +19,9 @@ var date = function ($) {
       var entertime = $('.entertime').text();
       var leavetime = $('.leavetime').text();
       var listIndex = 0;
-      $('body').css({
-        overflow: 'hidden'
-      });
+//      $('body').css({
+//        overflow: 'hidden'
+//      });
       // 主容器模板
       var dateTemplate = '\n        <div class =\'date container c-gray\'>\n          <h4 class="tac bold" >\u8BF7\u9009\u62E9<span class=\'c-blue\'>\u5165\u4F4F</span>\u548C<span class=\'c-red\'>\u79BB\u5F00</span>\u65F6\u95F4</h4>\n          <div class=\'close-btn\'>\u786E\u5B9A</div>\n        </div>      \n      ';
       setTimeout(function(){$(".date").show()},1000);

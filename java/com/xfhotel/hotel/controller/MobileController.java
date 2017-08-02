@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Comment;
@@ -1010,15 +1011,14 @@ public class MobileController  {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public @ResponseBody  Message add(Long id ,String number ,String name,Long card) {
+	public @ResponseBody  Message add(Long id ,String number ,String name,Long card, String phone) {
 	try {
-		Customer c= customerService.getCustomer(id);
 		Landlord landlord1 = new Landlord();
 		landlord1.setuId(id);
 		landlord1.setNumber(number);
 		landlord1.setCard(card);
 		landlord1.setName(name);
-		landlord1.setPhone(c.getTel());
+		landlord1.setPhone(phone);
 		landlord1.setRegTime(new Date().getTime());
 		landlordService.add(landlord1);
 		} catch (Exception e) {
@@ -1045,4 +1045,8 @@ public class MobileController  {
 	return new Message(Constants.MESSAGE_SUCCESS_CODE,landlord.getId());
 	}
 	
+	@RequestMapping(value = "/particulars", method = RequestMethod.POST)
+	public @ResponseBody List<Apartment> particulars(Long id) {
+		return apartmentService.landlord(id);
+	}
 }

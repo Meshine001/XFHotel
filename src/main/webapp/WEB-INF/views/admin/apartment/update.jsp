@@ -410,6 +410,7 @@
 							</div>
 						</div>
 						<div class="form-group">
+						
 							<label class="col-md-3 control-label">小区图片</label>
 							<!-- Button trigger modal -->
 							<div class="col-md-9">

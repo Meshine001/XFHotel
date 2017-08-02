@@ -11,7 +11,7 @@
     <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script type="text/javascript" src="js/fnBase.js"></script>
-
+	<script type="text/javascript" src="js/myhouse.js"></script>
 </head>
 <body style="background: #FFF">
 <div class="header">
@@ -23,7 +23,13 @@
 </div>
 
 <div id="Myscroll-body">
-    <ul class="houselist">
+	<div class="top-nav-wrap">
+		<a tp='0' class="atl">已上线</a>
+		<a tp='1'>待审核</a>
+		<a tp='2'>审核中</a>
+		<a tp='3'>未通过</a>
+	</div>
+    <ul class="houselist" class="active">
         <li>
             <div class="house-pic"><img src="" alt="房屋图片" class="img"><span>幸福中路-福邸铭门-21802</span></div>
             <div class="list_intro">
@@ -38,8 +44,14 @@
                 <p>总收入：￥6850</p>
             </div>
         </li>
-
-    </ul>
+	</ul>
+	<ul class="msg-house-list" style="display:none">
+		<li>
+			<p>高新区卡布洛奇国际社区2206</p>
+			<p class="lt">待审核</p>
+			<p>管家回复：房屋位置不符合要求、</p>
+		</li>
+	</ul>
 </div>
 <div class="footer">
     <!--<a href="" class="trust">我要托管</a>-->

@@ -223,7 +223,7 @@
 				<div class="card-body">
 					<i class="icon fa fa-sitemap fa-4x"></i>
 					<div class="content"> 
-						<div class="title">房源托管</div>
+						<div class="title">房东管理</div>
 						<div class="value">
 							<span class="sign"></span>
 						</div>
