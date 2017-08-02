@@ -58,7 +58,7 @@ $(document).ready(function(){
             $(".information").html("");
             var priceStr ='<h1 class="ic_house">'+data.position.xa_wei_zhi+"-" +data.position.xiao_qu+'</h1><p class="info_L24">'+data.basic_info.shi+"室"+data.basic_info.ting+"厅"+
             data.basic_info.wei+"卫"+'</p>' +
-                '<p class="info_L24 label-adders"><span class="czs-location-l"></span>'+vio+"-"+data.position.jie_dao+data.position.xiao_qu+'</p><span class="label-price">'+data.basic_info.jia_ge+'<small>/天</small></span><p class="info_L24" style="color: #fff;background:#e40f4a;width: 2.5rem;border-radius: 0.5rem;text-align: center;    padding: 0.01rem 0;">满3天9.5折、满7天9折、满30天8折</p>'
+                '<p class="info_L24 label-adders"><span class="czs-location-l"></span>'+vio+"-"+data.position.jie_dao+data.position.xiao_qu+'</p><span class="label-price">'+data.basic_info.jia_ge+'<small>/天</small></span><p class="info_L24" style="color:red;border:1px solid red;width: 2.5rem;border-radius: 0.5rem;text-align: center;">满3天9.5折、满7天9折、满30天8折</p>'
             $(".information").append(priceStr);
             //房源信息
             $(".housing .i_inf ul").html("");

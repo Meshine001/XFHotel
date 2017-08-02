@@ -3,7 +3,7 @@
 //  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 
 var clientIp = getIp();
-
+console.log(clientIp)
 var Constant = {
 //     URL: "http://192.168.1.108/",
          URL: baseUrl,
@@ -74,7 +74,7 @@ $(".link-home").attr("href","javascript:void(0);").click(function(){
 
     var fnBase={
         loadShow:function(){
-                $("<div class='black_loading' style='display: block'><div class='ldbg'><img src='images/ajax-loader.gif' ><p>正在载入，请稍后...</p></div></div>").appendTo($('body'))
+                $("<div class='black_loading' style='display: block'><div class='ldbg'><span class='scroll100'></span><p>正在载入，请稍后...</p></div></div>").appendTo($('body'))
         },
         
         loadHide:function(){

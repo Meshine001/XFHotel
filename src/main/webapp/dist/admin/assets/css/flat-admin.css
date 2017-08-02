@@ -5777,7 +5777,10 @@ ui-view>.app-messaging-container {
 	margin: 0;
 	padding: 0;
 }
-
+.card .card-header .card-action>li{
+	float:left;
+	margin-left: 10px;
+}
 .card .card-header .card-action>li>a {
 	color: #dfe6e8;
 }
@@ -8205,7 +8208,11 @@ div.section .section-body.__indent {
 .modal .modal-dialog {
 	border-radius: 3px;
 }
-
+.modal-dialog{
+	overflow: hidden;
+    overflow-y: auto;
+    max-height: 95%;
+}
 .modal .modal-dialog .modal-content {
 	background-color: #FFF;
 	border: 3px;
@@ -8838,7 +8845,7 @@ a:hover{text-decoration: none;}
 	-webkit-transform:scale(1);-moz-transform:scale(1);
 }
 
-#myalerts{
+#myalerts,.modallg{
 	position: fixed;
     top: 0;
     right: 0;
@@ -8846,10 +8853,11 @@ a:hover{text-decoration: none;}
     left: 0;
     z-index: 105000;
     display: none;
-    overflow: hidden;
     -webkit-overflow-scrolling: touch;
     outline: 0;
-    background:rgba(0,0,0,.6)
+    background:rgba(0,0,0,.6);
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 
@@ -9140,3 +9148,8 @@ text-align:center;color:#0C6;padding:1% 0;
 .data_table tbody td.orderdate{ color:#000;}
 .data_table tbody td.tdselect{ color:#fff;background-color:#999}
 /*2017-7-14日历样式end*/
+
+#mytable .nav-tabs li a{font-weight: bold}
+#houseList{margin:10px;padding:0;}
+#houseList li{margin:10px 0;padding:5px;border-bottom:1px solid #eee;clear:both}
+#houseList li .img-wrapper{text-align:left;}

@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-	   
+	
     // 新注册礼包
 	 $(".Masking-out,.newUser").hide();
     var _of=fnBase.huoqu(1,"newUser");

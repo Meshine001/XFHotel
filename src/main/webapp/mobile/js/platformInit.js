@@ -18,11 +18,11 @@ $(document).ready(function(){
     
     
     
-//    var postData={};
-//    var frontURL=Constant.URL+'/mobile/';
-//    fnBase.commonAjax(frontURL,postData,function(data){
-//        console.log(data);
-//        
-//    });
+    var postData={'id':_uid};
+    var frontURL=Constant.URL+'/monile/register';
+    fnBase.commonAjax(frontURL,postData,function(data){
+        console.log(data);
+        
+    });
    
 })
