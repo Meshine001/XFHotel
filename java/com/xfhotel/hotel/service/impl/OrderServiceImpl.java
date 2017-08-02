@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
 	CouponService couponService;
 
 	@Autowired
-	private SessionFactory sessionFactory;
+	SessionFactory sessionFactory;
 
 	@Transactional
 	@Override
@@ -353,5 +353,14 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderDAO.findPageByFetchedHql("from Order order by id desc", "select count(*) from Order", page, 10, null);
 	}
+	
+	@Transactional
+	@Override
+	public List<Order> getOrders(Long roomId) {
+		String hqlString = "from Order where roomId=?";
+		Object[] values = {roomId};
+		return orderDAO.getListByHQL(hqlString, values);
+	}
+
 
 }

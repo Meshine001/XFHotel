@@ -475,5 +475,13 @@ public class ApartmentServiceImpl implements ApartmentService {
 	       s = Math.round(s * 1000);  
 	       return s;
 	}
+
+	@Transactional
+	@Override
+	public List<Apartment> landlord(Long affiliation) {
+		String hqlString = "from Apartment where affiliation=?";
+		Object[] values = {affiliation};
+		return apartmentDAO.getListByHQL(hqlString, values);
+	}
 	
 }

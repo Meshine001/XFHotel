@@ -60,12 +60,23 @@ public class Apartment {
 	
 	private String panorama;
 	
+	private Long affiliation;
+	
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	
+	public Long getAffiliation() {
+		return affiliation;
+	}
+
+	public void setAffiliation(Long affiliation) {
+		this.affiliation = affiliation;
 	}
 
 	public JSONObject getBasic_info() {

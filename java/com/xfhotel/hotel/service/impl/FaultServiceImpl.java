@@ -65,7 +65,7 @@ public class FaultServiceImpl implements FaultService{
 	@Override
 	public List<Fault> list() {
 		// TODO Auto-generated method stub
-		return FaultDAO.getListByHQL("from Fault", null);
+		return FaultDAO.getListByHQL("from Fault order by id desc", null);
 	}
 
 }

@@ -2,6 +2,9 @@ package com.xfhotel.hotel.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
+import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
@@ -27,4 +30,5 @@ public interface OrderService {
 	public void refresh(Long cId);
 	public List<Order> search(Long cId, int category, int type, String startDate, String endDate, int range);
 	public Message outLease(Long id);
+	public List<Order> getOrders(Long roomId);
 }

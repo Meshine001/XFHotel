@@ -69,8 +69,6 @@ public class Order {
 		this.payNo = payNo;
 	}
 
-	
-	
 	public void setPayPlatform(String payPlatform) {
 		this.payPlatform = payPlatform;
 	}

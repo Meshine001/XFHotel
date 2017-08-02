@@ -19,10 +19,15 @@ $(document).ready(function(){
     
     
     var postData={'id':_uid};
-    var frontURL=Constant.URL+'/monile/register';
+    var frontURL=Constant.URL+'/mobile/register';
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
-        
+        if(data.statusCode=='0'){
+        	$(".approve").html('<span class="czs-medal-l"></span>未认证');
+        }else if(data.statusCode=='1'){
+        	$(".approve").html('<span class="czs-medal-l"></span>已认证');
+        	$(".approve").addClass('okapp');
+        }
     });
    
 })

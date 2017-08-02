@@ -21,12 +21,14 @@ public class HouseServiceImpl implements HouseService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	@Transactional
 	@Override
 	public void add(House house) {
 		// TODO Auto-generated method stub
 		houseDAO.save(house);
 	}
+	
 	@Override
 	public void delete(House t) {
 		// TODO Auto-generated method stub
@@ -41,7 +43,7 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public List<House> list() {
 		// TODO Auto-generated method stub
-		return houseDAO.getListByHQL("from House", null);
+		return houseDAO.getListByHQL("from House order by id desc", null);
 	}
 
 	@Transactional

@@ -28,10 +28,10 @@ import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
-import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
+import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.BlogService;
@@ -44,6 +44,7 @@ import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FaultService;
 import com.xfhotel.hotel.service.FileService;
 import com.xfhotel.hotel.service.HouseService;
+import com.xfhotel.hotel.service.LandlordService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
@@ -72,7 +73,6 @@ public class MobileController  {
  	@Autowired
 	CleanService cleanservice;
  	
-	
 	@Autowired
 	LockService lockService;
 	
@@ -118,6 +118,9 @@ public class MobileController  {
 	
 	@Autowired
 	FaultService faultservice;
+	
+	@Autowired
+	LandlordService landlordService;
 
 	/**
 	 * 房屋
@@ -676,7 +679,7 @@ public class MobileController  {
 			long time = new Date().getTime();
 			boolean usable = coupon2.isUsed();
 			if(startTime<=time&&time<=endTime&&price>=rule&&usable!=true&&price>yf){
-				map.put(String.valueOf(coupon2.getId()), coupon2);
+			map.put(String.valueOf(coupon2.getId()), coupon2);
 			}
 		}
 		
@@ -913,6 +916,8 @@ public class MobileController  {
 	     }
 		return list;	
 	}
+	
+	
 /**
  * 故障维修
  * @param demand
@@ -995,7 +1000,7 @@ public class MobileController  {
 			String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
 					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 			String[] p = {f};
-//			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_FAULT_SERVICE, systemConfiService.getConfig().getSms(), p);	
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfiService.getConfig().getSms(), p);	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1004,5 +1009,40 @@ public class MobileController  {
 		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
 	}
 	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public @ResponseBody  Message add(Long id ,String number ,String name,Long card) {
+	try {
+		Customer c= customerService.getCustomer(id);
+		Landlord landlord1 = new Landlord();
+		landlord1.setuId(id);
+		landlord1.setNumber(number);
+		landlord1.setCard(card);
+		landlord1.setName(name);
+		landlord1.setPhone(c.getTel());
+		landlord1.setRegTime(new Date().getTime());
+		landlordService.add(landlord1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
+		}
+	return new Message(Constants.MESSAGE_SUCCESS_CODE, "注册成功");
+		
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public @ResponseBody  Message register(Long id) {
+		Landlord landlord = landlordService.getCustomer(id);
+	try {	
+		if(landlord ==null){
+			return new Message(Constants.MESSAGE_ERR_CODE, "您还为未成为房东");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "登录失败");
+		}
+	return new Message(Constants.MESSAGE_SUCCESS_CODE,landlord.getId());
+	}
+	
 }
-
