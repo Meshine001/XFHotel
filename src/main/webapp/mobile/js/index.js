@@ -174,7 +174,12 @@ function life() {
             ad_str += '<div class="swiper-slide"><a pId="' + data.blogs.results[i].id + '"><img src="'+Constant.URL+ data.blogs.results[i].pic + '"><p class="mask">'+data.blogs.results[i].title+'</p><div class="content-mob"><p>'+data.blogs.results[i].abs_text+'</p><img src="'+Constant.URL+data.blogs.results[i].pic+'"></div></a></div>';
         }
         $(".swiper-container-life .swiper-wrapper").append(ad_str);
-        var mySwiper = new Swiper('.swiper-container-life');
+    //    var mySwiper = new Swiper('.swiper-container-life');
+        var mySwiper = new Swiper('.swiper-container-life', {
+            loop: true,
+            autoplay: 2000,
+            autoplayDisableOnInteraction: false
+        });
     });
     $(".service-image a").live('click', function () {
         var _page = $(this).attr("pId");

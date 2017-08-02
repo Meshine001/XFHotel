@@ -17,8 +17,8 @@
     <div id="Myscroll-body">
         <div class="content">
             <h1>发布新房源</h1>
-            <p><span class="czs-mobile-l"></span><input type="text" placeholder="电话号码"></p>
-            <p><span class="czs-location-l"></span><input type="text" placeholder="新房源地址"></p>
+            <p><span class="czs-mobile-l"></span><input type="text" placeholder="电话号码" id="tel"></p>
+            <p><span class="czs-location-l"></span><input type="text" placeholder="新房源地址" id="add"></p>
             <p style="font-size: 0.14rem">*填写完信息并提交后、我们会及时安排专业人士、去房源和您审核房屋状况、请保持24小时正常通话。</p>
             <p style="padding-top: 0.2rem"><button class="login_submit">提交</button></p>
         </div>
@@ -31,11 +31,31 @@
     	        return;
     		}
         	
+        	
+        	
             $(".login_submit").click(function(){
-                fnBase.myalert('提交成功、等待确认');
-                setTimeout(function(){
-                    window.location.href='platformInit.html'
-                },1500)
+            	if($("#tel").val()=="" || $("#add").val()==""){
+            		 fnBase.myalert('请填写信息后再提交、谢谢');
+            		 return;
+            	}
+            	var postData={
+            			'id':_fadid,
+            			'tel':$("#tel").val(),
+            			'site':$("#add").val()
+            	}
+                var frontURL=Constant.URL+'/mobile/addApply';
+                fnBase.commonAjax(frontURL,postData,function(data){
+                    console.log(data);
+                    if(data.statusCode=='1'){
+                    	 fnBase.myalert('提交成功、等待确认');
+                    }
+                    setTimeout(function(){
+                        window.location.href='platformInit.html'
+                    },1500)
+                });
+            	
+
+               
             })
         })
     </script>
