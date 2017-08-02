@@ -27,6 +27,7 @@ $(document).ready(function(){
         }else if(data.statusCode=='1'){
         	$(".approve").html('<span class="czs-medal-l"></span>已认证');
         	$(".approve").addClass('okapp');
+        
         }
     });
    

@@ -13,4 +13,20 @@ $(document).ready(function(){
 		$(".msg-house-list").show();
 	})
 	
+	var _fadid=fnBase.huoqu(0,"fadid");
+	
+	
+	
+	var postData={'id':_fadid};
+    var frontURL=Constant.URL+'/mobile/particulars/';
+    fnBase.commonAjax(frontURL,postData,function(data){
+        console.log(data);
+        if(data.statusCode=='0'){
+        	$(".approve").html('<span class="czs-medal-l"></span>未认证');
+        }else if(data.statusCode=='1'){
+        	$(".approve").html('<span class="czs-medal-l"></span>已认证');
+        	$(".approve").addClass('okapp');
+        
+        }
+    });
 });
