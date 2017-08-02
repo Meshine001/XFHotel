@@ -25,6 +25,12 @@
     </div>
     <script>
         $(document).ready(function(){
+        	var _fadid=fnBase.huoqu(0,"fadid");
+        	if(_fadid==null || _fadid=="undefined" || _fadid==""){
+    	        window.location.href="identification.html";
+    	        return;
+    		}
+        	
             $(".login_submit").click(function(){
                 fnBase.myalert('提交成功、等待确认');
                 setTimeout(function(){

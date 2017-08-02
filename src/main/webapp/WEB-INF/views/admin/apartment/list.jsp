@@ -45,7 +45,7 @@
 				  <div class="col-xs-6 col-sm-4">
 				  	<div class="input-group">
 							<span class="input-group-addon">
-								<input type="checkbox" value="1">
+								<input type="radio" value="1" name="radio">
 							</span>
 							<input type="text" class="form-control" placeholder="张三" readonly>
 						</div>
@@ -53,7 +53,7 @@
 				  <div class="col-xs-6 col-sm-4">
 				  	<div class="input-group">
 							<span class="input-group-addon">
-								<input type="checkbox"  value="0">
+								<input type="radio"  value="0" name="radio">
 							</span>
 							<input type="text" class="form-control" placeholder="张三" readonly>
 						</div>
@@ -61,7 +61,7 @@
 				  <div class="col-xs-6 col-sm-4">
 				  	<div class="input-group">
 							<span class="input-group-addon">
-								<input type="checkbox" value="">
+								<input type="radio" value="" name="radio">
 							</span>
 							<input type="text" class="form-control" placeholder="张三" readonly>
 						</div>
@@ -250,7 +250,7 @@
 			                    }
 			             	});
 			                roomids=result.join(",");
-			    			console.log(roomids)
+			    			
 			                //获取房东
 			      //          $.ajax({
 			      //          	type:'POST',
@@ -268,14 +268,27 @@
 						$(".modallg").fadeOut();
 					})
 					
-				//	$("#fangdongList").on('click','.input-group-addon input',function(){
-				//		$(this).is(":checked");
-				//		$(this).parent().parent().parent().siblings().find('.input-group-addon input')
-				//	});
-					
-					//给选中的房东添加房屋
+			//给选中的房东添加房屋
 					$("#payout").click(function(){
 						
+						 $("#fangdongList input[name = radio]").each(function () {
+			                    if ($(this).is(":checked")) {
+			                    	fangdongid=$(this).val();
+			                    }
+			             });
+						 console.log(fangdongid)
+						 console.log(roomids)
+				  //	     $.ajax({
+			      //          	type:'POST',
+			      //          	dataType:'json',
+			      //          	url:'',
+			      //          	data:{},
+			      //          	success:function(data){
+			      //          		console.log(data)
+			                		
+			      //          	}
+			       //         })
+						 
 						$(".modallg").fadeOut();
 					})
 					

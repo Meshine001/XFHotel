@@ -14,19 +14,32 @@ $(document).ready(function(){
 	})
 	
 	var _fadid=fnBase.huoqu(0,"fadid");
-	
-	
-	
+	console.log(_fadid)
+	if(_fadid==null || _fadid=="undefined" || _fadid==""){
+	        window.location.href="identification.html";
+	        return;
+	}
+
 	var postData={'id':_fadid};
     var frontURL=Constant.URL+'/mobile/particulars/';
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
-        if(data.statusCode=='0'){
-        	$(".approve").html('<span class="czs-medal-l"></span>未认证');
-        }else if(data.statusCode=='1'){
-        	$(".approve").html('<span class="czs-medal-l"></span>已认证');
-        	$(".approve").addClass('okapp');
-        
-        }
+       var str=""; 
+       $(".houselist").html('')
+	   for(var i=0;i<data.length;i++){
+		   str+='<li id="'+data[i].id+'"><div class="house-pic"><img src="'+Constant.URL+'/images/'+data[i].fang_jian_tu[0]+'" class="img"><span>'+data[i].position.xa_wei_zhi+'-'+data[i].position.xiao_qu+'-'+data[i].position.men_pai+
+		   '</span></div><div class="list_intro"><p>价格：'+data[i].basic_info.jia_ge+'/天</p></div></li>'
+	   }
+       $(".houselist").append(str);
+       if(data.length=='0'||data==null||data==""){
+    	   $("#zanwu").show();
+       }
     });
+    
+    $(".houselist").on('click','li',function(){
+    	var id=$(this).attr('id');
+    	 window.location.href="house_particulars.html?id="+encodeURIComponent(id)+"";
+    })
+    
+    
 });
