@@ -7,11 +7,11 @@
     <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
     <link href="css/common.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/Cleaning_service.css" />
-    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script type="text/javascript" src="js/fnBase.js"></script>
     <script type="text/javascript" src="js/personal.js"></script>
-    <script type="text/javascript" src="js/comment.js"></script>
+    <script type="text/javascript" src="js/acyongche.js"></script>
     <style>
     	.per-order-status ol dd{width:100%;}
     	.per-order-status ol dd i{padding:0 0.1rem;}
@@ -41,10 +41,25 @@
         <li><a href="javascript:;" style="color: #333;font-weight: bold;">叫车服务</a></li>
         
         <li>
+            <div class="per-order-status house-status">
+                <labler class="labler" style="font-weight: bold;color: #0c4b38">选择房间</labler>
+                <ol>
+
+                </ol>
+                <p id="atl" style="font-size: 0.14rem;color:orangered;display: none">您暂时还没有在住的房间。</p>
+            </div>
+        	 <div class="per-order-status">
+               <labler>车辆选择</labler>
+               <ol>	
+               		<dd ct="0"><i>轿车</i><i></i></dd>
+               		<dd ct="1"><i>SUV越野车</i><i></i></dd>
+               		<dd ct="2"><i>MPV商务车</i><i></i></dd>
+               </ol> 
+            </div>
             <div class="per-order-status">
                <labler>接送站服务</labler>
                <ol>	
-               		<dd cat="100"><i>西安北站</i><i>100元/单次</i></dd>
+               		<dd cat="100"><i>西安北站</i><i>80元/单次</i></dd>
                		<dd cat="150"><i>飞机场</i><i>150元/单次</i></dd>	
                </ol>
                <p class="time"><input placeholder="-年-月-日" class="textbox-n" type="text" onfocus="(this.type='date')"  id="stateDate">~<input placeholder="-时-分" type="text" onfocus="(this.type='time')"></p> 
@@ -57,18 +72,20 @@
                </ol> 
                <p class="time"><input placeholder="开始日期" class="textbox-n" type="text" onfocus="(this.type='date')"  id="stateDate">~<input placeholder="结束日期" class="textbox-n" type="text" onfocus="(this.type='date')"  id="endDate"></p>	
             </div>
+            
              <!-- 结算 -->
                <div class="bottomContainer">
                		<p>合计：<span></span>元</p>
                </div>
+               <!-- 
             <div class="per-order-status">
                <labler>联系电话：</labler>
                <input class="teltaxi" type="text" maxlength="11" placeholder="请输入手机号码">
             </div>
-            
+             -->
             <div class="per-order-status">
                <labler>备注</labler>
-               <textarea class="_textarea" placeholder="您还有其他什么需求"></textarea>
+               <textarea class="_textarea" placeholder="您的手机号码，或地址"></textarea>
             </div>
              
         </li>
@@ -78,9 +95,9 @@
     </p>
     <script>
         $(document).ready(function(){
-      //      $(".account-login-width").click(function(){
-      //          fnBase.myalert('此服务正在维护！')
-      //      })
+            $(".account-login-width").click(function(){
+                fnBase.myalert('此服务正在维护！')
+            })
         })
     </script>
 </div>

@@ -55,6 +55,7 @@ public class Constants {
 	public static final String SMS_INFORM_COMFIRM_CLEAN_ORDER = "194099";
 	public static final String SMS_INFORM_FAULT_SERVICE= "181355";
 	public static final String SMS_INFORM_ADD_FACILITY="194572";
+	public static final String SMS_INFORM_ADD_APPLY="195370";
 	public static final String SMS_AVAILBEL_TIME_STR = "2分钟";
 	public static final Long SMS_AVAILBEL_TIME = Long.valueOf(1000*60*2);
 	public static final String SMS_TEMPLATE_REG = "160686";//注册短信验证码模板编号

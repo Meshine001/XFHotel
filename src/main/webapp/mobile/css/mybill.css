@@ -1,3 +1,4 @@
+#zanwus{display:none;font-size: 0.16rem;padding:0 0.2rem;color: #ccc;}
 .header{
     width: 100%;
     height: 0.4rem;
@@ -7,9 +8,9 @@
     color: #1d1d1d;
 }
 #Myscroll-body{
-    top: 0.4rem;
+    top: 0.85rem;
     bottom: 0;
-    background: #fff;
+    background: #f2f4f3;
     overflow-y: scroll;
 }
 .header-mobile .cell span{color: #2c2c2c}
@@ -18,92 +19,55 @@
     background: #fff;
     border-bottom:1px solid #eee;
 }
-
-.narbar{
+#nav{
+	height: 0.45rem;
     width: 100%;
-    height: auto;
-}
-
-.narbar li{
-    float: left;
-    width: 50%;
-    font-size: 0.16rem;
+    position: fixed;
+    top: 0.4rem;
+    border-bottom: 1px solid #d1d1d1;
+    font-size: 0.14rem;
+    overflow: hidden;
+    background: #fff;
+    z-index: 88;
+    max-width: 640px;
+    margin: 0 auto;
     line-height: 0.45rem;
-    border-right: 1px solid #eee;
-    overflow: hidden;
-    color: #333;
-    border-bottom: 1px solid #eee;
+    color: #282828;
+    padding: 0 0.2rem;
 }
-.narbar li:last-child{
-    border-right: none;
+#nav input{
+	height: 0.45rem;
+    text-align: center;
+   
 }
-.narbar li i{
+#Myscroll-body .orderlist{width: 100%;height: auto;overflow-x: hidden;margin-top:0.1rem;}
+#Myscroll-body .orderlist li {
+    margin-bottom: 0.1rem;
+    background: #FFF;
+    border-top: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+    padding: 0 0.2rem;
+}
+.p_title{
+	line-height: 0.45rem;
+    font-size: 0.14rem;
+    border-bottom: 1px solid #d3d3d3;
+}
+.pay_content {
+    line-height: 0.25rem;
+    padding: 0.15rem 0;
+    font-size: 0.14rem;
+  /*  border-bottom: 1px solid #d3d3d3;*/
+}
+.pay_content .list_bigsize {
     overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
-    color: red;
-}
-.narbar li.border{border-bottom:none}
-.narbar li span{
+    text-overflow: ellipsis;
     font-size: 0.16rem;
-    padding: 0 0.1rem;
 }
-.narlist{width: 100%;height: auto;overflow-x: hidden}
-.narlist .section{
-    width: 100%;
-    height: auto;
-    float: left;
-    display: none;
+.pay_content .p_list span {
+    float: right;
 }
-.narlist .find-nav{
-    width: 100%;
-    padding: 0 0.1rem;
-    font-size: 0.14rem;
-}
-.narlist .find-nav .pagenavi1,.narlist .find-nav #pagenavi2,.narlist .find-nav #pag2{padding: 0;width: 100%}
-.narlist .find-nav .pagenavi1 li{
-    float: left;
-    font-size: 0.14rem;
-    width: 20%;
-    text-align: center;
-    line-height: 0.4rem;
-}
-.narlist .find-nav .roomRate li{
-    float: left;
-    font-size: 0.14rem;
-    width: 25%;
-    text-align: center;
-    line-height: 0.4rem;
-}
-.narlist .find-nav .pagenavi1 li:first-child,.narlist .find-nav #pagenavi2 li span:first-child{width: 10%}
-.narlist .find-nav .pagenavi1 li:first-child+li,.narlist .find-nav #pagenavi2 li span:first-child+span{width: 30%}
-
-.narlist .find-nav #pagenavi2 li{width: 100%;line-height: 0.4rem;height: 0.4rem;border-bottom: 1px solid #eee;clear: both}
-.narlist .find-nav #pagenavi2 li span{float: left;width: 20%;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap}
-
-.narlist .find-nav #page2 li{
-    border-left: 1px solid #878787;
-    width: 100%;
-    line-height: 0.4rem;
-    height: 0.4rem;
-    clear: both;
-    position: relative;
-}
-.narlist .find-nav #page2 li span{
-    width: 25%;
-    float: left;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.narlist .find-nav #page2 li span:first-child{
-    color: #878787;
-    color: #00b38a;
-    width: 0.12rem;
-    font-size: 0.12rem;
-    position: absolute;
-    left: -0.06rem;
-    top: 50%;
-    margin-top:-0.06rem;
+.pay_content .p_list span i{
+    color:red;
 }

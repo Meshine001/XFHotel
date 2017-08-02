@@ -21,12 +21,14 @@ public class HouseServiceImpl implements HouseService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	@Transactional
 	@Override
 	public void add(House house) {
 		// TODO Auto-generated method stub
 		houseDAO.save(house);
 	}
+	
 	@Override
 	public void delete(House t) {
 		// TODO Auto-generated method stub

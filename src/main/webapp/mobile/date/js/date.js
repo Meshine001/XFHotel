@@ -316,7 +316,7 @@ var date = function ($) {
       $('.input-leave').val(leaveYear + '-' + leaveTime);
     }
 
-    getDate(2); // 获取数据 参数: 拿6个月的数据
+    getDate(2); // 获取数据 参数: 拿2个月的数据
     initDay(); // 初始化入住和离店时间
   };
 

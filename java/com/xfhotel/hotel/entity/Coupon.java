@@ -27,6 +27,7 @@ public class Coupon {
 			return "不限";
 		}
 	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

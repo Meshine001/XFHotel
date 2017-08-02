@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Apply;
 import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Customer;
+import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
+import com.xfhotel.hotel.service.ApplyService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CommentService;
@@ -35,6 +38,7 @@ import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.Message;
+import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 
 @Controller
 @RequestMapping("landlord")
@@ -91,7 +95,10 @@ public class LandlordController {
 	@Autowired
 	LandlordService landlordService;
 	
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@Autowired
+	ApplyService appliService;
+	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody  Message add(Long id ,String number ,String name,Long card) {
 	try {
 		Customer c= customerService.getCustomer(id);
@@ -112,7 +119,7 @@ public class LandlordController {
 		
 	}
 	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public @ResponseBody  Message register(Long id) {
 		Landlord landlord = landlordService.getCustomer(id);
 	try {	
@@ -138,7 +145,7 @@ public class LandlordController {
 		return "/admin/customer/房东";
 	}
 	
-	@RequestMapping(value = "/allocation", method = RequestMethod.GET)
+	@RequestMapping(value = "/allocation", method = RequestMethod.POST)
 	public @ResponseBody  Message allocation(Long id ,Long roomId) {
 	try {	
 		if(id ==null){
@@ -157,8 +164,96 @@ public class LandlordController {
 	return new Message(Constants.MESSAGE_SUCCESS_CODE,"分配成功");
 	}
 	
-	@RequestMapping(value = "/particulars", method = RequestMethod.GET)
+	@RequestMapping(value = "/particulars", method = RequestMethod.POST)
 	public @ResponseBody List<Apartment> particulars(Long id) {
 		return apartmentService.landlord(id);
 	}
+	
+	@RequestMapping(value = "/getOrder", method = RequestMethod.POST)
+	public @ResponseBody List<Order> getOrder(Long id) {
+		return orderService.getOrders(id);
+	}
+	
+	@RequestMapping(value = "/addApply", method = RequestMethod.GET)
+	public @ResponseBody Message addApply(Long id ,Long tel ,String site) {
+		try {
+			Landlord l = landlordService.findById(id);
+			if(l==null){
+				return new Message(Constants.MESSAGE_ERR_CODE, "请先登录");
+			}
+			Apply apply = new Apply();
+			apply.setuId(id);
+			apply.setTel(tel);
+			apply.setTime(new Date().getTime());
+			apply.setSite(site);
+			apply.setName(l.getName());
+			apply.setState(Apply.STATUS_NOT_AFFIRM);
+			appliService.add(apply);
+			String[] p = {tel.toString()};
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_APPLY, systemConfiService.getConfig().getSms(), p);	
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "发布失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,"发布成功");
+	}
+	
+	@RequestMapping(value = "/getApply", method = RequestMethod.GET)
+	public @ResponseBody String getApply() {
+		List<Apply> list = appliService.list();
+		List<Map> orders = new ArrayList<Map>();
+		for (Apply o : list) {
+			orders.add(o.toMap());	
+		}
+		session.setAttribute("orders", orders);
+		return "/admin/customer/申请";
+	}
+//	@RequestMapping(value = "/ApplyOrder", method = RequestMethod.POST)
+//	@ResponseBody
+//	public Message ApplyOrder(Long id) {
+//		Apply c = appliService.findById(id);
+//		if (c == null) {
+//			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+//		}
+//		if (c.getState() == Apply.STATUS_NOT_AFFIRM) {
+//			try {
+//					c.setState(Apply.STATUS_CONDUCT);
+//					appliService.update(c);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				return new Message(Constants.MESSAGE_ERR_CODE, "确认审核失败");
+//			}
+//
+//		}
+//		return new Message(Constants.MESSAGE_SUCCESS_CODE, "确认审核成功");
+//		
+//	}
+//
+//	@RequestMapping(value = "/FacilityOrders", method = RequestMethod.POST)
+//	@ResponseBody
+//	public Message FacilityOrders(Long id ,int judge) {
+//		Apply c = appliService.findById(id);
+//		if (c == null) {
+//			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+//		}
+//		if (c.getState() == Apply.STATUS_CONDUCT) {
+//			try {
+//				if(judge == 0){
+//					c.setState(Apply.STATUS_COMPLETE);
+//					appliService.update(c);
+//				} else {
+//					c.setState(Apply.STATUS_DEFEATED);
+//					appliService.update(c);
+//				}
+//					
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+//			}
+//		}
+//		return new Message(Constants.MESSAGE_SUCCESS_CODE, "审核完成");
+//		}
 }
