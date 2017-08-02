@@ -1024,9 +1024,9 @@ public class MobileController  {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
+			return new Message(Constants.MESSAGE_ERR_CODE,"注册成功" );
 		}
-	return new Message(Constants.MESSAGE_SUCCESS_CODE, "注册成功");
+	return new Message(Constants.MESSAGE_SUCCESS_CODE,landlordService.getCustomer(id).getId());
 		
 	}
 	
@@ -1048,5 +1048,10 @@ public class MobileController  {
 	@RequestMapping(value = "/particulars", method = RequestMethod.POST)
 	public @ResponseBody List<Apartment> particulars(Long id) {
 		return apartmentService.landlord(id);
+	}
+	
+	@RequestMapping(value = "/getLandlord", method = RequestMethod.POST)
+	public @ResponseBody List<Order> getOrders(Long id) {
+		return orderService.getOrders(id);
 	}
 }
