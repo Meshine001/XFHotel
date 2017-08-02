@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Apply;
 import com.xfhotel.hotel.entity.Blog;
 import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Comment;
@@ -35,6 +36,7 @@ import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
+import com.xfhotel.hotel.service.ApplyService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CommentService;
@@ -122,6 +124,9 @@ public class MobileController  {
 	
 	@Autowired
 	LandlordService landlordService;
+	
+	@Autowired
+	ApplyService appliService;
 
 	/**
 	 * 房屋
@@ -1053,5 +1058,30 @@ public class MobileController  {
 	@RequestMapping(value = "/getLandlord", method = RequestMethod.POST)
 	public @ResponseBody List<Order> getOrders(Long id) {
 		return orderService.getOrders(id);
+	}
+	
+	@RequestMapping(value = "/addApply", method = RequestMethod.POST)
+	public @ResponseBody Message addApply(Long id ,Long tel ,String site) {
+		try {
+			Landlord l = landlordService.findById(id);
+			if(l==null){
+				return new Message(Constants.MESSAGE_ERR_CODE, "请先登录");
+			}
+			Apply apply = new Apply();
+			apply.setuId(id);
+			apply.setTel(tel);
+			apply.setTime(new Date().getTime());
+			apply.setSite(site);
+			apply.setName(l.getName());
+			apply.setState(Apply.STATUS_NOT_AFFIRM);
+			appliService.add(apply);
+			String[] p = {tel.toString()};
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_APPLY, systemConfiService.getConfig().getSms(), p);	
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "发布失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,"发布成功");
 	}
 }
