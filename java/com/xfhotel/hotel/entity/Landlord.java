@@ -22,7 +22,7 @@ public class Landlord {
 	private Long id;
 	private Long uId;//用户id
 	private String name;//真实姓名
-	private Long card;
+	private Long card;//身份证
 	private String number;//账号
 	private Long regTime;//注册时间
 	private String phone;//电话号
@@ -61,7 +61,6 @@ public class Landlord {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
 	public String getName() {
 		return name;
 	}

@@ -357,7 +357,7 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	@Override
 	public List<Order> getOrders(Long roomId) {
-		String hqlString = "from Order where roomId=?";
+		String hqlString = "from Order order by id desc where roomId=? ";
 		Object[] values = {roomId};
 		return orderDAO.getListByHQL(hqlString, values);
 	}

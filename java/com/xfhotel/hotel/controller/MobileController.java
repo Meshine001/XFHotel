@@ -1084,4 +1084,6 @@ public class MobileController  {
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"发布成功");
 	}
+	
 }
+

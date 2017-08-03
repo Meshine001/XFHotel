@@ -199,7 +199,7 @@ public class LandlordController {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"发布成功");
 	}
 	
-	@RequestMapping(value = "/getApply", method = RequestMethod.GET)
+	@RequestMapping(value = "/customer_collocation", method = RequestMethod.GET)
 	public @ResponseBody String getApply() {
 		List<Apply> list = appliService.list();
 		List<Map> orders = new ArrayList<Map>();
@@ -207,53 +207,53 @@ public class LandlordController {
 			orders.add(o.toMap());	
 		}
 		session.setAttribute("orders", orders);
-		return "/admin/customer/申请";
+		return "/admin/customer/collocation";
 	}
-//	@RequestMapping(value = "/ApplyOrder", method = RequestMethod.POST)
-//	@ResponseBody
-//	public Message ApplyOrder(Long id) {
-//		Apply c = appliService.findById(id);
-//		if (c == null) {
-//			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
-//		}
-//		if (c.getState() == Apply.STATUS_NOT_AFFIRM) {
-//			try {
-//					c.setState(Apply.STATUS_CONDUCT);
-//					appliService.update(c);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//				return new Message(Constants.MESSAGE_ERR_CODE, "确认审核失败");
-//			}
-//
-//		}
-//		return new Message(Constants.MESSAGE_SUCCESS_CODE, "确认审核成功");
-//		
-//	}
-//
-//	@RequestMapping(value = "/FacilityOrders", method = RequestMethod.POST)
-//	@ResponseBody
-//	public Message FacilityOrders(Long id ,int judge) {
-//		Apply c = appliService.findById(id);
-//		if (c == null) {
-//			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
-//		}
-//		if (c.getState() == Apply.STATUS_CONDUCT) {
-//			try {
-//				if(judge == 0){
-//					c.setState(Apply.STATUS_COMPLETE);
-//					appliService.update(c);
-//				} else {
-//					c.setState(Apply.STATUS_DEFEATED);
-//					appliService.update(c);
-//				}
-//					
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
-//			}
-//		}
-//		return new Message(Constants.MESSAGE_SUCCESS_CODE, "审核完成");
-//		}
+	@RequestMapping(value = "/ApplyOrder", method = RequestMethod.POST)
+	@ResponseBody
+	public Message ApplyOrder(Long id) {
+		Apply c = appliService.findById(id);
+		if (c == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+		if (c.getState() == Apply.STATUS_NOT_AFFIRM) {
+			try {
+					c.setState(Apply.STATUS_CONDUCT);
+					appliService.update(c);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new Message(Constants.MESSAGE_ERR_CODE, "确认审核失败");
+			}
+
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "确认审核成功");
+		
+	}
+
+	@RequestMapping(value = "/FacilityOrders", method = RequestMethod.POST)
+	@ResponseBody
+	public Message FacilityOrders(Long id ,int judge) {
+		Apply c = appliService.findById(id);
+		if (c == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+		if (c.getState() == Apply.STATUS_CONDUCT) {
+			try {
+				if(judge == 0){
+					c.setState(Apply.STATUS_COMPLETE);
+					appliService.update(c);
+				} else {
+					c.setState(Apply.STATUS_DEFEATED);
+					appliService.update(c);
+				}
+					
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+			}
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "审核完成");
+		}
 }

@@ -84,10 +84,10 @@
 									<c:forEach items="${orders}" var="order">
 										<tr>
 											<td>${order.id}</td>
-											<td>${order.time}</td>
-											<td>${order.status}</td>
-											<td>${order.content}</td>
-											<td>${order.roomId}</td>
+											<td>${order.phone}</td>
+											<td>${order.name}</td>
+											<td>${order.number}</td>
+											<td>查看</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -120,14 +120,14 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${orders}" var="order">
+									<c:forEach items="${ordersd}" var="order">
 										<tr>
 											<td style="min-width:80px">${order.id}</td>
-											<td>${order.time}</td>
-											<td>${order.status}</td>
-											<td>${order.content}</td>
-											<td>${order.roomId}</td>
-											<td>${order.cleanTime}</td>
+											<td>${order.name}</td>
+											<td>${order.tel}</td>
+											<td>${order.site}</td>
+											<td>${order.state}</td>
+											<td>${order.state}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
