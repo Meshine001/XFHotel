@@ -160,6 +160,7 @@ public class AdminController {
 			return "/admin/customer/DialogueCar";
 		}			
 	//..7.18叫车服务end...
+		
 		@RequestMapping(value = "/customer_collocation", method = RequestMethod.GET)
 		public String collocation() {
 			List<Clean> list = cleanService.list();

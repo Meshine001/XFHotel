@@ -28,18 +28,21 @@ $(document).ready(function(){
        $(".houselist").html('')
 	   for(var i=0;i<data.length;i++){
 		   str+='<li id="'+data[i].id+'"><div class="house-pic"><img src="'+Constant.URL+'/images/'+data[i].fang_jian_tu[0]+'" class="img"><span>'+data[i].position.xa_wei_zhi+'-'+data[i].position.xiao_qu+'-'+data[i].position.men_pai+
-		   '</span></div><div class="list_intro"><p>价格：'+data[i].basic_info.jia_ge+'/天</p></div></li>'
+		   '</span></div><div class="list_intro"><p>价格：'+data[i].basic_info.jia_ge+'/天</p><p><a href="javascript:;" class="order">查看订单</a></p></div></li>'
 	   }
        $(".houselist").append(str);
        if(data.length=='0'||data==null||data==""){
     	   $("#zanwu").show();
        }
     });
-    
-    $(".houselist").on('click','li',function(){
-    	var id=$(this).attr('id');
+    //查看详情
+    $(".houselist").on('click','li .house-pic',function(){
+    	var id=$(this).parent().attr('id');
     	 window.location.href="house_particulars.html?id="+encodeURIComponent(id)+"";
     })
-    
-    
+    //查看订单
+    $(".houselist").on('click','li .list_intro .order',function(){
+    	var id=$(this).parent().parent().parent().attr('id');
+    	 window.location.href="mybill.html?id="+encodeURIComponent(id)+"";
+    })
 });

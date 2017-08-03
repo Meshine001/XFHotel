@@ -21,17 +21,17 @@
         <span class="cell link-btn"></span>
     </header>
 </div>
-<div id="nav">按月份查询<input type="month"></div>
+<!--    <div id="nav">按月份查询<input type="month"></div>-->
 <div id="Myscroll-body">
-   <ul class="orderlist">
-       	<li>
-       		<p class="p_title">已完成</p>
+   <ul class="orderlist">  
+    <!--   	<li id="'+data[i].id+'">
+       		<p class="p_title">'+status+'</p>
        		<div class="pay_content">
-       			<p class="list_bigsize">航天西路天培元</p>
-       			<p class="p_list">入住2017-07-21~离开2017-07-22<span>共<i>1</i>晚</span></p>
-       			<p class="p_list">陈奕迅<span>总房费：<i>￥360</i></span></p>
+       			<p class="list_bigsize">'+data[i].description+'</p>
+       			<p class="p_list">入住'+beginTime+'~离开'+endTime+'<span>共<i>'+data[i].totalDay+'</i>晚</span></p>
+       			<p class="p_list">'+data[i].cusName+'<span>总房费：<i>￥'+data[i].totalPrice+'</i></span></p>
        		</div>
-       	</li>
+       	</li> -->
     </ul> 
     
     <p id="zanwus">暂无订单</p>
@@ -40,12 +40,60 @@
 
 <script>
     $(document).ready(function(){
-        $(".narbar li").click(function(){
-            var i=$(this).index();
-            $(this).addClass('border').siblings().removeClass('border');
-            $(".narlist .section").eq(i).show().siblings().hide();
-        });
-
+   //     $(".narbar li").click(function(){
+   //         var i=$(this).index();
+   //         $(this).addClass('border').siblings().removeClass('border');
+   //         $(".narlist .section").eq(i).show().siblings().hide();
+  //      });
+   		
+    	var _id = decodeURIComponent(fnBase.request("id"));
+    	var frontURL=Constant.URL+'/mobile/getLandlord/';
+    	var postData={'id':_id};
+    	fnBase.commonAjax(frontURL,postData,function(data){
+    	      console.log(data);
+    	      $(".orderlist").html('');
+    	      var _str="",begin,end;
+    	     
+    	      for(var i=0;i<data.length;i++){
+    	    	  var status=data[i].status;
+        	      if(status=='0'){
+        	    	  status='未完成'
+        	      }else if(status=='1'){
+        	    	  status='未支付'
+        	      }else if(status=='2'){
+        	    	  status='正在住'
+        	      }else if(status=='3'){
+        	    	  status='已完成'
+        	      }else if(status=='4'){
+        	    	  status='取消订单'
+        	      }else if(status=='5'){
+        	    	  status='超时'
+        	      }else if(status=='6'){
+        	    	  status='退款'
+        	      }else if(status=='7'){
+        	    	  status='需要管理员确认'
+        	      }else if(status=='8'){
+        	    	  status='退房中等待管理员确认'
+        	      };
+        	    
+        	      begin=new Date(data[i].startTime);
+        	      var y=begin.getFullYear();
+        	      var m=begin.getMonth();
+        	      var d=begin.getDate();
+        	      var beginTime=y+'-'+m+'-'+d;
+        	      
+        	      
+        	      end=new Date(data[i].endTime);
+        	      var y2=end.getFullYear();
+        	      var m2=end.getMonth();
+        	      var d2=end.getDate();
+        	      var endTime=y2+'-'+m2+'-'+d2;
+        	      
+    	    	  _str+='<li id="'+data[i].id+'"><p class="p_title">'+status+'</p><div class="pay_content"><p class="list_bigsize">'+data[i].description+'</p><p class="p_list">入住'+beginTime+'~离开'+endTime+'<span>共<i>'+data[i].totalDay+'</i>晚</span></p><p class="p_list">'+data[i].cusName+'<span>总房费：<i>￥'+data[i].totalPrice+'</i></span></p></div></li>'; 
+    	      }
+    	      $(".orderlist").append(_str);
+    	     
+    	})
     })
 </script>
 </body>
