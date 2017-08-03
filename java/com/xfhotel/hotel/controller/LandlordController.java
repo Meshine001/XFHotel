@@ -146,16 +146,18 @@ public class LandlordController {
 	}
 	
 	@RequestMapping(value = "/allocation", method = RequestMethod.POST)
-	public @ResponseBody  Message allocation(Long id ,Long roomId) {
+	public @ResponseBody  Message allocation(Long id ,Long roomId[]) {
 	try {	
 		if(id ==null){
 			return new Message(Constants.MESSAGE_ERR_CODE, "请提交正确id");
 			} else if(roomId==null){
 				return new Message(Constants.MESSAGE_ERR_CODE, "请提交正确房源id");
 			}
-		Apartment apartment = apartmentService.findById(roomId);
-		apartment.setAffiliation(id);
-		apartmentService.update(apartment);
+		for(Long d :roomId){
+			Apartment apartment = apartmentService.findById(d);
+			apartment.setAffiliation(id);
+			apartmentService.update(apartment);
+		}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
