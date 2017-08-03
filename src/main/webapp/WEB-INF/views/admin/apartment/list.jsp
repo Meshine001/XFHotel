@@ -252,16 +252,16 @@
 			                roomids=result.join(",");
 			    			
 			                //获取房东
-			      //          $.ajax({
-			      //          	type:'POST',
-			      //          	dataType:'json',
-			      //          	url:'',
-			      //          	data:{},
-			      //          	success:function(data){
-			      //          		console.log(data)
+			                $.ajax({
+			                	type:'POST',
+			                	dataType:'json',
+			                	url:'/admin/roomSort/',
+			                	success:function(data){
+			                		console.log(data)
 			                		
-			      //          	}
-			       //         })
+			                	}
+			                })
+			       
 					})
 					
 					$(".close").click(function(){
