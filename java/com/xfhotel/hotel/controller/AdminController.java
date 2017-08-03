@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Apply;
 import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
@@ -25,9 +26,11 @@ import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
+import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
+import com.xfhotel.hotel.service.ApplyService;
 import com.xfhotel.hotel.service.BlogService;
 import com.xfhotel.hotel.service.CleanService;
 import com.xfhotel.hotel.service.CouponService;
@@ -36,6 +39,7 @@ import com.xfhotel.hotel.service.FacilityOrderService;
 import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FaultService;
 import com.xfhotel.hotel.service.HouseService;
+import com.xfhotel.hotel.service.LandlordService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
@@ -45,7 +49,9 @@ import com.xfhotel.hotel.support.TimeUtil;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
+	@Autowired
+	LandlordService landlordService;
+	
 	@Autowired
 	HttpSession session;
 
@@ -78,7 +84,8 @@ public class AdminController {
 	HouseService houseService;
 //	@Autowired
 //	VacancyService vacancyService;
-	
+	@Autowired
+	ApplyService applyService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String homePage() {
@@ -146,6 +153,22 @@ public class AdminController {
 			session.setAttribute("orders", orders);
 			return "/admin/customer/addfacility";
 		}
+		@RequestMapping(value = "/customer_collocation", method = RequestMethod.GET)
+		public String getApply() {
+			List<Apply> list = applyService.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (Apply o : list) {
+				orders.add(o.toMap());	
+			}
+			List<Landlord> list1 = landlordService.list();
+			List<Map> orders1 = new ArrayList<Map>();
+			for (Landlord o : list1) {
+				orders1.add(o.toMap());	
+			}
+			session.setAttribute("orders", orders1);
+			session.setAttribute("ordersd", orders);
+			return "/admin/customer/collocation";
+		}
 		
 	//..7.18叫车服务begin...
 		@RequestMapping(value = "/customer_DialogueCar", method = RequestMethod.GET)
@@ -160,18 +183,17 @@ public class AdminController {
 			return "/admin/customer/DialogueCar";
 		}			
 	//..7.18叫车服务end...
-		
-		@RequestMapping(value = "/customer_collocation", method = RequestMethod.GET)
-		public String collocation() {
-			List<Clean> list = cleanService.list();
-			List<Map> orders = new ArrayList<Map>();
-			for (Clean o : list) {
-				orders.add(o.toMap());	
-				Order order = orderservice.get(o.getOederId());
-			}
-			session.setAttribute("orders", orders);
-			return "/admin/customer/collocation";
-		}								
+//		@RequestMapping(value = "/customer_collocation", method = RequestMethod.GET)
+//		public String collocation() {
+//			List<Clean> list = cleanService.list();
+//			List<Map> orders = new ArrayList<Map>();
+//			for (Clean o : list) {
+//				orders.add(o.toMap());	
+//				Order order = orderservice.get(o.getOederId());
+//			}
+//			session.setAttribute("orders", orders);
+//			return "/admin/customer/collocation";
+//		}								
 	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardPage() {
@@ -519,4 +541,5 @@ public class AdminController {
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"设置成功");
 	}
+	
 }

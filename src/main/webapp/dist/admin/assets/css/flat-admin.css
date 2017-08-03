@@ -8209,8 +8209,7 @@ div.section .section-body.__indent {
 	border-radius: 3px;
 }
 .modal-dialog{
-	overflow: hidden;
-    overflow-y: auto;
+    overflow-y: visible;
     max-height: 95%;
 }
 .modal .modal-dialog .modal-content {

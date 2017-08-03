@@ -22,24 +22,11 @@
 		      </div>
 		      <div class="modal-body">
 		       	<ul id="houseList">
-		       		<li>
-		       			<p>名称：福邸铭门2205</p>
-		       			<p>地址：西安市, 新城区, 幸福中路 幸福中路69号</p>
-		       			<p>价格：350元/天</p>
-		       			<p>入住率：80%</p>
-		       		</li>
-		       		<li>
-		       			<p>名称：福邸铭门2205</p>
-		       			<p>地址：西安市, 新城区, 幸福中路 幸福中路69号</p>
-		       			<p>价格：350元/天</p>
-		       			<p>入住率：80%</p>
-		       		</li>
-		       		<li>
-		       			<p>名称：福邸铭门2205</p>
-		       			<p>地址：西安市, 新城区, 幸福中路 幸福中路69号</p>
-		       			<p>价格：350元/天</p>
-		       			<p>入住率：80%</p>
-		       		</li>
+		   <!--   	<li>
+		       			<p>名称：'+data[i].position.xa_wei_zhi+'-'+data[i].position.xiao_qu+'-'+data[i].position.men_pai+'</p>
+		       			<p>地址：'+data[i].position.bd_wei_zhi+'-'+data[i].position.jie_dao+'</p>
+		       			<p>价格：'+data[i].basic_info.jia_ge+'元/天</p>
+		       		</li> -->  
 		       	</ul>
 		      </div>
 		      <div class="modal-footer">
@@ -84,10 +71,10 @@
 									<c:forEach items="${orders}" var="order">
 										<tr>
 											<td>${order.id}</td>
-											<td>${order.time}</td>
-											<td>${order.status}</td>
-											<td>${order.content}</td>
-											<td>${order.roomId}</td>
+											<td>${order.phone}</td>
+											<td>${order.name}</td>
+											<td>${order.number}</td>
+											<td><a faid="${order.id}" class="hbtn">查看</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -120,14 +107,22 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${orders}" var="order">
+									<c:forEach items="${ordersd}" var="order">
 										<tr>
 											<td style="min-width:80px">${order.id}</td>
-											<td>${order.time}</td>
-											<td>${order.status}</td>
-											<td>${order.content}</td>
-											<td>${order.roomId}</td>
-											<td>${order.cleanTime}</td>
+											<td>${order.name}</td>
+											<td>${order.tel}</td>
+											<td>${order.site}</td>
+											<td>${order.state}</td>
+											<td>
+												<c:if test="${order.state=='等待处理'}">
+													<a href="javascript:;" class="comfirm-order" order-id="${order.id}" style="display:block">进行审核</a>
+												</c:if>
+												<c:if test="${order.state=='审核中'}">
+													<a href="javascript:;" class="success-order" type="0" order-id="${order.id}" style="display:block">成功</a>
+													<a href="javascript:;" class="success-order" type="1" order-id="${order.id}" style="display:block">失败</a>
+												</c:if>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -159,17 +154,17 @@
 	    $("#profile .table th:eq(0),#profile .table td:eq(0)").css('min-width','80px');
 	    
 	
-		$("#home tbody").on('click','tr',function(){
-			$("#myalerts").fadeIn();
-		})
+	//	$("#home tbody").on('click','tr',function(){
+	//		$("#myalerts").fadeIn();visible
+	//	})
 		$(".close,.closes").click(function(){
 			$("#myalerts").fadeOut();
 		})
 	    
 	    
-		//确认订单
+		//确认审核
 		$('.comfirm-order').click(function(){
-			var url = '../order/cleanOrder';
+			var url = '../landlord/ApplyOrder';
 			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
@@ -184,7 +179,7 @@
 				success : function(data) {
 					console.log(data)
 					if(data.statusCode == 1){
-						window.location.href = '../admin/customer_baojie';
+						location=location;
 					}else{
 						alert(data.content);
 					}
@@ -192,27 +187,22 @@
 			});
 		});
 		
-		//关闭订单
+		//审核成功
 		$('.success-order').click(function(){
-			var url = '../order/cleanOrders';
+			var url = '../landlord/FacilityOrders';
 			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
 				dataType : 'json',
 				data : {
 					'id' : id,
+					'judge':$(this).attr('type')
 				},
 				url : url,
-				error : function(data) {
-					
-				},
 				success : function(data) {
 					console.log(data)
-				
-					
-					
 					if(data.statusCode == 1){
-						window.location.href = '../admin/customer_baojie';
+						location=location;
 					}else{
 						alert(data.content);
 					}
@@ -220,6 +210,33 @@
 				}
 			});
 		});
+		
+		//查看房东的房屋
+		$("#home tbody").on('click','tr td .hbtn',function(){
+			$("#myalerts").fadeIn();
+			var url = '../mobile/particulars/';
+			var id = $(this).attr('faid');
+			$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					'id' : id
+				},
+				url : url,
+				success : function(data) {
+					console.log(data)
+					var str="";
+					$("#houseList").html("");
+					for(var i=0;i<data.length;i++){
+						str+='<li><p>名称：'+data[i].position.xa_wei_zhi+'-'+data[i].position.xiao_qu+'-'+data[i].position.men_pai+'</p><p>地址：'+data[i].position.bd_wei_zhi+'-'+data[i].position.jie_dao+'</p><p>价格：'+data[i].basic_info.jia_ge+'元/天</p></li>';
+					}
+					if(data.length<=0){
+						str='<li><p>暂时没有房屋</p></li>'
+					}
+					$("#houseList").append(str);
+				}
+			});
+		})
 	</script>
 	</my_body>
 </body>

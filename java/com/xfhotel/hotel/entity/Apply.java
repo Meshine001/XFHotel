@@ -77,7 +77,18 @@ public class Apply {
 	public void setTime(Long time) {
 		this.time = time;
 	}
-	String getStatusString(int status) {
+	public Map toMap(){
+		Map info = new HashMap();
+		info.put("id", id);
+		info.put("site", site);
+		info.put("uId", uId);
+		info.put("tel", tel);
+		info.put("name", name);
+		info.put("state", getStateString(state));
+		info.put("time", DateUtil.format(new Date(time), "yyyy-MM-dd HH:mm:ss"));
+		return info;
+	}
+	String getStateString(int status) {
 		switch (status) {
 		case STATUS_NOT_AFFIRM:
 			return "等待处理";
@@ -89,17 +100,5 @@ public class Apply {
 			return "审核失败";
 		}
 		return "已完成";
-	}
-	
-	public Map toMap(){
-		Map info = new HashMap();
-		info.put("id", id);
-		info.put("site", site);
-		info.put("uId", uId);
-		info.put("tel", tel);
-		info.put("name", name);
-		info.put("status", getStatusString(state));
-		info.put("time", DateUtil.format(new Date(time), "yyyy-MM-dd HH:mm:ss"));
-		return info;
 	}
 }

@@ -158,10 +158,10 @@
 								<td>
 								<c:if test="${order.status=='等待管理员确认'}">
 									<a href="javascript:;" class="comfirm-order" order-id="${order.id}" style="display:block">确定服务</a>
-									</c:if>
-									<c:if test="${order.status=='正在路上'}">
+								</c:if>
+								<c:if test="${order.status=='正在路上'}">
 									<a href="javascript:;" class="success-order" order-id="${order.id}" style="display:block">确定完成</a>
-									</c:if>
+								</c:if>
 									<!-- 
 									<c:if test="${order.status=='确认中'}">
 									<a href="javascript:;" class="btn comfirm-order" data-id="${order.id}">确认订单</a><br>
