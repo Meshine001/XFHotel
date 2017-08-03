@@ -27,6 +27,7 @@ $(document).ready(function(){
         	$(".approve").html('<span class="czs-medal-l"></span>未认证');
         }else if(data.statusCode=='1'){
         	active=1;
+        	fnBase.keep(0,'fadid',data.content);
         	$(".approve").html('<span class="czs-medal-l"></span>已认证');
         	$(".approve").addClass('okapp');
         
@@ -41,6 +42,7 @@ $(document).ready(function(){
     	}
     })
     var _fadid=fnBase.huoqu(0,"fadid");
+    console.log(_fadid)
     if(_fadid==null || _fadid=="undefined" || _fadid==""){
     	$("#housactive").html(' 您的房屋（0）')
         return;
