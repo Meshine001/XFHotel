@@ -201,15 +201,9 @@ public class LandlordController {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"发布成功");
 	}
 	
-	@RequestMapping(value = "/customer_collocation", method = RequestMethod.GET)
-	public @ResponseBody String getApply() {
-		List<Apply> list = appliService.list();
-		List<Map> orders = new ArrayList<Map>();
-		for (Apply o : list) {
-			orders.add(o.toMap());	
-		}
-		session.setAttribute("orders", orders);
-		return "/admin/customer/collocation";
+	@RequestMapping(value = "/collocation", method = RequestMethod.POST)
+	public @ResponseBody List<com.xfhotel.hotel.entity.Landlord> getApply() {
+		return landlordService.list();
 	}
 	@RequestMapping(value = "/ApplyOrder", method = RequestMethod.POST)
 	@ResponseBody
