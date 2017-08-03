@@ -91,6 +91,9 @@
         	      
     	    	  _str+='<li id="'+data[i].id+'"><p class="p_title">'+status+'</p><div class="pay_content"><p class="list_bigsize">'+data[i].description+'</p><p class="p_list">入住'+beginTime+'~离开'+endTime+'<span>共<i>'+data[i].totalDay+'</i>晚</span></p><p class="p_list">'+data[i].cusName+'<span>总房费：<i>￥'+data[i].totalPrice+'</i></span></p></div></li>'; 
     	      }
+    	      if(data.length<=0){
+    	    	  _str='<p align="center">暂时没有订单</p>' 
+    	      }
     	      $(".orderlist").append(_str);
     	     
     	})

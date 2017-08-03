@@ -45,9 +45,9 @@
 				  <div class="col-xs-6 col-sm-4">
 				  	<div class="input-group">
 							<span class="input-group-addon">
-								<input type="radio" value="1" name="radio">
+								<input type="radio" value="'+data[i].id+'" name="radio">
 							</span>
-							<input type="text" class="form-control" placeholder="张三" readonly>
+							<input type="text" class="form-control" placeholder="'+data[i].name+'" readonly>
 						</div>
 				  </div>
 				  <div class="col-xs-6 col-sm-4">
@@ -255,10 +255,18 @@
 			                $.ajax({
 			                	type:'POST',
 			                	dataType:'json',
-			                	url:'/admin/roomSort/',
+			                	url:'/landlord/collocation/',
 			                	success:function(data){
 			                		console.log(data)
-			                		
+			                		$("#fangdongList").html("");
+			                		var sty="";
+			                		for(var i=0;i<data.length;i++){
+			                			sty+='<div class="col-xs-6 col-sm-4"><div class="input-group"><span class="input-group-addon"><input type="radio"value="'+data[i].id+'"name="radio"></span><input type="text"class="form-control"placeholder="'+data[i].name+'"readonly></div></div>';
+			                		}
+			                		if(data.length<=0){
+			                			sty='<p>暂时没有房东</p>'
+			                		}
+			                		$("#fangdongList").append(sty);
 			                	}
 			                })
 			       
@@ -278,16 +286,20 @@
 			             });
 						 console.log(fangdongid)
 						 console.log(roomids)
-				  //	     $.ajax({
-			      //          	type:'POST',
-			      //          	dataType:'json',
-			      //          	url:'',
-			      //          	data:{},
-			      //          	success:function(data){
-			      //          		console.log(data)
-			                		
-			      //          	}
-			       //         })
+						 if(roomids==""||roomids==null||fangdongid==""||fangdongid==null){
+							 alert('操作有误、不能提交！');
+							 return
+						 }
+				  	     $.ajax({
+			                	type:'POST',
+			                	dataType:'json',
+			                	url:'/landlord/allocation/',
+			                	data:{'id': fangdongid,'roomId':roomids},
+			                	success:function(data){
+			                		console.log(data)
+			                		alert(data.content)
+			                	}
+			               })
 						 
 						$(".modallg").fadeOut();
 					})

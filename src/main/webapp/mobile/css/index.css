@@ -67,8 +67,8 @@
     z-index: 18;
     font-size: 0.14rem;
     display: block;
-/*  background: url("../images/black40.png"); */   
-    color: #00b38a;
+    background: #000; 
+    color: #fff;
     text-align: center;
     right: 0;
     bottom: 0;
@@ -77,8 +77,8 @@
     line-height: 0.35rem;
     cursor: pointer;
     z-index:100;
-    border: 1px solid;
-    border-radius: 0.35rem;
+  
+  
 }
 /*hot-issue*/
 
