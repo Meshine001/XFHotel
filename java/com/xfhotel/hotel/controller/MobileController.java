@@ -1056,7 +1056,7 @@ public class MobileController  {
 	}
 	
 	@RequestMapping(value = "/getLandlord", method = RequestMethod.POST)
-	public @ResponseBody List<Order> getOrders(Long id) {
+	public @ResponseBody List<Order> getOrders(Long id , Long time) {
 		return orderService.getOrders(id);
 	}
 	
@@ -1085,5 +1085,15 @@ public class MobileController  {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"发布成功");
 	}
 	
+	@RequestMapping(value = "/Landlord", method = RequestMethod.GET)
+	public @ResponseBody String Landlord() {
+		List<Landlord> list = landlordService.list();
+		List<Map> orders = new ArrayList<Map>();
+		for (Landlord o : list) {
+			orders.add(o.toMap());	
+		}
+		session.setAttribute("orders", orders);
+		return "/admin/customer/房东";
+	}
 }
 

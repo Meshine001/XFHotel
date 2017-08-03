@@ -42,7 +42,7 @@ public class ApartmentDAOImpl extends BaseDAOImpl<Apartment, Long>{
 	public List<Apartment> listApartments() {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Apartment> list = session.createQuery("from Apartment").list();
+		List<Apartment> list = session.createQuery("from Apartment order by id desc").list();
 		return list;
 	}
 

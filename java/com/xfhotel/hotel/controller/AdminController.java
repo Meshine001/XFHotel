@@ -164,6 +164,7 @@ public class AdminController {
 			List<Map> orders1 = new ArrayList<Map>();
 			for (Landlord o : list1) {
 				orders1.add(o.toMap());	
+				
 			}
 			session.setAttribute("orders", orders1);
 			session.setAttribute("ordersd", orders);

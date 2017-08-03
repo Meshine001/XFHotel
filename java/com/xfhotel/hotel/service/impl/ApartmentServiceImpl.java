@@ -172,7 +172,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 	@Transactional
 	@Override
 	public JSONArray getHomeApartments1() {
-		List<Apartment> apartments = apartmentDAO.getListByHQL("from Apartment" , null);
+		List<Apartment> apartments = apartmentDAO.getListByHQL("from Apartment order by id desc" , null);
 		return JSONArray.fromObject(apartments);
 	}
 
