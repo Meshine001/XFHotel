@@ -9,7 +9,7 @@ var Constant = {
         CLIENT_IP:clientIp
 };
 /**
- * 获取ip
+ * 获取ip.
  */
 function getIp() {
     var ip;
