@@ -5,7 +5,7 @@
 var clientIp = getIp();
 console.log(clientIp)
 var Constant = {
-        URL: baseUrl,
+        URL: baseUrl, 
         CLIENT_IP:clientIp
 };
 /**
