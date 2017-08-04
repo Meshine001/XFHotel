@@ -917,8 +917,7 @@ public class MobileController  {
 					  map.put("apartment", jo);
 					  map.put("distance", apartmentService.GetDistance(lat1,lng1,lat2,lng2));
 					  list.add(map); 
-				  }
-				  
+				  }	  
 	     }
 		return list;	
 	}

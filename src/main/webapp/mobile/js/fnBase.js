@@ -184,6 +184,3 @@ $(".link-home").attr("href","javascript:void(0);").click(function(){
             return (arg1 + arg2) / m;
         },
     };
-
-
-
