@@ -17,9 +17,11 @@ import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.dao.impl.OrderDAOImpl;
 import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Coupon;
+import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CouponService;
+import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.support.DateUtil;
@@ -42,6 +44,9 @@ public class OrderServiceImpl implements OrderService {
 	 
 	@Autowired
 	SystemConfService systemConfiService;
+	
+	@Autowired
+	CustomerService customerService;
 	
 	@Autowired
 	CouponService couponService;
@@ -275,7 +280,8 @@ public class OrderServiceImpl implements OrderService {
 			String[] otherCusName, String[] otherCusIdCard, String cusIdCard, String personal, String startTime,
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
 			String apartmentType,Long counponId) {
-	
+		Customer c = customerService.getCustomer(cusId);
+		
 		if(null != counponId){
 			Coupon coupon =couponService.getCoupon2(counponId);
 			boolean isUsed = true;
@@ -284,6 +290,12 @@ public class OrderServiceImpl implements OrderService {
 			double favorable = coupon.getcValue();
 			Double totalPrice2 = Double.parseDouble(totalPrice);
 			totalPrice = String.valueOf(totalPrice2 -favorable); 
+		}
+		if(c.getConsumptionCount()>=1000){
+			Double totalPrice1 = Double.parseDouble(totalPrice);
+			Double Price1 = Double.parseDouble(price);
+			Double yj = totalPrice1-Price1;
+			totalPrice = String.valueOf(totalPrice1 -yj); 
 		}
 		
 		Order o = new Order();

@@ -496,12 +496,14 @@ public class MobileController  {
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
 			String apartmentType,String id) throws ParseException {
 		Long couponId = null;
+		
 		try {
 			couponId = Long.valueOf(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
+		System.out.println("price:"+price+","+"totalPrice"+totalPrice+"wanhoih");
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order);
