@@ -41,7 +41,7 @@ $(document).ready(function(){
             	if(data.panorama==null || data.panorama==undefined || data.panorama==""){
             		
             	}else{
-            		$("#Myscroll-body .main .swiper-container").append('<i class="videovr">VR实景查看</i>');
+            		$("#Myscroll-body .main .swiper-container").append('<i class="videovr"><span>实景</span></i>');
             	}
             	
             	$(".swiper-container .videovr").on('click',function(){
@@ -56,9 +56,9 @@ $(document).ready(function(){
         		vio=vio.slice(4,vio.length);
         		
             $(".information").html("");
-            var priceStr ='<h1 class="ic_house">'+data.position.xa_wei_zhi+"-" +data.position.xiao_qu+'</h1><p class="info_L24">'+data.basic_info.shi+"室"+data.basic_info.ting+"厅"+
+            var priceStr ='<h1 class="ic_house">'+data.position.xa_wei_zhi+"-" +data.position.xiao_qu+'</h1><p class="info_L24"><span class="czs-home-l"></span>'+ '&nbsp;'+data.basic_info.shi+"室"+data.basic_info.ting+"厅"+
             data.basic_info.wei+"卫"+'</p>' +
-                '<p class="info_L24 label-adders"><span class="czs-location-l"></span>'+vio+"-"+data.position.jie_dao+data.position.xiao_qu+'</p><span class="label-price">'+data.basic_info.jia_ge+'<small>/天</small></span><p class="info_L24" style="color:red;;width: 2.5rem;border-radius: 0.5rem;"><span class="czs-medal"></span>满3天9.5折、满7天9折、满30天8折</p>'
+                '<p class="info_L24"><span class="czs-location-l"></span>'+vio+"-"+data.position.jie_dao+data.position.xiao_qu+'</p><span class="label-price">'+data.basic_info.jia_ge+'<small>/天</small></span><p class="info_L24" style="color:#888;font-size:0.13rem">入住诱惑：满3天9.5折、满7天9折、满30天8折</p>'
             $(".information").append(priceStr);
             //房源信息
             $(".housing .i_inf ul").html("");

@@ -208,8 +208,8 @@ $(".account-login-width a").click(function(){
     fnBase.commonAjax(frontURL,postData,function(data){
     	console.log(data);
     	fnBase.myalert('提交成功');
-        setTimeout(function(){
-        	window.location.href='serve.html';
+    	setTimeout(function(){ //pid:订单ID
+        	window.location.href="paymentWP.html?pid="+encodeURIComponent(data.oederId);
         },300)
     })
 	

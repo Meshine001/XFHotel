@@ -1,7 +1,7 @@
 var _id;
 $(document).ready(function(){
 
-    _id=decodeURIComponent(fnBase.request('id'));
+    _id=decodeURIComponent(fnBase.request('pid'));
     var frontURL=Constant.URL+'/mobile/getOrder';
     var postData={id:_id};
     var _totalprice='';
@@ -9,9 +9,9 @@ $(document).ready(function(){
         console.log(data);
         fnBase.keep(1,'roomId',data[1].roomId)
         _totalprice=Number(data[1].totalPrice).toFixed(2);
-        $(".p_msg li ._date").html(data[0]+"入住"+data[2]+"离开"+"<i class='date'>共"+data[1].totalDay+"天</i>");
-        //$(".p_msg li ._cash").html("押金:<span style='color: #666'>"+_YJpic+"</span>");
-        $(".p_msg li .toal").html("订单总额:<span class='money'>￥"+_totalprice+"</span>");
+  //      $(".p_msg li ._date").html(data[0]+"入住"+data[2]+"离开"+"<i class='date'>共"+data[1].totalDay+"天</i>");
+
+ //       $(".p_msg li .toal").html("订单总额:<span class='money'>￥"+_totalprice+"</span>");
 
     });
    $.ajax({
@@ -23,7 +23,7 @@ $(document).ready(function(){
 		},
 		success:function(data){
 			console.log(data)
-			$(".p_msg li .addres").text(data.position.bd_wei_zhi+","+data.position.xiao_qu);
+//房间		  $(".p_msg li .addres").text(data.position.bd_wei_zhi+","+data.position.xiao_qu);
 		}
    })
 
@@ -44,7 +44,7 @@ var payment={
                 ip:Constant.CLIENT_IP//客户端ip
             };
             console.log(data);
-            fnBase.commonAjax(url,data,function (data) {
+            fnBase.commonAjax(url,data,function (data){
                 console.log(data);
                 if(data.status == 'success'){
                     console.log(data);
@@ -64,6 +64,7 @@ var payment={
         });
     }
 };
+
 
 /**
  * 调起支付

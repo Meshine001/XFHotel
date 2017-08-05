@@ -74,19 +74,32 @@
     z-index: 18;
     font-size: 0.14rem;
     display: block;
-    background: #000; 
-    color: #fff;
+    background:rgba(0,0,0,.5); 
+    color: #fbffff;
     text-align: center;
-    right: 0;
-    bottom: 0;
-    width: 1rem;
-    height: 0.35rem;
-    line-height: 0.35rem;
+    width: 0.5rem;
+    height: 0.5rem;
     cursor: pointer;
     z-index:100;
-  
-  
+    top:50%;
+    left:50%;
+    margin-left:-0.25rem;
+    margin-top:-0.25rem;
+  	border-radius:50%;
+  	-webkit-appearance : none ;
 }
+.swiper-container .videovr span{
+	position: absolute;
+    left: 0.1rem;
+    top: 0.1rem;
+    border: 1px solid;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    border-color: #fff transparent;
+    border-radius: 50%;
+    -webkit-appearance : none ;
+}
+
 /*hot-issue*/
 
 #proSort{
