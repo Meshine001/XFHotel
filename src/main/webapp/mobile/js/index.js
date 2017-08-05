@@ -19,11 +19,7 @@
     getData();
     alertSearch.info();
     
-    // 托管
-    $(".hot-issue .tuoguan").click(function(){
-    	fnBase.myalert('正在开发中...')
-    })
-    
+
     
    
     

@@ -344,7 +344,6 @@ public class WechatController {
 		try {
 
 			if ("SUCCESS".equals(result_code)) {
-				
 				// 由于微信后台会同时回调多次，所以需要做防止重复提交操作的判断
 				// 此处放防止重复提交操作
  				String out_trade_no = map.get("out_trade_no");
@@ -393,5 +392,32 @@ public class WechatController {
 		out.flush();
 		out.close();
 	}
+	
+//	@RequestMapping(value="/pay/jsAdd",method = RequestMethod.POST)
+//	@ResponseBody
+//	public JSONObject jsAdd(Long id, String ip) throws Exception {
+//		Order order = orderService.get(id);
+//		if (order == null){
+//			JSONObject jo = new JSONObject();
+//			jo.put("status", "error");
+//			jo.put("msg", "订单不存在");
+//			jo.put("obj", null);
+//			return jo;
+//		}
+//		
+//		order.setPayPlatform(Order.PAY_PLATFORM_WECHAT_JSAPI);
+//		orderService.update(order);
+//		String detail = order.getDescription();
+//		String desc = "青舍都市";
+//		Customer c = customerService.getCustomer(order.getCusId());
+//		String openId = c.getWechatOpenId();
+//		String goodSn = "" + order.getRoomId();
+//		String orderSn = order.getPayNo();
+//		String amount = order.getTotalPrice();
+//		String type = "JSAPI";
+//		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, type);
+//		return result;
+//	}
 
+	 
 }

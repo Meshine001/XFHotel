@@ -77,8 +77,10 @@ $(document).ready(function(){
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             if(data.customerId=="1"){
-            	fnBase.loadHide();
-                fnBase.myalert(data.content)
+                fnBase.myalert(data.content);
+                setTimeout(function(){
+                	window.location.href='serve.html';
+                },500);
             }else{
                 fnBase.myalert(data.content)
             }
