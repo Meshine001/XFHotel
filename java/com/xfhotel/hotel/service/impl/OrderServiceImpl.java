@@ -70,7 +70,6 @@ public class OrderServiceImpl implements OrderService {
 			sb.append("0");
 		}
 		sb.append(payNo);
-		
 		o.setPayNo(DateUtil.format(new Date(), "yyyyMMdd")+sb.toString());
 		orderDAO.saveOrUpdate(o);
 		
