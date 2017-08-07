@@ -24,6 +24,8 @@ public class FacilityOrder {
 	public final static int STATUS_ON_PAY = 3;//等待支付
 	public final static int STATUS_TIME_OUT = 4;//超时
 	
+	public final static String PAY_PLATFORM_WECHAT_NATIVE = "微信扫码";
+	public final static String PAY_PLATFORM_WECHAT_JSAPI = "微信公共号";
 	public final static String getmaintainTime(int addTime){
 		switch(addTime){
 		case 0:
@@ -49,6 +51,8 @@ public class FacilityOrder {
 	private double price;//价格
 	private String classify;//类型
 	private Long fate;//天数
+	private String payPlatform;//支付平台
+	private String payNo;//订单号
 	
 	public Long getId() {
 		return id;
@@ -117,6 +121,19 @@ public class FacilityOrder {
 	public void setFate(Long fate) {
 		this.fate = fate;
 	}
+	
+	public String getPayPlatform() {
+		return payPlatform;
+	}
+	public void setPayPlatform(String payPlatform) {
+		this.payPlatform = payPlatform;
+	}
+	public String getPayNo() {
+		return payNo;
+	}
+	public void setPayNo(String payNo) {
+		this.payNo = payNo;
+	}
 	public Map toMap(){
 		Map info = new HashMap();
 		info.put("id", id);
@@ -140,6 +157,10 @@ public class FacilityOrder {
 			return "正在路上";
 		case STATUS_COMPLETE:
 			return "完成";
+		case STATUS_ON_PAY:
+			return "等待支付";
+		case STATUS_TIME_OUT:
+			return "订单超时";
 		}
 		return "已完成";
 	}

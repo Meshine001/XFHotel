@@ -209,7 +209,6 @@ public class MobileController  {
 		c.setDetails(details);
 		c.setRegTime(new Date().getTime());
 		c.setLevel(0);
-		
 		if (customerService.register(c, details) == true) {
 			Customer c1 = customerService.getCustomer(c.getId());
 			Calendar calendar = Calendar.getInstance();
@@ -503,7 +502,7 @@ public class MobileController  {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
-		System.out.println("price:"+price+","+"totalPrice"+totalPrice+"wanhoih");
+//		System.out.println("price:"+price+","+"totalPrice"+totalPrice+"wanhoih");
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order);
@@ -984,12 +983,13 @@ public class MobileController  {
 							facilityOrder.setPrice(facilityservice.findById(Facility).getPrice()*fate1);
 							if(facilityservice.findById(Facility).getClassify()==0){
 								pay="免费";
+								facilityOrder.setStatus(FacilityOrder.STATUS_NOT_AFFIRM);
 							} else {
 								pay="收费";
+								facilityOrder.setStatus(FacilityOrder.STATUS_ON_PAY);
 							}
 							facilityOrder.setClassify(pay);
 				 			facilityOrder.setAddTime(FacilityOrder.getmaintainTime(addTime));
-				 			facilityOrder.setStatus(FacilityOrder.STATUS_NOT_AFFIRM);
 				 			facilityOrder.setRoomId(o.getDescription());
 				 			facilityOrder.setOederId(oederId);
 				 			facilityOrder.setTime(new Date().getTime());
@@ -1001,18 +1001,21 @@ public class MobileController  {
 //			TODO
 //			发短信给管理员
 //			【青舍都市】您有新订单需要确认，请及时处理。{1}
-			JSONObject a = apartmentService.getApartmentById(o.getRoomId())
-					.getJSONObject("position");
-			String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
-					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
-			String[] p = {f};
-			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfiService.getConfig().getSms(), p);	
+					if(facilityOrder.getClassify()=="免费"){
+						JSONObject a = apartmentService.getApartmentById(o.getRoomId())
+								.getJSONObject("position");
+						String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
+								a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
+						String[] p = {f};
+					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfiService.getConfig().getSms(), p);	
+					return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
+					} 
+					return new Message(Clean.STATUS_NOT_AFFIRM, facilityOrder);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
 		}
-		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)

@@ -1,6 +1,7 @@
 package com.xfhotel.hotel.service.impl;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -484,4 +485,18 @@ public class ApartmentServiceImpl implements ApartmentService {
 		return apartmentDAO.getListByHQL(hqlString, values);
 	}
 	
+	public static void main(String[] args) {
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance(); 
+		cal.set(Calendar.HOUR_OF_DAY, 0); 
+		cal.set(Calendar.SECOND, 0); 
+		cal.set(Calendar.MINUTE, 0); 
+		cal.set(Calendar.MILLISECOND, 0); 
+		System.out.println(cal.getTime());
+		Date d =cal.getTime(); 
+		System.out.println(d.getTime());	
+		System.out.println(sd.format(d.getTime()+1000*60*60*24));
+		System.out.println(sd.format(DateUtil.getStartTime()));
+		System.out.println(sd.format(cal.getTime()));
+	}
 }
