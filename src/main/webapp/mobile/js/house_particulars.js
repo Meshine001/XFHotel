@@ -41,7 +41,7 @@ $(document).ready(function(){
             	if(data.panorama==null || data.panorama==undefined || data.panorama==""){
             		
             	}else{
-            		$("#Myscroll-body .main .swiper-container").append('<i class="videovr"><span>实景</span></i>');
+            		$("#Myscroll-body .main .swiper-container").append('<i class="videovr"><span>VR实景</span></i>');
             	}
             	
             	$(".swiper-container .videovr").on('click',function(){

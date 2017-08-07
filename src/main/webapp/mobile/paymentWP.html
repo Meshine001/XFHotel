@@ -12,6 +12,14 @@
     <script type="text/javascript" src="js/zoom.js"></script>
     <script type="text/javascript" src="js/fnBase.js"></script>
     <script type="text/javascript" src="js/paymentWP.js"></script>
+    <style>
+    	.p_msg li ol{color:#888}
+    	.p_msg li p{clear:both;}
+    	.p_msg li ol span{float:right;}
+    	.p_msg li #mf dd{float:left;padding: 0 0.1rem;border: 1px solid #888;
+        margin-right: 0.05rem;}
+        .p_msg li #sf i{color:red;}
+    </style>
 </head>
 <body style="display:none;">
 <div class="header">
@@ -24,9 +32,17 @@
        <ul class="p_msg">
            <li>
                <p class="addres">陕西省, 西安市, 碑林区, 金花南路,星币传说</p>
-               <p class="_date">免费：毛巾</p>
-               <p class="_number">收费：投影仪</p>
-               <p class="_cash">时间：当天随时</p>
+               <p class="_date">免费物品：</p>
+	               <ol id="mf">
+	               	 <dd>毛巾</dd>
+	               	 <dd>被子</dd>
+	               </ol>
+               <p class="_number">收费物品：</p>
+	               <ol id="sf">
+	               	 <dd>投影仪<i>30/天</i><span>2天</span></dd>
+	               	 <dd>投影仪<i>20/天</i><span>1天</span></dd>
+	               </ol>
+               <p class="_cash">时间：<i>当天随时</i></p>
            </li>
            <li style="font-size: 0.16rem">
                <p class="toal">订单总额：￥60</p>

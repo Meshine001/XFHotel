@@ -496,12 +496,14 @@ public class MobileController  {
 			String endTime, Integer totalDay, String price, String totalPrice, String preferential, boolean needFapiao,
 			String apartmentType,String id) throws ParseException {
 		Long couponId = null;
+		
 		try {
 			couponId = Long.valueOf(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
+		System.out.println("price:"+price+","+"totalPrice"+totalPrice+"wanhoih");
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order);
@@ -685,7 +687,7 @@ public class MobileController  {
 			long time = new Date().getTime();
 			boolean usable = coupon2.isUsed();
 			if(startTime<=time&&time<=endTime&&price>=rule&&usable!=true&&price>yf){
-			map.put(String.valueOf(coupon2.getId()), coupon2);
+			map.put(String.valueOf(coupon2.getId()),coupon2);
 			}
 		}
 		
@@ -797,7 +799,6 @@ public class MobileController  {
 		return map ;
 	}
 	
-
 	/**
 	 * 退租
 	 * @param orderId
@@ -917,8 +918,7 @@ public class MobileController  {
 					  map.put("apartment", jo);
 					  map.put("distance", apartmentService.GetDistance(lat1,lng1,lat2,lng2));
 					  list.add(map); 
-				  }
-				  
+				  }	  
 	     }
 		return list;	
 	}
@@ -1056,7 +1056,7 @@ public class MobileController  {
 	}
 	
 	@RequestMapping(value = "/getLandlord", method = RequestMethod.POST)
-	public @ResponseBody List<Order> getOrders(Long id) {
+	public @ResponseBody List<Order> getOrders(Long id , Long time) {
 		return orderService.getOrders(id);
 	}
 	
@@ -1085,5 +1085,15 @@ public class MobileController  {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"发布成功");
 	}
 	
+	@RequestMapping(value = "/Landlord", method = RequestMethod.GET)
+	public @ResponseBody String Landlord() {
+		List<Landlord> list = landlordService.list();
+		List<Map> orders = new ArrayList<Map>();
+		for (Landlord o : list) {
+			orders.add(o.toMap());	
+		}
+		session.setAttribute("orders", orders);
+		return "/admin/customer/房东";
+	}
 }
 

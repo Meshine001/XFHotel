@@ -21,6 +21,8 @@ public class FacilityOrder {
 	public final static int STATUS_NOT_AFFIRM = 0;//等待管理员添加
 	public final static int STATUS_CONDUCT = 1;//正在路上
 	public final static int STATUS_COMPLETE = 2;//完成
+	public final static int STATUS_ON_PAY = 3;//等待支付
+	public final static int STATUS_TIME_OUT = 4;//超时
 	
 	public final static String getmaintainTime(int addTime){
 		switch(addTime){

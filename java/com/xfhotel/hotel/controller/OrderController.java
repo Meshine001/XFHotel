@@ -286,7 +286,6 @@ public class OrderController {
 
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
-
 	}
 	
 	
@@ -331,7 +330,6 @@ public class OrderController {
 				}else{
 					return result;
 				}
-				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -349,7 +347,6 @@ public class OrderController {
 	public String viewLockPsd(Long orderId) {
 		// TODO 还需要加入一些权限限制
 		Order o = orderservice.get(orderId);
-
 		session.setAttribute("lockPsd", "还没弄好");
 		return "customer/viewLockPsd";
 	}
@@ -385,7 +382,6 @@ public class OrderController {
 	}
 
 	
-	
 	/**
 	 * 跳转到订单评价页面
 	 * 
@@ -400,9 +396,9 @@ public class OrderController {
 		return "customer/comment";
 	}
 
+	
 	/**
 	 * 提交评论
-	 * 
 	 * @param roomId
 	 * @param from
 	 * @param to
@@ -426,7 +422,6 @@ public class OrderController {
 			comment.setHasRead(false);
 			Order o = orderservice.get(orderId);
 			comment.setEntryTime(o.getStartTime());
-
 			commentService.add(comment);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "评论成功");
 		} catch (Exception e) {
@@ -461,7 +456,6 @@ public class OrderController {
 	}
 
 	
-
 	@RequestMapping(value = "/msg", method = RequestMethod.GET)
 	public String msg(int msg) {
 		StringBuffer sb = new StringBuffer();
@@ -482,6 +476,7 @@ public class OrderController {
 		session.setAttribute("orderMsg", sb.toString());
 		return "customer/orderMessage";
 	}
+	
 	
 	@RequestMapping(value = "/cleanOrder", method = RequestMethod.POST)
 	@ResponseBody
@@ -504,6 +499,7 @@ public class OrderController {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
 		
 	}
+	
 	
 	@RequestMapping(value = "/cleanOrders", method = RequestMethod.POST)
 	@ResponseBody
@@ -567,6 +563,7 @@ public Message FaultOrders(Long id) {
 	return new Message(Constants.MESSAGE_SUCCESS_CODE, "维修完成");
 	}
 
+
 @RequestMapping(value = "/FacilityOrder", method = RequestMethod.POST)
 @ResponseBody
 public Message FacilityOrder(Long id) {
@@ -583,7 +580,6 @@ public Message FacilityOrder(Long id) {
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
 		}
-
 	}
 	return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
 	

@@ -3,6 +3,7 @@
 	  var facilId="";
 	  var sp="";
 	  var _addtime="";
+	  var hdz="";
 	  var dayList=new Array();
 	  var lastList=new Array();
 var addfacilities={
@@ -141,6 +142,8 @@ var addfacilities={
         $(this).addClass('_active').siblings().removeClass('_active');
         if($(this).hasClass('_active')==true){
             _oederId=$(this).attr('hid');
+            hdz=$(this).text();
+            
         }
         return _oederId; //住房订单id
     });
@@ -209,8 +212,9 @@ $(".account-login-width a").click(function(){
     	console.log(data);
     	fnBase.myalert('提交成功');
     	setTimeout(function(){ //pid:订单ID
-        	window.location.href="paymentWP.html?pid="+encodeURIComponent(data.oederId);
-        },300)
+       	window.location.href="paymentWP.html?pid="+encodeURIComponent(data.oederId);
+      },300)
+      
     })
 	
 }) 
