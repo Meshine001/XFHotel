@@ -68,8 +68,6 @@ import com.xfhotel.hotel.support.wechat.WechatOrderUtils;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-
-
 @Controller
 @RequestMapping("mobile")
 public class MobileController  {
@@ -859,7 +857,7 @@ public class MobileController  {
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
 		}
-		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "等待管理员确认");
 	}
 	
 	/*
@@ -965,12 +963,14 @@ public class MobileController  {
 		return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
 	}
 	
+	
 	@RequestMapping(value = "/FacilityOrderAdd", method = RequestMethod.POST)
 	public @ResponseBody Message FacilityOrderAdd (String demand,Long oederId , Long facility[],int addTime ,Long fate[]) {
 		if(facility==null){
 			return new Message(Constants.MESSAGE_ERR_CODE, "请选择服务内容");
 		}
 		try {
+			ArrayList<Object> list = new ArrayList<Object>();
 			int d=0;
 			String pay ;
 			Order o = orderservice.get(oederId);
@@ -994,6 +994,7 @@ public class MobileController  {
 				 			facilityOrder.setOederId(oederId);
 				 			facilityOrder.setTime(new Date().getTime());
 				 			facilityOrderService.add(facilityOrder);
+				 			list.add(facilityOrder);
 				 			d++;
 						break;
 					}
@@ -1008,9 +1009,9 @@ public class MobileController  {
 								a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 						String[] p = {f};
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfiService.getConfig().getSms(), p);	
-					return new Message(Clean.STATUS_NOT_AFFIRM, "等待管理员确认");
+					return new Message(FacilityOrder.STATUS_NOT_AFFIRM, "等待管理员确认");
 					} 
-					return new Message(Clean.STATUS_NOT_AFFIRM, facilityOrder);
+					return new Message(FacilityOrder.STATUS_NOT_AFFIRM, list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1088,15 +1089,16 @@ public class MobileController  {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"发布成功");
 	}
 	
-	@RequestMapping(value = "/Landlord", method = RequestMethod.GET)
-	public @ResponseBody String Landlord() {
-		List<Landlord> list = landlordService.list();
-		List<Map> orders = new ArrayList<Map>();
-		for (Landlord o : list) {
-			orders.add(o.toMap());	
-		}
-		session.setAttribute("orders", orders);
-		return "/admin/customer/房东";
-	}
+//	@RequestMapping(value = "/Landlord", method = RequestMethod.GET)
+//	public @ResponseBody String Landlord() {
+//		List<Landlord> list = landlordService.list();
+//		List<Map> orders = new ArrayList<Map>();
+//		for (Landlord o : list) {
+//			orders.add(o.toMap());
+//		}
+//		session.setAttribute("orders", orders);
+//		return "/admin/customer/房东";
+//	}
+	
 }
 

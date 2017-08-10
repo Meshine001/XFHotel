@@ -29,7 +29,6 @@ public class Constants {
 	
 	public static final Double YA_JIN = 100D;
 	
-	
 	public static final int pagesize = 10;
 	
 	//******************************注释*********************************************

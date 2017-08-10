@@ -66,7 +66,6 @@ public class CustomerServiceImpl implements CustomerService {
 		return c != null ? true : false;
 	}
 	
-	
 	@Transactional
 	@Override
 	public String changePsd(String oldPsd, String psd,long id) {
@@ -89,9 +88,9 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional
 	public PageResults<Customer> list(int page) {
 		// TODO Auto-generated method stub
-		return customerDAO.findPageByFetchedHql("from Customer", "select count(*) from Customer", page, 10, null);
+		return customerDAO.findPageByFetchedHql("from Customer order by id desc", "select count(*) from Customer", page, 10, null);
 	}
-
+	
 	@Override
 	@Transactional
 	public void changeStatus(long id, int status) {
@@ -138,7 +137,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<CustomerDetails> getlist() {
 		// TODO Auto-generated method stub
-		return customerDetailsDAO.getListByHQL("from CustomerDetails", null);
+		return customerDetailsDAO.getListByHQL("from CustomerDetails order by id desc", null);
 	}
 
 }
