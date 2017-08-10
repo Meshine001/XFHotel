@@ -232,6 +232,21 @@
 			</a>
 		</div>
 		
+			
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			<a class="card card-banner card-paste-light" href="<%=basePath%>/admin/customer_manager">
+				<div class="card-body">
+					<i class="icon fa fa-paste fa-4x"></i>
+					<div class="content"> 
+						<div class="title">成员权限</div>
+						<div class="value">
+							<span class="sign"></span>
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+		
 	</div>
 	</my_body>
 </body>

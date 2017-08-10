@@ -60,7 +60,7 @@
 					</div>
 				</div>
 				<div id="topscroll" style="width:100%;height:auto;overflow-x:auto">
-				<table class="table">
+				<table class="table table-bordered">
 
 					<thead>
 						<tr>

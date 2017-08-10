@@ -6,18 +6,24 @@
     <title>青舍都市公寓</title>
     <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
     <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="iconcaomei/style.css" />
     <link rel="stylesheet" href="css/Cleaning_service.css" />
     <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script type="text/javascript" src="js/fnBase.js"></script>
     <script type="text/javascript" src="js/personal.js"></script>
     <script type="text/javascript" src="js/acyongche.js"></script>
+    <script type="text/javascript" src="js/Taxi.js"></script>
     <style>
     	.per-order-status ol dd{width:100%;}
     	.per-order-status ol dd i{padding:0 0.1rem;}
     	.per-order-status ol dd i:first-child{float:left;}
     	.per-order-status ol dd i:first-child+i{float:right;}
     	.per-order-status .teltaxi{border-radius: 6px;line-height: 0.3rem;background: #f3f2f2;padding: 0 0.1rem;}
+    	.per-order-status labler{cursor: pointer;width:100%;display:block;line-height:0.45rem;position:relative;}
+    	.per-order-status labler span{float:right;font-size:0.2rem;position:absolute;right:0rem;top:0.125rem;}
+		.per-gap-conter ol,.per-gap-conter .time{display:none} 
+		.czs-circle-o{color:#00b38a}   
     </style>
 </head>
 <body style="background: #FFF;display:none">
@@ -48,7 +54,7 @@
                 </ol>
                 <p id="atl" style="font-size: 0.14rem;color:orangered;display: none">您暂时还没有在住的房间。</p>
             </div>
-        	 <div class="per-order-status">
+        	 <div class="per-order-status  car-status">
                <labler>车辆选择</labler>
                <ol>	
                		<dd ct="0"><i>轿车</i><i></i></dd>
@@ -56,33 +62,33 @@
                		<dd ct="2"><i>MPV商务车</i><i></i></dd>
                </ol> 
             </div>
-            <div class="per-order-status">
-               <labler>接送站服务</labler>
-               <ol>	
-               		<dd cat="100"><i>西安北站</i><i>80元/单次</i></dd>
-               		<dd cat="150"><i>飞机场</i><i>150元/单次</i></dd>	
+            <div class="per-order-status per-gap-conter">
+               <labler>接送站服务<span class="czs-circle-l"></span></labler>
+               <ol id="jiesongWarp">	
+               		<dd cat="100" price="80"><i>西安北站</i><i>80元/单次</i></dd>
+               		<dd cat="150" price="150"><i>飞机场</i><i>150元/单次</i></dd>	
                </ol>
-               <p class="time"><input placeholder="-年-月-日" class="textbox-n" type="text" onfocus="(this.type='date')"  id="stateDate">~<input placeholder="-时-分" type="text" onfocus="(this.type='time')"></p> 
+               <p class="time"><input placeholder=" 年-月-日-时-分" class="textbox-n" type="text" onfocus="(this.type='datetime-local')"  id="jiesongDate"></p> 
             </div>
-             <div class="per-order-status">
-               <labler>短程包车</labler>
-               <ol>	
-               		<dd cat="500"><i>临潼旅游专线</i><i>500元/天</i></dd>
-               		<dd cat="300"><i>三环内</i><i>300/天</i></dd>
+             <div class="per-order-status per-gap-conter">
+               <labler>短程包车<span class="czs-circle-l"></span></labler>
+               <ol id="baocheWarp">	
+               		<dd cat="1" price="500"><i>临潼旅游专线</i><i>500元/天</i></dd>
+               		<dd cat="2" price="300"><i>三环内</i><i>300/天</i></dd>
                </ol> 
-               <p class="time"><input placeholder="开始日期" class="textbox-n" type="text" onfocus="(this.type='date')"  id="stateDate">~<input placeholder="结束日期" class="textbox-n" type="text" onfocus="(this.type='date')"  id="endDate"></p>	
+               <p class="time"><input placeholder="开始日期" class="textbox-n" type="text" onfocus="(this.type='date')"  id="stateDate2">~<input placeholder="结束日期" class="textbox-n" type="text" onfocus="(this.type='date')"  id="endDate2"></p>	
             </div>
             
              <!-- 结算 -->
                <div class="bottomContainer">
                		<p>合计：<span></span>元</p>
                </div>
-               <!-- 
+               
             <div class="per-order-status">
-               <labler>联系电话：</labler>
-               <input class="teltaxi" type="text" maxlength="11" placeholder="请输入手机号码">
+               <labler style="float: left;width:auto;">联系电话：</labler>
+               <input class="teltaxi" id="tel" type="text" maxlength="11" placeholder="请输入手机号码"><span style="color:red">*</span>
             </div>
-             -->
+          
             <div class="per-order-status">
                <labler>备注</labler>
                <textarea class="_textarea" placeholder="您的手机号码，或地址"></textarea>
@@ -93,14 +99,8 @@
     <p class="account-login-width">
         <a href="javascript:;">提交</a>
     </p>
-    <script>
-        $(document).ready(function(){
-            $(".account-login-width").click(function(){
-                fnBase.myalert('此服务正在维护！')
-            })
-        })
-    </script>
+
 </div>
- <script type="text/javascript" src="js/Taxi.js"></script>
+ 
 </body>
 </html>

@@ -6281,6 +6281,49 @@ ui-view>.app-messaging-container {
 	color: sandybrown;
 }
 /*--------------------*/
+
+.card.card-paste-light-light {
+	background-color: #FFF;
+}
+
+.card.card-paste-light .card-body .icon {
+	color: #37b11a;
+	background-color: rgba(57, 195, 218, 0.05);
+}
+
+.card.card-paste-light .card-body .content .value {
+	color: #37b11a;
+}
+
+.card.card-paste-light:hover {
+	background-color: #37b11a;
+}
+
+.card.card-paste-light:hover .card-body .icon {
+	color: #FFF;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card.card-paste-light:hover .card-body .content .title, .card.card-paste-light:hover .card-body .content .value
+	{
+	color: #FFF;
+}
+
+.card.card-paste-light.card-chart .card-header {
+	background-color: #37b11a;
+	color: #37b11a;
+}
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------*/
 .card.card-blue {
 	background-color: #39c3da;
 }
@@ -6639,7 +6682,7 @@ input ::-webkit-input-placeholder {
 .form-horizontal .control-label {
 	font-weight: 400;
 	font-size: 1em;
-	text-align: left;
+	text-align: right;
 }
 
 .form-horizontal .control-label-help {
@@ -7017,6 +7060,7 @@ table.table.card-table>thead>tr>th {
 table.table.card-table>tbody>tr>td {
 	border-top-color: #f0f4f5;
 	color: #666;
+	vertical-align: middle;
 }
 
 .card-mini table.table.card-table>tbody>tr td, .card-mini table.table.card-table>thead>tr td
@@ -7430,7 +7474,7 @@ table.table.card-table>tbody>tr>td {
 	border-top-right-radius: 0;
 	background-color: #e7edee;
 }
-
+.panel .panel-heading .btn-group .btn{margin-bottom:10px;margin-right:5px;}
 .panel .panel-body {
 	padding: 20px;
 }
@@ -8259,7 +8303,7 @@ div.section .section-body.__indent {
 
 .label {
 	border-radius: 2px;
-	font-weight: 400;
+	font-weight: 700;
 	font-size: 0.9em;
 }
 
@@ -9087,6 +9131,7 @@ i{font-style:normal}
     border:1px solid #ccc;
     color: #656262;
     position:relative;
+    margin:0 auto;
 }
 #h-table .paixu input{
 	width:45%;
@@ -9152,3 +9197,5 @@ text-align:center;color:#0C6;padding:1% 0;
 #houseList{margin:10px;padding:0;}
 #houseList li{margin:10px 0;padding:5px;border-bottom:1px solid #eee;clear:both}
 #houseList li .img-wrapper{text-align:left;}
+#p-table tr td i{padding:2px 6px;color:#fff;background:#888;border-radius: 5px;}
+#p-table tr td i.status{background:#29c75f;}

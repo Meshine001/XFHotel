@@ -101,7 +101,7 @@
 					</div>
 				</div>
 				
-			<div class="col-md-4">
+				<div class="col-md-4">
 					<div class="card card-mini">
 						<div class="card-header">
 							<div class="card-title">收费设施管理</div>
@@ -122,11 +122,11 @@
 				
 				
 		
-			<div class="panel panel-default">
+			<div class="panel panel-default" style="margin-top:20px">
 			 
-			  <div class="panel-heading" style="background:#ffffff">订单列表</div>
+			  <div class="panel-heading" style="background:#ffffff;">订单列表</div>
 			  <div style="overflow: auto;width:100%;height:auto">
-				<table class="table table-striped table-condensed">
+				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
 							<th>id</th>
