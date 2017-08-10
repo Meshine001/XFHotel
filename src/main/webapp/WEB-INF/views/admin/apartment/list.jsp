@@ -99,10 +99,10 @@
 				
 				
 				<div style="overflow: hidden;width:100%;height:auto;overflow-x:auto;">
-				<table class="table">
+				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>房屋归属</th>
+							<th>归属</th>
 							<th>房屋id</th>
 							<!--<th>类型</th>  -->
 							<th>房号</th>
@@ -177,7 +177,9 @@
 			$(document).ready(function(){
 				$("[data-toggle='tooltip']").tooltip();  
 				$("table th,table td").css('text-align','center')
-				$("table th,table td").css('min-width','80px')
+				$("table th,table td").css({'width':'120px','min-width':'90px'});
+				//$("table th:nth-child(6),table td:nth-child(6)").css({'min-width':'160px'});
+				
 				$("#h-table .paixu input").focus(function(){
 					$(this).parent().css('border-color','#29c75f');
 					$(this).parent().find('.stb').css('bakcground','#29c75f');

@@ -3,6 +3,7 @@
 	  var facilId="";
 	  var sp="";
 	  var _addtime="";
+	  var hdz="";
 	  var dayList=new Array();
 	  var lastList=new Array();
 var addfacilities={
@@ -115,7 +116,7 @@ var addfacilities={
 		});
   	}
     
-	//查询免费
+	//查询收费
     var locadShoufeiSheshi=function(){
   		$.ajax({
 			type : 'POST',
@@ -141,6 +142,8 @@ var addfacilities={
         $(this).addClass('_active').siblings().removeClass('_active');
         if($(this).hasClass('_active')==true){
             _oederId=$(this).attr('hid');
+            hdz=$(this).text();
+            
         }
         return _oederId; //住房订单id
     });
@@ -207,10 +210,12 @@ $(".account-login-width a").click(function(){
     console.log(postData);
     fnBase.commonAjax(frontURL,postData,function(data){
     	console.log(data);
+    	fnBase.keep(1,'hdz',hdz)
     	fnBase.myalert('提交成功');
-        setTimeout(function(){
-        	window.location.href='serve.html';
-        },300)
+    	setTimeout(function(){ //pid:订单ID
+       	window.location.href="paymentWP.html?pid="+encodeURIComponent(data.oederId);
+      },300)
+      
     })
 	
 }) 

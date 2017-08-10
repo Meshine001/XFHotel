@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>青舍都市公寓</title>
+    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link href="css/payment.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="iconcaomei/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script type="text/javascript" src="js/fnBase.js"></script>
+    <script type="text/javascript" src="js/paymentWP.js"></script>
+    <style>
+    	.p_msg li ol{color:#888}
+    	.p_msg li p{clear:both;}
+    	.p_msg li ol span{float:right;}
+    	.p_msg li #mf dd{float:left;padding: 0 0.1rem;border: 1px solid #888;
+        margin-right: 0.05rem;}
+        .p_msg li #sf i{color:red;}
+    </style>
+</head>
+<body style="display:none;">
+<div class="header">
+    <header class="header-mobile">
+        <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
+        <span class="cell">支付</span>
+        <a href="serve.html" class="cell link-btn"><span class="czs-user-l"></span></a>
+    </header>
+    <div id="Myscroll-body">
+       <ul class="p_msg">
+           <li>
+               <p class="addres">陕西省, 西安市, 碑林区, 金花南路,星币传说</p>
+               <p class="_date">免费物品：</p>
+	               <ol id="mf">
+	               	 <dd>毛巾</dd>
+	               	 <dd>被子</dd>
+	               </ol>
+               <p class="_number">收费物品：</p>
+	               <ol id="sf">
+	               	 <dd>投影仪<i>30/天</i><span>2天</span></dd>
+	               	 <dd>投影仪<i>20/天</i><span>1天</span></dd>
+	               </ol>
+               <p class="_cash">时间：<i>当天随时</i></p>
+           </li>
+           <li style="font-size: 0.16rem">
+               <p class="toal">订单总额：￥60</p>
+           </li>
+       </ul>
+        <ul class="p_Settel">
+            <li><a href="javascript:;" class="wx_p">微信支付</a></li>
+            <!--<li><a href="" class="zfb_p">支付宝支付</a></li>-->
+        </ul>
+    </div>
+</div>
+</body>
+</html>

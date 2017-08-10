@@ -25,15 +25,18 @@
 <body>
 	<my_body>
 	<div class="row">
-		<input type="hidden" id="id" value="${id}"> <input
-			style="width: 100%; font-size: 22px;" type="text" id="title"
-			value="请输入标题">
-		<br>
-		<br>
+		<div class="input-group">
+			<input type="hidden" id="id" value="${id}"> <input class="form-control"
+				style="width: 100%; font-size: 22px;background:#fff" type="text" id="title"
+				value="请输入标题">
+		</div>
+	
 		<div id="div_editor">
 			<p>请输入内容</p>
 		</div>
-		<button type="button" id="submit">发布</button>
+		<br/>
+		<button type="button" class="btn btn-success" id="submit">发布</button>
+		
 	</div>
 	<script src="<%=basePath%>/dist/blog/js/lib/jquery-1.10.2.min.js"
 		type="text/javascript"></script> <script type="text/javascript"

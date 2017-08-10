@@ -57,15 +57,20 @@
     margin-bottom: 0.1rem;
 }
 .ic_house{
-    height: 0.22rem;
-    font-size: 0.16rem;
+    height: 0.15rem;
+    font-size: 0.15rem;
     color: #000000;
-    border-left: 4px solid #ed494a;
-    line-height: 0.22rem;
+    border-left: 2px solid #ed494a;
+    line-height: 0.18rem;
     padding-left: 0.1rem;
     margin: 0.12rem 0 0.1rem 0;
     overflow: hidden;
-    text-shadow: 0 0 0.2px rgba(0,0,0,0.8);
+  /*
+  text-shadow: 0 0 0.2px rgba(0,0,0,0.8);
+  
+  */  
+    
+    font-weight: normal;
 }
 .panel p{
     font-size: 0.14rem;

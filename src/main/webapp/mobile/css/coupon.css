@@ -21,7 +21,7 @@
 
 }
 
-.service{margin: 0.2rem auto}
+.service{margin: 0.2rem auto;padding:0.1rem;}
 .service .goodlist li{
     position: relative;
     width: 100%;
@@ -29,7 +29,8 @@
     margin-bottom: 0.15rem;
     background: #fff;
     background-size: 100% ;
-    border-top: 2px solid #e45e1d;
+    border: 1px solid #e8e3e3;
+    border-radius: 0.15rem;
 }
 .service .goodlist li h1{text-align: center;font-size: 0.3rem;color: #dc5f5f}
 .service .goodlist li p{font-size: 0.1rem;color: #dc5f5f;position: relative;top:0.59rem;text-indent: 0.4rem;}

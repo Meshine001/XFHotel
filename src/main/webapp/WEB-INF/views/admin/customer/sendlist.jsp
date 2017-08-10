@@ -157,7 +157,7 @@
 				
 				
 				
-				<table class="table" style="border-top:1px solid #dfe6e8">
+				<table class="table table-bordered" style="border-top:1px solid #dfe6e8">
 					
 					<thead>
 						<th>序号</th>
@@ -182,7 +182,7 @@
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("table th,table td").css('min-width','120px');
+			$("#list tr td").css('min-width','120px');
 		})
 	</script>
 	</my_body>

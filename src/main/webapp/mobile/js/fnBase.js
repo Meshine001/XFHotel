@@ -1,15 +1,15 @@
-﻿var baseUrl = getRootPath();//调试环境用这个
+﻿ var baseUrl = getRootPath();//调试环境用这个
 //console.log(baseUrl);
-//  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
+ //  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 
 var clientIp = getIp();
 console.log(clientIp)
 var Constant = {
-        URL: baseUrl,
+        URL: baseUrl, 
         CLIENT_IP:clientIp
 };
 /**
- * 获取ip
+ * 获取ip.
  */
 function getIp() {
     var ip;
@@ -184,3 +184,6 @@ $(".link-home").attr("href","javascript:void(0);").click(function(){
             return (arg1 + arg2) / m;
         },
     };
+
+
+

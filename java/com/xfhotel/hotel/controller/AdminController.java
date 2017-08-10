@@ -199,6 +199,21 @@ public class AdminController {
 //			return "/admin/customer/collocation";
 //		}								
 	
+		//成员权限 BEGIN
+		@RequestMapping(value = "/customer_manager", method = RequestMethod.GET)
+		public String collocation() {
+//			List<Clean> list = cleanService.list();
+//			List<Map> orders = new ArrayList<Map>();
+//			for (Clean o : list) {
+//				orders.add(o.toMap());	
+//				Order order = orderservice.get(o.getOederId());
+//			}
+//			session.setAttribute("orders", orders);
+			return "/admin/customer/manager";
+		}
+//		// 成员权限 END
+		
+		
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardPage() {
 		session.setAttribute("apartmentCount", apartmentService.list().size());

@@ -1,12 +1,91 @@
 ﻿$(document).ready(function(){
-	
-
-	
+	var currentObj="";
+	var dateSelect=""; 
     var _uid=fnBase.huoqu(0,"uid");
     if(_uid==null || _uid=="undefined" || _uid==""){
         window.location.href="login.html";
         return;
     }
+	//植入汽车服务$("#jiesongWarp")
+    var Service={
+    		jiesong:function(){
+    			 var frontURL='',
+    			     postData={},
+    			     str='';
+    			 fnBase.commonAjax(frontURL,postData,function(data){
+    				 console.log(data);
+    				 
+    				 $("#jiesongWarp").append(str);
+    			 })
+    		},
+    		baoche:function(){
+    			 var frontURL='',
+			         postData={},
+			         str='';
+    			 fnBase.commonAjax(frontURL,postData,function(data){
+    				 console.log(data);
+    				 
+    				 $("#baocheWarp").append(str);
+    			 })
+    		}
+    }
+//    Service.jiesong();//接送
+//    Service.baoche();//包车
+    
+    
+ 
+	//选择房间id
+	var _oederId='';
+    $(".house-status ol").on('click','dd',function(){
+        $(this).addClass('_active').siblings().removeClass('_active');
+        if($(this).hasClass('_active')==true){
+            _oederId=$(this).attr('hid');
+        }
+        return _oederId;
+    });
+	//选择车 car-status
+    var _carid='';
+    $(".car-status ol").on('click','dd',function(){
+        $(this).addClass('_active').siblings().removeClass('_active');
+        if($(this).hasClass('_active')==true){
+        	_carid=$(this).attr('ct');
+        }
+        return _carid;
+    });
+    
+	//用车服务、单次提交
+	$(".per-gap-conter labler").click(function(){
+		$(".bottomContainer span").text('0');
+		$(this).parent().find('ol dd').removeClass('_active');
+		$(".per-gap-conter ol,.per-gap-conter .time").hide();
+		$(this).find('span').addClass('czs-circle-o');
+		$(this).parent().siblings().find('span').removeClass('czs-circle-o');
+		if($(this).parent().find('span').hasClass('czs-circle-o')==true){
+			currentObj=$(this).parent().find('ol,.time');
+			displayobj(1)
+		}else{
+			return;
+		}
+		if($(".per-gap-conter").eq(0).find('labler span').hasClass('czs-circle-o')==true){
+			dateSelect=1;
+		}else{
+			dateSelect=2;
+		}
+	})
+	 function displayobj(flag){
+        if(flag==1){
+            currentObj.show();
+        }else{
+            currentObj.hide();
+        }
+    };
+    
+
+    
+   
+    
+  
+    
     var postData={uId:_uid,type:0 };
     var frontURL=Constant.URL+'/mobile/Clean';
     fnBase.commonAjax(frontURL,postData,function(data){
@@ -22,8 +101,7 @@
         $(".house-status ol").append(str);
     });
 
-       
-        
+   
     var _oederId='';
     $(".house-status ol dd").live('click',function(){
         $(this).addClass('_active').siblings().removeClass('_active');
@@ -51,45 +129,109 @@
         return _content;
     });
 
-    
+    //计算时间差、价格
+    function DateDiff(sDate1, sDate2) {  
 
 
+        var aDate, oDate1, oDate2, iDays;
+
+        aDate = sDate1.split("-");
+
+        oDate1 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]);  
+
+        aDate = sDate2.split("-");
+
+        oDate2 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]);
+
+        iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24); 
+
+        iDays=iDays+1;
+        var topic=_price*iDays;
+        $(".bottomContainer span").text(topic)
+        return topic;  
+
+    }
+	//选择一次一个
+    var _carip="";
+    var _price="";
+	$(".per-gap-conter ol").on('click','dd',function(){
+		$(this).addClass('_active').siblings().removeClass('_active');
+		_carip=$(this).attr('cat');
+		if(dateSelect==2){
+			_price=$(this).attr('price');
+			if($("#endDate2").val()!="" &&  $("#stateDate2").val()!=""){
+				DateDiff($("#endDate2").val(),$("#stateDate2").val());
+			}
+		}else if(dateSelect==1){
+			$(".bottomContainer span").text($(this).attr('price'));
+		}
+		
+	})
+	   $("#endDate2").bind('input propertychange', function() {
+		   DateDiff($("#endDate2").val(),$("#stateDate2").val());
+	   });
+	  $("#stateDate2").bind('input propertychange', function() {
+		  if($("#endDate2").val()!=""){
+			  DateDiff($("#endDate2").val(),$("#stateDate2").val());
+		  }
+	   });
+	 
+	
 
 
-
-    //�ύ����
+    //提交
     $(".account-login-width  a").click(function(){
-    
-       if($("#stateDate").val()=="" || $("#endDate").val()==""){
-           fnBase.myalert('请选择用车时间');
-           return;
-       }
-//        if(_content==''){
-//            fnBase.myalert('请选择服务的项目内容');
-//            return;
+    	if(_oederId==""){fnBase.myalert('请先选择房间');return;};
+    	if(_carid==""){fnBase.myalert('请先选择合适的车辆');return;};
+    	if(_carip==""){fnBase.myalert('请先选择需要的出行');return;};
+    	if($("#tel").val()==""){fnBase.myalert('请填写您的电话号码');return;};
+    	if(dateSelect==1){
+    		   var sta=$("#jiesongDate").val();
+    	       var starttimeHaoMiao = (new Date(sta)).getTime(); //接送站的具体时间
+    	       if(sta==""){fnBase.myalert('请选择接送时间');return;};
+ 
+    	       var postData={
+    	            oederId:_oederId,
+    	            che:_carid,
+    	            con:_carip,
+    	            stateDate:starttimeHaoMiao,
+    	            tel:$("#tel").val(),
+    	            pic:$(".bottomContainer span").text(),
+    	            demand:$('.per-order-status ._textarea').val()
+    	        };
+    	        console.log('接送站')
+    	        console.log(postData)
+    	        
+    	}else if(dateSelect==2){
+    		   if($("#stateDate2").val()==""){fnBase.myalert('请选择开始时间');return;};
+    		   if($("#endDate2").val()==""){fnBase.myalert('请选择结束时间');return;};
+    		   var postData={
+     	            oederId:_oederId,
+     	            che:_carid,//车
+     	            con:_carip,//内容
+     	            stateDate:$("#stateDate2").val(),
+     	            endtime:$("#endDate2").val(),
+     	            tel:$("#tel").val(),
+   	                pic:$(".bottomContainer span").text(),
+     	            demand:$('.per-order-status ._textarea').val()
+     	        };
+    		    console.log('包车')
+     	        console.log(postData)
+     	   
+    		   
+    	}
+      
+//        var oldTime = (new Date($("#stateDate").val())).getTime();
+//        
+//        function hm(val){
+//        	return val=(new Date(val)).getTime();
 //        }
-//        if(_cleanTime==''){
-//            fnBase.myalert('请选择服务的时间');
-//            return;
-//        }
-        var postData={
-            oederId:_oederId,
-            content1:_content,
-            stateDate:$("#stateDate").val(),
-            endDate:$("#endDate").val(),
-            demand:$('.per-order-status ._textarea').val()
-        };
-        var oldTime = (new Date($("#stateDate").val())).getTime();
-        
-        function hm(val){
-        	return val=(new Date(val)).getTime();
-        }
-        var Today=(hm($("#endDate").val())-hm($("#stateDate").val()))/1000/60/60/24;
-        Today=Today+1;
-        console.log(Today);
+//        var Today=(hm($("#endDate").val())-hm($("#stateDate").val()))/1000/60/60/24;
+//        Today=Today+1;
+//        console.log(Today);
         
         
-        var frontURL=Constant.URL+'/mobile/cleanAdd';
+//        var frontURL=Constant.URL+'/mobile/cleanAdd';
 //        $.ajax({
 //            type:'post',
 //            dataType:'json',

@@ -32,7 +32,7 @@
 				
 				
 				<div style="overflow: auto;width:100%;height:auto">
-				<table class="table">
+				<table class="table table-bordered table-hover">
 
 					<thead>
 						<tr>

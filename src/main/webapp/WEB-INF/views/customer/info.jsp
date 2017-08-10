@@ -333,7 +333,7 @@
 				</div>
 				<div class="inter">
 					<h4>你可能会喜欢</h4>
-					<ul>
+					<ul style="padding:10px;">
 						<c:forEach items="${allApartment}" var="r" varStatus="p">
 							<c:if test="${p.index < 5}">
 							<c:if test="${apartment.id != r.id}">

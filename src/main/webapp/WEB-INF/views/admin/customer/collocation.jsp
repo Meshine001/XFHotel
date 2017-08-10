@@ -56,7 +56,7 @@
 		<!-- 房东信息 begin-->
 				    	<div class="card card-mini">
 							<div style="overflow: auto;width:100%;height:auto">
-							<table class="table table-striped table-condensed">
+							<table class="table table-striped table-condensed table-bordered">
 			
 								<thead>
 									<tr>
@@ -94,12 +94,12 @@
 					
 					<div class="card card-mini">
 							<div style="overflow: auto;width:100%;height:auto">
-							<table class="table table-striped table-condensed">
+							<table class="table table-striped table-condensed table-bordered">
 			
 								<thead>
 									<tr>
-										<th style="min-width:80px">id</th>
-										<th>房东姓名</th>
+										<th style="min-width:80px;width:80px">id</th>
+										<th>姓名</th>
 										<th>联系方式</th>
 										<th>房屋地址</th>
 										<th>状态</th>
@@ -109,7 +109,7 @@
 								<tbody>
 									<c:forEach items="${ordersd}" var="order">
 										<tr>
-											<td style="min-width:80px">${order.id}</td>
+											<td style="min-width:80px;width:80px">${order.id}</td>
 											<td>${order.name}</td>
 											<td>${order.tel}</td>
 											<td>${order.site}</td>
@@ -149,9 +149,10 @@
 	</div>
 	<script type="text/javascript">
 	   
-	    $(".table th,.table td").css('min-width','180px');
-		$("#home .table th:eq(0),#home .table td:eq(0)").css('min-width','80px');
-	    $("#profile .table th:eq(0),#profile .table td:eq(0)").css('min-width','80px');
+	$("table th,table td").css({'min-width':'125px','text-align':'center'})
+    $("table th:first-child,table td:first-child").css({'width':'90px','min-width':'90px'});
+	$("table th:first-child+th,table td:first-child+td").css({'width':'90px','min-width':'90px'})
+	$("tbody tr td").css('vertical-align','middle')
 	    
 	
 	//	$("#home tbody").on('click','tr',function(){
