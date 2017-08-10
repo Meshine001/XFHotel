@@ -40,16 +40,14 @@ public class FacilityOrderServiceImpl implements FacilityOrderService{
 		Object[] values = {start,end};
 		List<FacilityOrder> facilityOrder = facilityOrderDAO.getListByHQL(hql, values);
 		String payNo = ""+(facilityOrder.size()+1);
-		int len = payNo.length();
+//		int len = payNo.length();
 		StringBuffer sb = new StringBuffer();
-		for(int i=len;i<5;i++){
-			sb.append("0");
-		}
-		sb.append(payNo);
-		
-		t.setPayNo(DateUtil.format(new Date(), "yyyyMMdd")+sb.toString());
+//		for(int i=len;i<5;i++){
+//			sb.append("0");
+//		}
+//		sb.append(payNo);
+		t.setPayNo(DateUtil.format(new Date(), "YYYYMMddHHmm")+sb.toString());
 		facilityOrderDAO.saveOrUpdate(t);
-		facilityOrderDAO.save(t);
 	}
 
 	@Override
@@ -87,4 +85,5 @@ public class FacilityOrderServiceImpl implements FacilityOrderService{
 		return facilityOrderDAO.getByHQL("from FacilityOrder where payNo="+payNo, null);
 	}
 
+	
 }

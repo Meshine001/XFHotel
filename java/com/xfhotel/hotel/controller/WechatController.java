@@ -31,12 +31,14 @@ import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.SystemConfig;
+import com.xfhotel.hotel.entity.TripOrder;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.FacilityOrderService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
+import com.xfhotel.hotel.service.TripOrderService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 import com.xfhotel.hotel.support.wechat.Config;
@@ -53,6 +55,8 @@ public class WechatController {
 	@Autowired
 	HttpSession session;
 
+	@Autowired
+	TripOrderService tripOrderService;
 	@Autowired
 	LockService lockService;
 	@Autowired
@@ -401,7 +405,6 @@ public class WechatController {
 	@ResponseBody
 	public JSONObject jsAdd(Long id, String ip) throws Exception {
 		FacilityOrder facilityOrder = facilityOrderService.findById(id);
-		Order order = orderService.get(id);
 		if (facilityOrder == null){
 			JSONObject jo = new JSONObject();
 			jo.put("status", "error");
@@ -416,7 +419,7 @@ public class WechatController {
 		String desc = "青舍都市";
 		Customer c = customerService.getCustomer(orderService.get(facilityOrder.getOederId()).getCusId());
 		String openId = c.getWechatOpenId();
-		String goodSn = "" + order.getRoomId();
+		String goodSn = "" + orderService.get(facilityOrder.getOederId()).getRoomId();
 		String orderSn = facilityOrder.getPayNo();
 		String amount = String.valueOf(facilityOrder.getPrice());
 		String type = "JSAPI";
@@ -526,5 +529,124 @@ public class WechatController {
 		out.close();
 	}
 	
+	@RequestMapping(value="/pay/jsTrip",method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject jsTrip(Long id, String ip) throws Exception {
+		TripOrder tripOrder = tripOrderService.findById(id);
+		if (tripOrder == null){
+			JSONObject jo = new JSONObject();
+			jo.put("status", "error");
+			jo.put("msg", "订单不存在");
+			jo.put("obj", null);
+			return jo;
+		}
+		
+		tripOrder.setPayPlatform(TripOrder.PAY_PLATFORM_WECHAT_JSAPI);
+		tripOrderService.update(tripOrder);
+		String detail = tripOrder.getRoomName();
+		String desc = "青舍都市";
+		Customer c = customerService.getCustomer(tripOrder.getCusId());
+		String openId = c.getWechatOpenId();
+		String goodSn = "" + orderService.get(tripOrder.getOederId()).getRoomId();
+		String orderSn = tripOrder.getPayNo();
+		String amount = String.valueOf(tripOrder.getPrice());
+		String type = "JSAPI";
+		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, type);
+		System.out.println("支付成功");
+		return result;
+	}
 	
+	@RequestMapping(value = "/pay/add/Trip", method = RequestMethod.POST)
+	public void addTrip(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		InputStream is = request.getInputStream();
+		HashMap<String, String> map = new HashMap<String, String>();
+		Log.info("------------微信回调函数----------------", null);
+		// 1、读取传入信息并转换为map
+		SAXReader reader = new SAXReader();
+		Document document = null;
+		try {
+			document = reader.read(is);
+		} catch (DocumentException e1) {
+			e1.printStackTrace();
+		}
+		String payType = "";
+		String memberId = "";
+		Element root = document.getRootElement();
+		List<Element> list = root.elements();
+		for (Element e : list) {
+			if (e.getName().trim().equals("payType")) {
+				payType = e.getText().trim();	
+			} else if (e.getName().trim().equals("memberId")) {
+				memberId = e.getText().trim();
+			} else {
+				map.put(e.getName().trim(), e.getText().trim());
+			}
+		}
+		is.close();
+		// System.out.println(map.toString());
+		// 2、克隆传入的信息并进行验签
+		HashMap<String, String> signMap = (HashMap<String, String>) map.clone();
+		signMap.remove("sign");
+		Log.info(map.toString(), null);
+		String key = Config.WX_KEY;
+		String sign = SignatureUtils.signature(signMap, key);
+		// System.out.println(sign);
+		// System.out.println(map.get("sign"));
+		if (!sign.equals(map.get("sign"))) {
+			Log.error("微信支付回调函数：验签错误", null);
+			return;
+		}
+		// 信息处理
+		String result_code = map.get("result_code");
+		try {
+
+			if ("SUCCESS".equals(result_code)) {
+				// 由于微信后台会同时回调多次，所以需要做防止重复提交操作的判断
+				// 此处放防止重复提交操作
+ 				String out_trade_no = map.get("out_trade_no");
+ 				TripOrder tripOrder = tripOrderService.getByPayNo(out_trade_no);
+				Customer customer = customerService.getCustomer(tripOrder.getCusId());
+				SystemConfig system = systemConfService.getConfig();
+				Float sum = (float) (customer.getConsumptionCount()+Float.parseFloat(String.valueOf(tripOrder.getPrice())));
+				customer.setConsumptionCount(sum);
+				customerService.updateBaseInfo(customer);
+				//更改订单状态
+				tripOrder.setStatus(TripOrder.STATUS_ON_COMFIRM);
+				tripOrderService.update(tripOrder);
+				String pwd_user_mobile = String.valueOf(tripOrder.getTel());
+				JSONObject a = apartmentService.getApartmentById(orderService.get(tripOrder.getOederId()).getRoomId())
+						.getJSONObject("position");
+				String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
+						a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号房间呼叫用车";
+				String[] p = {f};
+				//发短信给顾客
+				//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。
+				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
+				//发短信给管理员systemConfService
+				//【青舍都市】您有新订单需要确认，请及时处理。{1}
+				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfService.getConfig().getSms(), p);
+					
+			} else if ("FAIL".equals(result_code)) {
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		try {
+			// 进行业务逻辑操作
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.error("回调用户中心错误", e);
+		}
+
+		// 返回信息，防止微信重复发送报文
+		String result = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
+				+ "<return_msg><![CDATA[OK]]></return_msg>" + "</xml>";
+		PrintWriter out = new PrintWriter(response.getOutputStream());
+		out.print(result);
+		out.flush();
+		out.close();
+	}
 }

@@ -28,6 +28,7 @@ import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.entity.TripOrder;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.ApplyService;
@@ -41,6 +42,7 @@ import com.xfhotel.hotel.service.FaultService;
 import com.xfhotel.hotel.service.HouseService;
 import com.xfhotel.hotel.service.LandlordService;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.TripOrderService;
 import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
@@ -51,7 +53,8 @@ import com.xfhotel.hotel.support.TimeUtil;
 public class AdminController {
 	@Autowired
 	LandlordService landlordService;
-	
+	@Autowired
+	TripOrderService tripOrderService;
 	@Autowired
 	HttpSession session;
 
@@ -174,9 +177,9 @@ public class AdminController {
 	//..7.18叫车服务begin...
 		@RequestMapping(value = "/customer_DialogueCar", method = RequestMethod.GET)
 		public String DialogueCar() {
-			List<Clean> list = cleanService.list();
+			List<TripOrder> list = tripOrderService.list();
 			List<Map> orders = new ArrayList<Map>();
-			for (Clean o : list) {
+			for (TripOrder o : list) {
 				orders.add(o.toMap());	
 				Order order = orderservice.get(o.getOederId());
 			}
