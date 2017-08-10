@@ -241,6 +241,18 @@
 	    	if(jiesongName==""||jiesongPrice==""){
 	    		alert("请填写正确信息")
 	    	}else{
+	    		$.ajax({
+					type : 'POST',
+					dataType : 'json',
+					data : {
+						'id':id
+					},
+					url : '/site/addSite/',
+					success : function(data) {
+						console.log(data)
+						location=location
+					}
+				});
 	    		
 	    	}
 	    })
