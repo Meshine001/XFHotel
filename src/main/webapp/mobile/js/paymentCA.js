@@ -26,7 +26,7 @@ var payment={
             if(Constant.CLIENT_IP == undefined){
                 Constant.CLIENT_IP = getIp();
             }
-            var url = Constant.URL + '/wx/pay/jsOrder';
+            var url = Constant.URL + '/wx/pay/jsTrip';
             var data = {
                 id:_id,//订单id
                 ip:Constant.CLIENT_IP//客户端ip
