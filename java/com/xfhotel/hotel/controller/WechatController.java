@@ -404,6 +404,7 @@ public class WechatController {
 	@RequestMapping(value="/pay/jsAdd",method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject jsAdd(Long id, String ip) throws Exception {
+		
 		FacilityOrder facilityOrder = facilityOrderService.findById(id);
 		if (facilityOrder == null){
 			JSONObject jo = new JSONObject();
@@ -424,7 +425,6 @@ public class WechatController {
 		String amount = String.valueOf(facilityOrder.getPrice());
 		String type = "JSAPI";
 		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, type);
-		System.out.println("支付成功");
 		return result;
 	}
 

@@ -1145,6 +1145,18 @@ public class MobileController  {
 //		session.setAttribute("orders", orders);
 //		return "/admin/customer/房东";
 //	}
-	
+	@RequestMapping(value = "tripWechatOrder", method = RequestMethod.POST)
+	public Message tripWechatOrder(Long id){
+		TripOrder o = tripOrderService.findById(id);
+		JSONObject result = WechatOrderUtils.query(o.getPayNo());
+		if("success".equals(result.getString("status")) 
+				&& "SUCCESS".equals(result.getString("trade_state"))){
+			o.setStatus(TripOrder.STATUS_ON_LEASE);
+			tripOrderService.update(o);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "支付成功");
+		}else{
+			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
+		}
+	}
 }
 
