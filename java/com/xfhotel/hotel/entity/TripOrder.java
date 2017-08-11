@@ -32,6 +32,7 @@ public class TripOrder {
 	private Long id;
 	private String roomName;//房间名
 	private String tripId;//车名
+	private String site;
 	private Long startTime;
 	private Long endTime;
 	private Double price;
@@ -139,6 +140,13 @@ public class TripOrder {
 	public void setDemand(String demand) {
 		this.demand = demand;
 	}
+	
+	public String getSite() {
+		return site;
+	}
+	public void setSite(String site) {
+		this.site = site;
+	}
 	public Map toMap(){
 		Map info = new HashMap();
 		info.put("id", id);
@@ -153,6 +161,7 @@ public class TripOrder {
 		info.put("tel", tel);
 		info.put("status", getStatusString(status));
 		info.put("payPlatform", payPlatform);
+		info.put("site", site);
 		return info;
 	}
 	String getStatusString(int status) {

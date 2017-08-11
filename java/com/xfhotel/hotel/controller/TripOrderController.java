@@ -31,7 +31,7 @@ public class TripOrderController {
 	OrderService orderservice;
 
 	@RequestMapping(value = "/tripOrderAdd", method = RequestMethod.POST)
-	public @ResponseBody Message tripOrderAdd ( Long OrderId, Long tripId ,Long startTime ,Long endTime ,double price,Long tel ,String demand  ) {
+	public @ResponseBody Message tripOrderAdd ( Long OrderId, Long tripId ,Long startTime ,Long endTime ,double price,Long tel ,String demand ,String site1 ) {
 		TripOrder tripOrder = new TripOrder();
 		try {
 			Site site = siteService.findById(tripId);
@@ -45,6 +45,7 @@ public class TripOrderController {
 			tripOrder.setDemand(demand);
 			tripOrder.setCusId(order.getCusId());
 			tripOrder.setTime(new Date().getTime());
+			tripOrder.setSite(site1);
 			tripOrder.setTripId(site.getPlace());
 			int classify1 = site.getClassify();
 			if(classify1 ==0){
