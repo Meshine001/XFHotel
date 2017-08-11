@@ -211,7 +211,7 @@
 	    				 console.log(data);
 	    				 if(data.statusCode==1){
 	    					 fnBase.myalert('提交成功');
-	    					 window.location.href="paymentWP.html?pid="+encodeURIComponent(data.content.id)+"";
+	    					 window.location.href="paymentCA.html?pid="+encodeURIComponent(data.content.id)+"";
 	    				 }else{
 	    					 fnBase.myalert(data.content)
 	    				 }
@@ -238,7 +238,7 @@
 	    				 console.log(data);
 	    				 if(data.statusCode==1){
 	    					 fnBase.myalert('提交成功');
-	    					 window.location.href="paymentWP.html?pid="+encodeURIComponent(data.content.id)+"";
+	    					 window.location.href="paymentCA.html?pid="+encodeURIComponent(data.content.id)+"";
 	    				 }else{
 	    					 fnBase.myalert(data.content);
 	    				 }

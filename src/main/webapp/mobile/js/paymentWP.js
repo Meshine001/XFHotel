@@ -2,7 +2,11 @@ var _id;
 $(document).ready(function(){
 
     _id=decodeURIComponent(fnBase.request('pid'));
-    
+    var url = Constant.URL + '';
+    var postData={};
+    fnBase.commonAjax(url,postData,function (data){
+    	console.log(data);
+    })
     $(".p_msg li .addres").html('房间：'+hdz);
     $(".p_msg li .toal").html('订单总额：￥'+jiage);
 
