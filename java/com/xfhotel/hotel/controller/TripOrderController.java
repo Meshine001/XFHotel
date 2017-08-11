@@ -74,6 +74,26 @@ public class TripOrderController {
 		}
 		if (c.getStatus() == TripOrder.STATUS_ON_COMFIRM) {
 			try {
+					c.setStatus(TripOrder.STATUS_ON_LEASE);
+					tripOrderService.update(c);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+			}
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加完成");
+		}
+	
+	@RequestMapping(value = "/tipOrder", method = RequestMethod.POST)
+	@ResponseBody
+	public Message tipOrder(Long id) {
+		TripOrder c = tripOrderService.findById(id);
+		if (c == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+		if (c.getStatus() == TripOrder.STATUS_COMPLETE) {
+			try {
 					c.setStatus(TripOrder.STATUS_COMPLETE);
 					tripOrderService.update(c);
 			} catch (Exception e) {

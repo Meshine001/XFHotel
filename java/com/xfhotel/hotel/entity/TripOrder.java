@@ -31,7 +31,7 @@ public class TripOrder {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String roomName;//房间名
-	private String tripId;//车名
+	private String tripId;
 	private String site;
 	private Long startTime;
 	private Long endTime;

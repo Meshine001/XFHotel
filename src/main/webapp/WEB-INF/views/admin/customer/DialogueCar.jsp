@@ -177,10 +177,10 @@
 							<th>起止时间</th>
 							<th>房间</th>
 							<th>服务名称</th>
+							<th>车辆</th>
 							<th>服务内容</th>
 							<th>联系电话</th>
 							<th>价格</th>
-							<th>支付状态</th>
 							<th>支付平台</th>
 							<th>订单状态</th>
 							<th>其他需求</th>
@@ -189,20 +189,26 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${orders}" var="order">
-							<tr>
+							<tr order-id="${order.id}">
 								<td>${order.id}</td>
-								<td>${order.time}</td>
+								<td>${order.startTime}~${order.endTime}</td>
+								<td>${order.roomName}</td>
+								<td>${order.classify}</td>
+								<td>${order.site}</td>
+								<td>${order.tripId}</td>
+								<td>${order.tel}</td>
+								<td>${order.price}</td>
+								<td>${order.payPlatform}</td>
 								<td>${order.status}</td>
-								<td>${order.status}</td>
-								<td>${order.content}</td>
-								<td>${order.roomId}</td>
-								<td>${order.oederId}</td>
-								<td>${order.cleanTime}</td>
-								<td>${order.oederId}</td>
-								<td>${order.oederId}</td>
-								<td>${order.oederId}</td>
+								<td>${order.demand}</td>
 								<td>
-									<a href="javascript:;">同意</a>
+									
+									<c:if test="${order.status=='确认中'}">
+									<a href="javascript:;" class="success-order btn  comfirm-order" order-id="${order.id}" style="display:block;width:120px;">确定服务</a>
+									</c:if>
+									<c:if test="${order.status=='进行中'}">
+									<a href="javascript:;" class="success-order btn success-order " order-id="${order.id}" style="display:block;width:120px;">确定完成</a>
+									</c:if>
 								</td>
 							</tr>
 						</c:forEach>
@@ -344,7 +350,7 @@
 	  	
 		//确认订单
 		$('.comfirm-order').click(function(){
-			var url = '../order/cleanOrder';
+			var url = '../triporder/tipOrders';
 			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
@@ -359,7 +365,7 @@
 				success : function(data) {
 					console.log(data)
 					if(data.statusCode == 1){
-						window.location.href = '../admin/customer_baojie';
+						location=location;
 					}else{
 						alert(data.content);
 					}
@@ -367,9 +373,9 @@
 			});
 		});
 		
-		//关闭订单
+		//确认完成
 		$('.success-order').click(function(){
-			var url = '../order/cleanOrders';
+			var url = '../triporder/tipOrder';
 			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
@@ -387,7 +393,7 @@
 					
 					
 					if(data.statusCode == 1){
-						window.location.href = '../admin/customer_baojie';
+						location=location;
 					}else{
 						alert(data.content);
 					}
