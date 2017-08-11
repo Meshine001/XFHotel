@@ -984,9 +984,11 @@ public class MobileController  {
 			ArrayList<Object> list = new ArrayList<Object>();
 			int d=0;
 			String pay ;
+			boolean l= false;
 			Order o = orderservice.get(oederId);
-			FacilityOrder facilityOrder =new FacilityOrder();
+			
 					for(Long fate1 : fate){
+						FacilityOrder facilityOrder =new FacilityOrder();
 						facilityOrder.setFate(fate1);
 						for(int i =0;facility.length>i;){
 							Long Facility = facility[d];
@@ -994,6 +996,7 @@ public class MobileController  {
 							facilityOrder.setPrice(facilityservice.findById(Facility).getPrice()*fate1);
 							if(facilityservice.findById(Facility).getClassify()==0){
 								pay="免费";
+								l=true;
 								facilityOrder.setStatus(FacilityOrder.STATUS_NOT_AFFIRM);
 							} else {
 								pay="收费";
@@ -1010,19 +1013,16 @@ public class MobileController  {
 						break;
 					}
 				}
-//			TODO
-//			发短信给管理员
-//			【青舍都市】您有新订单需要确认，请及时处理。{1}
-					if(facilityOrder.getClassify()=="免费"){
+					if(l==true){
 						JSONObject a = apartmentService.getApartmentById(o.getRoomId())
 								.getJSONObject("position");
 						String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
 								a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 						String[] p = {f};
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfiService.getConfig().getSms(), p);	
-					return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
-					} 
-					return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+					return new Message(Constants.MESSAGE_ERR_CODE, "等待管理员添加");
+					}
+					return new Message(Constants.MESSAGE_ERR_CODE, "List"); 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
