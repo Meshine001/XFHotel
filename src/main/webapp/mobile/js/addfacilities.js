@@ -191,6 +191,10 @@ $(".account-login-width a").click(function(){
         }
     }
 	sp=lastList.join(',');//获取物品使用时间；
+	if(_oederId==""){
+		fnBase.myalert('请您选择房屋！')
+		return
+	}
 	if(facilId=="" || facilId==null){
 		fnBase.myalert('请您选择需要添加的物品再提交！')
 		return
@@ -210,12 +214,14 @@ $(".account-login-width a").click(function(){
     console.log(postData);
     fnBase.commonAjax(frontURL,postData,function(data){
     	console.log(data);
-    	fnBase.keep(1,'hdz',hdz)
-    	fnBase.myalert('提交成功');
-//    	setTimeout(function(){ //pid:订单ID
-//       	window.location.href="paymentWP.html?pid="+encodeURIComponent(data.oederId);
-//      },300)
-      
+    	if(data.statusCode==0){
+    		fnBase.myalert(data.content)
+    	}else if(data.statusCode==1){
+    		fnBase.myalert('提交成功');
+//        	setTimeout(function(){ //pid:订单ID
+//           	window.location.href="paymentWP.html?pid="+encodeURIComponent(data.oederId);
+//          },300)
+    	}
     })
 	
 }) 
