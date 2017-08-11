@@ -384,6 +384,7 @@ public class AdminController {
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
 	}
+	
 	@RequestMapping(value = "/dsendlist", method = RequestMethod.POST)
 	public @ResponseBody Message dsendlist(Double money , String sex , Double time){
 		Map<String, Object> map = new HashMap<String, Object>();
