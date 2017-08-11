@@ -425,7 +425,6 @@ public class WechatController {
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfService.getConfig().getSms(), p);
 						
 				}
-				
 			} else if ("FAIL".equals(result_code)) {
 				
 			}
@@ -489,7 +488,6 @@ public class WechatController {
 			jo.put("obj", null);
 			return jo;
 		}
-		
 		tripOrder.setPayPlatform(TripOrder.PAY_PLATFORM_WECHAT_JSAPI);
 		tripOrderService.update(tripOrder);
 		String detail = tripOrder.getRoomName();
