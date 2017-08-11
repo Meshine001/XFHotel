@@ -193,25 +193,30 @@
     		   var sta=$("#jiesongDate").val();
     	       var starttimeHaoMiao = (new Date(sta)).getTime(); //接送站的具体时间
     	       if(sta==""){fnBase.myalert('请选择接送时间');return;};
- 
-    	       var postData={
-    	    		OrderId:_oederId,
-    	    		site1:_carid,
-    	            tripId:_carip,
-    	            startTime:starttimeHaoMiao,
-    	            endTime:'',
-    	            tel:$("#tel").val(),
-    	            price:$(".bottomContainer span").text(),
-    	            demand:$('.per-order-status ._textarea').val()
-    	        };
-    	        console.log('接送站')
-    	        console.log(postData)
-    	        var url=Constant.URL+'/triporder/tripOrderAdd/';
-    	        fnBase.commonAjax(url,postData,function(data){
-   				 console.log(data);
-   				 
-   				
-   			 })
+        	
+	        	 var postData={
+	     	    		OrderId:_oederId,
+	     	    		site1:_carid,
+	     	            tripId:_carip,
+	     	            startTime:starttimeHaoMiao,
+	     	            endTime:starttimeHaoMiao,
+	     	            tel:$("#tel").val(),
+	     	            price:$(".bottomContainer span").text(),
+	     	            demand:$('.per-order-status ._textarea').val()
+	     	        };
+	     	        console.log('接送站');
+	     	        console.log(postData);
+	     	        var postUrl=Constant.URL+"/mobile/tripOrderAdd";
+	     	        fnBase.commonAjax(postUrl,postData,function(data){
+	    				 console.log(data);
+	    				 if(data.statusCode==1){
+	    					 fnBase.myalert('提交成功');
+	    					 window.location.href="paymentWP.html?pid="+encodeURIComponent(data.content.id)+"";
+	    				 }else{
+	    					 fnBase.myalert(data.content)
+	    				 }
+	    			 })
+    	      
     	        
     	}else if(dateSelect==2){
     		   if($("#stateDate2").val()==""){fnBase.myalert('请选择开始时间');return;};
@@ -220,54 +225,33 @@
      	            OrderId:_oederId,
      	            site1:_carid,
     	            tripId:_carip,
-    	            startTime:starttimeHaoMiao,
-    	            endTime:$("#endDate2").val(),
+    	            startTime:(new Date($("#stateDate2").val())).getTime(),
+    	            endTime:(new Date($("#endDate2").val())).getTime(),
     	            tel:$("#tel").val(),
     	            price:$(".bottomContainer span").text(),
     	            demand:$('.per-order-status ._textarea').val()
      	        };
     		    console.log('包车')
      	        console.log(postData)
-     	     var url=Constant.URL+'/triporder/tripOrderAdd/';
-    	        fnBase.commonAjax(url,postData,function(data){
-   				 console.log(data);
-   				 
-   				
-   			 })
+     	        var postUrl=Constant.URL+"/mobile/tripOrderAdd";
+	     	    fnBase.commonAjax(postUrl,postData,function(data){
+	    				 console.log(data);
+	    				 if(data.statusCode==1){
+	    					 fnBase.myalert('提交成功');
+	    					 window.location.href="paymentWP.html?pid="+encodeURIComponent(data.content.id)+"";
+	    				 }else{
+	    					 fnBase.myalert(data.content);
+	    				 }
+	    		})
+    	      
     		   
     	}
-      
-//        var oldTime = (new Date($("#stateDate").val())).getTime();
-//        
-//        function hm(val){
-//        	return val=(new Date(val)).getTime();
-//        }
-//        var Today=(hm($("#endDate").val())-hm($("#stateDate").val()))/1000/60/60/24;
-//        Today=Today+1;
-//        console.log(Today);
-        
-        
-//        var frontURL=Constant.URL+'/mobile/cleanAdd';
-//        $.ajax({
-//            type:'post',
-//            dataType:'json',
-//            data:{
-//                oederId:_oederId,
-//                content1:_content,
-//                cleanTime:_cleanTime,
-//                demand:$('.per-order-status ._textarea').val()
-//            },
-//           
-//            url:frontURL,
-//            success:function(data){
-//                console.log(data);
-//                fnBase.myalert('提交成功');
-//                setTimeout(function(){
-//                	window.location.href='serve.html';
-//                },300)
-//                
-//            }
-//        });
-    });
 
+    	
+    	
+    	
+    });
+//  setTimeout(function(){
+//	window.location.href='serve.html';
+//},300)
 });
