@@ -181,7 +181,6 @@ public class AdminController {
 			List<Map> orders = new ArrayList<Map>();
 			for (TripOrder o : list) {
 				orders.add(o.toMap());	
-				Order order = orderservice.get(o.getOederId());
 			}
 			session.setAttribute("orders", orders);
 			return "/admin/customer/DialogueCar";
