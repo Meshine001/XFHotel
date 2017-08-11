@@ -218,12 +218,17 @@ $(".account-login-width a").click(function(){
     		fnBase.myalert(data.content)
     	}else if(data.statusCode==1){
     		fnBase.myalert('提交成功');
-    		var orderids=new Array(),sic='';
-    		for(var i=0;i<data.content.length;i++){
-    			orderids.push(data.content[i].id)
+    		var pic=$(".bottomContainer span").text();
+    		if(pic==""||pic==0||pic==null){
+    			window.location.href='serve.html';
+    		}else{
+	    		var orderids=new Array(),sic='';
+	    		for(var i=0;i<data.content.length;i++){
+	    			orderids.push(data.content[i].id);
+	    		}
+	    		sic=orderids.join(',');
+	    		window.location.href="paymentWP.html?pid="+encodeURIComponent(sic)+"&&topic="+encodeURIComponent($(".bottomContainer span").text());
     		}
-    		sic=orderids.join(',');
-    		window.location.href="paymentWP.html?pid="+encodeURIComponent(sic);
     	}
     })
 	

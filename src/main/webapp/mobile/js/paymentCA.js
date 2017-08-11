@@ -85,7 +85,7 @@ function checkWechatPay() {
     fnBase.commonAjax(url,data,function (data) {
     	console.log(data)
         if(data.statusCode == 1 ){
-            window.location.href = fnBase.URL + '/wx/myorder.html';
+            window.location.href = fnBase.URL + '/wx/serve.html';
         }else{
             //查询3次
             if (checkCount < 3){
@@ -117,7 +117,7 @@ function onBridgeReady(payData){
                 // //TODO 再次查询是否支付成功
                 // checkWechatPay();
                 // fnBase.myalert('支付失败');
-                window.location.href = './myorder.html';
+                window.location.href = './serve.html';
 
             }else if(res.err_msg == "get_brand_wcpay_request:cancel"){//支付取消
                 fnBase.myalert('取消支付');
