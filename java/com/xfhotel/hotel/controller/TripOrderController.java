@@ -1,6 +1,5 @@
 package com.xfhotel.hotel.controller;
 
-import java.awt.geom.Arc2D.Double;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
-import com.xfhotel.hotel.entity.Clean;
-import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.entity.Site;
 import com.xfhotel.hotel.entity.TripOrder;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.SiteService;
 import com.xfhotel.hotel.service.TripOrderService;
 import com.xfhotel.hotel.support.Message;
 
@@ -23,15 +22,19 @@ import com.xfhotel.hotel.support.Message;
 public class TripOrderController {
 	
 	@Autowired
+	SiteService siteService;
+	
+	@Autowired
 	TripOrderService tripOrderService;
 	
 	@Autowired
 	OrderService orderservice;
 
 	@RequestMapping(value = "/tripOrderAdd", method = RequestMethod.POST)
-	public @ResponseBody Message tripOrderAdd ( Long OrderId, Long tripId ,Long startTime ,Long endTime ,double price,Long tel ,String demand ,int classify1 ) {
+	public @ResponseBody Message tripOrderAdd ( Long OrderId, Long tripId ,Long startTime ,Long endTime ,double price,Long tel ,String demand  ) {
 		TripOrder tripOrder = new TripOrder();
 		try {
+			Site site = siteService.findById(tripId);
 			String classify = null;
 			Order order = orderservice.get(OrderId);
 			tripOrder.setRoomName(order.getDescription());
@@ -42,6 +45,8 @@ public class TripOrderController {
 			tripOrder.setDemand(demand);
 			tripOrder.setCusId(order.getCusId());
 			tripOrder.setTime(new Date().getTime());
+			tripOrder.setTripId(site.getPlace());
+			int classify1 = site.getClassify();
 			if(classify1 ==0){
 				classify="接送";
 			}else{
