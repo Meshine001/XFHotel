@@ -245,12 +245,17 @@
 					type : 'POST',
 					dataType : 'json',
 					data : {
-						'id':id
+						'classify':0,
+						'place':jiesongName,
+						'price':jiesongPrice
 					},
 					url : '/site/addSite/',
 					success : function(data) {
 						console.log(data)
-						location=location
+						if(data.statusCode==1){
+							alert(data.content);
+						}
+						location=location;
 					}
 				});
 	    		
@@ -264,12 +269,57 @@
 	    	if(baocheName==""||baochePrice==""){
 	    		alert("请填写正确信息")
 	    	}else{
-	    		
+	    		$.ajax({
+					type : 'POST',
+					dataType : 'json',
+					data : {
+						'classify':1,
+						'place':baocheName,
+						'price':baochePrice
+					},
+					url : '/site/addSite/',
+					success : function(data) {
+						console.log(data)
+						if(data.statusCode==1){
+							alert(data.content);
+						}
+						location=location
+					}
+				});
 	    	}
 	    })
-	   
+	   //填写用车服务选项=>接送站
+	      var locadjiesong=function(){
+	  		$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				data : {},
+				url : '/site/getSite/',
+				success : function(data) {
+					console.log(data)
+					var jslist="",bclist="";
+					$("#jiesongList,#baocheList").html("");
+					for(var i=0;i<data.length;i++){
+						if(data[i].classify==0){
+							jslist+='<tr id="'+data[i].id+'" price="'+data[i].price+'"><td style="padding:10px 15px"><input type="text" style="margin:0" class="form-control" value="'+data[i].place+'" readonly></td><td style="padding:10px 15px"><input type="text" style="margin:0" class="form-control" value="'+data[i].price+'" readonly></td><td  style="padding:0 15px"><span class="input-group-btn" style="text-align: right;"><button class="btn btn-danger btn-sm" type="button">删除</button></span></td></tr>';
+						}else if(data[i].classify==1){
+							bclist+='<tr id="'+data[i].id+'" price="'+data[i].price+'"><td style="padding:10px 15px"><input type="text" style="margin:0" class="form-control" value="'+data[i].place+'" readonly></td><td style="padding:10px 15px"><input type="text" style="margin:0" class="form-control" value="'+data[i].price+'" readonly></td><td  style="padding:0 15px"><span class="input-group-btn" style="text-align: right;"><button class="btn btn-danger btn-sm" type="button">删除</button></span></td></tr>';
+						}
+						
+					};
+					$("#jiesongList").append(jslist);
+					$("#baocheList").append(bclist);
+				}
+			});
+	  	}
+	    locadjiesong();
+	    
+	    
+	    
+	    
+	    
 	  	//删除服务
-	   $("#jiesongList").on('click','tr td .btn-danger',function(){
+	   $("#jiesongList,#baocheList").on('click','tr td .btn-danger',function(){
 	    	var id=$(this).parent().parent().parent().attr('id');
 	    	$.ajax({
 				type : 'POST',
@@ -277,9 +327,12 @@
 				data : {
 					'id':id
 				},
-				url : '/facility/deleteFacility/',
+				url : '/site/deleteSite/',
 				success : function(data) {
-					console.log(data)
+					console.log(data);
+					if(data.statusCode==1){
+						alert(data.content);
+					}
 					location=location
 				}
 			});

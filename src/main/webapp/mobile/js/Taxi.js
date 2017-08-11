@@ -9,28 +9,32 @@
 	//植入汽车服务$("#jiesongWarp")
     var Service={
     		jiesong:function(){
-    			 var frontURL='',
-    			     postData={},
-    			     str='';
+    			 var frontURL=Constant.URL+'/site/getSiteyForm/';
+    			     postData={classify:0};
+    			     var str="";
     			 fnBase.commonAjax(frontURL,postData,function(data){
     				 console.log(data);
-    				 
+    				 for(var i=0;i<data.length;i++){
+    					 str+='<dd cat="'+data[i].id+'" price="'+data[i].price+'"><i>'+data[i].place+'</i><i>'+data[i].price+'/元</i></dd>'
+    				 }
     				 $("#jiesongWarp").append(str);
     			 })
     		},
     		baoche:function(){
-    			 var frontURL='',
-			         postData={},
-			         str='';
+    			 var frontURL=Constant.URL+'/site/getSiteyForm/';
+			     	 postData={classify:1};
+			         var str="";
     			 fnBase.commonAjax(frontURL,postData,function(data){
     				 console.log(data);
-    				 
+    				 for(var i=0;i<data.length;i++){
+    					 str+='<dd cat="'+data[i].id+'" price="'+data[i].price+'"><i>'+data[i].place+'</i><i>'+data[i].price+'/元</i></dd>'
+    				 }
     				 $("#baocheWarp").append(str);
     			 })
     		}
     }
-//    Service.jiesong();//接送
-//    Service.baoche();//包车
+    Service.jiesong();//接送
+    Service.baoche();//包车
     
     
  
