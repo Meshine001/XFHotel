@@ -1161,7 +1161,7 @@ public class MobileController  {
 	
 	@RequestMapping(value = "getTrip", method = RequestMethod.POST)
 	public @ResponseBody TripOrder getTrip(Long id){
-//		System.out.println();
+
 	return tripOrderService.findById(id);
 	}
 }
