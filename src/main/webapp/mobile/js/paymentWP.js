@@ -2,13 +2,13 @@ var _id;
 $(document).ready(function(){
 
     _id=decodeURIComponent(fnBase.request('pid'));
-    var url = Constant.URL + '';
-    var postData={};
-    fnBase.commonAjax(url,postData,function (data){
-    	console.log(data);
-    })
-    $(".p_msg li .addres").html('房间：'+hdz);
-    $(".p_msg li .toal").html('订单总额：￥'+jiage);
+//    var url = Constant.URL + '';
+//    var postData={};
+//    fnBase.commonAjax(url,postData,function (data){
+//    	console.log(data);
+//    })
+//    $(".p_msg li .addres").html('房间：'+hdz);
+//    $(".p_msg li .toal").html('订单总额：￥'+jiage);
 
     payment.Entry();
 });
@@ -20,9 +20,9 @@ var payment={
             if(Constant.CLIENT_IP == undefined){
                 Constant.CLIENT_IP = getIp();
             }
-            var url = Constant.URL + '/wx/pay/jsTrip';
+            var url = Constant.URL + '/wx/pay/jsAdd';
             var data = {
-                id:_id,//订单id
+                id1:_id,//订单id
                 ip:Constant.CLIENT_IP//客户端ip
             };
             console.log(data);
@@ -73,7 +73,7 @@ function callPay(payData) {
 var checkCount = 0;
 
 function checkWechatPay() {
-    var url = fnBase.URL + '/mobile/checkWechatPay';
+    var url = fnBase.URL + '/mobile/faciletyWechatOrder';
     var data = {
         id:_id
     };
