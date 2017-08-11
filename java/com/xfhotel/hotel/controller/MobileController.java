@@ -1117,6 +1117,7 @@ public class MobileController  {
 			tripOrder.setTime(new Date().getTime());
 			tripOrder.setSite(site1);
 			tripOrder.setTripId(site.getPlace());
+			tripOrder.setOederId(OrderId);
 			int classify1 = site.getClassify();
 			if(classify1 ==0){
 				classify="接送";
