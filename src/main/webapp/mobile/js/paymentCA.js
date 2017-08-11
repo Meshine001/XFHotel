@@ -79,11 +79,12 @@ function callPay(payData) {
 var checkCount = 0;
 
 function checkWechatPay() {
-    var url = fnBase.URL + '/mobile/checkWechatPay';
+    var url = fnBase.URL + '/mobile/tripWechatOrder/';
     var data = {
         id:_id
     };
     fnBase.commonAjax(url,data,function (data) {
+    	console.log(data)
         if(data.statusCode == 1 ){
             window.location.href = fnBase.URL + '/wx/myorder.html';
         }else{
