@@ -451,8 +451,17 @@ public class WechatController {
 	
 	@RequestMapping(value="/pay/jsAdd",method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject jsAdd(Long id, String ip) throws Exception {
-		FacilityOrder facilityOrder = facilityOrderService.findById(id);
+	public JSONObject jsAdd(Long[] id1, String ip) throws Exception {
+		Long d = null;
+		double g= 0.0; 
+		for(Long id : id1){
+			d =id;
+			FacilityOrder facilityOrder = facilityOrderService.findById(id);
+			facilityOrder.setPayPlatform(FacilityOrder.PAY_PLATFORM_WECHAT_JSAPI);
+			facilityOrderService.update(facilityOrder);
+			g+=facilityOrder.getPrice();
+		}
+		FacilityOrder facilityOrder = facilityOrderService.findById(d);
 		if (facilityOrder == null){
 			JSONObject jo = new JSONObject();
 			jo.put("status", "error");
@@ -460,16 +469,13 @@ public class WechatController {
 			jo.put("obj", null);
 			return jo;
 		}
-		
-		facilityOrder.setPayPlatform(FacilityOrder.PAY_PLATFORM_WECHAT_JSAPI);
-		facilityOrderService.update(facilityOrder);
 		String detail = facilityOrder.getRoomId();
 		String desc = "青舍都市";
 		Customer c = customerService.getCustomer(orderService.get(facilityOrder.getOederId()).getCusId());
 		String openId = c.getWechatOpenId();
 		String goodSn = "" + orderService.get(facilityOrder.getOederId()).getRoomId();
 		String orderSn = facilityOrder.getPayNo();
-		String amount = String.valueOf(facilityOrder.getPrice());
+		String amount = String.valueOf(g);
 		String type = "JSAPI";
 		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, type);
 		System.out.println("支付成功");
@@ -502,5 +508,4 @@ public class WechatController {
 		System.out.println("支付成功");
 		return result;
 	}
-	
 }
