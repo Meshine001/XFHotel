@@ -33,7 +33,6 @@ var payment={
             };
             console.log(data);
             fnBase.commonAjax(url,data,function (data){
-                console.log(data);
                 if(data.status == 'success'){
                     console.log(data);
                     var payData = {
