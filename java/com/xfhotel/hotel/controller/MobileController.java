@@ -1020,9 +1020,9 @@ public class MobileController  {
 								a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 						String[] p = {f};
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfiService.getConfig().getSms(), p);	
-					return new Message(Constants.MESSAGE_ERR_CODE, list);
+					return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
 					}
-					return new Message(Constants.MESSAGE_ERR_CODE, list); 
+					return new Message(Constants.MESSAGE_SUCCESS_CODE, list); 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1164,6 +1164,20 @@ public class MobileController  {
 	public @ResponseBody TripOrder getTrip(Long id){
 //
 	return tripOrderService.findById(id);
+	}
+	
+	@RequestMapping(value = "faciletyWechatOrder", method = RequestMethod.POST)
+	public @ResponseBody Message faciletyWechatOrder(Long id){
+		FacilityOrder o = facilityOrderService.findById(id);
+		JSONObject result = WechatOrderUtils.query(o.getPayNo());
+		if("success".equals(result.getString("status")) 
+				&& "SUCCESS".equals(result.getString("trade_state"))){
+			o.setStatus(TripOrder.STATUS_ON_LEASE);
+			facilityOrderService.update(o);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "支付成功");
+		}else{
+			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
+		}
 	}
 }
 
