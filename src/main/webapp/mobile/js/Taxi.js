@@ -52,7 +52,7 @@
     $(".car-status ol").on('click','dd',function(){
         $(this).addClass('_active').siblings().removeClass('_active');
         if($(this).hasClass('_active')==true){
-        	_carid=$(this).attr('ct');
+        	_carid=$(this).attr('ct_name');
         }
         return _carid;
     });
@@ -195,33 +195,45 @@
     	       if(sta==""){fnBase.myalert('请选择接送时间');return;};
  
     	       var postData={
-    	            oederId:_oederId,
-    	            che:_carid,
-    	            con:_carip,
-    	            stateDate:starttimeHaoMiao,
+    	    		OrderId:_oederId,
+    	    		site1:_carid,
+    	            tripId:_carip,
+    	            startTime:starttimeHaoMiao,
+    	            endTime:'',
     	            tel:$("#tel").val(),
-    	            pic:$(".bottomContainer span").text(),
+    	            price:$(".bottomContainer span").text(),
     	            demand:$('.per-order-status ._textarea').val()
     	        };
     	        console.log('接送站')
     	        console.log(postData)
+    	        var url=Constant.URL+'/triporder/tripOrderAdd/';
+    	        fnBase.commonAjax(url,postData,function(data){
+   				 console.log(data);
+   				 
+   				
+   			 })
     	        
     	}else if(dateSelect==2){
     		   if($("#stateDate2").val()==""){fnBase.myalert('请选择开始时间');return;};
     		   if($("#endDate2").val()==""){fnBase.myalert('请选择结束时间');return;};
     		   var postData={
-     	            oederId:_oederId,
-     	            che:_carid,//车
-     	            con:_carip,//内容
-     	            stateDate:$("#stateDate2").val(),
-     	            endtime:$("#endDate2").val(),
-     	            tel:$("#tel").val(),
-   	                pic:$(".bottomContainer span").text(),
-     	            demand:$('.per-order-status ._textarea').val()
+     	            OrderId:_oederId,
+     	            site1:_carid,
+    	            tripId:_carip,
+    	            startTime:starttimeHaoMiao,
+    	            endTime:$("#endDate2").val(),
+    	            tel:$("#tel").val(),
+    	            price:$(".bottomContainer span").text(),
+    	            demand:$('.per-order-status ._textarea').val()
      	        };
     		    console.log('包车')
      	        console.log(postData)
-     	   
+     	     var url=Constant.URL+'/triporder/tripOrderAdd/';
+    	        fnBase.commonAjax(url,postData,function(data){
+   				 console.log(data);
+   				 
+   				
+   			 })
     		   
     	}
       
