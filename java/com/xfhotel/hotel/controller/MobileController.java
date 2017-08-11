@@ -35,6 +35,7 @@ import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.entity.TripOrder;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.ApplyService;
 import com.xfhotel.hotel.service.BlogService;
@@ -51,6 +52,7 @@ import com.xfhotel.hotel.service.LandlordService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
+import com.xfhotel.hotel.service.TripOrderService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
@@ -126,6 +128,8 @@ public class MobileController  {
 	@Autowired
 	ApplyService appliService;
 
+	@Autowired
+	TripOrderService tripOrderService;
 	/**
 	 * 房屋
 	 * @return
@@ -1077,6 +1081,7 @@ public class MobileController  {
 			apply.setTime(new Date().getTime());
 			apply.setSite(site);
 			apply.setName(l.getName());
+			
 			apply.setState(Apply.STATUS_NOT_AFFIRM);
 			appliService.add(apply);
 			String[] p = {tel.toString()};
@@ -1099,6 +1104,20 @@ public class MobileController  {
 //		session.setAttribute("orders", orders);
 //		return "/admin/customer/房东";
 //	}
+	
+	@RequestMapping(value = "tripWechatOrder", method = RequestMethod.POST)
+	public Message tripWechatOrder(Long id){
+		TripOrder o = tripOrderService.findById(id);
+		JSONObject result = WechatOrderUtils.query(o.getPayNo());
+		if("success".equals(result.getString("status")) 
+				&& "SUCCESS".equals(result.getString("trade_state"))){
+			o.setStatus(TripOrder.STATUS_ON_LEASE);
+			tripOrderService.update(o);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "支付成功");
+		}else{
+			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
+		}
+	}
 	
 }
 
