@@ -35,6 +35,7 @@ import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.entity.Site;
 import com.xfhotel.hotel.entity.TripOrder;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.ApplyService;
@@ -51,6 +52,7 @@ import com.xfhotel.hotel.service.HouseService;
 import com.xfhotel.hotel.service.LandlordService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.SiteService;
 import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.service.TripOrderService;
 import com.xfhotel.hotel.support.Area;
@@ -127,9 +129,14 @@ public class MobileController  {
 	
 	@Autowired
 	ApplyService appliService;
-
+	
+	@Autowired
+	SiteService siteService;
+	
 	@Autowired
 	TripOrderService tripOrderService;
+	
+
 	/**
 	 * 房屋
 	 * @return
@@ -1081,7 +1088,6 @@ public class MobileController  {
 			apply.setTime(new Date().getTime());
 			apply.setSite(site);
 			apply.setName(l.getName());
-			
 			apply.setState(Apply.STATUS_NOT_AFFIRM);
 			appliService.add(apply);
 			String[] p = {tel.toString()};
@@ -1094,6 +1100,41 @@ public class MobileController  {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"发布成功");
 	}
 	
+	@RequestMapping(value = "/tripOrderAdd", method = RequestMethod.POST)
+	public @ResponseBody Message tripOrderAdd ( Long OrderId, Long tripId ,Long startTime ,Long endTime ,double price,Long tel ,String demand ,String site1 ) {
+		TripOrder tripOrder = new TripOrder();
+		try {
+			Site site = siteService.findById(tripId);
+			String classify = null;
+			Order order = orderservice.get(OrderId);
+			tripOrder.setRoomName(order.getDescription());
+			tripOrder.setEndTime(endTime);
+			tripOrder.setStartTime(startTime);
+			tripOrder.setTel(tel);
+			tripOrder.setPrice(price);
+			tripOrder.setDemand(demand);
+			tripOrder.setCusId(order.getCusId());
+			tripOrder.setTime(new Date().getTime());
+			tripOrder.setSite(site1);
+			tripOrder.setTripId(site.getPlace());
+			int classify1 = site.getClassify();
+			if(classify1 ==0){
+				classify="接送";
+			}else{
+				classify="包车";
+			}
+			tripOrder.setClassify(classify);
+			tripOrder.setStatus(TripOrder.STATUS_ON_PAY);
+			tripOrderService.add(tripOrder);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, tripOrder );
+	}
+	
 //	@RequestMapping(value = "/Landlord", method = RequestMethod.GET)
 //	public @ResponseBody String Landlord() {
 //		List<Landlord> list = landlordService.list();
@@ -1104,7 +1145,6 @@ public class MobileController  {
 //		session.setAttribute("orders", orders);
 //		return "/admin/customer/房东";
 //	}
-	
 	@RequestMapping(value = "tripWechatOrder", method = RequestMethod.POST)
 	public Message tripWechatOrder(Long id){
 		TripOrder o = tripOrderService.findById(id);
@@ -1118,6 +1158,5 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
 		}
 	}
-	
 }
 

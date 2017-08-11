@@ -2,35 +2,9 @@ var _id;
 $(document).ready(function(){
 
     _id=decodeURIComponent(fnBase.request('pid'));
-    var hdz=fnBase.huoqu(1,'hdz');
     
     $(".p_msg li .addres").html('房间：'+hdz);
-    
-    var frontURL=Constant.URL+'/mobile/getOrder';
-    var postData={id:_id};
-    var _totalprice='';
-    fnBase.commonAjax(frontURL,postData,function(data){
-        console.log(data);
-        fnBase.keep(1,'roomId',data[1].roomId)
-        _totalprice=Number(data[1].totalPrice).toFixed(2);
-  //      $(".p_msg li ._date").html(data[0]+"入住"+data[2]+"离开"+"<i class='date'>共"+data[1].totalDay+"天</i>");
-
- //       $(".p_msg li .toal").html("订单总额:<span class='money'>￥"+_totalprice+"</span>");
-
-    });
-   $.ajax({
-	   type:'GET',
-		dataType:'json',
-		url:Constant.URL+'/mobile/info',
-		data:{
-	        'apartmentId':fnBase.huoqu(1,'roomId')
-		},
-		success:function(data){
-			console.log(data)
-//房间		  $(".p_msg li .addres").text(data.position.bd_wei_zhi+","+data.position.xiao_qu);
-		}
-   })
-
+    $(".p_msg li .toal").html('订单总额：￥'+jiage);
 
     payment.Entry();
 });
@@ -42,7 +16,7 @@ var payment={
             if(Constant.CLIENT_IP == undefined){
                 Constant.CLIENT_IP = getIp();
             }
-            var url = Constant.URL + '/wx/pay/jsOrder';
+            var url = Constant.URL + '/wx/pay/jsTrip';
             var data = {
                 id:_id,//订单id
                 ip:Constant.CLIENT_IP//客户端ip
@@ -53,7 +27,7 @@ var payment={
                 if(data.status == 'success'){
                     console.log(data);
                     var payData = {
-                      appId: data.obj.appId,
+                        appId: data.obj.appId,
                         timeStamp:  data.obj.timeStamp,
                         nonceStr: data.obj.nonceStr,
                         package:data.obj.package,

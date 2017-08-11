@@ -9,28 +9,32 @@
 	//植入汽车服务$("#jiesongWarp")
     var Service={
     		jiesong:function(){
-    			 var frontURL='',
-    			     postData={},
-    			     str='';
+    			 var frontURL=Constant.URL+'/site/getSiteyForm/';
+    			     postData={classify:0};
+    			     var str="";
     			 fnBase.commonAjax(frontURL,postData,function(data){
     				 console.log(data);
-    				 
+    				 for(var i=0;i<data.length;i++){
+    					 str+='<dd cat="'+data[i].id+'" price="'+data[i].price+'"><i>'+data[i].place+'</i><i>'+data[i].price+'/元</i></dd>'
+    				 }
     				 $("#jiesongWarp").append(str);
     			 })
     		},
     		baoche:function(){
-    			 var frontURL='',
-			         postData={},
-			         str='';
+    			 var frontURL=Constant.URL+'/site/getSiteyForm/';
+			     	 postData={classify:1};
+			         var str="";
     			 fnBase.commonAjax(frontURL,postData,function(data){
     				 console.log(data);
-    				 
+    				 for(var i=0;i<data.length;i++){
+    					 str+='<dd cat="'+data[i].id+'" price="'+data[i].price+'"><i>'+data[i].place+'</i><i>'+data[i].price+'/元</i></dd>'
+    				 }
     				 $("#baocheWarp").append(str);
     			 })
     		}
     }
-//    Service.jiesong();//接送
-//    Service.baoche();//包车
+    Service.jiesong();//接送
+    Service.baoche();//包车
     
     
  
@@ -48,7 +52,7 @@
     $(".car-status ol").on('click','dd',function(){
         $(this).addClass('_active').siblings().removeClass('_active');
         if($(this).hasClass('_active')==true){
-        	_carid=$(this).attr('ct');
+        	_carid=$(this).attr('ct_name');
         }
         return _carid;
     });
@@ -189,69 +193,65 @@
     		   var sta=$("#jiesongDate").val();
     	       var starttimeHaoMiao = (new Date(sta)).getTime(); //接送站的具体时间
     	       if(sta==""){fnBase.myalert('请选择接送时间');return;};
- 
-    	       var postData={
-    	            oederId:_oederId,
-    	            che:_carid,
-    	            con:_carip,
-    	            stateDate:starttimeHaoMiao,
-    	            tel:$("#tel").val(),
-    	            pic:$(".bottomContainer span").text(),
-    	            demand:$('.per-order-status ._textarea').val()
-    	        };
-    	        console.log('接送站')
-    	        console.log(postData)
+        	
+	        	 var postData={
+	     	    		OrderId:_oederId,
+	     	    		site1:_carid,
+	     	            tripId:_carip,
+	     	            startTime:starttimeHaoMiao,
+	     	            endTime:starttimeHaoMiao,
+	     	            tel:$("#tel").val(),
+	     	            price:$(".bottomContainer span").text(),
+	     	            demand:$('.per-order-status ._textarea').val()
+	     	        };
+	     	        console.log('接送站');
+	     	        console.log(postData);
+	     	        var postUrl=Constant.URL+"/mobile/tripOrderAdd";
+	     	        fnBase.commonAjax(postUrl,postData,function(data){
+	    				 console.log(data);
+	    				 if(data.statusCode==1){
+	    					 fnBase.myalert('提交成功');
+	    					 window.location.href="paymentWP.html?pid="+encodeURIComponent(data.content.id)+"";
+	    				 }else{
+	    					 fnBase.myalert(data.content)
+	    				 }
+	    			 })
+    	      
     	        
     	}else if(dateSelect==2){
     		   if($("#stateDate2").val()==""){fnBase.myalert('请选择开始时间');return;};
     		   if($("#endDate2").val()==""){fnBase.myalert('请选择结束时间');return;};
     		   var postData={
-     	            oederId:_oederId,
-     	            che:_carid,//车
-     	            con:_carip,//内容
-     	            stateDate:$("#stateDate2").val(),
-     	            endtime:$("#endDate2").val(),
-     	            tel:$("#tel").val(),
-   	                pic:$(".bottomContainer span").text(),
-     	            demand:$('.per-order-status ._textarea').val()
+     	            OrderId:_oederId,
+     	            site1:_carid,
+    	            tripId:_carip,
+    	            startTime:(new Date($("#stateDate2").val())).getTime(),
+    	            endTime:(new Date($("#endDate2").val())).getTime(),
+    	            tel:$("#tel").val(),
+    	            price:$(".bottomContainer span").text(),
+    	            demand:$('.per-order-status ._textarea').val()
      	        };
     		    console.log('包车')
      	        console.log(postData)
-     	   
+     	        var postUrl=Constant.URL+"/mobile/tripOrderAdd";
+	     	    fnBase.commonAjax(postUrl,postData,function(data){
+	    				 console.log(data);
+	    				 if(data.statusCode==1){
+	    					 fnBase.myalert('提交成功');
+	    					 window.location.href="paymentWP.html?pid="+encodeURIComponent(data.content.id)+"";
+	    				 }else{
+	    					 fnBase.myalert(data.content);
+	    				 }
+	    		})
+    	      
     		   
     	}
-      
-//        var oldTime = (new Date($("#stateDate").val())).getTime();
-//        
-//        function hm(val){
-//        	return val=(new Date(val)).getTime();
-//        }
-//        var Today=(hm($("#endDate").val())-hm($("#stateDate").val()))/1000/60/60/24;
-//        Today=Today+1;
-//        console.log(Today);
-        
-        
-//        var frontURL=Constant.URL+'/mobile/cleanAdd';
-//        $.ajax({
-//            type:'post',
-//            dataType:'json',
-//            data:{
-//                oederId:_oederId,
-//                content1:_content,
-//                cleanTime:_cleanTime,
-//                demand:$('.per-order-status ._textarea').val()
-//            },
-//           
-//            url:frontURL,
-//            success:function(data){
-//                console.log(data);
-//                fnBase.myalert('提交成功');
-//                setTimeout(function(){
-//                	window.location.href='serve.html';
-//                },300)
-//                
-//            }
-//        });
-    });
 
+    	
+    	
+    	
+    });
+//  setTimeout(function(){
+//	window.location.href='serve.html';
+//},300)
 });
