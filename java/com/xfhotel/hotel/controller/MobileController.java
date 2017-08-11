@@ -1146,7 +1146,7 @@ public class MobileController  {
 //		return "/admin/customer/房东";
 //	}
 	@RequestMapping(value = "tripWechatOrder", method = RequestMethod.POST)
-	public  Message tripWechatOrder(Long id){
+	public @ResponseBody Message tripWechatOrder(Long id){
 		TripOrder o = tripOrderService.findById(id);
 		JSONObject result = WechatOrderUtils.query(o.getPayNo());
 		if("success".equals(result.getString("status")) 
@@ -1157,6 +1157,12 @@ public class MobileController  {
 		}else{
 			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
 		}
+	}
+	
+	
+	@RequestMapping(value = "getTrip", method = RequestMethod.POST)
+	public @ResponseBody TripOrder getTrip(Long id){
+	return tripOrderService.findById(id);
 	}
 }
 
