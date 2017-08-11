@@ -181,6 +181,7 @@ public class AdminController {
 			List<Map> orders = new ArrayList<Map>();
 			for (TripOrder o : list) {
 				orders.add(o.toMap());	
+				Order order = orderservice.get(o.getOederId());
 			}
 			session.setAttribute("orders", orders);
 			return "/admin/customer/DialogueCar";
@@ -383,7 +384,6 @@ public class AdminController {
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
 	}
-	
 	@RequestMapping(value = "/dsendlist", method = RequestMethod.POST)
 	public @ResponseBody Message dsendlist(Double money , String sex , Double time){
 		Map<String, Object> map = new HashMap<String, Object>();
