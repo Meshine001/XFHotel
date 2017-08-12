@@ -92,7 +92,7 @@ public class TripOrderController {
 		if (c == null) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
 		}
-		if (c.getStatus() == TripOrder.STATUS_COMPLETE) {
+		if (c.getStatus() == TripOrder.STATUS_ON_LEASE) {
 			try {
 					c.setStatus(TripOrder.STATUS_COMPLETE);
 					tripOrderService.update(c);

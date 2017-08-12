@@ -204,10 +204,10 @@
 								<td>
 									
 									<c:if test="${order.status=='确认中'}">
-									<a href="javascript:;" class="success-order btn  comfirm-order" order-id="${order.id}" style="display:block;width:120px;">确定服务</a>
+									<a href="javascript:;" class=" btn  comfirm-order" order-id="${order.id}" style="display:block;width:120px;">确定服务</a>
 									</c:if>
 									<c:if test="${order.status=='进行中'}">
-									<a href="javascript:;" class="success-order btn success-order " order-id="${order.id}" style="display:block;width:120px;">确定完成</a>
+									<a href="javascript:;" class="success-order btn  " order-id="${order.id}" style="display:block;width:120px;">确定完成</a>
 									</c:if>
 								</td>
 							</tr>
