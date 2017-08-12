@@ -23,7 +23,6 @@ function getIp() {
     });
     return ip;
 }
-
 /**
  * 获取根目录
  * @returns {string}

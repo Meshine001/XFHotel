@@ -191,7 +191,7 @@
 						<c:forEach items="${orders}" var="order">
 							<tr order-id="${order.id}">
 								<td>${order.id}</td>
-								<td>${order.startTime}至${order.endTime}</td>
+								<td>${order.startTime}~${order.endTime}</td>
 								<td>${order.roomName}</td>
 								<td>${order.classify}</td>
 								<td>${order.site}</td>
@@ -202,11 +202,12 @@
 								<td>${order.status}</td>
 								<td>${order.demand}</td>
 								<td>
+									
 									<c:if test="${order.status=='确认中'}">
-									<a href="javascript:;" class="comfirm-order" order-id="${order.id}" style="display:block;">确定服务</a>
+									<a href="javascript:;" class=" btn  comfirm-order" order-id="${order.id}" style="display:block;width:120px;">确定服务</a>
 									</c:if>
 									<c:if test="${order.status=='进行中'}">
-									<a href="javascript:;" class="success-order" order-id="${order.id}" style="display:block;">确定完成</a>
+									<a href="javascript:;" class="success-order btn  " order-id="${order.id}" style="display:block;width:120px;">确定完成</a>
 									</c:if>
 								</td>
 							</tr>
@@ -226,9 +227,10 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	$("table th,table td").css('min-width','120px')
-	$("table th:first-child,table td").css('min-width','60px')
-	$("tbody tr").css('vertical-align','middle')
+	$(".table th,.table td").css({'min-width':'120px'})
+	$(".table th:first-child,.table td:first-child").css({'width':'90px','min-width':'90px'});
+	$(".table th:first-child+th,.table td:first-child+td").css({'width':'240px','min-width':'240px'});
+	$(".table tr td").css('vertical-align','middle')	
 	    $("#addfac").click(function(){
 			$("#myalerts").fadeIn(100);
 		})
@@ -347,7 +349,7 @@
 	  	
 	  	
 	  	
-		//确认服务
+		//确认订单
 		$('.comfirm-order').click(function(){
 			var url = '../triporder/tipOrders';
 			var id = $(this).attr('order-id');
@@ -358,6 +360,9 @@
 					'id' : id,
 				},
 				url : url,
+				error : function(data) {
+					
+				},
 				success : function(data) {
 					console.log(data)
 					if(data.statusCode == 1){
@@ -380,8 +385,14 @@
 					'id' : id,
 				},
 				url : url,
+				error : function(data) {
+					
+				},
 				success : function(data) {
 					console.log(data)
+				
+					
+					
 					if(data.statusCode == 1){
 						location=location;
 					}else{
