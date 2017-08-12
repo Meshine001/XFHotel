@@ -227,9 +227,10 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	$(".table-condensed th,.table-condensed td").css('min-width','120px')
-	$(".table-condensed th:first-child,.table-condensed td:first-child").css({'width':'90px','min-width':'90px'});
-		
+	$(".table th,.table td").css({'min-width':'120px'})
+	$(".table th:first-child,.table td:first-child").css({'width':'90px','min-width':'90px'});
+	$(".table th:first-child+th,.table td:first-child+td").css({'width':'240px','min-width':'240px'});
+	$(".table tr td").css('vertical-align','middle')	
 	    $("#addfac").click(function(){
 			$("#myalerts").fadeIn(100);
 		})

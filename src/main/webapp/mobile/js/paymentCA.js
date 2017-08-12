@@ -2,9 +2,19 @@ var _id;
 $(document).ready(function(){
 
     _id=decodeURIComponent(fnBase.request('pid'));
-   var jiage=decodeURIComponent(fnBase.request('topic'));
-  
-    $(".p_msg li .toal").html('订单总额：<i style="color:red">￥'+jiage+'</i>');
+    var url = Constant.URL + '/mobile/getTrip/';
+    var postData={id:_id};
+    fnBase.commonAjax(url,postData,function (data){
+    	console.log(data); 
+    	if(data.classify=="接送"){
+    		var str='<p>房屋地址：'+data.roomName+'</p><p>车辆选择：'+data.site+'</p><p>接送站：'+data.tripId+'</p><p>接送站时间：'+(new Date(data.startTime)).toLocaleDateString()+'</p><p>手机号：'+data.tel+'</p>';
+    	}else if(data.classify=="包车"){
+    		var str='<p>房屋地址：'+data.roomName+'</p><p>车辆选择：'+data.site+'</p><p>包车路线：'+data.tripId+'</p><p>开始时间：'+(new Date(data.startTime)).toLocaleDateString()+'</p><p>结束时间：'+(new Date(data.endTime)).toLocaleDateString()+'</p><p>手机号：'+data.tel+'</p>';
+    	}
+    	$(".p_msg .massage").append(str);
+    	$(".p_msg li .toal").html('订单总额：<i style="color:red">￥'+data.price+'</i>');
+    })
+
 
     payment.Entry();
 });
@@ -16,9 +26,9 @@ var payment={
             if(Constant.CLIENT_IP == undefined){
                 Constant.CLIENT_IP = getIp();
             }
-            var url = Constant.URL + '/wx/pay/jsAdd';
+            var url = Constant.URL + '/wx/pay/jsTrip';
             var data = {
-                id1:_id,//订单id
+                id:_id,//订单id
                 ip:Constant.CLIENT_IP//客户端ip
             };
             console.log(data);
@@ -68,11 +78,12 @@ function callPay(payData) {
 var checkCount = 0;
 
 function checkWechatPay() {
-    var url = fnBase.URL + '/mobile/faciletyWechatOrder';
+    var url = fnBase.URL + '/mobile/tripWechatOrder/';
     var data = {
         id:_id
     };
     fnBase.commonAjax(url,data,function (data) {
+    	console.log(data)
         if(data.statusCode == 1 ){
             window.location.href = fnBase.URL + '/wx/serve.html';
         }else{
