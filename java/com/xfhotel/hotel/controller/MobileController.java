@@ -698,7 +698,6 @@ public class MobileController  {
 			map.put(String.valueOf(coupon2.getId()),coupon2);
 			}
 		}
-		
 		ArrayList<Object> list = new ArrayList<Object>();
 		  for(String key : map.keySet()){
 		   list.add(map.get(key));
@@ -836,7 +835,6 @@ public class MobileController  {
 	  }
 	  return new Message(Constants.MESSAGE_SUCCESS_CODE, list);	
 	}
-	
 	
 	@RequestMapping(value = "/cleanAdd", method = RequestMethod.POST)
 	public @ResponseBody Message cleanAdd (String demand,Long oederId , int content1[],int cleanTime) {
