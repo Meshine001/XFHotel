@@ -2,11 +2,11 @@
 //console.log(baseUrl);
    var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 
-var clientIp = getIp();
+//var clientIp = getIp();
 console.log(clientIp)
 var Constant = {
         URL: baseUrl, 
-        CLIENT_IP:clientIp
+//        CLIENT_IP:clientIp
 };
 /**
  * 获取ip.
