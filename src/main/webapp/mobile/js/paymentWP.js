@@ -1,10 +1,32 @@
 var _id;
 $(document).ready(function(){
+    
+	 var clientIp = getIp();
 
+		var Constant = {
+		        URL: baseUrl, 
+		        CLIENT_IP:clientIp
+		};
+		function getIp() {
+		    var ip;
+		    var ipInfoUrl = 'http://ipinfo.io/json';
+		    $.ajax({
+		        url:ipInfoUrl,
+		        async:false,
+		        success:function (data) {
+		            ip = data.ip;
+		        }
+		    });
+		    return ip;
+	}
+	
+	
     _id=decodeURIComponent(fnBase.request('pid'));
-   var jiage=decodeURIComponent(fnBase.request('topic'));
-  
+    var jiage=decodeURIComponent(fnBase.request('topic'));
+ 
     $(".p_msg li .toal").html('订单总额：<i style="color:red">￥'+jiage+'</i>');
+    
+
 
     payment.Entry();
 });

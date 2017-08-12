@@ -1,6 +1,23 @@
 var _id;
 $(document).ready(function(){
+	 var clientIp = getIp();
 
+		var Constant = {
+		        URL: baseUrl, 
+		        CLIENT_IP:clientIp
+		};
+		function getIp() {
+		    var ip;
+		    var ipInfoUrl = 'http://ipinfo.io/json';
+		    $.ajax({
+		        url:ipInfoUrl,
+		        async:false,
+		        success:function (data) {
+		            ip = data.ip;
+		        }
+		    });
+		    return ip;
+	}
     _id=decodeURIComponent(fnBase.request('pid'));
     var url = Constant.URL + '/mobile/getTrip/';
     var postData={id:_id};
