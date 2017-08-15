@@ -140,4 +140,19 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDetailsDAO.getListByHQL("from CustomerDetails order by id desc", null);
 	}
 
+	@Transactional
+	@Override
+	public Customer getOpenId(String openId) {
+		String hqlString = "from Customer where wechatOpenId=? ";
+		Object[] values = {openId};
+		return customerDAO.getByHQL(hqlString, values);
+	}
+
+	@Transactional
+	@Override
+	public CustomerDetails getCustomerDetails(long id) {
+		// TODO Auto-generated method stub
+		return customerDetailsDAO.get(id);
+	}
+
 }

@@ -164,6 +164,11 @@ public class CustomerDetails {
 		this.tel = tel;
 	}
 
+	public CustomerDetails(String nick, String avatar) {
+		super();
+		this.nick = nick;
+		this.avatar = avatar;
+	}
 	public CustomerDetails(String nick, String sex, String birthday, String constellation, String job, String education,
 			String declaration, String hobby, String avatar) {
 		super();

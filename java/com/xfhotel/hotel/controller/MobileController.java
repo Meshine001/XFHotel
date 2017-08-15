@@ -87,6 +87,7 @@ public class MobileController  {
 	@Autowired
 	ApartmentService apartmentService;
 
+
 	@Autowired
 	CustomerService customerService;
 	
@@ -254,14 +255,12 @@ public class MobileController  {
 		return new Message(Constants.MESSAGE_ERR_CODE, "注册失败");
 	}
 	
-	
 /**
  *
  * @param roomId
  * @param page
  * @return
  */
-	
 	@RequestMapping(value = "/get", method = RequestMethod.POST)
 	public @ResponseBody ArrayList<Object> getRoomComments(Long roomId){
 		ArrayList<Object> list = new ArrayList<Object>();
@@ -277,7 +276,6 @@ public class MobileController  {
 		}
 		return list;
 	}
-	
 	
 	/**
 	 * 获取价格
@@ -512,6 +510,13 @@ public class MobileController  {
 			//e.printStackTrace();
 		}
 //		System.out.println("price:"+price+","+"totalPrice"+totalPrice+"wanhoih");
+		Customer customer =customerService.getCustomer(cusId);
+		CustomerDetails  customerDetails = customerService.getCustomerDetails(cusId);
+		customerDetails.setTel(cusTel);
+		customerDetails.setIdCard(cusIdCard);
+		customerDetails.setNick(cusName);
+		customer.setTel(cusTel);
+		customerService.register(customer, customerDetails);
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order);
@@ -674,7 +679,6 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
 		}
 	}
-	
 	
 	/**
 	 * 获取可用优惠卷
@@ -862,7 +866,7 @@ public class MobileController  {
 			String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
 					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 			String[] p = {f};
-			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, systemConfiService.getConfig().getSms(), p);	
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_FAULT_SERVICE, systemConfiService.getConfig().getSms(), p);	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -965,7 +969,7 @@ public class MobileController  {
 			String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
 					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 			String[] p = {f};
-			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_FAULT_SERVICE, systemConfiService.getConfig().getSms(), p);	
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, systemConfiService.getConfig().getSms(), p);	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1146,11 +1150,12 @@ public class MobileController  {
 //		session.setAttribute("orders", orders);
 //		return "/admin/customer/房东";
 //	}
+	
 	@RequestMapping(value = "tripWechatOrder", method = RequestMethod.POST)
 	public @ResponseBody Message tripWechatOrder(Long id){
 		TripOrder o = tripOrderService.findById(id);
 		JSONObject result = WechatOrderUtils.query(o.getPayNo());
-		if("success".equals(result.getString("status")) 
+		if("success".equals(result.getString("status"))
 				&& "SUCCESS".equals(result.getString("trade_state"))){
 			o.setStatus(TripOrder.STATUS_ON_LEASE);
 			tripOrderService.update(o);
@@ -1179,5 +1184,23 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
 		}
 	}
+	
+	@RequestMapping(value = "/find1", method = RequestMethod.POST)
+	public @ResponseBody  Message find1(String tel ,String psd ,Long id) {
+			if (customerService.getCustomer(id)!=null) {
+			Customer c = customerService.getCustomer(id);
+			c.setTel(tel);
+			String content = customerService.changePsd(c.getPassword(), psd, c.getId());
+			customerService.updateBaseInfo(c);
+			if ("修改成功".equals(content)) {
+				customerService.logout();
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, content);
+			} else {
+				return new Message(Constants.MESSAGE_ERR_CODE, content);
+			}
+		}
+			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
+	}
 }
+
 

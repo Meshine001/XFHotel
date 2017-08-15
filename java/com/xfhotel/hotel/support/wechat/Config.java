@@ -18,6 +18,8 @@ public class Config {
 	
 	public static final String AUTH_OPENID_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APPID+"&secret="+SECRET+"&code=CODE&grant_type=authorization_code";
 	
+	
+	public static final String AUTH_GANIN_URL = "https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
 	/**
 	 * 微信统一下单地址
 	 */
