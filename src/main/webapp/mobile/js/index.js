@@ -111,8 +111,8 @@
 		                return;
 		            }
 		
-		            var frontURL=Constant.URL+"/mobile/find";
-		            var postDatat={"tel":phoneNumber,"psd":password};
+		            var frontURL=Constant.URL+"/mobile/find1";
+		            var postDatat={"tel":phoneNumber,"psd":password,'id':_id};
 		            fnBase.commonAjax(frontURL,postDatat,function(data){
 		                console.log(data);
 		                if(data.statusCode=="1"){
