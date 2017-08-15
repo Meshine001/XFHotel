@@ -1,5 +1,7 @@
-﻿$(document).ready(function(){
+﻿var _uid="";
+$(document).ready(function(){
     login.Entry();
+    login.login();
 });
 var login={
     Entry:function(){
@@ -26,6 +28,7 @@ var login={
                 
                 if (data.statusCode == "1") {
                     fnBase.keep( 0,"uid",data.content.id);
+                    _uid=data.content.id;
                     console.log(data.content);
                     //若还未经过微信授权
                     if(data.content.wechatOpenId == null || data.content.wechatOpenId == undefined||data.content.wechatOpenId != null){
@@ -36,12 +39,18 @@ var login={
                             'state=index.html#wechat_redirect ';
                         window.location.href = redirect;
                     }else{
-                        window.location.href = "index.html";
+                        window.location.href = "index.html?id="+encodeURIComponent(_uid)+"";
                     }
                 } else {
                     fnBase.myalert(data.content);
                 }
             })
         })
-    }
+    },
+	login:function(){
+		$("#weixin").click(function(){
+			  var redirect1 = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfa31f9e4951f95df&redirect_uri=http%3A%2F%2Fwww.yiyunzn.xyz%2Fwx%2Fauth%2Fautomatic&response_type=code&scope=snsapi_base&state=index.html#wechat_redirect';
+			  window.location.href = redirect1;
+		})
+	}
 };

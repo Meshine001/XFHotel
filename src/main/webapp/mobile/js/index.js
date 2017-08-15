@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-	
+
     // 新注册礼包
 	 $(".Masking-out,.newUser").hide();
     var _of=fnBase.huoqu(1,"newUser");
@@ -12,9 +12,22 @@
 		$(".Masking-out,.newUser").hide();
 		console.log(fnBase.huoqu(1,"newUser"))
 	})
-    
-    
-    
+	
+    var _id = decodeURIComponent(fnBase.request("id"));
+	var _status = decodeURIComponent(fnBase.request("status"));
+    //微信用户完善信息
+	$("#main_con,#masking").hide();
+	if(_status==""||_status==null||_status==undefined){
+		
+	}else if(_status==0){
+		$("#main_con,#masking").show();
+	}
+	$("#black_houme").click(function(){
+		$("#main_con,#masking").hide();
+	});
+	
+	
+	
     scrollNav();
     getData();
     alertSearch.info();
