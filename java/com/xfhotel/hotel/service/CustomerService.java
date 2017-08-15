@@ -12,7 +12,7 @@ public interface CustomerService {
 	public Customer modify(CustomerDetails c,long cId);
 	public boolean checkTel(String tel);
 	public void logout();
-	
+	public Customer getOpenId(String openId);
 	
 	public List<CustomerDetails> getlist();
 	public List<Customer> list();
@@ -21,6 +21,7 @@ public interface CustomerService {
 	public PageResults<Customer> list(int page);
 	public void changeStatus(long id, int status);
 	public Customer getCustomer(long id);
+	public CustomerDetails getCustomerDetails(long id);
 	public Customer  getFind(String tel);
 	public void updateBaseInfo(Customer c);
 	

@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.swetake.util.Qrcode;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Customer;
+import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.SystemConfig;
@@ -85,7 +87,6 @@ public class WechatController {
 		}else{
 				
 		}
-		
 		return new Message(Constants.MESSAGE_ERR_CODE, "未支付");
 	}
 
@@ -198,6 +199,53 @@ public class WechatController {
 		}
 		return "redirect:../login.html";
 	}
+	
+	@RequestMapping("/auth/automatic")
+	public String wechatAutomatic(String code, String state) {
+		
+		if (StringUtils.isBlank(code)) {// 用户拒绝授权
+			// 跳转某URL
+		} else {// 用户授权通过
+			try {
+				String authUrl = Config.AUTH_OPENID_URL.replace("CODE", code);
+				JSONObject result = JSONObject.fromObject(HttpUtils.get(authUrl));
+				System.out.println("微信授权============>\n"+result);
+				if (result.containsKey("errcode")) {// 错误返回
+					System.out.println(result);
+				} else {
+					String openId = result.getString("openid");
+					String access_token = result.getString("access_token");	
+					String authUrl1 = Config.AUTH_GANIN_URL.
+							replace("ACCESS_TOKEN", access_token).replace("OPENID", openId);
+					JSONObject basic = JSONObject.fromObject(HttpUtils.get(authUrl1));
+					Customer c = customerService.getOpenId(openId);
+					if(c != null){
+						if(c.getPassword()==null){
+							return "redirect:../" + state+"?="+c.getId()+"&&status=1";
+						} else {
+							return "redirect:../" + state+"?="+c.getId()+"&&status=0";
+						}
+						
+					} else {
+						Customer customer = new Customer();
+						CustomerDetails details = new CustomerDetails(basic.getString("nickname"), basic.getString("headimgurl"));
+						customer.setWechatOpenId(openId);
+						customer.setConsumptionTimes(0);
+						customer.setDetails(details);
+						customer.setConsumptionCount(0.00F);
+						customer.setRegTime(new Date().getTime());
+						customer.setLevel(0);
+						customerService.register(customer, details);
+						return "redirect:../" + state+"?="+customer.getId()+"&&status=0";
+					}
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return "redirect:../login.html";
+	}
 
 	/**
 	 * 公共号支付
@@ -299,7 +347,6 @@ public class WechatController {
 		return result.toString();
 	}
 	
-
 	/**
 	 * 微信支付回调函数
 	 * 
@@ -482,7 +529,6 @@ public class WechatController {
 		return result;
 	}
 
-	
 	@RequestMapping(value="/pay/jsTrip",method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject jsTrip(Long id, String ip) throws Exception {
@@ -508,4 +554,5 @@ public class WechatController {
 		System.out.println("支付成功");
 		return result;
 	}
+	
 }

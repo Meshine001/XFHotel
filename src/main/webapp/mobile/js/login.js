@@ -23,7 +23,6 @@ var login={
             var frontURL=Constant.URL+"/mobile/login";
             var postData ={"tel":phoneNumber,"password":passwordNumber};
             fnBase.commonAjax(frontURL,postData ,function(data) {
-                
                 if (data.statusCode == "1") {
                     fnBase.keep( 0,"uid",data.content.id);
                     console.log(data.content);
