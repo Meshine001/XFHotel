@@ -1,4 +1,4 @@
-﻿//var baseUrl = getRootPath();//调试环境用这个
+﻿// var baseUrl = getRootPath();//调试环境用这个
 
  var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 
