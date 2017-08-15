@@ -207,6 +207,7 @@ public class WechatController {
 			// 跳转某URL
 		} else {// 用户授权通过
 			try {
+				System.out.println(code);
 				String authUrl = Config.AUTH_OPENID_URL.replace("CODE", code);
 				JSONObject result = JSONObject.fromObject(HttpUtils.get(authUrl));
 				System.out.println("微信授权============>\n"+result);
@@ -219,16 +220,19 @@ public class WechatController {
 							replace("ACCESS_TOKEN", access_token).replace("OPENID", openId);
 					JSONObject basic = JSONObject.fromObject(HttpUtils.get(authUrl1));
 					Customer c = customerService.getOpenId(openId);
+					System.out.println(basic);
 					if(c != null){
-						if(c.getPassword()==null){
-							return "redirect:../" + state+"?="+c.getId()+"&&status=1";
+						if(c.getPassword()!=null){
+							return "redirect:../" + state+"?id="+c.getId()+"&&"+"status=1";
 						} else {
-							return "redirect:../" + state+"?="+c.getId()+"&&status=0";
+							return "redirect:../" + state+"?id="+c.getId()+"&&"+"status=0";
 						}
 						
 					} else {
 						Customer customer = new Customer();
-						CustomerDetails details = new CustomerDetails(basic.getString("nickname"), basic.getString("headimgurl"));
+						String Nick = basic.getString("nickname");
+						String avatar = basic.getString("headimgurl");
+						CustomerDetails details = new CustomerDetails(Nick, avatar);
 						customer.setWechatOpenId(openId);
 						customer.setConsumptionTimes(0);
 						customer.setDetails(details);
@@ -236,7 +240,7 @@ public class WechatController {
 						customer.setRegTime(new Date().getTime());
 						customer.setLevel(0);
 						customerService.register(customer, details);
-						return "redirect:../" + state+"?="+customer.getId()+"&&status=0";
+						return "redirect:../" + state+"?id="+customer.getId()+"&&"+"status=0";
 					}
 				}
 			} catch (Exception e) {
@@ -266,7 +270,6 @@ public class WechatController {
 			jo.put("obj", null);
 			return jo;
 		}
-		
 		order.setPayPlatform(Order.PAY_PLATFORM_WECHAT_JSAPI);
 		orderService.update(order);
 		String detail = order.getDescription();

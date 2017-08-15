@@ -48,7 +48,7 @@ var login={
     },
 	login:function(){
 		$("#weixin").click(function(){
-			  var redirect1 = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfa31f9e4951f95df&redirect_uri=http%3A%2F%2Fwww.yiyunzn.xyz%2Fwx%2Fauth%2Fautomatic&response_type=code&scope=snsapi_base&state=index.html#wechat_redirect';
+			  var redirect1 = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfa31f9e4951f95df&redirect_uri=http%3A%2F%2Fwww.yiyunzn.xyz%2Fwx%2Fauth%2Fautomatic&response_type=code&scope=snsapi_userinfo&state=index.html#wechat_redirect';
 			  window.location.href = redirect1;
 		})
 	}
