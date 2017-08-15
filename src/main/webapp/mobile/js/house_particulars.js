@@ -321,12 +321,6 @@ $(document).ready(function(){
         $(".criticism ul li").eq(0).addClass('showtime');
         $(this).text('全部')
     });  
-
-    $(".swiper-container .videovr").click(function(){
-    	fnBase.myalert('正在开发中...')
-    })
-    
-    
     
 
     // 全屏大图轮播显示
