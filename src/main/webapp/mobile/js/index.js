@@ -12,12 +12,17 @@
 		$(".Masking-out,.newUser").hide();
 		console.log(fnBase.huoqu(1,"newUser"))
 	})
-	
+	//====================2017/08/15========================
     var _id = decodeURIComponent(fnBase.request("id"));
 	var _status = decodeURIComponent(fnBase.request("status"));
+	console.log('此用户ID：'+_id+'状态：'+_status)
     //微信用户完善信息
-	$("#main_con,#masking").hide();
-	if(_status==""||_status==null||_status==undefined){
+	if(_id==""||_id==null||_id=="undefined"){
+		$("#main_con,#masking").hide(); 
+	}else{
+		 fnBase.keep( 0,"uid",_id);
+	}
+	if(_status==""||_status==null||_status=="undefined"){
 		
 	}else if(_status==0){
 		$("#main_con,#masking").show();
@@ -26,8 +31,128 @@
 		$("#main_con,#masking").hide();
 	});
 	
+	var resiger={
+		    inputList:new Array(),
+		    btnList:new Array(),
+		    addEvent:function(){
+		        resiger.inputList=[];
+		        resiger.btnList=[];
+		        resiger.inputList.push($("#tel"),$("#password"),$("#yzm"));
+		        resiger.btnList.push($("#fetch-cmd"),$("#login_submit"));
+
+		        //短信验证码
+		        resiger.btnList[0].click(function(){
+		            var phoneNumber=resiger.inputList[0].val();
+		            if(phoneNumber==""){
+		                fnBase.myalert("请填写手机号码");
+		                return;
+		            }
+		            var myreg = /^0?1[3|4|5|6|7|8][0-9]\d{8}$/;
+		            if (!myreg.test(phoneNumber)) {
+		                fnBase.myalert("手机号码有误！ 请输入11位数字");
+		                return;
+		            }
+		            var frontURL=Constant.URL+"/mobile/sendVCode";
+		            var postData={"tel":phoneNumber};
+		            fnBase.commonAjax(frontURL,postData,function(data){
+		                console.log(data);
+		                if(data.statusCode=="1"){
+		                    fnBase.myalert("短信发送成功");
+		                }else{
+		                    fnBase.myalert("短信发送失败")
+		                }
+		            });
+		            resiger.timePrompt();
+		        });
+
+
+		        resiger.inputList[2].blur(function(){
+		            var phoneNumber=resiger.inputList[0].val();
+		            var _yzm=resiger.inputList[2].val();
+		            if(_yzm==""){
+		                fnBase.myalert("请填写验证码");
+		                return;
+		            }
+		            var frontURL=Constant.URL+"/mobile/checkVCode";
+		            var postDatat={"vCode":_yzm,"tel": phoneNumber};
+		            fnBase.commonAjax(frontURL,postDatat,function(data){
+		                console.log(data);
+		                if(data.statusCode=="1"){
+		                    resiger.inputList[2].val(data.content);
+		                }else{
+		                    resiger.inputList[2].val(data.content);
+		                }
+		            });
+		        });
+		        //确认保存;
+		        resiger.btnList[1].click(function(){
+		            var phoneNumber=resiger.inputList[0].val();
+		            if(phoneNumber==""){
+		                fnBase.myalert("请填写手机号码");
+		                return;
+		            }
+		            var myreg = /^0?1[3|4|5|6|7|8][0-9]\d{8}$/;
+		            if (!myreg.test(phoneNumber)) {
+		                fnBase.myalert("手机号码有误！ 请输入11位数字");
+		                return;
+		            }
+		            var _yzm=resiger.inputList[2].val();
+		            if(_yzm==""){
+		                fnBase.myalert("请填写验证码");
+		                return;
+		            }
+		            var password=resiger.inputList[1].val();
+		            if(password==""){
+		                fnBase.myalert("请填写密码");
+		                return;
+		            }
+		            if(password.length<6){
+		                fnBase.myalert("密码至少是6位");
+		                return;
+		            }
+		
+		            var frontURL=Constant.URL+"/mobile/find";
+		            var postDatat={"tel":phoneNumber,"psd":password};
+		            fnBase.commonAjax(frontURL,postDatat,function(data){
+		                console.log(data);
+		                if(data.statusCode=="1"){
+		                	$("#main_con,#masking").hide();
+		                	fnBase.myalert(data.content);
+		                    sessionStorage.clear();
+		                    localStorage.clear();
+		                    location=location;
+		                }else{
+		                    fnBase.myalert(data.content)
+		                }
+		            })
+
+
+
+		        })
+
+		    },
+		    timePrompt:function(){
+		        var total=60;
+		        var mytimecont;
+		        resiger.btnList[0].text("60秒后重发");
+		        clearInterval(mytimecont);
+		        mytimecont=setInterval(function(){
+		            total=total-1;
+		            var str=total+"秒后重发";
+		            resiger.btnList[0].text(str);
+		            if(total<=0){
+		                clearInterval(mytimecont);
+		                resiger.sendCoded=false;
+		                resiger.btnList[0].text("短信验证码");
+		            }
+		        },1000)
+		    }
+		};
 	
 	
+	
+    resiger.addEvent();
+	//========================================================
     scrollNav();
     getData();
     alertSearch.info();
@@ -87,7 +212,7 @@ function getData() {
     var postData = {};
     fnBase.commonAjax(frontURL, postData, function (data) {
     	fnBase.loadHide();
-        console.log(data);
+        
         var mySwiper = new Swiper('.swiper-container', {
             loop: true,
             autoplay: 1800,
@@ -174,7 +299,7 @@ function life() {
     var frontURL = Constant.URL + '/mobile/story';
     var postData = {"page": 1};
     fnBase.commonAjax(frontURL, postData, function (data) {
-        console.log(data);
+       
         
         $(".swiper-container-life .swiper-wrapper").html("");
         var ad_str = '';

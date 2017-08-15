@@ -92,9 +92,6 @@ var resiger={
                 return;
             }
 
-
-
-            //
             var frontURL=Constant.URL+"/mobile/find";
             var postDatat={"tel":phoneNumber,"psd":password};
             fnBase.commonAjax(frontURL,postDatat,function(data){
@@ -102,7 +99,6 @@ var resiger={
                 if(data.statusCode=="1"){
                     sessionStorage.clear();
                     localStorage.clear();
-                    //fnBase.keep(0,"uid",data.info.m_id);
                     window.location.href="login.html";
                 }else{
                     fnBase.myalert(data.content)
