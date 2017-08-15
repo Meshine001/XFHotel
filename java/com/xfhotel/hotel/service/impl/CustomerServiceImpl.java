@@ -70,6 +70,9 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public String changePsd(String oldPsd, String psd,long id) {
 		Customer c = customerDAO.get(id);
+		if(c.getPassword()==null){
+			return "修改成功";
+		}
 		if(c.getPassword().equals(oldPsd)){
 			c.setPassword(psd);
 			customerDAO.update(c);
