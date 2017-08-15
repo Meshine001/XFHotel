@@ -1184,6 +1184,23 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "支付失败");
 		}
 	}
+	
+	@RequestMapping(value = "/find1", method = RequestMethod.POST)
+	public @ResponseBody  Message find1(String tel ,String psd ,Long id) {
+			if (customerService.getCustomer(id)!=null) {
+			Customer c = customerService.getCustomer(id);
+			c.setTel(tel);
+			String content = customerService.changePsd(c.getPassword(), psd, c.getId());
+			customerService.updateBaseInfo(c);
+			if ("修改成功".equals(content)) {
+				customerService.logout();
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, content);
+			} else {
+				return new Message(Constants.MESSAGE_ERR_CODE, content);
+			}
+		}
+			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
+	}
 }
 
 
