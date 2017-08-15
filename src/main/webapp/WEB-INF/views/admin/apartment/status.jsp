@@ -79,17 +79,24 @@
 					</div>
 				</div>
 				<div class="card-body">
-					
+					<div class="form-horizontal">
 						<div class="form-group">
-							<label class="col-md-3 control-label">选择日期</label>
-							<div class="col-md-3 status-time">
+							<label class="col-sm-2 control-label">起始日期</label>
+							<div class="col-sm-10 status-time">
 								<input type="date" class="form-control" placeholder=""
 									name="date" value="">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">状态选择</label>
-							<div class="col-md-4 status-house">
+							<label class="col-sm-2 control-label">结束日期</label>
+							<div class="col-sm-10 status-endtime">
+								<input type="date" class="form-control" placeholder=""
+									name="date" value="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">状态选择</label>
+							<div class="col-sm-10 status-house">
 								<a href="javascript:;" stag="0">无房</a>
 								<a href="javascript:;" stag="1">有房</a>
 							</div>
@@ -101,7 +108,8 @@
 						</div>
 						<div class="form-group">	
 						</div>
-					
+						
+					</div>	
 				</div>
 			</div>
 		</div>

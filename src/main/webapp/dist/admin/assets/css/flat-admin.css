@@ -6640,7 +6640,7 @@ input.form-control, textarea.form-control {
 	padding: 10px 15px;
 	height: auto;
 	font-size: 1em;
-	line-height: auto;
+	line-height: 1.42857143 !important;
 	border: 1px solid #c8d1d3;
 	background-color: transparent;
 	box-shadow: none;
@@ -8931,6 +8931,7 @@ a:hover{text-decoration: none;}
 	padding:6px;
 	border:1px solid #ddd;
 	color:#ddd;
+	text-decoration: none !important;
 }
 .status-house a.hat{color:#fff;background: #29c75f;}
 

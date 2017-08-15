@@ -1,11 +1,16 @@
 $(document).ready(function(){
-	var _status,_time;
+	var _status,_statime,_endtime;
 	var ID=window.sessionStorage.getItem('roomId');
 	
 	$(".status-time input").on('change',function(){
-		_time=$(".status-time input").val();
-		_time= (new Date(_time)).getTime()+ 1000 * 60 * 60 * 4;
-	})
+		_statime=$(".status-time input").val();
+		_statime= (new Date(_time)).getTime()+ 1000 * 60 * 60 * 4;
+	});
+	$(".status-endtime input").on('change',function(){
+		_endtime=$(".status-endtime input").val();
+		_endtime=(new Date(_time)).getTime()+ 1000 * 60 * 60 * 4;
+	});
+	
 	$(".status-house a").click(function(){
 		$(this).addClass('hat').siblings().removeClass('hat');
 		_status=$(this).attr('stag')
@@ -13,7 +18,7 @@ $(document).ready(function(){
 	
 	$(".btn-primary").click(function(){
 		
-		if(_time==null || _time==undefined){
+		if(_statime==null || _statime==undefined || _endtime==null || _endtime==undefined){
 			alert('请您先选择日期')
 			return;
 		}
@@ -28,7 +33,7 @@ $(document).ready(function(){
 			url:'/admin/house',
 			data : {
 				'state' : _status,
-				'data':_time,
+				'data':_statime,
 				'apartmentId':ID
 			},
 			error:function(e){

@@ -513,7 +513,7 @@
 .alert-content .but-success{width: 66%;height: 0.4rem;color: #FFF;border-radius: 0.2rem;box-shadow: 0 0.025rem 0.1rem #5f0d0d;position: absolute;bottom: 0.2rem;background: #ea644a;left: 50%;margin-left: -33%}
 
 #masking{
-	background: rgba(0,0,0,1);
+	background: rgba(0,0,0,.6);
 }
 .gratis{
     position: fixed;
@@ -560,5 +560,5 @@
 	width:100%;
 	height:auto !important;
 	position: absolute;
-    vertical-align:middle
+    vertical-align:middle;
 }
