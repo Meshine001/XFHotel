@@ -16,19 +16,19 @@
     var _id = decodeURIComponent(fnBase.request("id"));
 	var _status = decodeURIComponent(fnBase.request("status"));
 	console.log('此用户ID：'+_id+'状态：'+_status)
+	//fnBase.keep( 0,"uid",_id);
     //微信用户完善信息
-	if(_id==""||_id==null||_id=="undefined"){
+	if(_status==""||_status==null||_status=="undefined"||_status==1){
 		$("#main_con,#masking").hide(); 
-	}else{
-		 fnBase.keep( 0,"uid",_id);
-	}
-	if(_status==""||_status==null||_status=="undefined"){
-		
 	}else if(_status==0){
 		$("#main_con,#masking").show();
 	}
+	
+	
 	$("#black_houme").click(function(){
-		$("#main_con,#masking").hide();
+		_status=1;
+		$("#masking").hide();
+		$("#main_con").remove();
 	});
 	
 	var resiger={
@@ -120,10 +120,10 @@
 		                	fnBase.myalert(data.content);
 		                    sessionStorage.clear();
 		                    localStorage.clear();
-		                    location=location;
 		                }else{
 		                    fnBase.myalert(data.content)
 		                }
+		                window.location.href = "index.html";
 		            })
 
 

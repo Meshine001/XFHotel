@@ -456,13 +456,14 @@ public class AdminController {
 	@RequestMapping(value = "/house", method = RequestMethod.POST)
 	public @ResponseBody Message addHouse(Long startDate , Long endDate,Long apartmentId,int state){
 		try{
-			Long  day=((startDate-endDate)/1000/60/60/24)+1;
+			Long  day=((endDate-startDate)/1000/60/60/24)+1;
+			Long data=startDate;
 			for(int i=0;i<=day;i++){
-				Long data=startDate;
 				House house = houseService.getHouse(apartmentId, data);
 				if(house!=null){
 					house.setState(state);
 					houseService.update(house);
+					data+=(long) (1000*60*60*24);
 				}else{
 					House house1 = new House();
 					house1.setApartmentId(apartmentId);
