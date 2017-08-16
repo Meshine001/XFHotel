@@ -788,7 +788,8 @@ public class MobileController  {
 			StringBuffer sb = new StringBuffer();
 			sb.append(request.getSession().getServletContext().getRealPath("/"));
 //			System.out.println(sb.toString());
-			String fullPath = fileService.saveFile(file, sb.toString());
+			
+			String fullPath ="http://www.yiyunzn.xyz/images/"+fileService.saveFile(file, sb.toString());
 			if (fullPath != null)
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, fullPath);
 		}
