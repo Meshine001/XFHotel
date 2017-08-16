@@ -159,7 +159,7 @@ function getmsg(){
         if(data.details.avatar==""||data.details.avatar==null){
             $(".header-mobile .link-btn img").attr("src","/images/my-index.png");
         }else{
-            $(".header-mobile .link-btn img").attr("src",Constant.URL+'/images/'+data.details.avatar);
+            $(".header-mobile .link-btn img").attr("src",data.details.avatar);
         }
     });
 }
