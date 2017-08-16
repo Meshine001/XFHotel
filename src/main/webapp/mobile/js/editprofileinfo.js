@@ -4,6 +4,7 @@ $(document).ready(function(){
     var sexVal='';
     var _id=fnBase.huoqu(0,'uid');
     var _status=fnBase.huoqu(0,'status');
+    console.log(_status);
     var sexbtn=$("#Myscroll-body section .sex");
     sexbtn.live('click',function(){
         $("#masking").show(10,function(){
