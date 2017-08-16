@@ -27,25 +27,25 @@ $(document).ready(function(){
 			return;
 		}
 		console.log(_status+"&"+_statime+"&"+ID+"&"+_endtime);
-		$.ajax({
-			type : 'post',
-			dataType : 'json',
-			url:'/admin/house',
-			data : {
-				'state' : _status,
-				'data':_statime,
-				'endDate':_endtime,
-				'apartmentId':ID
-			},
-			error:function(e){
-				alert('修改错误')
-			},
-			success:function(data){
-				console.log(data)
-				alert('修改成功')
-				location=location
-			}
-		})
+//		$.ajax({
+//			type : 'post',
+//			dataType : 'json',
+//			url:'/admin/house',
+//			data : {
+//				'state' : _status,
+//				'startDate':_statime,
+//				'endDate':_endtime,
+//				'apartmentId':ID
+//			},
+//			error:function(e){
+//				alert('修改错误')
+//			},
+//			success:function(data){
+//				console.log(data)
+//				alert('修改成功')
+//				location=location
+//			}
+//		})
 	})
 	
 })
