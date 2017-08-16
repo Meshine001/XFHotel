@@ -38,7 +38,7 @@ var login={
                             'state=index.html#wechat_redirect ';
                         window.location.href = redirect;
                     }else{
-                        window.location.href = "index.html?id="+encodeURIComponent(_uid)+"";
+                        window.location.href = "index.html";
                     }
                 } else {
                     fnBase.myalert(data.content);

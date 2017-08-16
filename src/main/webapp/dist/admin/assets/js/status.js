@@ -4,11 +4,11 @@ $(document).ready(function(){
 	
 	$(".status-time input").on('change',function(){
 		_statime=$(".status-time input").val();
-		_statime= (new Date(_time)).getTime()+ 1000 * 60 * 60 * 4;
+		_statime= (new Date(_statime)).getTime()+ 1000 * 60 * 60 * 4;
 	});
 	$(".status-endtime input").on('change',function(){
 		_endtime=$(".status-endtime input").val();
-		_endtime=(new Date(_time)).getTime()+ 1000 * 60 * 60 * 4;
+		_endtime=(new Date(_endtime)).getTime()+ 1000 * 60 * 60 * 4;
 	});
 	
 	$(".status-house a").click(function(){
@@ -26,7 +26,7 @@ $(document).ready(function(){
 			alert('请您选择要设置的房屋状态')
 			return;
 		}
-		console.log(_status+"&"+_time+"&"+ID);
+		console.log(_status+"&"+_statime+"&"+ID+"&"+_endtime);
 		$.ajax({
 			type : 'post',
 			dataType : 'json',
@@ -34,6 +34,7 @@ $(document).ready(function(){
 			data : {
 				'state' : _status,
 				'data':_statime,
+				'endDate':_endtime,
 				'apartmentId':ID
 			},
 			error:function(e){
