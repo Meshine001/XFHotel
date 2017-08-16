@@ -67,14 +67,29 @@ var alertSearch = {
 
         $(".header-mobile .link-btn").click(function () {
             if (_uid == null || _uid == "undefined" || _uid == "") {
+            	 $(".header-mobile .link-btn img").attr('src',"/images/my-index.png");
                 window.location.href = "login.html";
                 return;
+            }else{
+            	getmsg();
             }
 
         })
     }
 
 };
+function getmsg(){
+    var frontURL=Constant.URL+'/mobile/detailsData';
+    var postData={id:_uid};
+    fnBase.commonAjax(frontURL,postData,function(data){
+        console.log(data);
+        if(data.details.avatar==""||data.details.avatar==null){
+            $(".header-mobile .link-btn img").attr("src","/images/my-index.png");
+        }else{
+            $(".header-mobile .link-btn img").attr("src",data.details.avatar);
+        }
+    });
+}
 
 
 function getData() {
@@ -144,25 +159,9 @@ function getData() {
 
 }
 
-var _uid=fnBase.huoqu(0,"uid");
-if(_uid==null || _uid=="undefined" || _uid==""){
-    $(".header-mobile .link-btn img").attr('src',"/images/my-index.png");
-}else{
-    getmsg();
-}
 
-function getmsg(){
-    var frontURL=Constant.URL+'/mobile/detailsData';
-    var postData={id:_uid};
-    fnBase.commonAjax(frontURL,postData,function(data){
-        console.log(data);
-        if(data.details.avatar==""||data.details.avatar==null){
-            $(".header-mobile .link-btn img").attr("src","/images/my-index.png");
-        }else{
-            $(".header-mobile .link-btn img").attr("src",data.details.avatar);
-        }
-    });
-}
+
+
 
 
 //青舍生活
