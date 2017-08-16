@@ -24,6 +24,7 @@ public interface CustomerService {
 	public CustomerDetails getCustomerDetails(long id);
 	public Customer  getFind(String tel);
 	public void updateBaseInfo(Customer c);
+	public void updateBaseInfo1(CustomerDetails d);
 	
 	
 }

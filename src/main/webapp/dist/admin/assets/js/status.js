@@ -33,7 +33,8 @@ $(document).ready(function(){
 			url:'/admin/house',
 			data : {
 				'state' : _status,
-				'data':_statime,
+				'startDate':_statime,
+				'endDate':_endtime,
 				'apartmentId':ID
 			},
 			error:function(e){

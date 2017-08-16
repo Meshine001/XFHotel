@@ -512,11 +512,15 @@ public class MobileController  {
 //		System.out.println("price:"+price+","+"totalPrice"+totalPrice+"wanhoih");
 		Customer customer =customerService.getCustomer(cusId);
 		CustomerDetails  customerDetails = customerService.getCustomerDetails(cusId);
+		if(customerDetails==null){
+			System.out.println("hahah1");
+		}
 		customerDetails.setTel(cusTel);
 		customerDetails.setIdCard(cusIdCard);
 		customerDetails.setNick(cusName);
 		customer.setTel(cusTel);
-		customerService.register(customer, customerDetails);
+		customerService.updateBaseInfo(customer);
+		customerService.updateBaseInfo1(customerDetails);
 		Order order = orderService.postOrder(cusId, description, roomId, cusName, cusTel, otherCusName, otherCusIdCard, cusIdCard, personal, startTime, endTime, totalDay, price, totalPrice, preferential, needFapiao, apartmentType, couponId);
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("order", order);
@@ -1190,14 +1194,9 @@ public class MobileController  {
 			if (customerService.getCustomer(id)!=null) {
 			Customer c = customerService.getCustomer(id);
 			c.setTel(tel);
-			String content = customerService.changePsd(c.getPassword(), psd, c.getId());
+			c.setPassword(psd);
 			customerService.updateBaseInfo(c);
-			if ("修改成功".equals(content)) {
-				customerService.logout();
-				return new Message(Constants.MESSAGE_SUCCESS_CODE, content);
-			} else {
-				return new Message(Constants.MESSAGE_ERR_CODE, content);
-			}
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
 		}
 			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
 	}

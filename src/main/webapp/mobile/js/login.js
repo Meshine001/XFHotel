@@ -29,8 +29,8 @@ var login={
                     fnBase.keep( 0,"uid",data.content.id);
                     _uid=data.content.id;
                     console.log(data.content);
-                    //若还未经过微信授权
-                    if(data.content.wechatOpenId == null || data.content.wechatOpenId == undefined||data.content.wechatOpenId != null){
+                    //若还未经过微信授权  ||data.content.wechatOpenId != null
+                    if(data.content.wechatOpenId == null || data.content.wechatOpenId == undefined){
                         var redirect = 'https://open.weixin.qq.com/connect/oauth2/authorize?'+
                             'appid=wxfa31f9e4951f95df'+
                             '&redirect_uri=http%3a%2f%2fwww.yiyunzn.xyz%2fwx%2fauth%2fopenId%3fid%3d'+data.content.id+

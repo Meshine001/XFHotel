@@ -71,6 +71,8 @@ public class CustomerServiceImpl implements CustomerService {
 	public String changePsd(String oldPsd, String psd,long id) {
 		Customer c = customerDAO.get(id);
 		if(c.getPassword()==null){
+			c.setPassword(psd);
+			customerDAO.update(c);
 			return "修改成功";
 		}
 		if(c.getPassword().equals(oldPsd)){
@@ -136,6 +138,14 @@ public class CustomerServiceImpl implements CustomerService {
 		// TODO Auto-generated method stub
 		customerDAO.saveOrUpdate(c);
 	}
+	
+	@Transactional
+	@Override
+	public void updateBaseInfo1(CustomerDetails d) {
+		// TODO Auto-generated method stub
+		customerDetailsDAO.saveOrUpdate(d);
+	}
+	
 	@Transactional
 	@Override
 	public List<CustomerDetails> getlist() {

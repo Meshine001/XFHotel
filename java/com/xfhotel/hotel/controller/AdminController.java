@@ -454,18 +454,24 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/house", method = RequestMethod.POST)
-	public @ResponseBody Message addHouse(Long data ,Long apartmentId,int state){
-		House house = houseService.getHouse(apartmentId, data);
+	public @ResponseBody Message addHouse(Long startDate , Long endDate,Long apartmentId,int state){
 		try{
-		if(house!=null){
-			house.setState(state);
-			houseService.update(house);
-		}else{
-			House house1 = new House();
-			house1.setApartmentId(apartmentId);
-			house1.setDate(data);
-			house1.setState(state);
-			houseService.add(house1);
+			Long  day=((startDate-endDate)/1000/60/60/24)+1;
+			for(int i=0;i<=day;i++){
+				Long data=startDate;
+				House house = houseService.getHouse(apartmentId, data);
+				if(house!=null){
+					house.setState(state);
+					houseService.update(house);
+				}else{
+					House house1 = new House();
+					house1.setApartmentId(apartmentId);
+					house1.setDate(data);
+					house1.setState(state);
+					houseService.add(house1);
+					data+=(long) (1000*60*60*24);
+			}
+			
 		}
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
@@ -559,5 +565,5 @@ public class AdminController {
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"设置成功");
 	}
-	
+
 }
