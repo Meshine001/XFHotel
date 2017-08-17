@@ -33,6 +33,7 @@ html,body{background: #fff}
     height: 0.75rem;
     float: left;
     margin-left: 0.1rem;
+    line-height: 0.23rem;
 }
 
 
@@ -46,7 +47,7 @@ html,body{background: #fff}
     color: #fff;
 	padding: 0.1rem;
 }
-.vip_info img{float:left;width: 0.7rem;height: 0.7rem;border-radius: 50%;border: 2px solid #fff}
+.vip_info img{float:left;width: 0.7rem;height: 0.7rem;border-radius: 50%;border: 2px solid rgba(70, 63, 63, 0.07);}
 .vip_info span{
 	display: block;
     width: 1.25rem;

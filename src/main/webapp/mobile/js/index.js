@@ -1,7 +1,16 @@
-﻿$(document).ready(function () {
-
+﻿
+$(document).ready(function () {
+	 var _onesid=decodeURIComponent(fnBase.request("id"));
+	 var _status = decodeURIComponent(fnBase.request("status"));
+	 if(_onesid==""||_onesid=="null"||_onesid=="undefined"){
+		 fnBase.keep(0,'status',1);
+	 }else{
+		 fnBase.keep(0,'uid',_onesid);
+	     fnBase.keep(0,'status',_status);
+		 console.log(_onesid);
+	 };
     // 新注册礼包
-	 $(".Masking-out,.newUser").hide();
+	$(".Masking-out,.newUser").hide();
     var _of=fnBase.huoqu(1,"newUser");
     console.log(_of)
 	if(_of==1){
@@ -10,20 +19,29 @@
 	 $(".newUser i").click(function(){
 		fnBase.keep(1,"newUser",0);
 		$(".Masking-out,.newUser").hide();
-		console.log(fnBase.huoqu(1,"newUser"))
-	})
-	//====================2017/08/15========================
-    var _id = decodeURIComponent(fnBase.request("id"));
-	var _status = decodeURIComponent(fnBase.request("status"));
-	if(_id==""||_id==null||_id=="undefined"){
-		
-	}else{
-		fnBase.keep(0,'uid',_id);
-		fnBase.keep(0,'status',_status);
-	}
+		console.log(fnBase.huoqu(1,"newUser"));
+	});
+	
+	//使用微信头像
+	 var _uid=fnBase.huoqu(0,"uid");
+	 if(_uid==null || _uid=="undefined" || _uid==""){
+	 	$(".header-mobile .link-btn img").attr("src","/images/my-index.png");
+	 }else{
+		 var frontURL=Constant.URL+'/mobile/detailsData';
+	     var postData={id:_uid};
+	     fnBase.commonAjax(frontURL,postData,function(data){
+	         console.log(data);
+	         if(data.details.avatar==""||data.details.avatar==null){
+	             $(".header-mobile .link-btn img").attr("src","/images/my-index.png");
+	         }else{
+	             $(".header-mobile .link-btn img").attr("src",data.details.avatar);
+	         }
+	     });
+	 };
+
 	
 	
-	//========================================================
+	
     scrollNav();
     getData();
     alertSearch.info();
@@ -123,7 +141,7 @@ function getData() {
             function () {
                 var id = $(this).attr('proID');
                 var isoff = $(this).attr('offer');
-                window.location.href = "house_particulars.html?id=" + encodeURIComponent(id) + "&offer=" + encodeURIComponent(isoff);
+                window.location.href = "house_particulars.html?id=" + encodeURIComponent(id) + "";
             }
         );
         $('.title-serce ').unbind('click').click(
@@ -144,25 +162,7 @@ function getData() {
 
 }
 
-var _uid=fnBase.huoqu(0,"uid");
-if(_uid==null || _uid=="undefined" || _uid==""){
-   
-}else{
-    getmsg();
-}
 
-function getmsg(){
-    var frontURL=Constant.URL+'/mobile/detailsData';
-    var postData={id:_uid};
-    fnBase.commonAjax(frontURL,postData,function(data){
-        console.log(data);
-        if(data.details.avatar==""||data.details.avatar==null){
-            $(".header-mobile .link-btn img").attr("src","/images/my-index.png");
-        }else{
-            $(".header-mobile .link-btn img").attr("src",data.details.avatar);
-        }
-    });
-}
 
 
 //青舍生活

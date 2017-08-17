@@ -22,9 +22,6 @@ $(document).ready(function(){
     });
     var personpic='';
 
-    //$('#formid #inputfile').change(function(){
-    //   $('#formid').submit();
-    //});
 
     //~~~~~~~~~~~~~~~~~~~~~~~~
     
@@ -50,20 +47,15 @@ $(document).ready(function(){
         });
     });
 
-
-
-
-    //~~~~~~~~~~~~~~~~~~~~~~~~~
 //==================8.16=====================================
 
     $("#IPlocad").click(function(){
     	if(_status==0){
     		$("#main_con,#masking").show();
     	}else if(_status==1){
-    		fnBase.myalert('您已认证、')
+    		fnBase.myalert('您已完善过账号密码信息')
     	}
-    	
-    })
+    });
     	
 	$("#black_houme").click(function(){
 		$("#masking,#main_con").hide();
@@ -198,10 +190,10 @@ $(document).ready(function(){
         var _nickNameInput=$("#fillNick").val();
         var frontURL=Constant.URL+'/mobile/modify';
         var postData={
-            "avatar":commersrc,
+            "avatar":$("#avatar").attr('src'),
             "customerId":_uid,
             "nick":_nickNameInput,
-            "sex":sexVal,
+            "sex":$("#Sex").text(),
             "tel":$("#tel").val(),
             "idCard":$("#idCard").val(),
             "job":$("#job").val(),

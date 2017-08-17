@@ -90,10 +90,12 @@ function list(page) {
 				data.results[i].endTime+'</td><td>'+data.results[i].totalDay+'</td><td>'+data.results[i].price+'</td><td>'+data.results[i].totalPrice+'</td><td>'+data.results[i].preferential+'</td>'
 				if(data.results[i].status=='确认中'){
 					str+='<td><a href="javascript:;" class="btn comfirm-order" data-id="'+data.results[i].id+'">确认订单</a><a href="javascript:;" class="btn close-order" data-id="'+data.results[i].id+'">关闭订单</a></td>'
-				}
-				if(data.results[i].status=='退租确认中'){
+				}else if(data.results[i].status=='退租确认中'){
 					str+='<td><a href="javascript:;" class="btn comfirmOutLease-order" data-id="'+data.results[i].id+'">确认退租</a></td>';
+				}else{
+					str+='<td></td>'
 				}
+				
 				str+='</tr>'
 					
 			}
@@ -393,7 +395,8 @@ $("#list").on('click','tr',function(){
 					 $(".detailWraper .clean .zanwu").show();
 				};
 			}
-	  })
+	  });
+	
 	 $('.masking').show();
 	 $(".orderDetail").addClass('hover');
 })
