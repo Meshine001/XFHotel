@@ -505,4 +505,13 @@ public class ApartmentServiceImpl implements ApartmentService {
 		System.out.println(sd.format(DateUtil.getStartTime()));
 		System.out.println(sd.format(cal.getTime()));
 	}
+
+	
+	@Transactional
+	@Override
+	public List<Apartment> steward(Long steward) {
+		String hqlString = "from Apartment where steward=?";
+		Object[] values = {steward};
+		return apartmentDAO.getListByHQL(hqlString, values);
+	}
 }

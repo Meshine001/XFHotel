@@ -65,6 +65,8 @@ public interface ApartmentService extends BaseService<Apartment, Long> {
 	
 	public List<Apartment> landlord(Long affiliation);
 	
+	public List<Apartment> steward(Long steward);
+	
 	public double GetDistance(double lat1, double lng1, double lat2, double lng2) ;
 	
 	
