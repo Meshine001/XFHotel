@@ -76,18 +76,25 @@ public class UserController {
 		}
 	return new Message(Constants.MESSAGE_SUCCESS_CODE,"修改成功");
 	}
-	//查询所有房屋
+	//查询所有用户
 	@RequestMapping(value = "/all", method = RequestMethod.POST)
-	public @ResponseBody List<User> all(){
+	public @ResponseBody Message all(){
 		List<User> list = userService.list();
-		return list;
+		try{	
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
 	}
+return new Message(Constants.MESSAGE_SUCCESS_CODE,list);
+}
 	
 	//查询某个地方的房屋
 	@RequestMapping(value = "/getRoom", method = RequestMethod.POST)
-	public @ResponseBody ArrayList<Object> getRoom(int wei){
+	public @ResponseBody Message getRoom(int wei){
 		List<Apartment> list = apartmentService.getApartments1();
 		ArrayList<Object> list1 = new ArrayList<Object>();
+		try{
 		for(Apartment apartment :list){
 			String weizhi = apartment.getPosition().getString("xa_wei_zhi");
 			int i =0;
@@ -106,8 +113,13 @@ public class UserController {
 				list1.add(apartment);
 			}
 		}
-		return list1;
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
 	}
+return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);
+}
 	
 	//分配房屋
 	@RequestMapping(value = "/allocation", method = RequestMethod.POST)
