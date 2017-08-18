@@ -41,11 +41,11 @@ public class UserController {
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-		return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+		return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
 	}
-		return new Message(Constants.MESSAGE_SUCCESS_CODE,"修改成功");
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,"添加成功");
 	}
-	
+	//修改
 	@RequestMapping(value = "/amend", method = RequestMethod.POST)
 	public @ResponseBody Message amend(Long id,String username,String psd,String tel,int authority){
 		try{
@@ -53,7 +53,9 @@ public class UserController {
 		user.setAuthority(authority);
 		user.setContact(tel);
 		user.setUsername(username);
-		user.setPassword(psd);
+		if(psd!=null){
+			user.setPassword(psd);
+		}
 		userService.update(user);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
@@ -141,5 +143,18 @@ return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);
 			return new Message(Constants.MESSAGE_ERR_CODE, "分配失败");
 		}
 	return new Message(Constants.MESSAGE_SUCCESS_CODE,"分配成功");
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public @ResponseBody Message delete(Long id){
+		try{	
+			User list = userService.findById(id);
+			userService.delete(list);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "删除失败");
+	}
+return new Message(Constants.MESSAGE_SUCCESS_CODE,"删除成功");
 	}
 }
