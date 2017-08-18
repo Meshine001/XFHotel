@@ -102,7 +102,7 @@
 						<div class="form-group">
 							<label  class="col-sm-2 control-label">登录账号</label>
 							<div class="col-sm-10">
-								<input type="email" class="form-control" id="setinputzh" placeholder="Account" value="安多民">
+								<input type="email" class="form-control" id="setinputzh" placeholder="Account" value="">
 							</div>
 						 </div>
 						<div class="form-group">
@@ -190,7 +190,7 @@
 								<td>${order.time}</td>
 								<td>${order.status}</td>
 								<td>
-					 			<a href="javascript:;" title="关闭启用">关闭</a>
+					 			<a href="javascript:;" title="关闭启用" class="setStatus">关闭</a>
 					 			<a href="javascript:;" title="修改信息" class="setip">修改</a>
 					 			<a href="javascript:;" title="删除用户" class="removeip">删除</a>
 					 		</td>
@@ -270,7 +270,7 @@
 	    //1删除removeip
 	    $("#p-table").on('click','tr td .removeip',function(){
 			$(".removeIp").fadeIn();
-			persons=$(this).parent().parent().attr('pid')
+			persons=$(this).parent().parent().attr('pid');
 		})
 		//2确认删除removeip
 		$("#removeIp").click(function(){
@@ -282,17 +282,17 @@
 		    console.log(persons);
 		    $(".modallg").fadeOut();
 			var url = '../admin/user/delete';
-			var id = $(this).attr('order-id');
 			$.ajax({
 				type : 'POST',
 				dataType : 'json',
 				data : {
-					'id' : id,
+					'id' : persons,
 			    },
 				url : url,
 				success : function(data) {
 					console.log(data)
-				if(data.statusCode == 1){
+					if(data.statusCode == 1){
+						alert(data.content)
 		                $(".modallg").fadeOut();
 						location=location;
 					}else{
@@ -309,9 +309,12 @@
 		});
 		$("#p-table").on('click','tr td .setip',function(){//获取现在账号信息
 			persons=$(this).parent().parent().attr('pid');
+		    var name=$(this).parent().parent().attr('name');
+		    var tel=$(this).parent().parent().attr('tel');
+		    $("#setinputzh").val(name);
+		    $("#setinputdh").val(tel);
 			$(".setingip").fadeIn();
 			$("#setadminIp").attr('disabled','disabled');
-			
 		})
 		$("#setadminIp").click(function(){//提交修改内容
 			var _name=$("#setinputzh").val();
@@ -319,14 +322,24 @@
 			var _date=$("#setipmassage option:selected").attr("ip");
 			var _tel=$("#setinputdh").val();
 			var postData={
-					'A':_name,
-					'B':_password,
-					'C':_date,
-					'D':_tel,
-					'E':persons
+					'username':_name,
+					'psd':_password,
+					'authority':_date,
+					'tel':_tel,
+					'id':persons
 			}
 			console.log(postData);
-			
+			$.ajax({
+				type:'post',
+				dataType:'json',
+				data:postData,
+				url:'/admin/user/amend',
+				success:function(data){
+					console.log(data)
+					alert(data.content);
+					location=location;
+				}
+			})
 		})
 		
 		
