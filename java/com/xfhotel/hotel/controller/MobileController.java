@@ -1107,7 +1107,6 @@ public class MobileController  {
 			String[] p = {tel.toString()};
 			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_APPLY, systemConfiService.getConfig().getSms(), p);	
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "发布失败");
 		}
@@ -1207,5 +1206,3 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
 	}
 }
-
-

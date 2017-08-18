@@ -20,8 +20,6 @@ public class Apartment {
 	public final static int TYPE_APARTMENT = 2;
 	public final static int TYPE_PLAY_ROOM = 3;
 	
-	
-	
 	@Id
 	@GeneratedValue(generator = "apartmentgenerator")
 	@GenericGenerator(name = "apartmentgenerator", strategy = "increment")

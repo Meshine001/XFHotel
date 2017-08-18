@@ -32,6 +32,10 @@ public class UserController {
 	public @ResponseBody Message add(String username,String psd,String tel,int authority){
 		try{
 		User user= new User();
+		List<User> user1 = userService.gtelogin(username);
+		if(user1.size()>0){
+			return new Message(Constants.MESSAGE_ERR_CODE, "该昵称已有人使用");
+		}
 		user.setAuthority(authority);
 		user.setContact(tel);
 		user.setUsername(username);
@@ -145,6 +149,7 @@ return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);
 	return new Message(Constants.MESSAGE_SUCCESS_CODE,"分配成功");
 	}
 	
+	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public @ResponseBody Message delete(Long id){
 		try{	
@@ -169,5 +174,5 @@ return new Message(Constants.MESSAGE_SUCCESS_CODE,"删除成功");
 		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
 	}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,list);
-}
+	}
 }
