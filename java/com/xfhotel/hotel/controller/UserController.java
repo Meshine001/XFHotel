@@ -88,7 +88,7 @@ public class UserController {
 		e.printStackTrace();
 		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
 	}
-return new Message(Constants.MESSAGE_SUCCESS_CODE,list);
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,list);
 }
 	
 	//查询某个地方的房屋
@@ -157,4 +157,17 @@ return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);
 	}
 return new Message(Constants.MESSAGE_SUCCESS_CODE,"删除成功");
 	}
+	
+	//查询管理员所管理房屋
+	@RequestMapping(value = "/steward", method = RequestMethod.POST)
+	public @ResponseBody Message steward( Long id){
+		List<Apartment> list = apartmentService.steward(id);
+		try{	
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
+	}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,list);
+}
 }
