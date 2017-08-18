@@ -18,22 +18,7 @@
 		<div class="detailTitle">订单详情<span class="close">X</span></div>
 		<div class="detailWraper">
 			<table class="zfhouse">
-			
-				<!-- 
-				<tr>
-					<td>查看每日房价</td>
-					<td style="clear:both;width:100%">
-						<ul id="everyDateprice">
-							<li><span>2017-06-20</span><span>￥200</span></li>
-							<li><span>2017-06-20</span><span>￥200</span></li>
-							<li><span>2017-06-20</span><span>￥200</span></li>
-							<li><span>2017-06-20</span><span>￥200</span></li>
-						</ul>
-					</td>
-				</tr>
-				 -->
-				
-			
+							
 			</table>
 			
 			<table class="clean">
@@ -43,6 +28,9 @@
 				<tr class="zanwu" style="display:none;color:#dd4a4a"><td>暂时没有保洁服务订单</td></tr>
 			</table>
 			
+			<table class="">
+			
+			</table>
 		</div>	
 	</div>
 	

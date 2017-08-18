@@ -9,19 +9,29 @@ $(document).ready(function () {
 	     fnBase.keep(0,'status',_status);
 		 console.log(_onesid);
 	 };
-    // 新注册礼包
-	$(".Masking-out,.newUser").hide();
-    var _of=fnBase.huoqu(1,"newUser");
-    console.log(_of)
-	if(_of==1){
-    	$(".Masking-out,.newUser").show();
-    };
-	 $(".newUser i").click(function(){
-		fnBase.keep(1,"newUser",0);
-		$(".Masking-out,.newUser").hide();
-		console.log(fnBase.huoqu(1,"newUser"));
-	});
-	
+	 
+    // 新注册礼包  discounts
+	 var discounts=decodeURIComponent(fnBase.request("discounts"));
+	 if(discounts==0){
+		 $(".newUser").show();
+	 }else{
+		 $(".newUser").hide();
+	 }
+
+	 $(".newUser .nest").click(function(){
+			$(".newUser .item1").animate({left:'-50%'},1000);
+			$(".newUser .item2").animate({left:'50%'},1000);
+			$(this).hide();
+			$(".newUser .begin").show();
+	 });
+	 $(".newUser .begin").click(function(){
+			$(".newUser").hide();
+	 });
+		
+
+
+		 
+
 	//使用微信头像
 	 var _uid=fnBase.huoqu(0,"uid");
 	 if(_uid==null || _uid=="undefined" || _uid==""){
