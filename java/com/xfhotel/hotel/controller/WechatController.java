@@ -250,7 +250,7 @@ public class WechatController {
 						customer.setRegTime(new Date().getTime());
 						customer.setLevel(0);
 						customerService.register(customer, details);
-						Customer c1 = customerService.getCustomer(c.getId());
+						Customer c1 = customerService.getCustomer(customer.getId());
 						Calendar calendar = Calendar.getInstance();
 				        Date date = new Date(System.currentTimeMillis());
 				        calendar.setTime(date);
