@@ -172,11 +172,17 @@
 		
 	})
 	   $("#endDate2").bind('input propertychange', function() {
-		   DateDiff($("#endDate2").val(),$("#stateDate2").val());
+		   if($("#stateDate2").val()==""){
+				 return
+			  }else{
+				 DateDiff($("#endDate2").val(),$("#stateDate2").val());  
+		   }
 	   });
 	  $("#stateDate2").bind('input propertychange', function() {
-		  if($("#endDate2").val()!=""){
-			  DateDiff($("#endDate2").val(),$("#stateDate2").val());
+		  if($("#endDate2").val()==""){
+			 return
+		  }else{
+			 DateDiff($("#endDate2").val(),$("#stateDate2").val());  
 		  }
 	   });
 	 

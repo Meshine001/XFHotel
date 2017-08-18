@@ -35,6 +35,12 @@ html,body{background: #fff}
     margin-left: 0.1rem;
     line-height: 0.23rem;
 }
+#personMan .ctxt p{
+   overflow: hidden; 
+   text-overflow: ellipsis;
+   white-space: nowrap;
+	
+}
 .vip_info .tit{
 	position: absolute;
 	top:0;
@@ -46,7 +52,7 @@ html,body{background: #fff}
     padding: 0.1rem;
 	
 }
-.vip_info img{float:left;width: 0.7rem;height: 0.7rem;border-radius: 50%;}
+.vip_info img{float:left;width: 0.7rem;height: 0.7rem;border-radius: 50%;border:2px solid rgba(70, 63, 63, 0.07);}
 .vip_info span{
 	display: block;
     width: 1.25rem;

@@ -35,31 +35,11 @@
         }
      	.swiper-container-life{ width: 3.75rem; height: 3.2rem;overflow: hidden; }
         .swiper-container-life .swiper-slide{ width: 3.75rem; height: 3.2rem; }
-        
-        #sc{
-		  width: 1rem;
-		  height: 1rem;
-		  border-radius: 50%;
-		  position: absolute;
-		  border:2px solid red;
-		  border-color: red red transparent transparent;
-		  animation: spin .8s linear infinite;
-		}
-
-		@keyframes spin {
-		0% {
-			transform:rotate(0deg);
-		 }
-		 100% {
-			transform:rotate(-360deg);
-		 }
-		}
-        
+         
     </style>
     
 </head>
 <body style="display:none">
-	<span id="sc"></span>
 <!--蒙版-->
     <div class="menuBar">
         <ul>
@@ -67,9 +47,7 @@
             <li><span class="czs-paper"></span><a href="myorder.html">我的订单</a></li>
             <li><span class="czs-link-l"></span><a href="serve.html">服务中心</a></li>
             <li><span class="czs-calendar-l"></span><a href="coupon.html">我的优惠卷</a></li>
-            
             <li><span class="czs-user-l"></span><a href="platform.html">房屋托管平台</a></li>
-             
             <li><span class="czs-cloud-l"></span><a href="Lifelist.html">青舍生活</a></li>
             <li><span class="czs-setting-l"></span><a href="editprofileinfo.html">设置</a></li>
             <li><span class="czs-write-l"></span><a href="login.html">登陆|注册</a></li>
@@ -77,9 +55,11 @@
         <h3 class="_logo"><img src="images/logo1.png"></h3>
     </div>
     <div class="Masking-out"></div>
-    <div class="newUser">
-       <img src="img/newp.png">
-       <i>+</i>
+   <div class="newUser">
+       <img src="img/newp.png" class="item1">
+       <img src="img/tishi.png" class="item2">
+       <i class="nest">下一步</i>
+       <i class="begin">立即使用</i>
     </div>
 <!--Address-search-->
 

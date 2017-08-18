@@ -37,7 +37,7 @@ $(document).ready(function(){
         if(data.details.avatar==""||data.details.avatar==null){
             $(".vip_info #personMan div img").attr("src",Constant.URL+"/images/face-90x90.png");
         }else{
-        	$(".vip_info #personMan div img").attr("src",Constant.URL+'/images/'+data.details.avatar);
+        	$(".vip_info #personMan div img").attr("src",data.details.avatar);
         }
 
 //        //未支付的订单数

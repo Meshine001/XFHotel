@@ -74,9 +74,10 @@ background:#56216f;
     width: 3rem;
     background: url(../images/block80.png);
     position: fixed;
-    left: 0.35rem;
+    left:50%;
     top:50%;
     height:0.6rem;
+    margin-left:-1.5rem;
     border-radius:10px;
     -webkit-transform: translateY(-50%);
 }
