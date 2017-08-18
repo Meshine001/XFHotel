@@ -213,12 +213,12 @@
 										<h4 class="username">Scott White</h4>
 									</div>
 									<ul class="action">
-										<li><a href="#"> Profile </a></li>
+									<!--<li><a href="#"> Profile </a></li>
 										<li><a href="#"> <span
 												class="badge badge-danger pull-right">5</span> My Inbox
 										</a></li>
-										<li><a href="#"> Setting </a></li>
-										<li><a href="#"> Logout </a></li>
+										<li><a href="#"> Setting </a></li> -->
+										<li><a href="#" id="loginout"> 退出登录 </a></li>
 									</ul>
 								</div></li>
 						</ul>
@@ -241,5 +241,16 @@
 	<script type="text/javascript"
 		src="<%=basePath%>/dist/admin/assets/js/app.js"></script>
 	<sitemesh:write property='my_script' />
+	<script>
+		$(document).ready(function(){
+			$("#loginout").click(function(){//退出登录
+				  sessionStorage.clear();
+			      localStorage.clear();
+			      setTimeout(function(){
+			           window.location.href="../login";
+			      },300)  
+			})
+		})
+	</script>
 </body>
 </html>

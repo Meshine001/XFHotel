@@ -14,7 +14,7 @@ $(document).ready(function () {
 	 var discounts=decodeURIComponent(fnBase.request("discounts"));
 	 if(discounts==0){
 		 $(".newUser").show();
-	 }else{
+	 }else if(discounts==null||discounts=="undefined"){
 		 $(".newUser").hide();
 	 }
 
