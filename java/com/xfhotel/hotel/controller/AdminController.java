@@ -117,10 +117,10 @@ public class AdminController {
 	// 7.2房态end
 	
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPage() {
-		return "/admin/login";
-	}
+//	@RequestMapping(value = "/login", method = RequestMethod.GET)
+//	public String loginPage() {
+//		return "/admin/login";
+//	}
 	//..2.28保洁服务...
 	@RequestMapping(value = "/customer_baojie", method = RequestMethod.GET)
 	public String baojie() {
@@ -277,11 +277,19 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(User user,HttpSession session){
-		User u = userService.getUser(user.getUsername(),user.getPassword());
-		if(null == u) return "/admin/login";
-		session.setAttribute(Constants.ADMIN_SESSION_ATTR, u);
-		return "redirect:/admin/dashboard";
+	public @ResponseBody Message login(String userName,String password){
+		User u = userService.login(userName, password);
+		if (u != null) {
+			User c = new User();
+			c.setId(u.getId());
+			c.setAuthority(u.getAuthority());
+			c.setUsername(u.getUsername());
+			c.setDate(u.getDate());
+			c.setStatus(u.getStatus());
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, c);
+		} else {
+			return new Message(Constants.MESSAGE_ERR_CODE, "账号或密码错误");
+		}
 	}
 	
 	@RequestMapping(value = "customer_list")
@@ -354,13 +362,13 @@ public class AdminController {
 //		return new Message(Constants.MESSAGE_SUCCESS_CODE, "设置成功");
 //	}
 //	
-	public String login(User user) {
-		User u = userService.getUser(user.getUsername(), user.getPassword());
-		if (null == u)
-			return "/admin/login";
-		session.setAttribute(Constants.ADMIN_SESSION_ATTR, u);
-		return "/admin/dashboard";
-	}
+//	public String login(User user) {
+//		User u = userService.getUser(user.getUsername(), user.getPassword());
+//		if (null == u)
+//			return "/admin/login";
+//		session.setAttribute(Constants.ADMIN_SESSION_ATTR, u);
+//		return "/admin/dashboard";
+//	}
 	@RequestMapping(value = "/sendlist", method = RequestMethod.POST)
 	public @ResponseBody Message sendlist(String startTime,String endTime,int type,Double cValue,String rule,Long Id[]) {
 		try {

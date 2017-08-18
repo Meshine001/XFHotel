@@ -137,6 +137,7 @@ public class MobileController  {
 	@Autowired
 	TripOrderService tripOrderService;
 	
+	
 
 	/**
 	 * 房屋
@@ -512,9 +513,7 @@ public class MobileController  {
 //		System.out.println("price:"+price+","+"totalPrice"+totalPrice+"wanhoih");
 		Customer customer =customerService.getCustomer(cusId);
 		CustomerDetails  customerDetails = customerService.getCustomerDetails(cusId);
-		if(customerDetails==null){
-			System.out.println("hahah1");
-		}
+
 		customerDetails.setTel(cusTel);
 		customerDetails.setIdCard(cusIdCard);
 		customerDetails.setNick(cusName);
@@ -617,8 +616,7 @@ public class MobileController  {
 		int ep = pr.getPageCount();
 		if ( (sp-Constants.pagesize/2) > 0){
 			sp = sp-Constants.pagesize/2;
-		}
-		else{
+		}else{
 			sp=1;
 		}
 		if( (sp+Constants.pagesize-1) < ep ){
@@ -811,11 +809,12 @@ public class MobileController  {
 		String lock_no = basic.getString("suo_di_zhi");
 		 lockService.viewPassword(phone, lock_no);
 		Map< String, Object> map = new HashMap<String, Object>();
-		map.put("pwd_text",  lockService.viewPassword(phone, lock_no));
-		System.out.println(lockService.viewPassword(phone, lock_no));
+		map.put("pwd_text",  lockService.viewPassword(phone, lock_no ));
+		System.out.println(lockService.viewPassword(phone, lock_no ));
 		return map ;
 	}
 	
+
 	/**
 	 * 退租
 	 * @param orderId
