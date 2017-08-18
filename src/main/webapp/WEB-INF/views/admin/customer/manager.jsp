@@ -182,7 +182,7 @@
 					
 					<tbody id="p-table">
 						<c:forEach items="${orders}" var="order">
-							<tr pid="${order.id}">
+							<tr pid="${order.id}" name="${order.username}" types="${order.authority}" tel="${order.contact}">
 								<td>${order.id}</td>
 								<td>${order.username}</td>
 								<td>${order.authority}</td>
@@ -199,35 +199,6 @@
 						</c:forEach>
 					</tbody>
 					 
-					 <!--  
-					 <tbody id="p-table">
-					 	<tr pid="0">
-					 		
-					 		<td>1</td>
-					 		<td>pertay</td>
-					 		<td>管理员</td>
-					 		<td>13022927976</td>
-					 		<td>2017/08/08 09:20</td>
-					 		<td><i class="status">已启用</i></td>
-					 		
-					 		<td><a href="javascript:;" title="查看房屋信息">查看</a></td>
-					 	</tr>
-					 		<tr pid="1">
-					 		
-					 		<td>1</td>
-					 		<td>admin2</td>
-					 		<td>管理员</td>
-					 		<td>13022927933</td>
-					 		<td>2017/08/08 09:20</td>
-					 		<td><i class="">已关闭</i></td>
-					 		<td>
-					 			<a href="javascript:;" title="关闭启用">开启</a>
-					 			<a href="javascript:;" title="修改信息" class="setip">修改</a>
-					 			<a href="javascript:;" title="删除用户" class="removeip">删除</a>
-					 		</td>
-					 		<td><a href="javascript:;" title="查看房屋信息">查看</a></td>
-					 	</tr>
-					 </tbody>	-->
 				</table>
 			
 				
@@ -259,16 +230,8 @@
 		})
 		//2检查用户名是否重复
 		$("#inputzh").blur(function(){
-			alert($(this).val())
-			$.ajax({
-				type:'post',
-				dataType:'JSON',
-				url:'',
-				data:{name:$(this).val()},
-				success:function(data){
-					console.log(data);
-				}
-			})
+		//	 alert($(this).val())
+		
 		})
 		//3确认创建
 		$("#newIp").click(function(){
@@ -281,12 +244,22 @@
 				alert('请填写上述完整信息')
 			}else{
 				var postdata={
-						'a':account,
-						'b':password,
-						'c':ip,
-						'e':tel
+						'username':account,
+						'psd':password,
+						'authority':ip,
+						'tel':tel
 				}
-				console.log(postdata)
+				console.log(postdata);
+				$.ajax({
+					type:'POST',
+					dataType:'json',
+					data:postdata,
+					url:'/admin/user/add',
+					success:function(data){
+						console.log(data);
+						//location=location;
+					}
+				})
 			}
 			
 		})
@@ -308,25 +281,25 @@
 		    }
 		    console.log(persons);
 		    $(".modallg").fadeOut();
-	//		var url = '../landlord/ApplyOrder';
-	//		var id = $(this).attr('order-id');
-	//		$.ajax({
-	//			type : 'POST',
-	//			dataType : 'json',
-	//			data : {
-	//				'id' : id,
-	//			},
-	//			url : url,
-	//			success : function(data) {
-	//				console.log(data)
-	//				if(data.statusCode == 1){
-	//	                $(".modallg").fadeOut();
-	//					location=location;
-	//				}else{
-	//					alert(data.content);
-	//				}
-	//			}
-	//		});
+			var url = '../admin/user/delete';
+			var id = $(this).attr('order-id');
+			$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					'id' : id,
+			    },
+				url : url,
+				success : function(data) {
+					console.log(data)
+				if(data.statusCode == 1){
+		                $(".modallg").fadeOut();
+						location=location;
+					}else{
+						alert(data.content);
+					}
+				}
+			});
 			
 		})
 		
@@ -336,7 +309,6 @@
 		});
 		$("#p-table").on('click','tr td .setip',function(){//获取现在账号信息
 			persons=$(this).parent().parent().attr('pid');
-			
 			$(".setingip").fadeIn();
 			$("#setadminIp").attr('disabled','disabled');
 			
