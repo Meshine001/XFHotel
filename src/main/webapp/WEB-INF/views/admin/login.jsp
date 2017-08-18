@@ -52,21 +52,21 @@
 									<span class="highlight">青舍都市</span> Admin
 								</div>
 							</div>
-							<form action="<%=basePath%>/admin/login" method="post" id="login-form">
+							<form id="login-form">
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon1"> <i
 										class="fa fa-user" aria-hidden="true"></i></span> <input type="text"
-										class="form-control" placeholder="用户名"
+										class="form-control" placeholder="用户名" id="username"
 										aria-describedby="basic-addon1" name="username">
 								</div>
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon2"> <i
 										class="fa fa-key" aria-hidden="true"></i></span> <input type="password"
-										class="form-control" placeholder="密  码"
+										class="form-control" placeholder="密  码" id="password"
 										aria-describedby="basic-addon2" name="password">
 								</div>
 								<div class="text-center">
-									<input type="submit" class="btn btn-success btn-submit"
+									<input type="submit" class="btn btn-success btn-submit" id="beginlogin"
 										value="登录">
 								</div>
 							</form>
@@ -98,9 +98,30 @@
 		src="<%=basePath%>/dist/admin/assets/js/app.js"></script>
 
 	<script type="text/javascript">
-		$('.btn-submit').click(function(){
-			$('#login-form').submit();
-		});
+		$(document).ready(function(){
+			$("#beginlogin").click(function(){
+				var userName=$("#username").val();
+				var password=$("#password").val();
+				if(userName==""||password==""){
+					alert('请输入账号密码')
+				}else{
+					$.ajax({
+						type:'post',
+						dataType:'json',
+						data:{'userName':userName,'password':password},
+						url:'../admin/login/',
+						success:function(data){
+							cosole.log(data);
+							window.location.href='/admin/dashboard/';
+						}
+					})
+				}
+			})
+
+		})
+	
+	
+		
 	</script>
 </body>
 
