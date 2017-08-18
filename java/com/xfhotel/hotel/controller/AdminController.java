@@ -117,10 +117,10 @@ public class AdminController {
 	// 7.2房态end
 	
 	
-//	@RequestMapping(value = "/login", method = RequestMethod.GET)
-//	public String loginPage() {
-//		return "/admin/login";
-//	}
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginPage() {
+		return "/admin/login";
+	}
 	//..2.28保洁服务...
 	@RequestMapping(value = "/customer_baojie", method = RequestMethod.GET)
 	public String baojie() {
