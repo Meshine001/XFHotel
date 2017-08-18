@@ -29,7 +29,8 @@ public class UserController {
 
 	//添加管理员角色
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public @ResponseBody User add(String username,String psd,String tel,int authority){
+	public @ResponseBody Message add(String username,String psd,String tel,int authority){
+		try{
 		User user= new User();
 		user.setAuthority(authority);
 		user.setContact(tel);
@@ -37,21 +38,65 @@ public class UserController {
 		user.setPassword(psd);
 		user.setStatus(0);
 		userService.add(user);
-		return user;
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
 	}
-	
-	//查询所有房屋
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,"添加成功");
+	}
+	//修改
+	@RequestMapping(value = "/amend", method = RequestMethod.POST)
+	public @ResponseBody Message amend(Long id,String username,String psd,String tel,int authority){
+		try{
+		User user= userService.findById(id);
+		user.setAuthority(authority);
+		user.setContact(tel);
+		user.setUsername(username);
+		if(psd!=null){
+			user.setPassword(psd);
+		}
+		userService.update(user);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+	}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,"修改成功");
+	}
+	//修改转态
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public @ResponseBody Message update(Long id,int status){
+		try {
+		User user= userService.findById(id);
+		user.setStatus(status);
+		userService.update(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+		}
+	return new Message(Constants.MESSAGE_SUCCESS_CODE,"修改成功");
+	}
+	//查询所有用户
 	@RequestMapping(value = "/all", method = RequestMethod.POST)
-	public @ResponseBody List<User> all(){
+	public @ResponseBody Message all(){
 		List<User> list = userService.list();
-		return list;
+		try{	
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
 	}
+return new Message(Constants.MESSAGE_SUCCESS_CODE,list);
+}
 	
 	//查询某个地方的房屋
 	@RequestMapping(value = "/getRoom", method = RequestMethod.POST)
-	public @ResponseBody ArrayList<Object> getRoom(int wei){
+	public @ResponseBody Message getRoom(int wei){
 		List<Apartment> list = apartmentService.getApartments1();
 		ArrayList<Object> list1 = new ArrayList<Object>();
+		try{
 		for(Apartment apartment :list){
 			String weizhi = apartment.getPosition().getString("xa_wei_zhi");
 			int i =0;
@@ -70,8 +115,13 @@ public class UserController {
 				list1.add(apartment);
 			}
 		}
-		return list1;
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
 	}
+return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);
+}
 	
 	//分配房屋
 	@RequestMapping(value = "/allocation", method = RequestMethod.POST)
@@ -93,5 +143,18 @@ public class UserController {
 			return new Message(Constants.MESSAGE_ERR_CODE, "分配失败");
 		}
 	return new Message(Constants.MESSAGE_SUCCESS_CODE,"分配成功");
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public @ResponseBody Message delete(Long id){
+		try{	
+			User list = userService.findById(id);
+			userService.delete(list);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "删除失败");
+	}
+return new Message(Constants.MESSAGE_SUCCESS_CODE,"删除成功");
 	}
 }

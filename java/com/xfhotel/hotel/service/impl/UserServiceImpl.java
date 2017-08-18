@@ -58,6 +58,14 @@ public class UserServiceImpl implements UserService{
 		String[] values = { username, password };
 		return  userDAO.getByHQL(hql, values);
 	}
+	
+	@Transactional
+	@Override
+	public List<User> gtelogin(String username) {
+		String hql = "from User where username = ?";
+		String[] values = { username };
+		return  userDAO.getListByHQL(hql, values);
+	}
 
 
 
