@@ -27,6 +27,7 @@ public class UserController {
 	@Autowired
 	ApartmentService apartmentService;
 
+	//添加管理员角色
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody User add(String username,String psd,String tel,int authority){
 		User user= new User();
@@ -39,13 +40,15 @@ public class UserController {
 		return user;
 	}
 	
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	//查询所有房屋
+	@RequestMapping(value = "/all", method = RequestMethod.POST)
 	public @ResponseBody List<User> all(){
 		List<User> list = userService.list();
 		return list;
 	}
 	
-	@RequestMapping(value = "/getRoom", method = RequestMethod.GET)
+	//查询某个地方的房屋
+	@RequestMapping(value = "/getRoom", method = RequestMethod.POST)
 	public @ResponseBody ArrayList<Object> getRoom(int wei){
 		List<Apartment> list = apartmentService.getApartments1();
 		ArrayList<Object> list1 = new ArrayList<Object>();
@@ -70,6 +73,7 @@ public class UserController {
 		return list1;
 	}
 	
+	//分配房屋
 	@RequestMapping(value = "/allocation", method = RequestMethod.POST)
 	public @ResponseBody  Message allocation(Long id ,Long roomId[]) {
 	try {	
