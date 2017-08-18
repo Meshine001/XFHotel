@@ -85,10 +85,31 @@ public class User {
 		Map info = new HashMap();
 		info.put("id", id);
 		info.put("username", username);
-		info.put("authority", authority);
-		info.put("time", DateUtil.format(new Date(date), "yyyy-MM-dd HH:mm:ss"));
+		info.put("authority", getauthority(authority));
+		info.put("time", gettime(date));
 		info.put("contact", contact);
-		info.put("status", status);
+		info.put("status",get( status));
 		return info;
+	}
+	String get(int status){
+		if(status==0){
+			return "激活";
+			}
+			return "冻结";
+	}
+	
+	String getauthority( int authority){
+		if(authority==1){
+			return "管理员";
+		}
+		return "超级管理员";
+	}
+	
+	String gettime( Long date){
+		if(date==null){
+			return "未登录";
+		}
+		return DateUtil.format(new Date(date), "yyyy-MM-dd HH:mm:ss");
+		
 	}
 }

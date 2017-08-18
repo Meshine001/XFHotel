@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> list() {
 		// TODO Auto-generated method stub
-		return userDAO.getListByHQL("from Customer order by id desc", null);
+		return userDAO.getListByHQL("from User order by id desc", null);
 	}
 
 	@Transactional

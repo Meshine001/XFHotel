@@ -201,13 +201,12 @@ public class AdminController {
 		//成员权限 BEGIN
 		@RequestMapping(value = "/customer_manager", method = RequestMethod.GET)
 		public String collocation() {
-//			List<Clean> list = cleanService.list();
-//			List<Map> orders = new ArrayList<Map>();
-//			for (Clean o : list) {
-//				orders.add(o.toMap());	
-//				Order order = orderservice.get(o.getOederId());
-//			}
-//			session.setAttribute("orders", orders);
+			List<User> list = userService.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (User o : list) {
+				orders.add(o.toMap());	
+			}
+			session.setAttribute("orders", orders);
 			return "/admin/customer/manager";
 		}
 //		// 成员权限 END
@@ -286,6 +285,8 @@ public class AdminController {
 			c.setUsername(u.getUsername());
 			c.setDate(u.getDate());
 			c.setStatus(u.getStatus());
+			u.setDate(new Date().getTime());
+			userService.update(u);
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c);
 		} else {
 			return new Message(Constants.MESSAGE_ERR_CODE, "账号或密码错误");
