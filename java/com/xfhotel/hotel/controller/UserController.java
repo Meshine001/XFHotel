@@ -40,6 +40,36 @@ public class UserController {
 		return user;
 	}
 	
+	@RequestMapping(value = "/amend", method = RequestMethod.POST)
+	public @ResponseBody Message amend(Long id,String username,String psd,String tel,int authority){
+		try{
+		User user= userService.findById(id);
+		user.setAuthority(authority);
+		user.setContact(tel);
+		user.setUsername(username);
+		user.setPassword(psd);
+		userService.update(user);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+	}
+return new Message(Constants.MESSAGE_SUCCESS_CODE,"修改成功");
+}
+	//修改转态
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public @ResponseBody Message update(Long id,int status){
+		try {
+		User user= userService.findById(id);
+		user.setStatus(status);
+		userService.update(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+		}
+	return new Message(Constants.MESSAGE_SUCCESS_CODE,"修改成功");
+	}
 	//查询所有房屋
 	@RequestMapping(value = "/all", method = RequestMethod.POST)
 	public @ResponseBody List<User> all(){
