@@ -170,6 +170,7 @@
 					<thead>
 						<tr>
 							
+							<th></th>
 							<th>ID</th>
 							<th>用户名</th>
 							<th>角色</th>
@@ -180,21 +181,28 @@
 							<th>管理的房屋</th>
 						</tr>
 					</thead>
-					<!-- 
+					
 					<tbody id="p-table">
 						<c:forEach items="${orders}" var="order">
 							<tr pid="${order.id}">
 								<td><input type="checkbox" name="chkItem"></td>
 								<td>${order.id}</td>
-								<td>${order.classify}</td>
-								<td>${order.Facility}</td>
-								<td>${order.fate}</td>
-								<td>${order.price}</td>
+								<td>${order.username}</td>
+								<td>${order.authority}</td>
+								<td>${order.contact}</td>
+								<td>${order.time}</td>
+								<td>${order.status}</td>
+								<td>
+					 			<a href="javascript:;" title="关闭启用">关闭</a>
+					 			<a href="javascript:;" title="修改信息" class="setip">修改</a>
+					 			<a href="javascript:;" title="删除用户" class="removeip">删除</a>
+					 		</td>
 								<td><a href="javascript:;">查看</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
-					 -->
+					 
+					 <!--  
 					 <tbody id="p-table">
 					 	<tr pid="0">
 					 		
@@ -204,11 +212,7 @@
 					 		<td>13022927976</td>
 					 		<td>2017/08/08 09:20</td>
 					 		<td><i class="status">已启用</i></td>
-					 		<td>
-					 			<a href="javascript:;" title="关闭启用">关闭</a>
-					 			<a href="javascript:;" title="修改信息" class="setip">修改</a>
-					 			<a href="javascript:;" title="删除用户" class="removeip">删除</a>
-					 		</td>
+					 		
 					 		<td><a href="javascript:;" title="查看房屋信息">查看</a></td>
 					 	</tr>
 					 		<tr pid="1">
@@ -228,7 +232,7 @@
 					 	</tr>
 					 </tbody>
 				</table>
-				
+				-->
 				
 				<ul id="pagecontroller" class="pagination">
 					

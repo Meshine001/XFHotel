@@ -37,6 +37,7 @@ import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Site;
 import com.xfhotel.hotel.entity.TripOrder;
+import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.ApplyService;
 import com.xfhotel.hotel.service.BlogService;
@@ -55,6 +56,7 @@ import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SiteService;
 import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.service.TripOrderService;
+import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Area;
 import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.LayoutType;
@@ -77,6 +79,8 @@ import net.sf.json.JSONObject;
 public class MobileController  {
  	@Autowired
 	CleanService cleanservice;
+	@Autowired
+	UserService userService;
  	
 	@Autowired
 	LockService lockService;
@@ -865,12 +869,12 @@ public class MobileController  {
 //			TODO
 //			发短信给管理员
 //			【青舍都市】您有新订单需要确认，请及时处理。{1}
-			JSONObject a = apartmentService.getApartmentById(o.getRoomId())
-					.getJSONObject("position");
-			String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
+			JSONObject a = apartmentService.getApartmentById(o.getRoomId());
+			String f= a.getJSONObject("position").getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
 					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 			String[] p = {f};
-			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_FAULT_SERVICE, systemConfiService.getConfig().getSms(), p);	
+			User user = userService.findById(a.getLong("steward"));
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_FAULT_SERVICE, user.getContact(), p);	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -969,11 +973,12 @@ public class MobileController  {
 //			发短信给管理员
 //			【青舍都市】您有新订单需要确认，请及时处理。{1}
 			JSONObject a = apartmentService.getApartmentById(o.getRoomId())
-					.getJSONObject("position");
-			String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
+					;
+			String f= a.getJSONObject("position").getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
 					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 			String[] p = {f};
-			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, systemConfiService.getConfig().getSms(), p);	
+			User user = userService.findById(a.getLong("steward"));
+			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, user.getContact(), p);	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1023,11 +1028,12 @@ public class MobileController  {
 				}
 					if(l==true){
 						JSONObject a = apartmentService.getApartmentById(o.getRoomId())
-								.getJSONObject("position");
-						String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
+								;
+						String f= a.getJSONObject("position").getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
 								a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 						String[] p = {f};
-					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfiService.getConfig().getSms(), p);	
+						User user = userService.findById(a.getLong("steward"));
+					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, user.getContact(), p);	
 					return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
 					}
 					return new Message(Constants.MESSAGE_SUCCESS_CODE, list); 
