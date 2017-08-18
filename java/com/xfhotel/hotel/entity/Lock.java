@@ -15,6 +15,7 @@ public class Lock {
 	@GeneratedValue(generator = "lockgenerator")
 	@GenericGenerator(name = "lockgenerator", strategy = "increment")
 	private long id;
+	private long oId;
 	//num of lock
 	private String lock_no;
 	//no of password
@@ -106,6 +107,14 @@ public class Lock {
 	}
 	public void setValid_time_end(long valid_time_end) {
 		this.valid_time_end = valid_time_end;
+	}
+
+	public long getoId() {
+		return oId;
+	}
+
+	public void setoId(long oId) {
+		this.oId = oId;
 	}
 	
 	

@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -28,19 +30,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.swetake.util.Qrcode;
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.SystemConfig;
 import com.xfhotel.hotel.entity.TripOrder;
+import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
+import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.FacilityOrderService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
 import com.xfhotel.hotel.service.TripOrderService;
+import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.sms.SendTemplateSMS;
 import com.xfhotel.hotel.support.wechat.Config;
@@ -58,6 +64,8 @@ public class WechatController {
 	HttpSession session;
 
 	@Autowired
+	UserService userService;
+	@Autowired
 	TripOrderService tripOrderService;
 	@Autowired
 	LockService lockService;
@@ -71,6 +79,8 @@ public class WechatController {
 	FacilityOrderService facilityOrderService;
 	@Autowired
 	SystemConfService systemConfService;
+	@Autowired
+	CouponService couponService;
 
 	/**
 	 * 查询订单是否已经支付
@@ -240,7 +250,37 @@ public class WechatController {
 						customer.setRegTime(new Date().getTime());
 						customer.setLevel(0);
 						customerService.register(customer, details);
-						return "redirect:../" + state+"?id="+customer.getId()+"&&"+"status=0";
+						Customer c1 = customerService.getCustomer(c.getId());
+						Calendar calendar = Calendar.getInstance();
+				        Date date = new Date(System.currentTimeMillis());
+				        calendar.setTime(date);
+				        calendar.add(Calendar.MONTH, +6);
+				        date = calendar.getTime();
+						List<Double> list = new ArrayList<Double>();
+						list.add(20.0);
+						list.add(30.0);
+						list.add(50.0);
+						List<String> list1 = new ArrayList<String>();
+						list1.add("200");
+						list1.add("300");
+						list1.add("500");
+						int d = 0;
+						for(double cValue : list){
+							for(int i =0;list1.size()>i;i++){
+								String rule = list1.get(d);
+								Coupon coupon = new Coupon();
+								coupon.setcValue(cValue);
+								coupon.setStartTime(new Date().getTime());
+								coupon.setEndTime(date.getTime());
+								coupon.setType(1);
+								coupon.setRule(rule);
+								coupon.setuId(c1.getId());
+								couponService.add(coupon);
+								d++;
+								break;
+							}
+						}
+						return "redirect:../" + state+"?id="+customer.getId()+"&&"+"status=0"+"&&"+"discounts=0";
 					}
 				}
 			} catch (Exception e) {
@@ -419,8 +459,8 @@ public class WechatController {
 					orderService.update(o);
 					String pwd_user_mobile = o.getCusTel();
 					JSONObject a = apartmentService.getApartmentById(o.getRoomId())
-							.getJSONObject("position");
-					String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
+							;
+					String f= a.getJSONObject("position").getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
 							a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 					String[] p = {f};
 					//发短信给顾客
@@ -428,7 +468,8 @@ public class WechatController {
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
 					//发短信给管理员
 					//【青舍都市】您有新订单需要确认，请及时处理。{1}
-					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, systemConfService.getConfig().getSms(), p);
+					User user = userService.findById(a.getLong("steward"));
+					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, user.getContact(), p);
 						
 				} else if(facilityOrder!=null){
 					Customer customer = customerService.getCustomer(orderService.get(facilityOrder.getOederId()).getCusId());

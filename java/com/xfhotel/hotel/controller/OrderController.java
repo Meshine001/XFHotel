@@ -271,12 +271,12 @@ public class OrderController {
 				String lock_no = apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
 				System.out.println("send pass to "+lock_no);
 				Message result = lockService.addPassword(o.getCusTel(), lock_no, DateUtil.format(new Date(o.getStartTime()), "yyyyMMddHHmmss"),
-						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddHHmmss"));
+						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddHHmmss") ,id);
 				if(result.getStatusCode() == Constants.MESSAGE_SUCCESS_CODE){
 					o.setStatus(Order.STATUS_ON_LEASE);
 					orderservice.update(o);
 				}else{
-					return result;
+					return result; 
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -324,7 +324,7 @@ public class OrderController {
 				String lock_no = apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
 				System.out.println("send pass to "+lock_no);
 				Message result = lockService.addPassword(o.getCusTel(), lock_no, DateUtil.format(new Date(o.getStartTime()), "yyyyMMddHHmmss"),
-						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddHHmmss"));
+						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddHHmmss"), id);
 				if(result.getStatusCode() == Constants.MESSAGE_SUCCESS_CODE){
 					return new Message(Constants.MESSAGE_SUCCESS_CODE, "发送密码成功");
 				}else{

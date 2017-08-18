@@ -62,6 +62,8 @@ public class Apartment {
 	
 	private Long affiliation;
 	
+	private Long steward;
+	
 	public long getId() {
 		return id;
 	}
@@ -71,6 +73,14 @@ public class Apartment {
 	}
 
 	
+	public Long getSteward() {
+		return steward;
+	}
+
+	public void setSteward(Long steward) {
+		this.steward = steward;
+	}
+
 	public Long getAffiliation() {
 		return affiliation;
 	}

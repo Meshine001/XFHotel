@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -145,7 +146,7 @@ public class LockOperater implements LockService {
 		param.put("valid_time_end", valid_time_end);
 		param.put("pwd_user_name", pwd_user_name);
 		param.put("pwd_user_mobile", pwd_user_mobile);
-		param.put("pwd_user_idcard", pwd_user_idcard);
+		param.put("pwd_user_idcard", null);
 		param.put("description", description);
 		param.put("extra", extra);
 		JSONObject response = sendPost(url, param, POST_TYPE_NEED_HEADER);
@@ -156,7 +157,7 @@ public class LockOperater implements LockService {
 	public JSONObject pwdAdd(String lock_no, String pwd_text,
 			Long valid_time_start, Long valid_time_end, String pwd_user_name, String pwd_user_mobile,
 			String pwd_user_idcard, String description, String extra) {
-		return pwdAdd("", "", "", lock_no, pwd_text,""+ valid_time_start, ""+valid_time_end, pwd_user_name, pwd_user_mobile, null, description, extra);
+		return pwdAdd("", "", "", lock_no, "", ""+valid_time_start, ""+valid_time_end, "", pwd_user_mobile, null, "", "");
 	}
 	@Override
 	public JSONObject pwdUpdate(String version, String access_token, String s_id, String lock_no, String pwd_text,
@@ -422,8 +423,14 @@ public class LockOperater implements LockService {
 		System.out.println(i);
 		i=i+1000*60*2;
 		Long n = i+1000*60*6;
+		long c = 1502949600000l;
+		long v= 1503028800000l;
+		Date date = new Date(c);  
+		Date date1= new Date(v);
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		System.out.println(sd.format(date));
 		System.out.println(n);
 		System.out.println(i);
-		System.out.println(getInstance().pwdAdd("", "", "", "11.1.116.166", "", ""+i, ""+n, "", "15825095926", null, "", ""));
+		System.out.println(getInstance().pwdAdd("", "", "", "11.1.129.161", "", ""+i, ""+n, "", "15596175020", null, "", ""));
 	}
 }

@@ -176,6 +176,12 @@ public class ApartmentServiceImpl implements ApartmentService {
 		List<Apartment> apartments = apartmentDAO.getListByHQL("from Apartment order by id desc" , null);
 		return JSONArray.fromObject(apartments);
 	}
+	
+	@Transactional
+	@Override
+	public List<Apartment> getApartments1() {
+		return apartmentDAO.getListByHQL("from Apartment order by id desc" , null);
+	}
 
 	/**
 	 * 获取更详细的信息

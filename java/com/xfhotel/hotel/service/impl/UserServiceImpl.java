@@ -5,8 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.xfhotel.hotel.dao.UserDAO;
+import com.xfhotel.hotel.dao.impl.UserDAOImpl;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.UserService;
 
@@ -14,42 +13,52 @@ import com.xfhotel.hotel.service.UserService;
 public class UserServiceImpl implements UserService{
 
 	@Autowired
-	private UserDAO userDAO;
-
-	@Override
+	UserDAOImpl userDAO;
+	
 	@Transactional
-	public void addUser(User u) {
-		this.userDAO.addUser(u);
+	@Override
+	public User findById(Long id) {
+		// TODO Auto-generated method stub
+		return userDAO.get(id);
+	}
+	
+	@Transactional
+	@Override
+	public void add(User t) {
+		// TODO Auto-generated method stub
+		userDAO.save(t);
 	}
 
-	@Override
 	@Transactional
-	public void updateUser(User u) {
-		this.userDAO.updateUser(u);
+	@Override
+	public void delete(User t) {
+		// TODO Auto-generated method stub
+		userDAO.delete(t);
 	}
 
-	@Override
+	
 	@Transactional
-	public List<User> listUsers() {
-		return this.userDAO.listUsers();
+	@Override
+	public void update(User t) {
+		// TODO Auto-generated method stub
+		userDAO.update(t);
+	}
+	
+	@Transactional
+	@Override
+	public List<User> list() {
+		// TODO Auto-generated method stub
+		return userDAO.getListByHQL("from Customer order by id desc", null);
 	}
 
-	@Override
 	@Transactional
-	public User getUserById(long id) {
-		return this.userDAO.getUserById(id);
+	@Override
+	public User login(String username, String password) {
+		String hql = "from User where username = ? and password = ?";
+		String[] values = { username, password };
+		return  userDAO.getByHQL(hql, values);
 	}
 
-	@Override
-	@Transactional
-	public void removeUser(long id) {
-		this.userDAO.removeUser(id);
-	}
 
-	@Override
-	@Transactional
-	public User getUser(String username, String password) {
-		return this.userDAO.getUser(username, password);
-	}
 
 }

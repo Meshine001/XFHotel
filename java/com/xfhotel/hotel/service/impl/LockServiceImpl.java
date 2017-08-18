@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.dao.impl.LockDAOImpl;
 import com.xfhotel.hotel.entity.Lock;
+import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.LockService;
+import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.lock.DES;
 import com.xfhotel.hotel.support.lock.LockOperater;
@@ -24,6 +26,9 @@ import net.sf.json.JSONObject;
 public class LockServiceImpl implements LockService {
 	@Autowired
 	LockDAOImpl lockDAOImpl;
+	
+	@Autowired
+	OrderService orderService;
 
 	@Override
 	public Message changePassword(String phone, String lock_no, String password) {
@@ -54,7 +59,7 @@ public class LockServiceImpl implements LockService {
 	
 	@Transactional
 	@Override
-	public Message addPassword(String phone, String lock_no, String time_start, String time_end) {
+	public Message addPassword(String phone, String lock_no, String time_start, String time_end, Long id) {
 		try {
 			String[] values = { phone, lock_no };
 //			Lock lock_check = lockDAOImpl.getByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
@@ -66,6 +71,7 @@ public class LockServiceImpl implements LockService {
 			Calendar end = Calendar.getInstance();
 			end.setTime(new SimpleDateFormat("yyyyMMddHHmmss").parse(time_end));
 			Lock lock = new Lock();
+			
 			lock.setPwd_user_mobile(phone);
 			lock.setLock_no(lock_no);
 			lock.setValid_time_end(end.getTimeInMillis());
@@ -78,6 +84,7 @@ public class LockServiceImpl implements LockService {
 				lock.setPwd_no(result.getInt("pwd_no"));
 				lock.setPwd_text(DES.decrypt(result.getString("pwd_text")));
 				lock.setAvailiable(0);
+				lock.setoId(id);
 				lockDAOImpl.save(lock);
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加锁密码成功");
 			}
@@ -101,10 +108,8 @@ public class LockServiceImpl implements LockService {
 		List<Lock> lock = lockDAOImpl.getListByHQL("from Lock l where l.pwd_user_mobile = ? and l.lock_no = ?", values);
 		String getPwd_text=null;
 		for(Lock lock1 : lock){
-			Date date = new Date(System.currentTimeMillis());
-		Date time1 = new Date(lock1.getValid_time_end());
-		Date time2 = new Date(lock1.getValid_time_start());
-		if(date.before(time1)&&date.after(time2)){
+			Order o = orderService.get(lock1.getoId());
+		if(lock1.getValid_time_end()==o.getEndTime()&&lock1.getValid_time_start()==o.getStartTime()){
 			getPwd_text =lock1.getPwd_text();
 			}
 		}
