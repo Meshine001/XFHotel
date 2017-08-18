@@ -29,7 +29,8 @@ public class UserController {
 
 	//添加管理员角色
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public @ResponseBody User add(String username,String psd,String tel,int authority){
+	public @ResponseBody Message add(String username,String psd,String tel,int authority){
+		try{
 		User user= new User();
 		user.setAuthority(authority);
 		user.setContact(tel);
@@ -37,7 +38,12 @@ public class UserController {
 		user.setPassword(psd);
 		user.setStatus(0);
 		userService.add(user);
-		return user;
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+	}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,"修改成功");
 	}
 	
 	@RequestMapping(value = "/amend", method = RequestMethod.POST)
@@ -54,8 +60,8 @@ public class UserController {
 		e.printStackTrace();
 		return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
 	}
-return new Message(Constants.MESSAGE_SUCCESS_CODE,"修改成功");
-}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,"修改成功");
+	}
 	//修改转态
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody Message update(Long id,int status){
