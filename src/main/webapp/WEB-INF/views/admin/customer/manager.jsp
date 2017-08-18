@@ -169,8 +169,6 @@
 				<table class="table table-bordered table-striped table-condensed">
 					<thead>
 						<tr>
-							
-							<th></th>
 							<th>ID</th>
 							<th>用户名</th>
 							<th>角色</th>
@@ -185,7 +183,6 @@
 					<tbody id="p-table">
 						<c:forEach items="${orders}" var="order">
 							<tr pid="${order.id}">
-								<td><input type="checkbox" name="chkItem"></td>
 								<td>${order.id}</td>
 								<td>${order.username}</td>
 								<td>${order.authority}</td>
@@ -230,9 +227,9 @@
 					 		</td>
 					 		<td><a href="javascript:;" title="查看房屋信息">查看</a></td>
 					 	</tr>
-					 </tbody>
+					 </tbody>	-->
 				</table>
-				-->
+			
 				
 				<ul id="pagecontroller" class="pagination">
 					

@@ -72,7 +72,8 @@
 				   
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-danger Del" id="payout">OK</button>
+			    <button type="button" class="btn btn-danger Del" id="present" style="display:none">确定</button>
+				<button type="button" class="btn btn-danger Del" id="payout" style="display:none">OK</button>
 			  </div>
 			</div>
 		  </div>
@@ -88,9 +89,7 @@
 						<h3>公寓列表</h3>
 					</div>
 					<ul class="card-action navbar-right" style="position:relative;top:14px;">
-						<li><a class="btn btn-success" id="add-landlord">选择房东</a>
-						</li>
-						<li><a class="btn btn-success " href="<%=basePath%>/admin/apartment/add">添加</a>
+						<li><a class="btn btn-success " href="<%=basePath%>/admin/apartment/add">添加新房源</a>
 						</li>
 					</ul>
 
@@ -99,6 +98,26 @@
 				
 				
 				<div style="overflow: hidden;width:100%;height:auto;overflow-x:auto;">
+					<div class="col-md-12 statistics">
+					    <div class="col-md-3">
+					       		<label class="col-md-3"  style="padding:0;line-height:36px;">地区筛选</label>
+					       		<div class="col-md-6" style="padding:0">
+									<select id="longtime"  class="form-control" style="margin:0;">
+										<option tid="0">全部</option>
+										<option tid="1">城东</option>
+										<option tid="2">城南</option>
+										<option tid="3">城西</option>
+										<option tid="4">城北</option>
+									</select>
+								</div>	
+					    </div>
+					    <div class="col-md-2 col-xs-6">
+					    	<a class="btn btn-success" id="appendto">选择管理员</a>
+					    </div>
+					    <div  class="col-md-2 col-xs-6">
+					    	<a class="btn btn-success" id="add-landlord">选择房东</a>
+					    </div>
+					 </div>   
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
@@ -245,6 +264,8 @@
 					var fangdongid=""//获取选择的房东id
 					$("#add-landlord").click(function(){
 							$(".modallg").fadeIn();
+							$("#payout").show();
+							$("#present").hide();
 							var result = new Array();
 			                $("#h-table tr td input[name = chkItem]:checkbox").each(function () {
 			                    if ($(this).is(":checked")) {
@@ -308,6 +329,22 @@
 					
 				
 			})
+			
+			// 
+			$("#appendto").click(function(){
+				$(".modallg").fadeIn();
+				$("#present").show();
+				$("#payout").hide();
+				var result = new Array();
+                $("#h-table tr td input[name = chkItem]:checkbox").each(function () {
+                    if ($(this).is(":checked")) {
+                        result.push($(this).parent().parent().attr('roomId'));
+                    }
+             	});
+                roomids=result.join(",");
+                console.log(roomids);
+			})
+			
 	    </script>
 	</my_script>
 </body>

@@ -248,6 +248,13 @@
 		</div>
 		
 	</div>
+	
+	<script>
+		$(document).ready(function(){
+			var userType=window.localStorage.getItem('userType');
+			console.log(userType);
+		})
+	</script>
 	</my_body>
 
 </body>
