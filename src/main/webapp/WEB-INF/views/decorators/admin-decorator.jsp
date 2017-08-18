@@ -247,7 +247,7 @@
 				  sessionStorage.clear();
 			      localStorage.clear();
 			      setTimeout(function(){
-			           window.location.href="../login";
+			           window.location.href='http://www.yiyunzn.xyz/admin/login';
 			      },300)  
 			})
 		})
