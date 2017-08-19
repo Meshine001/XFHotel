@@ -16,14 +16,12 @@ import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
 
-import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping("/admin/user/")
 public class UserController {
 	@Autowired
 	UserService userService;
-	
 	@Autowired
 	ApartmentService apartmentService;
 
@@ -49,6 +47,7 @@ public class UserController {
 	}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"添加成功");
 	}
+	
 	//修改
 	@RequestMapping(value = "/amend", method = RequestMethod.POST)
 	public @ResponseBody Message amend(Long id,String username,String psd,String tel,int authority){
@@ -68,6 +67,7 @@ public class UserController {
 	}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"修改成功");
 	}
+	
 	//修改转态
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody Message update(Long id,int status){
@@ -76,24 +76,23 @@ public class UserController {
 		user.setStatus(status);
 		userService.update(user);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
 		}
 	return new Message(Constants.MESSAGE_SUCCESS_CODE,"修改成功");
 	}
+	
 	//查询所有用户
 	@RequestMapping(value = "/all", method = RequestMethod.POST)
 	public @ResponseBody Message all(){
 		List<User> list = userService.list();
 		try{	
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
 	}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,list);
-}
+	}
 	
 	//查询某个地方的房屋
 	@RequestMapping(value = "/getRoom", method = RequestMethod.POST)
@@ -115,7 +114,9 @@ public class UserController {
 			}else if(weizhi=="城中"){
 				i = 4;
 			}
-			if(wei==i){
+			if(wei==5){
+				list1.add(apartment);
+			}else if(wei==i){
 				list1.add(apartment);
 			}
 		}
@@ -124,7 +125,7 @@ public class UserController {
 		e.printStackTrace();
 		return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
 	}
-return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);
 }
 	
 	//分配房屋
@@ -142,13 +143,11 @@ return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);
 			apartmentService.update(apartment);
 		}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "分配失败");
 		}
-	return new Message(Constants.MESSAGE_SUCCESS_CODE,"分配成功");
+			return new Message(Constants.MESSAGE_SUCCESS_CODE,"分配成功");
 	}
-	
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public @ResponseBody Message delete(Long id){
@@ -160,7 +159,7 @@ return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);
 		e.printStackTrace();
 		return new Message(Constants.MESSAGE_ERR_CODE, "删除失败");
 	}
-return new Message(Constants.MESSAGE_SUCCESS_CODE,"删除成功");
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,"删除成功");
 	}
 	
 	//查询管理员所管理房屋
@@ -169,10 +168,10 @@ return new Message(Constants.MESSAGE_SUCCESS_CODE,"删除成功");
 		List<Apartment> list = apartmentService.steward(id);
 		try{	
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
 	}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,list);
 	}
+	
 }

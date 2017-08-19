@@ -91,6 +91,7 @@ public class User {
 		info.put("status",get( status));
 		return info;
 	}
+	
 	String get(int status){
 		if(status==0){
 			return "激活";
