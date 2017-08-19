@@ -26,6 +26,7 @@ $(document).ready(function () {
 	 });
 	 $(".newUser .begin").click(function(){
 			$(".newUser").remove();
+			window.location.href='index.html'
 	 });
 		
 
