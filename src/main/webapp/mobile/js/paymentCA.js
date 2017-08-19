@@ -2,20 +2,23 @@ var _id;
 $(document).ready(function(){
 	 var clientIp = getIp();
 
-		var Constant = {
+	 var Constant = {
 		        URL: baseUrl, 
 		        CLIENT_IP:clientIp
 		};
-		function getIp() {
+	function getIp() {
 		    var ip;
 		    var ipInfoUrl = 'http://ipinfo.io/json';
-		    $.ajax({
+		   	 $.ajax({
 		        url:ipInfoUrl,
 		        async:false,
+		        dataType:'json',
 		        success:function (data) {
 		            ip = data.ip;
+		           
 		        }
 		    });
+		    
 		    return ip;
 	}
     _id=decodeURIComponent(fnBase.request('pid'));
@@ -32,40 +35,39 @@ $(document).ready(function(){
     	$(".p_msg li .toal").html('订单总额：<i style="color:red">￥'+data.price+'</i>');
     })
 
-
-    payment.Entry();
+    //微信支付
+    $(".p_Settel li .wx_p").click(function () {
+        //fnBase.myalert('支付系统未开启！')
+        if(Constant.CLIENT_IP == undefined){
+            Constant.CLIENT_IP = getIp();
+        }
+        var url = Constant.URL + '/wx/pay/jsTrip';
+        var data = {
+            id:_id,//订单id
+            ip:Constant.CLIENT_IP//客户端ip
+        };
+        console.log(data);
+        fnBase.commonAjax(url,data,function (data){
+            if(data.status == 'success'){
+                console.log(data);
+                var payData = {
+                    appId: data.obj.appId,
+                    timeStamp:  data.obj.timeStamp,
+                    nonceStr: data.obj.nonceStr,
+                    package:data.obj.package,
+                    signType: data.obj.signType,
+                    paySign:data.obj.paySign
+                };
+                callPay(payData);
+            }else {
+                fnBase.myalert('支付失败');
+            }
+        });
+    });
 });
 var payment={
     Entry:function(){
-        //微信支付
-        $(".p_Settel li .wx_p").click(function () {
-            //fnBase.myalert('支付系统未开启！')
-            if(Constant.CLIENT_IP == undefined){
-                Constant.CLIENT_IP = getIp();
-            }
-            var url = Constant.URL + '/wx/pay/jsTrip';
-            var data = {
-                id:_id,//订单id
-                ip:Constant.CLIENT_IP//客户端ip
-            };
-            console.log(data);
-            fnBase.commonAjax(url,data,function (data){
-                if(data.status == 'success'){
-                    console.log(data);
-                    var payData = {
-                        appId: data.obj.appId,
-                        timeStamp:  data.obj.timeStamp,
-                        nonceStr: data.obj.nonceStr,
-                        package:data.obj.package,
-                        signType: data.obj.signType,
-                        paySign:data.obj.paySign
-                    };
-                    callPay(payData);
-                }else {
-                    fnBase.myalert('支付失败');
-                }
-            });
-        });
+
     }
 };
 
