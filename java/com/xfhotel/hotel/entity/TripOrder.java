@@ -38,6 +38,7 @@ public class TripOrder {
 	private Double price;
 	private Long tel;
 	private Long OederId;
+	private Long apId;
 	private int status;
 	private Long time;
 	private Long cusId;
@@ -61,6 +62,13 @@ public class TripOrder {
 	}
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
+	}
+	
+	public Long getApId() {
+		return apId;
+	}
+	public void setApId(Long apId) {
+		this.apId = apId;
 	}
 	public String getTripId() {
 		return tripId;

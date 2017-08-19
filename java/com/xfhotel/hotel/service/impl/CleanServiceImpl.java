@@ -41,11 +41,19 @@ public class CleanServiceImpl implements CleanService {
 	@Transactional
 	@Override
 	public Clean getClean(Long oederId) {
-		String hql = "from Clean where oederId=?";
+		String hql = "from Clean where oederId=? order by id desc";
 		Object[] v = {oederId};
 		return CleanDAO.getByHQL(hql, v);
 		}
 
+	@Transactional
+	@Override
+	public List<Clean> getClean1(Long roomId) {
+		String hql = "from Clean where roomId=? order by id desc";
+		Object[] v = {roomId};
+		return CleanDAO.getListByHQL(hql, v);
+		}
+	
 
 	@Transactional
 	@Override
@@ -66,7 +74,7 @@ public class CleanServiceImpl implements CleanService {
 	@Override
 	public List<Clean> list() {
 		// TODO Auto-generated method stub
-		return CleanDAO.getListByHQL("from Clean", null);
+		return CleanDAO.getListByHQL("from Clean order by id desc", null);
 	}
 	@Transactional
 	@Override

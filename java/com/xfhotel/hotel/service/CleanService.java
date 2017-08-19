@@ -10,4 +10,5 @@ public interface CleanService extends BaseService<Clean, Long> {
 	public Clean get(Long id);
 	public List<Clean> list();
 	public Clean getClean(Long oederId);
+	public List<Clean> getClean1(Long roomId);
 }

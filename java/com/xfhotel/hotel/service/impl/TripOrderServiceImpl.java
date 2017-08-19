@@ -59,11 +59,20 @@ public class TripOrderServiceImpl implements TripOrderService {
 
 	@Transactional
 	@Override
-	public TripOrder getTripOrder(Long oederId) {
+	public List<TripOrder> getTripOrder(Long oederId) {
 		// TODO Auto-generated method stub
-		String hql = "from FacilityOrder where oederId=?";
+		String hql = "from TripOrder where oederId=?";
 		Object[] v = {oederId};
-		return tripOrderDAO.getByHQL(hql, v);
+		return tripOrderDAO.getListByHQL(hql, v);
+	}
+	
+	@Transactional
+	@Override
+	public List<TripOrder> getTripOrder1(Long apId) {
+		// TODO Auto-generated method stub
+		String hql = "from TripOrder where apId=?";
+		Object[] v = {apId};
+		return tripOrderDAO.getListByHQL(hql, v);
 	}
 	
 	@Transactional

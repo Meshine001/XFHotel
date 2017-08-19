@@ -11,8 +11,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
 import com.xfhotel.hotel.entity.Apartment;
+import com.xfhotel.hotel.entity.Clean;
+import com.xfhotel.hotel.entity.FacilityOrder;
+import com.xfhotel.hotel.entity.Fault;
+import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.entity.TripOrder;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
+import com.xfhotel.hotel.service.CleanService;
+import com.xfhotel.hotel.service.FacilityOrderService;
+import com.xfhotel.hotel.service.FaultService;
+import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.TripOrderService;
 import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
 
@@ -22,8 +32,22 @@ import com.xfhotel.hotel.support.Message;
 public class UserController {
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	TripOrderService tripOrderService;
+	@Autowired
+	FaultService faultservice;
+	
+	@Autowired
+	OrderService orderservice;
+	
+ 	@Autowired
+	CleanService cleanservice;
 	@Autowired
 	ApartmentService apartmentService;
+	
+	@Autowired
+	FacilityOrderService facilityOrderService;
 
 	//添加管理员角色
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -171,7 +195,132 @@ public class UserController {
 		e.printStackTrace();
 		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
 	}
-		return new Message(Constants.MESSAGE_SUCCESS_CODE,list);
+		User u =userService.findById(id);
+		if(u.getAuthority()==0){
+			return new Message(Constants.MESSAGE_SUCCESS_CODE,apartmentService.list());
+		} else{
+			return new Message(Constants.MESSAGE_SUCCESS_CODE,list);	
+		}
 	}
 	
+	//
+	@RequestMapping(value = "/stewardO", method = RequestMethod.POST)
+	public @ResponseBody Message stewardO( Long id){
+		List<Apartment> list = apartmentService.steward(id);
+		ArrayList<Object> list1 = new ArrayList<Object>();
+		try{
+			User u =userService.findById(id);
+			if(u.getAuthority()==0){
+				return new Message(Constants.MESSAGE_SUCCESS_CODE,orderservice.list(0));
+			} else{
+			for(Apartment apartment :list){
+				List<Order> o=orderservice.getOrders(apartment.getId());
+			 for(int i=0;i<o.size();i++){
+				 Order o1 = o.get(i);
+				 list1.add(o1);
+			 }
+				}
+			}
+	} catch (Exception e) {
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
+	}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);	
+		}
+	
+	@RequestMapping(value = "/stewardC", method = RequestMethod.POST)
+	public @ResponseBody Message stewardC( Long id){
+		List<Apartment> list = apartmentService.steward(id);
+		ArrayList<Object> list1 = new ArrayList<Object>();
+		try{
+			User u =userService.findById(id);
+			if(u.getAuthority()==0){
+				return new Message(Constants.MESSAGE_SUCCESS_CODE,cleanservice.list());
+			} else{
+			for(Apartment apartment :list){
+				List<Clean> o=cleanservice.getClean1(apartment.getId());
+			 for(int i=0;i<o.size();i++){
+				 Clean o1 = o.get(i);
+				 list1.add(o1);
+			 }
+				}
+			}
+	} catch (Exception e) {
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
+		}
+			return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);	
+	}
+	
+	@RequestMapping(value = "/stewardF", method = RequestMethod.POST)
+	public @ResponseBody Message stewardF( Long id){
+		List<Apartment> list = apartmentService.steward(id);
+		ArrayList<Object> list1 = new ArrayList<Object>();
+		try{
+			User u =userService.findById(id);
+			if(u.getAuthority()==0){
+				return new Message(Constants.MESSAGE_SUCCESS_CODE,faultservice.list());
+			} else {
+			for(Apartment apartment :list){
+				List<Fault> o=faultservice.getFault1(apartment.getId());
+			 for(int i=0;i<o.size();i++){
+				 Fault o1 = o.get(i);
+				 list1.add(o1);
+			 }
+				}
+			}
+	} catch (Exception e) {
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
+	}
+			return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);	
+		}
+	
+	@RequestMapping(value = "/stewardT", method = RequestMethod.POST)
+	public @ResponseBody Message stewardT( Long id){
+		List<Apartment> list = apartmentService.steward(id);
+		ArrayList<Object> list1 = new ArrayList<Object>();
+		try{
+			User u =userService.findById(id);
+			if(u.getAuthority()==0){
+				return new Message(Constants.MESSAGE_SUCCESS_CODE,tripOrderService.list());
+			} else {
+			for(Apartment apartment :list){
+				List<TripOrder> o=tripOrderService.getTripOrder1(apartment.getId());
+			 for(int i=0;i<o.size();i++){
+				 TripOrder o1 = o.get(i);
+				 list1.add(o1);
+			 }
+				}
+			}
+	} catch (Exception e) {
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
+	}
+			return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);	
+		}
+	
+	@RequestMapping(value = "/stewardFO", method = RequestMethod.POST)
+	public @ResponseBody Message stewardFO( Long id){
+		List<Apartment> list = apartmentService.steward(id);
+		ArrayList<Object> list1 = new ArrayList<Object>();
+		try{
+			User u =userService.findById(id);
+			if(u.getAuthority()==0){
+				return new Message(Constants.MESSAGE_SUCCESS_CODE,facilityOrderService.list());
+			} else {
+			for(Apartment apartment :list){
+				List<FacilityOrder> o=facilityOrderService.getFaultOrder1(apartment.getId());
+			 for(int i=0;i<o.size();i++){
+				 FacilityOrder o1 = o.get(i);
+				 list1.add(o1);
+			 }
+				}
+			}
+	} catch (Exception e) {
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
+	}
+			return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);	
+		}
 }
