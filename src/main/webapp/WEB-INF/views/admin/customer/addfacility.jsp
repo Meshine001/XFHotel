@@ -78,13 +78,13 @@
 					<div class="card-title">
 						<h3>添加设施</h3>
 					</div>
-					<ul class="card-action" style="position:relative;top:14px;">
+					<ul class="card-action" id="app-add-btn" style="position:relative;top:14px;display:none">
 						<li><a class="btn btn-success" id="addfac">添加</a>
 						</li>
 					</ul>
 				</div>
 				
-			<div class="row">
+			<div class="row" id="app-add-list" style="display:none">
 				<div class="col-md-4">
 					<div class="card card-mini">
 						<div class="card-header">
@@ -196,9 +196,16 @@
 	</div>
 	<script type="text/javascript">
 	$(document).ready(function(){
-	  	$("table th,table td").css('min-width','120px')
-		$("table th:first-child,table td").css('min-width','60px')
-		$("tbody tr").css('vertical-align','middle')
+		var userType=window.localStorage.getItem('userType');//0:超级管理员 1:管理员
+		if(userType==0){
+			$("#app-add-btn,#app-add-list").show();
+		}
+		
+		
+		
+	  	$("table th,table td").css('min-width','120px');
+		$("table th:first-child,table td").css('min-width','60px');
+		$("tbody tr").css('vertical-align','middle');
 		//设施查看
 	  	$(".add-lock").click(function(){
 	  		$(this).parent().parent().parent().parent().find('.addlist').slideToggle();
