@@ -84,6 +84,7 @@
 								<div class="col-sm-10">
 									<select class="form-control" id="ipmassage">
 										<option ip="1">管理员</option>
+										<option ip="0">超级管理员</option>
 									</select>
 								</div>
 						 </div>
@@ -140,6 +141,7 @@
 								<div class="col-sm-10">
 									<select class="form-control" id="setipmassage">
 										<option ip="1">管理员</option>
+										<option ip="0">超级管理员</option>
 									</select>
 								</div>
 						 </div>

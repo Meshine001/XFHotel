@@ -9109,7 +9109,8 @@ i{font-style:normal}
 	width:200px;
 	height:300px;
     overflow: hidden;
-        vertical-align: middle;
+    vertical-align: middle;
+    text-align:center;
 }
 
 #h-table .btn,#list .btn{
@@ -9200,3 +9201,6 @@ text-align:center;color:#0C6;padding:1% 0;
 #houseList li .img-wrapper{text-align:left;}
 #p-table tr td i{padding:2px 6px;color:#fff;background:#888;border-radius: 5px;}
 #p-table tr td i.status{background:#29c75f;}
+
+/*成员权限样式*/
+.app-ng{display:none}

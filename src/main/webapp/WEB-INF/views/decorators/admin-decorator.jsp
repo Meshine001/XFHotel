@@ -210,7 +210,7 @@
 							</a>
 								<div class="dropdown-menu">
 									<div class="profile-info">
-										<h4 class="username">Scott White</h4>
+										<h4 class="username" id="app-shenfen"></h4>
 									</div>
 									<ul class="action">
 									<!--<li><a href="#"> Profile </a></li>
@@ -243,11 +243,19 @@
 	<sitemesh:write property='my_script' />
 	<script>
 		$(document).ready(function(){
+			var userType=window.localStorage.getItem('userType');//0:超级管理员 1:管理员
+			if(userType==1){
+				$("#app-shenfen").text('您的身份：管理员');
+			}else{
+				$("#app-shenfen").text('您的身份：超级管理员');
+			}
+			
 			$("#loginout").click(function(){//退出登录
 				  sessionStorage.clear();
 			      localStorage.clear();
 			      setTimeout(function(){
-			           window.location.href='http://www.yiyunzn.xyz/admin/login';
+			           window.location.href='http://localhost/admin/login';   //测试地址
+			       //  window.location.href='http://www.yiyunzn.xyz/admin/login'; // 线上地址
 			      },300)  
 			})
 		})

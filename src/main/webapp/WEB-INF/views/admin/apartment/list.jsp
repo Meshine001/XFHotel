@@ -36,9 +36,10 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				 <button type="button" class="close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title house-title">房东列表<i></i></h4>
+				<h4 class="modal-title house-title" id="app-title-msg">房东列表<i></i></h4>
 			  </div>
 			  <div class="modal-body row" id="fangdongList">
+			  <!-- 
 				  <div class="col-xs-6 col-sm-4">
 				  	<div class="input-group">
 							<span class="input-group-addon">
@@ -46,24 +47,7 @@
 							</span>
 							<input type="text" class="form-control" placeholder="'+data.content[i].username+'" readonly>
 						</div>
-				  </div>
-				  <div class="col-xs-6 col-sm-4">
-				  	<div class="input-group">
-							<span class="input-group-addon">
-								<input type="radio"  value="0" name="radio">
-							</span>
-							<input type="text" class="form-control" placeholder="张三" readonly>
-						</div>
-				  </div>
-				  <div class="col-xs-6 col-sm-4">
-				  	<div class="input-group">
-							<span class="input-group-addon">
-								<input type="radio" value="" name="radio">
-							</span>
-							<input type="text" class="form-control" placeholder="张三" readonly>
-						</div>
-				  </div>
-				 
+				  </div> -->
 			  </div>
 			  <div class="modal-footer">
 			    <button type="button" class="btn btn-danger Del" id="present" style="display:none">确定</button>
@@ -82,7 +66,7 @@
 					<div class="card-title">
 						<h3>公寓列表</h3>
 					</div>
-					<ul class="card-action navbar-right" style="position:relative;top:14px;">
+					<ul class="card-action navbar-right" id="app-new-house-btn" style="position:relative;top:14px;display:none">
 						<li><a class="btn btn-success " href="<%=basePath%>/admin/apartment/add">添加新房源</a>
 						</li>
 					</ul>
@@ -92,7 +76,7 @@
 				
 				
 				<div style="overflow: hidden;width:100%;height:auto;overflow-x:auto;">
-					<div class="col-md-12 statistics">
+					<div class="col-md-12 statistics" style="display:none">
 					    <div class="col-md-3">
 					       		<label class="col-md-3"  style="padding:0;line-height:36px;">地区筛选</label>
 					       		<div class="col-md-6" style="padding:0">
@@ -116,7 +100,7 @@
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>归属</th>
+							<th>全选<input type="checkbox"name="chkItem" id="inputbox"></th>
 							<th>房屋id</th>
 							<!--<th>类型</th>  -->
 							<th>房号</th>
@@ -132,48 +116,7 @@
 					</thead>
 
 					<tbody id="h-table">
-						<c:forEach items="${apartments}" var="apartment">
-							<!-- Modal -->
-		
-	
-							<tr roomId="${apartment.id}">
-								<td><input type="checkbox" name="chkItem"></td>
-								<td>${apartment.id}</td>
-						   <!-- <td>${apartment.basic_info.lei_xing}</td> -->		
-								<td>${apartment.position.men_pai}</td>
-								<td>${apartment.position.jie_dao}</td>
-								<td>${apartment.position.xa_wei_zhi}</td>
-								<td>${apartment.position.xiao_qu}</td>
-								<td>${apartment.position.lou_hao}</td>
-								<td>${apartment.position.lou_ceng}/${apartment.position.zong_lou_ceng}</td>
-							<!--	<td>${apartment.basic_info.cao_xiang}</td>-->	
-								<td>${apartment.basic_info.mian_ji}</td>
-								<th><a class="btn btn-success"   data-toggle="tooltip" data-placement="left" title="编辑详情"
-									href="<%=basePath %>/admin/apartment/update/${apartment.id}">编辑详情</a><br>
-									<a class="btn btn-success price_s" data-toggle="tooltip" data-placement="left" title="编辑价格"
-									href="<%=basePath%>/admin/apartment/price/${apartment.id}">编辑价格</a><br>
-									
-									<a href="<%=basePath %>/admin/apartment/showHome/${apartment.id}" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="隐藏/显示" >
-										<c:if test="${apartment.show_home == true }">首页隐藏</c:if>
-										<c:if test="${apartment.show_home == false }">首页显示</c:if>
-									</a><br>
-									<a  data-toggle="tooltip" data-placement="left" title="删除" class="btn btn-danger">删除</a>
-							
-								<!-- 房客留言操作begin -->	
-									<br><a href="<%=basePath%>/admin/leavemsglist"  data-toggle="tooltip" data-placement="left" title="查看评论" class="btn btn-info evalpinglun">查看评论</a>
-								<!-- 房客留言操作end -->	
-								
-								<!-- 房态修改begin -->	
-									<br><a href="<%=basePath%>/admin/status"  data-toggle="tooltip" data-placement="left" title="房态设置" class="btn btn-warning houseStatus">房态设置</a>
-								<!-- 房态修改end -->	
-								    
-								<!-- 排序begin -->
-									<br><div class="paixu"><input type="text" placeholder="${apartment.sort}"><a class="stb">排序</a></div>
-								<!-- 排序begin -->
-								
-								</th>
-							</tr>
-						</c:forEach>
+						
 					</tbody>
 				</table>
 				</div>
@@ -189,10 +132,45 @@
 	    <script>
 		    
 			$(document).ready(function(){
-				$("[data-toggle='tooltip']").tooltip();  
-				$("table th,table td").css('text-align','center')
-				$("table th,table td").css({'width':'120px','min-width':'90px'});
-				//$("table th:nth-child(6),table td:nth-child(6)").css({'min-width':'160px'});
+				var userType=window.localStorage.getItem('userType');//0:超级管理员 1:管理员
+				var uid=window.localStorage.getItem('uid');
+				if(userType==1){
+					$.ajax({
+						type:'post',
+						dataType:'json',
+						data:{'id':uid},
+						url:'/admin/user/steward',
+						success:function(data){
+							console.log(data);
+							$("#h-table").html("");
+							var _str="";
+							for(var j=0;j<data.content.length;j++){
+								_str+='<tr roomId="'+data.content[j].id+'"><td><input type="checkbox"name="chkItem"></td><td>'+data.content[j].id+'</td><td>'+data.content[j].position.men_pai+'</td><td>'+data.content[j].position.jie_dao+'</td><td>'+data.content[j].position.xa_wei_zhi+'</td><td>'+data.content[j].position.xiao_qu+'</td><td>'+data.content[j].position.lou_hao+'</td><td>'+data.content[j].position.lou_ceng+'/'+data.content[j].position.zong_lou_ceng+'</td><td>'+data.content[j].basic_info.mian_ji+'</td>';
+								_str+='</tr>';
+							}
+							if(data.content.length<=0){
+								_str='<tr><td colspan="10"><p>该地区暂时没有房源、点我<a style="color:#f18c0b" href="/admin/apartment/add">添加新房源</a>吧。</p></td><tr>';
+							}
+							$("#h-table").append(_str);
+							$("#h-table tr td:first-child").hide();
+							$("#h-table").parent().find('thead th').eq(0).hide();
+							$("#h-table").parent().find('thead th:last-child').hide();
+						}
+					})
+				}else if(userType==0){
+					$(".statistics,#app-new-house-btn").show();
+					selectWeizhi(5);
+				}
+				
+				//全选
+				$("#inputbox").on('click',function(){
+					if ($(this).is(":checked")) {
+						$("#h-table tr td input[name = chkItem]").attr('checked', true);
+                    }else{
+                    	$("#h-table tr td input[name = chkItem]").attr('checked',false);
+                    }
+				})
+				
 				
 				$("#h-table .paixu input").focus(function(){
 					$(this).parent().css('border-color','#29c75f');
@@ -259,6 +237,7 @@
 					var fangdongid=""//获取选择的房东id
 					$("#add-landlord").click(function(){
 							$(".modallg").fadeIn();
+							$("#app-title-msg").text('房东列表');
 							$("#payout").show();
 							$("#present").hide();
 							var result = new Array();
@@ -328,6 +307,7 @@
 			// 选择管理员视口;
 			$("#appendto").click(function(){
 				$(".modallg").fadeIn();
+				$("#app-title-msg").text('管理员列表');
 				$("#present").show();
 				$("#payout").hide();
 				var result = new Array();
@@ -386,19 +366,51 @@
 						$(".modallg").fadeOut();
 			})
 			
-			//位置筛选
-			$("#weizhiselect").on('change',function(){
+			function selectWeizhi(value){
 				 $.ajax({
 						type:'POST',
 						dataType:'json',
-						data:{'wei':$("#weizhiselect option:selected").attr('tid')},
+						data:{'wei':value},
 						url:'/admin/user/getRoom/',
 						success:function(data){
-							cosnole.log(data)
+						//	console.log(data);
+							if(data.statusCode==1){
+								$("#h-table").html("");
+								var _str="";
+								for(var j=0;j<data.content.length;j++){
+									_str+='<tr roomId="'+data.content[j].id+'"><td><input type="checkbox"name="chkItem"></td><td>'+data.content[j].id+'</td><td>'+data.content[j].position.men_pai+'</td><td>'+data.content[j].position.jie_dao+'</td><td>'+data.content[j].position.xa_wei_zhi+'</td><td>'+data.content[j].position.xiao_qu+'</td><td>'+data.content[j].position.lou_hao+'</td><td>'+data.content[j].position.lou_ceng+'/'+data.content[j].position.zong_lou_ceng+'</td><td>'+data.content[j].basic_info.mian_ji+'</td>';
+									_str+='<th><a class="btn btn-success"   data-toggle="tooltip" data-placement="left" title="编辑详情" href="/admin/apartment/update/'+data.content[j].id+'">编辑详情</a><br>';
+									_str+='<a class="btn btn-success price_s" data-toggle="tooltip" data-placement="left" title="编辑价格"href="/admin/apartment/price/'+data.content[j].id+'">编辑价格</a><br>'
+									if(data.content[j].show_home==true){
+										_str+='<a href="/admin/apartment/showHome/'+data.content[j].id+'" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="隐藏/显示" >首页隐藏</a><br>';
+									}else{
+										_str+='<a href="/admin/apartment/showHome/'+data.content[j].id+'" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="隐藏/显示" >首页显示</a><br>';
+									}
+									_str+='<a  data-toggle="tooltip" data-placement="left" title="删除" class="btn btn-danger">删除</a><br>'
+									_str+='<a href="/admin/leavemsglist"  data-toggle="tooltip" data-placement="left" title="查看评论" class="btn btn-info evalpinglun">查看评论</a><br>'
+									_str+='<a href="/admin/status"  data-toggle="tooltip" data-placement="left" title="房态设置" class="btn btn-warning houseStatus">房态设置</a><br>'
+									_str+='<div class="paixu"><input type="text" placeholder="'+data.content[j].sort+'"><a class="stb">排序</a></div>'
+									_str+='</th></tr>';
+								}
+								if(data.content.length<=0){
+									_str='<tr><td colspan="10"><p>该地区暂时没有房源、点我<a style="color:#f18c0b" href="/admin/apartment/add">添加新房源</a>吧。</p></td><tr>';
+								}
+								$("#h-table").append(_str);
+							}
+							
 						}
 				 })
+			}
+			
+			//位置筛选
+			$("#weizhiselect").on('change',function(){
+				selectWeizhi($("#weizhiselect option:selected").attr('tid'));
 			})
 			
+
+			$("#h-table tr th [data-toggle='tooltip']").tooltip();  
+			$("table th,table td").css('text-align','center')
+			$("table th,table td").css({'width':'120px','min-width':'90px'});
 	    </script>
 	</my_script>
 </body>

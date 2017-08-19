@@ -82,14 +82,14 @@
 					<div class="card-title">
 						<h3>叫车服务</h3>
 					</div>
-					<ul class="card-action" style="position:relative;top:14px;">
+					<ul class="card-action" id="app-car-set" style="position:relative;top:14px;display:none;">
 						<li><a class="btn btn-success" id="addfac">设置服务</a>
 						</li>
 					</ul>
 				</div>
 <!--  -->	
 				
-			<div class="row">
+			<div class="row" id="app-car-con" style="display:none">
 				<div class="col-md-4">
 					<div class="card card-mini">
 						<div class="card-header">
@@ -227,6 +227,12 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+	$(document).ready(function(){
+		var userType=window.localStorage.getItem('userType');//0:超级管理员 1:管理员
+		if(userType==0){
+			$("#app-car-set,#app-car-con").show();
+		}
+	
 	$(".table th,.table td").css({'min-width':'120px'})
 	$(".table th:first-child,.table td:first-child").css({'width':'90px','min-width':'90px'});
 	$(".table th:first-child+th,.table td:first-child+td").css({'width':'240px','min-width':'240px'});
@@ -402,6 +408,7 @@
 				}
 			});
 		});
+	});	
 	</script>
 	</my_body>
 </body>
