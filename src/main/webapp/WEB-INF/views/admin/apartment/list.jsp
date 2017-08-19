@@ -39,15 +39,12 @@
 				<h4 class="modal-title house-title">房东列表<i></i></h4>
 			  </div>
 			  <div class="modal-body row" id="fangdongList">
-				
-				 
-				  
 				  <div class="col-xs-6 col-sm-4">
 				  	<div class="input-group">
 							<span class="input-group-addon">
-								<input type="radio" value="'+data[i].id+'" name="radio">
+								<input type="radio" value="'+data.content[i].id+'" name="radio">
 							</span>
-							<input type="text" class="form-control" placeholder="'+data[i].name+'" readonly>
+							<input type="text" class="form-control" placeholder="'+data.content[i].username+'" readonly>
 						</div>
 				  </div>
 				  <div class="col-xs-6 col-sm-4">
@@ -66,10 +63,7 @@
 							<input type="text" class="form-control" placeholder="张三" readonly>
 						</div>
 				  </div>
-				
 				 
-				  
-				   
 			  </div>
 			  <div class="modal-footer">
 			    <button type="button" class="btn btn-danger Del" id="present" style="display:none">确定</button>
@@ -102,12 +96,13 @@
 					    <div class="col-md-3">
 					       		<label class="col-md-3"  style="padding:0;line-height:36px;">地区筛选</label>
 					       		<div class="col-md-6" style="padding:0">
-									<select id="longtime"  class="form-control" style="margin:0;">
-										<option tid="0">全部</option>
-										<option tid="1">城东</option>
-										<option tid="2">城南</option>
-										<option tid="3">城西</option>
-										<option tid="4">城北</option>
+									<select id="weizhiselect"  class="form-control" style="margin:0;">
+										<option tid="5">全部</option>
+										<option tid="0">城东</option>
+										<option tid="1">城南</option>
+										<option tid="2">城西</option>
+										<option tid="3">城北</option>
+										<option tid="4">城中</option>
 									</select>
 								</div>	
 					    </div>
@@ -330,7 +325,7 @@
 				
 			})
 			
-			// 
+			// 选择管理员视口;
 			$("#appendto").click(function(){
 				$(".modallg").fadeIn();
 				$("#present").show();
@@ -343,6 +338,65 @@
              	});
                 roomids=result.join(",");
                 console.log(roomids);
+                $.ajax({
+                	type:'post',
+                	dataType:'json',
+                	data:{},
+                	url:'/admin/user/all/',
+                	success:function(data){
+                		console.log(data)
+                		if(data.statusCode==1){
+                			$("#fangdongList").html("");
+                			var str="";
+                			for(var i=0;i<data.content.length;i++){
+                				str+='<div class="col-xs-6 col-sm-4"><div class="input-group"><span class="input-group-addon"><input type="radio"value="'+data.content[i].id+'"name="radio"></span><input type="text"class="form-control"placeholder="'+data.content[i].username+'"readonly></div></div>';
+                			}
+                			$("#fangdongList").append(str);
+                		}
+                	}
+                })
+                
+			})
+			
+			//选择管理员并分配房屋；
+			$("#present").click(function(){
+						
+						 $("#fangdongList input[name = radio]").each(function () {
+			                    if ($(this).is(":checked")) {
+			                    	fangdongid=$(this).val();
+			                    }
+			             });
+	
+						 if(roomids==""||roomids==null||fangdongid==""||fangdongid==null){
+							 alert('操作有误、不能提交！');
+							 return
+						 }
+				  	     $.ajax({
+			                	type:'POST',
+			                	dataType:'json',
+			                	url:'/admin/user/allocation/',
+			                	data:{'id': fangdongid,'roomId':roomids},
+			                	success:function(data){
+			                		console.log(data)
+			                		alert(data.content)
+			                		location=location;
+			                	}
+			               })
+						 
+						$(".modallg").fadeOut();
+			})
+			
+			//位置筛选
+			$("#weizhiselect").on('change',function(){
+				 $.ajax({
+						type:'POST',
+						dataType:'json',
+						data:{'wei':$("#weizhiselect option:selected").attr('tid')},
+						url:'/admin/user/getRoom/',
+						success:function(data){
+							cosnole.log(data)
+						}
+				 })
 			})
 			
 	    </script>

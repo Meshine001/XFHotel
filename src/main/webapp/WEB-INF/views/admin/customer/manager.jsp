@@ -12,6 +12,30 @@
 </head>
 <body>
 	<my_body>
+	
+	<div class="modallg lockhouse">
+		<!-- Modal -->
+		<div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">他的房屋</h4>
+		      </div>
+		      <div class="modal-body">
+		       	<ul id="houseList">
+		    
+		       	</ul>
+		      </div>
+		      <div class="modal-footer">
+		      	   <button type="button" class="btn btn-primary closes">关闭</button>
+		      </div>
+		    </div>
+		  </div>
+	  </div>
+	
+	
+	
+	
 	<!-- 删除 -->
 	<div class="modallg removeIp">
 		  <div class="modal-dialog">
@@ -190,17 +214,24 @@
 								<td>${order.time}</td>
 								<td>${order.status}</td>
 								<td>
-					 			<a href="javascript:;" title="关闭启用" class="setStatus">关闭</a>
+								<c:if test="${order.status=='激活'}">
+									<a href="javascript:;" class="setStatus" status="1" order-id="${order.id}">关闭</a>
+								</c:if>
+								<c:if test="${order.status=='冻结'}">
+									<a href="javascript:;" class="setStatus" status="0" order-id="${order.id}">激活</a>
+								</c:if>
 					 			<a href="javascript:;" title="修改信息" class="setip">修改</a>
 					 			<a href="javascript:;" title="删除用户" class="removeip">删除</a>
 					 		</td>
-								<td><a href="javascript:;">查看</a></td>
+								<td><a href="javascript:;" class="lock" order-id="${order.id}">查看</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 					 
 				</table>
-			
+			<script>
+
+			</script>
 				
 				<ul id="pagecontroller" class="pagination">
 					
@@ -257,7 +288,7 @@
 					url:'/admin/user/add',
 					success:function(data){
 						console.log(data);
-						//location=location;
+						location=location;
 					}
 				})
 			}
@@ -342,6 +373,50 @@
 			})
 		})
 		
+		
+		// 激活、关闭用户
+			
+		$("#p-table").on('click','tr td .setStatus',function(){//获取现在账号信息
+			var persons=$(this).attr('order-id');
+			var status=$(this).attr('status');
+		    $.ajax({
+		    	type:'post',
+		    	dataType:'json',
+		    	data:{'id':persons,'status':status},
+		    	url:'/admin/user/update',
+		    	success:function(data){
+		    		console.log(data);
+		    		alert(data.content)
+		    		location=location;
+		    	}
+		    })
+		});
+		//myalerts_house
+		// 查看管理员管理的房屋
+		
+		$("#p-table").on('click','tr td .lock',function(){//获取现在账号信息
+			var persons=$(this).attr('order-id');
+		    $(".lockhouse").fadeIn();
+		    $.ajax({
+   		    	type:'post',
+   		    	dataType:'json',
+   		    	data:{'id':persons},
+   		    	url:'/admin/user/steward',
+   		    	success:function(data){
+   		    		console.log(data);
+   		    		var str="";
+					$("#houseList").html("");
+					for(var i=0;i<data.content.length;i++){
+						str+='<li><p>名称：'+data.content[i].position.xa_wei_zhi+'-'+data.content[i].position.xiao_qu+'-'+data.content[i].position.men_pai+'</p><p>地址：'+data.content[i].position.bd_wei_zhi+'-'+data.content[i].position.jie_dao+'</p><p>价格：'+data.content[i].basic_info.jia_ge+'元/天</p></li>';
+					}
+					if(data.content.length<=0){
+						str='<li><p>暂时没有房屋</p></li>'
+					}
+					$("#houseList").append(str);
+   		    	}
+   		    })
+		            
+		});
 		
 	   })
 	</script>
