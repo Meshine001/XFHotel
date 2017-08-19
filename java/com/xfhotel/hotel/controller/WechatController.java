@@ -226,8 +226,7 @@ public class WechatController {
 				} else {
 					String openId = result.getString("openid");
 					String access_token = result.getString("access_token");	
-					String authUrl1 = Config.AUTH_GANIN_URL.
-							replace("ACCESS_TOKEN", access_token).replace("OPENID", openId);
+					String authUrl1 = Config.AUTH_GANIN_URL.replace("ACCESS_TOKEN", access_token).replace("OPENID", openId);
 					JSONObject basic = JSONObject.fromObject(HttpUtils.get(authUrl1));
 					Customer c = customerService.getOpenId(openId);
 					System.out.println(basic);
@@ -237,7 +236,6 @@ public class WechatController {
 						} else {
 							return "redirect:../" + state+"?id="+c.getId()+"&&"+"status=0";
 						}
-						
 					} else {
 						Customer customer = new Customer();
 						String Nick = basic.getString("nickname");
@@ -337,7 +335,6 @@ public class WechatController {
 		Order order = orderService.get(id);
 		if (order == null)
 			return null;
-		
 		JSONObject response = null;
 		if("".equals(order.getWxQRCode()) || null == order.getWxQRCode()){
 			// TODO 向微信下订单,并获取扫一扫地址
@@ -440,7 +437,6 @@ public class WechatController {
 		// 信息处理
 		String result_code = map.get("result_code");
 		try {
-
 			if ("SUCCESS".equals(result_code)) {
 				// 由于微信后台会同时回调多次，所以需要做防止重复提交操作的判断
 				// 此处放防止重复提交操作
@@ -458,19 +454,21 @@ public class WechatController {
 					o.setStatus(Order.STATUS_ON_COMFIRM);
 					orderService.update(o);
 					String pwd_user_mobile = o.getCusTel();
-					JSONObject a = apartmentService.getApartmentById(o.getRoomId())
-							;
+					JSONObject a = apartmentService.getApartmentById(o.getRoomId());
 					String f= a.getJSONObject("position").getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
 							a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 					String[] p = {f};
+					User user = userService.findById(a.getLong("steward"));
 					//发短信给顾客
 					//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
 					//发短信给管理员
 					//【青舍都市】您有新订单需要确认，请及时处理。{1}
-					User user = userService.findById(a.getLong("steward"));
-					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, user.getContact(), p);
-						
+					if(user==null){
+						SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, systemConfService.getConfig().getSms(), p);
+					}else{
+						SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_ORDER, user.getContact(), p);
+					}
 				} else if(facilityOrder!=null){
 					Customer customer = customerService.getCustomer(orderService.get(facilityOrder.getOederId()).getCusId());
 					SystemConfig system = systemConfService.getConfig();
@@ -481,18 +479,21 @@ public class WechatController {
 					facilityOrder.setStatus(FacilityOrder.STATUS_NOT_AFFIRM);
 					facilityOrderService.update(facilityOrder);
 					String pwd_user_mobile = orderService.get(facilityOrder.getOederId()).getCusTel();
-					JSONObject a = apartmentService.getApartmentById(orderService.get(facilityOrder.getOederId()).getRoomId())
-							.getJSONObject("position");
-					String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
-							a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号房间添加的设施";
+					JSONObject a = apartmentService.getApartmentById(o.getRoomId());
+					String f= a.getJSONObject("position").getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
+							a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 					String[] p = {f};
+					User user = userService.findById(a.getLong("steward"));
 					//发短信给顾客
 					//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
 					//发短信给管理员systemConfService
 					//【青舍都市】您有新订单需要确认，请及时处理。{1}
-					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfService.getConfig().getSms(), p);
-						
+					if(user==null){
+						SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfService.getConfig().getSms(), p);
+					}else{
+						SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, user.getContact(), p);
+					}
 				} else if(tripOrder!=null){
 					Customer customer = customerService.getCustomer(tripOrder.getCusId());
 					SystemConfig system = systemConfService.getConfig();
@@ -503,9 +504,8 @@ public class WechatController {
 					tripOrder.setStatus(TripOrder.STATUS_ON_COMFIRM);
 					tripOrderService.update(tripOrder);
 					String pwd_user_mobile = String.valueOf(tripOrder.getTel());
-					JSONObject a = apartmentService.getApartmentById(orderService.get(tripOrder.getOederId()).getRoomId())
-							.getJSONObject("position");
-					String f= a.getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
+					JSONObject a = apartmentService.getApartmentById(orderService.get(tripOrder.getOederId()).getRoomId());
+					String f= a.getJSONObject("position").getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
 							a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号房间呼叫用车";
 					String[] p = {f};
 					//发短信给顾客
@@ -513,8 +513,12 @@ public class WechatController {
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
 					//发短信给管理员systemConfService
 					//【青舍都市】您有新订单需要确认，请及时处理。{1}
-					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfService.getConfig().getSms(), p);
-						
+					User user = userService.findById(a.getLong("steward"));
+					if(user==null){
+						SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfService.getConfig().getSms(), p);
+					}else{
+						SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, user.getContact(), p);
+					}	
 				}
 			} else if ("FAIL".equals(result_code)) {
 				
@@ -572,7 +576,8 @@ public class WechatController {
 		System.out.println("支付成功");
 		return result;
 	}
-
+	
+	
 	@RequestMapping(value="/pay/jsTrip",method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject jsTrip(Long id, String ip) throws Exception {
@@ -598,5 +603,4 @@ public class WechatController {
 		System.out.println("支付成功");
 		return result;
 	}
-	
 }

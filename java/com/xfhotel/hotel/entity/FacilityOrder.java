@@ -42,6 +42,7 @@ public class FacilityOrder {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String roomId;//房间名	
+	private Long apId;//房间名	
 	private Long oederId;//订单id
 	private int status;// 状态
 	private Long time;//下单时间
@@ -59,6 +60,14 @@ public class FacilityOrder {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	
+	public Long getApId() {
+		return apId;
+	}
+	public void setApId(Long apId) {
+		this.apId = apId;
 	}
 	public String getRoomId() {
 		return roomId;

@@ -874,7 +874,11 @@ public class MobileController  {
 					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 			String[] p = {f};
 			User user = userService.findById(a.getLong("steward"));
-			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_FAULT_SERVICE, user.getContact(), p);	
+			if(user==null){
+				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_FAULT_SERVICE,systemConfiService.getConfig().getSms(), p);
+			}else{
+				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_FAULT_SERVICE, user.getContact(), p);
+			}	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -965,6 +969,7 @@ public class MobileController  {
  			fault.setFaultItem(Fault.getTypeFaultItem(faultItem));
  			fault.setMaintainTime(Fault.getmaintainTime(maintainTime));
  			fault.setRoomId(o.getDescription());
+ 			fault.setApId(o.getRoomId());
  			fault.setOederId(oederId);
  			fault.setTime(new Date().getTime());
  			fault.setStatus(Fault.STATUS_NOT_AFFIRM);
@@ -978,7 +983,11 @@ public class MobileController  {
 					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 			String[] p = {f};
 			User user = userService.findById(a.getLong("steward"));
-			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, user.getContact(), p);	
+			if(user==null){
+				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, systemConfiService.getConfig().getSms(), p);
+			} else {
+				SendTemplateSMS.sendSMS(Constants.SMS_INFORM_COMFIRM_CLEAN_ORDER, user.getContact(), p);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1018,6 +1027,7 @@ public class MobileController  {
 							facilityOrder.setClassify(pay);
 				 			facilityOrder.setAddTime(FacilityOrder.getmaintainTime(addTime));
 				 			facilityOrder.setRoomId(o.getDescription());
+				 			facilityOrder.setApId(o.getRoomId());
 				 			facilityOrder.setOederId(oederId);
 				 			facilityOrder.setTime(new Date().getTime());
 				 			facilityOrderService.add(facilityOrder);
@@ -1033,8 +1043,12 @@ public class MobileController  {
 								a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
 						String[] p = {f};
 						User user = userService.findById(a.getLong("steward"));
-					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, user.getContact(), p);	
-					return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+						if(user==null){
+							SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfiService.getConfig().getSms(), p);	
+						}else{
+							SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, user.getContact(), p);
+						}
+						return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
 					}
 					return new Message(Constants.MESSAGE_SUCCESS_CODE, list); 
 		} catch (Exception e) {
@@ -1176,7 +1190,6 @@ public class MobileController  {
 	
 	@RequestMapping(value = "getTrip", method = RequestMethod.POST)
 	public @ResponseBody TripOrder getTrip(Long id){
-//
 	return tripOrderService.findById(id);
 	}
 	
@@ -1201,8 +1214,9 @@ public class MobileController  {
 			c.setTel(tel);
 			c.setPassword(psd);
 			customerService.updateBaseInfo(c);
-				return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
 		}
 			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
 	}
+	
 }

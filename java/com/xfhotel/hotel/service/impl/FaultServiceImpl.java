@@ -55,12 +55,21 @@ public class FaultServiceImpl implements FaultService{
 	}
 	@Transactional
 	@Override
-	public Fault getFault(Long oederId) {
+	public List<Fault> getFault(Long oederId) {
 		// TODO Auto-generated method stub
 		String hql = "from Fault where oederId=?";
 		Object[] v = {oederId};
-		return FaultDAO.getByHQL(hql, v);
+		return FaultDAO.getListByHQL(hql, v);
 	}
+	@Transactional
+	@Override
+	public List<Fault> getFault1(Long roomId) {
+		// TODO Auto-generated method stub
+		String hql = "from Fault where apId=?";
+		Object[] v = {roomId};
+		return FaultDAO.getListByHQL(hql, v);
+	}
+	
 	@Transactional
 	@Override
 	public List<Fault> list() {

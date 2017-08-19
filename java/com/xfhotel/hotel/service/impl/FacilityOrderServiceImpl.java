@@ -64,11 +64,20 @@ public class FacilityOrderServiceImpl implements FacilityOrderService{
 
 	@Transactional
 	@Override
-	public FacilityOrder getFaultOrder(Long oederId) {
+	public List<FacilityOrder> getFaultOrder(Long oederId) {
 		// TODO Auto-generated method stub
 		String hql = "from FacilityOrder where oederId=?";
 		Object[] v = {oederId};
-		return facilityOrderDAO.getByHQL(hql, v);
+		return facilityOrderDAO.getListByHQL(hql, v);
+	}
+	
+	@Transactional
+	@Override
+	public List<FacilityOrder> getFaultOrder1(Long apId) {
+		// TODO Auto-generated method stub
+		String hql = "from FacilityOrder where apId=?";
+		Object[] v = {apId};
+		return facilityOrderDAO.getListByHQL(hql, v);
 	}
 	
 	@Transactional
