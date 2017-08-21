@@ -40,7 +40,7 @@
     padding: 0 0.2rem;
     height: 0.28rem;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 1px solid #56216f;
     border-radius: 0.06rem;
     font-size:0.14rem;
     line-height: 0.28rem;
@@ -48,15 +48,8 @@
     margin-top: 0.085rem;
 }
 /*�˷�*/
-.total .cancel{background: #666;color: #e4d0d0}
-/*����*/
-.total .evaluate{background: orange;color: #FFFFFF}
-/*�ٴ�Ԥ��*/
-.total .reserve{background: #1fc8a1;color: #fff}
-/*֧��*/
-.total .payment{background: #0cbb08;color: #FFF}
-/*��ʱ ɾ������*/
-.total .removeLi{background: red;color: #fff}
+.total .cancel{color: #56216f}
+
 
     /*û�ж�������*/
 .geterror{width: 100%;text-align: center;

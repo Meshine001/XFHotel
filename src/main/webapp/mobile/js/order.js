@@ -236,7 +236,7 @@ function addpartenr(){
             fnBase.keep(1,"uname",data.details.nick);
             fnBase.keep(1,"usfz",data.details.idCard);
             $("#userName").attr('value',data.details.nick);
-            $("#tel").attr('value',data.details.tel);
+            $("#tel").attr('value',data.tel);
             $("#identity").attr('value',data.details.idCard);
         });
 

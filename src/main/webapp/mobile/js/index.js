@@ -33,14 +33,14 @@ $(document).ready(function () {
 	//使用微信头像
 	 var _uid=fnBase.huoqu(0,"uid");
 	 if(_uid==null || _uid=="undefined" || _uid==""){
-	 	$(".header-mobile .link-btn img").attr("src","/images/my-index.png");
+	 	$(".header-mobile .link-btn img").attr("src",Constant.URL+"/images/face-90x90.png");
 	 }else{
 		 var frontURL=Constant.URL+'/mobile/detailsData';
 	     var postData={id:_uid};
 	     fnBase.commonAjax(frontURL,postData,function(data){
 	         console.log(data);
 	         if(data.details.avatar==""||data.details.avatar==null){
-	             $(".header-mobile .link-btn img").attr("src","/images/my-index.png");
+	             $(".header-mobile .link-btn img").attr("src",Constant.URL+"/images/face-90x90.png");
 	         }else{
 	             $(".header-mobile .link-btn img").attr("src",data.details.avatar);
 	         }
