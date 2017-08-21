@@ -120,7 +120,7 @@ $(document).ready(function(){
     }
 
     $(".orderlist").on('click','li',function(){
-    	window.location.href='orderDetails.html';
+    	window.location.href="orderDetails.html?onumber="+$(this).attr("orderid")+"";
     })
 
 
