@@ -871,8 +871,8 @@ public class MobileController  {
 //			发短信给管理员
 //			【青舍都市】您有新订单需要确认，请及时处理。{1}
 			JSONObject a = apartmentService.getApartmentById(o.getRoomId());
-			String f= a.getJSONObject("position").getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
-					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
+			String f= a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
+					a.getJSONObject("position").getString("dan_yuan")+"单元"+a.getJSONObject("position").getString("lou_ceng")+"层"+a.getJSONObject("position").getString("men_pai")+"号";
 			String[] p = {f};
 			User user = userService.findById(a.getLong("steward"));
 			if(user==null){
@@ -980,8 +980,8 @@ public class MobileController  {
 //			【青舍都市】您有新订单需要确认，请及时处理。{1}
 			JSONObject a = apartmentService.getApartmentById(o.getRoomId())
 					;
-			String f= a.getJSONObject("position").getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
-					a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
+			String f= a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
+					a.getJSONObject("position").getString("dan_yuan")+"单元"+a.getJSONObject("position").getString("lou_ceng")+"层"+a.getJSONObject("position").getString("men_pai")+"号";
 			String[] p = {f};
 			User user = userService.findById(a.getLong("steward"));
 			if(user==null){
@@ -1040,11 +1040,12 @@ public class MobileController  {
 					if(l==true){
 						JSONObject a = apartmentService.getApartmentById(o.getRoomId())
 								;
-						String f= a.getJSONObject("position").getString("xiao_qu")+a.getString("lou_hao")+"号楼"+
-								a.getString("dan_yuan")+"单元"+a.getString("lou_ceng")+"层"+a.getString("men_pai")+"号";
+						String f= a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
+								a.getJSONObject("position").getString("dan_yuan")+"单元"+a.getJSONObject("position").getString("lou_ceng")+"层"+a.getJSONObject("position").getString("men_pai")+"号";
 						String[] p = {f};
 						User user = userService.findById(a.getLong("steward"));
 						if(user==null){
+							System.out.println();
 							SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, systemConfiService.getConfig().getSms(), p);	
 						}else{
 							SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_FACILITY, user.getContact(), p);
