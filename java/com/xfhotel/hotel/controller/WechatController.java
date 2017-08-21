@@ -247,6 +247,7 @@ public class WechatController {
 						customer.setConsumptionCount(0.00F);
 						customer.setRegTime(new Date().getTime());
 						customer.setLevel(0);
+						customer.setConsumptionCount(100F);
 						customerService.register(customer, details);
 						Customer c1 = customerService.getCustomer(customer.getId());
 						Calendar calendar = Calendar.getInstance();

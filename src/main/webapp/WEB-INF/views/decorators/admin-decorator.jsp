@@ -254,8 +254,8 @@
 				  sessionStorage.clear();
 			      localStorage.clear();
 			      setTimeout(function(){
-			           window.location.href='http://localhost/admin/login';   //测试地址
-			       //  window.location.href='http://www.yiyunzn.xyz/admin/login'; // 线上地址
+			    	  //    window.location.href='http://localhost/admin/login';   //测试地址
+			         window.location.href='http://www.yiyunzn.xyz/admin/login'; // 线上地址
 			      },300)  
 			})
 		})

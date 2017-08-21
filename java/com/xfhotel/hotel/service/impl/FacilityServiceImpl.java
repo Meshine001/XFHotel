@@ -57,4 +57,15 @@ public class FacilityServiceImpl implements FacilityService{
 				return facilityDao.getListByHQL(hql, v);
 	}
 
+	@Transactional
+	@Override
+	public List<Facility> getFacility(long oederId) {
+		// TODO Auto-generated method stub
+		String hql = "from Facility where oederId=?";
+		Object[] v = {oederId};
+		return facilityDao.getListByHQL(hql, v);
+	}
+	
+
+
 }

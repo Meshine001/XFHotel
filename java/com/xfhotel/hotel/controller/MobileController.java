@@ -30,6 +30,7 @@ import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
+import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
@@ -175,8 +176,8 @@ public class MobileController  {
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public @ResponseBody  Message login(String tel, String password) {
-		Customer c = customerService.login(tel, password);
+	public @ResponseBody  Message login(String tel) {
+		Customer c = customerService.getFind(tel);
 		if (c != null) {
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c);
 		} else {
@@ -1217,6 +1218,26 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
 		}
 			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
+	}
+	
+	@RequestMapping(value = "/getClean", method = RequestMethod.POST)
+	public @ResponseBody List<Clean> getClean(Long id){
+		return cleanservice.getClean1(id);
+	}
+	
+	@RequestMapping(value = "/getFault", method = RequestMethod.POST)
+	public @ResponseBody List<Fault> getFault(Long id){
+		return faultservice.getFault(id);
+	}
+	
+	@RequestMapping(value = "/getFacility", method = RequestMethod.POST)
+	public @ResponseBody List<Facility> getFacility(Long id){
+		return facilityservice.getFacility(id);
+	}
+	
+	@RequestMapping(value = "/getTripOrder", method = RequestMethod.POST)
+	public @ResponseBody List<TripOrder> getTripOrder(Long id){
+		return tripOrderService.getTripOrder(id);
 	}
 	
 }

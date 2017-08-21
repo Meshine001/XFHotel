@@ -45,6 +45,14 @@ public class CleanServiceImpl implements CleanService {
 		Object[] v = {oederId};
 		return CleanDAO.getByHQL(hql, v);
 		}
+	
+	@Transactional
+	@Override
+	public List<Clean> getClean2(Long oederId) {
+		String hql = "from Clean where oederId=? order by id desc";
+		Object[] v = {oederId};
+		return CleanDAO.getListByHQL(hql, v);
+		}
 
 	@Transactional
 	@Override
