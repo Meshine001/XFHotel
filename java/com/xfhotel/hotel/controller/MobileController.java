@@ -293,7 +293,6 @@ public class MobileController  {
 		return commentService.getRoomRates(roomId);
 	}
 	
-	
 	/**
 	 * 验证短信验证码
 	 * @param tel
@@ -652,7 +651,6 @@ public class MobileController  {
 		StringBuffer content = new StringBuffer();
 		FileReader fr;
 		try {
-			
 			fr = new FileReader(path);
 			BufferedReader br=new BufferedReader(fr);
 			String str;
@@ -819,7 +817,6 @@ public class MobileController  {
 		return map ;
 	}
 	
-
 	/**
 	 * 退租
 	 * @param orderId
@@ -926,7 +923,6 @@ public class MobileController  {
 		}
 		return data;
 	}
-	
 	
 	@RequestMapping(value = "/distance",method = RequestMethod.POST)
 	public @ResponseBody ArrayList<Object> distance(double lat1 , double lng1 ,Long mi){
@@ -1232,8 +1228,8 @@ public class MobileController  {
 	}
 	
 	@RequestMapping(value = "/getFacility", method = RequestMethod.POST)
-	public @ResponseBody List<Facility> getFacility(Long id){
-		return facilityservice.getFacility(id);
+	public @ResponseBody List<FacilityOrder> getFacility(Long id){
+		return facilityOrderService.getFaultOrder(id);
 	}
 	
 	@RequestMapping(value = "/getTripOrder", method = RequestMethod.POST)

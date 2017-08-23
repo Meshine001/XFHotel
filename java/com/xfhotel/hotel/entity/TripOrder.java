@@ -20,7 +20,7 @@ public class TripOrder {
 	public final static int STATUS_COMPLETE = 2;//完成订单
 	public final static int STATUS_TIME_OUT = 3;//超时
 	public final static int STATUS_CHARGEBACK = 4;//退款
-	public final static int STATUS_ON_COMFIRM = 5;//需要管理员确认
+	public final static int STATUS_ON_COMFIRM = 5;//需要管理员确认 
 	public final static int STATUS_ON_OUT_LEASE = 6;//
 	
 	public final static String PAY_PLATFORM_WECHAT_NATIVE = "微信扫码";
