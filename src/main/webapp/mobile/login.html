@@ -25,16 +25,22 @@
                maxlength="60" placeholder="手机号" value="" autocomplete=off
                id="login-username">
     </p>
-    <p class="input_wrapper  rb-top">
+    <!-- 
+    	<p class="input_wrapper  rb-top">
         <input type="password" name="password" class="text-input" autocomplete=off
                id="login-password" placeholder="密码" value="">
     </p>
+     -->
+     <p class="input_wrapper  rb-top">
+	   <input type="text" name="yzword" class="text-input" id="yzcode" placeholder="短信验证码" value="">
+	   <i id="fetch-cmd">获取验证码</i>         
+     </p>
     <p class="item-btn">
         <button type="button" id="login_submit" class="btn-block">立即登录</button>
     </p>
     <p class="f14">
-        <a href="retrievepassword.html" class="login-problem">忘记密码</a>
-        <a href="" class="login-problem" style="float: right">其他方式登录</a>
+        <!-- <a href="retrievepassword.html" class="login-problem">忘记密码</a> -->
+        <!-- <a href="" class="login-problem" style="float: right">其他方式登录</a> -->
     </p>
 
 </div>

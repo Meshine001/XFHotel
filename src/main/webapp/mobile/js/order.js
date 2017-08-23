@@ -235,7 +235,6 @@ function addpartenr(){
             console.log(data);
             fnBase.keep(1,"uname",data.details.nick);
             fnBase.keep(1,"usfz",data.details.idCard);
-            $("#userName").attr('value',data.details.nick);
             $("#tel").attr('value',data.tel);
             $("#identity").attr('value',data.details.idCard);
         });
@@ -253,9 +252,7 @@ function addpartenr(){
     	}
     })
     
-    $("#userName").bind('input onchange',function(){
-    	console.log($(this).val())
-    })
+ 
     
     $("#contract a").click(function(){
     	fnBase.keep(1,"uname",$("#userName").val());

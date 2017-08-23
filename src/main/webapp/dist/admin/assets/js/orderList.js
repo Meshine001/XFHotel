@@ -106,7 +106,8 @@ function list(page) {
 	
 //确认订单
 
-$('#list').on('click','tr .comfirm-order',function(){
+$('#list').on('click','tr .comfirm-order',function(event){
+	event.stopPropagation();
 	var url = '../order/comfirm';
 	var id = $(this).attr('data-id');
 	
@@ -133,7 +134,8 @@ $('#list').on('click','tr .comfirm-order',function(){
 
 //关闭订单
 
-$('#list').on('click','tr .close-order',function(){
+$('#list').on('click','tr .close-order',function(event){
+	event.stopPropagation();
 	var url = '../order/close';
 	var id = $(this).attr('data-id');
 	$.ajax({
@@ -157,7 +159,8 @@ $('#list').on('click','tr .close-order',function(){
 });
 //退租确认订单
 
-$('#list').on('click','tr .comfirmOutLease-order',function(){
+$('#list').on('click','tr .comfirmOutLease-order',function(event){
+	event.stopPropagation();
 	var url = '../order/comfirmOutLease';
 	var id = $(this).attr('data-id');
 	$.ajax({

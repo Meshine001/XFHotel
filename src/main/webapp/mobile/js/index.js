@@ -19,15 +19,10 @@ $(document).ready(function () {
 	 }
 
 	 $(".newUser .nest").click(function(){
-			$(".newUser .item1").animate({left:'-50%'},1000);
-			$(".newUser .item2").animate({left:'50%'},1000);
-			$(this).hide();
-			$(".newUser .begin").show();
-	 });
-	 $(".newUser .begin").click(function(){
-			$(".newUser").remove();
+		 $(".newUser").remove();
 			window.location.href='index.html'
 	 });
+	
 		
 
 	//使用微信头像
@@ -187,7 +182,7 @@ function life() {
             ad_str += '<div class="swiper-slide"><a pId="' + data.blogs.results[i].id + '"><img src="'+Constant.URL+ data.blogs.results[i].pic + '"><p class="mask">'+data.blogs.results[i].title+'</p><div class="content-mob"><p>'+data.blogs.results[i].abs_text+'</p><img src="'+Constant.URL+data.blogs.results[i].pic+'"></div></a></div>';
         }
         $(".swiper-container-life .swiper-wrapper").append(ad_str);
-    //    var mySwiper = new Swiper('.swiper-container-life');
+
         var mySwiper = new Swiper('.swiper-container-life', {
             loop: true,
             autoplay: 2000,
