@@ -88,15 +88,15 @@ $(document).ready(function(){
                     }else{
                         _str+='<li roomid="'+data.content[i].roomId+'" orderId="'+data.content[i].id+'"><p class="p_title" style="color: #00b38a">'+data.content[i].status+'</p>';
                     }
-                    _str+='<div class="pay_content"><p class="list_bigsize">'+tui.replace(/-undefined-/,"-")+'</p><p class="p_list"><span>支付<i style="color: orange">'+data.content[i].totalPrice+'</i>元</span></p><p class="p_list">'+data.content[i].startTime+"~"+data.content[i].endTime+'<span>共'+data.content[i].totalDay+'天</span></p></div>';
+                    _str+='<div class="pay_content"><p class="list_bigsize">'+tui.replace(/-undefined-/,"-")+'</p><p class="p_list"><span>&nbsp; 合计：<i style="color: orange">'+data.content[i].totalPrice+'</i>元</span></p><p class="p_list">'+data.content[i].startTime+"~"+data.content[i].endTime+'<span>共'+data.content[i].totalDay+'天</span></p></div>';
 
-                    if(data.content[i].status=="等待支付"){
+                    if(data.content[i].status=="等待支付"){//1
                         _str+='<p class="total"><span class="fl payment">支付</span></p>';
-                    }else if(data.content[i].status=="退款订单"){
+                    }else if(data.content[i].status=="退款订单"){//6
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
-                    }else if(data.content[i].status=="进行中"){
+                    }else if(data.content[i].status=="进行中"){//2
                         _str+='<p class="total"><span class="fl cancel check-out">退房</span><span class="fl cancel lockpassword">查看密码</span></p>'
-                    }else if(data.content[i].status=="已完成"||data.content[i].status=="退租确认中"){
+                    }else if(data.content[i].status=="已完成"||data.content[i].status=="退租确认中"){//3 or 8
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
                     }
                     _str+='</li>';
@@ -119,6 +119,9 @@ $(document).ready(function(){
         })
     }
 
+    $(".orderlist").on('click','li',function(){
+    	window.location.href="orderDetails.html?onumber="+$(this).attr("orderid")+"";
+    })
 
 
 
@@ -126,29 +129,27 @@ $(document).ready(function(){
     $(".reserve").live('click',function(){
         window.location.href="order.html"
     });
-    $(".payment").live('click',function(){
+    $(".orderlist").on('click','li .payment',function(event){
+    	event.stopPropagation();
         var _orderID=$(this).parent().parent().attr('orderid');
-        //var frontURL=Constant.URL+'/mobile/getOrder';
-        //var postData={id:_orderID};
-        //fnBase.commonAjax(frontURL,postData,function(data){
-        //    console.log(data)
-        //});
         window.location.href="payment.html?id="+_orderID;
-
     });
-    $(".evaluate").live('click',function(){
+    $(".orderlist").on('click','li .evaluate',function(event){
+    	event.stopPropagation();
         var _orderID=$(this).parent().parent().attr('orderid');
         var _roomID=$(this).parent().parent().attr('roomid');
         window.location.href="evaluate.html?orderId="+encodeURIComponent(_orderID)+"&roomId="+encodeURIComponent(_roomID);
     });
 
 
-    $(".check-out").live('click',function(){
+    $(".orderlist").on('click','li .check-out',function(event){
+    	event.stopPropagation();
         var _orderID=$(this).parent().parent().attr('orderid');
         window.location.href="checkout.html?id="+encodeURIComponent(_orderID);
     });
 
-    $(".lockpassword").live('click',function(){
+    $(".orderlist").on('click','li .lockpassword',function(event){
+    	event.stopPropagation();
         var Data=$(this).parent().parent().attr('orderid');
         var postData={"oId":Data};
         $.ajax({

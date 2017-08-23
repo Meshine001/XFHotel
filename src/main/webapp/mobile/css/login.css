@@ -73,3 +73,15 @@ html,body{background: -webkit-linear-gradient(135deg,#029253,#00887b);width: 100
     font-size: .14rem;
     text-align: center;
 }
+#fetch-cmd{
+    position: absolute;
+    font-size: 0.16rem;
+    right: 0px;
+    top: 0.14rem;
+    width: 1.28rem;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    border-left: 1px solid #dcdcdc;
+    color: #b9a05d;
+    text-align: center;
+}

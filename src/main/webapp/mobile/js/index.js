@@ -19,28 +19,23 @@ $(document).ready(function () {
 	 }
 
 	 $(".newUser .nest").click(function(){
-			$(".newUser .item1").animate({left:'-50%'},1000);
-			$(".newUser .item2").animate({left:'50%'},1000);
-			$(this).hide();
-			$(".newUser .begin").show();
-	 });
-	 $(".newUser .begin").click(function(){
-			$(".newUser").remove();
+		 $(".newUser").remove();
 			window.location.href='index.html'
 	 });
+	
 		
 
 	//使用微信头像
 	 var _uid=fnBase.huoqu(0,"uid");
 	 if(_uid==null || _uid=="undefined" || _uid==""){
-	 	$(".header-mobile .link-btn img").attr("src","/images/my-index.png");
+	 	$(".header-mobile .link-btn img").attr("src",Constant.URL+"/images/face-90x90.png");
 	 }else{
 		 var frontURL=Constant.URL+'/mobile/detailsData';
 	     var postData={id:_uid};
 	     fnBase.commonAjax(frontURL,postData,function(data){
 	         console.log(data);
 	         if(data.details.avatar==""||data.details.avatar==null){
-	             $(".header-mobile .link-btn img").attr("src","/images/my-index.png");
+	             $(".header-mobile .link-btn img").attr("src",Constant.URL+"/images/face-90x90.png");
 	         }else{
 	             $(".header-mobile .link-btn img").attr("src",data.details.avatar);
 	         }
@@ -187,7 +182,7 @@ function life() {
             ad_str += '<div class="swiper-slide"><a pId="' + data.blogs.results[i].id + '"><img src="'+Constant.URL+ data.blogs.results[i].pic + '"><p class="mask">'+data.blogs.results[i].title+'</p><div class="content-mob"><p>'+data.blogs.results[i].abs_text+'</p><img src="'+Constant.URL+data.blogs.results[i].pic+'"></div></a></div>';
         }
         $(".swiper-container-life .swiper-wrapper").append(ad_str);
-    //    var mySwiper = new Swiper('.swiper-container-life');
+
         var mySwiper = new Swiper('.swiper-container-life', {
             loop: true,
             autoplay: 2000,

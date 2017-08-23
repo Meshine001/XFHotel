@@ -1219,7 +1219,7 @@ public class MobileController  {
 	
 	@RequestMapping(value = "/getClean", method = RequestMethod.POST)
 	public @ResponseBody List<Clean> getClean(Long id){
-		return cleanservice.getClean1(id);
+		return cleanservice.getClean2(id);
 	}
 	
 	@RequestMapping(value = "/getFault", method = RequestMethod.POST)

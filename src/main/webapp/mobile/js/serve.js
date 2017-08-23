@@ -35,13 +35,7 @@ $(document).ready(function(){
             $(".vip_info #personMan div img").attr("src",data.details.avatar);
         }
 
-        //未支付的订单数
-        var toPaid=fnBase.huoqu(0,"toPaid");
-        if(toPaid=="0"){
-            $(".vip_info_list li .per-order-status .tip-size").hide();
-        }else{
-            $(".vip_info_list li .per-order-status .tip-size").text(toPaid).show();
-        }
+
 
     });
     }
