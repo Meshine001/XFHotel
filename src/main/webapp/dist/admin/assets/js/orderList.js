@@ -407,7 +407,7 @@ $("#list").on('click','tr',function(){
 			data:{'id':uid},
 			success:function(data){
 				console.log(data)
-				console.log(uid)
+			
 			}
 	  })	 
 	 
