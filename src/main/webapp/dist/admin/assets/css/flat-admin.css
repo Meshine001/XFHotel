@@ -9046,13 +9046,13 @@ i{font-style:normal}
     z-index: 1000000001;
 }
 .orderDetail{
-	width: 800px;
+	width: 600px;
     background: #FFF;
     position: fixed;
     left: 50%;
     top: 10%;
     bottom: 10%;
-    margin-left: -400px;
+    margin-left: -300px;
     z-index: 1000000002;
     overflow: hidden;
     border-radius: 10px;

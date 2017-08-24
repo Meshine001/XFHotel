@@ -56,6 +56,8 @@ var login={
             		fnBase.keep( 0,"uid",data.content.id);
                     _uid=data.content.id;
                     wechatOpenId=data.content.wechatOpenId;
+            	}else if(data.statusCode == "0"){
+            		fnBase.myalert(data.content);
             	}
             })
 		}

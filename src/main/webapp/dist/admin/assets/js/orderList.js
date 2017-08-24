@@ -399,6 +399,19 @@ $("#list").on('click','tr',function(){
 				};
 			}
 	  });
+	 
+	 /*用车订单*/
+	  $.ajax({
+			type:'POST',
+			dataType:'json',
+			url:'/mobile/getTripOrder',
+			data:{'oederId':uid},
+			success:function(data){
+				console.log(data)
+				console.log(uid)
+			}
+	  })	 
+	 
 	
 	 $('.masking').show();
 	 $(".orderDetail").addClass('hover');
