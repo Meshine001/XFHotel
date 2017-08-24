@@ -387,7 +387,6 @@ $("#list").on('click','tr',function(){
 				if(data.statusCode==1){
 					var content=data.content.content;
 					content=content.replace(/@/g,'、');
-					
 					$(".detailWraper .clean").html('');
 					var sty='<tr><td style="width:100%;border-bottom:1px solid #ccc;font-size: 18px;">保洁订单</td></tr><tr><td style="width:100%">下单时间：<span>'+statetime+
 					'</span></td><td class="fl50">订单状态：<span>'+stuse+'</span></td><td class="fl50">打扫时间：<span>'+data.content.cleanTime+
@@ -405,7 +404,7 @@ $("#list").on('click','tr',function(){
 			type:'POST',
 			dataType:'json',
 			url:'/mobile/getTripOrder',
-			data:{'oederId':uid},
+			data:{'id':uid},
 			success:function(data){
 				console.log(data)
 				console.log(uid)
