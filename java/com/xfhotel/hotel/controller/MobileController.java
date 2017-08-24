@@ -278,6 +278,7 @@ public class MobileController  {
 			map.put("tel", customer.getTel());
 			map.put("comment", comment1);
 			map.put("Avatar", f.getAvatar());
+			System.out.println();
 			list.add(map);
 		}
 		return list;
