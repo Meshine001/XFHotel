@@ -181,7 +181,7 @@ public class MobileController  {
 		if (c != null) {
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c);
 		} else {
-			return new Message(Constants.MESSAGE_ERR_CODE, "账号或密码错误");
+			return new Message(Constants.MESSAGE_ERR_CODE, "手机号未完善，或未注册");
 		}
 	}
 	
