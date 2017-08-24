@@ -552,7 +552,7 @@ public class AdminController {
 	@ResponseBody
 	public Message getClean(Long oederId ){
 		try {
-			if(cleanService.getClean(oederId)==null){
+			if(oederId==null){
 				return new Message(Constants.MESSAGE_ERR_CODE, "为空");
 			}
 		} catch (Exception e) {
@@ -560,7 +560,7 @@ public class AdminController {
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "失败");
 			}
-		return new Message(Constants.MESSAGE_SUCCESS_CODE, cleanService.getClean(oederId));
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, cleanService.getClean2(oederId));
 	}
 	
 	@RequestMapping(value = "/roomSort", method = RequestMethod.POST)
