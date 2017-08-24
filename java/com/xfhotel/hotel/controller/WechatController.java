@@ -140,13 +140,9 @@ public class WechatController {
 		handler.setQrcodeErrorCorrect('M');
 		handler.setQrcodeEncodeMode('B');
 		handler.setQrcodeVersion(7);
-
 		byte[] contentBytes = url.getBytes("UTF-8");
-
 		BufferedImage bufImg = new BufferedImage(140, 140, BufferedImage.TYPE_INT_RGB);
-
 		Graphics2D gs = bufImg.createGraphics();
-
 		gs.setBackground(Color.WHITE);
 		gs.clearRect(0, 0, 140, 140);
 
@@ -590,6 +586,7 @@ public class WechatController {
 			jo.put("obj", null);
 			return jo;
 		}
+		
 		tripOrder.setPayPlatform(TripOrder.PAY_PLATFORM_WECHAT_JSAPI);
 		tripOrderService.update(tripOrder);
 		String detail = tripOrder.getRoomName();

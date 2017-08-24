@@ -181,7 +181,7 @@ public class MobileController  {
 		if (c != null) {
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c);
 		} else {
-			return new Message(Constants.MESSAGE_ERR_CODE, "账号或密码错误");
+			return new Message(Constants.MESSAGE_ERR_CODE, "手机号未完善，或未注册");
 		}
 	}
 	
@@ -292,7 +292,6 @@ public class MobileController  {
 	public @ResponseBody Map<String, Object> getRoomRates(Long roomId){
 		return commentService.getRoomRates(roomId);
 	}
-	
 	
 	/**
 	 * 验证短信验证码
@@ -652,7 +651,6 @@ public class MobileController  {
 		StringBuffer content = new StringBuffer();
 		FileReader fr;
 		try {
-			
 			fr = new FileReader(path);
 			BufferedReader br=new BufferedReader(fr);
 			String str;
@@ -819,7 +817,6 @@ public class MobileController  {
 		return map ;
 	}
 	
-
 	/**
 	 * 退租
 	 * @param orderId
@@ -926,7 +923,6 @@ public class MobileController  {
 		}
 		return data;
 	}
-	
 	
 	@RequestMapping(value = "/distance",method = RequestMethod.POST)
 	public @ResponseBody ArrayList<Object> distance(double lat1 , double lng1 ,Long mi){
