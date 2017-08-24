@@ -553,6 +553,7 @@ public class AdminController {
 	public Message getClean(Long oederId ){
 		try {
 			if(oederId==null){
+				System.out.println();
 				return new Message(Constants.MESSAGE_ERR_CODE, "为空");
 			}
 		} catch (Exception e) {
