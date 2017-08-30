@@ -182,6 +182,7 @@ public class MobileController  {
 		if (c != null) {
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c);
 		} else {
+			System.out.println();
 			return new Message(Constants.MESSAGE_ERR_CODE, "亲，您的手机号未注册，请微信登录完善信息哦！");
 		}
 	}
