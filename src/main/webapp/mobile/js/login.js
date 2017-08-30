@@ -22,7 +22,17 @@ var login={
 	Entry:function(){
 		$("#fetch-cmd").click(function(){
 			
-			    var phoneNumber=$("#login-username").val();
+			   
+	            getid();
+	            console.log(ss)
+	   
+	            
+	          
+		});
+	
+		
+		function getid(){
+			 var phoneNumber=$("#login-username").val();
 	            if(phoneNumber==""){
 	                fnBase.myalert("请填写手机号码");
 	                return;
@@ -32,30 +42,6 @@ var login={
 	                fnBase.myalert("手机号码有误！ 请输入11位数字");
 	                return;
 	            }
-	            getid();
-	            if(ss==0){
-	            	return;
-	            }else{
-	            	var frontURL=Constant.URL+"/mobile/sendVCode";
-		            var postData={"tel":phoneNumber};
-		            fnBase.commonAjax(frontURL,postData,function(data){
-		                console.log(data);
-		                if(data.statusCode=="1"){
-		                    fnBase.myalert("短信发送成功");
-		                    _status=1;
-		                  
-		                }else{
-		                    fnBase.myalert("短信发送失败")
-		                }
-		            });
-		            login.timePrompt();
-	            }
-	            
-	          
-		});
-	
-		
-		function getid(){
 			var frontURL=Constant.URL+"/mobile/login";
             var postData ={"tel":$("#login-username").val()};
             fnBase.commonAjax(frontURL,postData ,function(data) {
@@ -68,8 +54,30 @@ var login={
             	}else if(data.statusCode == "0"){
             		fnBase.myalert(data.content);
             		ss=0;
-            		return;
             	}
+                if(ss==0){
+	            	return;
+	            }else if(ss==1){
+	            	  console.log(ss)
+	            	
+	            	var frontURL=Constant.URL+"/mobile/sendVCode";
+		            var postData={"tel":phoneNumber};
+		            console.log(postData);
+		            fnBase.commonAjax(frontURL,postData,function(data){
+		                console.log(data);
+		                if(data.statusCode=="1"){
+		                    fnBase.myalert("短信发送成功");
+		                    _status=1;
+		                    login.timePrompt();
+		                }else{
+		                    fnBase.myalert("短信发送失败")
+		                }
+		               
+		            });
+		            
+	            }
+            	
+            	
             })
 		}
         $("#login_submit").click(function(){
@@ -86,7 +94,7 @@ var login={
                     window.location.href = redirect;
                 }else{
                 	
-                //    window.location.href = "index.html";
+                   window.location.href = "index.html";
                 }
             }
             
