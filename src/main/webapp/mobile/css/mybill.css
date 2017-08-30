@@ -11,7 +11,7 @@
   /* top: 0.85rem;*/  
     bottom: 0;
     background: #f2f4f3;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .header-mobile .cell span{color: #2c2c2c}
 .header-mobile{

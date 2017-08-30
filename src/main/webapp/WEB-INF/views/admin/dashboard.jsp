@@ -267,7 +267,7 @@
 						data:{'id':uid},
 						url:'/admin/user/steward',//统计用户有多少管理的房屋
 						success:function(data){
-							console.log(data);
+				//			console.log(data);
 							$("#app-moble-house .value").html('<span class="sign"></span>'+data.content.length+'')
 						}
 				});
@@ -277,7 +277,7 @@
 						data:{'id':uid},
 						url:'/admin/user/stewardO',//统计住房订单
 						success:function(data){
-							console.log(data);
+				//			console.log(data);
 							$("#app-moble-order .value").html('<span class="sign"></span>'+data.content.length+'')
 						}
 				});
@@ -287,7 +287,7 @@
 					data:{'id':uid},
 					url:'/admin/user/stewardC',//统计保洁订单
 					success:function(data){
-						console.log(data);
+				//		console.log(data);
 						$("#app-moble-clean .value").html('<span class="sign"></span>'+data.content.length+'')
 					}
 				});
@@ -297,7 +297,7 @@
 					data:{'id':uid},
 					url:'/admin/user/stewardF',//统计维修订单
 					success:function(data){
-						console.log(data);
+				//		console.log(data);
 						$("#app-moble-wx .value").html('<span class="sign"></span>'+data.content.length+'')
 					}
 				});
@@ -307,7 +307,7 @@
 					data:{'id':uid},
 					url:'/admin/user/stewardT',//统计轿车订单
 					success:function(data){
-						console.log(data);
+				//		console.log(data);
 						$("#app-moble-car .value").html('<span class="sign"></span>'+data.content.length+'')
 					}
 				});
@@ -317,7 +317,7 @@
 					data:{'id':uid},
 					url:'/admin/user/stewardFO',//统计添加设置订单
 					success:function(data){
-						console.log(data);
+				//		console.log(data);
 						$("#app-moble-add .value").html('<span class="sign"></span>'+data.content.length+'')
 					}
 				});
@@ -327,7 +327,7 @@
                 	data:{},
                 	url:'/admin/user/all/',//统计有多少管理员
                 	success:function(data){
-                		console.log(data)
+                //		console.log(data)
                 		$("#app-moble-power .value").html('<span class="sign"></span>'+data.content.length+'')
                 	}
 				 });	
@@ -337,7 +337,7 @@
 	                	dataType:'json',
 	                	url:'/landlord/collocation/',//统计房东数量
 	                	success:function(data){
-	                		console.log(data)
+	             //   		console.log(data)
 	                		$("#app-moble-app .value").html('<span class="sign"></span>'+data.length+'')
 	                	}
 				   });

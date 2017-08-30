@@ -1,0 +1,53 @@
+.header-mobile {
+    position: relative;
+    z-index: 1001;
+    width: 100%;
+    height: 0.4rem;
+    padding-top: 0.06rem;
+    padding-bottom: 0.06rem;
+    line-height: 0.26rem;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    display: flex;
+    font-size: 0.18rem;
+    background: rgba(0,0,0,.8);
+    color: #ffffff;
+    font-size: 0.18rem;
+}
+.header-mobile .img-home {
+    width: 0.12rem;
+    margin-top: 0.04rem;
+}
+.ac-gn-bagview{
+	position:absolute;
+	width:100%;
+	height:3rem;
+	background:#fff;
+	z-index:1003;
+	padding:0 0.5rem;
+}
+.ac-gn-bagview ul li{
+	width:100%;
+	line-height:0.48rem;
+	font-size:0.16rem;
+}
+.ac-gn-bagview ul li a{color:#0070c9;}
+
+
+
+
+
+.service{margin: 0.2rem auto;padding:0.1rem;}
+.service .goodlist li{
+    position: relative;
+    width: 100%;
+    height: 1.4rem;
+    margin-bottom: 0.15rem;
+    background: #fff;
+    background-size: 100% ;
+    border: 1px solid #e8e3e3;
+    border-radius: 0.15rem;
+}
+.service .goodlist li h1{text-align: center;font-size: 0.3rem;color: #dc5f5f}
+.service .goodlist li p{font-size: 0.1rem;color: #dc5f5f;position: relative;top:0.59rem;text-indent: 0.4rem;}
+.service .goodlist li ._pic{width:1.2rem;height: 0.5rem;position: absolute;left: 0.3rem;bottom: 0.5rem;line-height: 0.6rem;;color:#dc5f5f;font-size: 0.5rem }

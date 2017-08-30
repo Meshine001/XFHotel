@@ -53,9 +53,9 @@ $(document).ready(function(){
 
     });
 
-	$("#Credit").click(function(){
-	   	 window.location.href='integral.html'
-	});
+    $("#Credit").click(function(){
+      	 window.location.href="integral.html?int="+encodeURIComponent($(this).find('i').text())+"&id="+encodeURIComponent(_uid)+"";
+      });
     
 
 //  商品配送  餐饮配送 暂时没有做；

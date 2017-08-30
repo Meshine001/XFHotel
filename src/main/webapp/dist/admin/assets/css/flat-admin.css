@@ -9050,8 +9050,8 @@ i{font-style:normal}
     background: #FFF;
     position: fixed;
     left: 50%;
-    top: 10%;
-    bottom: 10%;
+    top: 2%;
+    bottom: 2%;
     margin-left: -300px;
     z-index: 1000000002;
     overflow: hidden;
@@ -9076,7 +9076,7 @@ i{font-style:normal}
 	position: absolute;
 	width: 100%;
     top: 40px;
-    bottom: 0px;
+    bottom: 15px;
     overflow: hidden;
     overflow-y: auto;
     transition: all .3s;
@@ -9093,7 +9093,8 @@ i{font-style:normal}
 }
 .detailTitle{text-align:center;line-height: 40px;font-size: 18px;color: #444444;font-weight: 600;}
 .detailWraper ul{padding:0}
-.detailWraper ul li span{width:50%;display: inline-block;}
+.detailWraper ul li{border-bottom:1px solid #ccc}
+.detailWraper ul li span{display: inline-block;}
 .detailWraper table{width:100%;}
 .detailWraper table tr{margin-bottom:20px;}
 .detailWraper tr td{
