@@ -1,4 +1,4 @@
-﻿var _uid="",wechatOpenId="",_status='0';
+﻿var _uid="",wechatOpenId="",_status='0',ss="0";
 $(document).ready(function(){
     login.Entry();
     login.login();
@@ -21,7 +21,18 @@ var login={
 	    },
 	Entry:function(){
 		$("#fetch-cmd").click(function(){
-			    var phoneNumber=$("#login-username").val();
+			
+			   
+	            getid();
+	            console.log(ss)
+	   
+	            
+	          
+		});
+	
+		
+		function getid(){
+			 var phoneNumber=$("#login-username").val();
 	            if(phoneNumber==""){
 	                fnBase.myalert("请填写手机号码");
 	                return;
@@ -31,23 +42,6 @@ var login={
 	                fnBase.myalert("手机号码有误！ 请输入11位数字");
 	                return;
 	            }
-	            var frontURL=Constant.URL+"/mobile/sendVCode";
-	            var postData={"tel":phoneNumber};
-	            fnBase.commonAjax(frontURL,postData,function(data){
-	                console.log(data);
-	                if(data.statusCode=="1"){
-	                    fnBase.myalert("短信发送成功");
-	                    _status=1;
-	                    getid();
-	                }else{
-	                    fnBase.myalert("短信发送失败")
-	                }
-	            });
-	            login.timePrompt();
-		});
-		
-		
-		function getid(){
 			var frontURL=Constant.URL+"/mobile/login";
             var postData ={"tel":$("#login-username").val()};
             fnBase.commonAjax(frontURL,postData ,function(data) {
@@ -56,7 +50,34 @@ var login={
             		fnBase.keep( 0,"uid",data.content.id);
                     _uid=data.content.id;
                     wechatOpenId=data.content.wechatOpenId;
+                    ss=1;
+            	}else if(data.statusCode == "0"){
+            		fnBase.myalert(data.content);
+            		ss=0;
             	}
+                if(ss==0){
+	            	return;
+	            }else if(ss==1){
+	            	  console.log(ss)
+	            	
+	            	var frontURL=Constant.URL+"/mobile/sendVCode";
+		            var postData={"tel":phoneNumber};
+		            console.log(postData);
+		            fnBase.commonAjax(frontURL,postData,function(data){
+		                console.log(data);
+		                if(data.statusCode=="1"){
+		                    fnBase.myalert("短信发送成功");
+		                    _status=1;
+		                    login.timePrompt();
+		                }else{
+		                    fnBase.myalert("短信发送失败")
+		                }
+		               
+		            });
+		            
+	            }
+            	
+            	
             })
 		}
         $("#login_submit").click(function(){
@@ -72,7 +93,8 @@ var login={
                         'state=index.html#wechat_redirect ';
                     window.location.href = redirect;
                 }else{
-                    window.location.href = "index.html";
+                	
+                   window.location.href = "index.html";
                 }
             }
             

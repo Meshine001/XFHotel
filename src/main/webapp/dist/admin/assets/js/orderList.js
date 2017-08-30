@@ -57,7 +57,7 @@ function list(page) {
 			alert("嗷获取数据失败！");
 		},
 		success : function(data) {
-			console.log(data)
+	//		console.log(data)
 			
 			
 			
@@ -118,11 +118,8 @@ $('#list').on('click','tr .comfirm-order',function(event){
 			'id' : id,
 		},
 		url : url,
-		error : function(data) {
-			
-		},
 		success : function(data) {
-			console.log(data)
+		//	console.log(data)
 			if(data.statusCode == 1){
 				window.location.href = '../admin/order';
 			}else{
@@ -145,9 +142,6 @@ $('#list').on('click','tr .close-order',function(event){
 			'id' : id,
 		},
 		url : url,
-		error : function(data) {
-			
-		},
 		success : function(data) {
 			if(data.statusCode == 1){
 				window.location.href = '../admin/order';
@@ -166,17 +160,11 @@ $('#list').on('click','tr .comfirmOutLease-order',function(event){
 	$.ajax({
 		type : 'POST',
 		dataType : 'json',
-		data : {
-			'id' : id,
-		},
+		data : {'id' : id},
 		url : url,
-		error : function(data) {
-			
-		},
 		success : function(data) {
-			console.log(data)
+		//	console.log(data)
 			if(data.statusCode == 1){
-				
 				window.location.href = '../admin/order';
 			}else{
 				alert(data.content);
@@ -201,7 +189,7 @@ $("#longtime").on('change',function(){
 				alert('数据传输错误！')
 			},
 			success:function(data){
-				console.log(data);
+		//		console.log(data);
 				var str='';
 				var newTime=new Array();
 				$("#list").html('');
@@ -240,7 +228,7 @@ $("#monetary").on('change',function(){
 				alert('数据传输错误！')
 			},
 			success:function(data){
-				console.log(data);
+		//		console.log(data);
 				var str='';
 				var newTime=new Array();
 				$("#list").html('');
@@ -281,7 +269,7 @@ $("#sex").on('change',function(){
 			alert('数据传输错误！')
 		},
 		success:function(data){
-			console.log(data);
+		//	console.log(data);
 			var str='';
 			var newTime=new Array();
 			$("#list").html('');
@@ -325,7 +313,8 @@ $("#list").on('click','tr',function(){
 			url:'/mobile/getOrder',
 			data:{'id':uid},
 			success:function(data){
-				console.log(data);
+			//	console.log(data);
+				var pd="";
 				var unixTimestamp = new Date( data[1].time ) ;
 				commonTime = unixTimestamp.toLocaleString();
 				 
@@ -346,11 +335,31 @@ $("#list").on('click','tr',function(){
 			    	yhj=0;
 			    }
 			 
+			    if(data[1].status=='2'){
+	        		pd='进行中'
+	        	}else if(data[1].status=='1'){
+	        		pd='等待支付'
+	        	}else if(data[1].status=='3'){
+	        		pd='已完成'
+	        	}else if(data[1].status=='5'){
+	        		pd='超时'
+	        	}else if(data[1].status=='4'){
+	        		pd='删除订单'
+	        	}else if(data[1].status=='6'){
+	        		pd='退款'
+	        	}else if(data[1].status=='7'){
+	        		pd='需要管理员确认'
+	        	}else if(data[1].status=='8'){
+	        		pd='退房等待管理员确认'
+	        	}
+			    
+			    
+			    
 			    $(".detailWraper .zfhouse").html('');
 			    var det=data[1].description
-			    var kule='<tr><td style="width:100%;border-bottom:1px solid #ccc;font-size: 18px;">住房订单</td><td>预订房屋：<span>'+det.replace(/-undefined-/,"-")+
+			    var kule='<tr><td style="width:100%;background:rgb(232, 229, 229);font-size: 18px;">住房订单</td><td>预订房屋：<span>'+det.replace(/-undefined-/,"-")+
 			              '</span></td></tr><tr><td class="fl50">入住时间：<span>'+data[0]+'</span></td><td>离开时间：<span>'+data[2]+
-			              '</span></td></tr><tr><td class="fl50">天数：<span>'+data[1].totalDay+'</span></td><td>订单状态：<span>'+data[1].status+
+			              '</span></td></tr><tr><td class="fl50">天数：<span>'+data[1].totalDay+'</span></td><td>订单状态：<span>'+pd+
 			              '</span></td></tr><tr><td>下单时间：<span>'+commonTime+'</span></td></tr><tr><td>入住人：<span>'+data[1].cusName+
 			              '</span></td></tr><tr><td>联系电话：<span>'+data[1].cusTel+
 			              '</span></td></tr><tr><td class="fl50">总房费：<span>￥'+_price+'</span></td><td>押金：<span>￥'+jajin+
@@ -372,34 +381,119 @@ $("#list").on('click','tr',function(){
 			url:'/admin/getClean',
 			data:{'oederId':uid},
 			success:function(data){
-				console.log(data);
-				var state = new Date( data.content.time ) ;
-				statetime = state.toLocaleString();
-				var stuse;
-				if(data.content.status==0){
-					stuse='等待保洁';
-				}else if(data.content.status==1){
-					stuse='正在打扫';
-				}else if(data.content.status==2){
-					stuse='完成';
+			//	console.log(data);
+				$(".detailWraper .clean ul").html('');
+			    var sty="",stuse="";
+				for(var i=0;i<data.content.length;i++){
+					new Date( data.content[i].time ).toLocaleString();
+					
+					if(data.content[i].status==0){
+						stuse='等待保洁';
+					}else if(data.content[i].status==1){
+						stuse='正在打扫';
+					}else if(data.content[i].status==2){
+						stuse='完成';
+					}
+					
+					sty+='<li id="'+data.content[i].id+'"><table><tr><td style="width:100%">下单时间：<span>'+new Date( data.content[i].time ).toLocaleString()+'</span></td></tr><tr><td class="fl50">订单状态：<span>'+stuse+'</span></td><td class="fl50">打扫时间：<span>'+data.content[i].cleanTime+'</span></td></tr><tr><td style="width:100%">服务内容：<span>'+data.content[i].content+'</span></td></tr></table></li>'
+					
 				}
 				
-				if(data.statusCode==1){
-					var content=data.content.content;
-					content=content.replace(/@/g,'、');
-					
-					$(".detailWraper .clean").html('');
-					var sty='<tr><td style="width:100%;border-bottom:1px solid #ccc;font-size: 18px;">保洁订单</td></tr><tr><td style="width:100%">下单时间：<span>'+statetime+
-					'</span></td><td class="fl50">订单状态：<span>'+stuse+'</span></td><td class="fl50">打扫时间：<span>'+data.content.cleanTime+
-					'</span></td></tr><tr><td>服务内容：<span>'+content+'</span></td></tr>'
-					$(".detailWraper .clean").append(sty)
-				};
-				if(data.content=='为空'){
-					 $(".detailWraper .clean .zanwu").show();
-				};
+				$(".detailWraper .clean ul").append(sty);
+				
 			}
 	  });
+	 
+	 /*用车订单*/
+	  $.ajax({
+			type:'POST',
+			dataType:'json',
+			url:'/mobile/getTripOrder',
+			data:{'id':uid},
+			success:function(data){
+			//	console.log(data)
+				$(".detailWraper .usercar ul").html('');
+				var _Str="",st="";
+				for(var i=0;i<data.length;i++){
+			 		if(data[i].status=='0'){
+	        			st='未支付'
+		        	}else if(data[i].status=='1'){
+		        		st='进行中'		
+		        	}else if(data[i].status=='2'){
+		        		st='完成订单'		
+		        	}else if(data[i].status=='3'){
+		        		st='超时'
+		        	}else if(data[i].status=='4'){
+		        		st='退款'
+		        	}else if(data[i].status=='5'){
+		        		st='需要管理员确认'
+		        	}
+					_Str+='<li id="'+data[i].id+'"><table><tr><td style="width:100%">下单时间：<span>'+new Date( data[i].time ).toLocaleString()+'</span></td></tr><tr><td class="fl50">服务类型：<span>'+data[i].classify+'</span></td><td class="fl50">服务内容：<span>'+data[i].tripId+'</span></td></tr><tr><td style="width:100%">开始时间：<span>'+new Date( data[i].startTime ).toLocaleString()+'</span></td><td style="width:100%">结束时间：<span>'+new Date( data[i].endTime ).toLocaleString()+'</span></td></tr><tr><td class="fl50">车型：<span>'+data[i].site+'</span></td><td class="fl50">价格：<span>'+data[i].price+'</span></td></tr><tr><td class="fl50">订单状态：<span>'+st+'</span></td><td class="fl50">联系电话：<span>'+data[i].tel+'</span></td></tr></table></li>'
+				}
+				$(".detailWraper .usercar ul").append(_Str);
+			}
+	  })	 
+	 
 	
+	  	 /*维修订单*/
+	  $.ajax({
+			type:'POST',
+			dataType:'json',
+			url:'/mobile/getFault',
+			data:{'id':uid},
+			success:function(data){
+		//		console.log(data)
+				$(".detailWraper .getFault ul").html('');
+				var stuse="",_str="";
+		
+				for(var i=0;i<data.length;i++){
+					if(data[i].status=='0'){
+						stuse='等待管理员呼叫维修'	
+		        	}else if(data[i].status=='1'){
+		        		stuse='正在维修'		
+		        	}else if(data[i].status=='2'){
+		        		stuse='已完成'		
+		        	}
+					_str+='<li id="'+data[i].id+'"><table><tr><td style="width:100%">下单时间：<span>'+new Date( data[i].time ).toLocaleString()+'</span></td></tr><tr><td style="width:100%">房间地址：<span>'+data[i].roomId+'</span></td></tr><tr><td style="width:100%">订单状态：<span>'+stuse+'</span></td><td>维修时间：<span>'+data[i].maintainTime+'</span></td></tr><tr><td style="width:100%">服务内容：<span>'+data[i].faultItem+'</span></td></tr></table></li>'
+				}
+				$(".detailWraper .getFault ul").html(_str);
+				
+			}
+			
+	  })
+	  
+			
+		  	 /*添加订单*/
+	  $.ajax({
+			type:'POST',
+			dataType:'json',
+			url:'/mobile/getFacility',
+			data:{'id':uid},
+			success:function(data){
+		//		console.log(data)
+				$(".detailWraper .addsheshi ul").html('');
+				var st="",_str="";
+				for(var i=0;i<data.length;i++){
+	        		if(data[i].status=='0'){
+	        			st='等待管理员添加'	
+		        	}else if(data[i].status=='1'){
+		        		st='正在路上'		
+		        	}else if(data[i].status=='2'){
+		        		st='已完成'		
+		        	}else if(data[i].status=='3'){
+		        		st='等待支付';
+		        	}else if(data[i].status=='4'){
+		        		st='超时'		
+		        	}
+	        		_str+='<li id="'+data[i].id+'"><table><tr><td style="width:100%">下单时间：<span>'+new Date( data[i].time ).toLocaleString()+'</span></td></tr><tr><td style="width:100%">房间地址：<span>'+data[i].roomId+'</span></td></tr><tr><td class="fl50">订单状态：<span>'+st+'</span></td><td class="fl50">价格：<span>'+data[i].price+'</span></td></tr><tr><td class="fl50">物品名称：<span>'+data[i].facility+'</span></td><td class="fl50">添加时间：<span>'+data[i].addTime+'</span></td></tr></table></li>'
+	        	}
+				$(".detailWraper .addsheshi ul").append(_str);
+			}
+			
+	  })	
+			
+			
+	  
 	 $('.masking').show();
 	 $(".orderDetail").addClass('hover');
 })

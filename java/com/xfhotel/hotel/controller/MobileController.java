@@ -1257,6 +1257,7 @@ public class MobileController  {
 	
 	@RequestMapping(value = "/getTripOrder", method = RequestMethod.POST)
 	public @ResponseBody List<TripOrder> getTripOrder(Long id){
+		System.out.println(id);
 		return tripOrderService.getTripOrder(id);
 	}
 	

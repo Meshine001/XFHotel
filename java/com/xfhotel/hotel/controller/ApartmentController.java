@@ -193,7 +193,8 @@ public class ApartmentController {
 			sp = new Price(apartmentId, TimeUtil.getDateLong(date), Double.valueOf(price));
 		}
 		apartmentService.setSpPrice(sp);
-		return "redirect:/admin/apartment/price/" + apartmentId;
+//	return "redirect:/admin/apartment/price/" + apartmentId;
+		return "redirect:/admin/status";
 	}
 	
 	
@@ -205,6 +206,7 @@ public class ApartmentController {
 	 */
 	@RequestMapping(value = "/price/{id}", method = RequestMethod.GET)
 	public String price(@PathVariable("id") Long id) {
+		System.out.println("asgdi");
 		Apartment apartment = apartmentService.findById(id);
 		Long start = TimeUtil.getCurrentDateLong();
 		Long end = start + 1000 * 60 * 60 * 25 * 60;// 60天

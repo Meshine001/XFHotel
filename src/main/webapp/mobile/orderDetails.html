@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>青舍都市公寓</title>
+    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <link rel="stylesheet" href="iconcaomei/style.css" />
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/orderDetalis.css" />
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script type="text/javascript" src="js/fnBase.js"></script>
+	<script type="text/javascript" src="js/orderDetails.js"></script>
+</head>
+<body style="background: #FFF">
+<div class="header">
+    <header class="header-mobile">
+        <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
+        <span class="cell">订单详情</span>
+        <span class="cell link-btn"></span>
+    </header>
+</div>
+<div id="Myscroll-body">
+
+	<div class="find_nav">
+		<a href="javascript:;" class="item show">住房</a>
+		<a href="javascript:;" class="item">用车</a>
+		<a href="javascript:;" class="item">保洁</a>
+		<a href="javascript:;" class="item">维修</a>
+		<a href="javascript:;" class="chuans"><i class="czs-angle-down-l"></i></a>
+		<a href="javascript:;" class="item">添加</a>
+	</div>
+	
+	<div class="section msginfo">
+		<table cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="czs-user-l" style="margin:0 0.1rem 0 0 "></span></td>
+				<td id="infoname"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td id="infoadd"></td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="content-fixed">
+		
+	</div>
+	<div id="masking" style="overflow: hidden; display:none;"></div>
+	<div id="myArert" style=" display:none;">
+        <p id="diaTitle"><em>确定</em><em>返回</em></p>
+        <p id="diaBody">房门密码：</p>
+    </div>
+</div>
+<script>
+	(function(){
+		var a=0;
+		$(".find_nav .chuans").click(function(){
+			if(a=='0'){
+				$(".find_nav").css({'height':'0.9rem'});
+				$(this).find('i').addClass('czs-angle-up-l');
+				a=1;
+			}else if(a=='1'){
+				$(this).find('i').removeClass('czs-angle-up-l');
+				$(".find_nav").css({'height':'0.45rem'})
+				a=0;
+			}
+		})
+	})()
+</script>
+</body>
+</html>

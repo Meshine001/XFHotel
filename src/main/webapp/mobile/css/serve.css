@@ -1,9 +1,9 @@
-html,body{background: #fff}
+html,body{background: #f4f4f4;}
 #Myscroll-body{top:0}
 .vip_info{overflow: hidden;padding: 0.5rem 0 0.15rem 0;
     background-size: 100% 100%;
     text-align: center;
-    height: 2.11rem;
+    height: 2.2rem;
     position: relative;
 }
 #vip_icon_name{

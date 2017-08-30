@@ -112,6 +112,49 @@
 					</div>	
 				</div>
 			</div>
+			
+			
+			<div class="card card-mini" style="margin-top:20px;">
+				<div class="card-header">
+					<div class="card-title">
+						<h3>特殊价格设置</h3>
+					</div>
+				</div>
+				<div class="card-body">
+				
+				<form action="<%=basePath%>/admin/apartment/price/set"
+						class="form form-horizontal" method="post">
+						<input type="hidden" name="apartmentId" value id="apartmentId">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">选择日期</label>
+							<div class="col-sm-10">
+								<input type="date" id="teshuDate" class="form-control" placeholder=""
+									name="date" value="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">当日价格</label>
+							<div class="col-sm-10">
+								<input type="text" id="teshuPrice" class="form-control" placeholder=""
+									name="price" value="">
+							</div>
+						</div>
+						<div class="form-footer">
+							<div class="form-group">
+								<div class="col-md-9">
+									<button type="submit" id="teshuSubmit" class="btn btn-success">保存</button>
+									<button type="button" class="btn btn-default">取消</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				
+				</div>
+				
+			</div>
+			
+			
+			
 		</div>
 		
 		
@@ -123,7 +166,30 @@
 	     <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/jquery-1.7.1.min.js"></script>  		
 	     <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/status.js"></script> 
 		 <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/date.js"></script> 
+		<script>
+		(function(){
+			var bace={
+				     request: function(name){
+				            var url = window.location.href;
+				            if(url){
+				                var valArray = url.split("?")[1];
+				                if(valArray && valArray.length >0){
+				                    var valArr = valArray.split("&");
+				                    if(valArr && valArr.length > 0){
+				                        for(var i in valArr){
+				                            if(valArr[i].split("=")[0] == name){
+				                                return valArr[i].split("=")[1];
+				                            }
+				                        }
+				                    }
+				                }
+				            }
+				        }
+			}
+			$("#apartmentId").attr('value',encodeURIComponent(bace.request("id")));
 
+		})()
+		</script>
 	</my_script>
 	
 </body>

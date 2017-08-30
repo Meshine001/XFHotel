@@ -260,7 +260,6 @@ white-space: nowrap;
     right: 0;
     bottom: 0;
     left: 0;
-    background: url("../images/block50.png");
     background:rgba(0,0,0,0.75);
     z-index: 1002;
     display: none;
@@ -269,10 +268,10 @@ white-space: nowrap;
 .my-footer{
 	vertical-align: middle;
 	width: 100%;
-	padding:0.15rem 0.16rem 0.2rem 0.16rem;
+	padding:0.2rem 0.16rem 0.2rem 0.16rem;
 	background:#00b38a;
 	border-top: 1px solid #e3e3e3;
-	font-size: 0.14rem;
+	font-size: 0.12rem;
 	color: #FFF;
 }
 .my-footer .ac-footer{
@@ -281,11 +280,12 @@ white-space: nowrap;
 }
 .my-footer .ac-footer a{
 	border-right: 1px solid #d6d6d6;
-    margin-right: 0.1rem;
-    padding-right: 0.12rem;
+    margin-right: 0.06rem;
+    padding-right: 0.11rem;
     display: inline-block;
     margin-top: 0.03rem;
+    margin-bottom: 0.03rem;
     white-space: nowrap;
-    color:#fff;
+    color: #fff;
 }
 .my-footer .ac-footer a:last-child{border:none;}

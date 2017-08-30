@@ -1,13 +1,55 @@
 html,body{background: #fff}
 #Myscroll-body{background: #FFF;top:0}
-.vip_info{overflow: hidden;padding: 0.45rem 0;
-    background-size: 100% 100%;
-    background: linear-gradient(135deg, #0c4b38, #29c481);
-    background: #00b38a;
-    text-align: center;
-  
+.vip_info{
+	overflow: hidden;
+	padding: 0.45rem 0;
+    background-color: #ED5564;
+    background-image: url(../img/member_top_bg.png) center center;
+    background-size: cover;
+    -webkit-animation: changeBg 20s infinite;
+    -moz-animation: changeBg 20s infinite;
+    animation: changeBg 20s infinite;
 	
 }
+
+.vip_info{;background-color:#ED5564;;background:url(../img/member_top_bg.png) center center;background-size:100%;-webkit-animation:changeBg 20s infinite; -moz-animation:changeBg 20s infinite; animation:changeBg 20s infinite;}
+@-webkit-keyframes changeBg{
+0%{background-color:#ED5564;}
+10%{background-color:#FB6E52;}
+20%{background-color:#FFCE55;}
+30%{background-color:#A0D468;}
+40%{background-color:#48CFAE;}
+50%{background-color:#4FC0E8;}
+60%{background-color:#5D9CEC;}
+70%{background-color:#AC92ED;}
+80%{background-color:#EC87BF;}
+90%{background-color:#ED5564;}
+}
+@-moz-keyframes changeBg{
+0%{background-color:#ED5564;}
+10%{background-color:#FB6E52;}
+20%{background-color:#FFCE55;}
+30%{background-color:#A0D468;}
+40%{background-color:#48CFAE;}
+50%{background-color:#4FC0E8;}
+60%{background-color:#5D9CEC;}
+70%{background-color:#AC92ED;}
+80%{background-color:#EC87BF;}
+90%{background-color:#ED5564;}
+}
+@keyframes changeBg{
+0%{background-color:#ED5564;}
+10%{background-color:#FB6E52;}
+20%{background-color:#FFCE55;}
+30%{background-color:#A0D468;}
+40%{background-color:#48CFAE;}
+50%{background-color:#4FC0E8;}
+60%{background-color:#5D9CEC;}
+70%{background-color:#AC92ED;}
+80%{background-color:#EC87BF;}
+90%{background-color:#ED5564;}
+}
+
 .header-mobile .img-home{width: 0.22rem;margin: 3px 0.14rem}
 .header-mobile.scro{background: black;position: fixed;top: 0;opacity: 0.8}
 
@@ -41,12 +83,19 @@ html,body{background: #fff}
 	position: absolute;
 	top:0;
 	width:100%;
+	line-height:0.44rem;
 }
 .vip_info .tit a{
 	font-size: 0.14rem;
     color: #fff;
-	padding: 0.1rem;
+	padding: 0 0.1rem;
 }
+.vip_info .tit a i {
+    font-size: 0.2rem;
+    position: relative;
+    top: 0.04rem;
+}
+
 .vip_info img{float:left;width: 0.7rem;height: 0.7rem;border-radius: 50%;border: 2px solid rgba(70, 63, 63, 0.07);}
 .vip_info span{
 	display: block;

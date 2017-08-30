@@ -21,16 +21,61 @@
 							
 			</table>
 			
-			<table class="clean">
-				<tr>
-					<td style="width:100%;border-bottom:1px solid #ccc;font-size: 18px;">保洁订单</td>
-				</tr>
-				<tr class="zanwu" style="display:none;color:#dd4a4a"><td>暂时没有保洁服务订单</td></tr>
-			</table>
+			<div class="clean">
+				<table>
+					<tr><td style="width: 100%;font-size: 18px;background:rgb(232, 229, 229)">保洁订单</td></tr>
+				</table>
+							
+				<ul>
+					<!-- 
+					<li id="'+data.content[i].id+'">
+						<table>
+							<tr>
+								<td style="width:100%">下单时间：<span>'+new Date( data.content[i].time ).toLocaleString()+'</span></td>
+							</tr>
+							<tr>
+								<td class="fl50">订单状态：<span>'+stuse+'</span></td>
+							    <td class="fl50">打扫时间：<span>'+data.content[i].cleanTime+'</span></td>
+							</tr>
+							<tr>
+								<td style="width:100%">服务内容：<span>'+data.content[i].content+'</span></td>
+							</tr>
+						</table>
+					</li>
+					 -->
+				</ul>
+			</div>
 			
-			<table class="">
+			<div class="usercar">
+				<table>
+					<tr><td style="width: 100%;font-size: 18px;background:rgb(232, 229, 229)">叫车订单</td></tr>
+				</table>
+				<ul>
+
+				</ul>
+				
+			</div>
 			
-			</table>
+			<div class="getFault">
+				<table>
+					<tr><td style="width: 100%;font-size: 18px;background:rgb(232, 229, 229)">维修订单</td></tr>
+				</table>
+							
+				<ul>
+				
+				</ul>
+			</div>
+			
+			<div class="addsheshi">
+				<table>
+					<tr><td style="width: 100%;font-size: 18px;background:rgb(232, 229, 229)">添加设施订单</td></tr>
+				</table>
+							
+				<ul>
+					
+				</ul>
+			</div>
+			
 		</div>	
 	</div>
 	

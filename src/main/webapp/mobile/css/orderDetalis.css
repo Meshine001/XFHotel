@@ -1,0 +1,28 @@
+.section{padding:0.1rem;background:#fff;margin-bottom:0.1rem;font-size:0.14rem;color:#484848;clear:both;}
+.section ul li{font-size:0.14rem;line-height: 0.3rem;}
+.section ul li span{float:right;}
+.action{clear:both;text-align:right;border-top:1px solid #e7e7e7 }
+.action a{color:#56216f;border:1px solid #56216f;cursor: pointer;
+    margin-left: 0.03rem;
+    display: inline-block;
+    padding: 0 0.2rem;
+    height: 0.28rem;
+    text-align: center;
+    border-radius: 0.06rem;
+    font-size: 0.14rem;
+    line-height: 0.28rem;
+    margin-top: 0.085rem;
+}
+.section .no-boder{width:100%;}
+.section .no-boder th,.section .no-boder tr td{width:33%;text-align:left;border:1px solid #e7e7e7;
+	line-height: 0.3rem;
+    font-size: 0.14rem;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.find_nav{width:100%;line-height:0.45rem;height:0.45rem;background:#fff;transition:all .3s;margin-bottom:0.1rem;overflow: hidden;}
+.find_nav .item,.find_nav .chuans{float:left;width:0.82rem;text-align:center;font-size:0.14rem;color:#484848;}
+.find_nav .item.show{color: orange;}
+.find_nav .chuans{width:0.47rem;}

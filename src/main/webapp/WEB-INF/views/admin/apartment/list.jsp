@@ -380,7 +380,6 @@
 								for(var j=0;j<data.content.length;j++){
 									_str+='<tr roomId="'+data.content[j].id+'"><td><input type="checkbox"name="chkItem"></td><td>'+data.content[j].id+'</td><td>'+data.content[j].position.men_pai+'</td><td>'+data.content[j].position.jie_dao+'</td><td>'+data.content[j].position.xa_wei_zhi+'</td><td>'+data.content[j].position.xiao_qu+'</td><td>'+data.content[j].position.lou_hao+'</td><td>'+data.content[j].position.lou_ceng+'/'+data.content[j].position.zong_lou_ceng+'</td><td>'+data.content[j].basic_info.mian_ji+'</td>';
 									_str+='<th><a class="btn btn-success"   data-toggle="tooltip" data-placement="left" title="编辑详情" href="/admin/apartment/update/'+data.content[j].id+'">编辑详情</a><br>';
-									_str+='<a class="btn btn-success price_s" data-toggle="tooltip" data-placement="left" title="编辑价格"href="/admin/apartment/price/'+data.content[j].id+'">编辑价格</a><br>'
 									if(data.content[j].show_home==true){
 										_str+='<a href="/admin/apartment/showHome/'+data.content[j].id+'" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="隐藏/显示" >首页隐藏</a><br>';
 									}else{
@@ -388,7 +387,7 @@
 									}
 									_str+='<a  data-toggle="tooltip" data-placement="left" title="删除" class="btn btn-danger">删除</a><br>'
 									_str+='<a href="/admin/leavemsglist"  data-toggle="tooltip" data-placement="left" title="查看评论" class="btn btn-info evalpinglun">查看评论</a><br>'
-									_str+='<a href="/admin/status"  data-toggle="tooltip" data-placement="left" title="房态设置" class="btn btn-warning houseStatus">房态设置</a><br>'
+									_str+='<a href="/admin/status/?id='+data.content[j].id+'"  data-toggle="tooltip" data-placement="left" title="房态设置" class="btn btn-warning houseStatus">价格房态</a><br>'
 									_str+='<div class="paixu"><input type="text" placeholder="'+data.content[j].sort+'"><a class="stb">排序</a></div>'
 									_str+='</th></tr>';
 								}
