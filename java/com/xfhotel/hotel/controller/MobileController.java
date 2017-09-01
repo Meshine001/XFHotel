@@ -1280,6 +1280,7 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "购买失败");
 		} 		
 	}
+	
 	@RequestMapping(value = "/getFitness", method = RequestMethod.POST)
 	public @ResponseBody  Message getFitness(Long id) {
 		try{
@@ -1300,5 +1301,44 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "查询失败");
 		} 		
 	}
+	@RequestMapping(value = "/employ", method = RequestMethod.POST)
+	@ResponseBody
+	public Message employ(Long id) {
+		Fitness fitness = fitnessService.findById(id);
+		if (fitness == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+		if (fitness.isSituation()) {
+			try {
+				fitness.setSituation(true);
+				fitnessService.update(fitness);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
+			}
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
+	}
+	
+	@RequestMapping(value = "/userEmploy", method = RequestMethod.POST)
+	@ResponseBody
+	public Message userEmploy(Long id) {
+		Fitness fitness = fitnessService.findById(id);
+		if (fitness == null) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+		}
+			try {
+				String[] p = {fitness.getTel().toString()};
+				//SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_APPLY, systemConfiService.getConfig().getSms(), p);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new Message(Constants.MESSAGE_ERR_CODE, "订单使用失败");
+			}
+		
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单使用成功,请前往健身房登记");
+	}
+	
 	
 }
