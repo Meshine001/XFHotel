@@ -101,7 +101,7 @@ function addpartenr(){
 
     var cood='';
     var _span='';
-    var _uid = fnBase.huoqu(0, "uid");
+    var _uid = fnBase.huoqu(0, "userid");
     if (_uid == null || _uid == "undefined" || _uid == "") {
         window.location.href = "login.html";
         return;
@@ -224,7 +224,7 @@ function addpartenr(){
     //登录用户；默认显示信息；
    
     function getData(){
-        var _uid = fnBase.huoqu(0, "uid");
+        var _uid = fnBase.huoqu(0, "userid");
         if (_uid == null || _uid == "undefined" || _uid == "") {
             window.location.href = "login.html";
             return;

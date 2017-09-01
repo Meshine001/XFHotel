@@ -102,6 +102,8 @@ body {
 	 transition: all .3s;
 }
 
+
+
 .no-padding {
 	padding: 0 !important;
 }
@@ -2980,7 +2982,9 @@ body .app-container {
 	position: relative;
 	overflow-x: hidden;
 	padding-left: 180px;
+   
 }
+
 
 body .app-container .content-heading {
 	margin-bottom: 30px;
@@ -3153,6 +3157,7 @@ a:hover {
 }
 
 @media ( max-width : 767px) {
+
 	.row {
 		margin-left: -10.75px;
 		margin-right: -10.75px;
@@ -9134,7 +9139,6 @@ i{font-style:normal}
     border:1px solid #ccc;
     color: #656262;
     position:relative;
-    margin:0 auto;
 }
 #h-table .paixu input{
 	width:45%;
@@ -9205,3 +9209,23 @@ text-align:center;color:#0C6;padding:1% 0;
 
 /*成员权限样式*/
 .app-ng{display:none}
+
+
+
+
+@media ( max-width : 1440px) {
+	/*房源列表lis样式*/
+	#h-table tr td:first-child+td,#h-table tr td:first-child+td+td+td,#h-table tr td:first-child+td+td+td+td+td+td,#h-table tr td:first-child+td+td+td+td+td+td,#h-table tr td:first-child+td+td+td+td+td+td+td,#h-table tr td:first-child+td+td+td+td+td+td+td+td{
+		display:none;
+	}
+	#h-table-nav tr th:first-child+th,#h-table-nav tr th:first-child+th+th+th,#h-table-nav tr th:first-child+th+th+th+th+th+th,#h-table-nav tr th:first-child+th+th+th+th+th+th+th,#h-table-nav tr th:first-child+th+th+th+th+th+th+th+th{
+		display:none;
+	}
+	/*住房订单列表lis样式*/
+	#list tr td:first-child+td+td+td+td+td+td,#list tr td:first-child+td+td+td+td+td+td+td,#list tr td:first-child+td+td+td+td+td+td+td+td,#list tr td:first-child+td+td+td+td+td+td+td+td+td,#list tr td:first-child+td+td+td+td+td+td+td+td+td+td{
+		display:none;
+	}
+	#list-nav tr th:first-child+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th+th+th+th+th+th+th{
+		display:none;
+	}
+}

@@ -47,7 +47,7 @@ var login={
             fnBase.commonAjax(frontURL,postData ,function(data) {
             	console.log(data);
             	if(data.statusCode == "1"){
-            		fnBase.keep( 0,"uid",data.content.id);
+            		fnBase.keep( 0,"userid",data.content.id);
                     _uid=data.content.id;
                     wechatOpenId=data.content.wechatOpenId;
                     ss=1;

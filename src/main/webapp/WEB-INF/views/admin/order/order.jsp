@@ -95,7 +95,7 @@
 				<div id="topscroll" style="width:100%;height:auto;overflow-x:auto">
 				<table class="table table-bordered">
 
-					<thead>
+					<thead id="list-nav">
 						<tr>
 							<th>订单号</th>
 							<th>下单时间</th>
@@ -127,7 +127,7 @@
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("table th,table td").css('min-width','120px');
+			$("table th,table td").css('min-width','100px');
 		})
 	</script>
 	</my_body>

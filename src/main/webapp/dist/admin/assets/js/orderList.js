@@ -90,6 +90,8 @@ function list(page) {
 				data.results[i].endTime+'</td><td>'+data.results[i].totalDay+'</td><td>'+data.results[i].price+'</td><td>'+data.results[i].totalPrice+'</td><td>'+data.results[i].preferential+'</td>'
 				if(data.results[i].status=='确认中'){
 					str+='<td><a href="javascript:;" class="btn comfirm-order" data-id="'+data.results[i].id+'">确认订单</a><a href="javascript:;" class="btn close-order" data-id="'+data.results[i].id+'">关闭订单</a></td>'
+				}else if(data.results[i].status=='进行中'){
+					str+='<td><a href="javascript:;" class="btn comfirm-sendpwd" data-id="'+data.results[i].id+'">发送密码</a></td>'
 				}else if(data.results[i].status=='退租确认中'){
 					str+='<td><a href="javascript:;" class="btn comfirmOutLease-order" data-id="'+data.results[i].id+'">确认退租</a></td>';
 				}else{
@@ -110,7 +112,6 @@ $('#list').on('click','tr .comfirm-order',function(event){
 	event.stopPropagation();
 	var url = '../order/comfirm';
 	var id = $(this).attr('data-id');
-	
 	$.ajax({
 		type : 'POST',
 		dataType : 'json',
@@ -128,6 +129,25 @@ $('#list').on('click','tr .comfirm-order',function(event){
 		}
 	});
 });
+//发送密码
+$('#list').on('click','tr .comfirm-sendpwd',function(event){
+	event.stopPropagation();
+	var url = '../order/comfirmPw';
+	var id = $(this).attr('data-id');
+	$.ajax({
+		type : 'POST',
+		dataType : 'json',
+		data : {
+			'id' : id,
+		},
+		url : url,
+		success : function(data) {
+			console.log(data)
+			alert(data.content);
+		}
+	});
+});
+
 
 //关闭订单
 

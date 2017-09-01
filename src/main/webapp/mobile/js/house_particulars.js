@@ -1,7 +1,7 @@
 ﻿
 $(document).ready(function(){
 	fnBase.loadShow();
-	var _uid = fnBase.huoqu(0, "uid");
+	var _uid = fnBase.huoqu(0, "userid");
 	var _id = decodeURIComponent(fnBase.request("id"));
 	$("#Myscroll-body .main").hide();
 	$.ajax({

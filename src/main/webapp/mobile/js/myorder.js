@@ -3,7 +3,7 @@ var menuBar=0;
 $(document).ready(function(){
 
     var _status='';
-    var _uid=fnBase.huoqu(0,"uid");
+    var _uid=fnBase.huoqu(0,"userid");
     var daty={
         currentdate:'',
         _startDate:''

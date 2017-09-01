@@ -11,10 +11,25 @@
     <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
-    <!-- <script charset="gb2312" language="javascript" type="text/javascript" src="js/coupon.js"></script> -->
-    <style>
-        #Myscroll-body{top: 0.4rem;bottom: 0}
-    </style>
+    <script charset="gb2312" language="javascript" type="text/javascript" src="js/bodybuilding.js"></script> 
+	<style type="text/css">
+		.service .goodlist li {
+		    position: relative;
+		    width: 100%;
+		    height: 1.2rem;
+		    margin-bottom: 0.15rem;
+		    background: #fffdfd;
+		    background-size: 100%;
+		    border: 1px solid #e8e3e3;
+		    border-radius: 0.05rem;
+		}
+		.goodlist li .ac-gn-bagleft {
+		 	border:none;
+		}
+		.goodlist{
+			min-height:4.65rem;
+		}
+	</style>
 </head>
 <body style="display:none">
 <article class="sx_filter">
@@ -22,27 +37,67 @@
     <div class="header">
         <header class="header-mobile">
             <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
-            <span class="cell"><marquee>我的健身房</marquee></span>
+            <span class="cell">我的健身卡</span>
         <a href="javascript:;" class="cell link-btn">
-            <span class="czs-blackboard-l"></span>
+            <span class="czs-buy-l"></span>
         </a>
         </header>
     </div>
 <!--内容区域-->
     <div id="Myscroll-body">
     	<aside class="ac-gn-bagview">
+    		<i class="ac-rou"></i>
     		<ul>
-    			<li><a href="">在线售卡</a></li>
+    			<li><a href="bodybuilding_zaixian.html"><i class="czs-mobile-l"></i>在线售卡</a></li>
+    			<li><a href="bodybuilding_goodDetil.html"><i class="czs-folder-l"></i>我的账单</a></li>
+    			<li><a href="bodybuilding.html"><i class="czs-comment-l"></i>我的健身卡</a></li>
     		</ul>
     	</aside>
         <div class="service">
             <ul class="goodlist">
-
+				<li>
+					<div class="ac-gn-bagleft">
+						<h4 class="p-name">皇家健身会所</h4>
+						<p class="p-style">两小时体验卡</p>
+						<p>有效期：2017/8/1~2017/8/30</p>
+						<p class="p-price">价格：免费</p>
+					</div>
+					<div class="ac-gn-bagright">使用</div>
+				</li>
+				<li>
+					<div class="ac-gn-bagleft">
+						<h4 class="p-name">皇家健身会所</h4>
+						<p class="p-style">两小时体验卡</p>
+						<p>有效期：2017/8/1~2017/8/30</p>
+						<p class="p-price">价格：免费</p>
+					</div>
+					<div class="ac-gn-bagright">使用</div>
+				</li>
+			
             </ul>
+            <div class="footer">
+	        	<h3>皇家健身会馆</h3>
+	        	<p>地址：福邸铭门广场二层</p>
+	        	<p>电话：13022927976</p>
+	        </div>
         </div>
         <div id="zanwu"></div>
+      
     </div>
 </article>
 <div id="masking"></div>
+<div id="my-alert-views">
+	<p class="title">确定使用此卡</p>
+	<ul>
+		<li>名称：皇家健身次卡</li>
+		<li>价格：免费</li>
+		<li>TEL：<input type="text" value="15102988385" maxlength="11"></li>
+	</ul>
+	<div class="btnArea">
+		<a href="">返回</a>
+		<a href="">确定</a>
+	</div>
+</div>
+
 </body>
 </html>

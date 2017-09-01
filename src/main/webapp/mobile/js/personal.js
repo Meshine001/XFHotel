@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$(".vip_info #personMan div img").click(function(){
 		window.location.href='editprofileinfo.html'
 	});
-    var _uid=fnBase.huoqu(0,"uid");
+    var _uid=fnBase.huoqu(0,"userid");
     
     if(_uid==null || _uid=="undefined" || _uid==""){
         window.location.href="login.html";

@@ -191,7 +191,7 @@
 						<c:forEach items="${orders}" var="order">
 							<tr order-id="${order.id}">
 								<td>${order.id}</td>
-								<td>${order.startTime}~${order.endTime}</td>
+								<td>${order.startTime}<br>${order.endTime}</td>
 								<td>${order.roomName}</td>
 								<td>${order.classify}</td>
 								<td>${order.site}</td>

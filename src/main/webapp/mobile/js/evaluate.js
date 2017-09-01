@@ -27,7 +27,7 @@
         var oplist=arr.join(',');
         var _orderID=fnBase.request('orderId');
         var _roomID=fnBase.request('roomId');
-        var _uid=fnBase.huoqu(0,"uid");
+        var _uid=fnBase.huoqu(0,"userid");
         var frontURL=Constant.URL+"/mobile/comment";
         var postData ={
             "roomId":_roomID,

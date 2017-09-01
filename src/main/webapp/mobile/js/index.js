@@ -5,7 +5,7 @@ $(document).ready(function () {
 	 if(_onesid==""||_onesid=="null"||_onesid=="undefined"){
 		 fnBase.keep(0,'status',1);
 	 }else{
-		 fnBase.keep(0,'uid',_onesid);
+		 fnBase.keep(0,'userid',_onesid);
 	     fnBase.keep(0,'status',_status);
 		 console.log(_onesid);
 	 };
@@ -26,7 +26,7 @@ $(document).ready(function () {
 		
 
 	//使用微信头像
-	 var _uid=fnBase.huoqu(0,"uid");
+	 var _uid=fnBase.huoqu(0,"userid");
 	 if(_uid==null || _uid=="undefined" || _uid==""){
 	 	$(".header-mobile .link-btn img").attr("src",Constant.URL+"/images/face-90x90.png");
 	 }else{
