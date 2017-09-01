@@ -71,6 +71,7 @@ public class Tenant {
 		info.put("id", id);
 		info.put("userName", userName);
 		info.put("time", data);
+		info.put("password", password);
 		info.put("tradeName", tradeName);
 		info.put("tel",tel);
 		return info;
