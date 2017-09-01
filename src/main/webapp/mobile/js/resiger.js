@@ -101,7 +101,7 @@ var resiger={
                
                 if(data.statusCode=="1"){
                     fnBase.myalert("恭喜您注册成功");
-                    fnBase.keep(0,"uid",data.content);
+                    fnBase.keep(0,"userid",data.content);
                     fnBase.keep(1,"newUser",'1');
                     //若还未经过微信授权
                     if(data.wechatOpenId == null || data.wechatOpenId == undefined){

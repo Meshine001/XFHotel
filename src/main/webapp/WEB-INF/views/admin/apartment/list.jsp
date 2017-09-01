@@ -98,9 +98,9 @@
 					    </div>
 					 </div>   
 				<table class="table table-bordered table-hover">
-					<thead>
+					<thead id="h-table-nav">
 						<tr>
-							<th>全选<input type="checkbox"name="chkItem" id="inputbox"></th>
+							<th>选择</th>
 							<th>房屋id</th>
 							<!--<th>类型</th>  -->
 							<th>房号</th>
@@ -163,13 +163,13 @@
 				}
 				
 				//全选
-				$("#inputbox").on('click',function(){
-					if ($(this).is(":checked")) {
-						$("#h-table tr td input[name = chkItem]").attr('checked', true);
-                    }else{
-                    	$("#h-table tr td input[name = chkItem]").attr('checked',false);
-                    }
-				})
+//				$("#inputbox").on('click',function(){
+//					if ($(this).is(":checked")) {
+//						$("#h-table tr td input[name = chkItem]").attr('checked', true);
+//                    }else{
+//                    	$("#h-table tr td input[name = chkItem]").attr('checked',false);
+//                    }
+//				})
 				
 				
 				$("#h-table .paixu input").focus(function(){

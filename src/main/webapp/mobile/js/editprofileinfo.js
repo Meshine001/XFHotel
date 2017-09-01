@@ -2,7 +2,7 @@
 $(document).ready(function(){
     getData();
     var sexVal='';
-    var _id=fnBase.huoqu(0,'uid');
+    var _id=fnBase.huoqu(0,'userid');
     var _status=fnBase.huoqu(0,'status');
     console.log(_status);
     var sexbtn=$("#Myscroll-body section .sex");
@@ -186,7 +186,7 @@ $(document).ready(function(){
 //========================================================
     $(".baocun_btn").click(function(){
     	fnBase.loadShow();
-        var _uid = fnBase.huoqu(0, "uid");
+        var _uid = fnBase.huoqu(0, "userid");
         var _nickNameInput=$("#fillNick").val();
         var frontURL=Constant.URL+'/mobile/modify';
         var postData={
@@ -212,8 +212,8 @@ $(document).ready(function(){
     });
     //退出
     $(".quit_btn").click(function(){
-        sessionStorage.clear();
-        localStorage.clear();
+    	sessionStorage.clear();
+        localStorage.removeItem('userid');
         setTimeout(function(){
             window.location.href="login.html";
         },300)
@@ -221,7 +221,7 @@ $(document).ready(function(){
 
     //
     function getData(){
-        var _uid = fnBase.huoqu(0, "uid");
+        var _uid = fnBase.huoqu(0, "userid");
         if (_uid == null || _uid == "undefined" || _uid == "") {
             window.location.href = "login.html";
             return;

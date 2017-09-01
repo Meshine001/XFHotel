@@ -252,7 +252,7 @@
 			
 			$("#loginout").click(function(){//退出登录
 				  sessionStorage.clear();
-			      localStorage.clear();
+				  localStorage.removeItem('uid');
 			      setTimeout(function(){
 			    	  //    window.location.href='http://localhost/admin/login';   //测试地址
 			         window.location.href='http://www.yiyunzn.xyz/admin/login'; // 线上地址

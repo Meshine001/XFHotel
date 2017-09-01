@@ -5,7 +5,7 @@ $(document).ready(function(){
         window.location.href='editprofileinfo.html'
     });
     
-    var _uid=fnBase.huoqu(0,"uid");
+    var _uid=fnBase.huoqu(0,"userid");
     console.log(_uid)
     if(_uid==null || _uid=="undefined" || _uid==""){
        $("#nickName,#Credit").hide();
