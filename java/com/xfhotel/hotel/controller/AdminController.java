@@ -594,8 +594,10 @@ public class AdminController {
 			t.setTradeName(tradeName);
 			t.setPassword(password);
 			SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			t.setData(sdf.format(new Date().getTime()));
+			String d =sdf.format(new Date().getTime());
+			t.setData(d);
 			t.setVariety(r.size());
+			tenantService.add(t);
 	} catch (Exception e) {
 		e.printStackTrace();
 		return new Message(Constants.MESSAGE_ERR_CODE, "设置失败");

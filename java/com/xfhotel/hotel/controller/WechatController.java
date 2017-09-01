@@ -463,7 +463,9 @@ public class WechatController {
 					//发短信给顾客
 					//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
-					
+//					List<Order> orders = orderService.list(0);
+//					if(orders.size()<=1){
+
 //					Fitness fitness = new Fitness();
 //					fitness.setName("健身劵");
 //					fitness.setPrice("20");
@@ -471,6 +473,7 @@ public class WechatController {
 //					fitness.setTel(pwd_user_mobile);
 //					fitness.setMerchant(o.getId());
 //					fitnessService.add(fitness);
+//					}
 					//发短信给管理员
 					//【青舍都市】您有新订单需要确认，请及时处理。{1}
 					if(user==null){
