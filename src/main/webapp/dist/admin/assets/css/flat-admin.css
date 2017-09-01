@@ -102,6 +102,8 @@ body {
 	 transition: all .3s;
 }
 
+
+
 .no-padding {
 	padding: 0 !important;
 }
@@ -2980,7 +2982,9 @@ body .app-container {
 	position: relative;
 	overflow-x: hidden;
 	padding-left: 180px;
+   
 }
+
 
 body .app-container .content-heading {
 	margin-bottom: 30px;

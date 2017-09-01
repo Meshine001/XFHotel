@@ -273,15 +273,18 @@ public class OrderController {
 //				// 发送门锁密码
 //				Long roomId = o.getRoomId();
 //				String lock_no = apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
+//				System.out.println(lock_no.equals(null));
 //				System.out.println("send pass to "+lock_no);
-//				Message result = lockService.addPassword(o.getCusTel(), lock_no, DateUtil.format(new Date(o.getStartTime()), "yyyyMMddHHmmss"),
-//						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddHHmmss") ,id);
-//				if(result.getStatusCode() == Constants.MESSAGE_SUCCESS_CODE){
-//					o.setStatus(Order.STATUS_ON_LEASE);
-//					orderservice.update(o);
-//				}else{
-//					return result; 
-//				}
+//				System.out.println(lock_no+"sda");
+//				System.out.println();
+////				Message result = lockService.addPassword(o.getCusTel(), lock_no, DateUtil.format(new Date(o.getStartTime()), "yyyyMMddHHmmss"),
+////						DateUtil.format(new Date(o.getEndTime()), "yyyyMMddHHmmss") ,id);
+////				if(result.getStatusCode() == Constants.MESSAGE_SUCCESS_CODE){
+////					o.setStatus(Order.STATUS_ON_LEASE);
+////					orderservice.update(o);
+////				}else{
+////					return result; 
+////				}
 //			} catch (Exception e) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
@@ -324,14 +327,11 @@ public class OrderController {
 		}
 		JSONObject a = apartmentService.getApartmentById(o.getRoomId());
 		JSONObject basic =a.getJSONObject("basic_info");
-		String phone = o.getCusTel();
 		String lock_no1 = basic.getString("suo_di_zhi");
 		if(lock_no1.equals("")){
 			return new Message(Constants.MESSAGE_ERR_CODE, "该房间未安装果加智能门锁");
 		}
-		String pwd_text1 =  lockService.viewPassword(phone, lock_no1);
-		System.out.println(pwd_text1+"sgdu");
-		if(pwd_text1.equals("")){
+		if(lockService.getl(id)==null){
 			try {
 				// 发送门锁密码
 				Long roomId = o.getRoomId();

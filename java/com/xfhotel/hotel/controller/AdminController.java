@@ -199,6 +199,19 @@ public class AdminController {
 //		}								
 	
 		//成员权限 BEGIN
+		@RequestMapping(value = "/customer_jointwork", method = RequestMethod.GET)
+		public String jointwork() {
+			List<User> list = userService.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (User o : list) {
+				orders.add(o.toMap());	
+			}
+			session.setAttribute("orders", orders);
+			return "/admin/customer/jointwork";
+		}
+		// 成员权限 END
+
+		//合作商户 BEGIN 9-1
 		@RequestMapping(value = "/customer_manager", method = RequestMethod.GET)
 		public String collocation() {
 			List<User> list = userService.list();
@@ -208,8 +221,9 @@ public class AdminController {
 			}
 			session.setAttribute("orders", orders);
 			return "/admin/customer/manager";
-		}
-//		// 成员权限 END
+		}		
+		// 合作商户 END 
+		
 		
 		
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)

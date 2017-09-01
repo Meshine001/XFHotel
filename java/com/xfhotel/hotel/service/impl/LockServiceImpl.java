@@ -145,5 +145,13 @@ public class LockServiceImpl implements LockService {
 			return 1;
 		}
 	}
+	@Transactional
+	@Override
+	public Lock getl(Long o) {
+		// TODO Auto-generated method stub
+		Object[] values = new Object[1];
+		values[0] = o;
+		return lockDAOImpl.getByHQL("from Lock where oId = ?", values);
+	}
 
 }
