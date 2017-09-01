@@ -182,8 +182,7 @@ public class MobileController  {
 		if (c != null) {
 			return new Message(Constants.MESSAGE_SUCCESS_CODE, c);
 		} else {
-			System.out.println();
-			return new Message(Constants.MESSAGE_ERR_CODE, "亲，您的手机号未注册，请微信登录完善信息哦！");
+			return new Message(Constants.MESSAGE_ERR_CODE, "亲，手机号未注册，请微信登录完善信息！");
 		}
 	}
 	
@@ -1203,7 +1202,6 @@ public class MobileController  {
 		}
 	}
 	
-	
 	@RequestMapping(value = "getTrip", method = RequestMethod.POST)
 	public @ResponseBody TripOrder getTrip(Long id){
 	return tripOrderService.findById(id);
@@ -1257,7 +1255,6 @@ public class MobileController  {
 	
 	@RequestMapping(value = "/getTripOrder", method = RequestMethod.POST)
 	public @ResponseBody List<TripOrder> getTripOrder(Long id){
-		System.out.println(id);
 		return tripOrderService.getTripOrder(id);
 	}
 	

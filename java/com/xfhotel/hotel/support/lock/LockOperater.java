@@ -431,6 +431,6 @@ public class LockOperater implements LockService {
 		System.out.println(sd.format(date));
 		System.out.println(n);
 		System.out.println(i);
-		System.out.println(getInstance().pwdAdd("", "", "", "11.1.129.161", "", ""+i, ""+n, "", "15596175020", null, "", ""));
+		System.out.println(getInstance().pwdAdd("", "", "", "11.1.116.166", "", ""+i, ""+n, "", "15596175020", null, "", ""));
 	}
 }
