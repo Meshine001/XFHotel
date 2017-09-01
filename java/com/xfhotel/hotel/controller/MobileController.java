@@ -30,9 +30,9 @@ import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
-import com.xfhotel.hotel.entity.Facility;
 import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Fault;
+import com.xfhotel.hotel.entity.Fitness;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
@@ -50,6 +50,7 @@ import com.xfhotel.hotel.service.FacilityOrderService;
 import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FaultService;
 import com.xfhotel.hotel.service.FileService;
+import com.xfhotel.hotel.service.FitnessService;
 import com.xfhotel.hotel.service.HouseService;
 import com.xfhotel.hotel.service.LandlordService;
 import com.xfhotel.hotel.service.LockService;
@@ -141,6 +142,9 @@ public class MobileController  {
 	
 	@Autowired
 	TripOrderService tripOrderService;
+	
+	@Autowired
+	FitnessService fitnessService;
 	
 	/**
 	 * 房屋
@@ -1256,6 +1260,45 @@ public class MobileController  {
 	@RequestMapping(value = "/getTripOrder", method = RequestMethod.POST)
 	public @ResponseBody List<TripOrder> getTripOrder(Long id){
 		return tripOrderService.getTripOrder(id);
+	}
+	
+	@RequestMapping(value = "/addFitness", method = RequestMethod.POST)
+	public @ResponseBody  Message addFitness(Long id) {
+		try{
+			Order o =orderService.get(id);
+			Fitness fitness = new Fitness();
+			fitness.setName("健身劵");
+			fitness.setPrice("20");
+			fitness.setSituation(false);
+			fitness.setTel(o.getCusTel());
+			fitness.setMerchant(o.getId());
+			fitnessService.add(fitness);
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, "购买成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "购买失败");
+		} 		
+	}
+	@RequestMapping(value = "/getFitness", method = RequestMethod.POST)
+	public @ResponseBody  Message getFitness(Long id) {
+		try{
+			List<Order> orders =orderservice.getCustomerOrders(id ,0);
+			ArrayList<Object> list = new ArrayList<Object>();
+			for(Order order :orders){
+				List<Fitness> fitness = fitnessService.getlist(order.getCusId());
+				for(Fitness fitness1 :fitness){
+					list.add(fitness1);
+					break;
+				}
+				
+			}
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "查询失败");
+		} 		
 	}
 	
 }

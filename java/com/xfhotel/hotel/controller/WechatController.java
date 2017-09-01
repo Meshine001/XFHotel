@@ -34,6 +34,7 @@ import com.xfhotel.hotel.entity.Coupon;
 import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.FacilityOrder;
+import com.xfhotel.hotel.entity.Fitness;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.SystemConfig;
 import com.xfhotel.hotel.entity.TripOrder;
@@ -42,6 +43,7 @@ import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CouponService;
 import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.FacilityOrderService;
+import com.xfhotel.hotel.service.FitnessService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SystemConfService;
@@ -82,6 +84,8 @@ public class WechatController {
 	@Autowired
 	CouponService couponService;
 
+	@Autowired
+	FitnessService  fitnessService;
 	/**
 	 * 查询订单是否已经支付
 	 * 
@@ -459,6 +463,14 @@ public class WechatController {
 					//发短信给顾客
 					//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
+					
+//					Fitness fitness = new Fitness();
+//					fitness.setName("健身劵");
+//					fitness.setPrice("20");
+//					fitness.setSituation(false);
+//					fitness.setTel(pwd_user_mobile);
+//					fitness.setMerchant(o.getId());
+//					fitnessService.add(fitness);
 					//发短信给管理员
 					//【青舍都市】您有新订单需要确认，请及时处理。{1}
 					if(user==null){
@@ -586,7 +598,6 @@ public class WechatController {
 			jo.put("obj", null);
 			return jo;
 		}
-		
 		tripOrder.setPayPlatform(TripOrder.PAY_PLATFORM_WECHAT_JSAPI);
 		tripOrderService.update(tripOrder);
 		String detail = tripOrder.getRoomName();

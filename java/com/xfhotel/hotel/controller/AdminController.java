@@ -1,4 +1,5 @@
 package com.xfhotel.hotel.controller;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -28,6 +29,7 @@ import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.entity.Tenant;
 import com.xfhotel.hotel.entity.TripOrder;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
@@ -42,6 +44,7 @@ import com.xfhotel.hotel.service.FaultService;
 import com.xfhotel.hotel.service.HouseService;
 import com.xfhotel.hotel.service.LandlordService;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.TenantService;
 import com.xfhotel.hotel.service.TripOrderService;
 import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
@@ -51,6 +54,11 @@ import com.xfhotel.hotel.support.TimeUtil;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	
+
+	@Autowired
+	TenantService tenantService;
+	
 	@Autowired
 	LandlordService landlordService;
 	@Autowired
@@ -590,5 +598,24 @@ public class AdminController {
 		}
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"设置成功");
 	}
+	@RequestMapping(value = "/TenantAdd", method = RequestMethod.POST)
+	public @ResponseBody Message  TenantAdd(String userName,String password ,String tradeName,String tel){
+		try{
+			List<Tenant>  r = tenantService.list();
+			Tenant t = new Tenant();
+			t.setTel(tel);
+			t.setUserName(userName);
+			t.setTradeName(tradeName);
+			t.setPassword(password);
+			SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			t.setData(sdf.format(new Date().getTime()));
+			t.setVariety(r.size());
+	} catch (Exception e) {
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "设置失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,"设置成功");
+	}
+	
 
 }
