@@ -1281,16 +1281,18 @@ public class MobileController  {
 		} 		
 	}
 	
-	@RequestMapping(value = "/getFitness", method = RequestMethod.POST)
+	@RequestMapping(value = "/getFitness", method = RequestMethod.GET)
 	public @ResponseBody  Message getFitness(Long id) {
 		try{
 			List<Order> orders =orderservice.getCustomerOrders(id ,0);
 			ArrayList<Object> list = new ArrayList<Object>();
 			for(Order order :orders){
-				List<Fitness> fitness = fitnessService.getlist(order.getCusId());
+				System.out.println(order.getId());
+				List<Fitness> fitness = fitnessService.getlist(order.getId());
 				for(Fitness fitness1 :fitness){
+					System.out.println(fitness1+"dasdasdasd");
 					list.add(fitness1);
-					break;
+					
 				}
 				
 			}
