@@ -326,11 +326,12 @@ public class OrderController {
 		JSONObject basic =a.getJSONObject("basic_info");
 		String phone = o.getCusTel();
 		String lock_no1 = basic.getString("suo_di_zhi");
-		if(lock_no1==null){
+		if(lock_no1.equals("")){
 			return new Message(Constants.MESSAGE_ERR_CODE, "该房间未安装果加智能门锁");
 		}
 		String pwd_text1 =  lockService.viewPassword(phone, lock_no1);
-		if(pwd_text1!=null){
+		System.out.println(pwd_text1+"sgdu");
+		if(pwd_text1.equals("")){
 			try {
 				// 发送门锁密码
 				Long roomId = o.getRoomId();
@@ -349,7 +350,7 @@ public class OrderController {
 				return new Message(Constants.MESSAGE_ERR_CODE, "发送密码失败");
 			}
 		}
-		return new Message(Constants.MESSAGE_ERR_CODE, "已发送密码");
+		return new Message(Constants.MESSAGE_ERR_CODE, "已有密码");
 	}
 	
 	/**

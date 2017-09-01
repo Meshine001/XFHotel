@@ -143,11 +143,7 @@ $('#list').on('click','tr .comfirm-sendpwd',function(event){
 		url : url,
 		success : function(data) {
 			console.log(data)
-//			if(data.statusCode == 1){
-//				window.location.href = '../admin/order';
-//			}else{
-//				alert(data.content);
-//			}
+			alert(data.content);
 		}
 	});
 });
