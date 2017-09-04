@@ -50,13 +50,13 @@ public class Fitness {
 	public void setMerchant(long merchant) {
 		this.merchant = merchant;
 	}
+
 	public boolean isSituation() {
 		return situation;
 	}
 	public void setSituation(boolean situation) {
 		this.situation = situation;
 	}
-	
 	@Override
 	public String toString() {
 		return "Fitness [id=" + id + ", tel=" + tel + ", name=" + name + ", price=" + price + ", situation="
