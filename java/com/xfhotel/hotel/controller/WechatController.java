@@ -456,8 +456,9 @@ public class WechatController {
 					orderService.update(o);
 					String pwd_user_mobile = o.getCusTel();
 					JSONObject a = apartmentService.getApartmentById(o.getRoomId());
-					String f= a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
+					String f= a.getJSONObject("position").getString("bd_wei_zhi")+a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
 							a.getJSONObject("position").getString("dan_yuan")+"单元"+a.getJSONObject("position").getString("lou_ceng")+"层"+a.getJSONObject("position").getString("men_pai")+"号";
+					
 					String[] p = {f};
 					User user = userService.findById(a.getLong("steward"));
 					//发短信给顾客
@@ -493,7 +494,7 @@ public class WechatController {
 					facilityOrderService.update(facilityOrder);
 					String pwd_user_mobile = orderService.get(facilityOrder.getOederId()).getCusTel();
 					JSONObject a = apartmentService.getApartmentById(o.getRoomId());
-					String f= a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
+					String f= a.getJSONObject("position").getString("bd_wei_zhi")+a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
 							a.getJSONObject("position").getString("dan_yuan")+"单元"+a.getJSONObject("position").getString("lou_ceng")+"层"+a.getJSONObject("position").getString("men_pai")+"号";
 					String[] p = {f};
 					User user = userService.findById(a.getLong("steward"));
@@ -518,7 +519,7 @@ public class WechatController {
 					tripOrderService.update(tripOrder);
 					String pwd_user_mobile = String.valueOf(tripOrder.getTel());
 					JSONObject a = apartmentService.getApartmentById(orderService.get(tripOrder.getOederId()).getRoomId());
-					String f= a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
+					String f= a.getJSONObject("position").getString("bd_wei_zhi")+a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
 							a.getJSONObject("position").getString("dan_yuan")+"单元"+a.getJSONObject("position").getString("lou_ceng")+"层"+a.getJSONObject("position").getString("men_pai")+"号";
 					String[] p = {f};
 					//发短信给顾客

@@ -10,5 +10,6 @@ public interface LockService {
 	public String viewPassword(String phone, String lock_no );
 	public void deletePassword(String phone, String lock_no);
 	public Lock getl(Long o);
+	public Lock getLock(String pwd_text);
 	public int verify(String business_id, String lock_no, int pwd_no, String pwd_user_mobile);
 }

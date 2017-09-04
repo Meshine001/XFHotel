@@ -48,8 +48,8 @@ public class Constants {
 	public static final String SMS_APP_ID = "8a216da85a362949015a7e315fb51724";
 	public static final String SMS_VALIDATE_REGISTER = "156526";
 	public static final String SMS_VALIDATE_MODIFY_PASSWORD = "156527";
-	public static final String SMS_INFORM_LOCK_CODE = "181496";
-	public static final String SMS_INFORM_OVER_PAY = "181493";
+	public static final String SMS_INFORM_LOCK_CODE = "201969";
+	public static final String SMS_INFORM_OVER_PAY = "201964";
 	public static final String SMS_INFORM_COMFIRM_ORDER = "181659";
 	public static final String SMS_INFORM_COMFIRM_CLEAN_ORDER = "194099";
 	public static final String SMS_INFORM_FAULT_SERVICE= "181355";
