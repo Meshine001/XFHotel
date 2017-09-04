@@ -1375,4 +1375,8 @@ public class MobileController  {
 		}
 	}
 
+	@RequestMapping(value = "/getFitness", method = RequestMethod.POST)
+	public @ResponseBody  List<Fitness> getFitness() {
+		return fitnessService.list();
+	}
 }
