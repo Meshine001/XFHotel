@@ -31,6 +31,7 @@
 	    	          console.log(data);
 	    	          fnBase.myalert(data.content);
 	    	          if(data.statusCode==1){
+	    	        	  fnBase.keep(0,'cId',data.content);
 	    	        	  location.href='Cooperative-Detil.html';
 	    	          }
 	    	      })

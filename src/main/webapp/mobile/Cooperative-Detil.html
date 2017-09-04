@@ -11,9 +11,9 @@
     <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
-    <!-- 
+    
      <script charset="gb2312" language="javascript" type="text/javascript" src="js/bodybuilding.js"></script> 
-     -->
+     
     <style>
         #Myscroll-body{top: 0.4rem;bottom: 0;background:#fff}
         .service{top:0.24rem}
@@ -41,9 +41,7 @@
             <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
             <span class="cell">我的账单</span>
         <a href="javascript:;" class="cell link-btn">
-            <!-- 
-            <span class="czs-buy-l"></span>
-             -->
+           <span class="czs-buy-l"></span>
         </a>
         </header>
     </div>
@@ -51,15 +49,16 @@
     <div id="Myscroll-body">
     	<aside class="ac-gn-bagview">
     		<i class="ac-rou"></i>
-    		<p class="ac-gn-message">您有未确定的<i>2</i>个订单</p>
+    		<p class="ac-gn-message"><a href="javascript:;" id="closeOpen">退出登录</a></p>
+    		<!-- 
     		<ul>
-    			<li><a href="bodybuilding_zaixian.html"><i class="czs-time-l"></i>今天</a></li>
     			<li><a href="bodybuilding_goodDetil.html"><i class="czs-folder-l"></i>近一个月</a></li>
     		</ul>
+    		 -->
     	</aside>
     	<div class="ac-lastnav">
-        		<a href="javascript:;">已支付<i></i></a>
-        		<a href="javascript:;"  class="selected">未支付<i></i></a>
+        		<a href="javascript:;" class="selected">已支付<i></i></a>
+        		<a href="javascript:;" >未支付<i></i></a>
         </div>
         <div class="service">
             <ul class="goodlist">
@@ -73,6 +72,11 @@
 <script>
 
 $(document).ready(function(){
+	var _uid=fnBase.huoqu('0','cId');
+    if (_uid == null || _uid == "undefined" || _uid == "") {
+        window.location.href = "Cooperative.html";
+        return;
+    }
 	getlist(1);
 	getlist(0);
 	
@@ -93,6 +97,10 @@ $(document).ready(function(){
 	    		   if(data[i].userSituation=='用户已使用' && data[i].situation==false){
 		    		   str1+='<li><div class="ac-gn-bagleft"><p>来源：<span>青舍都市公寓</span></p><p>电话：<span>'+data[i].tel+'</span></p><p>种类：<span>'+data[i].name+'</span></p><p>是否支付：<span style="color:red">待支付</span></p><p>总价：<span>￥'+data[i].price+'</span></p><p class="status"><a href="javascript:;"class="btn" juanid="'+data[i].id+'">确认支付</a></p></div></li>';  
 		    		   result.push(data[i].id);
+		    		   console.log(result)
+		    		   if(result.length==0||result==""||result==undefined||result==null){
+		    			   str1='<li><p>暂时没有订单</p></li>'; 
+		    		   }
 		    		   $(".ac-lastnav a:first-child+a i").html('('+result.length+')');
 	    		   }
 	    	   }
@@ -125,7 +133,12 @@ $(document).ready(function(){
 		})
 	})
 	
-	
+	$("#closeOpen").click(function(){
+		  localStorage.removeItem('cId');
+	      setTimeout(function(){
+	         window.location.href='Cooperative.html';
+	      },300) 
+	})
 	
     
 })

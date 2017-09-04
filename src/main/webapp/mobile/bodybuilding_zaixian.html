@@ -76,8 +76,13 @@
 <div id="masking"></div>
 <script>
 $(document).ready(function(){
+	var _uid=fnBase.huoqu('0','userid');
+    if (_uid == null || _uid == "undefined" || _uid == "") {
+        window.location.href = "login.html";
+        return;
+    }
 	$(".ac-gn-bagright").click(function(){
-		location.href='bodybuilding_goumai.html'
+		location.href='bodybuilding_goumai.html';
 	})
 })
 </script>
