@@ -9,8 +9,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,7 +37,6 @@ import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.entity.Site;
-import com.xfhotel.hotel.entity.Tenant;
 import com.xfhotel.hotel.entity.TripOrder;
 import com.xfhotel.hotel.entity.User;
 import com.xfhotel.hotel.service.ApartmentService;
@@ -60,7 +57,6 @@ import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
 import com.xfhotel.hotel.service.SiteService;
 import com.xfhotel.hotel.service.SystemConfService;
-import com.xfhotel.hotel.service.TenantService;
 import com.xfhotel.hotel.service.TripOrderService;
 import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Area;
@@ -149,9 +145,6 @@ public class MobileController  {
 	
 	@Autowired
 	FitnessService fitnessService;
-	
-	@Autowired
-	TenantService tenantService;
 	
 	/**
 	 * 房屋
@@ -1272,6 +1265,7 @@ public class MobileController  {
 	@RequestMapping(value = "/addFitness", method = RequestMethod.POST)
 	public @ResponseBody  Message addFitness(Long id) {
 		try{
+			System.out.println(id);
 			Order o =orderService.get(id);
 			Fitness fitness = new Fitness();
 			fitness.setName("健身劵");
@@ -1294,10 +1288,8 @@ public class MobileController  {
 			List<Order> orders =orderservice.getCustomerOrders(id ,0);
 			ArrayList<Object> list = new ArrayList<Object>();
 			for(Order order :orders){
-				System.out.println(order.getId());
 				List<Fitness> fitness = fitnessService.getlist(order.getId());
 				for(Fitness fitness1 :fitness){
-					System.out.println(fitness1+"dasdasdasd");
 					list.add(fitness1);
 					
 				}
@@ -1333,26 +1325,13 @@ public class MobileController  {
 	@RequestMapping(value = "/userEmploy", method = RequestMethod.POST)
 	@ResponseBody
 	public Message userEmploy(Long id) {
-		final Fitness fitness = fitnessService.findById(id);
+		Fitness fitness = fitnessService.findById(id);
 		if (fitness == null) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
 		}
 			try {
 				String[] p = {fitness.getTel().toString()};
 				//SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_APPLY, systemConfiService.getConfig().getSms(), p);
-				Timer timer = new Timer();
-				TimerTask tt = new TimerTask() {
-					//延时
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						if(fitness.isSituation()!=true){
-							fitness.setSituation(true);
-							fitnessService.update(fitness);
-						}
-					}
-				};
-				timer.schedule(tt, 1000*60*60*24);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1362,18 +1341,5 @@ public class MobileController  {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单使用成功,请前往健身房登记");
 	}
 	
-	@RequestMapping(value = "/loginTenant", method = RequestMethod.POST)
-	public @ResponseBody  Message loginTenant(String userName , String password) {
-		Tenant tenant = tenantService.getTenant(userName, password);
-		if (tenant != null) {
-			return new Message(Constants.MESSAGE_SUCCESS_CODE, tenant.getId());
-		} else {
-			return new Message(Constants.MESSAGE_ERR_CODE, "亲，您输入的账号或密码错误，请确认信息！");
-		}
-	}
 	
-	@RequestMapping(value = "/getFitness1", method = RequestMethod.POST)
-	public @ResponseBody  List<Fitness> getFitness() {
-		return fitnessService.list();
-	}
 }
