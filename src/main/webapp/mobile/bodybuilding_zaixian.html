@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>青舍都市公寓</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/bodybuilding.css" />
+    <link rel="stylesheet" href="iconcaomei/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
+   <script charset="gb2312" language="javascript" type="text/javascript" src="js/bodybuilding.js"></script> 
+    <style>
+        #Myscroll-body{top: 0.4rem;bottom: 0}
+        	.service .goodlist li {
+		    position: relative;
+		    width: 100%;
+		    height: 1.2rem;
+		    margin-bottom: 0.15rem;
+		    background: #fffdfd;
+		    background-size: 100%;
+		    border: 1px solid #e8e3e3;
+		    border-radius: 0.05rem;
+		}
+		.goodlist li .ac-gn-bagleft {
+		 	border:none;
+		}
+    </style>
+</head>
+<body style="display:none">
+<article class="sx_filter">
+<!--头部-->
+    <div class="header">
+        <header class="header-mobile">
+            <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
+            <span class="cell">在线售卡</span>
+        <a href="javascript:;" class="cell link-btn">
+            <span class="czs-buy-l"></span>
+        </a>
+        </header>
+    </div>
+<!--内容区域-->
+    <div id="Myscroll-body">
+    	<aside class="ac-gn-bagview">
+    		<i class="ac-rou"></i>
+    		<ul>
+    			<!-- 
+    			<li><a href="bodybuilding_zaixian.html"><i class="czs-mobile-l"></i>在线售卡</a></li>
+    			<li><a href="bodybuilding_goodDetil.html"><i class="czs-folder-l"></i>我的账单</a></li>
+    			 -->
+    			<li><a href="bodybuilding.html"><i class="czs-comment-l"></i>我的健身卡</a></li>
+    		</ul>
+    	</aside>
+        <div class="service">
+            <ul class="goodlist">
+				<li>
+					<div class="ac-gn-bagleft">
+						<h4 class="p-name">预售次卡</h4>
+						<p class="p-style">购买可体验会员功能</p>
+						<p class="p-price">价格：￥20（活动）</p>
+					</div>
+					<div class="ac-gn-bagright">购买</div>
+				</li>			
+            </ul>
+            <div class="footer">
+	        	<h3>犀牛健身房</h3>
+	        	<p>地址：福邸铭门广场二层</p>
+	        	<p>电话：13022927976</p>
+	        </div>
+        </div>
+        <div id="zanwu"></div>
+    </div>
+</article>
+<div id="masking"></div>
+<script>
+$(document).ready(function(){
+	$(".ac-gn-bagright").click(function(){
+		location.href='bodybuilding_goumai.html'
+	})
+})
+</script>
+</body>
+</html>
