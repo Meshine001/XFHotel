@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>青舍都市公寓</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/bodybuilding.css" />
+    <link rel="stylesheet" href="iconcaomei/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
+    <script charset="gb2312" language="javascript" type="text/javascript" src="js/bodybuilding.js"></script> 
+    <style>
+        #Myscroll-body{background:#fff;}
+    </style>
+</head>
+<body style="display:none">
+<article class="sx_filter">
+<!--头部-->
+    <div class="header">
+        <header class="header-mobile">
+            <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
+            <span class="cell">购买</span>
+        <a href="javascript:;" class="cell link-btn">
+            <span class="czs-blackboard-l"></span>
+        </a>
+        </header>
+    </div>
+<!--内容区域-->
+    <div id="Myscroll-body">
+    	<aside class="ac-gn-bagview">
+    		<i class="ac-rou"></i>
+    		<ul>
+    			<li><a href="bodybuilding_zaixian.html"><i class="czs-mobile-l"></i>在线售卡</a></li>
+    			<!-- 
+    			<li><a href="bodybuilding_goodDetil.html"><i class="czs-folder-l"></i>我的账单</a></li>
+    			 -->
+    			<li><a href="bodybuilding.html"><i class="czs-comment-l"></i>我的健身卡</a></li>
+    		</ul>
+    	</aside>
+        <div class="inset-row">
+        	<div class="grid-row">
+        		<h1>在线购买的商品</h1>
+        	</div>
+        </div>
+        <div class="inset-row">
+        	<div class="row">
+        		<div class="gs grid-3of3">
+        			次卡
+        		</div>
+        		<div class="gs grid-3of9">
+        			<p>预售次卡</p>
+        			<p class="ofdate">购买可体验会员功能</p>
+        			<p class="ofnumber"><span>RMB:￥20</span></p>
+        		</div>
+        	</div>
+        	<div class="mbms">
+        		<h1>合计：￥20</h1>
+        	</div>
+        <!-- 
+        	<div class="row">
+        		<h1>TEL：<input type="tel" id="tel" maxlength="11"></h1>
+        	</div>
+         -->
+        	<div class="row">
+        		<a href="javascript:;" id="sub">提交</a>
+        	</div>
+        	<div class="row" style="line-height:0.3rem">
+        		<p>提示：您所购买的健身卡、需到健身馆购票处支付</p>
+        		<p>地址：福邸铭门广场二层</p>
+        	</div>
+        </div>
+        <div id="zanwu"></div>
+    </div>
+</article>
+<div id="masking"></div>
+<script>
+$(document).ready(function(){
+	var _uid=fnBase.huoqu('0','userid');
+    if (_uid == null || _uid == "undefined" || _uid == "") {
+        window.location.href = "login.html";
+        return;
+    }
+    var orderid="";
+    var postData={uId:_uid,type:0 };
+    var frontURL=Constant.URL+'/mobile/Clean';
+      fnBase.commonAjax(frontURL,postData,function(data){
+          console.log(data);
+          if(data.statusCode==1){
+        	  orderid=data.content[0].id;
+          }
+      });
+	$("#sub").click(function(){
+		 var postData={id:orderid};
+		 console.log(postData);
+		 var frontURL=Constant.URL+'/mobile/addFitness';
+		      fnBase.commonAjax(frontURL,postData,function(data){
+		          console.log(data);
+		          if(data.statusCode==1){
+		        	  fnBase.myalert(data.content);
+		        	  setTimeout(function(){
+		        		  location.href='bodybuilding.html'
+		        	 },1500)
+		          }else if(data.statusCode==0){
+		        	  fnBase.myalert(data.content);
+		          }
+		        
+		      });
+		     
+		
+	})
+})
+</script>
+
+
+</body>
+</html>

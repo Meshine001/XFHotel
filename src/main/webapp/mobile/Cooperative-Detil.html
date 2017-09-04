@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>青舍都市公寓</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/bodybuilding.css" />
+    <link rel="stylesheet" href="iconcaomei/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
+    
+     <script charset="gb2312" language="javascript" type="text/javascript" src="js/bodybuilding.js"></script> 
+     
+    <style>
+        #Myscroll-body{top: 0.4rem;bottom: 0;background:#fff}
+        .service{top:0.24rem}
+        .ac-gn-bagleft{width:100%; line-height: 0.3rem;}
+        .ac-gn-bagleft span{float:right}
+		.ac-gn-bagleft .status{display:block;border-top:1px solid #e8e3e3}
+		.ac-gn-bagleft .status .btn{
+			    background: linear-gradient(#42a1ec, #0070c9);
+			    color: #fff;
+			    display: block;
+			    margin-top: 0.08rem;
+			    width: 0.8rem;
+			    text-align: center;
+			    border-radius: 0.05rem;
+		}
+		.ac-gn-bagview{padding:0 0.5rem 0.1rem 0.5rem;}
+		.ac-gn-bagview ul li:first-child{border-top:1px solid #e3e3e3}
+    </style>
+</head>
+<body style="display:none">
+<article class="sx_filter">
+<!--头部-->
+    <div class="header">
+        <header class="header-mobile">
+            <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
+            <span class="cell">我的账单</span>
+        <a href="javascript:;" class="cell link-btn">
+           <span class="czs-buy-l"></span>
+        </a>
+        </header>
+    </div>
+<!--内容区域-->
+    <div id="Myscroll-body">
+    	<aside class="ac-gn-bagview">
+    		<i class="ac-rou"></i>
+    		<p class="ac-gn-message"><a href="javascript:;" id="closeOpen">退出登录</a></p>
+    		<!-- 
+    		<ul>
+    			<li><a href="bodybuilding_goodDetil.html"><i class="czs-folder-l"></i>近一个月</a></li>
+    		</ul>
+    		 -->
+    	</aside>
+    	<div class="ac-lastnav">
+        		<a href="javascript:;" class="selected">已支付<i></i></a>
+        		<a href="javascript:;" >未支付<i></i></a>
+        </div>
+        <div class="service">
+            <ul class="goodlist">
+				
+            </ul>
+        </div>
+        <div id="zanwu"></div>
+    </div>
+</article>
+<div id="masking"></div>
+<script>
+
+$(document).ready(function(){
+	var _uid=fnBase.huoqu('0','cId');
+    if (_uid == null || _uid == "undefined" || _uid == "") {
+        window.location.href = "Cooperative.html";
+        return;
+    }
+	getlist(1);
+	getlist(0);
+	
+	function getlist(selected){
+		var result = new Array();
+		fnBase.commonAjax(Constant.URL+'/mobile/getFitness1',{},function(data){
+	        console.log(data);
+	        $(".service .goodlist").html('');
+	        var str1="";
+	       for(var i=0;i<data.length;i++){
+	    	   if(selected==0){
+	    		   if(data[i].userSituation=='用户已使用' && data[i].situation==true){
+		    		   str1+='<li><div class="ac-gn-bagleft"><p>来源：<span>青舍都市公寓</span></p><p>电话：<span>'+data[i].tel+'</span></p><p>种类：<span>'+data[i].name+'</span></p><p>是否支付：<span style="color:lightgreen">已支付</span></p><p>总价：<span>￥'+data[i].price+'</span></p></div></li>';  
+		    		   result.push(data[i].id);
+		    		   $(".ac-lastnav a:first-child i").html('('+result.length+')');
+	    		   }
+	    	   }else if(selected==1){
+	    		   if(data[i].userSituation=='用户已使用' && data[i].situation==false){
+		    		   str1+='<li><div class="ac-gn-bagleft"><p>来源：<span>青舍都市公寓</span></p><p>电话：<span>'+data[i].tel+'</span></p><p>种类：<span>'+data[i].name+'</span></p><p>是否支付：<span style="color:red">待支付</span></p><p>总价：<span>￥'+data[i].price+'</span></p><p class="status"><a href="javascript:;"class="btn" juanid="'+data[i].id+'">确认支付</a></p></div></li>';  
+		    		   result.push(data[i].id);
+		    		   console.log(result)
+		    		   if(result.length==0||result==""||result==undefined||result==null){
+		    			   str1='<li><p>暂时没有订单</p></li>'; 
+		    		   }
+		    		   $(".ac-lastnav a:first-child+a i").html('('+result.length+')');
+	    		   }
+	    	   }
+	       }
+	       
+	       $(".service .goodlist").append(str1);
+	    })
+	    
+	}
+    
+    $(".ac-gn-bagright").click(function(){
+		location.href='bodybuilding_goumai.html'
+	})
+	$(".ac-lastnav a").click(function(){
+		var selected=$(this).index();
+		$(this).addClass('selected').siblings().removeClass('selected');
+		getlist(selected);
+	})
+	
+	
+	//确认支付使用
+	$(".service .goodlist").on('click','li .ac-gn-bagleft .status .btn',function(){
+		var postData={id:$(this).attr('juanid')}
+		fnBase.commonAjax(Constant.URL+'/mobile/employ',postData,function(data){
+			console.log(data);
+			fnBase.myalert(data.content);
+			if(data.statusCode==1){
+				location=location;
+			}
+		})
+	})
+	
+	$("#closeOpen").click(function(){
+		  localStorage.removeItem('cId');
+	      setTimeout(function(){
+	         window.location.href='Cooperative.html';
+	      },300) 
+	})
+	
+    
+})
+</script>
+</body>
+</html>

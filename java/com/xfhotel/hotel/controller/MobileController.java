@@ -1319,7 +1319,7 @@ public class MobileController  {
 		if (fitness == null) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
 		}
-		if (fitness.isSituation()) {
+		if (fitness.isSituation()!=true) {
 			try {
 				fitness.setSituation(true);
 				fitnessService.update(fitness);

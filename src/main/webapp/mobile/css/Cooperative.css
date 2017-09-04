@@ -1,0 +1,60 @@
+.header-mobile{
+	background:rgba(0,0,0,.8);
+}
+#Myscroll-body,html,body{
+	background:#fff;
+}
+.note{
+	position: absolute;
+    bottom: 0;
+    font-size: 0.14rem;
+    line-height: 0.4rem;
+    padding: 0 0.1rem;
+}
+.service{
+	width:3.4rem;
+	height:auto;
+	position:relative;
+	margin:0 auto;
+	margin-top:1.4rem;
+	color:#494949;
+}
+.service h1{
+	font-size:0.21rem;
+	text-align:center;
+	font-weight: 300;
+}
+.content{margin:0.2rem 0}
+.apple{
+	width:100%;
+	height:0.48rem;
+	line-height:0.48rem;
+	border:1px solid rgba(0, 0, 0, 0.3); 
+}
+.apple-id{
+	border-top-left-radius:0.08rem;
+	border-top-right-radius:0.08rem;
+}
+.apple-pwd{
+	margin-top: -1px;
+	border-bottom-left-radius:0.08rem;
+	border-bottom-right-radius:0.08rem;
+}
+.apple input{
+	width:80%;
+	font-size:0.15rem;
+	padding:0 0.1rem;
+	float:left;
+	line-height:0.46rem;
+	color: #494949;
+}
+.submit a{
+	width:100%;
+	line-height:0.5rem;
+	font-size:0.16rem;
+	background: linear-gradient(#42a1ec, #0070c9);
+	display: block;
+	text-align:center;
+	border-radius:0.06rem;
+	color:#fff;
+}

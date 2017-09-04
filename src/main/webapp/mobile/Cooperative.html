@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>青舍都市公寓</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/Cooperative.css" />
+    <link rel="stylesheet" href="iconcaomei/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
+    <!-- <script charset="gb2312" language="javascript" type="text/javascript" src="js/bodybuilding.js"></script>  -->
+	<script>
+		$(document).ready(function(){
+			$(".apple input").focus(function(){
+				$(this).parent().css({'border-color':'#42a1ec'});
+				$(this).parent().siblings().css({'border-color':'rgba(0, 0, 0, 0.3)'});
+			})
+			$(".apple input").blur(function(){
+				$(".apple input").css({'border-color':'rgba(0, 0, 0, 0.3)'});
+			})
+			$(".submit a").click(function(){
+				var postData={
+						userName:$("#controller-id").val(),
+						password:$("#controller-pwd").val()		
+				};
+	    	    var frontURL=Constant.URL+'/mobile/loginTenant';
+	    	      fnBase.commonAjax(frontURL,postData,function(data){
+	    	          console.log(data);
+	    	          fnBase.myalert(data.content);
+	    	          if(data.statusCode==1){
+	    	        	  fnBase.keep(0,'cId',data.content);
+	    	        	  location.href='Cooperative-Detil.html';
+	    	          }
+	    	      })
+				
+
+			})
+		})
+	</script>
+</head>
+<body style="display:none">
+<article class="sx_filter">
+<!--头部-->
+    <div class="header">
+        <header class="header-mobile">
+            <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
+            <span class="cell">合作商户</span>
+        <a href="javascript:;" class="cell link-btn">
+           <!--  <span class="czs-blackboard-l"></span> -->
+        </a>
+        </header>
+    </div>
+<!--内容区域-->
+    <div id="Myscroll-body">
+  
+        <div class="service">
+            <h1>登录商户ID</h1>
+			<div class="content">
+				<div class="apple apple-id">
+					<input type="text" autocomplete="off" placeholder="管理者ID" id="controller-id">
+				</div>
+				<div class="apple apple-pwd">
+					<input type="password" autocomplete="off" placeholder="密码" id="controller-pwd"><span></span>
+				</div>
+			</div>
+			<div class="submit">
+				<a href="javascript:;">登录</a>
+			</div>
+        </div>
+
+    </div>
+    <p class="note">最后解释权归：西安易云智能科技发展有限公司</p>
+</article>
+<div id="masking"></div>
+
+</body>
+</html>

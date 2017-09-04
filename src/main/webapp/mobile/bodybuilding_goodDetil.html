@@ -12,27 +12,11 @@
     <script type="text/javascript" src="js/zoom.js"></script>
     <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
     <script charset="gb2312" language="javascript" type="text/javascript" src="js/bodybuilding.js"></script> 
-	<style type="text/css">
-		.service{
-			top:0.01rem;
-		}
-		.service .goodlist li {
-		    position: relative;
-		    width: 100%;
-		    height: 1.2rem;
-		    margin-bottom: 0.15rem;
-		    background: #fffdfd;
-		    background-size: 100%;
-		    border: 1px solid #e8e3e3;
-		    border-radius: 0.05rem;
-		}
-		.goodlist li .ac-gn-bagleft {
-		 	border:none;
-		}
-		.goodlist{
-			min-height:4.65rem;
-		}
-	</style>
+    <style>
+        #Myscroll-body{top: 0.4rem;bottom: 0;background:#fff}
+        .ac-gn-bagleft{width:100%; line-height: 0.3rem;}
+        .ac-gn-bagleft span{float:right}
+    </style>
 </head>
 <body style="display:none">
 <article class="sx_filter">
@@ -40,7 +24,7 @@
     <div class="header">
         <header class="header-mobile">
             <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
-            <span class="cell">我的健身卡</span>
+            <span class="cell">我的账单</span>
         <a href="javascript:;" class="cell link-btn">
             <span class="czs-buy-l"></span>
         </a>
@@ -52,38 +36,53 @@
     		<i class="ac-rou"></i>
     		<ul>
     			<li><a href="bodybuilding_zaixian.html"><i class="czs-mobile-l"></i>在线售卡</a></li>
-    			
-    			<!-- 
-    			
+    			<li><a href="bodybuilding_goodDetil.html"><i class="czs-folder-l"></i>我的账单</a></li>
     			<li><a href="bodybuilding.html"><i class="czs-comment-l"></i>我的健身卡</a></li>
-    			 -->
     		</ul>
     	</aside>
+    	<div class="ac-lastnav">
+        		<a href="javascript:;" class="selected">已使用</a>
+        		<a href="javascript:;" >已过期</a>
+        </div>
         <div class="service">
+        	
             <ul class="goodlist">
+				<li>
+					<div class="ac-gn-bagleft">
+						<p>健身次卡<span>x1</span></p>
+						<p>有效期：<span>2017/08/01~2017/08/31</span></p>
+						<p>总价：<span>￥40</span></p>
+					</div>
+				</li>
+				<li>
+					<div class="ac-gn-bagleft">
+						<p>健身次卡<span>x1</span></p>
+						<p>有效期：<span>2017/08/01~2017/08/31</span></p>
+						<p>总价：<span>￥40</span></p>
+					</div>
+				</li>
+				<li>
+					<div class="ac-gn-bagleft">
+						<p>健身次卡<span>x1</span></p>
+						<p>有效期：<span>2017/08/01~2017/08/31</span></p>
+						<p>总价：<span>￥40</span></p>
+					</div>
+				</li>
 				
             </ul>
-            
         </div>
         <div id="zanwu"></div>
-      
     </div>
 </article>
 <div id="masking"></div>
-<div id="my-alert-views">
-	<p class="title">确定使用此卡</p>
-	<ul>
-		<li>名称：犀牛健身房</li>
-		<li class="jd">价格：免费</li>
-		<li>提示：24小时未付款消费、此卡作废</li>
-	</ul>
-	<div class="btnArea">
-		<a href="">返回</a>
-		<a href="javscript:;" class="userd">确定</a>
-	</div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){
+<script>
+(function(){
+	$(".ac-gn-bagright").click(function(){
+		location.href='bodybuilding_goumai.html'
+	})
+	$(".ac-lastnav a").click(function(){
+		$(this).addClass('selected').siblings().removeClass('selected')
+	})
 	var _uid=fnBase.huoqu('0','userid');
     if (_uid == null || _uid == "undefined" || _uid == "") {
         window.location.href = "login.html";
@@ -109,27 +108,7 @@ $(document).ready(function(){
           }
        
       });
-      //使用卡卷
-      var jid="";
-      var price="";
-      $(".goodlist").on('click','li .ac-gn-bagright',function(){
-    	  jid=$(this).attr('jid');
-    	  price=$(this).attr('price');
-    	  $("#my-alert-views .jd").text('价格：￥'+price);
-    	  $("#my-alert-views .btnArea .userd").attr('juanid',jid);
-      	  $("#masking,#my-alert-views").fadeIn();
-      })
-      $("#my-alert-views .btnArea .userd").click(function(){
-    	  	var postData={id:$(this).attr('juanid')};
-    	    var frontURL=Constant.URL+'/mobile/userEmploy';
-    	      fnBase.commonAjax(frontURL,postData,function(data){
-    	          console.log(data);
-    	          fnBase.myalert(data.content);
-    	          $("#masking,#my-alert-views").fadeOut();
-    	      })
-      })
-      
-})
+})()
 </script>
 </body>
 </html>

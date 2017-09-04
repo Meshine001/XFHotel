@@ -26,6 +26,7 @@ import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Fault;
+import com.xfhotel.hotel.entity.Fitness;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
@@ -41,6 +42,7 @@ import com.xfhotel.hotel.service.CustomerService;
 import com.xfhotel.hotel.service.FacilityOrderService;
 import com.xfhotel.hotel.service.FacilityService;
 import com.xfhotel.hotel.service.FaultService;
+import com.xfhotel.hotel.service.FitnessService;
 import com.xfhotel.hotel.service.HouseService;
 import com.xfhotel.hotel.service.LandlordService;
 import com.xfhotel.hotel.service.OrderService;
@@ -50,6 +52,9 @@ import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.TimeUtil;
+import com.xfhotel.hotel.support.wechat.WechatOrderUtils;
+
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/admin")
@@ -98,6 +103,8 @@ public class AdminController {
 	@Autowired
 	ApplyService applyService;
 
+	@Autowired
+	FitnessService fitnessService;
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String homePage() {
 		return "redirect:/admin/login";
@@ -207,19 +214,6 @@ public class AdminController {
 //		}								
 	
 		//成员权限 BEGIN
-		@RequestMapping(value = "/customer_jointwork", method = RequestMethod.GET)
-		public String jointwork() {
-			List<User> list = userService.list();
-			List<Map> orders = new ArrayList<Map>();
-			for (User o : list) {
-				orders.add(o.toMap());	
-			}
-			session.setAttribute("orders", orders);
-			return "/admin/customer/jointwork";
-		}
-		// 成员权限 END
-
-		//合作商户 BEGIN 9-1
 		@RequestMapping(value = "/customer_manager", method = RequestMethod.GET)
 		public String collocation() {
 			List<User> list = userService.list();
@@ -229,7 +223,21 @@ public class AdminController {
 			}
 			session.setAttribute("orders", orders);
 			return "/admin/customer/manager";
-		}		
+		}	
+		
+		// 成员权限 END
+
+		//合作商户 BEGIN 9-1
+		@RequestMapping(value = "/customer_jointwork", method = RequestMethod.GET)
+		public String jointwork() {
+			List<Tenant> list = tenantService.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (Tenant o : list) {
+				orders.add(o.toMap());	
+			}
+			session.setAttribute("orders", orders);
+			return "/admin/customer/jointwork";
+		}
 		// 合作商户 END 
 		
 		
@@ -619,5 +627,17 @@ public class AdminController {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,"设置成功");
 	}
 	
+	@RequestMapping(value = "/TenantD", method = RequestMethod.POST)
+	public @ResponseBody Message TenantD(Long id){
+		try{
+			Tenant tenant = tenantService.findById(id);
+			tenantService.delete(tenant);
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, "删除成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "删除失败");
+			}		
+		
+	}
 
 }

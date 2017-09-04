@@ -95,7 +95,7 @@ $(document).ready(function(){
                     }else if(data.content[i].status=="退款订单"){//6
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
                     }else if(data.content[i].status=="进行中"){//2
-                        _str+='<p class="total"><span class="fl cancel check-out">退房</span><span class="fl cancel lockpassword">查看密码</span></p>'
+                        _str+='<p class="total"><span class="fl cancel contenster" roomid="'+data.content[i].roomId+'">续租</span><span class="fl cancel lockpassword">查看密码</span><span class="fl cancel check-out">退房</span></p>'
                     }else if(data.content[i].status=="已完成"||data.content[i].status=="退租确认中"){//3 or 8
                         _str+='<p class="total"><span class="fl evaluate">评价</span></p>'
                     }
@@ -123,7 +123,11 @@ $(document).ready(function(){
     	window.location.href="orderDetails.html?onumber="+$(this).attr("orderid")+"";
     })
 
-
+    $(".orderlist").on('click','li .contenster',function(event){
+    	event.stopPropagation();
+    	 var id = $(this).attr('roomid');
+         window.location.href = "house_particulars.html?id=" + encodeURIComponent(id) + "";
+    });
 
 
     $(".reserve").live('click',function(){

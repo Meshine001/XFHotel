@@ -118,7 +118,7 @@
 .goodlist li .ac-gn-bagleft{
 	padding:0.18rem;
 	font-size:0.15rem;
-
+    line-height: 0.27rem;
     margin-bottom: 0.15rem;
     background: #fffdfd;
     background-size: 100% ;
