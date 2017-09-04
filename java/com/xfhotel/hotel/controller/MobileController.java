@@ -1374,8 +1374,8 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "亲，您输入的账号或密码错误，请确认信息！");
 		}
 	}
-
-	@RequestMapping(value = "/getFitness", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "/getFitness1", method = RequestMethod.POST)
 	public @ResponseBody  List<Fitness> getFitness() {
 		return fitnessService.list();
 	}
