@@ -1278,6 +1278,7 @@ public class MobileController  {
 			fitness.setPrice("20");
 			fitness.setSituation(false);
 			fitness.setTel(o.getCusTel());
+			fitness.setUserSituation("用户未使用");
 			fitness.setMerchant(o.getId());
 			fitnessService.add(fitness);
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, "购买成功");
@@ -1340,6 +1341,8 @@ public class MobileController  {
 			try {
 				String[] p = {fitness.getTel().toString()};
 				//SendTemplateSMS.sendSMS(Constants.SMS_INFORM_ADD_APPLY, systemConfiService.getConfig().getSms(), p);
+				fitness.setUserSituation("用户已使用");
+				fitnessService.update(fitness);
 				Timer timer = new Timer();
 				TimerTask tt = new TimerTask() {
 					//延时
@@ -1371,4 +1374,5 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "亲，您输入的账号或密码错误，请确认信息！");
 		}
 	}
+
 }

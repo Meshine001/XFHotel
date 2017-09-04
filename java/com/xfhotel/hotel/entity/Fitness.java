@@ -15,6 +15,7 @@ public class Fitness {
 	private String tel;
 	private String name;
 	private String price;
+	private String userSituation;
 	private long merchant;
 	private boolean situation;
 	
@@ -57,9 +58,17 @@ public class Fitness {
 	public void setSituation(boolean situation) {
 		this.situation = situation;
 	}
+	
+	
+	public String getUserSituation() {
+		return userSituation;
+	}
+	public void setUserSituation(String userSituation) {
+		this.userSituation = userSituation;
+	}
 	@Override
 	public String toString() {
 		return "Fitness [id=" + id + ", tel=" + tel + ", name=" + name + ", price=" + price + ", situation="
-				+ situation + "]";
+				+ situation + ", userSituation" +userSituation+ "]";
 	}
 }

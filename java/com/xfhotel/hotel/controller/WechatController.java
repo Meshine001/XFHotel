@@ -470,6 +470,7 @@ public class WechatController {
 //					fitness.setName("健身劵");
 //					fitness.setPrice("20");
 //					fitness.setSituation(false);
+//					fitness.setUserSituation("用户未使用");
 //					fitness.setTel(pwd_user_mobile);
 //					fitness.setMerchant(o.getId());
 //					fitnessService.add(fitness);
