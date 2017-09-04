@@ -13,6 +13,9 @@
     <script charset="utf-8" type="text/javascript" src="js/fnBase.js"></script>
     <script charset="gb2312" language="javascript" type="text/javascript" src="js/bodybuilding.js"></script> 
 	<style type="text/css">
+		.service{
+			top:0.01rem;
+		}
 		.service .goodlist li {
 		    position: relative;
 		    width: 100%;
@@ -50,33 +53,17 @@
     		<ul>
     			<li><a href="bodybuilding_zaixian.html"><i class="czs-mobile-l"></i>在线售卡</a></li>
     			<li><a href="bodybuilding_goodDetil.html"><i class="czs-folder-l"></i>我的账单</a></li>
+    			<!-- 
     			<li><a href="bodybuilding.html"><i class="czs-comment-l"></i>我的健身卡</a></li>
+    			 -->
     		</ul>
     	</aside>
         <div class="service">
             <ul class="goodlist">
-				<li>
-					<div class="ac-gn-bagleft">
-						<h4 class="p-name">皇家健身会所</h4>
-						<p class="p-style">两小时体验卡</p>
-						<p>有效期：2017/8/1~2017/8/30</p>
-						<p class="p-price">价格：免费</p>
-					</div>
-					<div class="ac-gn-bagright">使用</div>
-				</li>
-				<li>
-					<div class="ac-gn-bagleft">
-						<h4 class="p-name">皇家健身会所</h4>
-						<p class="p-style">两小时体验卡</p>
-						<p>有效期：2017/8/1~2017/8/30</p>
-						<p class="p-price">价格：免费</p>
-					</div>
-					<div class="ac-gn-bagright">使用</div>
-				</li>
-			
+				
             </ul>
             <div class="footer">
-	        	<h3>皇家健身会馆</h3>
+	        	<h3>犀牛健身房</h3>
 	        	<p>地址：福邸铭门广场二层</p>
 	        	<p>电话：13022927976</p>
 	        </div>
@@ -89,15 +76,63 @@
 <div id="my-alert-views">
 	<p class="title">确定使用此卡</p>
 	<ul>
-		<li>名称：皇家健身次卡</li>
-		<li>价格：免费</li>
-		<li>TEL：<input type="text" value="15102988385" maxlength="11"></li>
+		<li>名称：犀牛健身房</li>
+		<li class="jd">价格：免费</li>
+		<li>提示：24小时未付款消费、此卡作废</li>
 	</ul>
 	<div class="btnArea">
 		<a href="">返回</a>
-		<a href="">确定</a>
+		<a href="javscript:;" class="userd">确定</a>
 	</div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	var _uid=fnBase.huoqu('0','userid');
+    if (_uid == null || _uid == "undefined" || _uid == "") {
+        window.location.href = "login.html";
+        return;
+    }
 
+    var postData={id:_uid};
+    var frontURL=Constant.URL+'/mobile/getFitness';
+      fnBase.commonAjax(frontURL,postData,function(data){
+          console.log(data);
+          if(data.statusCode==1){
+        	  var _str="";
+        	  $(".goodlist").html("");
+              for(var i=0;i<data.content.length;i++){
+            	  if(data.content[i].situation==false){
+            		  _str+='<li><div class="ac-gn-bagleft"><h4 class="p-name">犀牛健身房</h4><p class="p-style">'+data.content[i].name+'次卡</p><p class="p-price">价格：￥'+data.content[i].price+'</p></div><div class="ac-gn-bagright" jid="'+data.content[i].id+'" price="'+data.content[i].price+'">使用</div></li>'; 
+            	  }
+              }
+              if(data.content.length==0){
+            	  _str="<p>您暂时没有健身卡</p>";
+        	  }
+              $(".goodlist").append(_str);
+          }
+       
+      });
+      //使用卡卷
+      var jid="";
+      var price="";
+      $(".goodlist").on('click','li .ac-gn-bagright',function(){
+    	  jid=$(this).attr('jid');
+    	  price=$(this).attr('price');
+    	  $("#my-alert-views .jd").text('价格：￥'+price);
+    	  $("#my-alert-views .btnArea .userd").attr('juanid',jid);
+      	  $("#masking,#my-alert-views").fadeIn();
+      })
+      $("#my-alert-views .btnArea .userd").click(function(){
+    	  	var postData={id:$(this).attr('juanid')};
+    	    var frontURL=Constant.URL+'/mobile/userEmploy';
+    	      fnBase.commonAjax(frontURL,postData,function(data){
+    	          console.log(data);
+    	          fnBase.myalert(data.content);
+    	          $("#masking,#my-alert-views").fadeOut();
+    	      })
+      })
+      
+})
+</script>
 </body>
 </html>

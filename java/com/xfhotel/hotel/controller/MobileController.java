@@ -1265,6 +1265,7 @@ public class MobileController  {
 	@RequestMapping(value = "/addFitness", method = RequestMethod.POST)
 	public @ResponseBody  Message addFitness(Long id) {
 		try{
+			System.out.println(id);
 			Order o =orderService.get(id);
 			Fitness fitness = new Fitness();
 			fitness.setName("健身劵");
@@ -1287,10 +1288,10 @@ public class MobileController  {
 			List<Order> orders =orderservice.getCustomerOrders(id ,0);
 			ArrayList<Object> list = new ArrayList<Object>();
 			for(Order order :orders){
-				List<Fitness> fitness = fitnessService.getlist(order.getCusId());
+				List<Fitness> fitness = fitnessService.getlist(order.getId());
 				for(Fitness fitness1 :fitness){
 					list.add(fitness1);
-					break;
+					
 				}
 				
 			}
