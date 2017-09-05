@@ -154,4 +154,12 @@ public class LockServiceImpl implements LockService {
 		return lockDAOImpl.getByHQL("from Lock where oId = ?", values);
 	}
 
+	@Transactional
+	@Override
+	public Lock getLock(String pwd_text) {
+		Object[] values = new Object[1];
+		values[0] = pwd_text;
+		return lockDAOImpl.getByHQL("from Lock where pwd_text = ?", values);
+	}
+
 }

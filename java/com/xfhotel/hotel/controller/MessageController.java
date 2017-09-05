@@ -2,6 +2,8 @@ package com.xfhotel.hotel.controller;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Lock;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.LockService;
 import com.xfhotel.hotel.service.OrderService;
@@ -75,11 +78,15 @@ public class MessageController {
 	public void lockSuccess(String business_id, String lock_no, Integer pwd_no, String pwd_user_mobile) {
 		int check = lockService.verify(business_id, lock_no, Integer.valueOf(pwd_no), pwd_user_mobile);
 		String pwd_text = lockService.viewPassword(pwd_user_mobile, lock_no);
-		System.out.println(pwd_text);
+		Lock lock = lockService.getLock(pwd_text);
+		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String d =sdf.format(lock.getValid_time_start());
+		String t = sdf.format(lock.getValid_time_end());
 		if (check == 1) {
-			String[] param = new String[2];
-			param[0] = "";
-			param[1] = pwd_text;
+			String[] param = new String[3];
+			param[0] = pwd_text;
+			param[1] = d;
+			param[2] = t;
 			SendTemplateSMS.sendSMS(Constants.SMS_INFORM_LOCK_CODE, pwd_user_mobile, param);
 		}
 	}

@@ -1000,8 +1000,9 @@ public class MobileController  {
 //			发短信给管理员
 //			【青舍都市】您有新订单需要确认，请及时处理。{1}
 			JSONObject a = apartmentService.getApartmentById(o.getRoomId());
-			String f= a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
+			String f= a.getJSONObject("position").getString("bd_wei_zhi")+a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
 					a.getJSONObject("position").getString("dan_yuan")+"单元"+a.getJSONObject("position").getString("lou_ceng")+"层"+a.getJSONObject("position").getString("men_pai")+"号";
+			System.out.println();
 			String[] p = {f};
 			User user = userService.findById(a.getLong("steward"));
 			if(user==null){
@@ -1056,7 +1057,7 @@ public class MobileController  {
 						break; 
 					}
 				}
-					if(l==true){
+					if(l!=false){
 						JSONObject a = apartmentService.getApartmentById(o.getRoomId());
 						String f= a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
 								a.getJSONObject("position").getString("dan_yuan")+"单元"+a.getJSONObject("position").getString("lou_ceng")+"层"+a.getJSONObject("position").getString("men_pai")+"号";
@@ -1233,7 +1234,6 @@ public class MobileController  {
 		}
 	}
 	
-	
 	@RequestMapping(value = "/find1", method = RequestMethod.POST)
 	public @ResponseBody  Message find1(String tel ,String psd ,Long id) {
 			if (customerService.getCustomer(id)!=null) {
@@ -1246,12 +1246,10 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
 	}
 	
-	
 	@RequestMapping(value = "/getClean", method = RequestMethod.POST)
 	public @ResponseBody List<Clean> getClean(Long id){
 		return cleanservice.getClean2(id);
 	}
-	
 	
 	@RequestMapping(value = "/getFault", method = RequestMethod.POST)
 	public @ResponseBody List<Fault> getFault(Long id){
@@ -1311,6 +1309,7 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "查询失败");
 		} 		
 	}
+	
 	@RequestMapping(value = "/employ", method = RequestMethod.POST)
 	@ResponseBody
 	public Message employ(Long id) {
@@ -1379,4 +1378,29 @@ public class MobileController  {
 	public @ResponseBody  List<Fitness> getFitness() {
 		return fitnessService.list();
 	}
+	
+	//获取用户
+	@RequestMapping(value = "/getUser", method = RequestMethod.POST)
+	public @ResponseBody List<Customer> getUser(){
+		return customerService.list();
+	}
+	
+	//获取优惠劵
+	@RequestMapping(value = "/getCoupon", method = RequestMethod.POST)
+	public @ResponseBody List<Coupon> getCoupon(){
+		return couponService.list();
+	}
+	
+	//获取商户
+	@RequestMapping(value = "/getTenant", method = RequestMethod.POST)
+	public @ResponseBody List<Tenant> getTenant(){
+		return tenantService.list();
+	}
+	
+	//获取文章
+	@RequestMapping(value = "/getBlog", method = RequestMethod.POST)
+	public @ResponseBody List<Blog> getBlog(){
+		return blogService.list();
+	}
+	
 }
