@@ -57,8 +57,8 @@
     		 -->
     	</aside>
     	<div class="ac-lastnav">
-        		<a href="javascript:;" class="selected">已支付<i></i></a>
-        		<a href="javascript:;" >未支付<i></i></a>
+        		<a href="javascript:;">已支付<i></i></a>
+        		<a href="javascript:;"  class="selected">未支付<i></i></a>
         </div>
         <div class="service">
             <ul class="goodlist">
@@ -78,7 +78,7 @@ $(document).ready(function(){
         return;
     }
 	getlist(1);
-	getlist(0);
+//	getlist(0);
 	
 	function getlist(selected){
 		var result = new Array();
@@ -97,7 +97,7 @@ $(document).ready(function(){
 	    		   if(data[i].userSituation=='用户已使用' && data[i].situation==false){
 		    		   str1+='<li><div class="ac-gn-bagleft"><p>来源：<span>青舍都市公寓</span></p><p>电话：<span>'+data[i].tel+'</span></p><p>种类：<span>'+data[i].name+'</span></p><p>是否支付：<span style="color:red">待支付</span></p><p>总价：<span>￥'+data[i].price+'</span></p><p class="status"><a href="javascript:;"class="btn" juanid="'+data[i].id+'">确认支付</a></p></div></li>';  
 		    		   result.push(data[i].id);
-		    		   console.log(result)
+		    	
 		    		   if(result.length==0||result==""||result==undefined||result==null){
 		    			   str1='<li><p>暂时没有订单</p></li>'; 
 		    		   }

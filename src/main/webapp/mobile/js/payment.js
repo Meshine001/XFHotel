@@ -37,7 +37,6 @@ $(document).ready(function(){
         fnBase.keep(1,'roomId',data[1].roomId)
         _totalprice=Number(data[1].totalPrice).toFixed(2);
         $(".p_msg li ._date").html(data[0]+"入住"+data[2]+"离开"+"<i class='date'>共"+data[1].totalDay+"天</i>");
-        //$(".p_msg li ._cash").html("押金:<span style='color: #666'>"+_YJpic+"</span>");
         $(".p_msg li .toal").html("订单总额:<span class='money'>￥"+_totalprice+"</span>");
 
     });

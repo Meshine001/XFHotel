@@ -84,30 +84,43 @@ $(document).ready(function(){
         return;
     }
     var orderid="";
+    var accesstocak;
     var postData={uId:_uid,type:0 };
     var frontURL=Constant.URL+'/mobile/Clean';
       fnBase.commonAjax(frontURL,postData,function(data){
           console.log(data);
           if(data.statusCode==1){
-        	  orderid=data.content[0].id;
+        	  if(data.content.length<=0){
+        		  accesstocak=false;
+        	  }else{
+        		  orderid=data.content[0].id;
+        	  }
           }
+         
+          
       });
 	$("#sub").click(function(){
-		 var postData={id:orderid};
-		 console.log(postData);
-		 var frontURL=Constant.URL+'/mobile/addFitness';
-		      fnBase.commonAjax(frontURL,postData,function(data){
-		          console.log(data);
-		          if(data.statusCode==1){
-		        	  fnBase.myalert(data.content);
-		        	  setTimeout(function(){
-		        		  location.href='bodybuilding.html'
-		        	 },1500)
-		          }else if(data.statusCode==0){
-		        	  fnBase.myalert(data.content);
-		          }
-		        
-		      });
+		 if(accesstocak==false){
+       	  fnBase.myalert('请没有在住的房间、不能购买');
+       	  return;
+         }else{
+        	 var postData={id:orderid};
+    		 console.log(postData);
+    		 var frontURL=Constant.URL+'/mobile/addFitness';
+    		      fnBase.commonAjax(frontURL,postData,function(data){
+    		          console.log(data);
+    		          if(data.statusCode==1){
+    		        	  fnBase.myalert(data.content);
+    		        	  setTimeout(function(){
+    		        		  location.href='bodybuilding.html'
+    		        	 },1500)
+    		          }else if(data.statusCode==0){
+    		        	  fnBase.myalert(data.content);
+    		          }
+    		        
+    		      });
+         }
+		
 		     
 		
 	})

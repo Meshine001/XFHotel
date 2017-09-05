@@ -360,40 +360,40 @@
 						type:'post',
 						dataType:'json',
 						data:{'id':uid},
-						url:'/admin/user/steward',// 用户数量
+						url:'/mobile/getUser',// 用户数量
 						success:function(data){
-				//			console.log(data);
-							$("#app-moble-user .value").html('<span class="sign"></span>'+data.content.length+'')
+						//	console.log(data);
+							$("#app-moble-user .value").html('<span class="sign"></span>'+data.length+'')
 						}
 				   });
 					$.ajax({
 						type:'post',
 						dataType:'json',
 						data:{'id':uid},
-						url:'/admin/user/steward',// 优惠卷数量
+						url:'/mobile/getCoupon',// 优惠卷数量
 						success:function(data){
-				//			console.log(data);
-							$("#app-moble-yhj .value").html('<span class="sign"></span>'+data.content.length+'')
+						//	console.log(data);
+							$("#app-moble-yhj .value").html('<span class="sign"></span>'+data.length+'')
 						}
 				   });
 					$.ajax({
 						type:'post',
 						dataType:'json',
 						data:{'id':uid},
-						url:'/admin/user/steward',// 青舍生活文章数量
+						url:'/mobile/getBlog',// 青舍生活文章数量
 						success:function(data){
-				//			console.log(data);
-							$("#app-moble-life .value").html('<span class="sign"></span>'+data.content.length+'')
+						//	console.log(data);
+							$("#app-moble-life .value").html('<span class="sign"></span>'+data.length+'')
 						}
 				   });	
 					$.ajax({
 						type:'post',
 						dataType:'json',
 						data:{'id':uid},
-						url:'/admin/user/steward',// 商户数量
+						url:'/mobile/getTenant',// 商户数量
 						success:function(data){
-				//			console.log(data);
-							$("#app-moble-coopler .value").html('<span class="sign"></span>'+data.content.length+'')
+						//	console.log(data);
+							$("#app-moble-coopler .value").html('<span class="sign"></span>'+data.length+'')
 						}
 				   });	
 		})

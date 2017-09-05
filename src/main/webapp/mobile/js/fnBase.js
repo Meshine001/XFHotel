@@ -1,16 +1,13 @@
-﻿// var baseUrl = getRootPath();//调试环境用这个
+﻿ // var baseUrl = getRootPath();//调试环境用这个
 
   var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 
-// var clientIp = getIp();
+
 
 var Constant = {
         URL: baseUrl, 
- //       CLIENT_IP:clientIp
 };
-/**
- * 获取ip.
- */
+
 function getIp() {
     var ip;
     var ipInfoUrl = 'http://ipinfo.io/json';
@@ -24,10 +21,7 @@ function getIp() {
     return ip;
 }
 
-/**
- * 获取根目录
- * @returns {string}
- */
+
 function getRootPath() {
     //获取当前网址，如： http://localhost:8080/ems/Pages/Basic/Person.jsp
     var curWwwPath = window.document.location.href;
@@ -45,11 +39,6 @@ function getRootPath() {
 $(document).ready(function(){
     menuStudent()
     function menuStudent(){
-        //try {
-        //    throw new Date(); // 抛出当前时间对象
-        //} catch (e) {
-        //    alert(e.toLocaleString()); // 使用本地格式显示当前时间
-        //}
         $(".header-mobile .link-home").click(function(){
             $(".menuBar").addClass("menuOpen");
             $(".Masking-out").show();

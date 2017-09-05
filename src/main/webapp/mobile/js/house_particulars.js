@@ -295,7 +295,7 @@ $(document).ready(function(){
                 if(data[i].Avatar==''){
                 	plStr+='<div class="customer"><img src="/images/face-90x90.png" class="pic"><p class="user">用户：'+str2+'<span style="float:right">评价：'+data[i].comment.score[0]+'分</span></p><p class="time">'+_date[i]+' 入住</p></div>'
                 }else{
-                	plStr+='<div class="customer"><img src="'+Constant.URL+'/images/'+data[i].Avatar+'" class="pic"><p class="user">用户：'+str2+'<span style="float:right">评价：'+data[i].comment.score[0]+'分</span></p><p class="time">'+_date[i]+' 入住</p></div>'
+                	plStr+='<div class="customer"><img src="'+data[i].Avatar+'" class="pic"><p class="user">用户：'+str2+'<span style="float:right">评价：'+data[i].comment.score[0]+'分</span></p><p class="time">'+_date[i]+' 入住</p></div>'
                 }
                 plStr+='<p class="text">'+data[i].comment.feel+'</p>';
                 if(data[i].comment.reply != null){
