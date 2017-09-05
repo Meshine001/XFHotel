@@ -1234,7 +1234,6 @@ public class MobileController  {
 		}
 	}
 	
-	
 	@RequestMapping(value = "/find1", method = RequestMethod.POST)
 	public @ResponseBody  Message find1(String tel ,String psd ,Long id) {
 			if (customerService.getCustomer(id)!=null) {
@@ -1247,12 +1246,10 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "该手机号未注册");
 	}
 	
-	
 	@RequestMapping(value = "/getClean", method = RequestMethod.POST)
 	public @ResponseBody List<Clean> getClean(Long id){
 		return cleanservice.getClean2(id);
 	}
-	
 	
 	@RequestMapping(value = "/getFault", method = RequestMethod.POST)
 	public @ResponseBody List<Fault> getFault(Long id){
@@ -1312,6 +1309,7 @@ public class MobileController  {
 			return new Message(Constants.MESSAGE_ERR_CODE, "查询失败");
 		} 		
 	}
+	
 	@RequestMapping(value = "/employ", method = RequestMethod.POST)
 	@ResponseBody
 	public Message employ(Long id) {
@@ -1380,4 +1378,25 @@ public class MobileController  {
 	public @ResponseBody  List<Fitness> getFitness() {
 		return fitnessService.list();
 	}
+	
+	@RequestMapping(value = "/getUser", method = RequestMethod.POST)
+	public @ResponseBody List<Customer> getUser(){
+		return customerService.list();
+	}
+	
+	@RequestMapping(value = "/getCoupon", method = RequestMethod.POST)
+	public @ResponseBody List<Coupon> getCoupon(){
+		return couponService.list();
+	}
+	
+	@RequestMapping(value = "/getTenant", method = RequestMethod.POST)
+	public @ResponseBody List<Tenant> getTenant(){
+		return tenantService.list();
+	}
+	
+	@RequestMapping(value = "/getBlog", method = RequestMethod.POST)
+	public @ResponseBody List<Blog> getBlog(){
+		return blogService.list();
+	}
+	
 }
