@@ -247,7 +247,7 @@
 			</a>
 		</div>
 		
-		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 app-ng"  id="">
+		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 app-ng"  id="app-moble-coopler">
 			<a class="card card-banner card-paste-light" href="<%=basePath%>/admin/customer_jointwork">
 				<div class="card-body">
 					<i class="icon fa fa-exchange fa-4x"></i>
@@ -356,6 +356,46 @@
 	                	}
 				   });
 				   
+					$.ajax({
+						type:'post',
+						dataType:'json',
+						data:{'id':uid},
+						url:'/admin/user/steward',// 用户数量
+						success:function(data){
+				//			console.log(data);
+							$("#app-moble-user .value").html('<span class="sign"></span>'+data.content.length+'')
+						}
+				   });
+					$.ajax({
+						type:'post',
+						dataType:'json',
+						data:{'id':uid},
+						url:'/admin/user/steward',// 优惠卷数量
+						success:function(data){
+				//			console.log(data);
+							$("#app-moble-yhj .value").html('<span class="sign"></span>'+data.content.length+'')
+						}
+				   });
+					$.ajax({
+						type:'post',
+						dataType:'json',
+						data:{'id':uid},
+						url:'/admin/user/steward',// 青舍生活文章数量
+						success:function(data){
+				//			console.log(data);
+							$("#app-moble-life .value").html('<span class="sign"></span>'+data.content.length+'')
+						}
+				   });	
+					$.ajax({
+						type:'post',
+						dataType:'json',
+						data:{'id':uid},
+						url:'/admin/user/steward',// 商户数量
+						success:function(data){
+				//			console.log(data);
+							$("#app-moble-coopler .value").html('<span class="sign"></span>'+data.content.length+'')
+						}
+				   });	
 		})
 	</script>
 	</my_body>

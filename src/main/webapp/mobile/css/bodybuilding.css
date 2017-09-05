@@ -147,7 +147,8 @@
 .grid-3of9{width:75%;height: 1.55rem;}
 .row #sub{
 	font-size: 0.16rem;
-    background-color: #158cfb;
+    background: linear-gradient(#42a1ec, #0070c9);
+    border-radius: 0.06rem;
     color: #fff;
 	width: 100%;
     display: block;

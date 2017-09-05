@@ -14,6 +14,7 @@
     <!-- <script charset="gb2312" language="javascript" type="text/javascript" src="js/bodybuilding.js"></script>  -->
 	<script>
 		$(document).ready(function(){
+			 
 			$(".apple input").focus(function(){
 				$(this).parent().css({'border-color':'#42a1ec'});
 				$(this).parent().siblings().css({'border-color':'rgba(0, 0, 0, 0.3)'});
@@ -29,10 +30,12 @@
 	    	    var frontURL=Constant.URL+'/mobile/loginTenant';
 	    	      fnBase.commonAjax(frontURL,postData,function(data){
 	    	          console.log(data);
-	    	          fnBase.myalert(data.content);
+	    	          
 	    	          if(data.statusCode==1){
 	    	        	  fnBase.keep(0,'cId',data.content);
 	    	        	  location.href='Cooperative-Detil.html';
+	    	          }else{
+	    	        	  fnBase.myalert(data.content);
 	    	          }
 	    	      })
 				
@@ -72,7 +75,7 @@
         </div>
 
     </div>
-    <p class="note">最后解释权归：西安易云智能科技发展有限公司</p>
+   <!--  <p class="note">最后解释权归：西安易云智能科技发展有限公司</p> -->
 </article>
 <div id="masking"></div>
 
