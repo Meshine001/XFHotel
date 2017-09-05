@@ -1379,21 +1379,25 @@ public class MobileController  {
 		return fitnessService.list();
 	}
 	
+	//获取用户
 	@RequestMapping(value = "/getUser", method = RequestMethod.POST)
 	public @ResponseBody List<Customer> getUser(){
 		return customerService.list();
 	}
 	
+	//获取优惠劵
 	@RequestMapping(value = "/getCoupon", method = RequestMethod.POST)
 	public @ResponseBody List<Coupon> getCoupon(){
 		return couponService.list();
 	}
 	
+	//获取商户
 	@RequestMapping(value = "/getTenant", method = RequestMethod.POST)
 	public @ResponseBody List<Tenant> getTenant(){
 		return tenantService.list();
 	}
 	
+	//获取文章
 	@RequestMapping(value = "/getBlog", method = RequestMethod.POST)
 	public @ResponseBody List<Blog> getBlog(){
 		return blogService.list();
