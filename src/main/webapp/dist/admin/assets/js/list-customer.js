@@ -48,7 +48,7 @@ function list(page) {
 			alert("获取数据失败！");
 		},
 		success : function(data) {
-			console.log(data)
+		//	console.log(data)
 			$('#pagecontroller').html('');
 			var a_f = $('<a></a>').attr('href','#').append('&laquo;').attr('onclick', 'list(1)').attr('href',
 			'javascript:void(0);');
@@ -117,7 +117,7 @@ $("#longtime").on('change',function(){
 				alert('数据传输错误！')
 			},
 			success:function(data){
-				console.log(data);
+			//	console.log(data);
 				var str='';
 				var newTime=new Array();
 				$("#list").html('');
@@ -156,7 +156,7 @@ $("#monetary").on('change',function(){
 				alert('数据传输错误！')
 			},
 			success:function(data){
-				console.log(data);
+			//	console.log(data);
 				var str='';
 				var newTime=new Array();
 				$("#list").html('');
@@ -197,7 +197,7 @@ $("#sex").on('change',function(){
 			alert('数据传输错误！')
 		},
 		success:function(data){
-			console.log(data);
+		//	console.log(data);
 			var str='';
 			var newTime=new Array();
 			$("#list").html('');

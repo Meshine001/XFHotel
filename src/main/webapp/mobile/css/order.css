@@ -58,7 +58,7 @@
     overflow: scroll;
     transition: all .5s;
 }
-
+.alert-content{overflow:hidden !important;}
 
 .alert-content header,#usecoupon header{
     width: 100%;

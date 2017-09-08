@@ -28,6 +28,7 @@
 </head>
 <body>
 	<my_body>
+<!-- 
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="card card-banner card-chart card-green no-br">
@@ -44,6 +45,7 @@
 			</div>
 		</div>
 	</div>
+ -->
 	<div class="row"  style="display: none;">
 		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 			<a class="card card-banner card-green-light">

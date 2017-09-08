@@ -2981,7 +2981,7 @@ body .app-container {
 	min-height: 100vh;
 	position: relative;
 	overflow-x: hidden;
-	padding-left: 180px;
+	padding-left: 0px;
    
 }
 
@@ -3387,11 +3387,11 @@ a:hover {
 	align-items: center;
 	-ms-flex-pack: start;
 	justify-content: flex-start;
-	font-weight: 300;
-	font-size: 1.3em;
+	font-weight: bold;
+	font-size: 2em;
 	height: 50%;
-	padding: 0 6rem;
-	padding-left: 45px;
+	padding-left: 15px;
+	font-family: Verdana,simsun;
 }
 
 .navbar .navbar-collapse .navbar-nav>li.navbar-title span {
@@ -3831,8 +3831,6 @@ a:hover {
 	font-size: 1.2em;
 	font-weight: 300;
 	position: relative;
-	margin: 0 auto;
-	width: 100%;
 	text-align: center;
 	color: #444;
 }
@@ -6004,7 +6002,7 @@ ui-view>.app-messaging-container {
 }
 
 .card.card-banner .card-body .content .value {
-	font-size: 4em;
+	font-size: 3em;
 	line-height: 3rem;
 	font-weight: 200;
 	padding-top: 2rem;
