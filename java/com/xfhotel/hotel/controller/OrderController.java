@@ -362,6 +362,7 @@ public class OrderController {
 	@RequestMapping(value = "/viewLockPsd", method = RequestMethod.GET)
 	public String viewLockPsd(Long orderId) {
 		// TODO 还需要加入一些权限限制
+		
 		Order o = orderservice.get(orderId);
 		session.setAttribute("lockPsd", "还没弄好");
 		return "customer/viewLockPsd";

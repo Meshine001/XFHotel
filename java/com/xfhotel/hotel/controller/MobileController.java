@@ -604,6 +604,7 @@ public class MobileController  {
 			String sex,String birthday,String job,
 			String education,String declaration,String hobby,String avatar) {
 		Customer customer = customerService.getCustomer(customerId);
+		customer.setTel(tel);
 		CustomerDetails c = customer.getDetails();
 		c.setNick(nick);
 		c.setSex(sex);
@@ -616,6 +617,7 @@ public class MobileController  {
 		c.setEducation(education);
 		c.setAvatar(avatar);
 		try {
+			customerService.updateBaseInfo(customer);
 			Customer c1 = customerService.modify(c, customerId);
 			session.setAttribute("c", c1);
 		} catch (Exception e) {
@@ -1296,7 +1298,6 @@ public class MobileController  {
 				System.out.println(order.getId());
 				List<Fitness> fitness = fitnessService.getlist(order.getId());
 				for(Fitness fitness1 :fitness){
-					System.out.println(fitness1+"dasdasdasd");
 					list.add(fitness1);
 					
 				}
