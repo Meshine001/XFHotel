@@ -295,10 +295,21 @@ function addpartenr(){
             fnBase.myalert("请输入您的电话号码");
             return;
         }
+        var myreg = /^0?1[3|4|5|6|7|8][0-9]\d{8}$/;
+        if (!myreg.test(_tel)) {
+            fnBase.myalert("手机号码有误！ 请输入11位数字");
+            return;
+        }
         if(_identity==''){
             fnBase.myalert("请输您的身份证号");
             return;
         }
+        var isIDCard0=/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+        if(!isIDCard0.test(_identity)){
+        	fnBase.myalert("请输正确的身份证号");
+            return;
+        }
+        
         if($("#contract span").hasClass('czs-circle-o')!=true){
         	 fnBase.myalert("同意住房协议之后才可以提交");
         	 return;
