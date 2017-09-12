@@ -97,7 +97,7 @@
 								</button>
 							</li>
 							 -->
-							<li class="logo"><a class="navbar-brand" href="#"><span
+							<li class="logo"><a class="navbar-brand" href="<%=basePath%>/admin/dashboard"><span
 									class="highlight">青舍都市</span> Admin</a></li>
 							<li>
 								<button type="button" class="navbar-toggle">
@@ -107,7 +107,7 @@
 							</li>
 						</ul>
 						<ul class="nav navbar-nav navbar-left">
-							<li class="navbar-title">青舍都市公寓后台管理</li>
+							<li class="navbar-title"><a href="<%=basePath%>/admin/dashboard">青舍都市公寓后台管理</a></li>
 							<!-- 
 							<li class="navbar-search hidden-sm"><input id="search"
 								type="text" placeholder="Search.." autocomplete="off">
