@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.servlet.http.HttpSession;
 
@@ -299,7 +301,7 @@ public class OrderController {
 	@RequestMapping(value = "/comfirm", method = RequestMethod.POST)
 	@ResponseBody
 	public Message comfirmOrder(Long id) {
-		Order o = orderservice.get(id);
+		final Order o = orderservice.get(id);
 		if (o == null) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
 		}
@@ -307,6 +309,26 @@ public class OrderController {
 			try {
 					o.setStatus(Order.STATUS_ON_LEASE);
 					orderservice.update(o);
+					final Timer timer = new Timer();
+					
+					final TimerTask tt = new TimerTask() {
+						//延时
+						@Override
+						public void run() {
+							o.setStatus(Order.STATUS_COMPLETE);
+							orderservice.update(o);
+						}
+					};
+					Timer timer1 = new Timer();
+					TimerTask tt1 = new TimerTask() {
+						//住房开始时间调起
+						@Override
+						public void run() {
+							timer.schedule(tt, 1000*60*60*22*o.getTotalDay());
+						}
+					};
+					Date da = new Date(o.getStartTime());
+					timer1.schedule(tt1, da);	
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
