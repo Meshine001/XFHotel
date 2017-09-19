@@ -497,7 +497,8 @@ public class AdminController {
 		try{
 			Long  day=((endDate-startDate)/1000/60/60/24)+1;
 			Long data=startDate;
-			for(int i=0;i<=day;i++){
+			System.out.println(day);
+			for(int i=0;i<day;i++){
 				House house = houseService.getHouse(apartmentId, data);
 				if(house!=null){
 					house.setState(state);

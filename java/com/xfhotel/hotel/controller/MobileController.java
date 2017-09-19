@@ -1201,7 +1201,6 @@ public class MobileController  {
 //		session.setAttribute("orders", orders);
 //		return "/admin/customer/房东";
 //	}
-
 	
 	@RequestMapping(value = "tripWechatOrder", method = RequestMethod.POST)
 	public @ResponseBody Message tripWechatOrder(Long id){
