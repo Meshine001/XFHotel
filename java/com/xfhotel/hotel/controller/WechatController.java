@@ -591,7 +591,6 @@ public class WechatController {
 		return result;
 	}
 	
-	
 	@RequestMapping(value="/pay/jsTrip",method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject jsTrip(Long id, String ip) throws Exception {

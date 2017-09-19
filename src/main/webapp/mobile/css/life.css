@@ -1,6 +1,6 @@
 ﻿html,body{background: #fff}
 /*.header-mobile{position: relative}*/
-#Myscroll-body{background: #FFF;font-size: 0.14rem;line-height: 0.25rem}
+#Myscroll-body{background: #FFF;font-size: 0.14rem;}
 #Myscroll-body .my-title{text-align: center;color: #333}
 #Myscroll-body .f12{font-size: 0.12rem;color: #666;padding-bottom: 0.2rem}
 #Myscroll-body .f12 i{color: #000000}
@@ -8,7 +8,7 @@
 #Myscroll-body .ptxt img{width: 100%;padding: 0.1rem 0}
 
 
-#content{min-height:5.6rem}
+#content{min-height:5.6rem;line-height:0.25rem;}
 
 /*�б�*/
 .content-ul{min-height:5.6rem;padding: 0}
