@@ -1269,6 +1269,7 @@ public class MobileController  {
 		return tripOrderService.getTripOrder(id);
 	}
 	
+	
 	@RequestMapping(value = "/addFitness", method = RequestMethod.POST)
 	public @ResponseBody  Message addFitness(Long id) {
 		try{
@@ -1331,6 +1332,7 @@ public class MobileController  {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, "订单确认成功");
 	}
 	
+	
 	@RequestMapping(value = "/userEmploy", method = RequestMethod.POST)
 	@ResponseBody
 	public Message userEmploy(Long id) {
@@ -1380,7 +1382,7 @@ public class MobileController  {
 		return fitnessService.list();
 	}
 	
-	//获取用户
+	//获取用户 
 	@RequestMapping(value = "/getUser", method = RequestMethod.POST)
 	public @ResponseBody List<Customer> getUser(){
 		return customerService.list();
