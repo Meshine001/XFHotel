@@ -175,7 +175,7 @@ public class MobileController  {
 	}
 	
 	
-	@RequestMapping(value = "/info",method = RequestMethod.GET)
+	@RequestMapping(value = "/info",method = RequestMethod.POST)
 	public @ResponseBody JSONObject info(Long apartmentId){
 		return apartmentService.getApartmentById(apartmentId);
 	}
@@ -438,8 +438,8 @@ public class MobileController  {
 			
 			for (Order o : orders) {
 				Map m = o.toMap();
-				Map apartment = apartmentService.getApartmentById(o.getRoomId());
-				m.put("apartment", apartment);
+					Map apartment = apartmentService.getApartmentById(o.getRoomId());
+					m.put("apartment", apartment);
 				maps.add(m);
 				 
 			}
@@ -811,7 +811,8 @@ public class MobileController  {
  */
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public @ResponseBody Message upload(MultipartFile file, HttpServletRequest request) {
-		if (file != null) {
+		if 
+		(file != null) {
 			StringBuffer sb = new StringBuffer();
 			sb.append(request.getSession().getServletContext().getRealPath("/"));
 //			System.out.println(sb.toString());
@@ -919,7 +920,7 @@ public class MobileController  {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Order order = orderservice.get(id);
 		String  i= TimeUtil.getDateStr(order.getStartTime());
-		String  d= TimeUtil.getDateStr(order.getEndTime());
+		String  d= TimeUtil.getDateStr(order.getEndTime()); 
 		map.put("开始时间", i);
 		map.put("结束时间", d);
 		map.put("全部", order);
@@ -1107,6 +1108,7 @@ public class MobileController  {
 		Landlord landlord = landlordService.getCustomer(id);
 	try {	
 		if(landlord ==null){
+			
 			return new Message(Constants.MESSAGE_ERR_CODE, "您还为未成为房东");
 			}
 		} catch (Exception e) {
@@ -1268,7 +1270,6 @@ public class MobileController  {
 	public @ResponseBody List<TripOrder> getTripOrder(Long id){
 		return tripOrderService.getTripOrder(id);
 	}
-	
 	
 	@RequestMapping(value = "/addFitness", method = RequestMethod.POST)
 	public @ResponseBody  Message addFitness(Long id) {

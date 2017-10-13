@@ -191,6 +191,9 @@ public class ApartmentServiceImpl implements ApartmentService {
 	@Override
 	public JSONObject getApartmentById(Long id) {
 		Apartment apartment = findById(id);
+		if(apartment==null){
+			return null;
+		}
 		JSONObject jo = apartment.toJson();
 		JSONArray picShow = new JSONArray();
 		for (Object s : jo.getJSONArray("fang_jian_tu").toArray()) {
