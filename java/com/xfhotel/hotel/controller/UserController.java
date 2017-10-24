@@ -123,6 +123,7 @@ public class UserController {
 	public @ResponseBody Message getRoom(int wei){
 		List<Apartment> list = apartmentService.getApartments1();
 		ArrayList<Object> list1 = new ArrayList<Object>();
+		System.out.println(wei);
 		try{
 		for(Apartment apartment :list){
 			String weizhi = apartment.getPosition().getString("xa_wei_zhi");
