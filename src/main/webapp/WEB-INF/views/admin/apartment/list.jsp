@@ -367,13 +367,14 @@
 			})
 			
 			function selectWeizhi(value){
+				console.log(value)
 				 $.ajax({
-						type:'POST',
+					 	type:'POST',
 						dataType:'json',
 						data:{'wei':value},
 						url:'/admin/user/getRoom/',
 						success:function(data){
-						//	console.log(data);
+							console.log(data);
 							if(data.statusCode==1){
 								$("#h-table").html("");
 								var _str="";

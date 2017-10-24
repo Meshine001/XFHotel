@@ -175,7 +175,7 @@ public class MobileController  {
 	}
 	
 	
-	@RequestMapping(value = "/info",method = RequestMethod.POST)
+	@RequestMapping(value = "/info",method = RequestMethod.GET)
 	public @ResponseBody JSONObject info(Long apartmentId){
 		return apartmentService.getApartmentById(apartmentId);
 	}
@@ -622,7 +622,6 @@ public class MobileController  {
 			Customer c1 = customerService.modify(c, customerId);
 			session.setAttribute("c", c1);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "内部错误");
 		}
@@ -1087,6 +1086,7 @@ public class MobileController  {
 	public @ResponseBody  Message add(Long id ,String number ,String name,Long card, String phone) {
 	try {
 		Landlord landlord1 = new Landlord();
+		
 		landlord1.setuId(id);
 		landlord1.setNumber(number);
 		landlord1.setCard(card);
@@ -1406,5 +1406,40 @@ public class MobileController  {
 	public @ResponseBody List<Blog> getBlog(){
 		return blogService.list();
 	}
+	
+	@RequestMapping(value = "/getRoom", method = RequestMethod.POST)
+	public @ResponseBody Message getRoom(int wei){
+		System.out.println(wei);
+		List<Apartment> list = apartmentService.getApartments1();
+		ArrayList<Object> list1 = new ArrayList<Object>();
+		try{
+		for(Apartment apartment :list){
+			String weizhi = apartment.getPosition().getString("xa_wei_zhi");
+			int i =0;
+			if(weizhi.equals("城东")){
+				i= 0;
+			} else if(weizhi.equals("城南")){
+				i = 1;
+			} else if(weizhi.equals("城西")){
+				i = 2;
+			}else if(weizhi.equals("城北")){
+				i = 3;
+			}else if(weizhi.equals("城中")){
+				i = 4;
+			}
+			if(wei==5){
+				list1.add(apartment);
+			}else if(wei==i){
+				list1.add(apartment);
+			}
+		}
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+	}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);
+}
+	
 	
 }

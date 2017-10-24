@@ -40,7 +40,7 @@
 <script>
     $(document).ready(function(){
     	var _fadid=fnBase.huoqu(0,'fadid');
-    	var _uid=fnBase.huoqu(0,"uid");
+    	var _uid=fnBase.huoqu(0,"userid");
         $(".login_submit").click(function(){
         	if($("#baomid").val()==""||$("#name").val()==""||$("#carid").val()==""||$("#tel").val()==""){
         		fnBase.myalert('请认真填写后再提交、谢谢')
@@ -54,6 +54,7 @@
         			'card':$("#carid").val(),
         			'phone':$("#tel").val()
         	};
+        	console.log(postData)
             var frontURL=Constant.URL+'/mobile/add';
             fnBase.commonAjax(frontURL,postData,function(data){
                 console.log(data);

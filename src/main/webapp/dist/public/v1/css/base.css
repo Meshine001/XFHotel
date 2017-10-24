@@ -6,6 +6,7 @@ body {
 	font-size:14px;
 	background: #fff;
 	color: #333333;
+	min-width:1200px;
 }
 
 body, ul, li, dl, dt, dd, table, td, th, form, input, h1, h2, h3, h4, h5,
