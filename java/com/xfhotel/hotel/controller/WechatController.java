@@ -614,8 +614,7 @@ public class WechatController {
 		String type = "JSAPI";
 		JSONObject result = WechatOrderUtils.createOrder(detail, desc, openId, ip, goodSn, orderSn, amount, type);
 		System.out.println("支付成功");
-		return result;
+		return result;	
 	}
+
 }
-
-

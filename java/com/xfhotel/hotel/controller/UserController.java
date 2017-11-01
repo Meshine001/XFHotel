@@ -280,6 +280,7 @@ public class UserController {
 			return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);	
 		}
 	
+	
 	@RequestMapping(value = "/stewardT", method = RequestMethod.POST)
 	public @ResponseBody Message stewardT( Long id){
 		List<Apartment> list = apartmentService.steward(id);
