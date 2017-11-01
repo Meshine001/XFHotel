@@ -542,7 +542,6 @@ public class OrderController {
 		
 	}
 	
-	
 	@RequestMapping(value = "/cleanOrders", method = RequestMethod.POST)
 	@ResponseBody
 	public Message cleanOrders(Long id) {
@@ -604,7 +603,6 @@ public Message FaultOrders(Long id) {
 	}
 	return new Message(Constants.MESSAGE_SUCCESS_CODE, "维修完成");
 	}
-
 
 @RequestMapping(value = "/FacilityOrder", method = RequestMethod.POST)
 @ResponseBody

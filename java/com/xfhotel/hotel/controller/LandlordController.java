@@ -176,7 +176,7 @@ public class LandlordController {
 		return orderService.getOrders(id);
 	}
 	
-	@RequestMapping(value = "/addApply", method = RequestMethod.GET)
+	@RequestMapping(value = "/addApply", method = RequestMethod.POST)
 	public @ResponseBody Message addApply(Long id ,Long tel ,String site) {
 		try {
 			Landlord l = landlordService.findById(id);

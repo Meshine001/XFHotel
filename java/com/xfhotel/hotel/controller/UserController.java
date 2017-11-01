@@ -121,6 +121,7 @@ public class UserController {
 	//查询某个地方的房屋
 	@RequestMapping(value = "/getRoom", method = RequestMethod.POST)
 	public @ResponseBody Message getRoom(int wei){
+		System.out.println(wei);
 		List<Apartment> list = apartmentService.getApartments1();
 		ArrayList<Object> list1 = new ArrayList<Object>();
 		System.out.println(wei);
@@ -128,15 +129,15 @@ public class UserController {
 		for(Apartment apartment :list){
 			String weizhi = apartment.getPosition().getString("xa_wei_zhi");
 			int i =0;
-			if(weizhi=="城东"){
+			if(weizhi.equals("城东")){
 				i= 0;
-			} else if(weizhi=="城西"){
+			} else if(weizhi.equals("城南")){
 				i = 1;
-			} else if(weizhi=="城北"){
+			} else if(weizhi.equals("城西")){
 				i = 2;
-			}else if(weizhi=="城南"){
+			}else if(weizhi.equals("城北")){
 				i = 3;
-			}else if(weizhi=="城中"){
+			}else if(weizhi.equals("城中")){
 				i = 4;
 			}
 			if(wei==5){
@@ -279,7 +280,6 @@ public class UserController {
 	}
 			return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);	
 		}
-	
 	
 	@RequestMapping(value = "/stewardT", method = RequestMethod.POST)
 	public @ResponseBody Message stewardT( Long id){
