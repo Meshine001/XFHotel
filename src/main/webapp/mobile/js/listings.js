@@ -84,8 +84,10 @@ var _wzid = decodeURIComponent(fnBase.request("ofo"));
 
 	 		}
 	 		$(".indexhouseList ul").append(str);
-	 		
+
 	 	})
+	 	
+	 	
 	 }
 	 function shulianghouseNumber(val){
 		 	var url=Constant.URL+'/admin/user/getRoom/';
@@ -119,7 +121,10 @@ var _wzid = decodeURIComponent(fnBase.request("ofo"));
 	 })
 
 	 
-	 
+	 $(".shaixuan .shaixuanList li").click(function(){
+		    var h = $('.indexTopCon').offset().top;
+		    $('html,body').animate({'scrollTop':h});
+	 });
 	 
 	 $(".shaixuan .shaixuanList:eq(0) li:first-child").click(function(){
 		 weizhishaixuan(5)
