@@ -1,5 +1,5 @@
 html,body{background: #f4f4f4;}
-#Myscroll-body{top:0}
+#Myscroll-body{top:0;padding-bottom:0.6rem;}
 .vip_info{overflow: hidden;padding: 0.5rem 0 0.15rem 0;
     background-size: 100% 100%;
     text-align: center;
@@ -11,7 +11,7 @@ html,body{background: #f4f4f4;}
 	background: rgba(0,0,0,.5);line-height:0.85rem;text-align:center;
 }
 #vip_icon_name i{font-size:0.3rem;}
-
+.vip_info_list:last-child{margin-bottom:0.52rem}
 
 
 .vip_info{;background-color:#ED5564;;background:url(../img/member_top_bg.png) center center;background-size:100%;-webkit-animation:changeBg 20s infinite; -moz-animation:changeBg 20s infinite; animation:changeBg 20s infinite;}
@@ -113,7 +113,7 @@ html,body{background: #f4f4f4;}
 	line-height:0.44rem;
 }
 .vip_info .tit a{
-	font-size: 0.14rem;
+	font-size: 0.12rem;
     color: #fff;
     padding:0 0.1rem;
 	position:relative;
@@ -150,16 +150,12 @@ html,body{background: #f4f4f4;}
     height: 0.8rem;
     line-height: 0.35rem;
     text-align: center;
-    font-size: 0.14rem;
+    font-size: 0.12rem;
     margin: 0px ;
     color: #777;
-    /*
-    border-left: 1px solid #ddd ;
-    */
 }
 .vip_info_list li .per-order-status a:first-child{border: 0}
 .vip_info_list li .per-order-status .tip-size{
-    /*display: inline;*/
     position: absolute;
     width: 0.18rem;
     height: 0.18rem;

@@ -86,7 +86,7 @@ html,body{background: #fff}
 	line-height:0.44rem;
 }
 .vip_info .tit a{
-	font-size: 0.14rem;
+	font-size: 0.12rem;
     color: #fff;
 	padding: 0 0.1rem;
 }
@@ -111,7 +111,7 @@ html,body{background: #fff}
     white-space: nowrap;
 }
 .vip_info_list{margin-bottom: 0.15rem;width: 100%;overflow: hidden;background: #fff;padding: 0 0.1rem;}
-.vip_info_list li{line-height: 0.45rem;border-bottom: 1px solid #ddd;font-size: 0.14rem;}
+.vip_info_list li{line-height: 0.45rem;border-bottom: 1px solid #ddd;font-size: 0.12rem;}
 .vip_info_list li:last-child{border: 0}
 .vip_info_list li a{display: block;}
 
@@ -272,7 +272,7 @@ html,body{background: #fff}
  .vip_info_list li .per-order-status .toll .numContainer{
  	width: 1.2rem;
     height: 0.3rem;
-    background:url(../img/numAdd.png) no-repeat;
+    background:url(../images/numAdd.png) no-repeat;
     background-size:100% 100%;
     float: right;
  }

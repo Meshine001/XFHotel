@@ -38,7 +38,7 @@ $(document).ready(function(){
     //查看详情
     $(".houselist").on('click','li .house-pic',function(){
     	var id=$(this).parent().attr('id');
-    	 window.location.href="house_particulars.html?id="+encodeURIComponent(id)+"";
+    	 window.location.href="house_details.html?id="+encodeURIComponent(id)+"";
     })
     //查看订单
     $(".houselist").on('click','li .list_intro .order',function(){

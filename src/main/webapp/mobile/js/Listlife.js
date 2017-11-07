@@ -1,5 +1,23 @@
 ﻿
 $(document).ready(function(){
+	 var userid,wechatOpenId="",_status='0',ss="0",uid="";
+	 var redirect = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfa31f9e4951f95df&redirect_uri=http%3A%2F%2Fwww.yiyunzn.xyz%2Fwx%2Fauth%2Fautomatic&response_type=code&scope=snsapi_userinfo&state=Listlife.html#wechat_redirect';
+	    
+  	 uid=fnBase.request("id");
+  	 userid=fnBase.huoqu(0,'userid');
+	 
+	 if(userid==null || userid==undefined || userid==""){
+		 if(uid==null || uid==undefined ||uid==''){
+			  window.location.href = redirect; 	 
+			  return; 
+		 }else{
+			 userid=fnBase.request("id")
+			 userid=fnBase.keep(0,'userid',userid);
+		 }
+	 };
+	
+	
+	
     getdata();
     var PageUp=$("#page a").eq(0);
     var PageDown=$("#page a").eq(1);

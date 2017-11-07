@@ -17,9 +17,13 @@
 .header-mobile .img-home {
     width: 0.12rem;
     margin-top: 0.04rem;
-
-
 }
+
+.topInnerNav{background-color: #fff;width: 100%;height: 0.45rem;line-height: 0.45rem;color: #333;font-size: 0.16rem;position: relative;display: flex;justify-content: space-between;align-content: center;}
+.topInnerNav a{display: block;width: 0.45rem;height: 0.45rem;line-height: 0.5rem;text-align: center;color: #03b28b;}
+.topInnerNav a .fj{font-size: 0.12rem;color: #03b28b;}
+.topInnerNav a:first-child{position: relative;transform: rotate(-90deg);}
+
 
 .service{margin: 0.2rem auto;padding:0.1rem;}
 .service .goodlist li{
@@ -30,8 +34,8 @@
     background: #fff;
     background-size: 100% ;
     border: 1px solid #e8e3e3;
-    border-radius: 0.15rem;
+    border-radius: 0.1rem;
 }
-.service .goodlist li h1{text-align: center;font-size: 0.3rem;color: #dc5f5f}
+.service .goodlist li h1{text-align: center;font-size: 0.26rem;color: #dc5f5f}
 .service .goodlist li p{font-size: 0.1rem;color: #dc5f5f;position: relative;top:0.59rem;text-indent: 0.4rem;}
 .service .goodlist li ._pic{width:1.2rem;height: 0.5rem;position: absolute;left: 0.3rem;bottom: 0.5rem;line-height: 0.6rem;;color:#dc5f5f;font-size: 0.5rem }

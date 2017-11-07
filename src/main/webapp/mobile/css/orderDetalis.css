@@ -22,7 +22,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.find_nav{width:100%;line-height:0.45rem;height:0.45rem;background:#fff;transition:all .3s;margin-bottom:0.1rem;overflow: hidden;}
+.find_nav{width:100%;line-height:0.45rem;height:0.45rem;background:#fff;transition:all .3s;margin-bottom:0.1rem;overflow: hidden;border-top:1px solid #ddd}
 .find_nav .item,.find_nav .chuans{float:left;width:0.82rem;text-align:center;font-size:0.14rem;color:#484848;}
 .find_nav .item.show{color: orange;}
 .find_nav .chuans{width:0.47rem;}

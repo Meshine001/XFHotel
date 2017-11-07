@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
     <title>青舍都市公寓</title>
     <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
     <link href="css/common.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/order.css" />
     <link rel="stylesheet" href="iconcaomei/style.css" />
-    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="js/fnBase.js"></script>
-    <script type="text/javascript" src="js/zoom.js"></script>
-    <script type="text/javascript" src="js/evaluate.js"></script>
+
     <style>
-        .price_info li i{display: block;width: 0.17rem;height: 0.17rem;background: orangered;float: left;position: relative;top: 0.115rem;margin-right: 0.1rem;background: url("images/degree.png") no-repeat center center;background-size:0.17rem; }
+	    .topInnerNav{border-bottom:1px solid #ddd;;background-color: #fff;width: 100%;height: 0.45rem;line-height: 0.45rem;color: #333;font-size: 0.16rem;position: relative;display: flex;justify-content: space-between;align-content: center;}
+		.topInnerNav a{display: block;width: 0.45rem;height: 0.45rem;line-height: 0.5rem;text-align: center;color: #03b28b;}
+		.topInnerNav a .fj{font-size: 0.12rem;color: #03b28b;}
+		.topInnerNav a:first-child{position: relative;transform: rotate(-90deg);}
+    	.main{margin-top:0.1rem;border-top:1px solid #ddd;}
+        .price_info li i{display: block;width: 0.17rem;height: 0.17rem;background: orangered;display:inline-block;position: relative;top: 0.04rem;margin-right: 0.1rem;background: url("images/degree.png") no-repeat center center;background-size:0.17rem; }
         .price_info li i.hover,.price_info li i:hover{background: url("images/degree_hover.png") no-repeat center center;background-size: 0.17rem;}
         #comment {
             width: 100%;
@@ -30,13 +35,13 @@
     </style>
 </head>
 <body style="display:none">
-<div class="header">
-    <header class="header-mobile">
-        <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
-        <span class="cell">我要评论</span>
-        <a href="serve.html" class="cell link-btn"><span class="czs-user-l"></span></a>
-    </header>
-</div>
+				<div class="topInnerNav">
+					<a href="#" onclick="javascript:history.back();"><span class="czs-arrow-up-l"></span></a>
+					<span>我要评价</span>
+					<a href="#">
+					<!-- <span class="czs-menu-l"></span> -->
+					</a>
+				</div>
 
 <div id="Myscroll-body">
     <div class="main">
@@ -58,5 +63,10 @@
         <a href="javascript:;">提交评论</a>
     </div>
 </div>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/fnBase.js"></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script type="text/javascript" src="js/evaluate.js"></script>
+
 </body>
 </html>

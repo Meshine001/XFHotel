@@ -1,277 +1,160 @@
-﻿$(document).ready(function(){
-	 getData();
-    $(".link-home").attr("href","javascript:void(0);").click(function(){
-        if (/(iPhone|iPad|iPod)/i.test(navigator.userAgent)) {
-            window.location.href = window.document.referrer;
-        } else { window.history.go("-1"); }
-    });
-
-    addpartenr();
-    var sexVal='';
-
-    var yhjid='';
-    $("#addfriend").live('click',function(){
-        $("#masking").show(10,function(){
-            $(".alert-content").animate({bottom:0},300);
-        });
-    });
-    $(".alert-content ._black,#usecoupon ._black").live('click',function(){
-        $("#masking").hide(10,function(){
-            $(".alert-content, #usecoupon").animate({bottom:'-5.7rem'},300);
-        });
-    });
-    
-function addpartenr(){
-    var isName='';
-    var isID='';
-    $("ins").toggle(function(){
-        $(this).addClass('rotate');
-        $(".news-msg").animate({bottom:0},260);
-    },function(){
-        $("#pName").val('');
-        $("#pId").val('');
-        $(this).removeClass('rotate');
-        $(".news-msg").animate({bottom:'-4.7rem'},200);
-    });
-    $("#keep").click(function(){//填写信息
-        isName=$("#pName").val();
-        isID=$("#pId").val();
-        //身份证验证
-        var isIDCard2=/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
-        if(isIDCard2.test(isID)){
-           fnBase.myalert('OK')
-        }else{
-            fnBase.myalert('身份证号码输入有误');
-            return false;
-        }
-
-        var str='';
-        if(isName!=''&& isID!=''){
-            str+='<li><i class="this"></i><span class="_pName">'+isName+'</span><span class="numbId">'+isID+'</span><i class="_remove"></i></li>'
-            $(".alert-content .oldpartenr").append(str);
-            
-        }
-        $("ins").removeClass('rotate');
-        $(".news-msg").animate({bottom:'-4.7rem'},200);
-    });
-    $(".alert-content .oldpartenr li").live('click',function(){
-        if($(this).hasClass('selected')==false){
-            $(this).addClass('selected')
-        }else{
-            $(this).removeClass('selected')
-        }
-    });
-    //删除同居人信息
-    $(".alert-content .oldpartenr li ._remove").live('click',function(){
-        $(this).parent().remove();
-    })
-   //确定同居人
-    $(".alert-content ._confirm").click(function(){
-        var opifo='';
-        var strList=new Array();
-        var pidlist=new Array();
-        var obj=$(".alert-content .oldpartenr li");
-        for(var i=0;i<obj.length;i++){
-            if(obj.eq(i).hasClass("selected")){
-                strList.push(obj.eq(i).find('._pName').text());
-                pidlist.push(obj.eq(i).find('.numbId').text());
-            }
-        }
-        console.log(strList)
-        $(".addpartenr").html('');
-        for(var j=0;j<strList.length;j++){
-            opifo+='<li pid="'+pidlist[j]+'"><span>'+strList[j]+'</span><i>X</i></li>'
-        }
-        $(".addpartenr").append(opifo);
-        $(".alert-content").animate({bottom:'-5.6rem'},200);
-        $("#masking").hide();
-    });
-    //取消好友
-    $(".addpartenr li i").live('click',function(){
-        $(this).parent().remove()
-    });
-  
-   
-    
-
-    
-}
-
-
-
-    var cood='';
-    var _span='';
-    var _uid = fnBase.huoqu(0, "userid");
-    if (_uid == null || _uid == "undefined" || _uid == "") {
-        window.location.href = "login.html";
-        return;
-    }
-    var _community=fnBase.huoqu(1,"community");
-    var _startTime = fnBase.huoqu(1, "startTime");
-    var _endTime=fnBase.huoqu(1,"endTime");
-    var _oTotalDay=fnBase.huoqu(1,"oTotalDay");
-    var _oTotalPrice=fnBase.huoqu(1,"oTotalPrice");
-    var _id = decodeURIComponent(fnBase.request("id"));
-    var _price=fnBase.huoqu(1,"dayPrice");
-    var _apartmenttype=fnBase.huoqu(1,"roomType");
-    var _YJpic=fnBase.huoqu(1,"YJpic");
-	var _getYHJprice=fnBase.huoqu(1,"_price");
-    $(".order_info .roomName").text(_community);
-    $(".order_info .roomTime").html(_startTime+"入住"+_endTime+"离开"+"<i class='date'>共（"+_oTotalDay+"）天</i>");
-    if(_oTotalDay<3){
-    	$(".order_info .roomZK").hide();
-    }else if(_oTotalDay>=3 && _oTotalDay<7){
-    	$(".order_info .roomZK").html('<i class="zk">9.5</i>折优惠：<span class="money">'+Number(_oTotalPrice).toFixed(2)+'</span>');
-    }else if(_oTotalDay>=7 && _oTotalDay<30){
-    	$(".order_info .roomZK").html('<i class="zk">9</i>折优惠：<span class="money">'+Number(_oTotalPrice).toFixed(2)+'</span>');
-    }else if(_oTotalDay>=30){
-    	$(".order_info .roomZK").html('<i class="zk">8</i>折优惠：<span class="money">'+Number(_oTotalPrice).toFixed(2)+'</span>');
-    }
-    $(".order_info .roompDJ .money").text(_price+"元");
-    $(".order_info .roompYJ .money").text(_YJpic+"元");
-    
-    $(".order_info .roompPic").html("订单总额:<span class='money'>"+Number(_oTotalPrice).toFixed(2)+"元</span><a>优惠劵</a>");
-    
-    $("#needpic i").click(function(){
-       if($(this).hasClass('active')==true){
-           $(this).removeClass('active');
-           cood=$(this).attr('cod')
-       } else{
-           $(this).addClass('active').siblings().removeClass('active');
-           cood=$(this).attr('cod')
-       }
-       
-    });
- 
-
-
-
-
-
-
-    /**
-	 * 获取可用优惠卷
-	 * @param uId  _uid
-	 * @param totalPrice
-	 * @return Number(_oTotalPrice-_YJpic).toFixed(2)
-	 */
-    function get(){
-
-    }
+var _uid="", _oTotalPrice="",_getYHJprice="";
+$(document).ready(function(){
+	_uid=fnBase.huoqu(0,'userid');
+	showUserInfo()//默认显示用户信息
+	orderShowinfo()//获取订单信息
+	myjmessage()//免押金说明
+	yhjtoggleshow()//点击优惠卷
 	
-   $(".order_info .roompPic a").click(function(){
-       $("#masking").show(10,function(){
-           $("#usecoupon").animate({bottom:'0rem'},300);
-       });
-        var frontURL=Constant.URL+'/mobile/getMyCoupons';
-        var postData={
-    			'uId':_uid,
-    			'price':_getYHJprice
-        };
-        console.log(postData);
-    	 fnBase.commonAjax(frontURL,postData,function(data){
-    		 console.log(data);
-    		 if(data.length=='0'||data.length==''){
-    			 $('#zanwu').show();
-    		 }else{
-    			 var _data='';
-        		 $('#usecoupon ul').html('');
-        		 for(var j=0;j<data.length;j++){
-        			 _data+='<li usid="'+data[j].id+'"  used="'+data[j].cValue+'"><div class="usemsg"><h1>'+data[j].type+'</h1><p>消费满：<span>'+data[j].rule+'</span></p><p>有效期：<span>'+data[j].startTime+"-"+data[j].endTime+'</span></p><span class="ifrader"><i></i></span></div><i class="_pic">￥'+data[j].cValue+'</i></li>'
-        		 }
-        		 $('#usecoupon ul').append(_data)
-    		 }
-    	 })
-    });
-
-//    选取优惠劵11
-    var couponid='';
-    var used='';
-    $("#usecoupon header ._confirm").live('click',function(){
-        $("#masking").hide(10,function(){
-            $("#usecoupon").animate({bottom:'-5.7rem'},300);
-        });
-        var obj=$(this).parent().parent().find('li');
-        for(var i=0;i<obj.length;i++){
-            if(obj.eq(i).find('.usemsg .ifrader').hasClass("hat")){
-                couponid=obj.eq(i).attr('used');
-                yhjid=obj.eq(i).attr('usid')
-            }
-        }
-        if(couponid==""){
-            couponid=0;
-            $(".order_info .roompYHJ .money").text(couponid+"元");
-        }else{
-        	$(".order_info .roompYHJ .money").text("-"+couponid+"元");
-        }
-        $(".order_info .roompYHJ").show();
-        used=_oTotalPrice-couponid;
-        used=Number(used).toFixed(0);
-        $(".order_info .roompPic .money").html(used+"元");
-        return yhjid;
-    });
-
-    $("#usecoupon ul li").live('click',function(){
-        if($(this).find('.ifrader').hasClass('hat')==false){
-            $(this).find('.ifrader').addClass('hat');
-            $(this).siblings().find('.ifrader').removeClass('hat')
-        }else{
-            $(this).find('.ifrader').removeClass('hat')
-        }
-    });
-
-
-    //登录用户；默认显示信息；
-   
-    function getData(){
-        var _uid = fnBase.huoqu(0, "userid");
-        if (_uid == null || _uid == "undefined" || _uid == "") {
-            window.location.href = "login.html";
-            return;
-        }
+	
+	
+	
+})
+	function showUserInfo(){//默认显示用户信息
+		
         var frontURL=Constant.URL+'/mobile/detailsData?id='+_uid;
         var postData={};
         fnBase.commonAjax(frontURL,postData,function(data){
-            console.log(data);
+           // console.log(data);
             fnBase.keep(1,"uname",data.details.nick);
             fnBase.keep(1,"usfz",data.details.idCard);
             $("#tel").attr('value',data.tel);
             $("#identity").attr('value',data.details.idCard);
         });
+	}
 
-    }
-  // 住房协议
+	function orderShowinfo(){//获取订单信息
+		var _community=fnBase.huoqu(1,"community");
+	    var _startTime = fnBase.huoqu(1, "startTime");
+	    var _endTime=fnBase.huoqu(1,"endTime");
+	    var _oTotalDay=fnBase.huoqu(1,"oTotalDay");
+	    var _oTotalPrice=fnBase.huoqu(1,"oTotalPrice");
+	    var _id = decodeURIComponent(fnBase.request("id"));
+	    var _price=fnBase.huoqu(1,"dayPrice");
+	    var _apartmenttype=fnBase.huoqu(1,"roomType");
+	    var _YJpic=fnBase.huoqu(1,"YJpic");
+		var _getYHJprice=fnBase.huoqu(1,"_price");
+//	    console.log(_community)
+//	    console.log(_startTime)
+//	    console.log(_endTime)
+//	    console.log(_oTotalDay)
+//	    console.log(_oTotalPrice)
+//	    console.log(Number(_oTotalPrice).toFixed(0))
+	    $(".roomName").text(_community);
+    	$(".roomTime").html(_startTime+"入住"+_endTime+"离开"+"<i class='date'>共（"+_oTotalDay+"）天</i>");
+	    $(".roompYJ .money").text('￥'+_YJpic+"元");
+	    $(".roomDJ .money").text('￥'+_price+"元");
+	    
+	    if(_oTotalDay<3){
+	    	$(".roomZK").hide();
+	    }else if(_oTotalDay>=3 && _oTotalDay<7){
+	    	$(".roomZK").html('<i class="zk">9.5</i>折优惠：<span class="money">'+Number(_oTotalPrice).toFixed(0)+'</span>');
+	    }else if(_oTotalDay>=7 && _oTotalDay<30){
+	    	$(".roomZK").html('<i class="zk">9</i>折优惠：<span class="money">'+Number(_oTotalPrice).toFixed(0)+'</span>');
+	    }else if(_oTotalDay>=30){
+	    	$(".roomZK").html('<i class="zk">8</i>折优惠：<span class="money">'+Number(_oTotalPrice).toFixed(0)+'</span>');
+	    }
+	    
+	    $(".roomPic").html("订单总额:<span class='money'>"+Number(_oTotalPrice).toFixed(0)+"元</span><a>优惠劵</a>");
+	    
+	}
+	
+	function myjmessage(){// 免押金说明
+	    $("#masking").hide();
+		$(".roomYJ .free").click(function(){	
+			 $(".gratis").addClass('scale');
+			 $("#masking").show();
+		});
+		$(".gratis h1 span").click(function(){
+			 $(".gratis").removeClass('scale');
+			 $("#masking").hide();		
+	    });	
+	}
 
-    
-    $("#contract").click(function(){
-    	var is=$(this).find('span');
-    	if(is.hasClass('czs-circle-o')==true){
-    		is.removeClass('czs-circle-o')
-    	}else{
-    		is.addClass('czs-circle-o')
-    	}
-    })
-    
- 
-    
-    $("#contract a").click(function(){
-    	fnBase.keep(1,"uname",$("#userName").val());
-    	fnBase.keep(1,"usfz",$("#identity").val());
-    })
-    
- // 免押金说明
-    $("#masking").hide();
-	$(".order_info .roompYJ .free").click(function(){	
-		 $(".gratis").addClass('scale');
-		 $("#masking").show();
-	});
-	$(".gratis h1 span").click(function(){
-		 $(".gratis").removeClass('scale');
-		 $("#masking").hide();		
-    });	
-
-    //    提交订单
-    $(".navbar a").click(function(){
+function yhjtoggleshow(){
+		_oTotalPrice=fnBase.huoqu(1,"oTotalPrice");
+		_getYHJprice=fnBase.huoqu(1,"_price");
+		
+		$(".roomPic a").click(function(){
+	       $("#masking").show(10,function(){
+	           $("#usecoupon").animate({bottom:'0rem'},300);
+	       });
+	        var frontURL=Constant.URL+'/mobile/getMyCoupons';
+	        var postData={
+	    			'uId':_uid,
+	    			'price':_getYHJprice
+	        };
+	        console.log(postData);
+	    	fnBase.commonAjax(frontURL,postData,function(data){
+	    		 console.log(data);
+	    		 if(data.length=='0'||data.length==''){
+	    			 $('#zanwu').show();
+	    		 }else{
+	    			 var _data='';
+	        		 $('#usecoupon ul').html('');
+	        		 for(var j=0;j<data.length;j++){
+	        			 _data+='<li usid="'+data[j].id+'"  used="'+data[j].cValue+'"><div class="usemsg"><h1>'+data[j].type+'</h1><p>消费满：<span>'+data[j].rule+'</span></p><p>有效期：<span>'+data[j].startTime+"-"+data[j].endTime+'</span></p><span class="ifrader"><i></i></span></div><i class="_pic">￥'+data[j].cValue+'</i></li>'
+	        		 }
+	        		 $('#usecoupon ul').append(_data)
+	    		 }
+	    	})
+    	});
+	 	$("#usecoupon ._black").live('click',function(){
+	        $("#masking").hide(10,function(){
+	            $("#usecoupon").animate({bottom:'-5.7rem'},300);
+	        });
+	    });
+    	//    选取优惠劵
+	    var couponid='';
+	    var used='';
+	    var yhjid='';
+	    $("#usecoupon header ._confirm").on('click',function(){
+	        $("#masking").hide(10,function(){
+	            $("#usecoupon").animate({bottom:'-5.7rem'},300);
+	        });
+	        var obj=$(this).parent().parent().find('li');
+	        for(var i=0;i<obj.length;i++){
+	            if(obj.eq(i).find('.usemsg .ifrader').hasClass("hat")){
+	                couponid=obj.eq(i).attr('used');
+	                yhjid=obj.eq(i).attr('usid')
+	            }
+	        }
+	        if(couponid==""){
+	            couponid=0;
+	            $(".roomYHJ .money").text(couponid+"元");
+	        }else{
+	        	$(".roomYHJ .money").text("-"+couponid+"元");
+	        }
+	        $(".roomYHJ").show();
+	        used=_oTotalPrice-couponid;
+	        used=Number(used).toFixed(0);
+	        console.log(used)
+	        $(".roomPic .money").html(used+"元");
+	        return yhjid;
+	    });
+	
+	    $("#usecoupon ul li").live('click',function(){
+	        if($(this).find('.ifrader').hasClass('hat')==false){
+	            $(this).find('.ifrader').addClass('hat');
+	            $(this).siblings().find('.ifrader').removeClass('hat')
+	        }else{
+	            $(this).find('.ifrader').removeClass('hat')
+	        }
+	    });
+    	//提交订单==========================
+    	 var _community=fnBase.huoqu(1,"community");
+	    var _startTime = fnBase.huoqu(1, "startTime");
+	    var _endTime=fnBase.huoqu(1,"endTime");
+	    var _oTotalDay=fnBase.huoqu(1,"oTotalDay");
+	    var _oTotalPrice=fnBase.huoqu(1,"oTotalPrice");
+	    var _id = decodeURIComponent(fnBase.request("id"));
+	    var _price=fnBase.huoqu(1,"dayPrice");
+	    var _apartmenttype=fnBase.huoqu(1,"roomType");
+	    var _YJpic=fnBase.huoqu(1,"YJpic");
+		var _getYHJprice=fnBase.huoqu(1,"_price");
+		var cood="";
+		var _span='';
+    $("#bottomMenu a").click(function(){
         var otherCusName=new Array();
         var otherCusIdCard=new Array();
         for(var i=0;i<$('.addpartenr li').length;i++){
@@ -340,13 +223,14 @@ function addpartenr(){
             console.log(data);
             console.log(data.order.id);
             if(data.order.id != '' && data.order.id != undefined){
-                //location.href = Constant.URL + '/wx/payment.html?id='+encodeURIComponent(data.order.id);
                 window.location.href="payment.html?id="+encodeURIComponent(data.order.id);
-            }else {
-                window.location.href = 'login.html';
             }
         })
     })
-    
-    
-});
+    	
+    	
+    	
+    	//提交订单end======================
+}
+
+	

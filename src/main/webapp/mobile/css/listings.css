@@ -1,0 +1,53 @@
+html,body{background: #fff !important;}
+#containerArea{width: 100%;position: relative;left: 0;top: 0;bottom: 0;overflow-y: auto;font-size: 0.12rem;padding-bottom: 0.1rem;}
+#bottomMenu{padding: 0 0.2rem;width: 100%;position: fixed;bottom: 0.2rem;left: 0;text-align: center;height: 0.4rem;background: none;display: flex;justify-content: space-between;align-content: center;}
+#bottomMenu a{display: block;height: 0.4rem;font-size: 0.2rem;width: 1.2rem;background: #FFFFFF;margin: 0 auto;border-radius: 0.2rem;box-shadow: 0 0 10px #666;line-height: 0.4rem;font-size: 0.18rem;color: #03b28b;}
+
+.topInnerNav{width: 100%;height: 0.45rem;line-height: 0.45rem;color: #333;font-size: 0.16rem;position: relative;display: flex;justify-content: space-between;align-content: center;}
+.topInnerNav a{display: block;width: 0.45rem;height: 0.45rem;line-height: 0.5rem;text-align: center;color: #03b28b;}
+.topInnerNav a .fj{font-size: 0.12rem;color: #03b28b;}
+.topInnerNav a:first-child{position: relative;transform: rotate(-90deg);}
+
+.selectedNav{border-top: 1px solid #dedede;border-bottom: 1px solid #dedede;height: 0.45rem;padding-top: 0.1rem;}
+.selectedNav.scrollTop{position: fixed;left: 0;top: 0;right: 0;z-index: 100;background: #fff;}
+
+.selectedNav ul li{width: 33.3333%;float: left;text-align: center;line-height: 0.25rem;}
+.selectedNav ul li a{color: #333;display: block;position: relative;}
+.selectedNav ul li:first-child+li{border-left: 1px solid #dedede;border-right: 1px solid #dedede;}
+
+.selectedNav ul li.active a{
+	color: #03b28b;
+}
+.confirm{display: block;width: 100%;line-height: 0.4rem;text-align: center;background:#03b28b;color: #fff;}
+.shaixuan{width: 100%;background: #fff;clear: both;}
+.shaixuan.sctop{position: fixed;top: 0.45rem;z-index: 100;}
+.shaixuanList{width: 100%;height:auto;display: none;}
+.shaixuanList.show{display:block;}
+.shaixuanList ul{100%;}
+.shaixuanList ul li{cursor:pointer;height: 0.5rem;border-bottom: 1px solid #dedede;;line-height: 0.5rem;display: flex;justify-content: space-between;align-content: center;}
+.shaixuanList ul li span{width: 33.3333%;color: #888;overflow: hidden;}
+.shaixuanList ul li span:first-child{color: #666;text-align: center;}
+.shaixuanList ul li span:last-child{text-align: center;line-height: 0.5rem;font-size: 0.16rem;}
+.shaixuanList ul li span:last-child.czs-circle-o{color:#03b28b ;}
+
+.indexhouseList{width: 100%;clear: both;}
+.indexhouseList ul{padding-bottom: 0.2rem;}
+.indexhouseList ul li{height: 3rem;width: 100%;border-bottom: 1px solid #e7e7e7;}
+.indexhouseList ul li a{color: #888;display: block;width: 100%;height: 100%;overflow: hidden;margin: 0.1rem auto;}
+.indexhouseList ul li a .fn-img{height: 2.3rem;overflow: hidden;position: relative;}
+.indexhouseList ul li a .fn-img img{width: 100%;}
+.indexhouseList ul li a .fn-img .price{display: block;position: absolute;width: 0.66rem;height: 0.4rem;line-height: 0.4rem;text-align: center;background: rgba(0,0,0,.65); color: #DFDFDF;left: 0;bottom: 0;font-size: 0.19rem;font-weight:bold;overflow: hidden;}
+.indexhouseList ul li a .fn-txt{padding: 0.1rem;line-height: 0.24rem;overflow: hidden;}
+.indexhouseList ul li a .fn-txt .hu-c{color: #888;}
+.indexhouseList ul li a .fn-txt span{padding-left: 0.15rem;}
+.indexhouseList ul li a .fn-txt p{
+	display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+     word-break: break-all;
+     overflow:hidden;	
+}
+.indexhouseList .more{text-align: center;}
+
+
+#hnumber,.hnumber_s{font-size:0.24rem;}

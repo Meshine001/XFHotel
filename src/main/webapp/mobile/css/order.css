@@ -1,135 +1,36 @@
-/*.header-mobile {background: #50ccc9;color: #ffffff;font-size: 0.18rem;}*/
-.header-mobile .img-home {width: 0.12rem;margin-top: 0.04rem;}
-
-/*优惠劵*/
-.order_info .roompPic a{float:right;color:orangered;font-weight: 400;font-size: 0.12rem;padding-right: 0.1rem;}
-    
-/*住房协议样式*/
-
-#contract span{
-	cursor: pointer;color: #00b38a;text-align: center;line-height: 0.4rem
-}
+html,body{background: #f2f4f3 !important;}
+#containerArea{width: 100%;position: relative;overflow-y: auto;font-size: 0.12rem;}
 
 
 
-.order_info{width: 100%;background: #fff;margin: 0.1rem 0 0 0;overflow: hidden}
-.order_info h1{border-bottom: 1px solid #ddd; font-weight: 400;color: #333;}
-.order_info .r_name{font-size: 0.14rem;padding: 0.1rem;;vertical-align: middle;}
-.order_info .h_date{width: 100%;overflow: hidden}
-.order_info .h_date li{padding-left: 0.1rem;float: left;border-left:1px solid #ddd ;width: 25%;height: 0.4rem;line-height: 0.4rem;font-size: 0.14rem;border-bottom: 1px solid #ddd;}
-.order_info .h_date li:first-child{border-left: 0}
-.order_info .h_date li .doubledate{width: 100%;color: orange}
-.order_info .h_date li:nth-child(even){border-left: 0;padding-left: 0}
-.order_info .o_pay{height: 0.4rem;line-height: 0.4rem;font-size: 0.14rem;text-align: left;padding-left: 0.1rem}
-.order_info .o_pay .money{font-size: 0.15rem;color:orangered;font-weight: 400;}
-.order_info .roomTime .date{float: right}
+.topInnerNav{background-color: #fff;width: 100%;height: 0.45rem;line-height: 0.45rem;color: #333;font-size: 0.16rem;position: relative;display: flex;justify-content: space-between;align-content: center;}
+.topInnerNav a{display: block;width: 0.45rem;height: 0.45rem;line-height: 0.5rem;text-align: center;color: #03b28b;}
+.topInnerNav a .fj{font-size: 0.12rem;color: #03b28b;}
+.topInnerNav a:first-child{position: relative;transform: rotate(-90deg);}
+
+.main{position: relative;}
+.main .od{background-color: #fff;margin-top: 0.1rem;}
+.main .od .r-pay{line-height: 0.4rem;padding: 0 0.1rem;border-bottom: 1px solid #ddd;}
+.roomTime .date{float: right;}
+.r-pay .money{color: red;}
+.roomYJ .free{float: right;color: #333;cursor: pointer;}
+.roomPic a{float: right;color: red;cursor: pointer;}
+.roomYHJ{display: none;}
+
+.price_info li{cursor: pointer;padding: 0 0.1rem;line-height: 0.4rem;border-bottom: 1px solid #ddd;background: #fff;}
+.price_info li span{width: 0.8rem;display: inline-block;float: left;}
+.price_info li .fl{padding: 0 0.1rem;overflow: hidden;border-left: 1px solid #ddd;}
+#contract span{text-align: center;line-height: 0.4rem;cursor: pointer;color: #00B38A;}
+
+.prompt_info{width: 100%;background-color: #fff;padding: 0.1rem;margin-top: 0.1rem;line-height: 0.2rem;border-top: 1px solid #ddd;overflow: hidden;}
+.prompt_info h1{font-size: 0.12rem;line-height: 0.4rem;}
 
 
-.price_info{width: 100%;background: #fff;margin: 0.1rem 0 0 0;overflow: hidden;border-top: 1px solid #ddd}
-.price_info li{cursor: pointer;padding: 0 0.1rem;height: 0.4rem;line-height: 0.4rem;border-bottom:1px solid #ddd;font-size: 0.14rem;}
-.price_info li span{width: 0.8rem;color: #333;display: inline-block;float: left}
-.price_info li .fl{padding: 0 0.1rem;overflow: hidden;border-left: 1px solid #ddd}
+#bottomMenu{width: 100%;position: fixed;bottom: 0;left: 0;text-align: center;height: 0.45rem;line-height: 0.45rem;    border-top: 1px solid #dedede;;background:#03b28b;}
+#bottomMenu a{cursor: pointer;display: block;text-align: center;line-height: 0.45rem;color: #fff;font-size: 0.16rem;}
 
-.prompt_info{width: 100%;background: #fff;margin: 0.1rem 0 0 0;overflow: hidden;padding: 0 0.1rem;border-top: 1px solid #ddd;font-size: 0.14rem;}
-.prompt_info h1{font-size: 0.14rem;line-height: 0.4rem}
-.prompt_info p{margin-bottom: 0.1rem}
-
-/*��ӵ���������Ϣ*/
-.addpartenr li{width: 50%;float: left;background: #938f88;border-right: 1px solid  #FFF;color:#FFF;text-align: center;position: relative}
-.addpartenr li i{width: 0.3rem;position: absolute;right: 0;height: 100%;background: #bab4b4}
-
-
-
-/*����Ʊ*/
-#needpic{border-left:0 }
-#needpic i{margin-left: 0.1rem;width: 0.6rem;float: left;padding-left: 0.25rem;background: url("../images/moren.png") no-repeat center left;background-size: 0.18rem}
-#needpic .active{background: url("../images/moren_hover.png") no-repeat center left;background-size: 0.18rem}
-
-
-/*���ס��*/
-.alert-content,#usecoupon{
-    position: fixed;
-    width: 100%;
-    height:5.5rem;
-    background: #fff;
-    z-index: 1003;
-    bottom: -5.6rem;
-    box-shadow: 0 0 0.2rem #333;
-    overflow: scroll;
-    transition: all .5s;
-}
-.alert-content{overflow:hidden !important;}
-
-.alert-content header,#usecoupon header{
-    width: 100%;
-    height: 0.4rem;
-    line-height: 0.4rem;
-    padding: 0;
-    border-bottom: 1px solid #dddddd;
-    font-size:0.16rem;
-    color: #353535;
-    text-align: center;
-    font-weight: normal;
-    position: relative;
-}
-.alert-content header ._black,#usecoupon header ._black{cursor: pointer;float: left;padding: 0 0.2rem;font-size: 0.3rem}
-.alert-content header ._confirm,#usecoupon header ._confirm{float: right;padding: 0 0.2rem;color: orangered;cursor: pointer}
-
-.alert-content ul{width: 90%;margin: 0 auto;}
-.alert-content ul li{position: relative;line-height: 0.4rem;font-size: 0.14rem;border-bottom: 1px solid #ddd;text-indent: 0.25rem}
-.alert-content ul li .this{
-    width: 0.1rem;
-    height: 0.1rem;
-    position: absolute;
-    top: 0.15rem;
-    left: 0.1rem;
-    border: 1px solid #0cbb08;
-    border-width: 1px;
-}
-.alert-content ul li.selected .this{background: #0cbb08}
-.alert-content ul li.selected{}
-
-.alert-content ul li .numbId{margin-left: 0.2rem}
-.alert-content ul li ._remove{display: block;width: 0.6rem;height: 0.4rem;float: right;background: url("../images/deleteico.png") no-repeat center right 0.1rem;background-size:0.16rem }
-
-/*����������*/
-.alert-content ins.rotate{transform: rotate(90deg)}
-.alert-content ins{transition: all .3s;width: 0.4rem;height: 0.4rem;position: absolute;bottom: 0.1rem;right: 0.1rem;background: url("../images/add.png")no-repeat center center;background-size: 0.4rem;border-radius: 50%;z-index: 100}
-.alert-content .news-msg{position: absolute;bottom: -4.7rem;left: 0;width: 100%;height: 4.7rem;background:#fff;border-top: 4px solid orangered}
-.alert-content .news-msg ul{width: 100%;}
-.alert-content .news-msg ul li{font-size: 0.14rem;width: 100%;height: 0.45rem;line-height: 0.45rem;border-bottom: 1px solid #d1d1d1}
-.alert-content .news-msg ul li input{display: block;width: 2.7rem;height: 0.45rem;font-size: 0.14rem;float: right}
-.alert-content .news-msg button{display: block;width: 1.6rem;height: 0.35rem;background: orangered;margin: 0.2rem auto;color: #fff;font-size: 0.14rem}
-
-
-#usecoupon.show{
-    bottom: 0;
-}
-/*优惠劵*/
-#usecoupon ul{width:100%;padding:0.1rem 0.1rem 0 0.1rem;}
-#usecoupon ul li{cursor: pointer;margin-bottom: 0.1rem;;width:100%;height:0.8rem;border:1px solid red;position:relative;border-radius: 0 0.2rem;overflow: hidden;}
-#usecoupon ul li .usemsg{float:right;height:0.78rem;position: relative;;width:75%;font-size:0.1rem;padding-left:0.1rem}
-#usecoupon ul li .usemsg h1{padding-bottom: 0.2rem;padding-top: 0.03rem;font-size: 0.14rem;}
-#usecoupon ul li ._pic{display:block;width:25%;height:100%;float:left;background:red;text-align:center;font-size:0.2rem;line-height: 0.8rem;color:#fff}
-#usecoupon ul li .usemsg .ifrader{position:absolute;width:0.2rem;height:0.2rem;border-radius:50%;border:1px solid #ccc;top:0.3rem;right:0.3rem;}
-#usecoupon ul li .usemsg .ifrader.hat i{display:block}
-#usecoupon ul li .usemsg .ifrader i{
-	display:none;
-	width: 0.3rem;
-    height: 0.1rem;
-    position: absolute;
-    top:-0.05rem;
-    border: 2px solid #18ca26;
-    border-width: 0px 0px 2px 2px;
-    -webkit-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-}
-/*免押金说明*/
-
-#masking{display: none;transition: all .3s}
 .gratis{
-    position: fixed;
+	position: fixed;
     width: 80%;
     height: 80%;
     margin: 0 auto;
@@ -139,8 +40,8 @@
     left: 50%;
     margin-left: -40%;
     top: 10%;
-	transition:0.2s;
-	transform: scale(0);
+    transition: 0.2s;
+    transform: scale(0);
 }
 .gratis.scale{
 	transform: scale(1);  
@@ -161,13 +62,68 @@
     right: 0.1rem;
 }
 .gratis .content{
-    width: 85%;
+	width: 85%;
     margin: 0 auto;
     overflow-y: scroll;
     height: 86%;
-    font-size: 0.14rem;
-	 -webkit-overflow-scrolling: touch;
+    font-size: 0.12rem;
+    line-height: 0.25rem;
+    -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
 }
-.czs-circle-o{font-size: 0.1rem}
-.czs-circle-l{font-size: 0.15rem}
+
+#usecoupon{
+	position: fixed;
+    width: 100%;
+    height:5.5rem;
+    background: #fff;
+    z-index: 1003;
+    bottom: -5.6rem;
+    box-shadow: 0 0 0.2rem #333;
+    overflow: scroll;
+    transition: all .5s;
+}
+#usecoupon header{
+	width: 100%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    padding: 0;
+    border-bottom: 1px solid #dddddd;
+    font-size:0.16rem;
+    color: #353535;
+    text-align: center;
+    font-weight: normal;
+    position: relative;
+}
+#usecoupon header ._black{
+	cursor: pointer;
+    float: left;
+    padding: 0 0.2rem;
+    font-size: 0.3rem;
+}
+#usecoupon header ._confirm{
+ 	float: right;
+    padding: 0 0.2rem;
+    color: orangered;
+    cursor: pointer;
+}
+ 
+#usecoupon ul{width:100%;padding:0.1rem 0.1rem 0 0.1rem;}
+#usecoupon ul li{cursor: pointer;margin-bottom: 0.1rem;;width:100%;height:0.8rem;border:1px solid red;position:relative;border-radius: 0 0.2rem;overflow: hidden;}
+#usecoupon ul li .usemsg{float:right;height:0.78rem;position: relative;;width:75%;font-size:0.1rem;padding-left:0.1rem}
+#usecoupon ul li .usemsg h1{padding-bottom: 0.2rem;padding-top: 0.03rem;font-size: 0.14rem;}
+#usecoupon ul li ._pic{display:block;width:25%;height:100%;float:left;background:red;text-align:center;font-size:0.2rem;line-height: 0.8rem;color:#fff}
+#usecoupon ul li .usemsg .ifrader{position:absolute;width:0.2rem;height:0.2rem;border-radius:50%;border:1px solid #ccc;top:0.3rem;right:0.3rem;}
+#usecoupon ul li .usemsg .ifrader.hat i{display:block}
+#usecoupon ul li .usemsg .ifrader i{
+	display:none;
+	width: 0.3rem;
+    height: 0.1rem;
+    position: absolute;
+    top:-0.05rem;
+    border: 2px solid #18ca26;
+    border-width: 0px 0px 2px 2px;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}

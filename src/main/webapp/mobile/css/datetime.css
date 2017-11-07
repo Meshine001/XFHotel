@@ -1,0 +1,127 @@
+body,html {
+ 
+  font-size:0.14rem;
+}
+
+
+
+.container  ul{
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  font-size: .8em;
+  background: #ebecf2;
+  display: block;
+  overflow: hidden;
+}
+
+
+
+.none {
+  display: none;
+  line-height:50px;
+}
+
+.row {
+  padding: 10px;
+  color: #333;
+  background: #f5f5f5
+}
+
+.date {
+/*  position:absolute;
+  top: 0;
+  left: 0;
+  overflow:scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  */
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  z-index: 10000;
+  text-align: center;
+  position: absolute;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+.date .action{
+  margin-top: 0;
+}
+
+.date .title div{
+  display: inline;
+}
+
+.tac{
+	font-size:0.14rem;
+	line-height:0.45rem;
+	color:#333;
+    clear: both;
+}
+
+.date ul li {
+  float: left;
+  width: 14.285%;
+  text-align: center;
+  border-bottom: 1px solid #ebecf2;
+  border-left: 1px solid #ebecf2;
+  background: #fff;
+}
+
+.week li {
+  background-color: #f1f1f1;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  border-top: 1px solid #ebecf2;
+}
+.day li{
+  height: 0.5rem;
+  line-height: 0.25rem;
+}
+.day li i{
+  color: #777;
+}
+.day .enter {
+  background: url("../images/en.png") no-repeat center center;
+  background-size: 0.5rem;
+  color: #2795dc;
+}
+.day .enter i{
+  color:#2795dc;
+}
+.day .leave {
+  background: url("../images/likai.png") no-repeat center center;
+  background-size: 0.5rem;
+  color: #2795dc;
+}
+
+.day .leave i{
+  color:#2795dc;
+}
+.day .disable {
+  background:#e1e1ea;
+}
+/*
+开始到结束日期的样式；
+*/
+.day .selected-range{
+  background: darkgrey;
+}
+
+.close-btn {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  display:block;
+  background: #383436;
+  color: #fff;
+  width:0.45rem;
+  height:0.45rem;
+  border-radius: 50%;
+  line-height:0.45rem;
+}
+.date .action:first-child{margin:0 !important;}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+    <title>青舍都市公寓</title>
+    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="iconcaomei/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
+    <script type="text/javascript" src="js/zoom.js"></script>
+    <script type="text/javascript" src="js/fnBase.js"></script>
+    <style>
+    	html,body,#Myscroll-body{background: #fff !important;}
+    	#Myscroll-body{bottom:0 !important;}
+        .about{font-size: 0.14rem;line-height: 0.3rem;padding: 0.1rem}
+         h1{font-size:0.15rem;text-align:center;line-height:0.3rem;color:#333}
+        .label,.textcon{font-size:0.14rem;line-height: 0.3rem;padding: 0 0.1rem;color:#333}
+        .textcon{margin-bottom:0.08rem}
+        .label i{color:#878787}
+        .topInnerNav{background-color: #fff;width: 100%;height: 0.45rem;line-height: 0.45rem;color: #333;font-size: 0.16rem;position: relative;display: flex;justify-content: space-between;align-content: center;}
+		.topInnerNav a{display: block;width: 0.45rem;height: 0.45rem;line-height: 0.5rem;text-align: center;color: #03b28b;}
+		.topInnerNav a .fj{font-size: 0.12rem;color: #03b28b;}
+		.topInnerNav a:first-child{position: relative;transform: rotate(-90deg);}
+		        #container{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: auto;
+        }
+        /*地图标题*/
+        .anchorBL{
+            display:none;
+        }
+        .BMap_bubble_title{
+            color:black;
+            font-size:0.13rem;
+            font-weight: bold;
+            text-align:left;
+        }
+        .BMap_pop div:nth-child(1){
+            border-radius:0.1rem 0 0 0;
+        }
+		 .BMap_pop div:nth-child(2){
+		    width:300px !important;
+        }
+        .BMap_pop div:nth-child(3){
+            border-radius:0 0.1rem 0 0;
+            background:#fff !important;
+            left:320px !important;
+        }
+        .BMap_pop div:nth-child(3) div{
+           border-radius:0 0.1rem 0 0;
+      
+        }
+        .BMap_pop div:nth-child(4){
+        	width:343.5px !important;
+        }
+        
+        .BMap_pop div:nth-child(5){
+            border-radius:0 0 0 0.1rem;
+        }
+        .BMap_pop div:nth-child(5) div{
+           border-radius:0 0 0 0.1rem;
+        }
+        .BMap_pop div:nth-child(7){
+            border-radius:0 0 0.1rem 0 ;
+            width:25px !important;
+            left:320px;
+        }
+        .BMap_pop div:nth-child(7) div{
+            border-radius:0 0 0.1rem 0 ;
+        }
+         .BMap_pop div:nth-child(8){
+                left: 113px !important;
+			    width: 0 !important;
+			    height: 0 !important;
+			    border-left: 25px solid transparent;
+			    border-right: 25px solid transparent;
+			    border-top: 50px solid #fff;
+			    display:none;
+        }
+         .BMap_pop div:nth-child(9){
+         	width:314px !important;
+         }
+          .BMap_pop div:nth-child(9) table{
+         	width:100%;
+         }
+         .BMap_pop div:nth-child(9) + img{
+         	color:red !important;
+         }
+        .roomId{font-size: 0.14rem;font-weight: bold;}
+        .addres{font-size: 0.14rem}
+        .roomTime a{font-size: 0.14rem ;color: rgb(61, 109, 204);;text-decoration: none;}
+        
+        .roomId,.addres,.roomTime a{
+        	    overflow: hidden;
+			    text-overflow: ellipsis;
+			    white-space: nowrap;
+        }
+		
+    </style>
+</head>
+<body style="background: #FFF">
+			<div class="topInnerNav">
+					<a href="#" onclick="javascript:history.back();"><span class="czs-arrow-up-l"></span></a>
+					<span>地图找房</span>
+					<a href="#">
+					<!-- <span class="czs-menu-l"></span> -->
+					</a>
+			</div>
+<div id="Myscroll-body">
+	<div id="container"></div>
+</div>
+   <script type="text/javascript" src="http://api.map.baidu.com/api?ak=m0QLQpDkATE2Q8WR1NPXRarUrWaA2eNi&v=2.0&services=false"></script>
+ <script type="text/javascript" src="js/map.js"></script>
+    <script type="text/javascript">
+		$(document).ready(function(){
+		    var frontURL=Constant.URL+'/mobile/homeTherefore';
+		    var postData={};
+		    fnBase.commonAjax(frontURL,postData,function(data){
+		        console.log(data);
+		        var jd,wd,wz1,wz2,jiage,url;
+		        for(var i=0;i<data.homeRooms.length;i++){
+					var vio=data.homeRooms[i].bd_wei_zhi;
+		        	vio=vio.slice(4,vio.length);
+		            jd=data.homeRooms[i].position.jing_du;
+		            wd=data.homeRooms[i].position.wei_du;
+		            wz1=data.homeRooms[i].position.xa_wei_zhi;
+		            wz2=data.homeRooms[i].position.xa_wei_zhi+"-"+data.homeRooms[i].position.xiao_qu;
+		            wz3=vio+data.homeRooms[i].position.bd_wei_zhi;
+		            jiage=data.homeRooms[i].basic_info.jia_ge;
+		            url='house_details.html?id='+encodeURIComponent(data.homeRooms[i].id);
+		            loadwz(jd,wd,wz2,wz3,jiage,url);
+		        }
+		    });
+		})
+    
+    
+        var map = new BMap.Map("container");
+        var point = new BMap.Point(108.998795,34.245567);
+        map.centerAndZoom(point,12);
+        map.enableScrollWheelZoom(true);
+        map.addControl(new BMap.OverviewMapControl({isOpen:false,anchor:BMAP_ANCHOR_BOTTOM_RIGHT}));
+        map.addControl(new BMap.NavigationControl());
+        map.addControl(new BMap.ScaleControl());
+       
+        
+    	setTimeout(function(){
+    		map.setZoom(13);   
+    	}, 2000);  //2秒后放大到14级
+    	map.enableScrollWheelZoom(true);
+        
+        var icon = new BMap.Icon("images/smiley.png",new BMap.Size(100,100));
+        function loadwz(jd,wd,id,addresA,addres,time){
+
+            var marker = new BMap.Marker(new BMap.Point(jd,wd),{icon:icon});
+
+            map.addOverlay(marker);
+            var content = "<table>";
+            content = content + "<tr><td><div class='roomId'>"+id+"</div></td></tr>";
+            content = content + "<tr><td class='addres'>位置："+addresA+"</td></tr>";
+            content = content + "<tr><td class='addres'>价格："+addres+"/天</td></tr>";
+            content = content + "<tr><td class='roomTime'><a href='"+time+"'>查看详情»</a></td></tr>";
+            content += "</table>";
+            var infowindow = new BMap.InfoWindow(content);
+            marker.addEventListener("click",function(){
+                this.openInfoWindow(infowindow);
+            });
+        }
+
+    </script>
+</body>
+</html>

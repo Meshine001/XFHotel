@@ -1,110 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
-    <title>青舍都市公寓</title>
-    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
-    <link href="css/doubleDate.css" rel="stylesheet" type="text/css">
-    <link href="css/common.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="css/order.css" />
-    <link rel="stylesheet" href="iconcaomei/style.css" />
-    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="js/doubleDate2.0.js"></script>
-    <script type="text/javascript" src="js/zoom.js"></script>
-    <script type="text/javascript" src="js/fnBase.js"></script>
-    <script  charset="gb2312" language="javascript"  type="text/javascript" src="js/order.js"></script>
-</head>
-<body  style="display:none;">
-<div class="header">
-    <header class="header-mobile">
-        <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
-        <span class="cell">填写订单</span>
-        <a href="serve.html" class="cell link-btn"><span class="czs-user-l"></span></a>
-    </header>
-</div>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+		<link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+	    <link rel="stylesheet" href="css/common.css" />
+	    <link rel="stylesheet" type="text/css" href="css/order.css"/>
+	    <link rel="stylesheet" href="iconcaomei/style.css" />
 
-<div class="gratis">
-    <h1>免租金说明<span style="cursor: pointer;" class="czs-close-l"></span></h1>
-    <div class="content">
-        <p>免押金方法:</p>
-        <p>1、信用积分满1000，可免押金入住，</p>
-    </div>
-    
-</div>
-
-<div id="Myscroll-body">
-    <div class="main">
-        <div class="order_info">
-            <h1 class="r_name roomName">福邸铭门(22楼)</h1>
-            <h1 class="r_name roomTime"><i>2017-04-26入住</i><i>2017-04-30离开</i> </h1>
-            
-            <h1 class="o_pay roompYJ">押金：<span class="money"></span><em>（试运营免押金）</em><a class="free" href="javascript:;" style="cursor: pointer;font-size: 0.12rem;float: right;padding-right: 0.1rem;color:#00b38a;">免押金说明</a></h1>
-            <h1 class="o_pay roompDJ">每日单价：<span class="money"></span></h1>
-            <h1 class="o_pay roompYHJ" style="display:none">使用优惠卷：<span class="money"></span></h1>
-            <h1 class="o_pay roomZK"><i class="zk"></i>折优：<span class="money"></span></h1>
-            <h1 class="o_pay roompPic">订单总额：<span class="money"></span><a onclick="getYouhuijuan()" data=1></a></h1>
+	</head>
+	<body style="display: none;">
+		<div id="masking"></div>
+		<div class="gratis">
+			<h1>免租金说明<span class="czs-close-l"></span></h1>
+			<div class="content">
+				<p>免押金方法:</p>
+				<p>1、信用积分满1000，可免押金入住，</p>
+			</div>
 		</div>
+		<div id="usecoupon">
+			<header><i class="_black">&times;</i>可用优惠劵<i class="_confirm">确定</i></header>
+			<ul></ul>	
+			<p id="zanwu"></p>
+		</div>
+		
+		
+		<div id="containerArea">
+			<div class="indexTopCon">
+				<div class="topInnerNav">
+					<a href="#" onclick="javascript:history.back();"><span class="czs-arrow-up-l"></span></a>
+					<span>填写订单</span>
+					<a href="#"><span class="czs-menu-l"></span></a>
+				</div>	
+			</div>
+			<div class="main">
+				<div class="or-info od">
+					<p class="r-pay roomName">城东福邸铭门</p>
+					<p class="r-pay roomTime">2017-10-26入住2017-10-27离开<i class="date">共一晚</i></p>
+					<p class="r-pay roomYJ">押金：<span class="money">0元</span><em>（试运营免押金）</em><a class="free">免押金说明</a></p>
+					<p class="r-pay roomDJ">单价：<span class="money">￥598</span></p>
+					<p class="r-pay roomYHJ">优惠卷：<span class="money"></span></p>
+					<p class="r-pay roomZK">折扣：<span class="money"></span></p>
+					<p class="r-pay roomPic">订单总额：<span class="money">￥598</span><a>优惠卷</a></p>
+				</div>
+				<ul class="price_info od">
+					<li>
+						<span>姓名</span>
+						<input class="fl" id="userName" type="text" placeholder="填写入住人姓名"/>
+					</li>
+					<li>
+						<span>联系电话</span>
+						<input class="fl" id="tel" type="text" maxlength="11" placeholder="用于接收房门密码"/>
+					</li>	
+					<li>
+						<span>身份证号</span>
+						<input class="fl" id="identity" type="text" maxlength="18" placeholder="填写入住人身份证号码"/>
+					</li>	
+					<li>
+						<span>您的需求</span>
+						<input class="fl" id="presonal" type="text" placeholder="您还有什么需求？"/>
+					</li>
+					<li id="contract">
+						<span class="czs-circle-l czs-circle-o"></span>我同意<a style="cursor: pointer;color:#00b38a">《房屋短租协议》</a>
+					</li>
+				</ul>
+				<div class="prompt_info">
+					<h1>* 预定提示</h1>
+					<p> 1、本公寓属于智能管理，为了方便您的入住，我们将会把您定好的房间门密码用短信的形式发送到你的手机号上，在填写订单的时候请认真填写。</p>
+					<p> 2、在您入住的时候请文明使用物品，如需要服务请在客服管理联系我们，谢谢。</p>
+					<p> 3、本酒店最晚保留到18点,超过18点请在特殊要求内注明具体到达时间及原因</p>
+				</div>
+			</div>
+		</div>	
+			
+		<div id="bottomMenu">
+			<a>提交订单</a>
+		</div>
+		
+		
+		
+		
+		
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
+	    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+	    <script type="text/javascript" src="js/order.js" ></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/autoZoomLoadImage.js"></script>
+	    <script charset="gb2312" language="javascript"   type="text/javascript" src="js/fastclick.js"></script>
 
-        <ul class="price_info">
-            <li><span>姓名</span><input class="fl" id="userName" type="text" placeholder="入住人姓名"></li>
-            <li><span>联系电话</span><input class="fl" id="tel" type="text" maxlength="11" placeholder="用于接收房门密码"></li>
-            <li><span>身份证号</span><input class="fl" id="identity" type="text" maxlength="18" placeholder="入住人身份证号"></li>
-            <li><span>您的需求</span><input class="fl" id="presonal" type="text" placeholder="您还有什么需求？"></li>
-            <li style="display: none"><span>是否开发票</span><div class="fl" id="needpic"><i class="" cod="true">是</i><i cod="false" class="active">否</i></div></li>
-            <li id="contract"><span class="czs-circle-l czs-circle-o"></span>我同意<a style="cursor: pointer;color:#00b38a" href="protocol.html">《房屋短租协议》</a></li>
-        </ul>
-        <ul class="price_info addpartenr">
-
-        </ul>
-        <ul class="price_info">
-            <li id="addfriend" style="text-align: center;color: orangered">添加朋友+</li>
-        </ul>
-        <div class="prompt_info">
-            <h1>* 预定提示</h1>
-            <p class="form_strl"></p>
-            <p class="form_ctrl "> 1、本公寓属于智能管理，为了方便您的入住，我们将会把您定好的房间门密码用短信的形式发送到你的手机号上，在填写订单的时候请认真填写。</p>
-            <p class="form_ctrl "> 2、在您入住的时候请文明使用物品，如需要服务请在客服管理联系我们，谢谢。</p>
-            <p class="form_ctrl "> 3、本酒店最晚保留到18点,超过18点请在特殊要求内注明具体到达时间及原因</p>
-
-        </div>
-
-
-    </div>
-    <div class="navbar">
-        <a href="javascript:;">提交订单</a>
-    </div>
-</div>
-<!-- 使用优惠劵 -->
-<div id="usecoupon">
-	<header><i class="_black">&times;</i>可用优惠劵<i class="_confirm">确定</i></header>
-	<ul>
-	</ul>	
-	<p id="zanwu"></p>
-</div>
-
-
-
-<!--添加同住人信息-->
-<div id="masking"></div>
-<div class="alert-content">
-    <header><i class="_black">&times;</i>增加朋友一起住<i class="_confirm">确定</i></header>
-    <!--<ul>-->
-        <!--<li>增加新朋友</li>-->
-    <!--</ul>-->
-    <ul class="oldpartenr">
-    </ul>   
-    <div class="news-msg">
-        <ul>
-            <li>朋友姓名：<input id="pName" type="text" placeholder="请输入姓名"></li>
-            <li>身份证号：<input id="pId" type="text" placeholder="请输入身份证"></li>
-        </ul>
-        <button id="keep">保存</button>
-    </div>
-    <ins></ins>
-
-</div>
-
-
-</body>
+	</body>
 </html>

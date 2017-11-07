@@ -123,7 +123,8 @@ header {
 }
 
 .logo {
-	background: url(../images/logo260.png) no-repeat left;
+	/*background: url(../images/logo260.png) no-repeat left;*/
+	font-size:35px;
 	width: 450px;
 	height: 70px;
 	display: inline-block;

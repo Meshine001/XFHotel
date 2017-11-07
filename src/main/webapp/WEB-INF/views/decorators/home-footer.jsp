@@ -70,7 +70,7 @@
 					| <a href="http://www.weilver.com/" title="微驴儿机票" target="_blank">微驴儿机票</a>
 					| <a href="http://www.tielu.cn/" title="铁路网" target="_blank">铁路网</a>
 				</p>
-				<p>Copyright © 2014-2016 qinshe.com 青舍 版权所有 陕ICP备...号</p>
+				<p>Copyright © 2014-2016 qinshe.com 西安易云智能科技发展有限公司 版权所有 陕ICP备...号</p>
 			</div>
 		</div>
 	</footer>

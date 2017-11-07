@@ -3,34 +3,37 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
     <title>青舍都市公寓</title>
     <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
     <link href="css/common.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="css/personalCenter.css" />
     <link rel="stylesheet" href="iconcaomei/style.css" />
-    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script type="text/javascript" src="js/fnBase.js"></script>
     <style>
+    	html,body,#Myscroll-body{background: #fff !important;}
         .about{font-size: 0.14rem;line-height: 0.3rem;padding: 0.1rem}
-        h1{font-size:0.15rem;text-align:center;line-height:0.3rem;color:#333}
+         h1{font-size:0.15rem;text-align:center;line-height:0.3rem;color:#333}
         .label,.textcon{font-size:0.14rem;line-height: 0.3rem;padding: 0 0.1rem;color:#333}
         .textcon{margin-bottom:0.08rem}
         .label i{color:#878787}
+        .topInnerNav{background-color: #fff;width: 100%;height: 0.45rem;line-height: 0.45rem;color: #333;font-size: 0.16rem;position: relative;display: flex;justify-content: space-between;align-content: center;}
+		.topInnerNav a{display: block;width: 0.45rem;height: 0.45rem;line-height: 0.5rem;text-align: center;color: #03b28b;}
+		.topInnerNav a .fj{font-size: 0.12rem;color: #03b28b;}
+		.topInnerNav a:first-child{position: relative;transform: rotate(-90deg);}
     </style>
 </head>
 <body style="background: #FFF">
-<div class="header">
-    <header class="header-mobile">
-        <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
-        <span class="cell">房屋短租协议</span>
-        <span class="cell link-btn">
-            <!--<img src="images/my_h.png" class="img-btn">-->
-        </span>
-    </header>
-</div>
+			<div class="topInnerNav">
+					<a href="#" onclick="javascript:history.back();"><span class="czs-arrow-up-l"></span></a>
+					<span>房屋短租协议</span>
+					<a href="#"><span class="czs-menu-l"></span></a>
+			</div>
 <div id="Myscroll-body">
-	<h1>青舍都市公寓短租合同</h1>
+	
     <p class="label">出租方(甲方)：<i>青舍都市公寓</i></p>
     <p class="label" id="username">承租方(乙方)：<i>自己</i></p>
     <p class="textcon">经双方协商，乙方同意租用甲方所有的青舍都市公寓，并订以下合同，共同遵守:</p>
@@ -40,18 +43,7 @@
 	<p class="textcon">第四条 乙方须提供真实有效身份资料，如实申报登记入住人数和身份；入住期间不得从事违法违规行为。</p>
 	<p class="textcon">第五条 乙方须爱惜使用室内设施设备，人为损坏将承担相应赔偿；做到文明入住，不得噪扰邻居；自行保管私人物品，做好安全防护工作。</p>
 	<p class="textcon">第六条 其它未尽事宜，由甲乙双方协商解决。</p>
-	<!-- 
-	<p class="textcon">第七条 本协议一式两份，甲、乙双方各执一份，签字后即行生效。</p>
-	 -->
 </div>
-<script>
-(function(){
-//	var _uname=fnBase.huoqu(1,"uname");
-//	var _usfz=fnBase.huoqu(1,"usfz");
-	
-//	$("#username i").text(_uname);
-//	$("#userid i").text(_usfz);
-})(jQuery)
-</script>
+
 </body>
 </html>

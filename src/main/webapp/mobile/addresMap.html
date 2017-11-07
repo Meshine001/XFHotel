@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+    <title>青舍都市公寓</title>
+    <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="iconcaomei/style.css" />
+
+    <style>
+        .about{font-size: 0.16rem;line-height: 0.3rem;padding: 0.1rem}
+        html,body,.header-mobile{background:black;}
+     	.link-home span{position: relative;transform: rotate(-90deg);}
+     	#Myscroll-body{top:0.45rem;bottom:0;}
+     	#dituContent{position:absolute;top:0;left:0;right:0;bottom:0;overflow:auto;}
+     	.topInnerNav{width: 100%;height: 0.45rem;line-height: 0.45rem;color: #333;font-size: 0.16rem;position: relative;display: flex;justify-content: space-between;align-content: center;}
+		.topInnerNav a{display: block;width: 0.45rem;height: 0.45rem;line-height: 0.5rem;text-align: center;color: #03b28b;}
+		.topInnerNav a .fj{font-size: 0.12rem;color: #03b28b;}
+		.topInnerNav a:first-child{position: relative;transform: rotate(-90deg);}
+    </style>
+</head>
+<body style="background: #FFF">
+			<div class="indexTopCon">
+				<div class="topInnerNav">
+					<a href="javascript:;" onclick="javascript:history.back();"><span class="czs-arrow-up-l"></span></a>
+					<span>房屋位置</span>
+					<a href="javascript:;">
+					<!-- <span class="czs-menu-l"></span> -->
+					</a>
+				</div>	
+			</div>
+			<div id="Myscroll-body">
+			   <div id="dituContent"></div>
+			</div>
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/zoom.js"></script>
+<script type="text/javascript" src="js/fnBase.js"></script>		
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>			
+<script>
+	$(document).ready(function(){
+		var _jd = decodeURIComponent(fnBase.request("jd"));
+		var _wd = decodeURIComponent(fnBase.request("wd"));
+		var _address = decodeURIComponent(fnBase.request("address"));
+		var _price = decodeURIComponent(fnBase.request("price"));
+		console.log(_jd+"&&&&&"+_wd+"%%%%%"+_address+"*****"+_price);
+		
+
+        //创建和初始化地图函数：
+        function initMap(){
+            createMap();//创建地图
+            setMapEvent();//设置地图事件
+            addMapControl();//向地图添加控件
+            addMarker();//向地图中添加marker
+        }
+
+        //创建地图函数：
+        function createMap(){
+            var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
+            var point = new BMap.Point(_jd,_wd);//定义一个中心点坐标
+            map.centerAndZoom(point,12);//设定地图的中心点和坐标并将地图显示在地图容器中
+            window.map = map;//将map变量存储在全局
+        }
+
+        //地图事件设置函数：
+        function setMapEvent(){
+            map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+            map.enableScrollWheelZoom(true);//启用地图滚轮放大缩小
+            map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+            map.enableKeyboard();//启用键盘上下左右键移动地图
+        }
+
+        //地图控件添加函数：
+        function addMapControl(){
+            //向地图中添加缩放控件
+            var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,type:BMAP_NAVIGATION_CONTROL_PAN});
+            map.addControl(ctrl_nav);
+            //向地图中添加缩略图控件
+            var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:0});
+     //       map.addControl(ctrl_ove);
+            //向地图中添加比例尺控件
+            var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+     //       map.addControl(ctrl_sca);
+        }
+        var markerArr='';
+        var XXX=_jd;
+        var YYY=_wd;
+        //标注点数组
+        markerArr = [{
+            title:"房屋位置",
+            content:_address,
+            point:XXX+'|'+YYY,
+            isOpen:1,
+            icon:{w:23,h:25,l:46,t:21,x:9,lb:12}
+        }];
+        //创建marker
+        function addMarker(){
+            for(var i=0;i<markerArr.length;i++){
+                var json = markerArr[i];
+                var p0 = json.point.split("|")[0];
+                var p1 = json.point.split("|")[1];
+                var point = new BMap.Point(p0,p1);
+                var iconImg = createIcon(json.icon);
+                var marker = new BMap.Marker(point,{icon:iconImg});
+                var iw = createInfoWindow(i);
+                var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
+                marker.setLabel(label);
+                map.addOverlay(marker);
+                label.setStyle({
+                    borderColor:"#808080",
+                    color:"#333",
+                    cursor:"pointer"
+                });
+
+                (function(){
+                    var index = i;
+                    var _iw = createInfoWindow(i);
+                    var _marker = marker;
+                    _marker.addEventListener("click",function(){
+                        this.openInfoWindow(_iw);
+                    });
+                    _iw.addEventListener("open",function(){
+                        _marker.getLabel().hide();
+                    });
+                    _iw.addEventListener("close",function(){
+                        _marker.getLabel().show();
+                    });
+                    label.addEventListener("click",function(){
+                        _marker.openInfoWindow(_iw);
+                    });
+                    if(!!json.isOpen){
+                        label.hide();
+                        _marker.openInfoWindow(_iw);
+                    }
+                })()
+            }
+        }
+        //创建InfoWindow
+        function createInfoWindow(i){
+            var json = markerArr[i];
+            var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div><p>价格：￥"+_price+"/晚</p>");
+            return iw;
+        }
+        //创建一个Icon
+        function createIcon(json){
+    
+            var icon = new BMap.Icon("images/smiley.png",new BMap.Size(30,30));
+            return icon;
+            
+        }
+
+        
+        initMap();//创建和初始化地图
+		
+		
+		
+	})
+</script>
+
+</body>
+</html>

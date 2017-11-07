@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+		<link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+	    <link rel="stylesheet" href="css/common.css" />
+	    <link rel="stylesheet" type="text/css" href="css/orderlist.css"/>
+	    <link rel="stylesheet" href="iconcaomei/style.css" />
+	</head>
+	<body style="display: none;">
+		<div id="containerArea">
+			<div class="indexTopCon">
+				<div class="topInnerNav">
+					<a href="#" onclick="javascript:history.back();"><span class="czs-arrow-up-l"></span></a>
+					<span>我的订单</span>
+					<a href="#">
+					<!-- <span class="czs-menu-l"></span> -->
+					</a>
+				</div>	
+			</div>
+			<div id="nav">
+				<a href="javascript:;">全部订单</a>
+				<a href="javascript:;">有效订单</a>
+				<a href="javascript:;">退款订单</a>
+			</div>
+			<ul class="orderlist">
+<!-- 
+				<li>
+					<p class="p_title">订单超时</p>
+					<div class="pay_content">
+						<p class="list_bigsize">半坡国际广场-1-41402</p>
+						<p class="p_list"><span>合计：<i style="color: red">￥598</i></span></p>
+						<p class="p_list">2017-11-29~2017-11-30 <span>共一晚</span></p>
+					</div>
+				</li>
+ -->
+			</ul>
+			<div id="zanWu"></div>
+		</div>	
+			
+		<div id="bottomMenu"> 
+		   <div class="innerCon"> 
+		    <ul> 
+		     <li> 
+		      <div class="imgico"><span class="czs-home"></span></div> <p class="m_txt">首页</p>
+		     </li> 
+		     <li > 
+		      <div class="imgico"><span class="czs-list-clipboard-l"></span></div> <p class="m_txt">LIVE</p> 
+		     </li> 
+		     <li> 
+		      <div class="imgico"><span class="czs-network-l"></span></div> <p class="m_txt">找房</p> 
+		     </li> 
+		     <li  class="active"> 
+		      <div class="imgico"><span class="czs-doc-file"></span></div> <p class="m_txt">订单</p> 
+		     </li> 
+		     <li> 
+		      <div class="imgico"><span class="czs-user"></span></div> <p class="m_txt">我的</p> 
+		     </li> 
+		    </ul> 
+		   </div> 
+	  	</div> 
+	<div id="masking" style="overflow: hidden; display: none;"></div>
+	<div id="myArert">
+        <p id="diaTitle"><em>确定</em><em>返回</em></p>
+        <p id="diaBody">房门密码：</p>
+    </div>
+		
+		
+		
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
+	    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+	    <script type="text/javascript" src="js/myorder.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/autoZoomLoadImage.js"></script>
+	    <script charset="gb2312" language="javascript"   type="text/javascript" src="js/fastclick.js"></script>
+		<script>
+			$(document).ready(function(){
+				 var mySwiper = new Swiper('.swiper-container', {
+		            loop: true,
+		            autoplay: 1800,
+		            pagination: '.swiper-pagination',
+		            autoplayDisableOnInteraction: false
+		        });
+				//房间描述查看
+				$(".hs-content").on('click','.info-lock',function(){
+					if($(this).parent().find('.hs-info').hasClass('showtime')==true){
+						$(this).parent().find('.hs-info').removeClass('showtime');
+						$(this).html('收起<span class="czs-arrow-up-l"></span>')
+					}else{
+						$(this).parent().find('.hs-info').addClass('showtime');
+						$(this).html('展开全部<span class="czs-arrow-down-l"></span>')
+					}
+					
+				})
+				//设施服务查看
+				var falg=1;
+				$(".dp .deploy li").hide();
+	        	$(".dp .deploy li:eq(0)").show();
+	            $(".dp .deploy li:eq(0)").find('.fc-name').hide();
+	            
+				$(".dp .info-lock").click(function(){
+					if(falg=='1'){
+	                    $(".dp .deploy li:eq(0)").find('.fc-name').show();
+	                    $(".dp .deploy li").show();
+						$(this).html('收起<span class="czs-arrow-up-l"></span>');
+	                    falg=0;
+	                }else if(falg=='0'){
+	                    $(".dp .deploy li").hide();
+	                    $(".dp .deploy li:eq(0)").show();
+	                    $(".dp .deploy li:eq(0)").find('.fc-name').hide();
+						$(this).html('展开全部<span class="czs-arrow-down-l"></span>');
+	                    falg=1
+	                }
+				})
+				//评价
+				$(".appraise li").eq(0).addClass('showtime');
+            	$(".pingjia .info-lock").toggle(function(){
+            		$(".appraise li").addClass('showtime');
+            		$(this).html('收起<span class="czs-arrow-up-l"></span>');
+            	},function(){
+            		$(".appraise li").removeClass('showtime');
+			        $(".appraise li").eq(0).addClass('showtime');
+			        $(this).html('展开全部<span class="czs-arrow-down-l"></span>');
+            	})
+          
+				
+				
+				
+				//置顶
+			   $(window).scroll(function(event){
+					 var st=$(window).scrollTop();
+					 	if(st>200){
+		                	$(".fn-loca-nav").addClass("stp");
+			            }
+			            else{
+			                $(".fn-loca-nav").removeClass("stp");
+			            }
+	    		});
+	            //滚动
+	         
+				$('.fn-loca-nav a:first-child').click(function(){
+						$('html,body').animate({scrollTop:$('#page1').offset().top-45}, 200);}
+				);
+				$('.fn-loca-nav a:first-child+a').click(function(){
+						$('html,body').animate({scrollTop:$('#page2').offset().top-45}, 200);}
+				);
+				$('.fn-loca-nav a:first-child+a+a').click(function(){
+						$('html,body').animate({scrollTop:$('#page3').offset().top-45}, 200);}
+				);
+				$('.fn-loca-nav a:first-child+a+a+a').click(function(){
+						$('html,body').animate({scrollTop:$('#page4').offset().top-45}, 200);}
+				);
+				
+	            
+	            
+	            
+	            
+        	});
+				
+		</script>
+	</body>
+</html>

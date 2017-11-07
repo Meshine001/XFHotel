@@ -207,7 +207,7 @@ public class WechatController {
 				e.printStackTrace();
 			}
 		}
-		return "redirect:../login.html";
+		return "redirect:../index.html";
 	}
 	
 	@RequestMapping("/auth/automatic")
@@ -232,8 +232,10 @@ public class WechatController {
 					System.out.println(basic);
 					if(c != null){
 						if(c.getPassword()!=null){
+//							System.out.println("redirect:../" + state+"?id="+c.getId()+"&&"+"status=0");
 							return "redirect:../" + state+"?id="+c.getId()+"&&"+"status=1";
 						} else {
+//							System.out.println("redirect:../" + state+"?id="+c.getId()+"&&"+"status=0");
 							return "redirect:../" + state+"?id="+c.getId()+"&&"+"status=0";
 						}
 					} else {
@@ -253,7 +255,7 @@ public class WechatController {
 						Calendar calendar = Calendar.getInstance();
 				        Date date = new Date(System.currentTimeMillis());
 				        calendar.setTime(date);
-				        calendar.add(Calendar.MONTH, +1);
+				        calendar.add(Calendar.MONTH, +1); 
 				        date = calendar.getTime();
 						List<Double> list = new ArrayList<Double>();
 						list.add(20.0);
@@ -279,6 +281,7 @@ public class WechatController {
 								break;
 							}
 						}
+//						System.out.println("redirect:../" + state+"?id="+customer.getId()+"&&"+"status=0"+"&&"+"discounts=0");
 						return "redirect:../" + state+"?id="+customer.getId()+"&&"+"status=0"+"&&"+"discounts=0";
 					}
 				}
@@ -287,7 +290,7 @@ public class WechatController {
 				e.printStackTrace();
 			}
 		}
-		return "redirect:../login.html";
+		return "redirect:../index.html";
 	}
 
 	/**
@@ -458,7 +461,6 @@ public class WechatController {
 					JSONObject a = apartmentService.getApartmentById(o.getRoomId());
 					String f= a.getJSONObject("position").getString("bd_wei_zhi")+a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
 							a.getJSONObject("position").getString("dan_yuan")+"单元"+a.getJSONObject("position").getString("lou_ceng")+"层"+a.getJSONObject("position").getString("men_pai")+"号";
-					
 					String[] p = {f};
 					User user = userService.findById(a.getLong("steward"));
 					//发短信给顾客
@@ -616,5 +618,5 @@ public class WechatController {
 		System.out.println("支付成功");
 		return result;	
 	}
-
+	
 }

@@ -14,7 +14,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>青舍都市公寓-西安租房_西安合租</title>
+<title>都市公寓-西安租房_西安合租</title>
 
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/public/v1/css/base.css?r=3">

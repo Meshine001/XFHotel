@@ -13,7 +13,7 @@ $(document).ready(function(){
     	var str='';
     	$(".goodlist").html('');
     	for(var i=0;i<data.length;i++){
-    		str+='<li cuid="'+data[i].id+'"><h1>'+data[i].type+'</h1><p>消费满：<span>￥'+data[i].rule+'</span>可用</p><p>有效期：<span>'+data[i].startTime+"-"+data[i].endTime+'</span></p><i class="_pic">￥'+data[i].cValue+'</i></li>'
+    		str+='<li cuid="'+data[i].id+'"><h1>'+data[i].type+'</h1><p>消费满：<span>￥'+data[i].rule+'</span>可用</p><p>有效期：<span>'+data[i].startTime+"&nbsp;到&nbsp;"+data[i].endTime+'</span></p><i class="_pic">￥'+data[i].cValue+'</i></li>'
     	}
     	$(".goodlist").append(str);
         if($(".goodlist li").length==0){

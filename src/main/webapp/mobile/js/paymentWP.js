@@ -24,8 +24,8 @@ $(document).ready(function(){
 	}
 	
 	
-    _id=decodeURIComponent(fnBase.request('pid'));
-    var jiage=decodeURIComponent(fnBase.request('topic'));
+    _id=fnBase.request('pid');
+    var jiage=fnBase.request('topic');
  
     $(".p_msg li .toal").html('订单总额：<i style="color:red">￥'+jiage+'</i>');
     
