@@ -501,7 +501,7 @@ public class WechatController {
 					String[] p = {f};
 					User user = userService.findById(a.getLong("steward"));
 					//发短信给顾客
-					//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。
+					//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。//
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
 					//发短信给管理员systemConfService
 					//【青舍都市】您有新订单需要确认，请及时处理。{1}
@@ -525,7 +525,7 @@ public class WechatController {
 							a.getJSONObject("position").getString("dan_yuan")+"单元"+a.getJSONObject("position").getString("lou_ceng")+"层"+a.getJSONObject("position").getString("men_pai")+"号";
 					String[] p = {f};
 					//发短信给顾客 
-					//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。、、、
+					//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
 					//发短信给管理员systemConfService
 					//【青舍都市】您有新订单需要确认，请及时处理。{1}
