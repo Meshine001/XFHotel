@@ -14,7 +14,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>青舍都市公寓-西安租房_西安合租</title>
+<title>都市公寓-西安租房_西安合租</title>
 
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/public/v1/css/base.css?r=3">
@@ -187,12 +187,12 @@
 			</c:forEach>
 			<a href="" title="" target="" style="width: 100%; height: 100%;">
 				<div class="hr_img banner_img"
-					style="position: absolute; width: 100%; height: 100%; background: url(&quot;dist/public/v1/images/H-315.png&quot;) center 0px no-repeat; background-size:100% 100%;display: block; ;">
+					style="position: absolute; width: 100%; height: 100%; background: url(&quot;dist/public/v1/images/bannerweb.png&quot;) center 0px no-repeat; background-size:100% 100%;display: block; ;">
 				</div>
 			</a>
 			<a href="" title="" target="" style="width: 100%; height: 100%;">
 				<div class="hr_img banner_img"
-					style="position: absolute; width: 100%; height: 100%; background: url(&quot;dist/public/v1/images/ttttttttK.png&quot;) center 0px no-repeat; background-size:100% 100%;display: block; ;">
+					style="position: absolute; width: 100%; height: 100%; background: url(&quot;dist/public/v1/images/bannerweb.png&quot;) center 0px no-repeat; background-size:100% 100%;display: block; ;">
 				</div>
 			</a>
 			

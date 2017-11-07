@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <title>青舍都市公寓</title>
     <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
     <link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
     <link href="css/common.css" type="text/css" rel="stylesheet">
     <link href="css/life.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="iconcaomei/style.css" />
-    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script type="text/javascript" src="js/fnBase.js"></script>
     <script type="text/javascript" src="js/Listlife.js"></script>
@@ -17,14 +20,15 @@
     </style>
 </head>
 <body style="display:none">
-<div class="header">
-    <header class="header-mobile">
-        <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
-        <span class="cell">青舍生活</span>
-        <span class="cell link-btn">
-        </span>
-    </header>
-</div>
+			<div class="indexTopCon">
+				<div class="topInnerNav">
+					<a href="#" onclick="javascript:history.back();"><span class="czs-arrow-up-l"></span></a>
+					<span>青舍生活</span>
+					<a href="#">
+					<!-- <span class="czs-menu-l"></span> -->
+					</a>
+				</div>	
+			</div>
 <div id="Myscroll-body">
     <ul class="content-ul">
     </ul>
@@ -34,19 +38,40 @@
         <a>下一页</a>
     </div>
    <!-- my-footer-->
-        <div class="my-footer">
-        	<p>青舍都市公寓</p>
-            <div class="ac-footer">
-            	<a href="about.html">关于我们</a>
-            	<a href="problem.html">常见问题</a>
-            	<a href="platform.html" title="platform.html">房屋托管</a>
-            	<a href="Cooperative.html">合作商户</a>
-            	<a href="platformInit.html" title="platformInit.html">人才招聘</a>
-            </div>
-            <p>Copyright © 西安易云智能科技发展有限公司提供技术支持</p>
-        </div>
+			<div class="footerTel">
+				<ul>
+					<li><a href="about.html">关于我们</a></li>
+					<li><a href="platform.html">房屋托管</a></li>
+					<li><a href="Cooperative.html">合作商户</a></li>
+					<li><a href="https://m.lagou.com/">人才招聘</a></li>
+					<li><a href="">返回顶部</a></li>
+				</ul>
+				<div class="tel">
+					<p>Copyright © 西安易云智能提供技术支持</p>
+				</div>
+			</div>
 </div>
 
-
+		<div id="bottomMenu"> 
+		   <div class="innerCon"> 
+		    <ul> 
+		     <li> 
+		      <div class="imgico"><span class="czs-home"></span></div> <p class="m_txt">首页</p>
+		     </li> 
+		     <li class="active"> 
+		      <div class="imgico"><span class="czs-list-clipboard-l"></span></div> <p class="m_txt">LIVE</p> 
+		     </li> 
+		     <li> 
+		      <div class="imgico"><span class="czs-network-l"></span></div> <p class="m_txt">找房</p> 
+		     </li> 
+		     <li > 
+		      <div class="imgico"><span class="czs-doc-file"></span></div> <p class="m_txt">订单</p> 
+		     </li> 
+		     <li> 
+		      <div class="imgico"><span class="czs-user"></span></div> <p class="m_txt">我的</p> 
+		     </li> 
+		    </ul> 
+		   </div> 
+	  	</div>  
 </body>
 </html>

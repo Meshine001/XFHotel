@@ -8,8 +8,9 @@ $(document).ready(function(){
         currentdate:'',
         _startDate:''
     };
-    if(_uid==null||_uid=="undefined"||_uid==""){
-        window.location.href="login.html";
+    if(_uid=='null'||_uid=="undefined"||_uid==""){
+   		var redirect1 = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfa31f9e4951f95df&redirect_uri=http%3A%2F%2Fwww.yiyunzn.xyz%2Fwx%2Fauth%2Fautomatic&response_type=code&scope=snsapi_userinfo&state=index.html#wechat_redirect';
+  	 	window.location.href = redirect1;
         return;
     }
 
@@ -126,7 +127,7 @@ $(document).ready(function(){
     $(".orderlist").on('click','li .contenster',function(event){
     	event.stopPropagation();
     	 var id = $(this).attr('roomid');
-         window.location.href = "house_particulars.html?id=" + encodeURIComponent(id) + "";
+         window.location.href = "house_details.html?id=" + encodeURIComponent(id) + "";
     });
 
 

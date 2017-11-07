@@ -253,7 +253,7 @@ public class WechatController {
 						Calendar calendar = Calendar.getInstance();
 				        Date date = new Date(System.currentTimeMillis());
 				        calendar.setTime(date);
-				        calendar.add(Calendar.MONTH, +6);
+				        calendar.add(Calendar.MONTH, +1);
 				        date = calendar.getTime();
 						List<Double> list = new ArrayList<Double>();
 						list.add(20.0);
@@ -522,7 +522,7 @@ public class WechatController {
 					String f= a.getJSONObject("position").getString("bd_wei_zhi")+a.getJSONObject("position").getString("xiao_qu")+a.getJSONObject("position").getString("lou_hao")+"号楼"+
 							a.getJSONObject("position").getString("dan_yuan")+"单元"+a.getJSONObject("position").getString("lou_ceng")+"层"+a.getJSONObject("position").getString("men_pai")+"号";
 					String[] p = {f};
-					//发短信给顾客
+					//发短信给顾客 
 					//【青舍都市】您预订的{1}已支付成功，管理员正在确认中，请耐心等待。
 					SendTemplateSMS.sendSMS(Constants.SMS_INFORM_OVER_PAY, pwd_user_mobile, p);
 					//发短信给管理员systemConfService
@@ -617,3 +617,5 @@ public class WechatController {
 		return result;
 	}
 }
+
+

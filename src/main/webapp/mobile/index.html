@@ -1,162 +1,153 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<head lang="en">
-    <!-- 图标库参考http://chuangzaoshi.com/icon/-->
-    <meta charset="UTF-8">
-    <title>青舍都市公寓</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-
-	<link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
-    <link rel="stylesheet" href="css/common.css" />
-    <link rel="stylesheet" href="css/index.css" />
-    <link rel="stylesheet" href="css/swiper-3.3.1.min.css" />
-    <link rel="stylesheet" href="iconcaomei/style.css" />
-    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
-    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
-    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
-    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
-    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/autoZoomLoadImage.js"></script>
-    <script charset="gb2312" language="javascript" type="text/javascript" src="js/index.js"></script> 
-    <script charset="gb2312" language="javascript"   type="text/javascript" src="js/fastclick.js"></script>
-	<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/iscroll.js"></script>
-    <style>
-        .swiper-container { width: 3.75rem; height: 2.1rem;overflow: hidden; }
-        .swiper-container .swiper-slide{ width: 3.75rem; height: 2.1rem; }
-        .swiper-container .swiper-slide img{width: 100%;height: 2.1rem; }
-        .swiper-container .swiper-pagination-bullet{ width: 0.24rem; height: 0.02rem;border-radius: 0.05rem; background: rgba(255,255,255,0.8);}
-        .swiper-container .swiper-pagination-bullet-active{ background: #fff;}
-        .header-mobile .img-btn{
-            width: 0.28rem;
-            height: 0.28rem;
-            border-radius: 0.14rem;
-            overflow: hidden;
-            margin: 0;
-            vertical-align: top;
-        }
-     	.swiper-container-life{ width: 3.75rem; height: 3.2rem;overflow: hidden; }
-        .swiper-container-life .swiper-slide{ width: 3.75rem; height: 3.2rem; }
-         
-    </style>
-    
-</head>
-<body style="display:none">
-<!--蒙版-->
-    <div class="menuBar">
-        <ul>
-            <li><span class="czs-home-l"></span><a href="index.html">首页</a></li>
-            <li><span class="czs-paper"></span><a href="myorder.html">我的订单</a></li>
-            <li><span class="czs-link-l"></span><a href="serve.html">服务中心</a></li>
-            <li><span class="czs-calendar-l"></span><a href="coupon.html">我的优惠卷</a></li>
-            <li><span class="czs-user-l"></span><a href="platform.html">房屋托管平台</a></li>
-            <li><span class="czs-cloud-l"></span><a href="Lifelist.html">青舍生活</a></li>
-            <li><span class="czs-setting-l"></span><a href="editprofileinfo.html">设置</a></li>
-            <li><span class="czs-write-l"></span><a href="login.html">登陆|注册</a></li>
-        </ul>
-        <h3 class="_logo"><img src="images/logo1.png"></h3>
-    </div>
-    <div class="Masking-out"></div>
-   <div class="newUser">
-       <img src="img/newp.png" class="item1">
-       <i class="nest">领取</i>
-    </div>
-<!--Address-search-->
-
-
-
-
-<!--头部-->
-    <div class="header">
-        <header class="header-mobile" >
-            <a href="javascript:;" class="cell link-home"><span class="czs-menu-l"></span></a>
-            <span class="cell group-search">
-                <input type="buttom" placeholder="您想住哪呢？"  class="input-search">
-            </span>
-            <a href="serve.html" class="cell link-btn"><img src="images/my-index.png" class="img-btn"></a>
-        </header>
-    </div>
-<!--内容区域-->
-    <div id="Myscroll-body">
-        <!-- 轮播-->
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><a href="javascript:void(0)"><img src="img/banner100.png"/></a></div>
-                <div class="swiper-slide"><a href="javascript:void(0)"><img src="img/banner101.png"/></a></div>
-                <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA3.png"/></a></div>
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-		
-        <!--主页内容 酒店型公寓 | 短租型公寓 | 在线找房 | 青客生活 -->
-		
-			<div id="proSort">
-				<div class="fancybox"> 
-					<div class="actionoce hot-issue">
-						<a href="houseType.html">
-			                <div class="img-wrapper"><img src="images/jd.png"></div>
-			                <div style="color: #4d4d4d;">我要找房</div>
-            			</a>
-			            <a href="map.html">
-			                <div class="img-wrapper"><img src="images/jd2.png"></div>
-			                <div style="color: #4d4d4d;">地图找房</div>
-			            </a>
-			            <a href="serve.html" id="_fw">
-			                <div class="img-wrapper"><img src="images/jd5.png" style="height: 0.41rem"></div>
-			                <div style="color: #4d4d4d;">服务中心</div>
-			            </a>
-			           
-			            <a href="Lifelist.html">
-			                <div class="img-wrapper"><img src="images/jd3.png"></div>
-			                <div style="color: #4d4d4d;">青舍生活</div>
-			            </a>
-			             <a href="platformInit.html" class="tuoguan" alt="platformInit.html">
-			                <div class="img-wrapper"><img src="images/jd6.png"></div>
-			                <div style="color: #4d4d4d;">房屋托管</div>
-			            </a>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	    <meta http-equiv="Pragma" content="no-cache" />
+	    <meta http-equiv="Expires" content="0" />
+		<link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+	    <link rel="stylesheet" href="css/common.css" />
+	    <link rel="stylesheet" href="css/swiper-3.3.1.min.css" />
+	    <link rel="stylesheet" href="css/index.css" />
+	    <link rel="stylesheet" href="iconcaomei/style.css" />
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script charset="gb2312" language="javascript"   type="text/javascript" src="js/fastclick.js"></script>
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/autoZoomLoadImage.js"></script>
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
+	    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+		<script type="text/javascript" src="js/index_v1.js"></script>
+	</head>
+	<body style="display: none;">
+		<div id="containerArea">
+			<div class="indexTopCon">
+				<div class="slideBox">
+					<div class="topInnerNav">
+<!-- 						<a href="listings.html"><span class="czs-search-l"></span></a> -->
+						<a href="editprofileinfo.html" class="myimg"><img src="../images/face-90x90.png"></a>
+					</div>
+					<div class="topInnerlogo">
+						<p>青舍都市公寓</p>
+						<p>The life I want...</p>
+					</div>
+				</div>
+				<div class="topContainerNav">
+					<div class="innerCon">
+<!-- 
+						<ul>
+							<li><a href="listings.html">
+								<span class="czs-home"></span>
+								<p>特色房源</a>
+							</li>
+							<li><a href="platform.html">
+								<span class="czs-people"></span>
+								<p>房东加盟</p></a>
+							</li>
+							<li><a href="serve.html">
+								<span class="czs-comment-l"></span>
+								<p>服务中心</p></a>
+							</li>
+							<li><a href="Lifelist.html">
+								<span class="czs-list-clipboard-l"></span>
+								<p>青舍生活</p></a>
+							</li>
+						</ul>
+ -->
+ 
+ 					<div class="search-form-box">
+ 						<span class="czs-search-l"></span>
+ 						<input type="text" placeholder="区域，户型，价格？"> 						
+ 					</div>
+  					<div class="subparent">搜索</div>
+ 
 					</div>
 				</div>
 			</div>
+			
+			<div class="indexCenterCon">
+				<div class="fn-title">
+					<h3 class="fl">区域选择</h3>
+				</div>
+				<div class="swiper-container">
+		            <div class="swiper-wrapper">
+		                <div class="swiper-slide" selectweizhiid="0"><a href="javascript:void(0)"><h2>城东</h2><img src="images/dong.png"/></a></div>
+		                <div class="swiper-slide" selectweizhiid="1"><a href="javascript:void(0)"><h2>城南</h2><img src="images/lan.png"/></a></div>
+		                <div class="swiper-slide" selectweizhiid="2"><a href="javascript:void(0)"><h2>城西</h2><img src="images/xi.png"/></a></div>
+		                <div class="swiper-slide" selectweizhiid="3"><a href="javascript:void(0)"><h2>城北</h2><img src="images/bei.png"/></a></div>
+		            	<div class="swiper-slide" selectweizhiid="4"><a href="javascript:void(0)"><h2>城中</h2><img src="images/zhong.png"/></a></div>
+		            </div>
+		            <div class="swiper-pagination" style="display: none;"></div>
+		        </div>
+				
+			</div>
+			
+			<div class="indexhouseList">
+				<div class="fn-title">
+					<h3 class="fl">优质房源</h3>
+					<a href="listings.html" class="fr czs-angle-right-l"></a>
+				</div>
+				<div class="hatHouse">
+					<ul>
 
-        <!-- service-->
-        <div class="service plCon">
-            <h2 class="title-serce">热门房源<a href="houseType.html">更多</a></h2>
-            <ul class="goodlist">
+					</ul>
+				</div>
+			</div>
+			<div class="lifeList service-image">
+				<div class="fn-title">
+					<h3 class="fl">青舍生活</h3>
+					<a href="Lifelist.html" class="fr czs-angle-right-l"></a>
+				</div>
+				 <div class="swiper-container-life">
+					<div class="swiper-wrapper">
+				       <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA11.png"/></a></div>
+				       <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA2.jpg"/></a></div>
+				       <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA3.png"/></a></div>         
+				    </div>      
+				 </div>
+			</div>
+			
 
-            </ul>
-            <div id="zanwu"></div>
+			<div class="footerTel" style="height:auto;">
+				<ul>
+					<li><a href="about.html">关于我们</a></li>
+					<li><a href="platform.html">房屋托管</a></li>
+					<li><a href="Cooperative.html">合作商户</a></li>
+					<li><a href="https://m.lagou.com/">人才招聘</a></li>
+					<li><a href="">返回顶部</a></li>
+				</ul>
+				<div class="tel">
+					<p>Copyright © 西安易云智能提供技术支持</p>
+				</div>
+				<img src="images/erweima.jpg" style="margin:0.2rem auto 0 auto;width:1.3rem;display:block"/>
+			</div>			
+		</div>
+		
+		
+		<div id="bottomMenu"> 
+		   <div class="innerCon"> 
+		    <ul> 
+		     <li class="active"> 
+		      <div class="imgico"><span class="czs-home"></span></div> <p class="m_txt">首页</p>
+		     </li> 
+		     <li > 
+		      <div class="imgico"><span class="czs-list-clipboard-l"></span></div> <p class="m_txt">LIVE</p> 
+		     </li> 
+		     <li> 
+		      <div class="imgico"><span class="czs-network-l"></span></div> <p class="m_txt">找房</p> 
+		     </li> 
+		     <li > 
+		      <div class="imgico"><span class="czs-doc-file"></span></div> <p class="m_txt">订单</p> 
+		     </li> 
+		     <li> 
+		      <div class="imgico"><span class="czs-user"></span></div> <p class="m_txt">我的</p> 
+		     </li> 
+		    </ul> 
+		   </div> 
+	  	</div>   
+		
 
-        </div>
-        <div class="service" style="border: none">
-            <a href="houseType.html"><img src="img/tonglangg.png" style="width: 100%"></a>
-        </div>
-        <!-- qingshe生活-->
-        <div class="service service-image">
-            <h2 class="title-serce">青舍生活<a href="Lifelist.html">更多</a></h2>
-			 <div class="swiper-container-life">
-				<div class="swiper-wrapper">
-			       <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA11.png"/></a></div>
-			       <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA2.jpg"/></a></div>
-			       <div class="swiper-slide"><a href="javascript:void(0)"><img src="images/polpA3.png"/></a></div>         
-			    </div>      
-			 </div>
-        </div>
 
-        <!-- my-footer-->
-        <div class="my-footer">
-        	<p>青舍都市公寓</p>
-            <div class="ac-footer">
-                <a href="about.html">关于我们</a>
-            	<a href="problem.html">常见问题</a>
-            	<a href="platform.html" title="platform.html">房屋托管</a>
-            	<a href="Cooperative.html">合作商户</a>
-            	<a href="platformInit.html" title="platformInit.html">人才招聘</a>
-            </div>
-            <p>Copyright © 西安易云智能科技发展有限公司提供技术支持</p>
-        </div>
-    </div>
-
-<!-- 完善提示 -->
-<div id="masking"></div>
-
-
-</body>
+	</body>
 </html>

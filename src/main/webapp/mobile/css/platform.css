@@ -13,10 +13,10 @@
 .header p i.success{color: #2dec7b}
 .trust{
     display: inline-block;
-    font-size: 0.14rem;
-    padding: 0.06rem;
-    border: 1px solid #2c2c2c;
-    color: #2c2c2c;
+    font-size: 0.12rem;
+    padding: 0.06rem 0.24rem;
+    border: 1px solid #666;
+    color: #666;
 }
 #Myscroll-body{top: 1.8rem;bottom: 0rem;background: #fff;overflow-y: auto;padding: 0.25rem;font-size: 0.13rem;line-height: 0.25rem}
 .footer{

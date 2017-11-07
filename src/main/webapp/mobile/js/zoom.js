@@ -10,5 +10,10 @@ $(document).ready(
 			zoom();
 			window.onresize = zoom;
 			$("body").show();
+			
+			$("#bottomMenu .innerCon ul li").click(function(){
+				$(this).addClass('active').siblings().removeClass('active');
+			})
+			
 	}
 );

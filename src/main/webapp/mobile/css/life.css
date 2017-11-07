@@ -1,11 +1,16 @@
 ﻿html,body{background: #fff}
 /*.header-mobile{position: relative}*/
-#Myscroll-body{background: #FFF;font-size: 0.14rem;}
+#Myscroll-body{background: #FFF;font-size: 0.12rem;}
 #Myscroll-body .my-title{text-align: center;color: #333}
 #Myscroll-body .f12{font-size: 0.12rem;color: #666;padding-bottom: 0.2rem}
 #Myscroll-body .f12 i{color: #000000}
 #Myscroll-body .ptxt{text-indent: 0.25rem;}
 #Myscroll-body .ptxt img{width: 100%;padding: 0.1rem 0}
+
+.topInnerNav{background-color: #fff;width: 100%;height: 0.45rem;line-height: 0.45rem;color: #333;font-size: 0.16rem;position: relative;display: flex;justify-content: space-between;align-content: center;}
+.topInnerNav a{display: block;width: 0.45rem;height: 0.45rem;line-height: 0.5rem;text-align: center;color: #03b28b;}
+.topInnerNav a .fj{font-size: 0.12rem;color: #03b28b;}
+.topInnerNav a:first-child{position: relative;transform: rotate(-90deg);}
 
 
 #content{min-height:5.6rem;line-height:0.25rem;}
@@ -21,7 +26,7 @@
     display: block;
     width: 100%;
     height: 0.4rem;
-    background: url(../images/black40.png);
+    background: rgba(0,0,0,.65);
     color: #fff;
     font-size: 0.12rem;
     padding: 0.1rem;
@@ -56,7 +61,7 @@
 
 
 #page{width: 100%;height:0.4rem;line-height: 0.4rem;text-align: right;padding-right: 0.15rem;margin: 0.2rem auto 0.1rem auto}
-#page a{font-size: 0.14rem;padding: 0.06rem;border: 1px solid #ccc;color:#767675; border-radius: 0.03rem;}
+#page a{font-size: 0.12rem;padding: 0.03rem 0.1rem;border: 1px solid #ccc;color:#767675; border-radius: 0.12rem;}
 
 
 

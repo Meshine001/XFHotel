@@ -282,7 +282,6 @@ public class BaseDAOImpl<T, ID extends Serializable> implements BaseDAO<T, ID> {
 		}
 		return query.list();
 	}
-
 	/**
 	 * <refresh>
 	 * 

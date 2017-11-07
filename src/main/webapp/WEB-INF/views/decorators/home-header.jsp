@@ -6,7 +6,7 @@
 %>
 	<header>
 		<div class="main">
-			<a href="<%=basePath%>" title="青舍首页" class="logo"></a>
+			<a href="<%=basePath%>" title="青舍首页" class="logo">都市公寓</a>
 			<div class="nav clearfix">
 				<ul class="nav_ul">
 					<li><a href="<%=basePath%>/" title="">首页</a></li>

@@ -12,7 +12,8 @@
 </head>
 <body>
 	<my_body>
-	<h1 class="page-header">个人资料</h1>
+	
+	<div class="row"><h1 class="page-header">个人资料</h1></div>
 	<div class="row placeholders"></div>
 	<div class="row">
 		<div class="col-md-6">

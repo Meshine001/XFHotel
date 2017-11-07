@@ -8,7 +8,7 @@
     <link href="css/common.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/personalCenter.css" />
     <link rel="stylesheet" href="iconcaomei/style.css" />
-    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
     <script type="text/javascript" src="js/fnBase.js"></script>
     <style>
@@ -18,16 +18,21 @@
         #content{padding:0 0.1rem;}
         #content .topic{border-bottom: 1px solid #e4e4e4;padding:0.2rem 0;font-size:0.12rem;color:#666;}
     	#content .topic h3{padding-bottom:0.1rem;color:#333}
+    	
+    	.topInnerNav{width: 100%;height: 0.45rem;line-height: 0.45rem;color: #333;font-size: 0.16rem;position: relative;display: flex;justify-content: space-between;align-content: center;}
+.topInnerNav a{display: block;width: 0.45rem;height: 0.45rem;line-height: 0.5rem;text-align: center;color: #03b28b;}
+.topInnerNav a .fj{font-size: 0.12rem;color: #03b28b;}
+.topInnerNav a:first-child{position: relative;transform: rotate(-90deg);}
     </style>
 </head>
 <body style="background: #FFF">
-<div class="header">
-    <header class="header-mobile">
-        <a href="#" onclick="javascript:history.back();" class="cell link-home"><span class="czs-angle-left-l"></span></a>
-        <span class="cell">关于我们</span>
-        <span class="cell link-btn"></span>
-    </header>
-</div>
+				<div class="topInnerNav">
+					<a href="javascript:;" onclick="javascript:history.back();"><span class="czs-arrow-up-l"></span></a>
+					<span>关于我们</span>
+					<a href="javascript:;">
+					<!-- <span class="czs-menu-l"></span> -->
+					</a>
+				</div>	
 <div id="Myscroll-body">
     <div id="header">
     	<h1>青舍都市公寓</h1>
@@ -40,6 +45,10 @@
     	<div class="topic">
     		<h3>使用条款</h3>
     		<p>我们是集酒店式公寓和休闲式公寓为主营出租业务，供广大消费者，工作之余的娱乐休闲，周末朋友聚会，麻友娱乐等等，配备的麻将桌，茶室，大床房，智能电视等等；</p>
+    	</div>
+    	<div class="topic">
+    		<h3>退房政策</h3>
+    		<p>在您退房时，房间提供的物品，不得有损伤和丢失，到订房结束日期时我们会安排保洁人员去检查房屋状况，一切正常后我们方将押金退还到你订房时的付款账号，我们会通过银行电汇或向您的银行卡／信用卡退款。如房间物品有人为故意损坏，我们将按物品原价赔偿，</p>
     	</div>
     </div>
     

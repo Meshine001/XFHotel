@@ -119,11 +119,12 @@ header {
 	background: #fff;
 	height: 68px;
 	line-height: 68px;
-/*	border-bottom: 4px solid #000;*/
+	border-bottom: 1px solid #000;
 }
 
 .logo {
-	background: url(../images/logo260.png) no-repeat left;
+	/*background: url(../images/logo260.png) no-repeat left;*/
+	font-size:35px;
 	width: 450px;
 	height: 70px;
 	display: inline-block;

@@ -28,7 +28,7 @@ $(document).ready(function(){
 		    return ip;
 	}
 	
-    _id=decodeURIComponent(fnBase.request('id'));
+    _id=fnBase.request('id');
     var frontURL=Constant.URL+'/mobile/getOrder';
     var postData={id:_id};
     var _totalprice='';
@@ -36,9 +36,9 @@ $(document).ready(function(){
         console.log(data);
         fnBase.keep(1,'roomId',data[1].roomId)
         _totalprice=Number(data[1].totalPrice).toFixed(2);
-        $(".p_msg li ._date").html(data[0]+"入住"+data[2]+"离开"+"<i class='date'>共"+data[1].totalDay+"天</i>");
-        $(".p_msg li .toal").html("订单总额:<span class='money'>￥"+_totalprice+"</span>");
-
+        $(".p_msg li ._date").html(data[0]+"入住"+data[2]+"离开");
+        $(".p_msg li ._cash").html("订单总额:<span class='money'>￥"+_totalprice+"</span>");
+		$(".p_msg li ._number").html('共'+data[1].totalDay+'天')
     });
    $.ajax({
 	   type:'GET',
@@ -55,7 +55,7 @@ $(document).ready(function(){
 
 
    $(".p_Settel li .wx_p").click(function (){
-       //fnBase.myalert('支付系统未开启！')
+
        if(Constant.CLIENT_IP == undefined){
            Constant.CLIENT_IP = getIp();
        }
@@ -65,23 +65,23 @@ $(document).ready(function(){
            ip:Constant.CLIENT_IP//客户端ip
        };
        console.log(data);
-       fnBase.commonAjax(url,data,function (data) {
-           console.log(data);
-           if(data.status == 'success'){
-               console.log(data);
-               var payData = {
-                 appId: data.obj.appId,
-                   timeStamp:  data.obj.timeStamp,
-                   nonceStr: data.obj.nonceStr,
-                   package:data.obj.package,
-                   signType: data.obj.signType,
-                   paySign:data.obj.paySign
-               };
-               callPay(payData);
-           }else {
-               fnBase.myalert('支付失败');
-           }
-       });
+     fnBase.commonAjax(url,data,function (data) {
+         console.log(data);
+         if(data.status == 'success'){
+             console.log(data);
+             var payData = {
+               appId: data.obj.appId,
+                 timeStamp:  data.obj.timeStamp,
+                 nonceStr: data.obj.nonceStr,
+                 package:data.obj.package,
+                 signType: data.obj.signType,
+                 paySign:data.obj.paySign
+             };
+             callPay(payData);
+         }else {
+             fnBase.myalert('支付失败');
+         }
+     });
    });
    
 });

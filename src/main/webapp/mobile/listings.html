@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+		<link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+	    <link rel="stylesheet" href="css/common.css" />
+	    <link rel="stylesheet" href="css/swiper-3.3.1.min.css" />
+	    <link rel="stylesheet" href="css/listings.css" />
+	    <link rel="stylesheet" href="iconcaomei/style.css" />
+	</head>
+	<body style="display: none;">
+		<div id="containerArea">
+			<div class="indexTopCon">
+				<div class="topInnerNav">
+					<a href="#" onclick="javascript:history.back();"><span class="czs-arrow-up-l"></span></a>
+					<span>房屋列表</span>
+					<a href="javascript:;" id="nearby"><span class="czs-location-l"></span><span class="fj">附近</span></a>
+				</div>	
+			</div>
+			<div class="indexTopCon selectedNav">
+				<ul>
+					<li><a href="javascript:;">位置区域</a></li>
+					<li><a href="javascript:;">户型选择</a></li>
+					<li><a href="javascript:;">周边</a></li>
+				</ul>
+			</div>
+			<div class="shaixuan">
+				<div class="shaixuanList">
+					<ul>
+						<li selectweizhiid="5">
+							<span>不限</span>
+							<span></span>
+							<span class="czs-circle-l czs-circle-o"></span>
+						</li>
+						<li selectweizhiid="0">
+							<span>城东</span>
+							<span><i></i>家民宿</span>
+							<span class="czs-circle-l"></span>
+						</li>
+						<li selectweizhiid="1">
+							<span>城南</span>
+							<span><i></i>家民宿</span>
+							<span class="czs-circle-l"></span>
+						</li>
+						<li selectweizhiid="2">
+							<span>城西</span>
+							<span><i></i>家民宿</span>
+							<span class="czs-circle-l"></span>
+						</li>
+						<li selectweizhiid="3">
+							<span>城北</span>
+							<span><i></i>家民宿</span>
+							<span class="czs-circle-l"></span>
+						</li>
+						<li selectweizhiid="4">
+							<span>城中</span>
+							<span><i></i>家民宿</span>
+							<span class="czs-circle-l"></span>
+						</li>
+					</ul>
+<!-- 				<a class="confirm">筛选</a>  -->	
+				</div>
+				<div class="shaixuanList">
+					<ul>
+						<li>
+							<span>不限</span>
+							<span class="czs-circle-l"></span>
+						</li>
+						<li>
+							<span>一室</span>
+							<span class="czs-circle-l"></span>
+						</li>
+						<li>
+							<span>二室</span>
+							<span class="czs-circle-l"></span>
+						</li>
+						<li>
+							<span>三室</span>
+							<span class="czs-circle-l"></span>
+						</li>
+						<li>
+							<span>四室</span>
+							<span class="czs-circle-l"></span>
+						</li>
+					</ul>
+				</div>
+				<div class="shaixuanList">
+					<ul>
+						<li>
+							<span>不限</span>
+							<span class="czs-circle-l"></span>
+						</li>
+						<li>
+							<span>交通便利</span>
+							<span class="czs-circle-l"></span>
+						</li>
+						<li>
+							<span>商业中心</span>
+							<span class="czs-circle-l"></span>
+						</li>
+						<li>
+							<span>大学附近</span>
+							<span class="czs-circle-l"></span>
+						</li>
+						<li>
+							<span>娱乐中心</span>
+							<span class="czs-circle-l"></span>
+						</li>
+					</ul>	
+				</div>
+			</div>
+			<div class="indexhouseList">
+				<ul>
+<!-- 
+					<li proID='+data[i].apartment.id+'>
+						<a href="javascript:;">
+							<div class="fn-img">
+									<img src="'+Constant.URL+"/images/"+data[i].apartment.fang_jian_tu[0]+'">
+									<span class="price">￥'+data[i].apartment.basic_info.jia_ge+'</span>
+								</div>
+								<div class="fn-txt">
+									<p>'+data[i].apartment.position.xa_wei_zhi+"-"+data[i].apartment.position.xiao_qu+'</p>
+									<p class="hu-c">'+data[i].apartment.basic_info.shi+"室"+data[i].apartment.basic_info.ting+"厅"+data[i].apartment.basic_info.wei+"卫"+'<span>宜住：'+data[i].apartment.basic_info.reng_shu+'人</span><span>常住优惠</span></p>
+								</div>
+						</a>
+					</li>
+
+ -->
+				</ul>
+				<div id="zanwu"></div>
+				<p class="more">没有更多了</p>
+			</div>
+			<div class="footerTel">
+				<ul>
+					<li><a href="about.html">关于我们</a></li>
+					<li><a href="platform.html">房屋托管</a></li>
+					<li><a href="Cooperative.html">合作商户</a></li>
+					<li><a href="https://m.lagou.com/">人才招聘</a></li>
+					<li><a href="">返回顶部</a></li>
+				</ul>
+				<div class="tel">
+					<p>Copyright © 西安易云智能提供技术支持</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottomMenu">
+			<a href="mapbd.html">地图找房</a>
+		</div>
+		
+		
+		
+		
+		
+		<script  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	    <script  type="text/javascript" src="js/zoom.js"></script>
+	    <script  type="text/javascript" src="js/fnBase.js"></script>
+	    <script  type="text/javascript" src="js/listings.js" ></script>
+	    <script  type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
+	    <script  type="text/javascript" src="js/autoZoomLoadImage.js"></script>
+	    <script  type="text/javascript" src="js/fastclick.js"></script>
+
+	</body>
+</html>

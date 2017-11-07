@@ -369,7 +369,7 @@
 			function selectWeizhi(value){
 				console.log(value)
 				 $.ajax({
-						type:'POST',
+					 	type:'POST',
 						dataType:'json',
 						data:{'wei':value},
 						url:'/admin/user/getRoom/',

@@ -1,261 +1,324 @@
+'use strict';
 
-//$(document).ready(function(){
+// 日期选择插件(自定义)
+
+var date = function ($) {
+
+  $.fn.hotelDate = function (options) {
 
 
 
-var gMonths=new Array("一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月");
-var WeekDay=new Array("日","一","二","三","四","五","六");
-var strToday="今天";
-var strYear="年";
-var strMonth="月";
-var strDay="日";
-var splitChar="-";
-var startYear=2000;
-var endYear=2050;
-var dayTdHeight=1.8;
-var dayTdTextSize=0.35;
-var gcNotCurMonth="#E0E0E0";
-var gcRestDay="#FF0000";
-var gcWorkDay="#444444";
-var gcMouseOver="#79D0FF";
-var gcMouseOut="#F4F4F4";
-var gcToday="#444444";
-var gcTodayMouseOver="#6699FF";
-var gcTodayMouseOut="#79D0FF";
-var gdCtrl=new Object();
-var goSelectTag=new Array();
-var gdCurDate=new Date();
-var giYear=gdCurDate.getFullYear();
-var giMonth=gdCurDate.getMonth()+1;
-var giDay=gdCurDate.getDate();
-function $(){
-    var elements=new Array();
-    for(var i=0;i<arguments.length;i++){
-        var element=arguments[i];
-        if(typeof(arguments[i])=='string'){
-            element=document.getElementById(arguments[i]);
-        }if(arguments.length==1){
-            return element;
-        }
-        elements.Push(element);}
-    return elements;
-}
-Array.prototype.Push=function(){
-    var startLength=this.length;
-    for(var i=0;i<arguments.length;i++){
-        this[startLength+i]=arguments[i];
-    }
-    return this.length;
-};
-String.prototype.HexToDec=function(){
-    return parseInt(this,16);
-}
-String.prototype.cleanBlank=function(){
-    return this.isEmpty()?"":this.replace(/\s/g,"");
-}
-function checkColor(){
-    var color_tmp=(arguments[0]+"").replace(/\s/g,"").toUpperCase();
-    var model_tmp1=arguments[1].toUpperCase();
-    var model_tmp2="rgb("+arguments[1].substring(1,3).HexToDec()+","+arguments[1].substring(1,3).HexToDec()+","+arguments[1].substring(5).HexToDec()+")";
-    model_tmp2=model_tmp2.toUpperCase();
-    if(color_tmp==model_tmp1 ||color_tmp==model_tmp2){
-        return true;
-    }
-    return false;
-}
-function $V(){
-    return $(arguments[0]).value;
-}
-function fPopCalendar(evt,popCtrl,dateCtrl){
-    evt.cancelBubble=true;
-    gdCtrl=dateCtrl;
-    fSetYearMon(giYear,giMonth);
-    var point=fGetXY(popCtrl);
-    with($(".calendardiv").style){
-        left=point.x+"rem";
-        top=(point.y+popCtrl.offsetHeight+1)+"rem";
-        visibility='visible';
-        zindex='99';
-        width='100%';
-        position='absolute';
-    }
-    $("calendardiv").focus();
-}
-function fSetDate(iYear,iMonth,iDay){
-    var iMonthNew=new String(iMonth);
-    var iDayNew=new String(iDay);
-    if(iMonthNew.length<2){
-        iMonthNew="0"+iMonthNew;
-    }if(iDayNew.length<2){
-        iDayNew="0"+iDayNew;
-    }
-    gdCtrl.value=iYear+splitChar+iMonthNew+splitChar+iDayNew;fHideCalendar();
-}
-function fHideCalendar(){
-    $("calendardiv").style.visibility="hidden";
-    for(var i=0;i<goSelectTag.length;i++){
-        goSelectTag[i].style.visibility="visible";
-    }
-    goSelectTag.length=0;
-}
-function fSetSelected(){
-    var iOffset=0;
-    var iYear=parseInt($("tbSelYear").value);
-    var iMonth=parseInt($("tbSelMonth").value);
-    var aCell=$("cellText"+arguments[0]);aCell.bgColor=gcMouseOut;
-    with(aCell){
-        var iDay=parseInt(innerHTML);
-        if(checkColor(style.color,gcNotCurMonth)){
-            iOffset=(innerHTML>10)?-1:1;
-        }
-        iMonth+=iOffset;if(iMonth<1){
-            iYear--;iMonth=12;
-        }else if(iMonth>12){
-            iYear++;iMonth=1;
-        }
-    }
-    fSetDate(iYear,iMonth,iDay);
-}
-function Point(iX,iY){this.x=iX;this.y=iY;}
+    var nowdate = new Date(); // 获取当前时间
+    var dateArr = new Array(); // 获取到的时间数据集合
+    var btn = $(this);
 
-function fBuildCal(iYear,iMonth){
-    var aMonth=new Array();
-    for(var i=1;i<7;i++){
-        aMonth[i]=new Array(i);
-    }
-    var dCalDate=new Date(iYear,iMonth-1,1);
-    var iDayOfFirst=dCalDate.getDay();
-    var iDaysInMonth=new Date(iYear,iMonth,0).getDate();
-    var iOffsetLast=new Date(iYear,iMonth-1,0).getDate()-iDayOfFirst+1;
-    var iDate=1;
-    var iNext=1;
-    for(var d=0;d<7;d++){
-        aMonth[1][d]=(d<iDayOfFirst)?(iOffsetLast+d)*(-1):iDate++;
-    }
-    for(var w=2;w<7;w++){
-        for(var d=0;d<7;d++){
-            aMonth[w][d]=(iDate<=iDaysInMonth)?iDate++:(iNext++)*(-1);
-        }
-    }
-    return aMonth;
-}
-function fDrawCal(iYear,iMonth,iCellHeight,iDateTextSize){
-    var colorTD=" bgcolor='"+gcMouseOut+"' bordercolor='"+gcMouseOut+"'";
-    var styleTD=" valign='middle' align='center' style='height:"+iCellHeight+"rem;font-weight:bolder;font-size:"+iDateTextSize+"rem;";
-    var dateCal="";
-    dateCal+="<tr>";
-    for(var i=0;i<7;i++){
-        dateCal+="" + "<td"+colorTD+styleTD+"color:#990099'>"+WeekDay[i]+"</td>";
-    }
-    dateCal+="</tr>";
-    for(var w=1;w<7;w++){
-        dateCal+="<tr>";
-        for(var d=0;d<7;d++){
-            var tmpid=w+""+d;dateCal+="<td"+styleTD+"cursor:pointer;' onclick='fSetSelected("+tmpid+")'>";
-            dateCal+="<span id='cellText"+tmpid+"'></span><em style='display: block;font-size: 0.2rem;color: #333'>有房</em><i style='display: block;font-size: 0.2rem;color: orangered'>￥0.1</i>";dateCal+="</td>";}
-        dateCal+="</tr>";
-    }
-    return dateCal;
-}
+    btn.on('click', initTemplate); // 初始化(显示)插件
 
-function fUpdateCal(iYear,iMonth){
-    var myMonth=fBuildCal(iYear,iMonth);
-    var i=0;
-    for(var w=1;w<7;w++){
-        for(var d=0;d<7;d++){
-            with($("cellText"+w+""+d)){
-                parentNode.bgColor=gcMouseOut;parentNode.borderColor=gcMouseOut;parentNode.onmouseover=function(){
-                    this.bgColor=gcMouseOver;
-                };
-                parentNode.onmouseout=function(){
-                    this.bgColor=gcMouseOut;};
-                if(myMonth[w][d]<0){
-                    style.color=gcNotCurMonth;
-                    innerHTML=Math.abs(myMonth[w][d]);
-                }else{
-                    style.color=((d==0)||(d==6))?gcRestDay:gcWorkDay;innerHTML=myMonth[w][d];
-                    if(iYear==giYear && iMonth==giMonth && myMonth[w][d]==giDay){
-                        style.color=gcToday;parentNode.bgColor=gcTodayMouseOut;parentNode.onmouseover=function(){
-                            this.bgColor=gcTodayMouseOver;
-                        };
-                        parentNode.onmouseout=function(){
-                            this.bgColor=gcTodayMouseOut;
-                        };
-                    }
-                }
+    // 初始化模板
+    function initTemplate() {
+      var entertime = $('.entertime').text();
+      var leavetime = $('.leavetime').text();
+      var listIndex = 0;
+//      $('body').css({
+//        overflow: 'hidden'
+//      });
+      // 主容器模板
+      var dateTemplate = '\n        <div class =\'date container c-gray\'>\n          <h4 class="tac bold" >\u8BF7\u9009\u62E9<span class=\'c-blue\'>\u5165\u4F4F</span>\u548C<span class=\'c-red\'>\u79BB\u5F00</span>\u65F6\u95F4</h4>\n          <div class=\'close-btn\'>\u786E\u5B9A</div>\n        </div>      \n      ';
+      setTimeout(function(){$(".date").show()},1000);
+      $('body').append(dateTemplate); // 向body添加插件
+      $("#Myscroll-body,.header").hide();
+
+      // action容器模板
+      dateArr.forEach(function (item, index) {
+        var template = '\n          <div class=\'action mt10\'>\n            <div class=\'title tac c-blue\'><div class="y">' + item.getFullYear() + '</div>\u5E74<div class="m">' + (item.getMonth() + 1) + '</div>\u6708</div>\n            <ul class=\'week border-bottom\'><li>\u65E5</li><li>\u4E00</li><li>\u4E8C</li><li>\u4E09</li><li>\u56DB</li><li>\u4E94</li><li>\u516D</li></ul>\n            <ul class=\'day f-small\'></ul>\n          </div>        \n        ';
+        $('.date').append(template);
+        $("#Myscroll-body,.header").show();
+        $("#Myscroll-body,.header").hide();
+      });
+
+      getPrice();
+      function getPrice(){
+        var _id = decodeURIComponent(fnBase.request("id"));
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth()+1;
+        var day = date.getDate();
+        var startDate=year+"-"+month+"-"+day;
+        var dateList;
+        var gg=new Array();
+        var postData={
+          id:_id,
+          startDate:startDate
+        };
+        var frontURL=Constant.URL+'/mobile/price/'+_id+'/'+startDate;
+        $.ajax({
+          type:'POST',
+          dataType:'json',
+          data:postData,
+          url:frontURL,
+          error:function(data){
+            fnBase.myalert(data)
+          },
+          success:function(data){
+          //  console.log(data);
+            dateList= data;
+
+            jQuery.each(dateList, function(key, val){
+              gg[key] = val;
+            });
+         //   console.log(gg);
+            function p(s) {
+              return s < 10 ? '0' + s: s;
             }
-        }
-    }
-}
-function fSetYearMon(iYear,iMon){
-    $("tbSelMonth").options[iMon-1].selected=true;
-    for(var i=0;i<$("tbSelYear").length;i++){
-        if($("tbSelYear").options[i].value==iYear){
-            $("tbSelYear").options[i].selected=true;
-        }
-    }
-    fUpdateCal(iYear,iMon);
-}
-function fPrevMonth(){
-    var iMon=$("tbSelMonth").value;var iYear=$("tbSelYear").value;
-    if(--iMon<1){
-        iMon=12;iYear--;
-    }
-    fSetYearMon(iYear,iMon);
-}
-function fNextMonth(){
-    var iMon=$("tbSelMonth").value;var iYear=$("tbSelYear").value;if(++iMon>12){
-        iMon=1;
-        iYear++;
-    }
-    fSetYearMon(iYear,iMon);
-}
-function fGetXY(aTag){
-    var oTmp=aTag;
-    var pt=new Point(0,0);
-    do{
-        pt.x+=oTmp.offsetLeft;
-        pt.y+=oTmp.offsetTop;
-        oTmp=oTmp.offsetParent;
-    }while(oTmp.tagName.toUpperCase()!="BODY");
-    return pt;
-}
-function getDateDiv(){
-    var noSelectForIE="";
-    var noSelectForFireFox="";
-    if(document.all){
-        noSelectForIE="onselectstart='return false;'";
-    }else{
-        noSelectForFireFox="-moz-user-select:none;";}
-    var dateDiv="";
-    dateDiv+="<div id='calendardiv' onclick='event.cancelBubble=true' "+noSelectForIE+" style='"+noSelectForFireFox+"position:absolute;z-index:99;visibility:hidden;border:1px solid #999999;'>";
-    dateDiv+="<table width='100%' border='0' bgcolor='#E0E0E0' cellpadding='1' cellspacing='1' >";
-    dateDiv+="<tr height='1.2rem'>";dateDiv+="<td ><input type='button' id='PrevMonth' value='<' style='height:1.2rem;width:1.4rem;font-weight:bolder;font-size: 0.35rem;' onclick='fPrevMonth()'>";
-    dateDiv+="</td><td><select id='tbSelYear' style='border:1px solid;width:80%;height: 60px;font-size: 35px;' onchange='fUpdateCal($V(\"tbSelYear\"),$V(\"tbSelMonth\"))'>";
-    for(var i=startYear;i<endYear;i++){
-        dateDiv+="<option value='"+i+"'>"+i+strYear+"</option>";
-    }
-    dateDiv+="</select></td><td>";
-    dateDiv+="<select id='tbSelMonth' style='border:1px solid;width:80%;height: 0.6rem;font-size: 0.35rem;float: right' onchange='fUpdateCal($V(\"tbSelYear\"),$V(\"tbSelMonth\"))'>";
-    for(var i=0;i<12;i++){
-        dateDiv+="<option value='"+(i+1)+"'>"+gMonths[i]+"</option>";
-    }
-    dateDiv+="</select></td><td>";
-    dateDiv+="<input type='button' id='NextMonth' value='>' style='height:1.2rem;width:1.4rem;font-weight:bolder;font-size: 0.35rem;float: right' onclick='fNextMonth()'>";
-    dateDiv+="</td>";
-    dateDiv+="</tr><tr>";
-    dateDiv+="<td align='center' colspan='4'>";
-    dateDiv+="<div style='background-color:#cccccc'><table width='100%' border='0' cellpadding='3' cellspacing='1'>";
-    dateDiv+=fDrawCal(giYear,giMonth,dayTdHeight,dayTdTextSize);
-    dateDiv+="</table></div>";dateDiv+="</td>";dateDiv+="</tr><tr><td align='center' colspan='4' nowrap>";
-    dateDiv+="<span style='font-size:0.35rem;line-height:0.6rem;cursor:pointer;font-weight:bolder;' onclick='fSetDate(giYear,giMonth,giDay)' onmouseover='this.style.color=\""+gcMouseOver+"\"' onmouseout='this.style.color=\"#000000\"'>"+strToday+":"+giYear+strYear+giMonth+strMonth+giDay+strDay+"</span>";
-    dateDiv+="</tr></tr>";dateDiv+="</table></div>";
-    return dateDiv;
-};
-    with(document){
-    onclick=fHideCalendar;
-    write(getDateDiv());
-}
+
+            $('.action').each(function (index, item) {
+
+              var days = getDays(dateArr[index]);
+
+              var nowweek = dateArr[index].getDay();
+
+           //   console.log(days + nowweek)
+              for (var i = 0; i < days + nowweek; i++) {
+                var Month=dateArr[index].getMonth() + 1;
+
+                var _work=i - nowweek + 1;
+
+                var template='';
+                // 空白填充
+                if (i < nowweek) {
+                  template = '<li style="border: 0;background: #ebecf2"></li>';
+                } else {
+
+                var date =  dateArr[index].getFullYear() + '-' + p(Month) + '-' + p(_work);
+
+                if (i < nowdate.getDate() + nowweek - 1 && dateArr[index].getMonth() === nowdate.getMonth()) {
+                  // 当月已经过去的日期 不能点击
+                  listIndex++;
+
+                    template = '<li index=\'' + listIndex + '\' class=\'disable\'>' + '<span>' + (i - nowweek + 1) + '</span>' + '<br><i>￥' + gg[date].price + '</i>' + '</li>';
+
+                } else if (dateArr[index].getMonth() == Number(entertime.split('.')[0]) - 1 && i - nowweek + 1 == Number(entertime.split('.')[1])) {
+                  // 默认入住时间
+                  listIndex++;
+                  template = '<li index=\'' + listIndex + '\' class=\'enter\' date-date="' + dateArr[index].getFullYear() + '-' + (dateArr[index].getMonth() + 1) + '-' + (i - nowweek + 1) + '">' + (i - nowweek + 1) + '</li>';
+                } else if (dateArr[index].getMonth() == Number(leavetime.split('.')[0]) - 1 && i - nowweek + 1 == Number(leavetime.split('.')[1])) {
+                  // 默认离开时间
+                  listIndex++;
+                  template = '<li index=\'' + listIndex + '\' class=\'leave\' date-date="' + dateArr[index].getFullYear() + '-' + (dateArr[index].getMonth() + 1) + '-' + (i - nowweek + 1) + '">' + (i - nowweek + 1) +'&'+ '</li>';
+                } else {
+                  listIndex++;
+                  var status;
+                  var _datelist=dateArr[index];
+                  if(gg[date].roomNum=='0'){
+                    status="满房";
+                    template = '<li index=\'' + listIndex + '\' date-date="' + dateArr[index].getFullYear() + '-' + (dateArr[index].getMonth() + 1) + '-' + (i - nowweek + 1) + '">' +'<span>'+(i - nowweek + 1)+
+                        '</span>'+'<br><i style="color: #e48435">'+status+'</i>'+ '</li>';
+                  }else if(gg[date].roomNum=='1'){
+                    template = '<li index=\'' + listIndex + '\' date-date="' + dateArr[index].getFullYear() + '-' + (dateArr[index].getMonth() + 1) + '-' + (i - nowweek + 1) + '">' +'<span>'+(i - nowweek + 1)+
+                        '</span>'+'<br><i>￥'+gg[date].price+'</i>'+ '</li>';
+                  }
+
+                }
+                }
+                $(item).find('.day').append(template);
+              }
+            })
 
 
-//});
+          }
+        });
+
+      };
+
+
+      $(".action ").on('click','.day .disable',function(){
+        fnBase.myalert("抱歉、你所选日期不能再选、请重新选取")
+      });
+
+
+      // 事件监听
+      // 关闭插件
+      $('.close-btn').on('click', function (){
+ 
+        // 获取入住时间
+        var enterYear = $('.enter').parents('.day').siblings('.title').find('.y').text();
+        var enterMonth = $('.enter').parents('.day').siblings('.title').find('.m').text();
+        enterMonth.length === 1 ? enterMonth = '0' + enterMonth : false;
+        var enterDay = $('.enter span').text();
+        enterDay.length === 1 ? enterDay = '0' + enterDay : false;
+        var enterTime = enterMonth + '-' + enterDay;
+        // 获取离开时间
+        var leaveYear = $('.enter').parents('.day').siblings('.title').find('.y').text();
+        var leaveMonth = $('.leave').parents('.day').siblings('.title').find('.m').text();
+        leaveMonth.length === 1 ? leaveMonth = '0' + leaveMonth : false;
+        var leaveDay = $('.leave span').text();
+        leaveDay.length === 1 ? leaveDay = '0' + leaveDay : false;
+        var leaveTime = leaveMonth + '-' + leaveDay;
+        var night = Number($('.leave').attr('index')) - Number($('.enter').attr('index'));
+        
+ 
+        $('body').css({ overflow: 'auto' });
+        $('.select-time').show();
+        $('.entertime').text(enterTime); // 显示
+        $('.leavetime').text(leaveTime);
+        $('.input-enter').val(enterYear + '-' + enterTime);
+        $('.input-leave').val(leaveYear + '-' + leaveTime);
+        $('.night').text('共' + night + '晚');
+
+        if(enterYear==null || leaveYear==null ||enterYear=="" || leaveYear=="" ){
+        	fnBase.myalert('操作失误：请选择入住和离开时间');
+          	return;
+        }else{
+						hasshouse();
+        }
+        
+     
+      });
+
+			function hasshouse(){
+				        	   //判断有房没房
+            var _id = decodeURIComponent(fnBase.request("id"));
+            var checkIn= $(".input-enter").val();
+            var leave= $(".input-leave").val();
+            if(checkIn>=leave){
+              fnBase.myalert("请重新选择时间");
+              $(".input-enter").val();
+              $(".input-leave").val();
+              return;
+            }else{
+              var frontURL=Constant.URL+'/mobile/checkAvailable';
+              var postData={"startTime":checkIn,"endTime":leave,"roomId":_id};
+              fnBase.commonAjax(frontURL,postData,function(data){
+            //    console.log(data);
+                if(data.content.length>0){
+                    fnBase.myalert('您所选时间段内没有空房，请重新选择');
+                    return;
+                }else{
+                  $(".alert-content .but-success").click();
+                  $('.date').remove(); // 移除插件
+                  msgdata()
+                }
+              })
+            }
+			}
+
+
+      function msgdata(){
+          var checkIn= $(".input-enter").val();
+          var leave= $(".input-leave").val();
+
+          var _id = decodeURIComponent(fnBase.request("id"));
+          var frontURL=Constant.URL+'/mobile/module';
+          var postData={"startTime":checkIn,"endTime":leave,"apartmentId":_id};
+          fnBase.commonAjax(frontURL,postData,function(data){
+          //    console.log(data);
+              fnBase.keep(1,'startTime',data.oStart);
+              fnBase.keep(1,'endTime',data.oEnd);
+              fnBase.keep(1,'oTotalDay',data.oTotalDay);
+              fnBase.keep(1,'oTotalPrice',data.oTotalPrice);
+              fnBase.keep(1,"YJpic",data.oCashPledge);
+  			  		fnBase.keep(1,"_price",data.price);
+ 			  			window.location.href="order.html?id="+encodeURIComponent(_id);
+          })
+      }
+
+
+      var num = 0;
+      // 时间选择
+      $('.day').on('click','li', function () {
+        if (!$(this).hasClass('disable')) {
+          var thisIndex = Number($(this).attr('index'));
+          var enterIndex = Number($('.enter').attr('index'));
+          var leaveIndex = Number($('.leave').attr('index'));
+          if (num % 2 === 0) {
+            removeLeave();
+            $(this).addClass('leave');
+            num++;
+          } else if (num % 2 !== 0) {
+            removeEnter();
+            $(this).addClass('enter');
+            num++;
+          }
+          // 当入住时间 大于 离开时间 两者互换
+          if (Number($('.enter').attr('index')) > Number($('.leave').attr('index'))) {
+            $('.day .enter')[0].className = 'leave';
+            $('.day .leave')[0].className = 'enter';
+          }
+        }
+      });
+    }
+
+    function removeLeave() {
+      $('.day li').removeClass('leave');
+    }
+
+    function removeEnter() {
+      $('.day li').removeClass('enter');
+    }
+
+    // 获取num个月的时间数据
+    function getDate(num) {
+
+      var year = nowdate.getFullYear();
+      var month = nowdate.getMonth() - 1;
+
+      for (var i = 0; i < num; i++) {
+        month <= 12 ? month++ : (month = 1, year++);
+        var data = new Date(year, month); // 从当前月开始算 一共个6个月的数据
+
+        dateArr.push(data);
+      }
+    }
+
+    // 获取当月天数
+    function getDays(date) {
+      //构造当前日期对象
+      var date = date;
+      //获取年份
+      var year = date.getFullYear();
+      //获取当前月份
+      var mouth = date.getMonth() + 1;
+      //定义当月的天数；
+      var days;
+      //当月份为二月时，根据闰年还是非闰年判断天数
+      if (mouth == 2) {
+        days = year % 4 == 0 ? 29 : 28;
+      } else if (mouth == 1 || mouth == 3 || mouth == 5 || mouth == 7 || mouth == 8 || mouth == 10 || mouth == 12) {
+        //月份为：1,3,5,7,8,10,12 时，为大月.则天数为31；
+        days = 31;
+      } else {
+        //其他月份，天数为：30.
+        days = 30;
+      }
+      return days;
+    }
+
+
+
+    function initDay() {
+      var enterYear = String(nowdate.getFullYear());
+      var enterMonth = String(nowdate.getMonth() + 1);
+      enterMonth.length === 1 ? enterMonth = '0' + enterMonth : false;
+      var enterDay = String(nowdate.getDate());
+      enterDay.length === 1 ? enterDay = '0' + enterDay : false;
+      var enterTime =enterYear+'年'+ enterMonth + '月' + enterDay;
+      // 获取离开时间
+      var leaveYear = String(nowdate.getFullYear());
+      var leaveMonth = String(nowdate.getMonth() + 1);
+      leaveMonth.length === 1 ? leaveMonth = '0' + leaveMonth : false;
+      var leaveDay = String(nowdate.getDate() + 1);
+      leaveDay.length === 1 ? leaveDay = '0' + leaveDay : false;
+      var leaveTime = leaveYear+'年'+leaveMonth + '月' + leaveDay;
+      
+      $('.entertime').text(enterTime); // 显示
+      $('.leavetime').text(leaveTime);
+      $('.input-enter').val(enterYear+'-'+ enterMonth + '-' + enterDay);
+      $('.input-leave').val(leaveYear+'-'+leaveMonth + '-' + leaveDay);
+    }
+
+    getDate(2); // 获取数据 参数: 拿2个月的数据
+    initDay(); // 初始化入住和离店时间
+  };
+
+
+}(jQuery);

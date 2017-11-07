@@ -21,7 +21,7 @@ $(document).ready(function(){
 		    
 		    return ip;
 	}
-    _id=decodeURIComponent(fnBase.request('pid'));
+    _id=fnBase.request('pid');
     var url = Constant.URL + '/mobile/getTrip/';
     var postData={id:_id};
     fnBase.commonAjax(url,postData,function (data){
