@@ -457,6 +457,7 @@ public class MobileController  {
 	 */
 	@RequestMapping(value = "/detailsData", method = RequestMethod.POST)
 	public @ResponseBody Customer getCustomerDetails(Long id){
+		System.out.println(id);
 		return customerService.getCustomer(id);
 	}
 	

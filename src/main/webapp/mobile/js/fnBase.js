@@ -1,9 +1,9 @@
-﻿   var baseUrl = getRootPath();//调试环境用这个
+﻿    var baseUrl = getRootPath();//调试环境用这个
 
-   //     var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
+    // var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 
-
-
+   
+    
 var Constant = {
         URL: baseUrl, 
 };
@@ -35,7 +35,6 @@ function getRootPath() {
 //    return(localhostPath + projectName);
     return(localhostPath);
 }
-
 $(document).ready(function(){
     menuStudent()
     function menuStudent(){
@@ -52,13 +51,36 @@ $(document).ready(function(){
             setTimeout(function(){$(".Masking-out").hide()},500)
         });
     }
+    menuButnav();
+    function menuButnav(){
+        $("#bottomMenu li:eq(0)").click(function(){
+        	window.location.href="index.html"
+        });
+        $("#bottomMenu li:eq(1)").click(function(){
+        	window.location.href="Lifelist.html"
+        });
+        $("#bottomMenu li:eq(2)").click(function(){
+        	window.location.href="listings.html"
+        });
+        $("#bottomMenu li:eq(3)").click(function(){
+        	window.location.href="orderlist.html"
+        });
+        $("#bottomMenu li:eq(4)").click(function(){
+        	window.location.href="serve.html"
+        });
+    }
+    
+    
 
+    
+    
+    
 });
-$(".link-home").attr("href","javascript:void(0);").click(function(){
-    if (/(iPhone|iPad|iPod)/i.test(navigator.userAgent)) {
-        window.location.href = window.document.referrer;
-    } else { window.history.go("-1"); }
-});
+//$(".link-home").attr("href","javascript:void(0);").click(function(){
+//    if (/(iPhone|iPad|iPod)/i.test(navigator.userAgent)) {
+//        window.location.href = window.document.referrer;
+//    } else { window.history.go("-1"); }
+//});
 
     var fnBase={
         loadShow:function(){
@@ -92,7 +114,7 @@ $(".link-home").attr("href","javascript:void(0);").click(function(){
         myalert:function(txt){
             var str='<div id="alertMC"><p>'+txt+'</p></div>';
             $("body").append(str);
-            setTimeout(function(){$("#alertMC").remove();},1500)
+            setTimeout(function(){$("#alertMC").remove();},1000)
         },
         keep:function(type,key,value){
             if(type==0){
@@ -172,6 +194,8 @@ $(".link-home").attr("href","javascript:void(0);").click(function(){
             }
             return (arg1 + arg2) / m;
         },
+
+
     };
 
 
