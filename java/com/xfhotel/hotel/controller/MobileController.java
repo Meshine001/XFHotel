@@ -1407,6 +1407,27 @@ public class MobileController  {
 		return blogService.list();
 	}
 	
+	@RequestMapping(value = "/screen", method = RequestMethod.GET)
+	public @ResponseBody Message screen(int room ){
+		List<Apartment> list = apartmentService.getApartments1();
+		ArrayList<Object> list1 = new ArrayList<Object>();
+		try{
+			for(Apartment apartment : list){
+				String shi = apartment.getBasic_info().getString("shi");
+				if(shi.equals(room)){
+					list1.add(apartment);
+				}else if(room==0){
+					list1.add(apartment);
+				}
+			}
+		} catch (Exception e) {
+			return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);	
+	}
+	
+	
+	
 	@RequestMapping(value = "/getRoom", method = RequestMethod.POST)
 	public @ResponseBody Message getRoom(int wei){
 		System.out.println(wei);
@@ -1441,5 +1462,18 @@ public class MobileController  {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);
 }
 	
+	@RequestMapping(value = "/price", method = RequestMethod.POST)
+	public @ResponseBody Message ambitus(int price){
+		List<Apartment> list = apartmentService.getApartments1();
+		ArrayList<Object> list1 = new ArrayList<Object>();
+		try{
+			
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+	}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,list1);
+	}
 	
 }
