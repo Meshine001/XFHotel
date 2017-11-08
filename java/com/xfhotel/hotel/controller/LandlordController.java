@@ -205,6 +205,21 @@ public class LandlordController {
 	public @ResponseBody List<com.xfhotel.hotel.entity.Landlord> getApply() {
 		return landlordService.list();
 	}
+	
+	@RequestMapping(value = "/deleteLandlord", method = RequestMethod.POST)
+	public @ResponseBody Message deleteLandlord(long id) {
+		try{
+			
+		Landlord landlord = landlordService.findById(id);
+		 landlordService.delete(landlord);
+	} catch (Exception e) {
+		// TODO: handle exception
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "删除失败");
+	}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE,"删除成功");
+	}
+	
 	@RequestMapping(value = "/ApplyOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public Message ApplyOrder(Long id) {
