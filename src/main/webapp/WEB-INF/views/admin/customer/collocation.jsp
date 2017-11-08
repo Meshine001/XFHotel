@@ -64,7 +64,7 @@
 										<th>手机号码</th>
 										<th>姓名</th>
 										<th>收款账号</th>
-										<th>上线房屋</th>
+										<th>操作</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -74,7 +74,7 @@
 											<td>${order.phone}</td>
 											<td>${order.name}</td>
 											<td>${order.number}</td>
-											<td><a faid="${order.id}" class="hbtn">查看</a></td>
+											<td><a faid="${order.id}" class="hbtn btn-sm">查看房屋</a><a faid="${order.id}" class="hbtn btn-sm btn-sm-sc">删除</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>

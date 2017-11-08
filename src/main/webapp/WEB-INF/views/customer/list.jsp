@@ -288,9 +288,7 @@
 				<div class="page" data-pageCount="${info.page.pageCount}"
 					data-currentPage="${info.page.currentPage}">
 					<a class="up none" title="首页">First</a>
-					<a class="up none"
-						title="上一页">&lt;</a> 
-					
+					<a class="up none" title="上一页">&lt;</a> 
 				</div>
 				<script type="text/javascript">
 					var pageCount = $('.page').attr('data-pageCount');

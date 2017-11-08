@@ -21,7 +21,6 @@ $(document).ready(function(){
 		        success:function (data) {
 		        	fnBase.loadHide();
 		            ip = data.ip;
-		           
 		        }
 		    });
 		    

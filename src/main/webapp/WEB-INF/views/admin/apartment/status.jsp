@@ -97,13 +97,13 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">状态选择</label>
 							<div class="col-sm-10 status-house">
-								<a href="javascript:;" stag="0">无房</a>
-								<a href="javascript:;" stag="1">有房</a>
+								<a href="javascript:;" stag="0">有人住</a>
+								<a href="javascript:;" stag="1">没人住</a>
 							</div>
 						</div>
 						<div class="form-group">
 								<div class="col-md-9 ">
-									<button type="submit" class="btn btn-primary">确定修改</button>
+									<button type="submit" class="btn btn-success" id="btnyesDate">确定</button>
 								</div>
 						</div>
 						<div class="form-group">	
@@ -143,7 +143,7 @@
 							<div class="form-group">
 								<div class="col-md-9">
 									<button type="submit" id="teshuSubmit" class="btn btn-success">保存</button>
-									<button type="button" class="btn btn-default">取消</button>
+									<button type="button" class="btn btn-danger">取消</button>
 								</div>
 							</div>
 						</div>

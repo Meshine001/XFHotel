@@ -20,7 +20,7 @@
   
     	if($("#comment").val()==''){
     		fnBase.myalert('请留言后再提交')
-    		return
+    		return;
     	}
     	
         var arr=[num,5,5,5,5,5];

@@ -8932,10 +8932,11 @@ a:hover{text-decoration: none;}
 .status-house{padding: 20px 15px;margin-bottom: 10px;}
 .status-house a{
 	font-size:16px;
-	padding:6px;
+	padding:5px 20px;
 	border:1px solid #ddd;
 	color:#ddd;
 	text-decoration: none !important;
+	border-radius: 18px;
 }
 .status-house a.hat{color:#fff;background: #29c75f;}
 
@@ -8955,6 +8956,26 @@ a:hover{text-decoration: none;}
 	color: #f15305;
     font-size: 36px;
 }
+
+
+.btn-sm{
+	display:inline-block;
+	padding:3px;
+	cursor: pointer;
+}
+.btn-sm-sc{
+	color:orange;
+}
+
+
+
+
+
+
+
+
+
+
 
 /*个人优惠卷列表*/
 i{font-style:normal}

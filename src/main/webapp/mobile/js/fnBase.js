@@ -1,6 +1,6 @@
-﻿    //   var baseUrl = getRootPath();//调试环境用这个
+﻿       var baseUrl = getRootPath();//调试环境用这个
 
-    var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
+//    var baseUrl = 'http://www.yiyunzn.xyz';//生成环境下用这个
 
    
     
@@ -9,12 +9,14 @@ var Constant = {
 };
 
 function getIp() {
+	fnBase.loadShow();
     var ip;
     var ipInfoUrl = 'http://ipinfo.io/json';
     $.ajax({
         url:ipInfoUrl,
         async:false,
         success:function (data) {
+        	 fnBase.loadHide();
             ip = data.ip;
         }
     });

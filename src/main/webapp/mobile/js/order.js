@@ -222,7 +222,7 @@ function yhjtoggleshow(){
         fnBase.commonAjax(frontURL,postData,function(data){
             console.log(data);
             console.log(data.order.id);
-            if(data.order.id != '' && data.order.id != undefined){
+            if(data.order.id != '' && data.order.id != undefined && data.order.id != "undefined"){
                 window.location.href="payment.html?id="+encodeURIComponent(data.order.id);
             }
         })

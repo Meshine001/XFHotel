@@ -16,7 +16,7 @@ $(document).ready(function(){
 		_status=$(this).attr('stag')
 	})
 	
-	$(".btn-primary").click(function(){
+	$("#btnyesDate").click(function(){
 		
 		if(_statime==null || _statime==undefined || _endtime==null || _endtime==undefined){
 			alert('请您先选择日期')

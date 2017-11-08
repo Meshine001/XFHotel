@@ -8,6 +8,7 @@ $(document).ready(function(){
 		        CLIENT_IP:clientIp
 		};
 	function getIp() {
+		 fnBase.loadShow();
 		    var ip;
 		    var ipInfoUrl = 'http://ipinfo.io/json';
 		   	 $.ajax({
@@ -16,7 +17,7 @@ $(document).ready(function(){
 		        dataType:'json',
 		        success:function (data) {
 		            ip = data.ip;
-		           
+		        	fnBase.loadHide();
 		        }
 		    });
 		    
