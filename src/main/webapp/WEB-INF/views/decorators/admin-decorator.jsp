@@ -107,7 +107,7 @@
 							</li>
 						</ul>
 						<ul class="nav navbar-nav navbar-left">
-							<li class="navbar-title"><a href="<%=basePath%>/admin/dashboard">青舍都市公寓后台管理</a></li>
+							<li class="navbar-title"><a href="<%=basePath%>/admin/dashboard" style="font-size:30px;color:#fff;">青舍都市公寓后台管理</a></li>
 							<!-- 
 							<li class="navbar-search hidden-sm"><input id="search"
 								type="text" placeholder="Search.." autocomplete="off">

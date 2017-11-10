@@ -169,7 +169,7 @@
 						<th>优惠卷使用情况</th>	
 						<th id="about">全选<i></i></th>
 					</thead>
-					<tbody id="list">
+					<tbody id="list-yhj">
 						
 					</tbody>
 				</table>
@@ -182,7 +182,8 @@
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("#list tr td").css('min-width','120px');
+			$("#list-yhj tr td").css({'min-width':'120px'});
+			$("#list-yhj tr td").show();
 		})
 	</script>
 	</my_body>

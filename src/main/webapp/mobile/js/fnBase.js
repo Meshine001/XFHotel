@@ -101,6 +101,7 @@ $(document).ready(function(){
                 timeout:30000,
                 dataType : "json",
                 async : true,
+                globat:false,
                 type : "POST",
                 success : function(data) {
                     fnBase.loadHide();

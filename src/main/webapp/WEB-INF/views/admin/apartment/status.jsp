@@ -69,6 +69,89 @@
 		
 				</div>
 			</div>
+			
+			<div class="card card-mini" style="margin-top:20px;">
+				<div class="card-header">
+					<div class="card-title">
+						<h3>第三方平台订单统计</h3>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="form-horizontal">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">订单来源</label>
+							<div class="col-sm-10 status-time">
+								<input type="text" class="form-control" placeholder="" id="otherAddress"
+									name="date" value="">
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="col-sm-2 control-label">总收入</label>
+							<div class="col-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder=""
+										name="date" value="" id="otherSave">
+									<span class="input-group-addon">元</span>	
+								</div>
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="col-sm-2 control-label">入住总天数</label>
+							<div class="col-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder=""
+										name="date" value="" id="otherdate">
+									<span class="input-group-addon">天</span>	
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">入住人姓名</label>
+							<div class="col-sm-10 status-endtime">
+								<input type="text" class="form-control" placeholder=""
+									name="date" value="" id="otherName">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">联系电话</label>
+							<div class="col-sm-10 status-endtime">
+								<input type="text" class="form-control" placeholder=""
+									name="date" value="" id="otherTel">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">入住时间</label>
+							<div class="col-sm-10 status-endtime">
+								<input type="date" class="form-control" placeholder=""
+									name="date" value="" id="otherCheck-in">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">离开时间</label>
+							<div class="col-sm-10 status-endtime">
+								<input type="date" class="form-control" placeholder=""
+									name="date" value="" id="otherCheck-out">
+							</div>
+						</div>
+
+						<div class="form-group">
+								<div class="col-md-9 ">
+									<button type="submit" class="btn btn-success" id="otherOrder">确定</button>
+								</div>
+						</div>
+						<div class="form-group">
+								<div class="col-md-12 ">
+									<p style="margin-top:10px">提示：填写完订单信息后，请及时修改房屋状态并保存。</p>
+								</div>
+						</div>
+						
+					</div>	
+				</div>
+			</div>
+			
+			
+			
+			
 		</div>
 		
 		<div class="col-md-6">
@@ -143,7 +226,7 @@
 							<div class="form-group">
 								<div class="col-md-9">
 									<button type="submit" id="teshuSubmit" class="btn btn-success">保存</button>
-									<button type="button" class="btn btn-danger">取消</button>
+									<!-- <button type="button" class="btn btn-danger">取消</button> -->
 								</div>
 							</div>
 						</div>

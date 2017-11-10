@@ -17,7 +17,7 @@ $(document).ready(function(){
 	})
 	
 	$("#btnyesDate").click(function(){
-		
+	
 		if(_statime==null || _statime==undefined || _endtime==null || _endtime==undefined){
 			alert('请您先选择日期')
 			return;
@@ -47,5 +47,63 @@ $(document).ready(function(){
 			}
 		})
 	})
+	
+	
+	//其他平台订单信息统计
+	$("#otherOrder").click(function(){
+		var add=$("#otherAddress").val();
+		if( add==null || add==undefined ||add==""){
+			alert('请您填写订单来源后再提交')
+			return;
+		}
+		var value=$("#otherSave").val();
+		if( value==null || value==undefined ||value==""){
+			alert('请您填写订单价格后再提交')
+			return;
+		}
+		var name=$("#otherName").val();
+		if( name==null || name==undefined ||name==""){
+			alert('请您填写入住人姓名后再提交')
+			return;
+		}
+		var chickin=$("#otherCheck-in").val();
+		if( chickin==null || chickin==undefined ||chickin==""){
+			alert('请您填写入住时间后再提交')
+			return;
+		}
+		var chickout=$("#otherCheck-out").val();
+		if( chickout==null || chickout==undefined ||chickout==""){
+			alert('请您填写离开时间后再提交')
+			return;
+		}
+		var otherdate=$("#otherdate").val();
+		if( otherdate==null || otherdate==undefined ||otherdate==""){
+			alert('请您填写入住总天数后再提交')
+			return;
+		}
+		
+		$.ajax({
+			type:'post',
+			dataType:'json',
+			url:'/admin/Rests',
+			data:{
+				'source': add,
+				'startTime' : chickin,
+				'endTime':chickout,
+				'sum':value,
+				'apId':ID,
+				'name':name,
+				'fate':otherdate
+			},
+			success:function(data){
+				console.log(data)
+			},
+			error:function(data){
+				
+			}
+		})
+		
+	})
+	
 	
 })

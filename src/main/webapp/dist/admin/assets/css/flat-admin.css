@@ -2968,8 +2968,9 @@ html, body {
 
 body {
 	min-height: 100vh;
-	background-color: #EDEDED;
+	background-color:#EDEDED;/*#cfe3ff*/
 	overflow-x: hidden;
+	
 }
 
 body .app {
@@ -3331,13 +3332,15 @@ a:hover {
 }
 
 .navbar .navbar-collapse {
-	background-color: #FFF;
+	background-color: #29c75f;
 	border-radius: 2px;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 	box-shadow: 0 1px 2px #c8d1d3;
+	background: url(../images/logobgtop.jpg);
+	background-size:100% 100%;
 }
-
+.navbar-default .navbar-nav > li > a{color:#fff}
 .navbar .navbar-collapse .navbar-nav {
 	height: 89px;
 	border-bottom: 1px solid transparent;
@@ -3831,7 +3834,7 @@ a:hover {
 	font-weight: 300;
 	position: relative;
 	text-align: center;
-	color: #444;
+	color: #fff;
 }
 
 .navbar .navbar-collapse .navbar-nav.navbar-mobile .navbar-brand .highlight
@@ -8771,7 +8774,11 @@ footer.app-footer .footer-copyright {
 #list td{vertical-align: middle;}
 #list tr{ cursor: pointer; transition: all .3s;border-bottom:1px solid #dddddd}
 #list tr:hover{background: #f2f2f2;}
-#list tr td i,#about i{
+
+#list-yhj td{vertical-align: middle;}
+#list-yhj tr{ cursor: pointer; transition: all .3s;border-bottom:1px solid #dddddd}
+#list-yhj tr:hover{background: #f2f2f2;}
+#list-yhj tr td i,#about i{
 	display:block;
 	width:20px;
 	height:20px;
@@ -8779,7 +8786,7 @@ footer.app-footer .footer-copyright {
 }
 #about i{float:left;}
 #about{cursor: pointer;}
-#list tr._active td i,#about._active i{
+#list-yhj tr._active td i,#about._active i{
 	background:url('../images/moren-hat.png')  no-repeat center center;
 }
 
@@ -9189,7 +9196,7 @@ i{font-style:normal}
 	background: #ccc;
 	border-radius: 0 6px 6px 0;
 }
-
+#h-table tr{cursor: pointer;}
 
 /*2017-7-14日历样式begin*/
 .choosecal{ width:100%; margin:3% auto; overflow:hidden;margin-top:0;}
@@ -9248,4 +9255,12 @@ text-align:center;color:#0C6;padding:1% 0;
 	#list-nav tr th:first-child+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th+th+th+th+th+th+th{
 		display:none;
 	}
+}
+
+.navs a:first-child{margin:0;}
+.navs a.active{color:#000;}
+.navs a{float:left;display:block;margin:0 40px;font-weight:bold;cursor: pointer;font-size:18px;color:#777}
+.navs a i{display:block;padding:3px;font-size:14px;background:orange;color:#fff;float:right;border-radius:6px;}
+@media ( max-width :375px) {
+	.navs a{margin:0;width:100%;padding-bottom:10px;}
 }

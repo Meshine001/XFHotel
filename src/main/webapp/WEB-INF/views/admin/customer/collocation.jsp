@@ -74,7 +74,7 @@
 											<td>${order.phone}</td>
 											<td>${order.name}</td>
 											<td>${order.number}</td>
-											<td><a faid="${order.id}" class="hbtn btn-sm">查看房屋</a><a faid="${order.id}" class="hbtn btn-sm btn-sm-sc">删除</a></td>
+											<td><a faid="${order.id}" class="hbtn btn-sm">查看房屋</a><a faid="${order.id}" class="hremove btn-sm btn-sm-sc">删除</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -238,6 +238,38 @@
 				}
 			});
 		})
+		
+		
+		
+		
+				//删除房东
+		$("#home tbody").on('click','tr td .hremove',function(){
+			var url = '../landlord/deleteLandlord';
+			var id = $(this).attr('faid');
+			$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					'id' : id
+				},
+				url : url,
+				success : function(data) {
+					console.log(data)
+					if(data.statusCode==1){
+						alert(data.content);
+					}else{
+						alert(data.content)
+					}
+					location=location;
+				}
+			});
+		})
+		
+		
+		
+		
+		
+		
 	</script>
 	</my_body>
 </body>

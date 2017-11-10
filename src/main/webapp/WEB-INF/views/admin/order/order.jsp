@@ -88,52 +88,99 @@
 		<div class="col-md-12">
 			<div class="card card-mini">
 				<div class="card-header">
-					<div class="card-title">
-						<h3>订单列表</h3>
+					<div class="card-title navs">
+						<a class="active">青舍订单统计<i></i></a>
+						<a>第三方订单统计<i></i></a>
 					</div>
 				</div>
 				<div id="topscroll" style="width:100%;height:auto;overflow-x:auto">
-				<table class="table table-bordered">
-
-					<thead id="list-nav">
-						<tr>
-							<th>订单号</th>
-							<th>下单时间</th>
-							<th>订单状态</th>
-							<th>下单人</th>
-							<th>联系手机</th>
-							<th>房间</th>
-							<th>住房时间</th>
-							<th>总天数</th>
-							<th>单价</th>
-							<th>总价</th>
-							<th>优惠</th>
-							<th>操作</th>
-						</tr>
-					</thead>
-					<tbody id="list">
+					<table class="table table-bordered">
+						<thead id="list-nav">
+							<tr>
+								<th>订单号</th>
+								<th>下单时间</th>
+								<th>订单状态</th>
+								<th>下单人</th>
+								<th>联系手机</th>
+								<th>房间</th>
+								<th>住房时间</th>
+								<th>总天数</th>
+								<th>单价</th>
+								<th>总价</th>
+								<th>优惠</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id="list">
+							
+						</tbody>
+					</table>
+					<ul id="pagecontroller" class="pagination">
 						
-					</tbody>
-				</table>
-				
-				
-				<ul id="pagecontroller" class="pagination">
-					
-				</ul>
-				
+					</ul>
 				</div>
+	<!-- 外来订单列表begin -->			
+				<div id="otherOrderlist" style="width:100%;height:300px;overflow-x:auto">
+					<table class="table table-bordered">
+						<thead id="otherlist-nav">
+							<tr>
+								<th>订单来源/平台</th>
+								<th>总收入/元</th>
+								<th>房间/小区-门牌号</th>
+								<th>入住时间</th>
+								<th>离开时间</th>
+								<th>姓名</th>
+								<th>电话</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id="otherlist">
+							
+						</tbody>
+					</table>
+					<ul id="otherpagecontroller" class="pagination">
+						
+					</ul>
+				</div>
+	<!-- 外来订单列表end -->					
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("table th,table td").css('min-width','100px');
+			var uid=window.localStorage.getItem('uid');
+			$("#otherOrderlist").hide();
+			$("table th,table td").css('min-width','140px');
+			$("table th").eq(0).css('min-width','75px');
+			
+			$(".navs a").click(function(){
+				$(this).addClass('active').siblings().removeClass('active');
+				var i=$(this).index();
+				if(i==0){
+					$("#topscroll").show();
+					$("#otherOrderlist").hide();
+				}else if(i==1){
+					$("#topscroll").hide();
+					$("#otherOrderlist").show();
+				}
+			})
+				$.ajax({
+						type:'post',
+						dataType:'json',
+						data:{'id':uid},
+						url:'/admin/user/stewardO',//统计住房订单
+						success:function(data){
+				//			console.log(data);
+							$(".navs a").eq(0).find('i').text(data.content.length);
+						}
+				})
+			
 		})
 	</script>
 	</my_body>
 	<my_script>
 		<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/orderList.js"></script> 
-	
+		<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/otherOrder.js"></script> 
 	</my_script>
 </body>
 </html>

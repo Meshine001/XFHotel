@@ -69,7 +69,7 @@ function list(page) {
 			$('#pagecontroller').append(li_l);
 
 			var trtitle = $('<tr></tr>').append('');
-			$("#list").html(trtitle);
+			$("#list-yhj").html(trtitle);
 			$.each(data.results,
 					function(index, value) {
 						var tr = $('<tr></tr>');
@@ -100,7 +100,7 @@ function list(page) {
 								.append(td_regTime).append(td_consumptionCount)
 								.append(td_consumptionTimes).append(td_details)
 								.append(td_status);
-						$("#list").append(tr);
+						$("#list-yhj").append(tr);
 					});
 		}
 	});
@@ -144,7 +144,7 @@ $(".masking").css({
 				console.log(data);
 				var str='';
 				var newTime=new Array();
-				$("#list").html('');
+				$("#list-yhj").html('');
 				for(var i=0;i<data.content.length;i++){
 					var infotime=data.content[i].regTime;
 					var j = new Date(infotime);
@@ -152,7 +152,7 @@ $(".masking").css({
 					    newTime.push(istime);
 					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 				}
-				$("#list").append(str);
+				$("#list-yhj").append(str);
 				if($("#longtime option:selected").attr('tid')=='3'){
 					list(1)
 				}
@@ -175,7 +175,7 @@ $(".masking").css({
 				console.log(data);
 				var str='';
 				var newTime=new Array();
-				$("#list").html('');
+				$("#list-yhj").html('');
 				for(var i=0;i<data.content.length;i++){
 					var infotime=data.content[i].regTime;
 					var j = new Date(infotime);
@@ -183,7 +183,7 @@ $(".masking").css({
 					    newTime.push(istime);
 					str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 				}
-				$("#list").append(str);
+				$("#list-yhj").append(str);
 				if($("#monetary option:selected").val()=='0'){
 					list(1)
 				}
@@ -207,7 +207,7 @@ $(".masking").css({
 			console.log(data);
 			var str='';
 			var newTime=new Array();
-			$("#list").html('');
+			$("#list-yhj").html('');
 			for(var i=0;i<data.content.length;i++){
 				var infotime=data.content[i].regTime;
 				var j = new Date(infotime);
@@ -215,7 +215,7 @@ $(".masking").css({
 				    newTime.push(istime);
 				str+='<tr><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+'</td><td>'+data.content[i].status+'</td><td><a><i></i></a></td></tr>'
 			}
-			$("#list").append(str);
+			$("#list-yhj").append(str);
 			if($("#sex option:selected").val()=='全部'){
 				list(1)
 			}
@@ -223,7 +223,7 @@ $(".masking").css({
 	})
 });
 
-$("#list").on('click','tr',function(){
+$("#list-yhj").on('click','tr',function(){
 	if($(this).hasClass('_active')==false){
 		$(this).addClass('_active')
 	}else{
@@ -234,10 +234,10 @@ $("#list").on('click','tr',function(){
 $("#about").click(function(){
 	if($(this).hasClass('_active')==false){
 		$(this).addClass('_active');
-		$("#list tr").addClass('_active');
+		$("#list-yhj tr").addClass('_active');
 	}else{
 		$(this).removeClass('_active');
-		$("#list tr").removeClass('_active');
+		$("#list-yhj tr").removeClass('_active');
 	}
 })
 
@@ -246,7 +246,7 @@ var strlist2='';
 
 $(document).on('click','#delivery',function(){
     var	strlist=new Array();
-	var obj=$(this).parent().parent().parent().parent().find('#list tr');
+	var obj=$(this).parent().parent().parent().parent().find('#list-yhj tr');
 	
 	for(var i=1;i<obj.length;i++){
 		if(obj.eq(i).hasClass('_active')==true){
@@ -330,7 +330,7 @@ $.ajax({
 	)
 
     $(".Volume-list,.masking").hide();
-	$("#list").on('click','tr .lock',function(){
+	$("#list-yhj").on('click','tr .lock',function(){
 		var uId=$(this).parent().parent().attr('uid');
 		$.ajax({
 			type : 'POST',

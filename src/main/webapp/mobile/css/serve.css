@@ -14,7 +14,7 @@ html,body{background: #f4f4f4;}
 .vip_info_list:last-child{margin-bottom:0.52rem}
 
 
-.vip_info{;background-color:#ED5564;;background:url(../img/member_top_bg.png) center center;background-size:100%;-webkit-animation:changeBg 20s infinite; -moz-animation:changeBg 20s infinite; animation:changeBg 20s infinite;}
+.vip_info{;background-color:#ED5564;;background:url(../images/member_top_bg.png) center center;background-size:100%;-webkit-animation:changeBg 20s infinite; -moz-animation:changeBg 20s infinite; animation:changeBg 20s infinite;}
 @-webkit-keyframes changeBg{
 0%{background-color:#ED5564;}
 10%{background-color:#FB6E52;}

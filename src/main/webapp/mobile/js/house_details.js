@@ -358,7 +358,7 @@ $(document).ready(function(){
                 }
                 plStr+='<p class="text">'+data[i].comment.feel+'</p>';
                 if(data[i].comment.reply != null){
-            	   plStr+='<div class="huifu"><span class="sro"></span><p style="font-size:0.14rem;line-height: 0.2rem;color:#484848"><i style="color:#000;">管家回复：</i>'+data[i].comment.reply+'</p></div>'
+            	   plStr+='<div class="huifu"><span class="sro"></span><p style="font-size:0.12rem;line-height: 0.2rem;color:#484848"><i style="color:#000;">管家回复：</i>'+data[i].comment.reply+'</p></div>'
                }
               
                 plStr+='</li>';
