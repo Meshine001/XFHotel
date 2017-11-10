@@ -26,10 +26,10 @@ import com.xfhotel.hotel.entity.Customer;
 import com.xfhotel.hotel.entity.CustomerDetails;
 import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Fault;
-import com.xfhotel.hotel.entity.Fitness;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.entity.Rests;
 import com.xfhotel.hotel.entity.Tenant;
 import com.xfhotel.hotel.entity.TripOrder;
 import com.xfhotel.hotel.entity.User;
@@ -46,21 +46,21 @@ import com.xfhotel.hotel.service.FitnessService;
 import com.xfhotel.hotel.service.HouseService;
 import com.xfhotel.hotel.service.LandlordService;
 import com.xfhotel.hotel.service.OrderService;
+import com.xfhotel.hotel.service.RestsService;
 import com.xfhotel.hotel.service.TenantService;
 import com.xfhotel.hotel.service.TripOrderService;
 import com.xfhotel.hotel.service.UserService;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.TimeUtil;
-import com.xfhotel.hotel.support.wechat.WechatOrderUtils;
-
-import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	
-
+	@Autowired
+	RestsService restsService;
+	
 	@Autowired
 	TenantService tenantService;
 	
@@ -641,4 +641,56 @@ public class AdminController {
 		
 	}
 
+	@RequestMapping(value = "/Rests", method = RequestMethod.POST)
+	public @ResponseBody Message Rests(String source,String startTime, String endTime,Double sum,int tel,int fate,String name,Long apId) {
+		try {
+			Apartment apartment = apartmentService.findById(apId);
+			String roomName = apartment.getPosition().getString("xiao_qu")+apartment.getPosition().getString("men_pai");
+			Rests rests = new Rests();	
+			rests.setApId(apId);
+			rests.setEndTime(endTime);
+			rests.setRoomName(roomName);
+			rests.setName(name);
+			rests.setTel(tel);
+			rests.setStartTime(startTime);
+			rests.setSource(source);
+			rests.setFate(fate);
+			rests.setSum(sum);
+			SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String d =sdf.format(new Date().getTime());
+			rests.setTime(d);
+			restsService.add(rests);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "添加失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加成功");
+	}
+	
+	@RequestMapping(value = "/deleteRests", method = RequestMethod.POST)
+	public @ResponseBody Message deleteRests(Long id){
+			try{
+				Rests rests = restsService.findById(id);
+				restsService.delete(rests);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "删除失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "删除成功");
+	}
+	
+	@RequestMapping(value = "/getListRests", method = RequestMethod.POST)
+	public @ResponseBody Message getListRests(int page){
+			try{
+				PageResults<Rests> rests = restsService.getRests(page);
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, rests);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
+		}
+	}
+	
 }

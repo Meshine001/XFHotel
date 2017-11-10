@@ -230,7 +230,7 @@ public class LandlordController {
 		if (c.getState() == Apply.STATUS_NOT_AFFIRM) {
 			try {
 					c.setState(Apply.STATUS_CONDUCT);
-					appliService.update(c);
+					appliService.update(c); 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
