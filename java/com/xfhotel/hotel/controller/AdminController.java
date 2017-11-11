@@ -29,6 +29,7 @@ import com.xfhotel.hotel.entity.Fault;
 import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Landlord;
 import com.xfhotel.hotel.entity.Order;
+import com.xfhotel.hotel.entity.Price;
 import com.xfhotel.hotel.entity.Rests;
 import com.xfhotel.hotel.entity.Tenant;
 import com.xfhotel.hotel.entity.TripOrder;
@@ -50,6 +51,7 @@ import com.xfhotel.hotel.service.RestsService;
 import com.xfhotel.hotel.service.TenantService;
 import com.xfhotel.hotel.service.TripOrderService;
 import com.xfhotel.hotel.service.UserService;
+import com.xfhotel.hotel.support.DateUtil;
 import com.xfhotel.hotel.support.Message;
 import com.xfhotel.hotel.support.PageResults;
 import com.xfhotel.hotel.support.TimeUtil;
@@ -60,6 +62,9 @@ public class AdminController {
 	
 	@Autowired
 	RestsService restsService;
+	
+	
+	
 	
 	@Autowired
 	TenantService tenantService;
@@ -492,28 +497,57 @@ public class AdminController {
 		return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
 	}
 	
-	@RequestMapping(value = "/house", method = RequestMethod.POST)
-	public @ResponseBody Message addHouse(Long startDate , Long endDate,Long apartmentId,int state){
+	@RequestMapping(value = "/price", method = RequestMethod.POST)
+	public @ResponseBody Message price(Long[] time ,Long apartmentId,Double price){
 		try{
-			Long  day=((endDate-startDate)/1000/60/60/24)+1;
-			Long data=startDate;
-			System.out.println(day);
-			for(int i=0;i<day;i++){
+			for(int i=0;i<time.length;i++){
+				Long date = time[i];
+				Price price1 = apartmentService.getSpPrice(apartmentId, date+1000*60*60*12);
+				if(price1!=null){
+					price1.setPrice(price);
+					apartmentService.setSpPrice(price1);
+				}else{
+					Price price2 = new Price();
+					price2.setApartment_id(apartmentId);
+					price2.setDate(date+1000*60*60*12);
+					price2.setPrice(price);
+					apartmentService.setSpPrice(price1);
+			}
+			
+		}
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "设置失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "设置成功");
+	}
+	
+	@RequestMapping(value = "/house", method = RequestMethod.POST)
+	public @ResponseBody Message addHouse(Long[] time,Long apartmentId,int state){
+		try{
+			List<House> houses = houseService.list();
+			for(House houses1:houses){
+				Long date = houses1.getDate();
+				if(date<DateUtil.getStartTime()+1000*60*60*12){
+					houseService.delete(houses1);
+				}
+			}
+			for(int i=0;i<time.length;i++){
+				Long data=time[i];
 				House house = houseService.getHouse(apartmentId, data);
 				if(house!=null){
 					house.setState(state);
 					houseService.update(house);
-					data+=(long) (1000*60*60*24);
 				}else{
 					House house1 = new House();
 					house1.setApartmentId(apartmentId);
 					house1.setDate(data);
 					house1.setState(state);
 					houseService.add(house1);
-					data+=(long) (1000*60*60*24);
+				}
 			}
-			
-		}
+
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -694,3 +728,4 @@ public class AdminController {
 	}
 	
 }
+
