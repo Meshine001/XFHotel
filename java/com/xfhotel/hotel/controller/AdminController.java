@@ -502,16 +502,16 @@ public class AdminController {
 		try{
 			for(int i=0;i<time.length;i++){
 				Long date = time[i];
-				Price price1 = apartmentService.getSpPrice(apartmentId, date+1000*60*60*12);
+				Price price1 = apartmentService.getSpPrice(apartmentId, date-1000*60*60*12);
 				if(price1!=null){
 					price1.setPrice(price);
 					apartmentService.setSpPrice(price1);
 				}else{
 					Price price2 = new Price();
 					price2.setApartment_id(apartmentId);
-					price2.setDate(date+1000*60*60*12);
+					price2.setDate(date-1000*60*60*12);
 					price2.setPrice(price);
-					apartmentService.setSpPrice(price1);
+					apartmentService.setSpPrice(price2);
 			}
 			
 		}

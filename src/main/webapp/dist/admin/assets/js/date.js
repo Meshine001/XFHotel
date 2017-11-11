@@ -187,8 +187,11 @@
 			return;
 		}
     	$(".modallg").fadeIn();
+    	$("#app-title-msg").text('设置房态');
+    	$("#activerooom").html('<a class="btn" stag="0">有人住</a><a class="btn" stag="1">没人住</a>');
+
     });
-    $("#activerooom a").click(function(){
+    $("#activerooom").on('click','a',function(){
     	$(this).addClass('ac').siblings().removeClass('ac');
     	_status=$(this).attr('stag')
     })
@@ -214,10 +217,57 @@
 			},
 			success:function(data){
 				console.log(data)
+				if(data.statusCode==1){
+					$(".modallg").fadeOut();
+					alert(data.content)
+					location=location;
+				}else{
+					alert(data.content)
+				}
 			}
 		})
 	})
 	
+	//============设置价格=================
+    $("#sethouse .btn:first-child+.btn").click(function(){
+		if(facilId==""||facilId==null ){
+			alert('请先选择时间')
+			return;
+		}
+    	$(".modallg").fadeIn();
+    	$("#app-title-msg").text('设置价格');
+    	$("#activerooom").html('<input type="text" class="form-control" placeholder="填写价格" id="priceset">');
+    	$(".modal-footer").html('<a class="btn btn-success" id="priceOK">确定</a>')
+    });
 	
-	
+	$(".modal-footer").on('click','#priceOK',function(){
+		var val=$("#priceset").val();
+		if(val==""||val==null){
+			alert('选择设置价格后提交')
+			return;
+		}
+		console.log(facilId+'&'+val+'&'+ID)
+		$.ajax({
+			type:'POST',
+			dataType:'json',
+			url:'/admin/price',
+			data:{
+				'time':facilId,
+				'price':val,
+				'apartmentId':ID
+			},
+			success:function(data){
+				console.log(data)
+				if(data.statusCode==1){
+					$(".modallg").fadeOut();
+					alert(data.content)
+					location=location;
+				}else{
+					alert(data.content)
+				}
+			}
+		})
+	})
+    
+    
    }

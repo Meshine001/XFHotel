@@ -102,7 +102,15 @@
 				</div>
 			</div>
 			
-			<div class="card card-mini" style="margin-top:20px;">
+
+			
+			
+			
+			
+		</div>
+		
+		<div class="col-md-6">
+			<div class="card card-mini">
 				<div class="card-header">
 					<div class="card-title">
 						<h3>第三方平台订单统计</h3>
@@ -180,96 +188,7 @@
 					</div>	
 				</div>
 			</div>
-			
-			
-			
-			
-		</div>
-		
-		<div class="col-md-6">
-			<div class="card card-mini">
-				<div class="card-header">
-					<div class="card-title">
-						<h3>房屋状态设置</h3>
-					</div>
-				</div>
-				<div class="card-body">
-					<div class="form-horizontal">
-						<div class="form-group">
-							<label class="col-sm-2 control-label">起始日期</label>
-							<div class="col-sm-10 status-time">
-								<input type="date" class="form-control" placeholder=""
-									name="date" value="">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label">结束日期</label>
-							<div class="col-sm-10 status-endtime">
-								<input type="date" class="form-control" placeholder=""
-									name="date" value="">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label">状态选择</label>
-							<div class="col-sm-10 status-house">
-								<a href="javascript:;" stag="0">有人住</a>
-								<a href="javascript:;" stag="1">没人住</a>
-							</div>
-						</div>
-						<div class="form-group">
-								<div class="col-md-9 ">
-									<button type="submit" class="btn btn-success" id="btnyesDate">确定</button>
-								</div>
-						</div>
-						<div class="form-group">	
-						</div>
-						
-					</div>	
-				</div>
-			</div>
-			
-			
-			<div class="card card-mini" style="margin-top:20px;">
-				<div class="card-header">
-					<div class="card-title">
-						<h3>特殊价格设置</h3>
-					</div>
-				</div>
-				<div class="card-body">
-				
-				<form action="<%=basePath%>/admin/apartment/price/set"
-						class="form form-horizontal" method="post">
-						<input type="hidden" name="apartmentId" value id="apartmentId">
-						<div class="form-group">
-							<label class="col-sm-2 control-label">选择日期</label>
-							<div class="col-sm-10">
-								<input type="date" id="teshuDate" class="form-control" placeholder=""
-									name="date" value="">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label">当日价格</label>
-							<div class="col-sm-10">
-								<input type="text" id="teshuPrice" class="form-control" placeholder=""
-									name="price" value="">
-							</div>
-						</div>
-						<div class="form-footer">
-							<div class="form-group">
-								<div class="col-md-9">
-									<button type="submit" id="teshuSubmit" class="btn btn-success">保存</button>
-									<!-- <button type="button" class="btn btn-danger">取消</button> -->
-								</div>
-							</div>
-						</div>
-					</form>
-				
-				</div>
-				
-			</div>
-			
-			
-			
+
 		</div>
 		
 		
