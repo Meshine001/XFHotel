@@ -81,7 +81,12 @@ $(document).ready(function(){
 			alert('请您填写入住总天数后再提交')
 			return;
 		}
-		
+		var othertel=$("#otherTel").val();
+		if( othertel==null || othertel==undefined ||othertel==""){
+			alert('请您填写入住人电话号码后再提交')
+			return;
+		}
+
 		$.ajax({
 			type:'post',
 			dataType:'json',
@@ -93,12 +98,17 @@ $(document).ready(function(){
 				'sum':value,
 				'apId':ID,
 				'name':name,
-				'fate':otherdate
+				'fate':otherdate,
+				'tel':othertel
 			},
 			success:function(data){
 				console.log(data)
-			},
-			error:function(data){
+				if(data.statusCode==1){
+					alert('信息成交成功，请及时修改房态。')
+					location=location;
+				}else{
+					alert(data.content)
+				}
 				
 			}
 		})

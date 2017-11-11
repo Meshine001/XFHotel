@@ -13,6 +13,35 @@
 </head>
 <body>
 	<my_body>
+	
+	<!-- 11.11 -->
+		<div class="modallg">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				 <button type="button" class="close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title house-title" id="app-title-msg">修改房态<i></i></h4>
+			  </div>
+			  <div class="modal-body row" id="activerooom">
+					<a class="btn" stag="0">有人住</a>
+					<a class="btn" stag="1">没人住</a>
+			  </div>
+			  <div class="modal-footer" style="text-align:center">
+			    <a class="btn btn-success" id="present">确定</a>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	<!-- 11.11 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<div class="row">
 		
 		<div class="col-md-6">
@@ -66,7 +95,10 @@
 					
 				
 			<!-- 2017-7-14日历 --> 
-		
+		<div class="btn-group" id="sethouse">
+		    <a type="button" class="btn btn-default">修改房态</a>
+		    <a type="button" class="btn btn-default">修改价格</a>
+		</div>
 				</div>
 			</div>
 			

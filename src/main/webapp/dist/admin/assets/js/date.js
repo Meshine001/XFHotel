@@ -91,14 +91,18 @@
                    $(".data_table tbody tr").eq(0).find("td").eq(i).html("");
                   }else{
                 	  var dates =  thisyear + '-' + p(thismonth) + '-' + p(a);
+                	  var hm=(new Date(dates)).getTime()+4*60*60*1000;
+                	  var newTime = new Date(hm);  
+                	  
+                	  
 		                   if(a<=days){ //填日期
-		                    $(".data_table tbody tr").eq(j).find("td").eq(i).attr('date-date',dates);
+		                    $(".data_table tbody tr").eq(j).find("td").eq(i).attr({'date-date':dates,'date-hm':hm,'sj':newTime});
 		                   
 		                    if(gg[dates].roomNum=='0'){
-		                    	 $(".data_table tbody tr").eq(j).find("td").eq(i).html(a+'<br>'+"<i style='color:red'>满房</i>");
+		                    	 $(".data_table tbody tr").eq(j).find("td").eq(i).html(a+'<br>'+"<i style='color:coral'>满房</i>");
 		                    	 $(".data_table tbody tr").eq(j).find("td").eq(i).css('background','#f0f0f0');
 		                    }else if(gg[dates].roomNum=='1'){
-		                    	 $(".data_table tbody tr").eq(j).find("td").eq(i).html(a+'<br>'+gg[dates].price);
+		                    	 $(".data_table tbody tr").eq(j).find("td").eq(i).html(a+'<br>￥'+gg[dates].price);
 		                    	 $(".data_table tbody tr").eq(j).find("td").eq(i).css('background','#fff');
 		                    }
 		                    
@@ -154,5 +158,66 @@
 	     }
 	     initdata();
     });
+    
+    //11.11
+    var ID=window.sessionStorage.getItem('roomId');
+    var facilId="",_status="";
+    $(".data_table tbody").on('click',' td',function(){
+    	if($(this).hasClass('selectDate')==true){
+    		$(this).removeClass('selectDate');
+    	}else{
+    		$(this).addClass('selectDate');
+    	}
+    	
+    	var houseList=new Array();
+        for(var i=0;i<$(".data_table tbody td").length;i++){
+            if($(".data_table tbody td").eq(i).hasClass('selectDate')==true){
+                houseList.push($(".data_table tbody td").eq(i).attr('date-hm'));
+            }
+        }
+        facilId=houseList.join(',');
+    	
+    })
+    
 
+    
+    $("#sethouse .btn:first-child").click(function(){
+		if(facilId==""||facilId==null ){
+			alert('请先选择时间')
+			return;
+		}
+    	$(".modallg").fadeIn();
+    });
+    $("#activerooom a").click(function(){
+    	$(this).addClass('ac').siblings().removeClass('ac');
+    	_status=$(this).attr('stag')
+    })
+    $(".close").click(function(){
+			$(".modallg").fadeOut();
+	})
+    //修改房态提交信息
+	
+	$("#present").click(function(){
+		if(facilId==""||facilId==null || _status=="" || _status==null){
+			alert('选择状态后提交')
+			return;
+		}
+		console.log(facilId+'&'+_status+'&'+ID)
+		$.ajax({
+			type:'POST',
+			dataType:'json',
+			url:'/admin/house',
+			data:{
+				'time':facilId,
+				'state':_status,
+				'apartmentId':ID
+			},
+			success:function(data){
+				console.log(data)
+			}
+		})
+	})
+	
+	
+	
    }

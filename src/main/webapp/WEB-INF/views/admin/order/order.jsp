@@ -120,7 +120,7 @@
 					</ul>
 				</div>
 	<!-- 外来订单列表begin -->			
-				<div id="otherOrderlist" style="width:100%;height:300px;overflow-x:auto">
+				<div id="otherOrderlist" style="width:100%;height:auto;overflow-x:auto">
 					<table class="table table-bordered">
 						<thead id="otherlist-nav">
 							<tr>
@@ -139,7 +139,9 @@
 						</tbody>
 					</table>
 					<ul id="otherpagecontroller" class="pagination">
-						
+						<li><a>上一页</a></li>
+						<li><a>下一页</a></li>
+						<li><span></span></li>
 					</ul>
 				</div>
 	<!-- 外来订单列表end -->					

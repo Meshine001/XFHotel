@@ -642,7 +642,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/Rests", method = RequestMethod.POST)
-	public @ResponseBody Message Rests(String source,String startTime, String endTime,Double sum,int tel,int fate,String name,Long apId) {
+	public @ResponseBody Message Rests(String source,String startTime, String endTime,Double sum,Long tel,int fate,String name,Long apId) {
 		try {
 			Apartment apartment = apartmentService.findById(apId);
 			String roomName = apartment.getPosition().getString("xiao_qu")+apartment.getPosition().getString("men_pai");

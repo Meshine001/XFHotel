@@ -33,9 +33,13 @@ $(document).ready(function(){
     	console.log(data);
     	 //电话号码****代替
     	var _tel=data.tel;
-        var tel= _tel.substr(0,3)+"****"+_tel.substr(7);
+    	if(_tel!=null || _tel!="undefined"){
+    		// var tel= _tel.substr(0,3)+"****"+_tel.substr(7)
+    		var tel=_tel
+    	}
+       
         var _nick=data.details.nick;
-        if(_nick=="" || _nick==null || _nick==undefined){
+        if(_nick=="" || _nick==null || _nick==undefined ||_nick=="undefined"){
         	$(".header .nick .nk").html(tel)
         }else{
         	$(".header .nick .nk").text(_nick)

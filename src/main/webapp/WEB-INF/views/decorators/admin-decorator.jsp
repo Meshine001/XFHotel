@@ -15,6 +15,8 @@
 	href="<%=basePath%>/dist/admin/assets/css/vendor.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/admin/assets/css/flat-admin.css">
+	<link rel="stylesheet" type="text/css"
+	href="<%=basePath%>/dist/admin/assets/css/iconcaomei/style.css">
 <!-- 
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>/dist/admin/assets/css/theme/blue-sky.css">
@@ -39,7 +41,7 @@
 </head>
 <body>
 	<div class="app app-default">
-<!-- 
+ 
 		<aside class="app-sidebar" id="sidebar">
 			<div class="sidebar-header">
 				<a class="sidebar-brand" href="#"><span class="highlight">青舍都市</span>
@@ -50,24 +52,18 @@
 			</div>
 			<div class="sidebar-menu">
 				<ul class="sidebar-nav">
-					<li class="active"><a href="<%=basePath%>/admin/dashboard">
-							<div class="icon">
-								<i class="fa fa-tasks" aria-hidden="true"></i>
-							</div>
-							<div class="title">控制面板</div>
+					<li><a href="<%=basePath%>/admin/dashboard">
+							<div class="title"><i class="czs-layout-grid"></i>菜单主页</div>
 					</a></li>
-					<li  style="display:none;"  class="active"><a href="<%=basePath%>/admin/dashboard">
-							<div class="icon">
-								<i class="fa fa-users" aria-hidden="true"></i>
-							</div>
-							<div class="title">管理员设置</div>
+					<li><a href="<%=basePath%>/admin/apartment">
+							<div class="title"><i class="czs-home-l"></i>房源管理</div>
+					</a></li>
+					<li><a href="<%=basePath%>/admin/order">
+							<div class="title"><i class="czs-paper"></i>订单管理</div>
 					</a></li>
 					
-					<li style="display:none;"><a href="<%=basePath%>/admin/system">
-							<div class="icon">
-								<i class="fa fa-cog" aria-hidden="true"></i>
-							</div>
-							<div class="title">系统设置</div>
+					<li><a href="<%=basePath%>/admin/customer_list">
+							<div class="title"><i class="czs-people"></i>用户管理</div>
 					</a></li>
 
 				</ul>
@@ -83,54 +79,46 @@
 				</ul>
 			</div>
 		</aside>
- -->
+
 
 		<div class="app-container">
 			<nav class="navbar navbar-default" id="navbar">
 				<div class="container-fluid">
 					<div class="navbar-collapse collapse in">
 						<ul class="nav navbar-nav navbar-mobile">
-							<!-- 
-							<li>
-								<button type="button" class="sidebar-toggle">
-									<i class="fa fa-bars"></i>
-								</button>
-							</li>
-							 -->
 							<li class="logo"><a class="navbar-brand" href="<%=basePath%>/admin/dashboard"><span
 									class="highlight">青舍都市</span> Admin</a></li>
 							<li>
 								<button type="button" class="navbar-toggle">
-									<img class="profile-img"
-										src="<%=basePath%>/dist/admin/assets/images/profile.png">
+									<i class="czs-menu-l"></i>
 								</button>
 							</li>
 						</ul>
 						<ul class="nav navbar-nav navbar-left">
-							<li class="navbar-title"><a href="<%=basePath%>/admin/dashboard" style="font-size:30px;color:#fff;">青舍都市公寓后台管理</a></li>
-							<!-- 
-							<li class="navbar-search hidden-sm"><input id="search"
-								type="text" placeholder="Search.." autocomplete="off">
-								<button class="btn-search">
-									<i class="fa fa-search"></i>
-								</button></li>
-							 -->
+							<li class="navbar-title"><a href="<%=basePath%>/admin/dashboard" style="color:#fff;"><i class="czs-microsoft" style="margin-right:15px;font-size:18px;"></i>青舍都市公寓后台管理</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-					
 							<li class="dropdown profile">
-								<a href="javascript:;" id="loginOuts" class="dropdown-toggle" data-toggle="dropdown">
-									<img class="profile-img" src="<%=basePath%>/dist/admin/assets/images/profile.png">
+								<a href="<%=basePath%>/admin/apartment">
+									<div class="title">房源管理 </div>
+								</a>
+							</li>
+							<li class="dropdown profile">
+								<a href="<%=basePath%>/admin/order"   >
+									<div class="title">订单管理 </div>
+								</a>
+							</li>
+							<li class="dropdown profile">
+								<a href="<%=basePath%>/admin/customer_list"  >
+									<div class="title">用户管理 </div>
+								</a>
+							</li>
+							<li class="dropdown profile">
+								<a href="javascript:;" id="loginOuts" >
 									<div class="title">退出登录 </div>
 								</a>
-								<div class="dropdown-menu">
-									<div class="profile-info">
-										<h4 class="username" id="app-shenfen"></h4>
-									</div>
-									<ul class="action">
-										<li><a href="#" id="loginout"> 退出登录 </a></li>
-									</ul>
-								</div></li>
+							</li>
+
 						</ul>
 					</div>
 				</div>
@@ -152,6 +140,7 @@
 		src="<%=basePath%>/dist/admin/assets/js/app.js"></script>
 	<sitemesh:write property='my_script' />
 	<script>
+
 		$(document).ready(function(){
 			var userType=window.localStorage.getItem('userType');//0:超级管理员 1:管理员
 			if(userType==1){
@@ -168,6 +157,7 @@
 			         window.location.href='http://www.yiyunzn.xyz/admin/login'; // 线上地址
 			      },300)  
 			})
+ 
 		})
 	</script>
 </body>

@@ -22,7 +22,7 @@ public class Rests {
 	private Long apId;//房间id	
 	private String source;//来源
 	private String name;//姓名
-	private int tel;// 电话
+	private Long tel;// 电话
 	private int fate;//天数
 	private String time;//下单时间
 	private String startTime;//开始时间
@@ -62,10 +62,10 @@ public class Rests {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getTel() {
+	public Long getTel() {
 		return tel;
 	}
-	public void setTel(int tel) {
+	public void setTel(Long tel) {
 		this.tel = tel;
 	}
 	public int getFate() {
