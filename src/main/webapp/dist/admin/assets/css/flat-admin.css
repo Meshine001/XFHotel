@@ -6496,7 +6496,8 @@ ui-view>.app-messaging-container {
 }
 
 .btn {
-	padding: 10px 30px;
+/*	padding: 10px 30px; */
+	display:block;
 	border-radius: 0;
 	border-width: 1px;
 	border-style: solid;
@@ -9144,45 +9145,49 @@ i{font-style:normal}
     color: #eae7e7;
 }
 #h-table .btn:hover{color:#fff}
-#h-table .paixu:hover{border-color:#f98d08:background:none;color:black;}
-#h-table .paixu{
-	width: 92px;
-    height: 36px;
+.paixu:hover{border-color:#f98d08:background:none;color:black;}
+.paixu{
+	width: 68px;
+    height: 30px;
     padding: 0;
-    line-height: 36px;
+    line-height: 30px;
     border-radius: 6px;
     border:1px solid #ccc;
     color: #656262;
     position:relative;
+    margin:0 auto;
 }
-#h-table .paixu input{
+.paixu input{
 	width:45%;
 	heigth:30px;
 	position:absolute;
 	left:0;
-	top:2px;
 	text-align:center;
-	line-height:28px;
+	line-height:26px;
 	color:block;
 	transition:0s;
 	border-radius: 3px;
 	border:none;
 }
-#h-table .paixu input.hover .#h-table .paixu{
+.paixu input.hover .paixu{
 	border-color:#29c75f;
 }
+
+
+
 /*29c75f*/
-#h-table .stb{
+.paixu .stb{
 	cursor: pointer;
 	width:55%;
 	position:absolute;
 	right:0;
 	top:0;
 	text-align:center;
-	line-height: 34px;
+	line-height: 26px;
 	color:#fff;
 	background: #ccc;
 	border-radius: 0 6px 6px 0;
+	padding:0 !important;
 }
 #h-table tr{cursor: pointer;}
 
@@ -9265,3 +9270,69 @@ text-align:center;color:#0C6;padding:1% 0;cursor: pointer;
 @media ( max-width :450px) {
 	.navs a{margin:0;width:100%;padding-bottom:10px;}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/*11.14*/
+.clear{clear:both;}
+.think{width:100%;padding:10px;position:relative;overflow:hidden;}
+.think:hover{border-color:#f1500c}
+.think .hb-img{width:50%;height:140px;float:left;}
+.think .hb-img img{width:100%;display:block;border:1px solid #ccc;height:140px;}
+.hb-info{width:50%;float:left;padding:10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.think ul{clear:both;overflow:hidden;width:100%;border-top:1px solid #ccc;margin-top:10px;padding:0;margin-bottom:0;padding-top:10px;}
+.think ul li{float:left;padding:10px 0 10px 0;width:25%;text-align:center;}
+.think ul li a{
+	padding:5px;
+	color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+}
+.think asdie{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background: rgba(255,69,0,.5);
+    top: -50px;
+    left: -50px;
+    transition: all .1s;
+    transform: rotate(-45deg);
+}
+.think asdie input{
+	position: absolute;
+    bottom: 12px;
+    left: 45px;
+    transform: rotate(45deg);
+}
+
+
+@media ( max-width :375px) {
+	.think ul li{
+		width:33.3333%;
+	}	
+}
+@media ( max-width :750px) {
+	.hb-info{padding:6px}
+	.think .hb-img,.hb-info{width:100%;}
+}
+@media ( max-width :900px) {
+	.hb-item{width:100%}
+}
+@media (min-width: 1200px) and (max-width: 1240px) {
+	.hb-item{width:50%}
+}
+@media (min-width: 1240px) and (max-width: 1570px) {
+	.hb-item{width:33.3333%}
+}
+/*11.14*/

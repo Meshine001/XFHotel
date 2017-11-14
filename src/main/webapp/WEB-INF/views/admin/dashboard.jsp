@@ -275,6 +275,19 @@
 				$(".app-ng").show();
 			}
 			
+			$.ajax({
+				type:'post',
+				dataType:'json',
+				data:{'id':uid},
+				url:'/admin/getData',
+				success:function(data){
+					console.log(data);
+					
+				}
+		    });
+			
+			
+			
 			
 			//实时状态
 				$.ajax({
