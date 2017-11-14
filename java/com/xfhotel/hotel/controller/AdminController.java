@@ -726,6 +726,28 @@ public class AdminController {
 			return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
 		}
 	}
+	@RequestMapping(value = "/getData", method = RequestMethod.POST)
+	public @ResponseBody Message getData(){
+			try{
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("room",apartmentService.list().size());
+				map.put("order ", orderservice.list(0).size());
+				map.put("blog", blogService.list().size());
+				map.put("coupon", couponService.list().size());
+				map.put("clean", cleanService.list().size());
+				map.put("fault", faultservice.list().size());
+				map.put("facility", facilityOrderservice.list().size());
+				map.put("trip", tripOrderService.list().size());
+				map.put("landlord", landlordService.list().size());
+				map.put("user", userService.list().size());
+				map.put("tenant", tenantService.list().size());
+				return new Message(Constants.MESSAGE_SUCCESS_CODE, map);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
+		}
+	}
 	
 }
 
