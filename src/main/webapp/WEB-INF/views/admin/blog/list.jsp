@@ -24,13 +24,14 @@
 						<a  class="btn " href="<%=basePath%>/admin/blog/create">添加</a>
 					</ul>
 				</div>
-				<table class="table" id="list">
+				<div style="width:100%;overflow-x:auto;">
+				<table class="table" id="t_list">
 					<thead>
 						<tr>
-							<th width="20%">发布日期</th>
-							<th width="50%">标题</th>
-							<th width="15%">状态</th>
-							<th width="15%"></th>
+							<th>发布日期</th>
+							<th>标题</th>
+							<th>状态</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody id="t_body">
@@ -38,6 +39,7 @@
 				</table>
 				<ul id="pagecontroller" class="pagination">
 				</ul>
+				</div>
 			</div>
 		</div>
 	</div>

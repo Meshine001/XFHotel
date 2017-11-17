@@ -100,11 +100,16 @@ function getaddress(lng, lat) {
 			});
 }
 //复选
-$(".informers input").click(function(){
+$(".informers input").click(function(event){
+	event.stopPropagation();
 	$(this).parent().css({'height':'300px','border':'1px solid #009688'});
 	$(this).parent().find('.checkBox,.confirm').show();
 	
 })
+//$(document).click(function(event){
+//	event.stopPropagation();
+//	$(".informers .checkBox,.informers p").hide();
+//})
 
 $(".informers .checkBox ul li").on('click',function(){
 	if($(this).hasClass('actives')==true){

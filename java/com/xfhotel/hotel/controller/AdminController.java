@@ -731,7 +731,8 @@ public class AdminController {
 			try{
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("room",apartmentService.list().size());
-				map.put("order ", orderservice.list(0).size());
+				map.put("order", orderservice.list(0).size());
+				map.put("customer", customerService.list().size());
 				map.put("blog", blogService.list().size());
 				map.put("coupon", couponService.list().size());
 				map.put("clean", cleanService.list().size());

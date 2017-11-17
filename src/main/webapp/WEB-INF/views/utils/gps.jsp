@@ -16,7 +16,7 @@
 		#r-result,#r-result table{width:100%;height:95%;font-size:12px;overflow:auto}
 		#search_type{width:100%,height:5%;float:top;font-size:20px;}
 	</style>
-<title>title-青舍都市公寓-西安租房_西安合租</title>
+<title>智能公寓平台-西安租房_西安合租</title>
 
 <meta charset="utf-8">
 </head>

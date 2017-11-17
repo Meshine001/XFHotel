@@ -313,6 +313,7 @@
 					var jslist="",bclist="";
 					$("#jiesongList,#baocheList").html("");
 					for(var i=0;i<data.length;i++){
+						
 						if(data[i].classify==0){
 							jslist+='<tr id="'+data[i].id+'" price="'+data[i].price+'"><td style="padding:10px 15px"><input type="text" style="margin:0" class="form-control" value="'+data[i].place+'" readonly></td><td style="padding:10px 15px"><input type="text" style="margin:0" class="form-control" value="'+data[i].price+'" readonly></td><td  style="padding:0 15px"><span class="input-group-btn" style="text-align: right;"><button class="btn btn-danger btn-sm" type="button">删除</button></span></td></tr>';
 						}else if(data[i].classify==1){
@@ -395,10 +396,7 @@
 					
 				},
 				success : function(data) {
-					console.log(data)
-				
-					
-					
+
 					if(data.statusCode == 1){
 						location=location;
 					}else{

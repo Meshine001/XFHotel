@@ -70,7 +70,7 @@
 						<th>状态</th>
 						<th></th>
 					</thead>
-					<tbody id="list">
+					<tbody id="userlist">
 					</tbody>
 				</table>
 				</div>
@@ -79,6 +79,11 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id="myalerts" style="display:none" >
+		<div class="lg"><span></span><p>正在加载中,请稍后</p></div>
+	</div>
+	
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("table th,table td").css('min-width','120px');

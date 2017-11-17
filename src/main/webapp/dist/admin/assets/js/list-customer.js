@@ -33,7 +33,7 @@ function change(id, status,cp) {
 		}
 	});
 };
-
+$("#myalerts").fadeIn();
 function list(page) {
 	$.ajax({
 		async : false,
@@ -48,6 +48,7 @@ function list(page) {
 			alert("获取数据失败！");
 		},
 		success : function(data) {
+			$("#myalerts").fadeOut();
 		//	console.log(data)
 			$('#pagecontroller').html('');
 			var a_f = $('<a></a>').attr('href','#').append('&laquo;').attr('onclick', 'list(1)').attr('href',
@@ -68,7 +69,7 @@ function list(page) {
 			$('#pagecontroller').append(li_l);
 
 			var trtitle = $('<tr></tr>').append('');
-			$("#list").html(trtitle);
+			$("#userlist").html(trtitle);
 			$.each(data.results,
 					function(index, value) {
 						var tr = $('<tr></tr>');
@@ -91,12 +92,12 @@ function list(page) {
 												+ data.currentPage + ')').attr(
 										'href', 'javascript:void(0);');
 						var td_status = $('<td></td>').append(a_detail).append(
-								'<br>').append(a_op);
+								'').append(a_op);
 						tr.append(td_id).append(td_level).append(td_tel)
 								.append(td_regTime).append(td_consumptionCount)
 								.append(td_consumptionTimes).append(td_details)
 								.append(td_status);
-						$("#list").append(tr);
+						$("#userlist").append(tr);
 					});
 		}
 	});
@@ -106,6 +107,7 @@ function list(page) {
 // 5.20分页存在问题；
 //条件搜索；
 $("#longtime").on('change',function(){
+	$("#myalerts").fadeIn();
 	 $.ajax({
 			type:'POST',
 			async : false,
@@ -118,19 +120,23 @@ $("#longtime").on('change',function(){
 			},
 			success:function(data){
 			//	console.log(data);
+				$("#myalerts").fadeOut();
 				var str='';
 				var newTime=new Array();
-				$("#list").html('');
+				$("#userlist").html('');
 				for(var i=0;i<data.content.length;i++){
 					var infotime=data.content[i].regTime;
 					var j = new Date(infotime);
 					var istime=j.toLocaleDateString()
 					    newTime.push(istime);
 					str+='<tr _pid="'+data.content[i].id+'"><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+
-					'</td><td>'+getStatus(data.content[i].status)+'</td><td><a class="lockit">查看详细</a><br><a onclick="change(' +data.content[i].id+ ','+data.content[i].status+',1)">'+getOp(data.content[i].status)+'</a></td></tr>';
+					'</td><td>'+getStatus(data.content[i].status)+'</td><td><a class="lockit btn">查看详细</a><a class="btn" onclick="change(' +data.content[i].id+ ','+data.content[i].status+',1)">'+getOp(data.content[i].status)+'</a></td></tr>';
 					
 				}
-				$("#list").append(str);
+				if(data.content.length<10){
+					$("#pagecontroller").hide();
+				}
+				$("#userlist").append(str);
 // OK	查看详细  状态显示			
 				$(".lockit").on('click',function(){
 					window.location.href="view_customer?id="+encodeURIComponent($(this).parent().parent().attr('_pid'));
@@ -144,6 +150,7 @@ $("#longtime").on('change',function(){
 		})
 });
 $("#monetary").on('change',function(){
+	$("#myalerts").fadeIn();
 //  getData($("#monetary option:selected").val())
 	  $.ajax({
 			type:'POST',
@@ -157,19 +164,23 @@ $("#monetary").on('change',function(){
 			},
 			success:function(data){
 			//	console.log(data);
+				$("#myalerts").fadeOut();
 				var str='';
 				var newTime=new Array();
-				$("#list").html('');
+				$("#userlist").html('');
 				for(var i=0;i<data.content.length;i++){
 					var infotime=data.content[i].regTime;
 					var j = new Date(infotime);
 					var istime=j.toLocaleDateString()
 					    newTime.push(istime);
 					str+='<tr _pid="'+data.content[i].id+'"><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+
-					'</td><td>'+getStatus(data.content[i].status)+'</td><td><a class="lockit">查看详细</a><br><a onclick="change(' +data.content[i].id+ ','+data.content[i].status+',1)">'+getOp(data.content[i].status)+'</a></td></tr>';
+					'</td><td>'+getStatus(data.content[i].status)+'</td><td><a class="lockit btn">查看详细</a><a class="btn" onclick="change(' +data.content[i].id+ ','+data.content[i].status+',1)">'+getOp(data.content[i].status)+'</a></td></tr>';
 					
 				}
-				$("#list").append(str);
+				if(data.content.length<10){
+					$("#pagecontroller").hide();
+				}
+				$("#userlist").append(str);
 // OK	查看详细  状态显示			
 				$(".lockit").on('click',function(){
 					window.location.href="view_customer?id="+encodeURIComponent($(this).parent().parent().attr('_pid'));
@@ -185,6 +196,7 @@ $("#monetary").on('change',function(){
 });
 
 $("#sex").on('change',function(){
+	$("#myalerts").show();
 //  getData($("#sex option:selected").val())
     $.ajax({
 		type:'POST',
@@ -197,20 +209,25 @@ $("#sex").on('change',function(){
 			alert('数据传输错误！')
 		},
 		success:function(data){
-		//	console.log(data);
+			$("#myalerts").fadeOut();
+			console.log(data);
 			var str='';
 			var newTime=new Array();
-			$("#list").html('');
+			$("#userlist").html('');
 			for(var i=0;i<data.content.length;i++){
 				var infotime=data.content[i].regTime;
 				var j = new Date(infotime);
 				var istime=j.toLocaleDateString()
 				    newTime.push(istime);
 				str+='<tr _pid="'+data.content[i].id+'"><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+
-				'</td><td>'+getStatus(data.content[i].status)+'</td><td><a class="lockit">查看详细</a><br><a onclick="change(' +data.content[i].id+ ','+data.content[i].status+',1)">'+getOp(data.content[i].status)+'</a></td></tr>';
+				'</td><td>'+getStatus(data.content[i].status)+'</td><td><a class="lockit btn">查看详细</a><a class="btn" onclick="change(' +data.content[i].id+ ','+data.content[i].status+',1)">'+getOp(data.content[i].status)+'</a></td></tr>';
 				
 			}
-			$("#list").append(str);
+			if(data.content.length<10){
+				$("#pagecontroller").hide();
+			}
+			
+			$("#userlist").append(str);
 //OK	查看详细  状态显示			
 			$(".lockit").on('click',function(){
 				window.location.href="view_customer?id="+encodeURIComponent($(this).parent().parent().attr('_pid'));

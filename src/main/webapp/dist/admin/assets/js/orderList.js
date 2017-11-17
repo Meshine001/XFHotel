@@ -44,6 +44,97 @@ function getItem(key) {
 
 
 
+//一般管理员&超级管理员
+var uid=window.localStorage.getItem('uid');
+var _userType=window.localStorage.getItem('userType');
+$("#otherOrderlist").hide();
+$("table th,table td").css('min-width','140px');
+$("table th").eq(0).css('min-width','75px');
+
+$(".navs a").click(function(){
+	$(this).addClass('active').siblings().removeClass('active');
+	var i=$(this).index();
+	if(i==0){
+		$("#topscroll").show();
+		$("#otherOrderlist").hide();
+	}else if(i==1){
+		$("#topscroll").hide();
+		$("#otherOrderlist").show();
+	}
+})
+
+
+function masglistData(){
+	$.ajax({
+		type:'post',
+		dataType:'json',
+		data:{'id':uid},
+		url:'/admin/user/stewardO',//统计住房订单
+		success:function(data){
+			console.log(data);
+			$(".navs a").eq(0).find('i').text(data.content.length);
+			
+/*			new Date( data.content[i].time ).toLocaleString()      *///毫秒转换成date日期
+			
+			$("#list").html('');
+			var str='';
+
+			
+			for(var i=0;i<data.content.length;i++){
+			  var ted=data.content[i].description;
+  	    	  var status=data.content[i].status;
+    	      if(status=='0'){
+    	    	  status='未完成'
+    	      }else if(status=='1'){
+    	    	  status='未支付'
+    	      }else if(status=='2'){
+    	    	  status='正在住'
+    	      }else if(status=='3'){
+    	    	  status='已完成'
+    	      }else if(status=='4'){
+    	    	  status='取消订单'
+    	      }else if(status=='5'){
+    	    	  status='超时'
+    	      }else if(status=='6'){
+    	    	  status='退款'
+    	      }else if(status=='7'){
+    	    	  status='需要管理员确认'
+    	      }else if(status=='8'){
+    	    	  status='退房中等待管理员确认'
+    	      };
+				
+				
+
+				str+='<tr data-id="'+data.content[i].id+'"><td>'+data.content[i].id+'</td><td>'+new Date( data.content[i].time ).toLocaleString()+'</td><td>'+status+
+				'</td><td>'+data.content[i].cusName+'</td><td>'+data.content[i].cusTel+'</td><td>'+ted.replace(/-undefined-/,"-")+'</td><td>'+new Date( data.content[i].startTime ).toLocaleString()+"<br>"+
+				new Date( data.content[i].endTime ).toLocaleString()+'</td><td>'+data.content[i].totalDay+'</td><td>'+data.content[i].price+'</td><td>'+data.content[i].totalPrice+'</td>'
+				if(data.content[i].status=='7'){
+					str+='<td><a href="javascript:;" class="btn comfirm-order" data-id="'+data.content[i].id+'">确认订单</a><a href="javascript:;" class="btn close-order" data-id="'+data.content[i].id+'">关闭订单</a></td>'
+				}else if(data.content[i].status=='2'){
+					str+='<td><a href="javascript:;" class="btn comfirm-sendpwd" data-id="'+data.content[i].id+'">发送密码</a></td>'
+				}else if(data.content[i].status=='8'){
+					str+='<td><a href="javascript:;" class="btn comfirmOutLease-order" data-id="'+data.content[i].id+'">确认退租</a></td>';
+				}else{
+					str+='<td></td>'
+				}
+				
+				str+='</tr>'
+					
+			}
+			$("#list").append(str)
+			
+			
+			
+			
+		}
+	})
+}
+
+
+
+
+
+
 
 function list(page) {
 	$.ajax({
@@ -57,8 +148,8 @@ function list(page) {
 			alert("嗷获取数据失败！");
 		},
 		success : function(data) {
-	//		console.log(data)
-			
+			console.log(data)
+		
 			
 			
 //			分页
@@ -87,7 +178,7 @@ function list(page) {
 				var ted=data.results[i].description;
 				str+='<tr data-id="'+data.results[i].id+'"><td>'+data.results[i].id+'</td><td>'+data.results[i].timeStr+'</td><td>'+data.results[i].status+
 				'</td><td>'+data.results[i].cusName+'</td><td>'+data.results[i].cusTel+'</td><td>'+ted.replace(/-undefined-/,"-")+'</td><td>'+data.results[i].startTime+"至"+
-				data.results[i].endTime+'</td><td>'+data.results[i].totalDay+'</td><td>'+data.results[i].price+'</td><td>'+data.results[i].totalPrice+'</td><td>'+data.results[i].preferential+'</td>'
+				data.results[i].endTime+'</td><td>'+data.results[i].totalDay+'</td><td>'+data.results[i].price+'</td><td>'+data.results[i].totalPrice+'</td>'
 				if(data.results[i].status=='确认中'){
 					str+='<td><a href="javascript:;" class="btn comfirm-order" data-id="'+data.results[i].id+'">确认订单</a><a href="javascript:;" class="btn close-order" data-id="'+data.results[i].id+'">关闭订单</a></td>'
 				}else if(data.results[i].status=='进行中'){
@@ -132,7 +223,7 @@ $('#list').on('click','tr .comfirm-order',function(event){
 //发送密码
 $('#list').on('click','tr .comfirm-sendpwd',function(event){
 	event.stopPropagation();
-	var url = '../order/comfirmPw';
+	var url = '/order/comfirmPw';
 	var id = $(this).attr('data-id');
 	$.ajax({
 		type : 'POST',
@@ -236,7 +327,7 @@ $("#longtime").on('change',function(){
 		})
 });
 $("#monetary").on('change',function(){
-//  getData($("#monetary option:selected").val())
+
 	  $.ajax({
 			type:'POST',
 			async : false,
@@ -323,6 +414,11 @@ $(".orderDetail .close").click(
 		}
 )
 
+
+
+
+
+
 $("#list").on('click','tr',function(){
 	
 	/*住房订单*/
@@ -377,7 +473,7 @@ $("#list").on('click','tr',function(){
 			    
 			    $(".detailWraper .zfhouse").html('');
 			    var det=data[1].description
-			    var kule='<tr><td style="width:100%;background:rgb(232, 229, 229);font-size: 18px;">住房订单</td><td>预订房屋：<span>'+det.replace(/-undefined-/,"-")+
+			    var kule='<tr><td style="width:100%;font-size: 18px;">住房订单</td><td>预订房屋：<span>'+det.replace(/-undefined-/,"-")+
 			              '</span></td></tr><tr><td class="fl50">入住时间：<span>'+data[0]+'</span></td><td>离开时间：<span>'+data[2]+
 			              '</span></td></tr><tr><td class="fl50">天数：<span>'+data[1].totalDay+'</span></td><td>订单状态：<span>'+pd+
 			              '</span></td></tr><tr><td>下单时间：<span>'+commonTime+'</span></td></tr><tr><td>入住人：<span>'+data[1].cusName+
@@ -418,7 +514,9 @@ $("#list").on('click','tr',function(){
 					sty+='<li id="'+data.content[i].id+'"><table><tr><td style="width:100%">下单时间：<span>'+new Date( data.content[i].time ).toLocaleString()+'</span></td></tr><tr><td class="fl50">订单状态：<span>'+stuse+'</span></td><td class="fl50">打扫时间：<span>'+data.content[i].cleanTime+'</span></td></tr><tr><td style="width:100%">服务内容：<span>'+data.content[i].content+'</span></td></tr></table></li>'
 					
 				}
-				
+				if(data.content.length<=0){
+					sty='<p style="color:red">暂无订单</p>'
+				}
 				$(".detailWraper .clean ul").append(sty);
 				
 			}
@@ -450,6 +548,9 @@ $("#list").on('click','tr',function(){
 		        	}
 					_Str+='<li id="'+data[i].id+'"><table><tr><td style="width:100%">下单时间：<span>'+new Date( data[i].time ).toLocaleString()+'</span></td></tr><tr><td class="fl50">服务类型：<span>'+data[i].classify+'</span></td><td class="fl50">服务内容：<span>'+data[i].tripId+'</span></td></tr><tr><td style="width:100%">开始时间：<span>'+new Date( data[i].startTime ).toLocaleString()+'</span></td><td style="width:100%">结束时间：<span>'+new Date( data[i].endTime ).toLocaleString()+'</span></td></tr><tr><td class="fl50">车型：<span>'+data[i].site+'</span></td><td class="fl50">价格：<span>'+data[i].price+'</span></td></tr><tr><td class="fl50">订单状态：<span>'+st+'</span></td><td class="fl50">联系电话：<span>'+data[i].tel+'</span></td></tr></table></li>'
 				}
+				if(data.length<=0){
+					_Str='<p style="color:red">暂无订单</p>'
+				}
 				$(".detailWraper .usercar ul").append(_Str);
 			}
 	  })	 
@@ -475,6 +576,9 @@ $("#list").on('click','tr',function(){
 		        		stuse='已完成'		
 		        	}
 					_str+='<li id="'+data[i].id+'"><table><tr><td style="width:100%">下单时间：<span>'+new Date( data[i].time ).toLocaleString()+'</span></td></tr><tr><td style="width:100%">房间地址：<span>'+data[i].roomId+'</span></td></tr><tr><td style="width:100%">订单状态：<span>'+stuse+'</span></td><td>维修时间：<span>'+data[i].maintainTime+'</span></td></tr><tr><td style="width:100%">服务内容：<span>'+data[i].faultItem+'</span></td></tr></table></li>'
+				}
+				if(data.length<=0){
+					_str='<p style="color:red">暂无订单</p>'
 				}
 				$(".detailWraper .getFault ul").html(_str);
 				
@@ -507,6 +611,9 @@ $("#list").on('click','tr',function(){
 		        	}
 	        		_str+='<li id="'+data[i].id+'"><table><tr><td style="width:100%">下单时间：<span>'+new Date( data[i].time ).toLocaleString()+'</span></td></tr><tr><td style="width:100%">房间地址：<span>'+data[i].roomId+'</span></td></tr><tr><td class="fl50">订单状态：<span>'+st+'</span></td><td class="fl50">价格：<span>'+data[i].price+'</span></td></tr><tr><td class="fl50">物品名称：<span>'+data[i].facility+'</span></td><td class="fl50">添加时间：<span>'+data[i].addTime+'</span></td></tr></table></li>'
 	        	}
+				if(data.length<=0){
+					_str='<p style="color:red">暂无订单</p>'
+				}
 				$(".detailWraper .addsheshi ul").append(_str);
 			}
 			
@@ -521,4 +628,25 @@ $("#list").on('click','tr',function(){
 
 
 
-$(document).ready(list(1));
+$(document).ready(function(){
+	 $("#otherOrderlist").hide();
+	 $(".navs a:last-child").hide();
+	 if(_userType==1){
+		 masglistData();
+	 }else{
+		 	$(".navs a:last-child").show();
+		 	list(1);
+			$.ajax({
+				type:'post',
+				dataType:'json',
+				data:{'id':uid},
+				url:'/admin/user/stewardO',
+				success:function(data){
+					console.log(data);
+					$(".navs a").eq(0).find('i').text(data.content.length);
+				}
+			})
+	 }
+	 
+	 
+});

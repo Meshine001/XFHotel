@@ -12,23 +12,7 @@
 </head>
 <body>
 	<my_body>
-	<!-- 
-	<div class="row">
-		<div class="col-md-6">
-			<div class="card card-mini">
-				<div class="card-header">
-					<div class="card-title">
-						<h4>设置维修项</h4>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-		<div class="col-md-6">
-			
-		</div>
-	</div>
-	 -->
+
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card card-mini">
@@ -72,12 +56,7 @@
 								<c:if test="${order.status=='正在维修'}">
 									<a href="javascript:;" class="success-order btn btn-warning " order-id="${order.id}" style="display:block;width:120px;">确定完成</a>
 								</c:if>
-									<!-- 
-									<c:if test="${order.status=='确认中'}">
-									<a href="javascript:;" class="btn comfirm-order" data-id="${order.id}">确认订单</a><br>
-									<a href="javascript:;" class="btn close-order" data-id="${order.id}">关闭订单</a>
-									</c:if>
-									 -->
+
 								</td>
 							</tr>
 						</c:forEach>
@@ -98,7 +77,6 @@
 	<script type="text/javascript">
 	    $("table th,table td").css('min-width','120px')
 		$("table th:first-child,table td").css('min-width','60px')
-		$("table th").css('background','#ccc')
 		$("tbody tr").css('vertical-align','middle')
 		//确认订单
 		$('.comfirm-order').click(function(){

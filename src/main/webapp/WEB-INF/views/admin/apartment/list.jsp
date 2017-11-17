@@ -136,6 +136,7 @@
 		    
 			$(document).ready(function(){
 				var userType=window.localStorage.getItem('userType');//0:超级管理员 1:管理员
+				console.log('userType='+userType)
 				var uid=window.localStorage.getItem('uid');
 				if(userType==1){
 					$.ajax({
@@ -148,8 +149,22 @@
 							$("#h-table").html("");
 							var _str="";
 							for(var j=0;j<data.content.length;j++){
-								_str+='<tr roomId="'+data.content[j].id+'"><td><input type="checkbox"name="chkItem"></td><td>'+data.content[j].id+'</td><td>'+data.content[j].position.men_pai+'</td><td>'+data.content[j].position.jie_dao+'</td><td>'+data.content[j].position.xa_wei_zhi+'</td><td>'+data.content[j].position.xiao_qu+'</td><td>'+data.content[j].position.lou_hao+'</td><td>'+data.content[j].position.lou_ceng+'/'+data.content[j].position.zong_lou_ceng+'</td><td>'+data.content[j].basic_info.mian_ji+'</td>';
-								_str+='</tr>';
+								_str+='<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 hb-item">';
+								_str+='<div class="think thumbnail">';//<asdie ><input type = "checkbox"name = "chkItem" roomId='+data.content[j].id+'></asdie>
+								_str+='<div class="hb-img"><img src="'+'<%=basePath%>/images/'+data.content[j].fang_jian_tu[0]+'"></div>';
+								_str+='<div class="hb-info"><p>位置：'+data.content[j].position.xa_wei_zhi+'</p><p>房号：'+data.content[j].position.men_pai+'</p><p>价格：'+data.content[j].basic_info.jia_ge+'</p><p>地址：'+data.content[j].position.bd_wei_zhi+'</p></div><div class="clear"></div>';
+								_str+='<ul>';
+								_str+='<li><a class="btn-success" title="编辑详情" href="/admin/apartment/update/'+data.content[j].id+'">编辑详情</a></li>'
+/* 								if(data.content[j].show_home==true){
+									_str+='<li><a href="/admin/apartment/showHome/'+data.content[j].id+'" class="btn-success" title="隐藏/显示" >首页隐藏</a></li>';
+								}else{
+									_str+='<li><a href="/admin/apartment/showHome/'+data.content[j].id+'" class="btn-success" title="隐藏/显示" >首页显示</a></li>';
+								}
+								_str+='<li><a href="javascript:;" title="删除" class="btn-danger" roomid='+data.content[j].id+'>删除房源</a></li>';
+								_str+='<li><a href="/admin/leavemsglist"  title="查看评论" class="btn-info evalpinglun" roomid='+data.content[j].id+'>查看评论</a></li>'
+								_str+='<li><a href="/admin/status/?id='+data.content[j].id+'" title="房态设置" class="btn-warning houseStatus" roomid='+data.content[j].id+'>价格房态</a></li>';
+								_str+='<li style="padding-top:5px;"><div class="paixu"><input type="text" placeholder="'+data.content[j].sort+'"><a class="stb" roomid='+data.content[j].id+'>排序</a></div></li>' */
+								_str+='</ul></div></div>';
 							}
 							if(data.content.length<=0){
 								_str='<tr><td colspan="10"><p>该地区暂时没有房源、点我<a style="color:#f18c0b" href="/admin/apartment/add">添加新房源</a>吧。</p></td><tr>';
@@ -253,7 +268,7 @@ $("#h-table").on('click','tr .price_s',function(){
 			                    }
 			             	});
 			                roomids=result.join(",");
-			    			
+			    			console.log(roomids)
 			                //获取房东
 			                $.ajax({
 			                	type:'POST',
@@ -318,9 +333,9 @@ $("#h-table").on('click','tr .price_s',function(){
 				$("#present").show();
 				$("#payout").hide();
 				var result = new Array();
-                $("#h-table tr td input[name = chkItem]:checkbox").each(function () {
+                $("#h-table  input[name = chkItem]:checkbox").each(function () {
                     if ($(this).is(":checked")) {
-                        result.push($(this).parent().parent().attr('roomId'));
+                        result.push($(this).attr('roomId'));
                     }
              	});
                 roomids=result.join(",");

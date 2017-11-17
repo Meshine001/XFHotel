@@ -343,6 +343,7 @@ public class OrderController {
 	@RequestMapping(value = "/comfirmPw", method = RequestMethod.POST)
 	@ResponseBody
 	public Message comfirmPw(Long id) {
+		try {
 		Order o = orderservice.get(id);
 		if (o == null) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
@@ -354,7 +355,7 @@ public class OrderController {
 			return new Message(Constants.MESSAGE_ERR_CODE, "该房间未安装果加智能门锁");
 		}
 		if(lockService.getl(id)==null){
-			try {
+			
 				// 发送门锁密码
 				Long roomId = o.getRoomId();
 				String lock_no = apartmentService.getApartmentById(roomId).getJSONObject("basic_info").getString("suo_di_zhi");
@@ -366,12 +367,12 @@ public class OrderController {
 				}else{
 					return result;
 				}
+		}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return new Message(Constants.MESSAGE_ERR_CODE, "发送密码失败");
 			}
-		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "已有密码");
 	}
 	

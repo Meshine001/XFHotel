@@ -62,21 +62,21 @@
 							<div class="title"><i class="czs-paper"></i>订单管理</div>
 					</a></li>
 					
-					<li><a href="<%=basePath%>/admin/customer_list">
+					<li class="user"><a href="<%=basePath%>/admin/customer_list">
 							<div class="title"><i class="czs-people"></i>用户管理</div>
 					</a></li>
 
 				</ul>
 			</div>
 			<div class="sidebar-footer">
-				<ul class="menu">
+<!-- 				<ul class="menu">
 					<li class=""><a href="/" class="dropdown-toggle"
 						data-toggle="dropdown" aria-expanded="false"> <i
 							class="fa fa-cogs" aria-hidden="true"></i>
 					</a></li>
 					<li><a href="#"><span
 							class="flag-icon flag-icon-th flag-icon-squared"></span></a></li>
-				</ul>
+				</ul> -->
 			</div>
 		</aside>
 
@@ -144,9 +144,9 @@
 		$(document).ready(function(){
 			var userType=window.localStorage.getItem('userType');//0:超级管理员 1:管理员
 			if(userType==1){
-				$("#app-shenfen").text('您的身份：管理员');
+				$(".sidebar-nav .user").hide();
 			}else{
-				$("#app-shenfen").text('您的身份：超级管理员');
+				$(".sidebar-nav .user").show();
 			}
 			
 			$("#loginout,#loginOuts").click(function(){//退出登录

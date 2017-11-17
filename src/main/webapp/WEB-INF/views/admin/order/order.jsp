@@ -23,7 +23,7 @@
 			
 			<div class="clean">
 				<table>
-					<tr><td style="width: 100%;font-size: 18px;background:rgb(232, 229, 229)">保洁订单</td></tr>
+					<tr><td style="width: 100%;font-size: 18px;">保洁订单</td></tr>
 				</table>
 							
 				<ul>
@@ -48,7 +48,7 @@
 			
 			<div class="usercar">
 				<table>
-					<tr><td style="width: 100%;font-size: 18px;background:rgb(232, 229, 229)">叫车订单</td></tr>
+					<tr><td style="width: 100%;font-size: 18px;">叫车订单</td></tr>
 				</table>
 				<ul>
 
@@ -58,7 +58,7 @@
 			
 			<div class="getFault">
 				<table>
-					<tr><td style="width: 100%;font-size: 18px;background:rgb(232, 229, 229)">维修订单</td></tr>
+					<tr><td style="width: 100%;font-size: 18px;">维修订单</td></tr>
 				</table>
 							
 				<ul>
@@ -68,7 +68,7 @@
 			
 			<div class="addsheshi">
 				<table>
-					<tr><td style="width: 100%;font-size: 18px;background:rgb(232, 229, 229)">添加设施订单</td></tr>
+					<tr><td style="width: 100%;font-size: 18px;">添加设施订单</td></tr>
 				</table>
 							
 				<ul>
@@ -107,7 +107,6 @@
 								<th>总天数</th>
 								<th>单价</th>
 								<th>总价</th>
-								<th>优惠</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -120,7 +119,7 @@
 					</ul>
 				</div>
 	<!-- 外来订单列表begin -->			
-				<div id="otherOrderlist" style="width:100%;height:auto;overflow-x:auto">
+				<div id="otherOrderlist" style="width:100%;height:auto;overflow-x:auto;display:none">
 					<table class="table table-bordered">
 						<thead id="otherlist-nav">
 							<tr>
@@ -138,7 +137,7 @@
 							
 						</tbody>
 					</table>
-					<ul id="otherpagecontroller" class="pagination">
+					<ul id="otherpagecontroller" class="pagination" style="display:none">
 						<li><a>上一页</a></li>
 						<li><a>下一页</a></li>
 						<li><span></span></li>
@@ -148,37 +147,7 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			var uid=window.localStorage.getItem('uid');
-			$("#otherOrderlist").hide();
-			$("table th,table td").css('min-width','140px');
-			$("table th").eq(0).css('min-width','75px');
-			
-			$(".navs a").click(function(){
-				$(this).addClass('active').siblings().removeClass('active');
-				var i=$(this).index();
-				if(i==0){
-					$("#topscroll").show();
-					$("#otherOrderlist").hide();
-				}else if(i==1){
-					$("#topscroll").hide();
-					$("#otherOrderlist").show();
-				}
-			})
-				$.ajax({
-						type:'post',
-						dataType:'json',
-						data:{'id':uid},
-						url:'/admin/user/stewardO',//统计住房订单
-						success:function(data){
-				//			console.log(data);
-							$(".navs a").eq(0).find('i').text(data.content.length);
-						}
-				})
-			
-		})
-	</script>
+
 	</my_body>
 	<my_script>
 		<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/orderList.js"></script> 

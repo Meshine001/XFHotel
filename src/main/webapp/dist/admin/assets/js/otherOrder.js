@@ -34,7 +34,7 @@ $(document).ready(function(){
     				$("#otherlist").html("");
     				var str="";
     				for(var i=0;i<data.content.results.length;i++){
-    					str+='<tr><td>'+data.content.results[i].source+'</td><td style="color:red">'+data.content.results[i].sum+'/元</td><td>'+data.content.results[i].roomName+'</td><td>'+data.content.results[i].startTime+'</td><td>'+data.content.results[i].endTime+'</td><td>'+data.content.results[i].name+'</td><td>'+data.content.results[i].tel+'</td><td><a oid="'+data.content.results[i].id+'" class="removeOrder" style="cursor: pointer">删除</a></td></tr>';
+    					str+='<tr><td>'+data.content.results[i].source+'</td><td style="color:red">'+data.content.results[i].sum+'/元</td><td>'+data.content.results[i].roomName+'</td><td>'+data.content.results[i].startTime+'</td><td>'+data.content.results[i].endTime+'</td><td>'+data.content.results[i].name+'</td><td>'+data.content.results[i].tel+'</td><td><a oid="'+data.content.results[i].id+'" class="removeOrder btn" style="cursor: pointer">删除</a></td></tr>';
 
     				}
 					if(data.content.results.length<=0){

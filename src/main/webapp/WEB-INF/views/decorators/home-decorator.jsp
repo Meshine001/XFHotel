@@ -14,7 +14,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>青舍都市公寓-西安租房_西安合租</title>
+<title>智能公寓平台-西安租房_西安合租</title>
 
 
 	

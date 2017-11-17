@@ -470,8 +470,8 @@
 						<div class="form-footer">
 							<div class="form-group">
 								<div class="col-md-9 col-md-offset-3">
-									<button type="submit" class="btn btn-primary btn-submit">保存</button>
-									<a type="button" class="btn btn-default" href="<%=basePath%>/admin/apartment">取消</a>
+									<button type="submit" class="btn btn-primary btn-submit" style="float:left">保存</button>
+									<button type="button" class="btn " href="<%=basePath%>/admin/apartment" style="float:left">取消</button>
 								</div>
 							</div>
 						</div>
@@ -485,7 +485,12 @@
 			</script>
 		</div>
 		<div class="col-md-5">
-			<div id="map" style="width: 500px; height: 500px"></div>
+			<div class="card">
+				<div class="card-header">房屋位置</div>
+			 	<div class="card-body">
+			 		<div id="map" style="width: 100%; height: 500px;"></div>
+			 	</div>
+			</div>
 		</div>
 		<!-- 上传图片 -->
 		<form action="" id="upload-image-form">
@@ -495,10 +500,24 @@
 
 	</div>
 	</my_body>
-
-	<my_script> <script
-		src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1"
-		type="text/javascript"></script>  <script type="text/javascript"
-		src="<%=basePath%>/dist/admin/assets/js/update-apartment.js"></script></my_script>
+	
+	<my_script>
+	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script> 
+	
+	<script>
+	$(document).ready(function(){
+		var userType=window.localStorage.getItem('userType');//0:超级管理员 1:管理员
+		console.log('userType='+userType);
+		if(userType==1){
+			$(".card-body input,select,textarea,button").attr('disabled','disabled');
+			$(".upload-image").click(function(){
+				return;
+			})
+		}
+	})
+	</script>
+	<script src="http://api.map.baidu.com/api?v=2.0&ak=10NGT8xy035ui6vS5jxirNoGDb0nOsmr&s=1" type="text/javascript"></script>
+    <script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/update-apartment.js"></script>
+	</my_script>
 </body>
 </html>
