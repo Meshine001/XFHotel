@@ -1,4 +1,44 @@
- window.onload=function(){
+
+
+$(document).ready(function(){
+	gethouse();
+	var roomId="";
+	
+    var oDate = new Date(); 
+	$("#fl_hslist tr th:first-child span:last-child").html('/'+oDate.getFullYear())
+	
+	
+	$("#home .houselist").on('click','a',function(){
+		$("#home .houselist a").removeClass('show');
+		$(this).addClass('show');
+		$(".lastmonth,.nextmonth").attr('roomId',$(this).attr('hid'))
+		getactive($(this).attr('hid'));
+	})
+})
+
+
+	function gethouse(){
+		$.ajax({
+			type:'POST',
+			dataType:'json',
+			url:'http://www.yiyunzn.xyz/mobile/home',
+			success:function(data){
+				var _str="";
+				$("#home .houselist").html("");
+				for(var i=0;i<data.homeRooms.length;i++){
+					_str+='<a hid="'+data.homeRooms[i].id+'">'+data.homeRooms[i].position.xa_wei_zhi+'-'+data.homeRooms[i].position.xiao_qu+'-'+data.homeRooms[i].position.men_pai+'</a>';
+				}
+				$("#home .houselist").append(_str);
+				$("#home .houselist a:first-child").addClass('show');
+				$(".lastmonth,.nextmonth").attr('roomId',data.homeRooms[0].id)
+				getactive(data.homeRooms[0].id);
+			}
+		})
+	}
+
+
+
+function getactive(roomId){
 	
 	 
     var mydate=new Date();
@@ -15,6 +55,7 @@
     var datetxt="datetoday";
     var datefirst;
     var datesecond;
+    
     function initdata(){
      //日期初始填充
      var tdheight=$(".data_table tbody tr").eq(0).find("td").height();
@@ -29,9 +70,10 @@
      var days=getdaysinonemonth(thisyear,thismonth); //获得这个月的总天数
      var weekday=getfirstday(thisyear,thismonth); // 获得这个月1号，是星期几
      setcalender(days,weekday);
-     
+     console.log(roomId)
     }
     initdata();
+    
     $(".datetoday").val(thisyear+"-"+thismonth+"-"+thisday);
     $(".dateendday").val(thisyear+"-"+thismonth+"-"+(thisday+1));
     
@@ -57,7 +99,7 @@
     
     //价格状态
     function setcalender(days,weekday){
-    	var _id = window.sessionStorage.getItem('roomId');
+    	var _id = roomId;
         var date = new Date();
         var year = date.getFullYear();
         var month = date.getMonth()+1;
@@ -75,7 +117,7 @@
         	url:'/mobile/price/'+_id+'/'+startDate,
         	data:postData,
         	success:function(data){
-        		 console.log(data)
+        	//	 console.log(data)
         		dateList=data
         		jQuery.each(dateList, function(key, val){
                     gg[key] = val;
@@ -83,7 +125,7 @@
                 function p(s) {
                     return s < 10 ? '0' + s: s;
                 }
-                console.log(gg)
+            //    console.log(gg)
                 //往日历中填入日期
                 var a=1;
                 
@@ -162,15 +204,14 @@
     });
     
     //11.11
-    var ID=window.sessionStorage.getItem('roomId');
     var facilId="",_status="";
     $(".data_table tbody").on('click',' td',function(){
-    	if($(this).hasClass('selectDate')==true){
-    		$(this).removeClass('selectDate');
-    	}else{
+    	if($(this).hasClass('selectDate')==false){
     		$(this).addClass('selectDate');
+    	}else{
+    		$(this).removeClass('selectDate');
     	}
-    	
+
     	var houseList=new Array();
         for(var i=0;i<$(".data_table tbody td").length;i++){
             if($(".data_table tbody td").eq(i).hasClass('selectDate')==true){

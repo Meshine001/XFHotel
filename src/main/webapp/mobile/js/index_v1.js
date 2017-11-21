@@ -47,12 +47,18 @@ $(document).ready(function(){
     	console.log(data);
     	var str = '';
         var isoffers;
+        var _vr='';
         $('.hatHouse ul').html("");
         for (var i = 0; i < data.homeRooms.length; i++) {
         	 var vio=data.homeRooms[i].position.bd_wei_zhi;
      		     vio=vio.slice(4,vio.length);
-            str += '<li proID=' + data.homeRooms[i].id + '><a href="javascript:;"><div class="fn-img"><img src="' + Constant.URL+'/images/' + data.homeRooms[i].fang_jian_tu[0] + '"/><span class="price">￥' + data.homeRooms[i].basic_info.jia_ge + '</span></div><div class="fn-txt"><p>'+data.homeRooms[i].position.xa_wei_zhi+"-" + data.homeRooms[i].position.xiao_qu + '</p><p class="hu-c">' + data.homeRooms[i].basic_info.shi + "室" + data.homeRooms[i].basic_info.ting + "厅" +data.homeRooms[i].basic_info.wei + "卫" + '<span>宜住'+data.homeRooms[i].basic_info.reng_shu+'人</span><span>常住优惠</span></p></div></a></li>';
-           
+            str += '<li proID=' + data.homeRooms[i].id + '><a href="javascript:;"><div class="fn-img"><img src="' + Constant.URL+'/images/' + data.homeRooms[i].fang_jian_tu[0] + '"/><span class="price">￥' + data.homeRooms[i].basic_info.jia_ge + '</span></div><div class="fn-txt"><p>'+data.homeRooms[i].position.xa_wei_zhi+"-" + data.homeRooms[i].position.xiao_qu + '</p>';
+            if(data.homeRooms[i].panorama==""||data.homeRooms[i].panorama==null||data.homeRooms[i].panorama=="undefined"){
+            	_vr='<span class="showSp">实拍</span>';
+            }else{
+            	_vr='<span class="showVr">VR实景</span><span class="showSp">实拍</span>'
+            }
+            str+='<p class="hu-c">'+_vr+ data.homeRooms[i].basic_info.shi + "室" + data.homeRooms[i].basic_info.ting + "厅" +data.homeRooms[i].basic_info.wei + "卫" + '<span>宜住'+data.homeRooms[i].basic_info.reng_shu+'人</span><span>常住优惠</span></p></div></a></li>'
         }
         $('.hatHouse ul').append(str);
         

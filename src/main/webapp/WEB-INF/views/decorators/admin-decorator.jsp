@@ -58,6 +58,9 @@
 					<li><a href="<%=basePath%>/admin/apartment">
 							<div class="title"><i class="czs-home-l"></i>房源管理</div>
 					</a></li>
+					<li><a href="<%=basePath%>/admin/customer_houseStatus">
+							<div class="title"><i class="czs-home-l"></i>房态设置</div>
+					</a></li>	
 					<li><a href="<%=basePath%>/admin/order">
 							<div class="title"><i class="czs-paper"></i>订单管理</div>
 					</a></li>
@@ -106,6 +109,11 @@
 							<li class="dropdown profile">
 								<a href="<%=basePath%>/admin/order"   >
 									<div class="title">订单管理 </div>
+								</a>
+							</li>
+							<li class="dropdown profile">
+								<a href="<%=basePath%>/admin/apartment">
+									<div class="title">房态设置</div>
 								</a>
 							</li>
 							<li class="dropdown profile">

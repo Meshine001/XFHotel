@@ -194,6 +194,13 @@ public class AdminController {
 			return "/admin/customer/collocation";
 		}
 		
+		@RequestMapping(value = "/customer_houseStatus", method = RequestMethod.GET)
+		public String houseStatus() {
+			return "/admin/customer/houseStatus";
+		}
+		
+		
+		
 	//..7.18叫车服务begin...
 		@RequestMapping(value = "/customer_DialogueCar", method = RequestMethod.GET)
 		public String DialogueCar() {
@@ -749,6 +756,42 @@ public class AdminController {
 			return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");
 		}
 	}
+	@RequestMapping(value = "/house1", method = RequestMethod.POST)
+	public @ResponseBody Message addHouse1(Long startDate , Long endDate,Long apartmentId,int state){
+		try{
+			List<House> houses = houseService.list();
+			for(House houses1:houses){
+				Long date = houses1.getDate();
+				if(date<DateUtil.getStartTime()+1000*60*60*12){
+					houseService.delete(houses1);
+				}
+			}
+			Long  day=((endDate-startDate)/1000/60/60/24);
+			Long data=startDate;
+			for(int i=0;i<=day;i++){
+				House house = houseService.getHouse(apartmentId, data);
+				if(house!=null){
+					house.setState(state);
+					houseService.update(house);
+					data+=(long) (1000*60*60*24);
+				}else{
+					House house1 = new House();
+					house1.setApartmentId(apartmentId);
+					house1.setDate(data);
+					house1.setState(state);
+					houseService.add(house1);
+					data+=(long) (1000*60*60*24);
+			}
+			
+		}
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return new Message(Constants.MESSAGE_ERR_CODE, "设置失败");
+		}
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, "设置成功");
+	}
 	
 }
+
 

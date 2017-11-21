@@ -86,7 +86,7 @@ $(document).ready(function(){
             'apartmentId':_id,
 		},
 		success:function(data){
-//			console.log(data);
+			console.log(data);
 			fnBase.keep(1,"community",data.position.xiao_qu);
             fnBase.keep(1,"dayPrice",data.basic_info.jia_ge);
             fnBase.keep(1,"roomType",data.basic_info.lei_xing);

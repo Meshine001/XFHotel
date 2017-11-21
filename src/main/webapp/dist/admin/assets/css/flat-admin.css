@@ -9206,17 +9206,17 @@ i{font-style:normal}
 
 .inputdate{ color:#F60;}
 .calender{ width:100%; overflow:hidden;}
-.selectmouth{ background-color:#F30; width:100%; 
-overflow:hidden;padding:2% 3%;border-radius:5px 5px 0 0;}
-.selectmouth p{ float:left; width:33%; color:#FFF;margin:0;
+.selectmouth{ background-color:#f5f5f; width:100%; 
+overflow:hidden;line-height:40px;border:1px solid #aaa;border-radius:5px 5px 0 0;}
+.selectmouth p{ float:left; width:33%; color:#393d49;margin:0;
 font-weight:700; cursor:pointer;}
-.selectmouth .selectdate{ width:100%; background-color:#F30; 
-border:none; color:#FFF; font-weight:700; text-align:center;} 
-.data_table{ width:100%;border:1px solid #cccccc;
+.selectmouth .selectdate{ width:100%; background-color:#f5f5f; 
+border:none; color:#393d49; font-weight:700; text-align:center;} 
+.data_table{ width:100%;border:1px solid #cccccc;border-top:0;
 border-collapse:collapse; }
-.data_table thead{ background-color:#333;}
-.data_table thead td{ color:#FFF; text-align:center;
-border:1px solid #333;border-collapse:collapse; padding:1% 0;
+.data_table thead{ background-color:#f5f5f;}
+.data_table thead td{ color:#393d49; text-align:center;
+border:1px solid #aaa;border-collapse:collapse; padding:1% 0;border-top:0
 }
 .data_table tbody td{border:1px solid #aaaaaa;
 border-collapse:collapse;
@@ -9408,3 +9408,14 @@ text-align:center;color:#0C6;padding:1% 0;cursor: pointer;
 }
 
 /*11.14*/
+#fl_hslist tr td:first-child{background:#fff}
+#fl_hslist tr td{background:#1ae80e;border-bottom:1px solid #ddd}
+#fl_hslist tr .rol{background:red}
+
+
+/*11.21*/
+#myTabContent .row{margin:0;}
+#home .pd,#ios .pd{padding:15px}
+#home .houselist a{display:block;border:1px solid #ddd;line-height:40px;border-bottom:0;color:#828282;padding:0 10px;cursor: pointer}
+#home .houselist a:last-child{border-bottom:1px solid #ddd;}
+#home .houselist a.show{background:#29c75f;color:#fff;border-color:#29c75f;}

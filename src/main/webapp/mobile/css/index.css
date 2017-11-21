@@ -148,4 +148,27 @@
 }
 .wxewm img{width: 45%;float:right;display: block;padding-bottom: 0.2rem;}
 
-
+.showSp{
+	padding:0 0.06rem !important;
+    font-size: 0.1rem;
+    background: #5a92e0;
+    margin-right: 0.1rem;
+    padding: 0.02rem;
+    color: #fff;
+    border-radius: 0.05rem;
+    line-height: 0.16rem;
+    display: inline-block;
+    font-size:0.1rem;
+}
+.showVr{
+	padding:0 0.05rem !important;
+    font-size: 0.1rem;
+    background: orange;
+    margin-right: 0.1rem;
+    padding: 0.02rem;
+    color: #fff;
+    border-radius: 0.05rem;
+    line-height: 0.16rem;
+    display: inline-block;
+     font-size:0.1rem;
+}

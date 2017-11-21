@@ -51,3 +51,41 @@ html,body{background: #fff !important;}
 
 
 #hnumber,.hnumber_s{font-size:0.24rem;}
+
+
+.showSp{
+	padding:0 0.06rem !important;
+    font-size: 0.1rem;
+    background: #5a92e0;
+    margin-right: 0.1rem;
+    padding: 0.02rem;
+    color: #fff;
+    border-radius: 0.05rem;
+    line-height: 0.16rem;
+    display: inline-block;
+    font-size:0.1rem;
+}
+.showVr{
+	padding:0 0.05rem !important;
+    font-size: 0.1rem;
+    background: orange;
+    margin-right: 0.1rem;
+    padding: 0.02rem;
+    color: #fff;
+    border-radius: 0.05rem;
+    line-height: 0.16rem;
+    display: inline-block;
+     font-size:0.1rem;
+}
+.indexhouseList ul li a .fn-img .good_icon{
+	display: block;
+    position: absolute;
+    width: 0.6rem;
+    height: 0.6rem;
+    background: url('../images/good_icon.png');
+    background-size:100%;
+    color: #DFDFDF;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+}
