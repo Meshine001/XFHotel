@@ -20,8 +20,8 @@
 					<li><a href="#ios" data-toggle="tab">入住率汇总</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
-					<div class="tab-pane fade" id="ios">
-						<div class="pd col-md-6" id="rz" >
+					<div class="tab-pane fade" id="ios" style="width:100%">
+						<div class="pd" id="rzoom" style="width:100%">
 							
 						</div>
 					</div>

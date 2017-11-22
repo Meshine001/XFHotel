@@ -64,9 +64,9 @@
 					<li><a href="<%=basePath%>/admin/order">
 							<div class="title"><i class="czs-paper"></i>订单管理</div>
 					</a></li>
-					<li><a href="<%=basePath%>/admin/customer_statistics">
+<%-- 					<li><a href="<%=basePath%>/admin/customer_statistics">
 							<div class="title"><i class="czs-home-l"></i>数据分析</div>
-					</a></li>
+					</a></li> --%>
 					<li class="user"><a href="<%=basePath%>/admin/customer_list">
 							<div class="title"><i class="czs-people"></i>用户管理</div>
 					</a></li>
