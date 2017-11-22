@@ -51,13 +51,29 @@
     }
     
     
+	function request(name){
+		            var url = window.location.href;
+		            if(url){
+		                var valArray = url.split("?")[1];
+		                if(valArray && valArray.length >0){
+		                    var valArr = valArray.split("&");
+		                    if(valArr && valArr.length > 0){
+		                        for(var i in valArr){
+		                            if(valArr[i].split("=")[0] == name){
+		                                return valArr[i].split("=")[1];
+		                            }
+		                        }
+		                    }
+		                }
+		            }
+		        }
+
     
-    
-    
-    
+	var _id = request('id');
+
     //价格状态
     function setcalender(days,weekday){
-    	var _id = window.sessionStorage.getItem('roomId');
+    	var _id = request('id');
         var date = new Date();
         var year = date.getFullYear();
         var month = date.getMonth()+1;
@@ -162,7 +178,7 @@
     });
     
     //11.11
-    var ID=window.sessionStorage.getItem('roomId');
+    var ID=request('id');
     var facilId="",_status="";
     $(".data_table tbody").on('click',' td',function(){
     	if($(this).hasClass('selectDate')==true){

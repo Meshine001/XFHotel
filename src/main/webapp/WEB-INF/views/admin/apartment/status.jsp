@@ -220,8 +220,8 @@
 				            }
 				        }
 			}
-			$("#apartmentId").attr('value',encodeURIComponent(bace.request("id")));
-
+			$("#apartmentId").attr('value',bace.request("id"));
+			console.log(bace.request("id"))
 		})()
 		</script>
 	</my_script>

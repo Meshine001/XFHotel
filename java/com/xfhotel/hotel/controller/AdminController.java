@@ -194,11 +194,14 @@ public class AdminController {
 			return "/admin/customer/collocation";
 		}
 		
+		@RequestMapping(value = "/customer_statistics", method = RequestMethod.GET)
+		public String statistics() {
+			return "/admin/customer/statistics";
+		}
 		@RequestMapping(value = "/customer_houseStatus", method = RequestMethod.GET)
 		public String houseStatus() {
 			return "/admin/customer/houseStatus";
 		}
-		
 		
 		
 	//..7.18叫车服务begin...

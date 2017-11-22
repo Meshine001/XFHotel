@@ -9415,7 +9415,23 @@ text-align:center;color:#0C6;padding:1% 0;cursor: pointer;
 
 /*11.21*/
 #myTabContent .row{margin:0;}
-#home .pd,#ios .pd{padding:15px}
+#home .pd,#ios .pd,#house .pd{padding:15px}
 #home .houselist a{display:block;border:1px solid #ddd;line-height:40px;border-bottom:0;color:#828282;padding:0 10px;cursor: pointer}
 #home .houselist a:last-child{border-bottom:1px solid #ddd;}
 #home .houselist a.show{background:#29c75f;color:#fff;border-color:#29c75f;}
+
+
+.clear{clear: both;}
+
+
+#home .warp{overflow: auto;position: relative;}
+.warp .ul{max-width: 210px;text-align: left;}
+.warp .info{position: absolute;z-index: 1;top: 0;left: 210px;}
+.ymd th{min-width: 50px;padding:6px 8px;text-align:center}
+.info tr{height: 33px;text-align: center;}
+th,td{cursor:pointer}
+
+
+/*统计11/22*/
+.nav-tabs{clear:both}
+#rz{height:450px;background:red;width:600px;}
