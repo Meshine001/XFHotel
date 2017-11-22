@@ -92,7 +92,7 @@ window.onload=function(){
 						info_date=""
 					}else{
 						if(gg[dates].roomNum=='0'){
-	 						info_date+='<td data="'+dates+'" _hid="'+id+'" style="background:#f50bcb8c;color:#fff">￥'+gg[dates].price+'</td>';
+	 						info_date+='<td data="'+dates+'" _hid="'+id+'" style="background-color:orangered;color:#fff">￥'+gg[dates].price+'</td>';
 	 					}else{
 	 						info_date+='<td data="'+dates+'"  _hid="'+id+'">￥'+gg[dates].price+'</td>';
 	 					}
