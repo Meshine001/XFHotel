@@ -81,7 +81,6 @@ window.onload=function(){
                 function p(s) {
                     return s < 10 ? '0' + s: s;
                 }
- //             console.log(gg)
 				var dates=""; 
                 var hm=(new Date(dates)).getTime()+4*60*60*1000;
                 var newTime = new Date(hm);  
@@ -99,7 +98,7 @@ window.onload=function(){
 					}
 				}  
 
-				 var zs='<tr id="'+id+'">'+info_date+'</tr>'
+				 var zs='<tr id="'+id+'">'+info_date+'</tr>';
 				
 				$(".info tbody").append(zs)
 				
@@ -111,22 +110,24 @@ window.onload=function(){
     }
 
 
- 
+	var uid=window.localStorage.getItem('uid');
  	function gethouse(){
  				
  		    $.ajax({
-    		type : 'POST',
-			dataType : 'json',
-        	url:'http://www.yiyunzn.xyz/mobile/home',
+ 				type:'post',
+ 				dataType:'json',
+ 				data:{'id':uid},
+ 				url:'/admin/user/steward',
         	success:function(data){
-				
+				console.log(data)
 				var str="";
 				var _tr="";
 				$("#h-info,#h-name").html('');
-				for(var i=0;i<data.homeRooms.length;i++){
-					str+='<tr hid="'+data.homeRooms[i].id+'"><td>'+data.homeRooms[i].position.xa_wei_zhi+'-'+data.homeRooms[i].position.xiao_qu+'-'+data.homeRooms[i].position.men_pai+'</td></tr>'
+				for(var i=0;i<data.content.length;i++){
+					
+					str+='<tr hid="'+data.content[i].id+'"><td>'+data.content[i].position.xa_wei_zhi+'-'+data.content[i].position.xiao_qu+'-'+data.content[i].position.men_pai+'</td></tr>'
 									
-					setcalender(days,data.homeRooms[i].id);
+					setcalender(days,data.content[i].id);
 				}
 				
 				$("#h-name").append(str);			

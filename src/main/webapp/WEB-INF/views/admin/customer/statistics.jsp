@@ -20,20 +20,36 @@
 					<li><a href="#ios" data-toggle="tab">入住率汇总</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
-					<div class="tab-pane fade" id="ios" style="overflow:auto">
-						<div class="pd" id="rzoom" style="width:900px;margin:0 auto;">
+					<div class="tab-pane fade" id="ios" style="overflow:auto;width:100%;">
+						<div id="clear"></div>
+						<div class="pd" id="rzoom">
 							
 						</div>
 					</div>
 				</div>
 				<ul id="houseTab" class="nav nav-tabs">
-					<li><a href="#house" data-toggle="tab">收入统计</a></li>
+					<li><a href="#house" data-toggle="tab">收入统计
+						<select id="yearDate">
+							<option>2017</option>
+						</select>
+<!-- 						&nbsp;&nbsp;位置
+						<select id="address">
+							<option aid="5">全部</option>
+							<option aid="0">城东</option>
+							<option aid="1">城南</option>
+							<option aid="2">城西</option>
+							<option aid="3">城北</option>
+							<option aid="4">城内</option>
+						</select> -->
+					</a></li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane fade" id="house">
-						<div class="pd">
-							
-						
+						<div class="pd" id="everydata" style="overflow:auto;width:100%">
+							<ul class="houseListcon">
+							</ul>
+							<div id="post_detail"></div>
+							<div style="clear:both"></div>
 						</div>
 					</div>
 				</div>
@@ -48,6 +64,7 @@
  	<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/statistics.js"></script>   
 	<script>
 		$(document).ready(function(){
+			$(".post_detail").css( 'width', $(".post_detail").width() );
 			$(function () {
 				$('#myTab li:eq(0) a').tab('show');
 				$('#houseTab li:eq(0) a').tab('show');
@@ -57,29 +74,7 @@
 			
 			
 			
-	        var myChart = echarts.init(document.getElementById('main'));
 
-	        // 指定图表的配置项和数据
-	        var option = {
-	            title: {
-	                text: 'ECharts ',
-					link:'http://www.yiyunzn.xyz/',
-					target:'self'
-	            },
-	            tooltip: {},
-	            xAxis: {
-	                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-	            },
-	            yAxis: {},
-	            series: [{
-	                name: '销量',
-	                type: 'bar',
-	                data: [5, 20, 36, 10, 10, 120]
-	            }]
-	        };
-
-	        // 使用刚指定的配置项和数据显示图表。
-	        myChart.setOption(option);
 			
 			
 			

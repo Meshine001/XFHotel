@@ -7127,8 +7127,8 @@ table.table.card-table>tbody>tr>td {
 	border: 0;
 	background-color: transparent;
 	border-radius: 1px;
-	border-bottom: 4px solid #29c75f;
-	color: #29c75f;
+	border-bottom: 4px solid #393d49;
+	color: #393d49;
 }
 
 @media ( max-width : 767px) {
@@ -9434,9 +9434,18 @@ th,td{cursor:pointer}
 
 /*统计11/22*/
 .nav-tabs{clear:both}
-#rzoom{height:500px;}
+#clear{width:1600px;height:30px;;display:block;margin:0 auto}
+#rzoom{width:1300px;height:600px;margin:0 auto;}
+#post_detail{width:800px;height:600px;float:left;margin-left:20px}
+#everydata .houseListcon{width:230px;max-height:600px;overflow:auto;float:left;;border:1px solid #ddd;padding:0;}
+#everydata .houseListcon li{line-height:35px;overflow:hidden;cursor:pointer;padding:0 10px;text-overflow: ellipsis;
+    white-space: nowrap;}
+#everydata .houseListcon li:hover{background:#e26a67;color:#fff}
+#everydata .houseListcon li.ace{background:#c23531;color:#fff}
 
-
-
-
+@media ( max-width :1350px) {
+	#everydata .houseListcon,#post_detail{width:100%;margin:0 auto}
+	#post_detail{height:400px;margin-top:20px;}
+	#everydata .houseListcon{max-height:160px;}
+}
 

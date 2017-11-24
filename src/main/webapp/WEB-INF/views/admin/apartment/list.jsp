@@ -152,7 +152,7 @@
 								_str+='<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 hb-item">';
 								_str+='<div class="think thumbnail">';//<asdie ><input type = "checkbox"name = "chkItem" roomId='+data.content[j].id+'></asdie>
 								_str+='<div class="hb-img"><img src="'+'<%=basePath%>/images/'+data.content[j].fang_jian_tu[0]+'"></div>';
-								_str+='<div class="hb-info"><p>位置：'+data.content[j].position.xa_wei_zhi+'</p><p>房号：'+data.content[j].position.men_pai+'</p><p>价格：'+data.content[j].basic_info.jia_ge+'</p><p>地址：'+data.content[j].position.bd_wei_zhi+'</p></div><div class="clear"></div>';
+								_str+='<div class="hb-info"><p>位置：'+data.content[j].position.xa_wei_zhi+'-'+data.content[j].position.xiao_qu+'</p><p>房号：'+data.content[j].position.men_pai+'</p><p>价格：'+data.content[j].basic_info.jia_ge+'</p><p>地址：'+data.content[j].position.bd_wei_zhi+'</p></div><div class="clear"></div>';
 								_str+='<ul>';
 								_str+='<li><a class="btn-success" title="编辑详情" href="/admin/apartment/update/'+data.content[j].id+'">编辑详情</a></li>'
 /* 								if(data.content[j].show_home==true){
@@ -161,9 +161,9 @@
 									_str+='<li><a href="/admin/apartment/showHome/'+data.content[j].id+'" class="btn-success" title="隐藏/显示" >首页显示</a></li>';
 								}
 								_str+='<li><a href="javascript:;" title="删除" class="btn-danger" roomid='+data.content[j].id+'>删除房源</a></li>';
-								_str+='<li><a href="/admin/leavemsglist"  title="查看评论" class="btn-info evalpinglun" roomid='+data.content[j].id+'>查看评论</a></li>'
+								_str+='<li><a href="/admin/leavemsglist"  title="查看评论" class="btn-info evalpinglun" roomid='+data.content[j].id+'>查看评论</a></li>'*/
 								_str+='<li><a href="/admin/status/?id='+data.content[j].id+'" title="房态设置" class="btn-warning houseStatus" roomid='+data.content[j].id+'>价格房态</a></li>';
-								_str+='<li style="padding-top:5px;"><div class="paixu"><input type="text" placeholder="'+data.content[j].sort+'"><a class="stb" roomid='+data.content[j].id+'>排序</a></div></li>' */
+								/* _str+='<li style="padding-top:5px;"><div class="paixu"><input type="text" placeholder="'+data.content[j].sort+'"><a class="stb" roomid='+data.content[j].id+'>排序</a></div></li>'  */
 								_str+='</ul></div></div>';
 							}
 							if(data.content.length<=0){

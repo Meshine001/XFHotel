@@ -3,6 +3,7 @@ package com.xfhotel.hotel.controller;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -646,5 +647,37 @@ public Message FacilityOrders(Long id) {
 	return new Message(Constants.MESSAGE_SUCCESS_CODE, "添加完成");
 	}
 
-
+@RequestMapping(value = "/getOrderSum", method = RequestMethod.POST)
+@ResponseBody
+public Message getOrderSum(String year ,Long roomId) {
+	ArrayList<Object> list = new ArrayList<Object>();
+		try {
+			int month =1;
+			String g ="-0";
+			for(int i=0;i<12;i++){
+			Double sum = 0.0;
+			String startTime =year+g+month+g+1;
+			String endTime =year+g+(month+1)+g+1;
+			if(i==11){
+				  Long year1 =Long.valueOf(year);
+				 endTime =(year1+1)+g+1+g+1;
+			}
+			List<Order> availableOders = orderservice.checkAvailable(roomId, startTime, endTime);
+			if(availableOders==null){
+				list.add(sum);
+				}
+			for(Order order : availableOders){
+				String sum1=order.getTotalPrice();
+				sum+=Double.valueOf(sum1);
+				}
+			list.add(sum);
+			month++;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "查询失败");
+		}
+	return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+	}
 }

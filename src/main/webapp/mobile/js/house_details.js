@@ -389,7 +389,6 @@ $(document).ready(function(){
 	            var frontURL=Constant.URL+'/mobile/checkAvailable';
 	            var postData={"startTime":checkIn,"endTime":leave,"roomId":_id};
 	            fnBase.commonAjax(frontURL,postData,function(data){
-	            //    console.log(data);
 	                if(data.content.length>0){
 	                    fnBase.myalert('您所选时间段内没有空房，请重新选择');
 	                    return;
@@ -407,7 +406,6 @@ $(document).ready(function(){
           var frontURL=Constant.URL+'/mobile/module';
           var postData={"startTime":checkIn,"endTime":leave,"apartmentId":_id};
           fnBase.commonAjax(frontURL,postData,function(data){
-          //    console.log(data);
               fnBase.keep(1,'startTime',data.oStart);
               fnBase.keep(1,'endTime',data.oEnd);
               fnBase.keep(1,'oTotalDay',data.oTotalDay);
