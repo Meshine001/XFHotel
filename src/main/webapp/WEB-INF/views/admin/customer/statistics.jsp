@@ -72,8 +72,7 @@
 			$("#fl_hslist tr th,tr td").css({'min-width':'40px','text-align':'center'}) 
 			$("#h-name tr").find('td').eq(0).css('border-right','0px')
 			
-			
-			
+
 
 			
 			

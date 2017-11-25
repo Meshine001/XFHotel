@@ -680,4 +680,24 @@ public Message getOrderSum(String year ,Long roomId) {
 		}
 	return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
 	}
+
+@RequestMapping(value = "/SetOrder", method = RequestMethod.POST)
+@ResponseBody
+public Message SetOrder(Long id,String totalPrice) {
+	Order o = orderservice.get(id);
+	if (o == null) {
+		return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");
+	}
+	if (o.getStatus() ==Order.STATUS_ON_PAY) {
+		try {
+				o.setTotalPrice(totalPrice);
+			orderservice.update(o);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+		}
+	}
+	return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
+}
 }

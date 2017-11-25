@@ -52,7 +52,7 @@
 									<span class="highlight">青舍都市</span> Admin
 								</div>
 							</div>
-							<form id="login-form">
+							<div id="login-form">
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon1"> <i
 										class="fa fa-user" aria-hidden="true"></i></span> <input type="text"
@@ -69,7 +69,7 @@
 									<input type="submit" class="btn btn-success btn-submit" id="beginlogin"
 										value="登录">
 								</div>
-							</form>
+							</div>
 
 							<div class="form-line" style="display: none;">
 								<div class="title">或者</div>

@@ -41,7 +41,7 @@ var ID=window.sessionStorage.getItem('roomId');
 				for(var i=1;i<data.length;i++){
 					var str;
 								
-				   str+='<tr msgid="'+data[i].comment.id+'"><td class="name">'+data[i].tel+'</td><td>'+data[i].comment.time+'</td><td style="max-width:400px;min-width:280px">'+data[i].comment.feel+'</td><td>'+data[i].comment.score[1]+'</td><th><a href="javascript:;" class="btn reply">回复</a><br><a href="javascript:;" class="btn removes" >删除</a></th></tr>'
+				   str+='<tr msgid="'+data[i].comment.id+'"><td class="name">'+data[i].tel+'</td><td>'+data[i].comment.time+'</td><td style="max-width:400px;min-width:280px;text-overflow: ellipsis;overflow: hidden">'+data[i].comment.feel+'</td><td>'+data[i].comment.score[1]+'</td><th><a href="javascript:;" class="btn reply">回复</a><br><a href="javascript:;" class="btn removes" >删除</a></th></tr>'
 				
 				}
 				$("#list").append(str);

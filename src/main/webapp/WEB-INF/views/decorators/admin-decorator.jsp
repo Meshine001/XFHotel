@@ -65,7 +65,7 @@
 							<div class="title"><i class="czs-paper"></i>订单管理</div>
 					</a></li>
 					<li><a href="<%=basePath%>/admin/customer_statistics">
-							<div class="title"><i class="czs-home-l"></i>数据分析</div>
+							<div class="title"><i class="czs-analysis"></i>数据分析</div>
 					</a></li>
 					<li class="user"><a href="<%=basePath%>/admin/customer_list">
 							<div class="title"><i class="czs-people"></i>用户管理</div>
@@ -74,14 +74,7 @@
 				</ul>
 			</div>
 			<div class="sidebar-footer">
-<!-- 				<ul class="menu">
-					<li class=""><a href="/" class="dropdown-toggle"
-						data-toggle="dropdown" aria-expanded="false"> <i
-							class="fa fa-cogs" aria-hidden="true"></i>
-					</a></li>
-					<li><a href="#"><span
-							class="flag-icon flag-icon-th flag-icon-squared"></span></a></li>
-				</ul> -->
+
 			</div>
 		</aside>
 
@@ -116,6 +109,11 @@
 							<li class="dropdown profile">
 								<a href="<%=basePath%>/admin/apartment">
 									<div class="title">房态设置</div>
+								</a>
+							</li>
+							<li class="dropdown profile">
+								<a href="<%=basePath%>/admin/customer_statistics">
+									<div class="title">数据分析</div>
 								</a>
 							</li>
 							<li class="dropdown profile">
@@ -159,6 +157,27 @@
 				$(".sidebar-nav .user").show();
 			}
 			
+			
+			
+		    $(".sidebar-nav li a").each(function(){  
+		        $this = $(this);  
+		        if($this[0].href==String(window.location)){  
+		            $this.parent().addClass("show");  
+		            console.log(String(window.location))
+		        }  
+		    }); 
+			
+		    $(".sidebar-nav li").click(function(){
+		    	if($(this).hasClass('show')==true){
+		    		$(this).removeClass('show')
+		    	}else{
+		    		$(this).addClass('show')
+		    	}
+		    })
+			
+			
+			
+			
 			$("#loginout,#loginOuts").click(function(){//退出登录
 				  sessionStorage.clear();
 				  localStorage.removeItem('uid');
@@ -167,7 +186,10 @@
 			         window.location.href='http://www.yiyunzn.xyz/admin/login'; // 线上地址
 			      },300)  
 			})
- 
+
+
+			
+			
 		})
 	</script>
 </body>

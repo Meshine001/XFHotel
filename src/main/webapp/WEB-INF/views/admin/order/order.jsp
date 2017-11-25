@@ -12,6 +12,26 @@
 </head>
 <body>
 	<my_body>
+		<div id="myalerts">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				 <button type="button" class="close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title house-title">修改订单总价<i></i></h4>
+			  </div>
+			  <div class="modal-body" id="mmb">
+				<input type="text" class="form-control" placeholder="填写价格" id="priceset">
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn" id="confirm">确定</button>
+			  </div>
+			</div>
+		  </div>
+	</div>
+	
+	
+	
+	
 	<!-- 订单详情 -->
 	<div class="masking" style="display:none"></div>
 	<div class="orderDetail">

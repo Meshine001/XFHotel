@@ -257,7 +257,7 @@ th {
   }
   .table-bordered th,
   .table-bordered td {
-    border: 1px solid #ddd !important;
+ border: 1px solid #ddd !important;
   }
 }
 @font-face {
@@ -2279,8 +2279,10 @@ th {
 }
 .table > thead > tr > th {
   vertical-align: bottom;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
+.table > thead > tr > th:first-child{text-align:center}
+.table > tbody > tr > td:first-child{text-align:center}
 .table > caption + thead > tr:first-child > th,
 .table > colgroup + thead > tr:first-child > th,
 .table > thead:first-child > tr:first-child > th,
@@ -2304,7 +2306,7 @@ th {
   padding: 5px;
 }
 .table-bordered {
-  border: 1px solid #ddd;
+ 
 }
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
@@ -2316,7 +2318,7 @@ th {
 }
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {
-  border-bottom-width: 2px;
+ 
 }
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: #f9f9f9;

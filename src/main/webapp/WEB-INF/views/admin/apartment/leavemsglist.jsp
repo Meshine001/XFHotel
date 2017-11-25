@@ -31,7 +31,7 @@
 				</div>
 				<div style="overflow: auto;width:100%;height:auto">
 				<table class="table" id="table">
-					<thead>
+					<thead class="msglist">
 						<tr>
 							<th>评论人</th>
 							<th>评论时间</th>
@@ -54,10 +54,6 @@
 	</my_body>
 	<my_script>
 		<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/msglist.js"></script> 
-	</my_script>
-	<my_script>
-		<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/msglist.js"></script> 
-	
 	</my_script>
 </body>
 </html>

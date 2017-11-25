@@ -104,7 +104,7 @@ background:#56216f;
     border-radius: 50%;
 	border:1px solid #fff;
 	border-color: #fff #fff transparent transparent;
-	animation: spin .4s linear infinite;
+	animation: spin .3s linear infinite;
 	z-index:1000;	  
 }
 

@@ -161,7 +161,8 @@ public class OrderServiceImpl implements OrderService {
 		c.add(Restrictions.eq("roomId", id));
 		SimpleExpression[] or = {Restrictions.eq("status", Order.STATUS_ON_PAY),
 				Restrictions.eq("status", Order.STATUS_ON_LEASE),
-				Restrictions.eq("status", Order.STATUS_ON_COMFIRM)};
+				Restrictions.eq("status", Order.STATUS_ON_COMFIRM),
+				Restrictions.eq("status", Order.STATUS_COMPLETE)};
 		c.add(Restrictions.or(or));
 		c.add(Restrictions.between("startTime", (TimeUtil.getDateLong(startTime) - 1), (TimeUtil.getDateLong(endTime) + 1)));
 		return c.list();

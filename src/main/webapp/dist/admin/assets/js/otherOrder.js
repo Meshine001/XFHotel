@@ -29,7 +29,7 @@ $(document).ready(function(){
     			
     			if(data.statusCode==1){
     				totalPage=data.content.pageCount
-    				$(".navs a").eq(1).find('i').text(data.content.totalCount);
+    				$(".navs a").eq(1).find('i').html('('+data.content.totalCount+')条');
     				$("#otherpagecontroller li span").html("共"+data.content.pageCount+"页");
     				$("#otherlist").html("");
     				var str="";

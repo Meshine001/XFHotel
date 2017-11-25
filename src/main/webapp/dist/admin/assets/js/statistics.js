@@ -103,7 +103,7 @@ $(document).ready(function(){
 		$.ajax({
 			type : 'POST',
 			dataType : 'json',
-			url : 'http://www.yiyunzn.xyz/mobile/getLandlord',//http://localhost/mobile/getLandlord
+			url : 'http://www.yiyunzn.xyz/mobile/getLandlord',
 			data : { 'id' : id },
 			async:false,
 			success : function(e) {
@@ -176,7 +176,7 @@ $(document).ready(function(){
 	    	
 
 	    function date(id,year,name){
-	    	//	console.log(id+'^^^'+year+'^^^'+name)
+	    		console.log(id+'^^^'+year+'^^^'+name)
 				var echart=echarts.init(document.getElementById('post_detail'));
 		        var option={
 		            baseOption:{
@@ -227,7 +227,7 @@ $(document).ready(function(){
 	            		},
 	            		url:'/order/getOrderSum',
 	            		success:function(data){
-	            		//	console.log(data)
+	            			console.log(data)
 	            			if(data.statusCode==1){
 	            				echart.setOption({
 	            		            series:{

@@ -55013,6 +55013,8 @@ hljs.registerLanguage('zephir', function(hljs) {
             that.adjustScroll(that.selectedIndex + 1);
         },
 
+
+        
         adjustScroll: function (index) {
             var that = this,
                 activeItem = that.activate(index);

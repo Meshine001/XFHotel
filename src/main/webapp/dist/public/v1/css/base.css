@@ -8,6 +8,16 @@ body {
 	color: #333333;
 	min-width:1200px;
 }
+@font-face
+{
+font-family: first;
+src: url(first.OTF);
+}
+@font-face
+{
+font-family: two;
+src: url(first2.OTF);
+}
 
 body, ul, li, dl, dt, dd, table, td, th, form, input, h1, h2, h3, h4, h5,
 	h6, p, img, em, b, label, textarea, ol, p {
@@ -45,7 +55,7 @@ dfn, i, u, em, b {
 }
 
 img {
-	border: none; /*display:block;*/
+	border: none; 
 	vertical-align: middle;
 }
 
@@ -129,6 +139,7 @@ header {
 	height: 70px;
 	display: inline-block;
 	margin-top: 0px;
+	font-family: two;
 }
 
 .nav {
@@ -145,11 +156,13 @@ header {
 	height: 68px;
 	line-height: 68px;
 	padding: 0 15px;
+	font-family: first;
+	font-weight: bold;
 }
 
 .nav_ul li a {
 	font-size: 16px;
-	color: #3d3d3d;
+	color: #333;
 	display: inline-block;
 	text-decoration: none;
 }

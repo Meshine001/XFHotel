@@ -72,7 +72,7 @@ function masglistData(){
 		url:'/admin/user/stewardO',//统计住房订单
 		success:function(data){
 			console.log(data);
-			$(".navs a").eq(0).find('i').text(data.content.length);
+			$(".navs a").eq(0).find('i').html('('+data.content.length+'条)');
 			
 /*			new Date( data.content[i].time ).toLocaleString()      *///毫秒转换成date日期
 			
@@ -181,6 +181,8 @@ function list(page) {
 				data.results[i].endTime+'</td><td>'+data.results[i].totalDay+'</td><td>'+data.results[i].price+'</td><td>'+data.results[i].totalPrice+'</td>'
 				if(data.results[i].status=='确认中'){
 					str+='<td><a href="javascript:;" class="btn comfirm-order" data-id="'+data.results[i].id+'">确认订单</a><a href="javascript:;" class="btn close-order" data-id="'+data.results[i].id+'">关闭订单</a></td>'
+				}else if(data.results[i].status=='等待支付'){
+					str+='<td><a href="javascript:;" class="btn comfirm-price" data-id="'+data.results[i].id+'">修改价格</a></td>'
 				}else if(data.results[i].status=='进行中'){
 					str+='<td><a href="javascript:;" class="btn comfirm-sendpwd" data-id="'+data.results[i].id+'">发送密码</a></td>'
 				}else if(data.results[i].status=='退租确认中'){
@@ -238,6 +240,46 @@ $('#list').on('click','tr .comfirm-sendpwd',function(event){
 		}
 	});
 });
+
+//修改价格
+$('#list').on('click','tr .comfirm-price',function(event){
+	event.stopPropagation();
+	$("#myalerts").fadeIn();
+	var id = $(this).attr('data-id');
+	$("#confirm").attr('orderid',id);
+});
+
+$("#confirm").click(function(){
+	var modify=$("#priceset").val();
+	if(modify==""||modify=="undefined"||modify==null){
+		alert('请填写修改的价格后再提交！')
+		return
+	}
+	$.ajax({
+		type : 'POST',
+		dataType : 'json',
+		data : {
+			'id' : $(this).attr('orderid'),
+			'totalPrice':modify
+		},
+		url : '/order/SetOrder',
+		success : function(data) {
+			console.log(data)
+			alert(data.content);
+			$("#myalerts").fadeOut();
+			$("#confirm").attr('orderid','');
+		}
+	});
+})
+
+
+$(".modal-header .close").click(function(){
+	$("#myalerts").fadeOut();
+})
+
+
+
+
 
 
 //关闭订单
@@ -429,14 +471,16 @@ $("#list").on('click','tr',function(){
 			url:'/mobile/getOrder',
 			data:{'id':uid},
 			success:function(data){
-			//	console.log(data);
+				console.log(data);
 				var pd="";
 				var unixTimestamp = new Date( data[1].time ) ;
 				commonTime = unixTimestamp.toLocaleString();
 				 
 				var dj=data[1].price.split('@');
+				console.log(dj)
 				/*计算总价*/
 				var total=eval(dj.join("+"));
+				console.log(total)
 				/*押金*/
 			    var jajin=Number(dj[dj.length-1]);
 			   
@@ -477,9 +521,9 @@ $("#list").on('click','tr',function(){
 			              '</span></td></tr><tr><td class="fl50">入住时间：<span>'+data[0]+'</span></td><td>离开时间：<span>'+data[2]+
 			              '</span></td></tr><tr><td class="fl50">天数：<span>'+data[1].totalDay+'</span></td><td>订单状态：<span>'+pd+
 			              '</span></td></tr><tr><td>下单时间：<span>'+commonTime+'</span></td></tr><tr><td>入住人：<span>'+data[1].cusName+
-			              '</span></td></tr><tr><td>联系电话：<span>'+data[1].cusTel+
-			              '</span></td></tr><tr><td class="fl50">总房费：<span>￥'+_price+'</span></td><td>押金：<span>￥'+jajin+
-			              '</span></td><td class="fl50">优惠卷：<span>减'+yhj+
+			              '</span></td></tr><tr><td class="fl50">联系电话：<span>'+data[1].cusTel+
+			              '</span></td><td>单价：<span>￥'+dj[0]+'</span></td></tr><tr><td class="fl50">总房费：<span>￥'+Number(data[1].totalPrice).toFixed(0)+'</span></td><td>押金：<span>￥'+jajin+
+			              '</span></td><td class="fl50">优惠卷：<span>减'+data[1].preferential+
 			              '元</span></td><td>合计：<span>￥'+Number(data[1].totalPrice).toFixed(0)+'</span></td></tr>';
 			    
 			    
@@ -643,7 +687,7 @@ $(document).ready(function(){
 				url:'/admin/user/stewardO',
 				success:function(data){
 					console.log(data);
-					$(".navs a").eq(0).find('i').text(data.content.length);
+					$(".navs a").eq(0).find('i').html('('+data.content.length+')条');
 				}
 			})
 	 }

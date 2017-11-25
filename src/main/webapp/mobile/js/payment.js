@@ -26,18 +26,65 @@ $(document).ready(function(){
 		    
 		    return ip;
 	}
-	
+
+
+    
+    
     _id=fnBase.request('id');
     var frontURL=Constant.URL+'/mobile/getOrder';
     var postData={id:_id};
     var _totalprice='';
     fnBase.commonAjax(frontURL,postData,function(data){
         console.log(data);
+        
         fnBase.keep(1,'roomId',data[1].roomId)
         _totalprice=Number(data[1].totalPrice).toFixed(2);
         $(".p_msg li ._date").html(data[0]+"入住"+data[2]+"离开");
         $(".p_msg li ._cash").html("订单总额:<span class='money'>￥"+_totalprice+"</span>");
 		$(".p_msg li ._number").html('共'+data[1].totalDay+'天')
+		
+	    if(data[1].status=='2'){
+    		pd='进行中'
+    	}else if(data[1].status=='1'){
+    		pd='等待支付'
+    	}else if(data[1].status=='3'){
+    		pd='已完成'
+    	}else if(data[1].status=='5'){
+    		pd='超时'
+    	}else if(data[1].status=='4'){
+    		pd='删除订单'
+    	}else if(data[1].status=='6'){
+    		pd='退款'
+    	}else if(data[1].status=='7'){
+    		pd='需要管理员确认'
+    	}else if(data[1].status=='8'){
+    		pd='退房等待管理员确认'
+    	};
+
+    	
+    	
+    	if(data[1].status=='1'){
+            var x = 10;
+            var interval='';
+            var d = new Date("1111/1/1,0:" + x + ":0");
+    		interval = setInterval(function() {
+    	        var m = d.getMinutes();
+    	        var s = d.getSeconds();
+    	        m = m < 10 ? "0" + m : m;
+    	        s = s < 10 ? "0" + s : s;
+    	        $(".p_msg li .daojs").html("剩余支付时间:"+ m + ":" + s);
+    	        if (m == 0 && s == 0) {
+    	            clearInterval(interval);
+    	            $(".p_msg li .daojs").html("");
+    	            return;
+    	        }
+    	        d.setSeconds(s - 1);
+    	    }, 1000);
+    	}
+		
+
+		
+		
     });
    $.ajax({
 	   type:'GET',

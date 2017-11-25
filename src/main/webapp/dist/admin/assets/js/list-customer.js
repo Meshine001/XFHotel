@@ -83,7 +83,7 @@ function list(page) {
 								value.consumptionTimes);
 						var td_details = $('<td></td>').append(
 								getStatus(value.status));
-						var a_detail = $('<a class="btn btn-success"></a>').append('查看详情');
+						var a_detail = $('<a class="btn btn-success"></a>').append('查看');
 						a_detail.attr('href', './view_customer?id='+value.id);
 						var a_op = $('<a class="btn btn-warning"></a>').append(getOp(value.status));
 						a_op.attr('onclick',
@@ -130,7 +130,7 @@ $("#longtime").on('change',function(){
 					var istime=j.toLocaleDateString()
 					    newTime.push(istime);
 					str+='<tr _pid="'+data.content[i].id+'"><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+
-					'</td><td>'+getStatus(data.content[i].status)+'</td><td><a class="lockit btn">查看详细</a><a class="btn" onclick="change(' +data.content[i].id+ ','+data.content[i].status+',1)">'+getOp(data.content[i].status)+'</a></td></tr>';
+					'</td><td>'+getStatus(data.content[i].status)+'</td><td><a class="lockit btn">查看</a><a class="btn" onclick="change(' +data.content[i].id+ ','+data.content[i].status+',1)">'+getOp(data.content[i].status)+'</a></td></tr>';
 					
 				}
 				if(data.content.length<10){
@@ -174,7 +174,7 @@ $("#monetary").on('change',function(){
 					var istime=j.toLocaleDateString()
 					    newTime.push(istime);
 					str+='<tr _pid="'+data.content[i].id+'"><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+
-					'</td><td>'+getStatus(data.content[i].status)+'</td><td><a class="lockit btn">查看详细</a><a class="btn" onclick="change(' +data.content[i].id+ ','+data.content[i].status+',1)">'+getOp(data.content[i].status)+'</a></td></tr>';
+					'</td><td>'+getStatus(data.content[i].status)+'</td><td><a class="lockit btn">查看</a><a class="btn" onclick="change(' +data.content[i].id+ ','+data.content[i].status+',1)">'+getOp(data.content[i].status)+'</a></td></tr>';
 					
 				}
 				if(data.content.length<10){
@@ -220,7 +220,7 @@ $("#sex").on('change',function(){
 				var istime=j.toLocaleDateString()
 				    newTime.push(istime);
 				str+='<tr _pid="'+data.content[i].id+'"><td>'+data.content[i].id+'</td><td>'+data.content[i].level+'</td><td>'+data.content[i].tel+'</td><td>'+newTime[i]+'</td><td>'+data.content[i].consumptionCount+'</td><td>'+data.content[i].consumptionTimes+
-				'</td><td>'+getStatus(data.content[i].status)+'</td><td><a class="lockit btn">查看详细</a><a class="btn" onclick="change(' +data.content[i].id+ ','+data.content[i].status+',1)">'+getOp(data.content[i].status)+'</a></td></tr>';
+				'</td><td>'+getStatus(data.content[i].status)+'</td><td><a class="lockit btn">查看</a><a class="btn" onclick="change(' +data.content[i].id+ ','+data.content[i].status+',1)">'+getOp(data.content[i].status)+'</a></td></tr>';
 				
 			}
 			if(data.content.length<10){
