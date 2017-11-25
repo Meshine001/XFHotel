@@ -8782,7 +8782,7 @@ footer.app-footer .footer-copyright {
 	display:block;
 	width:20px;
 	height:20px;
-	background:url('../images/moren.png')  no-repeat center center;
+	background:url('../images/moren.png')  no-repeat center center;/**/
 }
 #about i{float:left;}
 #about{cursor: pointer;}
