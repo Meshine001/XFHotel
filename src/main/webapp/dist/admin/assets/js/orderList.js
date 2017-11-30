@@ -24,8 +24,8 @@ function change(id, status,cp) {
 			'id' : id,
 			'status' : status
 		},
-		url : "./change_status",// 请求的action路径
-		error : function(e) {// 请求失败处理函数
+		url : "./change_status",
+		error : function(e) {
 			alert("更改失败！");
 		},
 		success : function(data) {
@@ -62,7 +62,7 @@ $(".navs a").click(function(){
 		$("#otherOrderlist").show();
 	}
 })
-
+$("#list td").css({'height':'41px'})
 
 function masglistData(){
 	$.ajax({
@@ -71,10 +71,8 @@ function masglistData(){
 		data:{'id':uid},
 		url:'/admin/user/stewardO',//统计住房订单
 		success:function(data){
-			console.log(data);
+//			console.log(data);
 			$(".navs a").eq(0).find('i').html('('+data.content.length+'条)');
-			
-/*			new Date( data.content[i].time ).toLocaleString()      *///毫秒转换成date日期
 			
 			$("#list").html('');
 			var str='';
@@ -148,7 +146,7 @@ function list(page) {
 			alert("嗷获取数据失败！");
 		},
 		success : function(data) {
-			console.log(data)
+		//	console.log(data)
 		
 			
 			
@@ -178,7 +176,7 @@ function list(page) {
 				var ted=data.results[i].description;
 				str+='<tr data-id="'+data.results[i].id+'"><td>'+data.results[i].id+'</td><td>'+data.results[i].timeStr+'</td><td>'+data.results[i].status+
 				'</td><td>'+data.results[i].cusName+'</td><td>'+data.results[i].cusTel+'</td><td>'+ted.replace(/-undefined-/,"-")+'</td><td>'+data.results[i].startTime+"至"+
-				data.results[i].endTime+'</td><td>'+data.results[i].totalDay+'</td><td>'+data.results[i].price+'</td><td>'+data.results[i].totalPrice+'</td>'
+				data.results[i].endTime+'</td><td>'+data.results[i].totalDay+'</td><td>'+data.results[i].price+'</td><td>'+Number(data.results[i].totalPrice).toFixed(0)+'元</td>'
 				if(data.results[i].status=='确认中'){
 					str+='<td><a href="javascript:;" class="btn comfirm-order" data-id="'+data.results[i].id+'">确认订单</a><a href="javascript:;" class="btn close-order" data-id="'+data.results[i].id+'">关闭订单</a></td>'
 				}else if(data.results[i].status=='等待支付'){
@@ -521,7 +519,7 @@ $("#list").on('click','tr',function(){
 			              '</span></td></tr><tr><td class="fl50">入住时间：<span>'+data[0]+'</span></td><td>离开时间：<span>'+data[2]+
 			              '</span></td></tr><tr><td class="fl50">天数：<span>'+data[1].totalDay+'</span></td><td>订单状态：<span>'+pd+
 			              '</span></td></tr><tr><td>下单时间：<span>'+commonTime+'</span></td></tr><tr><td>入住人：<span>'+data[1].cusName+
-			              '</span></td></tr><tr><td class="fl50">联系电话：<span>'+data[1].cusTel+
+			              '</span></td><tr><td>备注：<span>'+data[1].personal+'</span></td></tr></tr><tr><td class="fl50">联系电话：<span>'+data[1].cusTel+
 			              '</span></td><td>单价：<span>￥'+dj[0]+'</span></td></tr><tr><td class="fl50">总房费：<span>￥'+Number(data[1].totalPrice).toFixed(0)+'</span></td><td>押金：<span>￥'+jajin+
 			              '</span></td><td class="fl50">优惠卷：<span>减'+data[1].preferential+
 			              '元</span></td><td>合计：<span>￥'+Number(data[1].totalPrice).toFixed(0)+'</span></td></tr>';

@@ -152,7 +152,7 @@ public class HomeController {
 	@RequestMapping(value = "/price/{id}/{startDate}", method = RequestMethod.GET)
 	public @ResponseBody JSONObject getRangePrices(@PathVariable("id") Long id,
 			@PathVariable("startDate") String startDate) {
-		JSONArray prices = apartmentService.get2MonthPrices(id, startDate);
+		JSONArray prices = apartmentService.get2MonthPrices(id, startDate ,2);
 		JSONObject data = new JSONObject();
 		for (Object obj : prices) {
 			String key = (String) JSONObject.fromObject(obj).keys().next();

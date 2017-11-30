@@ -8,7 +8,7 @@ window.onload=function(){
     var thismonth=mydate.getMonth()+1;
     var thisday=mydate.getDate();
 	var days=getDaysInOneMonth(thisyear,thismonth); 
-
+	var dateitem=[];
 
    
     function initdata(){
@@ -18,25 +18,55 @@ window.onload=function(){
         var month = date.getMonth()+1;
         var day = date.getDate();
         var startDate=year+"-"+month+"-"+day;
+		
+        
         function p(s) {
                  return s < 10 ? '0' + s: s;
         }
      	var a=1,e_date="";
+     	
+		function GetDateStr(AddDayCount) {   
+			   var dd = new Date();  
+			   dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期  
+			   var y = dd.getFullYear();   
+			   var m = (dd.getMonth()+1)<10?"0"+(dd.getMonth()+1):(dd.getMonth()+1);//获取当前月份的日期，不足10补0  
+			   var d = dd.getDate()<10?"0"+dd.getDate():dd.getDate();//获取当前几号，不足10补0  
+			   return y+"-"+m+"-"+d;   
+		}  
+     	
+	Date.prototype.format = function() {  
+	      var s = '';  
+	      var mouth = (this.getMonth() + 1)>=10?(this.getMonth() + 1):('0'+(this.getMonth() + 1));  
+	      var day = this.getDate()>=10?this.getDate():('0'+this.getDate());  
+	      s += this.getFullYear() + '-'; // 获取年份。  
+	      s += mouth + "-"; // 获取月份。  
+	      s += day; // 获取日。  
+	      return (s); // 返回日期。  
+	  }; 
+	  function getAll(begin, end) {  
+	      var ab = begin.split("-");  
+	      var ae = end.split("-");  
+	      var db = new Date();  
+	      db.setUTCFullYear(ab[0], ab[1] - 1, ab[2]);  
+	      var de = new Date();  
+	      de.setUTCFullYear(ae[0], ae[1] - 1, ae[2]);  
+	      var unixDb = db.getTime();  
+	      var unixDe = de.getTime();  
+	      for (var k = unixDb; k <= unixDe;) {  
+	          dateitem.push((new Date(parseInt(k))).format());  
+	          k = k + 24 * 60 * 60 * 1000;  
+	      }  
+	  }  
+	  
+	    getAll(startDate, GetDateStr(14))		 
+				  	
      	$(".info .ymd").html('')
-     	for(a=1;a<=days;a++){
-				    dates =  thisyear + '-' + p(thismonth) + '-' + p(a);
-				    if(dates==startDate){
-				    	e_date+='<th data="'+dates+'" style="color:#29c75f">今天</th>';
-				    }else if(dates<startDate){
-				    	e_date+=''
-				    }else{
-				    	e_date+='<th data="'+dates+'">'+p(thismonth) + '-' + p(a)+'</th>';
-				    }
- 					
+     	for(a=0;a<dateitem.length;a++){
+				    e_date+='<th data="'+dateitem[a]+'">'+dateitem[a]+'</th>';	
      	}
 		$(".info .ymd").append(e_date)
-				
-				
+		$(".info .ymd th").css({'min-width':'90px'})
+		$(".info .ymd th:first-child").html('今天')		
     }
     initdata();
  
@@ -78,24 +108,15 @@ window.onload=function(){
         		jQuery.each(dateList, function(key, val){
                     gg[key] = val;
                   });
-                function p(s) {
-                    return s < 10 ? '0' + s: s;
-                }
-				var dates=""; 
-                var hm=(new Date(dates)).getTime()+4*60*60*1000;
-                var newTime = new Date(hm);  
 
-				for(var a=1;a<=days;a++){
-				    dates =  thisyear + '-' + p(thismonth) + '-' + p(a);
-					if(dates<startDate){
-						info_date=""
-					}else{
-						if(gg[dates].roomNum=='0'){
-	 						info_date+='<td data="'+dates+'" _hid="'+id+'" style="background-color:orangered;color:#fff">￥'+gg[dates].price+'</td>';
+                for(a=0;a<dateitem.length;a++){
+
+						if(gg[dateitem[a]].roomNum=='0'){
+	 						info_date+='<td data="'+dateitem[a]+'" _hid="'+id+'" style="background-color:orangered;color:#fff">￥'+gg[dateitem[a]].price+'</td>';
 	 					}else{
-	 						info_date+='<td data="'+dates+'"  _hid="'+id+'">￥'+gg[dates].price+'</td>';
+	 						info_date+='<td data="'+dateitem[a]+'"  _hid="'+id+'">￥'+gg[dateitem[a]].price+'</td>';
 	 					}
-					}
+			
 				}  
 
 				 var zs='<tr id="'+id+'">'+info_date+'</tr>';
@@ -119,13 +140,13 @@ window.onload=function(){
  				data:{'id':uid},
  				url:'/admin/user/steward',
         	success:function(data){
-				console.log(data)
+			//	console.log(data)
 				var str="";
 				var _tr="";
 				$("#h-info,#h-name").html('');
 				for(var i=0;i<data.content.length;i++){
 					
-					str+='<tr hid="'+data.content[i].id+'"><td>'+data.content[i].position.xa_wei_zhi+'-'+data.content[i].position.xiao_qu+'-'+data.content[i].position.men_pai+'</td></tr>'
+					str+='<tr hid="'+data.content[i].id+'"><td style="text-align:left">'+data.content[i].position.xa_wei_zhi+'-'+data.content[i].position.xiao_qu+'-'+data.content[i].position.men_pai+'</td></tr>'
 									
 					setcalender(days,data.content[i].id);
 				}

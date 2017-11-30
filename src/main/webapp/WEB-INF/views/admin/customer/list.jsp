@@ -59,7 +59,7 @@
 				</div>
 				
 				
-				<table class="table">
+				<table class="table table-bordered">
 					<thead>
 						<th>序号</th>
 						<th>等级</th>
@@ -68,7 +68,7 @@
 						<th>消费总额</th>
 						<th>消费次数</th>
 						<th>状态</th>
-						<th></th>
+						<th>操作</th>
 					</thead>
 					<tbody id="userlist">
 					</tbody>
@@ -86,7 +86,7 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("table th,table td").css('min-width','120px');
+			$("table th,table td").css('min-width','85px');
 		})
 	</script>
 	</my_body>

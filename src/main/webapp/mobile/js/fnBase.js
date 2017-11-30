@@ -11,7 +11,7 @@ var Constant = {
 function getIp() {
 	fnBase.loadShow();
     var ip;
-    var ipInfoUrl = 'http://ipinfo.io/json';
+    var ipInfoUrl = 'http://ipinfo.io/json';//http://pv.sohu.com/cityjson?ie=utf-8
     $.ajax({
         url:ipInfoUrl,
         async:false,

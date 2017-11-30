@@ -172,6 +172,13 @@
 	<my_script>
 		<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/orderList.js"></script> 
 		<script type="text/javascript" src="<%=basePath%>/dist/admin/assets/js/otherOrder.js"></script> 
+		<script>
+		(function(){
+			$("#list-nav th:first-child+th+th,#list-nav th:first-child,#list-nav th:first-child+th+th+th,#list-nav th:eq(7),#list-nav th:eq(9)").css({'min-width':'60px'})
+			$("#list-nav th:eq(4)").css({'min-width':'100px'})
+			$("#list-nav th:last-child").css({'min-width':'85px'})
+		})()
+		</script>
 	</my_script>
 </body>
 </html>

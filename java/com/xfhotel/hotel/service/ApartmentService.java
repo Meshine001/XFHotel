@@ -38,7 +38,7 @@ public interface ApartmentService extends BaseService<Apartment, Long> {
 
 	public JSONObject getApartmentById(Long id);
 
-	public JSONArray get2MonthPrices(Long id, String startDate);
+	public JSONArray get2MonthPrices(Long id, String startDate ,int i);
 
 	public JSONArray get7DaysPrices(Long id, String startDate);
 	

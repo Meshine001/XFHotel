@@ -536,13 +536,6 @@ public class AdminController {
 	@RequestMapping(value = "/house", method = RequestMethod.POST)
 	public @ResponseBody Message addHouse(Long[] time,Long apartmentId,int state){
 		try{
-			List<House> houses = houseService.list();
-			for(House houses1:houses){
-				Long date = houses1.getDate();
-				if(date<DateUtil.getStartTime()+1000*60*60*12){
-					houseService.delete(houses1);
-				}
-			}
 			for(int i=0;i<time.length;i++){
 				Long data=time[i];
 				House house = houseService.getHouse(apartmentId, data);
@@ -762,13 +755,6 @@ public class AdminController {
 	@RequestMapping(value = "/house1", method = RequestMethod.POST)
 	public @ResponseBody Message addHouse1(Long startDate , Long endDate,Long apartmentId,int state){
 		try{
-			List<House> houses = houseService.list();
-			for(House houses1:houses){
-				Long date = houses1.getDate();
-				if(date<DateUtil.getStartTime()+1000*60*60*12){
-					houseService.delete(houses1);
-				}
-			}
 			Long  day=((endDate-startDate)/1000/60/60/24);
 			Long data=startDate;
 			for(int i=0;i<=day;i++){

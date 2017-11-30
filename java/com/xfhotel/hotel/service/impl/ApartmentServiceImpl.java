@@ -210,10 +210,10 @@ public class ApartmentServiceImpl implements ApartmentService {
 	
 	@Transactional
 	@Override
-	public JSONArray get2MonthPrices(Long id, String startDate) {
+	public JSONArray get2MonthPrices(Long id, String startDate ,int i) {
 		Apartment apartment = findById(id);
 		Long start = TimeUtil.getDateLong(startDate + " 12:00", "yyyy-MM-dd hh:mm");
-		Long end = TimeUtil.getDatePlusMonth(new Date(start), 2).getTime();
+		Long end = TimeUtil.getDatePlusMonth(new Date(start), i).getTime();
 		// 获得特殊价格
 		List<Price> sp = getSpPrices(start, end, id);
 		List<House> house = getSpHouse(start, end, id);
@@ -253,6 +253,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 //				System.out.println(sd.format(date));
 				if(h.getState()==0&& h.getDate().equals(tt)){
 					details.put("roomNum", "0");
+					
 				}
 			}
 //			for (Order o : availableOrders) {
@@ -281,7 +282,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 	@Transactional
 	@Override
 	public JSONArray get7DaysPrices(Long id, String startDate) {
-		JSONArray twoMonthPrices = get2MonthPrices(id, startDate);
+		JSONArray twoMonthPrices = get2MonthPrices(id, startDate ,2);
 		JSONArray sevenDaysPrices = new JSONArray();
 		int s = Integer.parseInt(startDate.substring(startDate.length() - 2, startDate.length())) - 1;
 		Iterator<Object> iterator = twoMonthPrices.iterator();

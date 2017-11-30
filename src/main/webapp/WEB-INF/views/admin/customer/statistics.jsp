@@ -17,10 +17,17 @@
 		<div class="col-md-12">
 			<div class="card card-mini">
 				<ul id="myTab" class="nav nav-tabs">
-					<li><a href="#ios" data-toggle="tab">入住率汇总</a></li>
+					<li><a href="#ios" data-toggle="tab">入住率汇总
+						<select id="statusyear">
+							<option>2017年</option>
+						</select>
+						<select id="statusmoth">
+							<option>11月</option>
+						</select>
+					</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
-					<div class="tab-pane fade" id="ios" style="overflow:auto;width:100%;">
+					<div class="tab-pane fade" id="ios" style="overflow:auto;width:100%;display:block">
 						<div id="clear"></div>
 						<div class="pd" id="rzoom">
 							
@@ -32,20 +39,11 @@
 						<select id="yearDate">
 							<option>2017</option>
 						</select>
-<!-- 						&nbsp;&nbsp;位置
-						<select id="address">
-							<option aid="5">全部</option>
-							<option aid="0">城东</option>
-							<option aid="1">城南</option>
-							<option aid="2">城西</option>
-							<option aid="3">城北</option>
-							<option aid="4">城内</option>
-						</select> -->
 					</a></li>
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane fade" id="house">
-						<div class="pd" id="everydata" style="overflow:auto;width:100%">
+					<div class="tab-pane fade" id="house" style="display:block">
+						<div class="pd" id="everydata" style="overflow:auto;width:100%;">
 							<ul class="houseListcon">
 							</ul>
 							<div id="post_detail"></div>

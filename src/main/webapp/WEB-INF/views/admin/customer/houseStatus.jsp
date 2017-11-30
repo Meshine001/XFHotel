@@ -32,7 +32,7 @@
 													<th>名称</th>
 												</tr>
 											</thead>
-											<tbody id="h-name">
+											<tbody id="h-name" style="text-align:left">
 													
 											</tbody>
 										</table>
@@ -67,6 +67,7 @@
 				$('#myTab li:eq(0) a').tab('show');
 			});
 			$("#fl_hslist tr th,tr td").css({'min-width':'40px','text-align':'center'}) 
+			$("#h-name td").css({'text-align':'left !important'}) 
 			$("#h-name tr").find('td').eq(0).css('border-right','0px')
 		})
 	</script>

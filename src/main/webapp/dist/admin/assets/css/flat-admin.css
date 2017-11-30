@@ -4118,7 +4118,7 @@ aside.app-sidebar .sidebar-menu ul.sidebar-nav>li {
 	width: 100%;position:relative;
 }
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li.show{
-		background:rgba(255,255,255,.1);
+		background:rgba(255,255,255,.15);
 }
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li.show .title{
 	    color:#fff;
@@ -4169,21 +4169,21 @@ aside.app-sidebar .sidebar-menu ul.sidebar-nav>li>a:hover .icon i.fa,
 }
 
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li>a:hover{
-	background:rgba(255,255,255,.1);
+	background:rgba(212,179,179,.1);
 	color:#fff;
 }
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li>a:hover .title{
 	color:#fff;
 //	padding-left:30px;
 }
-aside.app-sidebar .sidebar-menu ul.sidebar-nav>li:hover:before{
+aside.app-sidebar .sidebar-menu ul.sidebar-nav>li.show:before{
 	content: "";
     position: absolute;
     left: 0px;
     width: 2px;
     height: 46px;
-    background: #34A0CE;
-    opacity: 0;
+    background: #1aa094;
+    opacity: 1;
     transition: all .3s;
 }
 aside.app-sidebar .sidebar-menu ul.sidebar-nav>li>a .title i{
@@ -8771,7 +8771,7 @@ footer.app-footer .footer-copyright {
 .media.social-post .media-body .media-comment input {
 	padding: 7.5px 15px;
 }
-#list td{vertical-align: middle;}
+#list td{vertical-align: middle;height:41px;padding:0 8px;}
 #list tr{ cursor: pointer; transition: all .3s;border-bottom:1px solid #dddddd}
 #list tr:hover{background: #f2f2f2;}
 
@@ -9148,7 +9148,7 @@ i{font-style:normal}
 
 #h-table .btn,#list .btn,#otherlist .btn,#userlist .btn{
 	display: inline;
-	padding:0 10px;
+	padding:4px;
     text-align: center;
     line-height: 30px;
     border-radius: 2px;
@@ -9289,10 +9289,10 @@ text-align:center;color:#0C6;padding:1% 0;cursor: pointer;
 		display:none;
 	}
 	/*住房订单列表lis样式*/
-	#list tr td:first-child+td+td+td+td+td+td,#list tr td:first-child+td,#list tr td:first-child+td+td+td+td+td+td+td,#list tr td:first-child+td+td+td+td+td+td+td+td,#list tr td:first-child+td+td+td+td+td+td+td+td+td{
+	#list tr td:first-child+td+td+td+td+td+td,#list tr td:first-child+td+td+td+td,#list tr td:first-child+td,#list tr td:first-child+td+td+td+td+td+td+td,#list tr td:first-child+td+td+td+td+td+td+td+td,#list tr td:first-child+td+td+td+td+td+td+td+td+td{
 		display:none;
 	}
-	#list-nav tr th:first-child+th+th+th+th+th+th,#list-nav tr th:first-child+th,#list-nav tr th:first-child+th+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th+th+th+th+th+th{
+	#list-nav tr th:first-child+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th,#list-nav tr th:first-child+th,#list-nav tr th:first-child+th+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th+th+th+th+th,#list-nav tr th:first-child+th+th+th+th+th+th+th+th+th{
 		display:none;
 	}
 	.msglist tr th:first-child+th{display:none}
@@ -9453,10 +9453,10 @@ th,td{cursor:pointer}
 
 /*统计11/22*/
 .nav-tabs{clear:both}
-#clear{width:1600px;height:30px;;display:block;margin:0 auto}
-#rzoom{width:1300px;height:600px;margin:0 auto;}
-#post_detail{width:800px;height:600px;float:left;margin-left:20px}
-#everydata .houseListcon{width:230px;max-height:600px;overflow:auto;float:left;;border:1px solid #ddd;padding:0;}
+#clear{width:100%;height:1px;;display:block;margin:0 auto}
+#rzoom{width:100%;height:600px;margin:0 auto;}
+#post_detail{width:80%;height:600px;float:left;margin-left:2%}
+#everydata .houseListcon{width:15%;max-height:600px;overflow:auto;float:left;;border:1px solid #ddd;padding:0;}
 #everydata .houseListcon li{line-height:35px;overflow:hidden;cursor:pointer;padding:0 10px;text-overflow: ellipsis;
     white-space: nowrap;}
 #everydata .houseListcon li:hover{background:#e26a67;color:#fff}
@@ -9464,7 +9464,7 @@ th,td{cursor:pointer}
 
 @media ( max-width :1350px) {
 	#everydata .houseListcon,#post_detail{width:100%;margin:0 auto}
-	#post_detail{height:400px;margin-top:20px;}
+	 #post_detail{width:100%;height:400px;margin-top:20px;} 
 	#everydata .houseListcon{max-height:160px;}
 }
 

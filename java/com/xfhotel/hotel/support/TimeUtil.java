@@ -6,7 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TimeUtil {
 	
@@ -210,15 +213,72 @@ public class TimeUtil {
 		}
 		return dates;
 	}
+	
+	public static String getFirstDay(String str1) throws ParseException {
+	    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	    Date date = df.parse(str1);
+	    Calendar calendar = Calendar.getInstance();
+	    calendar.setTime(date);
+	    calendar.set(Calendar.DATE, 1);
+	    Date theDate = calendar.getTime();
+	    String s = df.format(theDate);
+	    StringBuffer str = new StringBuffer().append(s).append(" 00:00:00");
+	    return str.toString();
 
-	public static void main(String[] args) {
+	}
+	public static String getLastDay(String str1) throws ParseException {
+	    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	    Calendar calendar = Calendar.getInstance();
+	    Date date = df.parse(str1);
+	    calendar.setTime(date);
+	    calendar.add(Calendar.MONTH, 1);    //加一个月
+	    calendar.set(Calendar.DATE, 1);        //设置为该月第一天
+	    calendar.add(Calendar.DATE, -1);
+	    Date theDate = calendar.getTime();
+	    String s = df.format(theDate);
+	    StringBuffer str = new StringBuffer().append(s).append(" 23:59:59");
+	    return str.toString();
+
+	}
+
+	public static Map<String, String> getFirstday_Lastday_Month(Date date) {
+	    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	    Calendar calendar = Calendar.getInstance();
+	    calendar.setTime(date);
+	    calendar.add(Calendar.MONTH, -1);
+	    Date theDate = calendar.getTime();
+	    
+	    //上个月第一天
+	    GregorianCalendar gcLast = (GregorianCalendar) Calendar.getInstance();
+	    gcLast.setTime(theDate);
+	    gcLast.set(Calendar.DAY_OF_MONTH, 1);
+	    String day_first = df.format(gcLast.getTime());
+	    StringBuffer str = new StringBuffer().append(day_first).append(" 00:00:00");
+	    day_first = str.toString();
+
+	    //上个月最后一天
+	    calendar.add(Calendar.MONTH, 1);    //加一个月
+	    calendar.set(Calendar.DATE, 1);        //设置为该月第一天
+	    calendar.add(Calendar.DATE, -1);    //再减一天即为上个月最后一天
+	    String day_last = df.format(calendar.getTime());
+	    StringBuffer endStr = new StringBuffer().append(day_last).append(" 23:59:59");
+	    day_last = endStr.toString();
+
+	    Map<String, String> map = new HashMap<String, String>();
+	    map.put("first", day_first);
+	    map.put("last", day_last);
+	    return map;
+	}
+	
+	public static void main(String[] args) throws ParseException {
 //		// TODO Auto-generated method stub
 //		Date d = new Date();
 //		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 //		for (Date dd : TimeUtil.getAllDateInMonth(2017, d.getMonth())) {
 //			System.out.println(df.format(dd));
 //		}
-		System.out.println(getBetweenDays("2017-03-16", "2017-03-30"));
+
+//		System.out.println(getBetweenDays("2017-03-16", "2017-03-30"));
 
 	}
 

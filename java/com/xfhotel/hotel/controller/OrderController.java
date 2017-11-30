@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xfhotel.hotel.common.Constants;
+import com.xfhotel.hotel.entity.Apartment;
 import com.xfhotel.hotel.entity.Clean;
 import com.xfhotel.hotel.entity.Comment;
 import com.xfhotel.hotel.entity.FacilityOrder;
 import com.xfhotel.hotel.entity.Fault;
+import com.xfhotel.hotel.entity.House;
 import com.xfhotel.hotel.entity.Order;
 import com.xfhotel.hotel.service.ApartmentService;
 import com.xfhotel.hotel.service.CleanService;
@@ -392,7 +394,6 @@ public class OrderController {
 		return "customer/viewLockPsd";
 	}
 
-	
 	/**
 	 * 查询订单
 	 * 
@@ -602,6 +603,7 @@ public Message FaultOrders(Long id) {
 			e.printStackTrace();
 			return new Message(Constants.MESSAGE_ERR_CODE, "订单确认失败");
 		}
+	
 	}
 	return new Message(Constants.MESSAGE_SUCCESS_CODE, "维修完成");
 	}
@@ -700,4 +702,34 @@ public Message SetOrder(Long id,String totalPrice) {
 	}
 	return new Message(Constants.MESSAGE_SUCCESS_CODE, "修改成功");
 }
+
+@RequestMapping(value = "/SetOrderFate", method = RequestMethod.POST)
+@ResponseBody
+public Message SetOrderFate(String date) {
+			ArrayList<Map> list = new ArrayList<Map>();
+		try {
+			List<Apartment> apartment =apartmentService.getApartments1();
+			Long start = TimeUtil.getDateLong(TimeUtil.getFirstDay(date));
+			Long end = TimeUtil.getDateLong(TimeUtil.getLastDay(date));
+			for(Apartment apartment2 :apartment){
+				Map<String,Object> map = new HashMap<String, Object>();
+				int i = 0;
+				List<House> house = apartmentService.getSpHouse(start, end, apartment2.getId());
+				for(House house1 : house){
+					if(house1.getDate()>start&&house1.getDate()<end&&house1.getState()==0){
+						i++;
+					}
+				}
+				JSONObject a = apartmentService.getApartmentById(apartment2.getId()).getJSONObject("position");
+				map.put(a.getString("xa_wei_zhi")+a.getString("xiao_qu")+a.getString("men_pai"), i);
+				list.add(map);
+			}		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new Message(Constants.MESSAGE_ERR_CODE, "修改失败");
+		}
+	return new Message(Constants.MESSAGE_SUCCESS_CODE, list);
+	}
+
 }

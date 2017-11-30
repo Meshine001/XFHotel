@@ -107,7 +107,7 @@
 								</a>
 							</li>
 							<li class="dropdown profile">
-								<a href="<%=basePath%>/admin/apartment">
+								<a href="<%=basePath%>/admin/customer_houseStatus">
 									<div class="title">房态设置</div>
 								</a>
 							</li>
@@ -163,7 +163,6 @@
 		        $this = $(this);  
 		        if($this[0].href==String(window.location)){  
 		            $this.parent().addClass("show");  
-		            console.log(String(window.location))
 		        }  
 		    }); 
 			
