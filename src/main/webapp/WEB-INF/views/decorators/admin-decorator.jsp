@@ -64,7 +64,7 @@
 					<li><a href="<%=basePath%>/admin/order">
 							<div class="title"><i class="czs-paper"></i>订单管理</div>
 					</a></li>
-					<li><a href="<%=basePath%>/admin/customer_statistics">
+					<li class="data"><a href="<%=basePath%>/admin/customer_statistics">
 							<div class="title"><i class="czs-analysis"></i>数据分析</div>
 					</a></li>
 					<li class="user"><a href="<%=basePath%>/admin/customer_list">
@@ -111,12 +111,12 @@
 									<div class="title">房态设置</div>
 								</a>
 							</li>
-							<li class="dropdown profile">
+							<li class="dropdown profile data">
 								<a href="<%=basePath%>/admin/customer_statistics">
 									<div class="title">数据分析</div>
 								</a>
 							</li>
-							<li class="dropdown profile">
+							<li class="dropdown profile user" >
 								<a href="<%=basePath%>/admin/customer_list"  >
 									<div class="title">用户管理 </div>
 								</a>
@@ -152,9 +152,9 @@
 		$(document).ready(function(){
 			var userType=window.localStorage.getItem('userType');//0:超级管理员 1:管理员
 			if(userType==1){
-				$(".sidebar-nav .user").hide();
+				$(".sidebar-nav .user,.sidebar-nav .data").hide();
 			}else{
-				$(".sidebar-nav .user").show();
+				$(".sidebar-nav .user,.sidebar-nav .data").show();
 			}
 			
 			

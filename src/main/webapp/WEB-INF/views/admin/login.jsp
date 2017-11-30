@@ -49,25 +49,24 @@
 						<div class="app-form">
 							<div class="form-header">
 								<div class="app-brand">
-									<span class="highlight">青舍都市</span> Admin
+									<span class="highlight">青舍都市公寓</span>
 								</div>
 							</div>
 							<div id="login-form">
 								<div class="input-group">
-									<span class="input-group-addon" id="basic-addon1"> <i
-										class="fa fa-user" aria-hidden="true"></i></span> <input type="text"
+								 <input type="text"
 										class="form-control" placeholder="用户名" id="username"
 										aria-describedby="basic-addon1" name="username">
 								</div>
 								<div class="input-group">
-									<span class="input-group-addon" id="basic-addon2"> <i
-										class="fa fa-key" aria-hidden="true"></i></span> <input type="password"
+									 <input type="password"
 										class="form-control" placeholder="密  码" id="password"
 										aria-describedby="basic-addon2" name="password">
+										<input type="submit" class="btn btn-success btn-submit" id="beginlogin"
+										value="登录">
 								</div>
 								<div class="text-center">
-									<input type="submit" class="btn btn-success btn-submit" id="beginlogin"
-										value="登录">
+									
 								</div>
 							</div>
 
@@ -99,6 +98,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
+			$(".input-group").css({'border':0})
 			$("#beginlogin").click(function(){
 				var userName=$("#username").val();
 				var password=$("#password").val();
