@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+	    <link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/orderlist.css" />
+		
+	</head>
+	<body style="display: none;">
+		<div class="layer-title">
+			<span class="layer-logo"><img src="images/notes.png">订单管理</span>
+			<span class="layer-setwin">
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+			</span>
+		</div>
+		<div class="content">
+			<div class="layer-select">
+				<a class="layer-nav show">青舍订单<i></i></a>
+				<a class="layer-nav ">第三方订单<i></i></a>
+			</div>
+			
+			<div class="houseList">
+				<ul>
+<!-- 					<li data-id="'+data.content[i].id+'">
+						<div class="row">
+							<span class="fl">订单号：'+data.content[i].id+'</span>
+							<span class="fl">下单人：'+data.content[i].cusName+'</span>
+						</div>
+						<p>房间：'+data.content[i].description+'</p>
+						<p>状态：'+orderStatus(data.content[i].status)+'</p>
+						<p class="cz-btn">操作：<span>发送密码</span><span>确定</span></p>
+					</li>	
+					<li>
+						<div class="row">
+							<span class="fl">订单号：1561323132</span>
+							<span class="fl">下单人：陈某某</span>
+						</div>
+						<p>房间：城东-福邸铭门-12208</p>
+						<p>状态：进行中</p>
+						<p class="cz-btn">操作：<span data-id="'+data.results[i].id+'">发送密码</span><span data-id="'+data.results[i].id+'">确定</span></p>
+					</li> -->	
+				</ul>
+<!-- 				<div class="page">
+					<a>上一页</a>
+					<a>下一页</a>
+				</div> -->
+			</div>
+			
+			<div class="houseList" style="display:none">
+				<ul>
+					<li>
+						<div class="row">
+							<span class="fl">来源：'+data.content.results[i].source+'</span>
+							<span class="fl">收入：'+data.content.results[i].sum+'元</span>
+						</div>
+						<p>房间：'+data.content.results[i].roomName+'</p>
+						<div class="row">
+							<span class="fl">入住：'+data.content.results[i].startTime+'</span>
+							<span class="fl">离开：'+data.content.results[i].endTime+'</span>
+						</div>
+						<div class="row">
+							<span class="fl">姓名：'+data.content.results[i].name+'</span>
+							<span class="fl">电话：'+data.content.results[i].tel+'</span>
+						</div>
+						<p class="cz-btn">操作：<span oid="'+data.content.results[i].id+'" class="removeOrder" style="cursor: pointer">删除</span></p>
+					</li>
+				</ul>
+				<div class="page">
+					<a>上一页</a>
+					<a>下一页</a>
+				</div> 
+			</div>
+			
+			
+			
+			
+		</div>
+		<div id="maskShow"></div>
+		<div id="module-box">
+			<div class="module-state">
+				<span class="layer-logo"><img src="images/computer.png">订单详情</span>
+				<span class="layer-setwin">
+					<a class="layer-icon"><i></i></a>
+					<a class="layer-icon"><i></i></a>
+					<a class="layer-icon"><i></i></a>
+				</span>
+			</div>
+			<div class="module-con">
+				<div class="fn">
+					<h1 class="title">住房订单</h1>
+					<table id="zfhouse">
+						<tr><td>预定房屋：<i></i></td></tr>
+						<tr><td>入住时间：</td><td>离开时间：</td></tr>
+						<tr><td>总天数：</td><td>订单状态：</td></tr>
+						<tr><td>下单时间：<i></i></td></tr>
+						<tr><td>下单人姓名：<i></i></td></tr>
+						<tr><td>备注：<i></i></td></tr>
+						<tr><td>联系电话：</td><td>单价：</td></tr>
+						<tr><td>总房价：</td><td>押金：</td></tr>
+						<tr><td>优惠卷：</td><td>合计：</td></tr>
+					</table>
+				</div>
+				<div class="fn">
+					<h1 class="title">保洁订单</h1>
+					<ul id="clean">
+
+					</ul>
+				</div>
+				<div class="fn">
+					<h1 class="title">叫车订单</h1>
+					<ul id="usercar">
+
+					</ul>
+				</div>	
+				<div class="fn">
+					<h1 class="title">维修订单</h1>
+					<ul id="getFault">
+
+					</ul>
+				</div>
+				<div class="fn">
+					<h1 class="title">添加设施订单</h1>
+					<ul id="addsheshi">
+
+					</ul>
+				</div>					
+			</div>
+			<div class="module-footer">
+	
+			</div>
+		</div>
+		
+		
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
+	    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+		<script charset="gb2312" language="javascript" type="text/javascript" src="js/orderlist.js"></script>
+<!------------------------------>
+<script>
+  (function(){
+
+	$(".houseList ul li .hbtn .selected").click(function(){
+		if($(this).hasClass('show')==false){
+			$(this).addClass('show')
+		}else{
+			$(this).removeClass('show')
+		}
+	})
+
+  })()
+</script>
+
+
+	</body>
+</html>

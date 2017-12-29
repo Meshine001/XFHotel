@@ -148,7 +148,7 @@ var date = function ($) {
         enterDay.length === 1 ? enterDay = '0' + enterDay : false;
         var enterTime = enterMonth + '-' + enterDay;
         // 获取离开时间
-        var leaveYear = $('.enter').parents('.day').siblings('.title').find('.y').text();
+        var leaveYear = $('.leave').parents('.day').siblings('.title').find('.y').text();
         var leaveMonth = $('.leave').parents('.day').siblings('.title').find('.m').text();
         leaveMonth.length === 1 ? leaveMonth = '0' + leaveMonth : false;
         var leaveDay = $('.leave span').text();

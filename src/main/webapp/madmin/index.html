@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+	    <link rel="stylesheet" href="css/common.css" />
+	    <link rel="stylesheet" href="css/swiper-3.3.1.min.css" />
+	    <link rel="stylesheet" href="css/index.css" />
+	    <link rel="stylesheet" href="iconcaomei/style.css" />
+	</head>
+	<body style="display: none;">
+		<div id="containerArea">
+			<h1>青舍都市公寓后台管理系统</h1>
+			<ul>
+				<li data-url="apartment.html"><img src="images/maps.png"><p>房屋管理</p></li>
+				<li data-url="orderList.html"><img src="images/notes.png"><p>订单管理</p></li>
+				<li><img src="images/computer.png"><p>用户管理</p></li>
+				<li><img src="images/preview.png"><p>青舍生活</p></li>
+				<li><img src="images/launchpad.png"><p>优惠卷</p></li>
+				<li><img src="images/gamecenter.png"><p>保洁服务</p></li>
+				<li><img src="images/prefapp.png"><p>故障维修</p></li>
+				<li><img src="images/icloud.png"><p>添加设施</p></li>
+				<li><img src="images/mail.png"><p>叫车服务</p></li>
+				<li><img src="images/messages.png"><p>房东管理</p></li>
+				<li><img src="images/appstore.png"><p>成员权限</p></li>
+				<li><img src="images/finder.png"><p>合作商户</p></li>
+			</ul>
+		</div>
+		
+		
+		<div id="bottomMenu"> 
+			<ul>
+				<li><img src="images/ibooks.png"><p>房态管理</p></li>
+				<li data-url="orderList.html"><img src="images/notes.png"><p>订单管理</p></li>
+				<li><img src="images/facetime.png"><p>入住分析</p></li>
+			</ul>
+	  	</div>   
+		
+		
+		
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
+	    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/autoZoomLoadImage.js"></script>
+	    <script charset="gb2312" language="javascript"   type="text/javascript" src="js/fastclick.js"></script>
+	    <script>
+			$(document).ready(function(){
+				var userType=window.localStorage.getItem('userType');//1:管理员 ,0:超级管理员
+				var uid=window.localStorage.getItem('uid');
+			
+				if(userType==1){
+					$("#containerArea ul li:nth-child(1),#containerArea ul li:nth-child(2),#containerArea ul li:nth-child(6),#containerArea ul li:nth-child(7),#containerArea ul li:nth-child(8),#containerArea ul li:nth-child(9)").fadeIn();
+				}else{
+					$("#containerArea ul li").fadeIn();
+				}
+				
+				$("#containerArea ul li,#bottomMenu ul li").click(function(){
+					var $url=$(this).attr('data-url');
+					if($url=='undefined' || $url==null || $url==''){
+						location=location
+					}else{
+						window.location.href=baseUrl+'/madmin/'+$url;
+					}
+				})
+				
+			})
+		</script>
+	</body>
+</html>

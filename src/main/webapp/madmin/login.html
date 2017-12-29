@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	    <link rel="stylesheet" href="css/common.css" />
+	    <link rel="stylesheet" href="css/login.css" />
+	
+	</head>
+	<body style="display: none;">
+		<div id="app_login">
+			<div class="login_form">
+				<h1>青舍都市公寓</h1>
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="用户名" id="username" aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group">
+					<input type="password" class="form-control" placeholder="密码" id="password" aria-describedby="basic-addon1">
+					<input type="submit" id="beginlogin" value="登录">
+				</div>
+			</div>
+		</div>
+			
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
+	    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+		<script>
+			$(document).ready(function(){
+				$("#beginlogin").click(function(){
+					var name=$("#username").val();
+					var psd=$("#password").val();
+					if(name=="" || name==null || name=="undefined"){
+						alert('请输入账号')
+						return;
+					}
+					if(psd=="" || psd==null || psd=="undefined"){
+						alert('请输入密码')
+						return;
+					}
+					$.ajax({
+						type:'post',
+						dataType:'json',
+						url:baseUrl+'/admin/login/',
+						data:{'userName':name,'password':psd},
+						error:function(data){
+							alert('喔喔出问题了')
+						},
+						success:function(data){
+							console.log(data)
+ 							if(data.statusCode==1){
+								window.localStorage.setItem('uid',data.content.id);
+								window.localStorage.setItem('userType',data.content.authority);
+								window.localStorage.setItem('userStatus',data.content.status);
+								
+								if(data.content.status==0){// status==0 激活状态
+									window.location.href=baseUrl+'/madmin/index.html';
+								}else if(data.content.status==1){ // status==1 冻结状态
+									alert('您的账号已冻结、如需登录请联系超级管理员。');
+									location=location;
+								}
+							}else{
+								alert(data.content)
+							} 
+							
+							
+						}
+					})
+				})
+			})
+		</script>
+	</body>
+</html>

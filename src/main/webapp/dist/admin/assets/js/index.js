@@ -8,7 +8,6 @@ $(document).ready(function(){
 				getmsghouseNum();
 			}else{
 				$(".app-ng").show();
-			//	$("#myalerts").fadeIn();
 				getData()
 			}
 
@@ -19,7 +18,6 @@ $(document).ready(function(){
 					data:{},
 					url:'/admin/getData',
 					success:function(data){
-				//		$("#myalerts").fadeOut();
 						console.log(data);
 						$("#app-moble-house .value").html('<span class="sign"></span>'+data.content.room+'');
 						$("#app-moble-order .value").html('<span class="sign"></span>'+data.content.order+'');

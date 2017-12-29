@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+	    <link rel="stylesheet" href="css/common.css" />
+	    <link rel="stylesheet" href="css/Roomstatus.css" />
+		
+	</head>
+	<body style="display: none;">
+		<div class="layer-title">
+			<span class="layer-logo"><img src="images/ibooks.png">房态管理</span>
+			<span class="layer-setwin">
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+			</span>
+		</div>
+		<div class="content">			
+			<div class="houseList">
+				<ul>
+					<li>
+						<div class="info">
+							<p>城东-福邸铭门-12208</p>
+						</div>
+						<div class="date">
+<!--------------------------------------------------------------->
+							 <div class="calender">
+							  <div class="selectmouth">
+							  <p style="text-align:right" class="lastmonth"><</p>
+							  <p><input type="text" class="selectdate" value="2014年2月" readonly=readonly /></p>
+							  <p class="nextmonth">></p>
+							  </div>
+							  <table class="data_table" cellspacing="0px">
+							  <thead>
+							   <tr>
+							   <td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td>
+							   </tr>
+							  </thead>
+							  <tbody>
+							   <tr>
+							   <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+							   </tr>
+							   <tr>
+							   <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+							   </tr>
+							   <tr>
+							   <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+							   </tr>
+							   <tr>
+							   <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+							   </tr>
+							   <tr>
+							   <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+							   </tr>
+							   <tr>
+							   <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+							   </tr>
+							   </tbody>
+							  </table>
+							 </div>
+<!--------------------------------------------------------------->
+						</div>
+					</li>
+					
+					<li class="otherOrder">
+						<p class="title">第三方订单</p>
+						<div class="ground">来源：<input type="text" placeholder="填写订单来源" id="otherAddress"></div>
+						<div class="ground">总天数（/天）：<input type="text" placeholder="填写总天数" id="otherdate"></div>
+						<div class="ground">总价格（/元）：<input type="text" placeholder="填写总金额" id="otherSave"></div>
+						<div class="ground">入住人姓名：<input type="text" placeholder="填写入住人姓名" id="otherName"></div>
+						<div class="ground">联系电话：<input type="text" placeholder="填写入住人电话" id="otherTel"></div>
+						<div class="ground">入住时间：<input type="date" id="otherCheck-in"></div>
+						<div class="ground">离开时间：<input type="date" id="otherCheck-out"></div>
+						<div class="ground"><a class="button" id="otherOrder">提交</a></div>
+						<div class="ground"><p><span style="color: #FF4500">! 提示:</span>成功提交信息后，系统将自动修改当天房态。</p></div>
+					</li>
+
+				</ul>
+			</div>
+			
+			<div class="bottombtn">
+				<span>改房态</span>
+				<span>改价格</span>
+			</div>
+		</div>
+		<div id="maskShow"></div>
+		<div id="module-box">
+			<span class="module-state">修改房态</span>
+			<div class="module-con">
+				<a>入住</a>
+				<a>空闲</a>
+				<div style="clear: both;"></div>
+			</div>
+			<div class="module-footer">
+				<a id="contuse">确定</a>
+				<a>取消</a>
+			</div>
+		</div>
+		
+		
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
+	    <script charset="UTF-8" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+
+<!------------------------------>
+<script>
+ $(document).ready(function(){
+
+   window.onload=function(){
+	    var mydate=new Date();
+	    var thisyear=mydate.getFullYear();
+	    var thismonth=mydate.getMonth()+1;
+	    var thisday=mydate.getDate();
+	    var mydate1=new Date();
+	    var thisyear1=mydate1.getFullYear();
+	    var thismonth1=mydate1.getMonth()+1;
+	    var thisday1=mydate1.getDate();
+
+	    var selectday=thisday;
+	   
+	    var datetxt="datetoday";
+	    var datefirst;
+	    var datesecond;
+	    var r=1;
+	    function initdata(){
+	     //日期初始填充
+	     var tdheight=$(".data_table tbody tr").eq(0).find("td").height();
+	     $(".data_table tbody td").css("height",tdheight);
+	     //只获取两个月的数据
+	
+		
+
+ 		$(".selectmouth .selectdate").val(thisyear+"年"+thismonth+"月");
+	     var days=getdaysinonemonth(thisyear,thismonth); //获得这个月的总天数
+	     var weekday=getfirstday(thisyear,thismonth); // 获得这个月1号，是星期几
+	    
+	     setcalender(days,weekday);
+	 //    orderabledate(thisyear,thismonth,thisday); 
+	    }
+	    
+	    initdata();
+	    $(".datetoday").val(thisyear+"-"+thismonth+"-"+thisday);
+	    $(".dateendday").val(thisyear+"-"+thismonth+"-"+(thisday+1));
+	    
+	  
+	    
+	    function getdaysinonemonth(year,month){
+	        //算某个月的总天数
+	        month=parseInt(month,10);
+	        var d=new Date(year,month,0);
+	        return d.getDate();
+	    }
+	    function getfirstday(year,month){
+	        //算某个月的第一天是星期几
+	        month=month-1;
+	        var d=new Date(year,month,1);
+	        return d.getDay();
+	    }
+	    
+	    
+		function request(name){
+			            var url = window.location.href;
+			            if(url){
+			                var valArray = url.split("?")[1];
+			                if(valArray && valArray.length >0){
+			                    var valArr = valArray.split("&");
+			                    if(valArr && valArr.length > 0){
+			                        for(var i in valArr){
+			                            if(valArr[i].split("=")[0] == name){
+			                                return valArr[i].split("=")[1];
+			                            }
+			                        }
+			                    }
+			                }
+			            }
+			        }
+
+	    
+		var _id = request('id');
+		
+	    function orderabledate(thisyear,thismonth,thisday){
+	        //能预订的日期
+	        if(thisyear<thisyear1){
+	         $(".data_table tbody td").addClass("orderdate");
+	         $(".data_table tbody td").removeClass("usedate");
+	        }else if(thisyear==thisyear1){
+	         if(thismonth<thismonth1){
+	          $(".data_table tbody td").addClass("orderdate");
+	          $(".data_table tbody td").removeClass("usedate");
+	         }else if(thismonth==thismonth1){
+	          for(var j=0;j<6;j++){
+	              for(var i=0;i<7;i++){
+	                  var tdhtml=$(".data_table tbody tr").eq(j).find("td").eq(i).attr('dt');
+	                  console.log(tdhtml)
+	                  if(tdhtml<thisday){
+	                     $(".data_table tbody tr").eq(j).find("td").eq(i).addClass("orderdate");
+	                     $(".data_table tbody tr").eq(j).find("td").eq(i).removeClass("usedate");
+	                  }else{
+	                     $(".data_table tbody tr").eq(j).find("td").eq(i).removeClass("orderdate");
+	                  }
+	              }
+	          }
+	         }else{
+	          $(".data_table tbody td").removeClass("orderdate");
+	         }
+	        }else{
+	         $(".data_table tbody td").removeClass("orderdate");
+	        }
+	       }
+		
+		
+		
+		
+	    function setcalender(days,weekday){
+	        //往日历中填入日期
+	        var a=1;
+	        for(var j=0;j<6;j++){
+	         for(var i=0;i<7;i++){
+	          if(j==0&&i<weekday){ //空白填充
+	           $(".data_table tbody tr").eq(0).find("td").eq(i).html("");
+	           $(".data_table tbody tr").eq(0).find("td").eq(i).removeClass("usedate");
+	          }else{
+	           if(a<=days){ //填日期
+	            $(".data_table tbody tr").eq(j).find("td").eq(i).html(a);
+	            $(".data_table tbody tr").eq(j).find("td").eq(i).addClass("usedate");
+	            a++;
+	           }else{ // 超过总天数的留空白
+	            $(".data_table tbody tr").eq(j).find("td").eq(i).html("");
+	            $(".data_table tbody tr").eq(j).find("td").eq(i).removeClass("usedate");
+
+	            a=days+1;
+	           }
+	          }
+	         }
+	        }
+	       }
+		
+		
+
+	    
+	    
+		  //价格状态
+ 	    function setcalender(days,weekday){
+	    	var _id = request('id');
+	        var datew = new Date();
+	        var yearw = datew.getFullYear();
+	        var monthw = datew.getMonth()+1;
+	        var dayw = datew.getDate();
+	        var startDate=yearw+"-"+monthw+"-"+dayw;
+	        var dateList;
+	        var gg=new Array();
+	        var postData={
+	          id:_id,
+	          startDate:startDate
+	        };
+	    	$.ajax({
+	    		type : 'POST',
+				dataType : 'json',
+	        	url:'/mobile/price/'+_id+'/'+startDate,
+	        	data:postData,
+	        	success:function(data){
+	        		 console.log(data)
+	        		dateList=data
+	        		jQuery.each(dateList, function(key, val){
+	                    gg[key] = val;
+	                  });
+	                function p(s) {
+	                    return s < 10 ? '0' + s: s;
+	                }
+	          
+	                //往日历中填入日期
+	                var a=1;
+	                
+	                for(var j=0;j<6;j++){
+	                 for(var i=0;i<7;i++){
+	                  if(j==0&&i<weekday){ //空白填充
+	                   $(".data_table tbody tr").eq(0).find("td").eq(i).html("");
+	                  }else{
+	                	  var dates =  thisyear + '-' + p(thismonth) + '-' + p(a);
+	                	  var hm=(new Date(dates)).getTime()+4*60*60*1000;
+	                	  var newTime = new Date(hm);  
+	                	  
+	                	  
+			                   if(a<=days){ //填日期
+			                    $(".data_table tbody tr").eq(j).find("td").eq(i).attr({'date-date':dates,'date-hm':hm,'sj':newTime,'dt':a});
+			                   
+			                    if(gg[dates].roomNum=='0'){
+			                    	 $(".data_table tbody tr").eq(j).find("td").eq(i).html('<i class="nu">'+a+'</i>'+'<br>'+"<i style='color:coral'>满房</i>");
+			                    	 $(".data_table tbody tr").eq(j).find("td").eq(i).css('background','#f0f0f0');
+			                    }else if(gg[dates].roomNum=='1'){
+			                    	 $(".data_table tbody tr").eq(j).find("td").eq(i).html('<i class="nu">'+a+'</i>'+'<br>￥'+gg[dates].price);
+			                    	 $(".data_table tbody tr").eq(j).find("td").eq(i).css('background','#fff');
+			                    }
+			                    
+			                    a++;
+			                   }else{ // 超过总天数的留空白
+			                    $(".data_table tbody tr").eq(j).find("td").eq(i).html("");
+			                    a=days+1;
+			                   }
+	                  }
+	                 }
+	                }
+	                
+	                
+	        	}
+	    	})
+
+	       }
+		
+
+		  
+     $(".houseList ul li .lastmonth").click(function(){
+     //上一个月
+     thismonth--;
+     r--;
+     if(thismonth==0){
+      thismonth=12;
+      thisyear--;
+     }else if(thisyear<thisyear && thismonth<thismonth ){
+      alert(111)
+     }
+     initdata();
+   		$(".data_table tbody td").removeClass('selectDate')
+    });
+    
+    $(".houseList ul li .nextmonth").click(function(){
+     //上一个月
+     thismonth++;
+     r++;
+     if(thismonth==13){
+      thismonth=1;
+      thisyear++;
+     }
+     initdata();
+     $(".data_table tbody td").removeClass('selectDate')
+    }); 
+
+   }
+	
+
+
+	
+    var facilId="",_status="";
+    $(".data_table tbody").on('click',' td',function(){
+    	if($(this).hasClass('selectDate')==true){
+    		$(this).removeClass('selectDate');
+    	}else{
+    		$(this).addClass('selectDate');
+    	}
+    	
+    	var houseList=new Array();
+        for(var i=0;i<$(".data_table tbody td").length;i++){
+            if($(".data_table tbody td").eq(i).hasClass('selectDate')==true){
+                houseList.push($(".data_table tbody td").eq(i).attr('date-hm'));
+            }
+        }
+        facilId=houseList.join(',');
+    	
+    })
+    
+    $(".bottombtn span:first-child").click(function(){
+		if(facilId==""||facilId==null ){
+			alert('请先选择时间')
+			return;
+		}
+		$("#module-box,#maskShow").fadeIn();
+    	$(".module-state").text('设置房态');
+    	$(".module-con").html('<a stag="0">入住</a><a stag="1">空闲</a><div style="clear: both;"></div>');
+
+    });
+    
+    $(".module-con").on('click','a',function(){
+    	$(this).addClass('ac').siblings().removeClass('ac');
+    	_status=$(this).attr('stag')
+    })
+    $(".module-footer a:nth-child(2)").click(function(){ //关闭
+			$("#module-box,#maskShow").fadeOut();
+			$(".data_table tbody td").removeClass('selectDate');
+	})
+	var id=fnBase.request('id');
+	 $("#contuse").click(function(){
+		 console.log(facilId+'&'+_status+'&'+id)
+			if(facilId==""||facilId==null || _status=="" || _status==null){
+				alert('选择状态后提交')
+				return;
+			}
+			console.log(facilId+'&'+_status+'&'+id)
+  			$.ajax({
+				type:'POST',
+				dataType:'json',
+				url:'/admin/house',
+				data:{
+					'time':facilId,
+					'state':_status,
+					'apartmentId':id
+				},
+				success:function(data){
+					console.log(data)
+					if(data.statusCode==1){
+						$("#module-box,#maskShow").fadeOut();
+						location=location;
+					}else{
+						alert(data.content)
+					}
+				}
+			})  			
+			/* $(".data_table tbody td").removeClass('selectDate'); */
+	})
+
+	
+	 $(".bottombtn span:first-child+span").click(function(){
+			if(facilId==""||facilId==null ){
+				alert('请先选择时间')
+				return;
+			}
+			$("#module-box,#maskShow").fadeIn();
+	    	$(".module-state").text('修改价格');
+	    	$(".module-con").html('<input type="text" class="form-control" placeholder="填写价格" id="priceset">');
+			$(".module-footer").html('<a id="priceok">确定</a><a id="closeOpen">取消</a>')
+	  });
+	
+	 $(".module-footer").on('click','#closeOpen',function(){
+		 $("#module-box,#maskShow").fadeOut();
+			$(".data_table tbody td").removeClass('selectDate'); 
+	 })
+	 
+	 $(".module-footer").on('click','#priceok',function(){
+			var val=$("#priceset").val();
+			if(val==""||val==null){
+				alert('选择设置价格后提交')
+				return;
+			}
+			console.log(facilId+'&'+val+'&'+id)
+			$.ajax({
+				type:'POST',
+				dataType:'json',
+				url:'/admin/price',
+				data:{
+					'time':facilId,
+					'price':val,
+					'apartmentId':id
+				},
+				success:function(data){
+					console.log(data)
+					if(data.statusCode==1){
+						$("#module-box,#maskShow").fadeOut();
+						location=location;
+					}else{
+						alert(data.content)
+					}
+				}
+			})
+	 })
+	 
+	 
+	 
+	 //三方订单
+	 
+	 $("#otherOrder").click(function(){
+		 var add=$("#otherAddress").val();
+			if( add==null || add==undefined ||add==""){
+				alert('请您填写订单来源后再提交')
+				return;
+			}
+			var value=$("#otherSave").val();
+			if( value==null || value==undefined ||value==""){
+				alert('请您填写订单价格后再提交')
+				return;
+			}
+			var name=$("#otherName").val();
+			if( name==null || name==undefined ||name==""){
+				alert('请您填写入住人姓名后再提交')
+				return;
+			}
+			var chickin=$("#otherCheck-in").val();
+			if( chickin==null || chickin==undefined ||chickin==""){
+				alert('请您填写入住时间后再提交')
+				return;
+			}
+			var chickout=$("#otherCheck-out").val();
+			if( chickout==null || chickout==undefined ||chickout==""){
+				alert('请您填写离开时间后再提交')
+				return;
+			}
+			var otherdate=$("#otherdate").val();
+			if( otherdate==null || otherdate==undefined ||otherdate==""){
+				alert('请您填写入住总天数后再提交')
+				return;
+			}
+			var othertel=$("#otherTel").val();
+			if( othertel==null || othertel==undefined ||othertel==""){
+				alert('请您填写入住人电话号码后再提交')
+				return;
+			}
+
+			$.ajax({
+				type:'post',
+				dataType:'json',
+				url:'/admin/Rests',
+				data:{
+					'source': add,
+					'startTime' : chickin,
+					'endTime':chickout,
+					'sum':value,
+					'apId':id,
+					'name':name,
+					'fate':otherdate,
+					'tel':othertel
+				},
+				success:function(data){
+				//	console.log(data)
+					if(data.statusCode==1){
+						 status();
+					}else{
+						alert(data.content)
+					}
+					
+				}
+			})
+			
+	 })	
+			function status(){
+				var _startDate=$("#otherCheck-in").val();
+				var _endDate=$("#otherCheck-out").val();
+				
+				_startDate=(new Date(_startDate)).getTime()+ 1000 * 60 * 60 * 4;
+				_endDate=(new Date(_endDate)).getTime()+ 1000 * 60 * 60 * 4;
+			//	console.log(_startDate+'&&&&'+_endDate+'&&&'+ID)
+				$.ajax({
+					type : 'post',
+					dataType : 'json',
+					url:'/admin/house1',
+					data : {
+						'state' : 0,
+						'startDate':_startDate,
+						'endDate':_endDate,
+						'apartmentId':id
+					},
+					error:function(e){
+						alert('修改错误')
+					},
+					success:function(data){
+						console.log(data)
+						alert(data.content)
+						location=location
+					}
+				});
+			}
+	 
+	 
+ })
+</script>
+
+
+	</body>
+</html>

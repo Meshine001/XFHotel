@@ -20,11 +20,11 @@
      var tdheight=$(".data_table tbody tr").eq(0).find("td").height();
      $(".data_table tbody td").css("height",tdheight);
      //只获取两个月的数据
-     if(thismonth<thismonth1 || thisyear<thisyear1){
+/*     if(thismonth<thismonth1 || thisyear<thisyear1){
     	 return
      }else if(thismonth>thismonth1+1){
     	 return
-     }
+     }*/
      $(".selectdate").val(thisyear+"年"+thismonth+"月");
      var days=getdaysinonemonth(thisyear,thismonth); //获得这个月的总天数
      var weekday=getfirstday(thisyear,thismonth); // 获得这个月1号，是星期几

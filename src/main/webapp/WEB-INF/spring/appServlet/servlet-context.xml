@@ -23,6 +23,7 @@
 	<resources mapping="/dist/**" location="/dist/**" />
 	<resources mapping="/images/**" location="/images/" />
 	<resources mapping="/wx/**" location="/mobile/**" />
+	<resources mapping="/madmin/**" location="/madmin/**" />
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<beans:bean

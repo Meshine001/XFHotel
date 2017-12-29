@@ -97,7 +97,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<Order> list(int type) {
 		if (type == Apartment.TYPE_ALL) {
-			return orderDAO.getListByHQL("from Order", null);
+			return orderDAO.getListByHQL("from Order order by id desc", null);
 		}
 		String hql = "from Order where type=?";
 		String[] values = { Apartment.getTypeDescription(type)};

@@ -130,6 +130,14 @@ public class ApartmentController {
 		return "redirect:/admin/apartment";
 	}
 	
+	@RequestMapping(value = "/showHomell/{id}", method = RequestMethod.GET)
+	public Message showHomell(@PathVariable("id")Long id){
+		Apartment apartment = apartmentService.findById(id);
+		apartment.setShow_home(apartment.isShow_home()?false:true);
+		apartmentService.update(apartment);
+		return new Message(Clean.STATUS_NOT_AFFIRM, "成功");
+	}
+	
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable("id") Long id,String jing_du, String wei_du, String bd_wei_zhi, String xa_wei_zhi, String jie_dao,
@@ -181,6 +189,7 @@ public class ApartmentController {
 		System.out.println(id);
 		Apartment apartment = apartmentService.findById(id);
 		apartmentService.delete(apartment);
+		System.out.println("123123");
 		return new Message(Clean.STATUS_NOT_AFFIRM, "成功");
 	}
 

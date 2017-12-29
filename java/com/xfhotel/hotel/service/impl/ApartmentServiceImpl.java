@@ -514,7 +514,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 	@Transactional
 	@Override
 	public List<Apartment> steward(Long steward) {
-		String hqlString = "from Apartment where steward=?";
+		String hqlString = "from Apartment where steward=? ";
 		Object[] values = {steward};
 		return apartmentDAO.getListByHQL(hqlString, values);
 	}

@@ -216,14 +216,10 @@ public class UserController {
 			if(u.getAuthority()==0){
 				return new Message(Constants.MESSAGE_SUCCESS_CODE,orderservice.list(0));
 			} else{
-			for(Apartment apartment :list){
-				List<Order> o=orderservice.getOrders(apartment.getId());
-			 for(int i=0;i<o.size();i++){
-				 Order o1 = o.get(i);
-				 list1.add(o1);
-			 }
+				List<Order> o=orderservice.list(0);
+				 list1.add(o);
+			 
 				}
-			}
 	} catch (Exception e) {
 		e.printStackTrace();
 		return new Message(Constants.MESSAGE_ERR_CODE, "查找失败");

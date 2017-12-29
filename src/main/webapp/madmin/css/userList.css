@@ -1,0 +1,15 @@
+.page{
+	clear: both;padding: 0.1rem;font-size: 0.12rem;overflow: hidden;
+}
+.page a{display:block;padding: 0.05rem; border: 1px solid #eee;float: left;margin-right: 0.05rem;}
+
+.content{left: 0;width: 100%;bottom: 0;position: absolute;top: 0.42rem;overflow: hidden;overflow-y: auto;}
+.layer-select{width: 100%;height: 0.4rem;background: #FAFAFA;position: relative;border-bottom: 1px solid #eee;}
+.layer-select .layer-nav{text-align: center;cursor: pointer;color: #333;background: none !important;height: 0.4rem;display: block;float: left;font-size: 0.13rem;width: 33.333%;border-right: 1px solid #eee;text-align: center;line-height: 0.4rem;}
+.houseList{margin: 0.1rem 0;border: 1px solid #eee;}
+.houseList,.houseList table{width: 100%;}
+.houseList table th,.houseList table td{line-height: 0.3rem;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding: 0 0.1rem;border-right:1px solid #eee;text-align: left;color: #666;border-bottom: 1px solid #eee;font-size: 0.14rem;line-height: 0.3rem;}
+.houseList table th:first-child,.houseList table td:first-child{width: 8%;}
+.houseList table th:last-child,.houseList table td:last-child{border-right: none;}
+.houseList table tr .look{cursor: pointer !important;}
+.houseList table tr .look img{width: 0.18rem;margin-top: 0.08rem;} 

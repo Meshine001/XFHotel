@@ -1,0 +1,85 @@
+body,html{background: #fff;}
+
+.content{left: 0;width: 100%;bottom: 0;position: absolute;top: 0.42rem;overflow: hidden;overflow-y: auto;}
+.layer-select{width: 100%;height: 0.4rem;background: #FAFAFA;display: flex}
+.layer-select select{height: 0.3rem;font-size: 0.13rem;margin: 0.05rem 0 0.05rem 0.12rem;border: 1px solid #eee;text-align: center;padding: 0 0.2rem;}
+
+.houseList{width: 100%;overflow: hidden;}
+.houseList ul{padding: 0.12rem;margin-bottom: 0.6rem;}
+.houseList ul li{width: 100%;padding: 0.1rem;border: 1px solid #ddd;margin-bottom: 0.12rem;border-radius: 0.1rem;}
+.info{
+    line-height: 0.4rem;
+    font-size: 0.14rem;
+    color: #fff;
+    padding: 0 0.1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+    background: #28ca40;
+    border-top-right-radius: 0.1rem;
+    border-top-left-radius: 0.1rem;
+}
+
+
+/*-----*/
+.choosecal{overflow:hidden;}
+
+.caltline1{ width:94%; background-color:#eee; overflow:hidden; padding:2% 3%;}
+.caltline1 p{ float:left; width:10%; font-weight:700; text-align:right;}
+.caltline1 .bookdate{ width:90%; text-align:left;}
+
+.inputdate{ color:#F60;}
+.calender{ width:100%;overflow:hidden;}
+.selectmouth{ background-color:#eee; width:100%;
+overflow:hidden;}
+.selectmouth p{ float:left; width:33.3333%; color:#333;font-size: 0.14rem;padding: 0.08rem 0;
+font-weight:700; cursor:pointer;text-align: center !important;}
+
+.selectmouth .selectdate{ width:100%; background-color:#eee;
+border:none; color:#333; font-weight:700; text-align:center;}
+
+.data_table{ width:100%;border:1px solid #cccccc;font-size: 0.14rem;
+border-collapse:collapse; }
+
+.data_table thead{}
+
+.data_table thead td{ color:#000; text-align:center;
+border:1px solid #ccc;border-collapse:collapse; padding:2%;
+}
+.data_table tbody td{border:1px solid #cccccc;
+border-collapse:collapse;
+text-align:center;color:#0C6;padding:1%;height: 0.3rem !important;
+}
+.data_table tbody td.orderdate{ color:#000;}
+.data_table tbody td.tdselect{ color:#fff;background-color:#999}
+
+.data_table tbody td.selectDate{background:#3686ec !important;color:#fff}
+.module-con a.ac{background:#13d87b;color:#fff;}
+.module-con input{width:100%;line-height:0.3rem;border:1px solid #eee;font-size:0.14rem;padding:0 0.1rem}
+
+.bottombtn{position: fixed;bottom: 0;left: 0;width: 100%;height: 0.42rem;background: rgba(0,0,0,.6);color: #fff;}
+.bottombtn span{width: 50%;text-align: center;line-height: 0.42rem;display: block;float: left;font-size: 0.14rem;border-left: 1px solid #a7a3a3;}
+.bottombtn span:first-child{border: none;}
+
+
+
+/*弹出框*/
+#module-box{display: none;width: 3.5rem;background: #fff;border-radius: 0.1rem;position: fixed;left: 50%;margin-left: -1.75rem;top: 50%;margin-top: -1.4rem;z-index: 101;}
+.module-state{text-align: center;font-size: 0.16rem;font-weight: bold;display: block;line-height: 0.45rem;color: #333;    color: #333;
+    background: #fafafa;border-top-left-radius: 0.1rem;border-top-right-radius: 0.1rem;}
+
+.module-con{border-top: 1px solid #eee;border-bottom: 1px solid #EEEEEE;padding: 0.3rem 0.15rem;}
+.module-con a{cursor: pointer;display: block;width: 50%;text-align: center;float: left;font-size: 0.16rem;border: 1px solid #EEEEEE;border-radius: 0.2rem;padding: 0.08rem;}
+.module-footer{background: #FAFAFA;height: 0.45rem;border-bottom-left-radius:0.1rem;border-bottom-right-radius:0.1rem;line-height: 0.45rem;font-size: 0.14rem;}
+.module-footer a{display: block;float: left;width: 50%;text-align: center;cursor: pointer;}
+.module-footer a:nth-child(1){color: #28CA40;}
+.module-footer a:nth-child(2){color: #FF6057;}
+
+
+
+/*第三方订单*/
+.otherOrder .title{font-size: 0.14rem;font-weight: bold;color: #333;border-bottom: 1px solid #eee;padding-bottom: 0.08rem;}
+.otherOrder .ground{clear: both;font-size: 0.14rem;line-height: 0.4rem;color: #333;}
+.otherOrder .ground input{width: 60%;border-bottom: 1px solid #ddd;padding: 0.05rem;}
+.otherOrder .ground .button{padding: 0.08rem 0.2rem;cursor: pointer;background: #28ca40;color: #fff;border-radius: 0.05rem;}

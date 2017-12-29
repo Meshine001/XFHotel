@@ -1,0 +1,62 @@
+.content{left: 0;width: 100%;bottom: 0;position: absolute;top: 0.42rem;overflow: hidden;overflow-y: auto;}
+.layer-select{width: 100%;height: 0.4rem;background: #FAFAFA;position: relative;border-bottom: 1px solid #eee;}
+.layer-select .layer-nav{cursor: pointer;color: #333;background: none !important;height: 0.4rem;display: block;float: left;font-size: 0.13rem;width: 50%;border-right: 1px solid #eee;text-align: center;line-height: 0.4rem;}
+.layer-select .layer-nav.show{border-bottom: orangered 1px solid;color: orangered;}
+.houseList{position: relative;width: 100%;}
+.houseList ul{padding: 0.1rem;}
+.houseList ul li{
+	width: 100%;padding: 0.1rem;border: 1px solid #ddd;margin-bottom: 0.12rem;border-radius: 0.06rem;overflow: hidden;
+	font-size: 0.14rem;background: #fafafa;line-height: 0.26rem;cursor: pointer;
+}
+.houseList ul li .row{clear: both;}
+.houseList ul li .fl{float: left;width: 50%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.houseList ul li .cz-btn span{font-size: 0.12rem;padding: 0.05rem;background: orange;margin-right: 0.04rem;color: #fafafa;border-radius: 0.04rem;cursor: pointer;}
+.page{
+	clear: both;padding: 0.1rem;font-size: 0.12rem;overflow: hidden;display:none;
+}
+.page a{display:block;padding: 0.05rem; border: 1px solid #eee;float: left;margin-right: 0.05rem;cursor:pointer;}
+
+
+/* 订单详情 */
+#module-box{
+	width:100%;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	position:fixed;
+	background:#fff;
+	z-index: 10001;
+    overflow: hidden;
+    transition: all .2s;
+    transform:scale(0);
+}
+#module-box.hover{
+	transform:scale(1);
+}
+.module-state{
+	position:relative;
+	box-sizing: border-box;
+    background-color: #F6F6F6;
+    color: #333 !important;
+    line-height: 0.42rem;
+    height: 0.42rem;
+    width: 100%;
+    z-index: 99;
+    border-bottom: 1px solid #eee;
+    display:block;
+}
+
+.module-con{
+	width:100%;
+	position:absolute;
+	top:0.42rem;
+	bottom:0;
+	left:0;
+	right:0;
+	overflow:auto;
+	padding:0.12rem;
+}
+.module-con .fn{width:100%;font-size:0.14rem;margin-bottom:0.2rem}
+.module-con .fn .title{line-height:0.3rem;font-size:0.14rem;color:#333;border-left:2px solid red;padding-left:0.1rem}
+.module-con table td{line-height:0.3rem;}

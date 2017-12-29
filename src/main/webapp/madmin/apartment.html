@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	    <link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/apartment.css" />
+		
+	</head>
+	<body style="display: none;">
+		<div class="layer-title">
+			<span class="layer-logo"><img src="images/maps.png">房源管理</span>
+			<span class="layer-setwin">
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+			</span>
+		</div>
+		<div class="content">
+			<div class="layer-select">
+				<a class="layer-nav">新建房源</a>
+				<a class="layer-nav">选择房东</a>
+				<a class="layer-nav">选择管理员</a>
+				<select class="layer-nav" id="weizhiselect">
+					<option style="display:none">位置选择</option>
+					<option tid="5">全部</option>
+					<option tid="0">城东</option>
+					<option tid="1">城南</option>
+					<option tid="2">城西</option>
+					<option tid="3">城北</option>
+					<option tid="4">城内</option>
+				</select>
+			</div>
+			
+			<div class="houseList">
+				<ul>
+<!-- 					<li  proID='+data.content[i].id+'>
+						<div class="hinfo">
+							<div class="infoimg"><img src="'+baseUrl+"/images/"+data.content[i].fang_jian_tu[0]+'"></div>
+							<div class="infocon">
+								<p>位置：'+data.content[i].position.xa_wei_zhi+'</p>
+								<p>小区：'+data.content[i].position.xiao_qu+'</p>
+								<p>价格：<i style="color:red">'+data.content[i].basic_info.jia_ge+'</i></p>
+								<p>地址：'+data.content[i].position.jie_dao+'</p>
+							</div>
+						</div>
+						<div class="hbtn">
+							<a class="fn-edit">编辑详情</a>
+							<a class="fn-ifshow">显示隐藏</a>
+							<a class="fn-remove">删除房屋</a>
+							<a class="fn-look">查看评论</a>
+							<a class="fn-price">价格房态</a>
+							<a><input type="text" class="paixu"><input type="button" value="排序" class="btn-px"></a>
+							<a class="selected">选择<i></i></a>
+						</div>
+					</li> -->
+					
+				</ul>
+			</div>
+		</div>
+
+		
+		
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
+	    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+		<script type="text/javascript" src="js/apartment.js" ></script>
+<!------------------------------>
+
+
+	</body>
+</html>

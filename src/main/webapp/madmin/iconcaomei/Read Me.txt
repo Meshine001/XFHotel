@@ -1,0 +1,5 @@
+草莓图标
+http://chuangzaoshi.com/icon/
+
+使用文档
+https://github.com/xiangsudian/caomei
