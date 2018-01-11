@@ -1,0 +1,42 @@
+.content{left: 0;width: 100%;bottom: 0;position: absolute;top: 0.42rem;overflow: hidden;overflow-y: auto;}
+.layer-select{width: 100%;height: 0.4rem;background: #FAFAFA;position: relative;border-bottom: 1px solid #eee;}
+.layer-select .layer-nav{cursor: pointer;color: #333;background: none !important;height: 0.4rem;display: block;float: left;font-size: 0.13rem;width: 50%;border-right: 1px solid #eee;text-align: center;line-height: 0.4rem;}
+.layer-select .layer-nav.show{border-bottom: #4587f5 2px solid;color: #4587f5;    font-weight: bold;}
+.houseList{position: relative;width:100%;overflow:auto}
+.houseList ul{padding: 0.1rem;}
+.houseList ul li{
+	width: 100%;padding: 0.1rem;border: 1px solid #ddd;margin-bottom: 0.12rem;border-radius: 0.06rem;overflow: hidden;
+	font-size: 0.14rem;background: #fafafa;line-height: 0.26rem;cursor: pointer;
+}
+.houseList ul li .row{clear: both;}
+.houseList ul li .fl{float: left;width: 50%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.houseList ul li .cz-btn span{font-size: 0.12rem;padding: 0.05rem;background: orange;margin-right: 0.04rem;color: #fafafa;border-radius: 0.04rem;cursor: pointer;}
+.page{
+	clear: both;padding: 0.1rem;font-size: 0.12rem;overflow: hidden;display:none;
+}
+.page a{display:block;padding: 0.05rem; border: 1px solid #eee;float: left;margin-right: 0.05rem;cursor:pointer;}
+
+
+.heardman{
+	font-size: 0.14rem;
+    line-height: 0.4rem;
+    padding: 0 0.12rem;
+    color: #333;
+    font-weight: bold;
+}
+.heardman .fp{border:1px solid #333;height:0.3rem;}
+.houseListcon{border:1px solid #eee;max-height:2rem;overflow:auto;}
+.houseListcon li{
+	line-height: 0.35rem;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0 0.1rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.houseListcon li.ace {
+    background: #c23531;
+    color: #fff;
+}
+#rzoom{width:100%;height:6rem}
+#post_detail{width:100%;height:6rem;}

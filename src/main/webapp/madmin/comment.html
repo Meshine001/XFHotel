@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+	    <link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/comment.css" />
+		
+	</head>
+	<body style="display: none;">
+		<div class="layer-title">
+			<span class="layer-logo"><img src="images/computer.png">用户评论</span>
+			<span class="layer-setwin">
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+			</span>
+		</div>
+		<div class="content">
+
+			<div class="houseList">
+				<ul>
+					<li>
+						<p>用户：'+data[i].nick+' <span style="float:right;color:orange">'+data[i].comment.score[i]+'星</span></p>
+						<p>内容：'+data[i].comment.feel+'</p>
+						<p>操作：<a toid="'+data[i].comment.id+'">回复</a><a toid="'+data[i].comment.id+'">删除</a></p>
+					</li>
+					<li></li>
+					<li></li>
+				</ul>
+				
+				
+ 				<div class="page">
+					<a>上一页</a>
+					<a>下一页</a>
+					<a></a>
+				</div>  
+				
+			</div>
+		</div>
+		<div id="maskShow"></div>
+		
+		<div id="module-box">
+			<span class="module-state">回复评论</span>
+			<div class="module-con">
+				<input type="text" class="form-control" placeholder="填写回复" id="priceset">
+			</div>
+			<div class="module-footer">
+				<a id="contuse">确定</a>
+				<a>取消</a>
+			</div>
+		</div>
+		
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
+	    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+		<script charset="gb2312" language="javascript" type="text/javascript" src="js/comment.js"></script>
+<!------------------------------>
+<script>
+  (function(){
+
+/* 	$(".houseList ul li .hbtn .selected").click(function(){
+		if($(this).hasClass('show')==false){
+			$(this).addClass('show')
+		}else{
+			$(this).removeClass('show')
+		}
+	})
+ */
+  })()
+</script>
+
+
+	</body>
+</html>

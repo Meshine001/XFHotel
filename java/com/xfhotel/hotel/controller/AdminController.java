@@ -154,6 +154,18 @@ public class AdminController {
 		return "/admin/customer/baojie";
 	}
 	
+	@RequestMapping(value = "/Clean", method = RequestMethod.POST)
+	public @ResponseBody Message Clean() {
+		List<Clean> list = cleanService.list();
+		List<Map> orders = new ArrayList<Map>();
+		Order order = null;;
+		for (Clean o : list) {
+			orders.add(o.toMap());	
+		}
+		
+		return new Message(Constants.MESSAGE_SUCCESS_CODE, orders);
+	}
+	
 	//..7.18故障维修...
 		@RequestMapping(value = "/customer_weixiu", method = RequestMethod.GET)
 		public String Fault() {
@@ -164,6 +176,16 @@ public class AdminController {
 			}
 			session.setAttribute("orders", orders);
 			return "/admin/customer/weixiu";
+		}
+		
+		@RequestMapping(value = "/weixiu", method = RequestMethod.POST)
+		public @ResponseBody Message Weixiu() {
+			List<Fault> list = faultservice.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (Fault o : list) {
+				orders.add(o.toMap());	
+			}
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, orders);
 		}
 	//..7.18添加设施...
 		@RequestMapping(value = "/customer_addfacility", method = RequestMethod.GET)
@@ -176,6 +198,17 @@ public class AdminController {
 			session.setAttribute("orders", orders);
 			return "/admin/customer/addfacility";
 		}
+		
+		@RequestMapping(value = "/addfacility1", method = RequestMethod.POST)
+		public @ResponseBody Message addfacility1() {
+			List<FacilityOrder> list = facilityOrderservice.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (FacilityOrder o : list) {
+				orders.add(o.toMap());	
+			}
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, orders);
+		}
+		
 		@RequestMapping(value = "/customer_collocation", method = RequestMethod.GET)
 		public String getApply() {
 			List<Apply> list = applyService.list();
@@ -194,6 +227,29 @@ public class AdminController {
 			return "/admin/customer/collocation";
 		}
 		
+		//房东申请
+		@RequestMapping(value = "/Collocation1", method = RequestMethod.POST)
+		public @ResponseBody Message Collocation1() {
+			List<Apply> list = applyService.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (Apply o : list) {
+				orders.add(o.toMap());	
+			}
+			
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, orders);
+		}
+		//房东
+		@RequestMapping(value = "/Collocation2", method = RequestMethod.POST)
+		public @ResponseBody Message Collocation2() {
+			List<Landlord> list1 = landlordService.list();
+			List<Map> orders1 = new ArrayList<Map>();
+			for (Landlord o : list1) {
+				orders1.add(o.toMap());	
+				
+			}
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, orders1);
+		}
+	
 		@RequestMapping(value = "/customer_statistics", method = RequestMethod.GET)
 		public String statistics() {
 			return "/admin/customer/statistics";
@@ -214,7 +270,17 @@ public class AdminController {
 			}
 			session.setAttribute("orders", orders);
 			return "/admin/customer/DialogueCar";
-		}			
+		}		
+		
+		@RequestMapping(value = "/DialogueCar1", method = RequestMethod.POST)
+		public @ResponseBody Message DialogueCar1() {
+			List<TripOrder> list = tripOrderService.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (TripOrder o : list) {
+				orders.add(o.toMap());	
+			}
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, orders);
+		}
 	//..7.18叫车服务end...
 //		@RequestMapping(value = "/customer_collocation", method = RequestMethod.GET)
 //		public String collocation() {
@@ -229,7 +295,7 @@ public class AdminController {
 //		}								
 	
 		//成员权限 BEGIN
-		@RequestMapping(value = "/customer_manager", method = RequestMethod.GET)
+		@RequestMapping(value = "/customer_manager", method = RequestMethod.POST)
 		public String collocation() {
 			List<User> list = userService.list();
 			List<Map> orders = new ArrayList<Map>();
@@ -239,6 +305,16 @@ public class AdminController {
 			session.setAttribute("orders", orders);
 			return "/admin/customer/manager";
 		}	
+		
+		@RequestMapping(value = "/Manager1", method = RequestMethod.POST)
+		public @ResponseBody Message Manager1() {
+			List<User> list = userService.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (User o : list) {
+				orders.add(o.toMap());	
+			}
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, orders);
+		}
 		
 		// 成员权限 END
 
@@ -256,6 +332,15 @@ public class AdminController {
 		// 合作商户 END 
 		
 		
+		@RequestMapping(value = "/Jointwork1", method = RequestMethod.POST)
+		public @ResponseBody Message Jointwork1() {
+			List<Tenant> list = tenantService.list();
+			List<Map> orders = new ArrayList<Map>();
+			for (Tenant o : list) {
+				orders.add(o.toMap());	
+			}
+			return new Message(Constants.MESSAGE_SUCCESS_CODE, orders);
+		}
 		
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboardPage() {
@@ -444,7 +529,7 @@ public class AdminController {
 			if(money!=null){
 				List<Customer> c = customerService.list();
 				for(Customer customer : c){
-					if(customer.getConsumptionCount()>money){
+					if(customer.getConsumptionCount()>=money){
 						map.put(customer.getTel(), customer);	
 					}
 				}

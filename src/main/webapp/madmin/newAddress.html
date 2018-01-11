@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		
+		<link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+	    <link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/newaddress.css" />
+
+
+	</head>
+	<body style="display: none;">
+		<div class="layer-title">
+			<span class="layer-logo"><img src="images/computer.png">新建房屋</span>
+			<span class="layer-setwin">
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+			</span>
+		</div>
+		<div class="content">
+			<div class="houseList">
+				<div class="new">
+					<laber>区域：<span id="address"></span></laber>
+					<div id="map"></div>
+					<small style="color:#ed2d2d">用手拖动红色地标定位</small>
+				</div>
+				<div class="new">
+					<laber>位置：</laber>
+					<select class="form-control" id="wei_zhi">
+				<!-- 		<option style="display:none">位置选择</option> -->
+						<option value="城东">城东</option>
+						<option value="城南">城南</option>
+						<option value="城西">城西</option>
+						<option value="城北">城北</option>
+						<option value="城内">城内</option>
+					</select>
+				</div>
+				<div class="new">
+					<laber>街道：</laber>
+					<input type="text" id="jie_dao" class="form-control" placeholder="如：xxx路xxx号" name="jie_dao">
+				</div>
+				<div class="new">
+					<laber>小区名：</laber>
+					<input type="text" id="xiao_qu" class="form-control" placeholder="如：xxx小区" name="xiao_qu_ming">
+				</div>
+								<div class="new">
+					<laber>楼号：</laber>
+					<input type="number" id="lou_hao" min="0" class="form-control" placeholder="请填写数字" name="lou_hao">
+				</div>
+				<div class="new">
+					<laber>单元号：</laber>
+					<input type="number" id="dan_yuan" min="0" class="form-control" placeholder="请填写数字" name="dan_yuan_hao">
+				</div>
+				<div class="new">
+					<laber>楼层：</laber>
+					<input type="number" id="lou_ceng" min="0"  class="form-control" placeholder="第xx层" name="lou_ceng">
+					<input type="number" id="zong_lou_ceng" min="0"  class="form-control" placeholder="共xx层" name="lou_ceng">
+				</div>
+				<div class="new">
+					<laber>门牌：</laber>
+					<input type="text" id="men_pai" class="form-control" placeholder="请填写门牌号" name="Men_pai">
+				</div>	
+				<div class="new">
+					<laber>锁地址：</laber>
+					<input type="text" id="suo_di_zhi" class="form-control" placeholder="如：129.11.11.22" name="suo_di_zhi">
+				</div>
+				<div class="new">
+					<laber>朝向：</laber>
+					<select class="form-control" id="cao_xiang">
+<!-- 						<option style="display:none">朝向选择</option> -->
+						<option value="南北">南北</option>
+						<option value="东西">东西</option>
+					</select>
+				</div>	
+				<div class="new">
+					<laber>总面积：</laber>
+					<div class="form-control">
+						<input type="number" id="mian_ji" min="0"  placeholder="请填写房源面积" name="mian_ji">
+						<span>平方米</span>
+					</div>
+				</div>	
+				<div class="new">
+					<laber>户型：</laber>
+					<div class="form-control">
+						<input type="number" id="shi" min="0"  placeholder="请填写数字" name="">
+						<span>室</span>
+					</div>
+					<div class="form-control">
+						<input type="number" id="ting" min="0"  placeholder="请填写数字" name="">
+						<span>厅</span>
+					</div>
+					<div class="form-control">
+						<input type="number" id="wei" min="0"  placeholder="请填写数字" name="">
+						<span>卫</span>
+					</div>
+					<div class="form-control">
+						<input type="number" id="yang_tai" min="0"  placeholder="请填写数字" name="">
+						<span>阳台</span>
+					</div>					
+				</div>	
+				<div class="new">
+					<laber>可居住：</laber>
+					<div class="form-control">
+						<input type="number" id="reng_shu" min="0"  placeholder="请填写入住人数" name="ren_shu">
+						<span>人</span>
+					</div>
+				</div>				
+				<div class="new">
+					<laber>床：</laber>
+					<input type="text" id="chuang" class="form-control" placeholder="如：对床的描述" name="Men_pai">
+				</div>
+				<div class="new">
+					<laber>综合描述：</laber>
+					<textarea class="form-control" id="miao_su" placeholder="如：对房屋的综合描述" style="height:auto;" rows="3"></textarea>
+				</div>	
+				
+				<div class="new">
+					<laber>特色：</laber>
+					<div class="form-control newmask" item="tese">
+						<input type="text" id="te_se" placeholder="可选的特色" name="te_se">
+						<input type="text" id="te_se_class" class="ifclass" value="">
+					</div>
+				</div>	
+				<div class="new">
+					<laber>家居：</laber>
+					<div class="form-control newmask" item="jiaju">
+						<input type="text" id="jia_ju" placeholder="可选的家居" name="jia_ju">
+						<input type="text" id="jia_ju_class" class="ifclass" value="">
+					</div>
+				</div>					
+				<div class="new">
+					<laber>卫浴：</laber>
+					<div class="form-control newmask" item="weiyu">
+						<input type="text" id="wei_yu" placeholder="可选的卫浴" name="wei_yu">
+						<input type="text" id="wei_yu_class" class="ifclass" value="">
+					</div>
+				</div>					
+				<div class="new">
+					<laber>餐厨：</laber>
+					<div class="form-control newmask"  item="canchu">
+						<input type="text" id="can_chu" placeholder="可选的餐厨" name="can_chu">
+						<input type="text" id="can_chu_class" class="ifclass" value="">
+					</div>
+				</div>	
+				<div class="new">
+					<laber>配套：</laber>
+					<div class="form-control newmask"  item="peitao">
+						<input type="text" id="pei_tao" placeholder="可选的配套" name="pei_tao">
+						<input type="text" id="pei_tao_class" class="ifclass" value="">
+					</div>
+				</div>
+				<div class="new">
+					<laber>周边：</laber>
+					<div class="form-control newmask"  item="zhoubian">
+						<input type="text" id="zhou_bian" placeholder="周边" name="zhou_bian">
+						<input type="text" id="zhou_bian_class" class="ifclass" value="">
+					</div>
+				</div>	
+				<div class="new">
+					<laber>其他：</laber>
+					<div class="form-control newmask"  item="qita">
+						<input type="text" id="qi_ta" placeholder="其他" name="qi_ta">
+						<input type="text" id="qi_ta_class" class="ifclass" value="">
+					</div>
+				</div>
+				<div class="new">
+					<laber>公寓展示：</laber>
+					<div class="form-control" id="uploadImg">
+						<ul>
+							<li class="fangjiantu">
+								 <form id="uploadForm1" onclick="getElementById('file1').click()">
+									 <img src="" alt="公寓图片一" id="img1">
+									 <input type="file" name="file" id="file1" multiple style="display: none">
+								</form>	
+							</li>
+							<li class="fangjiantu">
+								 <form id="uploadForm2" onclick="getElementById('file2').click()">
+									 <img src="" alt="公寓图片二" id="img2">
+									 <input type="file" name="file" id="file2" multiple style="display: none">
+								</form>	
+							</li>	
+							<li class="fangjiantu">
+								 <form id="uploadForm3" onclick="getElementById('file3').click()">
+									 <img src="" alt="公寓图片三" id="img3">
+									 <input type="file" name="file" id="file3" multiple style="display: none">
+								</form>	
+							</li>	
+							<li class="fangjiantu">
+								 <form id="uploadForm4" onclick="getElementById('file4').click()">
+									 <img src="" alt="公寓图片四" id="img4">
+									 <input type="file" name="file" id="file4" multiple style="display: none">
+								</form>	
+							</li>	
+							<li class="fangjiantu">
+								 <form id="uploadForm5" onclick="getElementById('file5').click()">
+									 <img src="" alt="公寓图片五" id="img5">
+									 <input type="file" name="file" id="file5" multiple style="display: none">
+								</form>	
+							</li>	
+							<li class="huxingtusrc">
+								 <form id="uploadForm6" onclick="getElementById('file6').click()">
+									 <img src="" alt="公寓图片六" id="img6">
+									 <input type="file" name="file" id="file6" multiple style="display: none">
+								</form>	
+							</li>	
+							<li class="huxingtusrc">
+								 <form id="uploadForm7" onclick="getElementById('file7').click()">
+									 <img src="" alt="公寓图片七" id="img7">
+									 <input type="file" name="file" id="file7" multiple style="display: none">
+								</form>	
+							</li>	
+							<li class="huxingtusrc">
+								 <form id="uploadForm8" onclick="getElementById('file8').click()">
+									 <img src="" alt="公寓图片八" id="img8">
+									 <input type="file" name="file" id="file8" multiple style="display: none">
+								</form>	
+							</li>	
+																																																									
+						</ul>																		
+					</div>
+				</div>	
+				
+				<div class="new">
+					<laber>价格：</laber>
+					<div class="form-control">
+						<input type="number" id="jia_ge" min="0"  placeholder="请填写价格" name="jia_ge">
+						<span>元</span>
+					</div>
+				</div>
+				<div class="new">
+					<laber>VR实景地址：</laber>
+					<input type="text" id="VR_di_zhi" class="form-control" placeholder="如：129.11.11.22" name="shi_jing_di_zhi">
+				</div>
+				<div class="new">
+					<input type="button" value="提交" id="push_btn">
+				</div>																															
+			</div>
+		</div>
+
+		
+		
+		
+		<div id="maskShow"></div>
+		<div id="module-box">
+			<span class="module-state">修改房态</span>
+			<div class="module-con">
+				<a>入住</a>
+				<a>空闲</a>
+				<a>空闲</a>
+				<a>空闲</a>
+				<a>空闲</a>
+				<a>空闲</a>
+				<a>空闲</a>
+				<div style="clear: both;"></div>
+			</div>
+			<div class="module-footer">
+				<a id="contuse">确定</a>
+				<a>取消</a>
+			</div>
+		</div>
+		
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=fjEOTea6oQGEcK1GSUHruG4efO9fccei"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
+	    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+		<script charset="gb2312" language="javascript" type="text/javascript" src="js/newaddress.js"></script>
+
+<!------------------------------>
+
+	</body>
+</html>

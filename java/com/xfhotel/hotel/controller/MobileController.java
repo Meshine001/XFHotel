@@ -811,13 +811,13 @@ public class MobileController  {
  */
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public @ResponseBody Message upload(MultipartFile file, HttpServletRequest request) {
-		if 
-		(file != null) {
+		if (file != null) {
 			StringBuffer sb = new StringBuffer();
 			sb.append(request.getSession().getServletContext().getRealPath("/"));
 //			System.out.println(sb.toString());
 			String fullPath ="http://www.yiyunzn.xyz/images/"+fileService.saveFile(file, sb.toString());
-			if (fullPath != null)
+			String dd = fileService.saveFile(file, sb.toString());
+			if (fullPath != null && dd!=null)
 				return new Message(Constants.MESSAGE_SUCCESS_CODE, fullPath);
 		}
 		return new Message(Constants.MESSAGE_ERR_CODE, "上传失败");

@@ -27,7 +27,7 @@ public class CleanServiceImpl implements CleanService {
 	@Override
 	public Clean findById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return CleanDAO.get(id);
 	}
 
 	@Transactional
@@ -84,6 +84,7 @@ public class CleanServiceImpl implements CleanService {
 		// TODO Auto-generated method stub
 		return CleanDAO.getListByHQL("from Clean order by id desc", null);
 	}
+	
 	@Transactional
 	@Override
 	public Clean get(Long id) {

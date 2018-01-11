@@ -148,6 +148,9 @@ public class ApartmentServiceImpl implements ApartmentService {
 		apartment.setHu_xing_tu(pic1);
 		apartment.setFang_jian_tu(JSONArray.fromObject(pic2).toString());
 		apartment.setXiao_qu_tu(JSONArray.fromObject(pic3).toString());
+		System.out.println(JSONArray.fromObject(pic2).toString()+"我有5个");
+		System.out.println(pic2.length);
+		System.out.println(JSONArray.fromObject(pic3).toString()+"我有3个");
 		apartmentDAO.saveOrUpdate(apartment);
 		return apartment;
 	}

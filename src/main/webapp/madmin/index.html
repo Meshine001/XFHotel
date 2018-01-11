@@ -16,25 +16,26 @@
 			<ul>
 				<li data-url="apartment.html"><img src="images/maps.png"><p>房屋管理</p></li>
 				<li data-url="orderList.html"><img src="images/notes.png"><p>订单管理</p></li>
-				<li><img src="images/computer.png"><p>用户管理</p></li>
+				<li data-url="userList.html" ><img src="images/computer.png"><p>用户管理</p></li>
 				<li><img src="images/preview.png"><p>青舍生活</p></li>
-				<li><img src="images/launchpad.png"><p>优惠卷</p></li>
-				<li><img src="images/gamecenter.png"><p>保洁服务</p></li>
-				<li><img src="images/prefapp.png"><p>故障维修</p></li>
-				<li><img src="images/icloud.png"><p>添加设施</p></li>
-				<li><img src="images/mail.png"><p>叫车服务</p></li>
-				<li><img src="images/messages.png"><p>房东管理</p></li>
-				<li><img src="images/appstore.png"><p>成员权限</p></li>
-				<li><img src="images/finder.png"><p>合作商户</p></li>
+				<li data-url="sendlist.html" ><img src="images/launchpad.png"><p>优惠卷</p></li>
+				<li data-url="clearList.html"><img src="images/gamecenter.png"><p>保洁服务</p></li>
+				<li data-url="weixiuList.html" ><img src="images/prefapp.png"><p>故障维修</p></li>
+				<li data-url="addfacility.html"><img src="images/icloud.png"><p>添加设施</p></li>
+				<li data-url="dialogueCar.html"  ><img src="images/mail.png"><p>叫车服务</p></li>
+				<li data-url="collocation.html"><img src="images/messages.png"><p>房东管理</p></li>
+				<li data-url="manager.html"><img src="images/appstore.png"><p>成员权限</p></li>
+				<li data-url="jointwodk.html"><img src="images/finder.png"><p>合作商户</p></li>
 			</ul>
 		</div>
 		
 		
 		<div id="bottomMenu"> 
 			<ul>
-				<li><img src="images/ibooks.png"><p>房态管理</p></li>
+				<li data-url="apartment.html"><img src="images/maps.png"><p>房屋管理</p></li>
+				<li data-url="listStatus.html"><img src="images/ibooks.png"><p>房态管理</p></li>
 				<li data-url="orderList.html"><img src="images/notes.png"><p>订单管理</p></li>
-				<li><img src="images/facetime.png"><p>入住分析</p></li>
+				<li data-url="statistics.html"><img src="images/facetime.png"><p>入住分析</p></li>
 			</ul>
 	  	</div>   
 		
@@ -46,13 +47,15 @@
 	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
 	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/autoZoomLoadImage.js"></script>
 	    <script charset="gb2312" language="javascript"   type="text/javascript" src="js/fastclick.js"></script>
+	    
 	    <script>
 			$(document).ready(function(){
 				var userType=window.localStorage.getItem('userType');//1:管理员 ,0:超级管理员
 				var uid=window.localStorage.getItem('uid');
 			
 				if(userType==1){
-					$("#containerArea ul li:nth-child(1),#containerArea ul li:nth-child(2),#containerArea ul li:nth-child(6),#containerArea ul li:nth-child(7),#containerArea ul li:nth-child(8),#containerArea ul li:nth-child(9)").fadeIn();
+					$("#containerArea ul li:nth-child(1),#containerArea ul li:nth-child(2),#containerArea ul li:nth-child(6),#containerArea ul li:nth-child(7),#containerArea ul li:nth-child(8),#containerArea ul li:nth-child(9),#bottomMenu ul li:last-child").fadeIn();
+					$("#bottomMenu ul li").css('width','33.3333%')
 				}else{
 					$("#containerArea ul li").fadeIn();
 				}

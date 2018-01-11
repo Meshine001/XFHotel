@@ -2,7 +2,7 @@
 	clear: both;padding: 0.1rem;font-size: 0.12rem;overflow: hidden;
 }
 .page a{display:block;padding: 0.05rem; border: 1px solid #eee;float: left;margin-right: 0.05rem;}
-
+.page a:last-child{border:none !important;}
 .content{left: 0;width: 100%;bottom: 0;position: absolute;top: 0.42rem;overflow: hidden;overflow-y: auto;}
 .layer-select{width: 100%;height: 0.4rem;background: #FAFAFA;position: relative;border-bottom: 1px solid #eee;}
 .layer-select .layer-nav{text-align: center;cursor: pointer;color: #333;background: none !important;height: 0.4rem;display: block;float: left;font-size: 0.13rem;width: 33.333%;border-right: 1px solid #eee;text-align: center;line-height: 0.4rem;}
@@ -11,5 +11,51 @@
 .houseList table th,.houseList table td{line-height: 0.3rem;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding: 0 0.1rem;border-right:1px solid #eee;text-align: left;color: #666;border-bottom: 1px solid #eee;font-size: 0.14rem;line-height: 0.3rem;}
 .houseList table th:first-child,.houseList table td:first-child{width: 8%;}
 .houseList table th:last-child,.houseList table td:last-child{border-right: none;}
-.houseList table tr .look{cursor: pointer !important;}
-.houseList table tr .look img{width: 0.18rem;margin-top: 0.08rem;} 
+.houseList table tr .look{cursor: pointer !important;color:#0044cc}
+.houseList table tr .look img{width: 0.12rem;margin-top: 0.1rem;} 
+
+/* 用户详情 */
+#module-box{
+	width:100%;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	position:fixed;
+	background:#fff;
+	z-index: 10001;
+    overflow: hidden;
+    transition: all .2s;
+    transform:scale(0);
+}
+#module-box.hover{
+	transform:scale(1);
+}
+.module-state{
+	position:relative;
+	box-sizing: border-box;
+    background-color: #F6F6F6;
+    color: #333 !important;
+    line-height: 0.42rem;
+    height: 0.42rem;
+    width: 100%;
+    z-index: 99;
+    border-bottom: 1px solid #eee;
+    display:block;
+}
+
+.module-con{
+	width:100%;
+	position:absolute;
+	top:0.42rem;
+	bottom:0;
+	left:0;
+	right:0;
+	overflow:auto;
+/* 	padding:0.12rem; */
+}
+.module-con .icon{width:100%;height:1.8rem;text-align:center;line-height:1.8rem;background:url(../images/mobile.jpg) no-repeat;}
+.module-con .icon img{width:1rem;height:1rem;vertical-align: middle;border-radius: 50%;}
+.contentText{padding:0.12rem;font-size:0.13rem;line-height:0.3rem}
+.contentText span{font-weight:bold;color:#333}
+

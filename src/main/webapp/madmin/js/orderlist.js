@@ -2,7 +2,7 @@ $(document).ready(function(){
 	var id=fnBase.huoqu(0,'uid'); // 0:超管   1：普通管理员 
 	var userType=fnBase.huoqu(0,'userType');
 	var pd="";
-//	console.log(id+'_'+userType)
+	console.log(id+'_'+userType)
 	
 	$(".layer-select a").click(function(){
 		$(this).addClass('show').siblings().removeClass('show');
@@ -52,19 +52,20 @@ $(document).ready(function(){
 	
 	masglistData();
 	function masglistData(){
+		 fnBase.loadShow();
 		$.ajax({
 			type:'post',
 			dataType:'json',
 			data:{'id':id},
-			async: false,
 			url:'/admin/user/stewardO',
 			success:function(data){
+				fnBase.loadHide();
 				console.log(data);
 				$(".layer-select a:eq(0) i").html('('+data.content.length+'/条)');
 				$(".content .houseList:eq(0) ul").html('');
 				var ai="";
 				for(var i=0;i<data.content.length;i++){
-					ai+='<li data-id="'+data.content[i].id+'"><div class="row"><span class="fl">订单号：'+data.content[i].id+'</span><span class="fl">下单人：'+data.content[i].cusName+'</span></div><p>房间：'+data.content[i].description+'</p><p>时间：'+ymd(data.content[i].startTime)+'至'+ymd(data.content[i].endTime)+'</p><p>状态：'+orderStatus(data.content[i].status)+'</p>';
+					ai+='<li data-id="'+data.content[i].id+'"><div class="row"><span class="fl">订单号：'+data.content[i].id+'</span><span class="fl">下单人：'+data.content[i].cusName+'</span></div><p>房间：'+data.content[i].description+'</p><p>时间：'+ymd(data.content[i].startTime)+'至'+ymd(data.content[i].endTime)+'</p><p>总金额：￥'+data.content[i].totalPrice+'</p><p>状态：'+orderStatus(data.content[i].status)+'</p>';
 					if(data.content[i].status==7){
 						ai+='<p class="cz-btn">操作：<span class="comfirm-order" data-id="'+data.content[i].id+'">确认订单</span><span class="close-order" data-id="'+data.content[i].id+'">关闭订单</span></p>'
 					}else if(data.content[i].status==1){
@@ -151,6 +152,47 @@ $(document).ready(function(){
 		});
 	});
 	
+
+	//修改订单价格
+	
+	$(".content .houseList:eq(0) ul").on('click','li .comfirm-price',function(event){
+		event.stopPropagation();
+		var url = '../order/close';
+		var id = $(this).attr('data-id');
+		$('#module-box2,#maskShow').fadeIn();
+		$("#xg_price_btn").attr('pid',id);
+
+	});
+	
+	$("#module-box2 .module-footer a:nth-child(2)").click(function(){
+		$('#module-box2,#maskShow').fadeOut();
+		$("#xg_price_btn").attr('pid','');
+	})
+	
+	$("#xg_price_btn").click(function(){
+		var modify=$("#xg_price").val();
+		if(modify==""||modify=="undefined"||modify==null){
+			alert('请填写修改的价格后再提交！')
+			return
+		}
+		$.ajax({
+			type : 'POST',
+			dataType : 'json',
+			data : {
+				'id' : $(this).attr('pid'),
+				'totalPrice':modify
+			},
+			url : '/order/SetOrder',
+			success : function(data) {
+				console.log(data)
+				fnBase.myalert(data.content);
+				$('#module-box2,#maskShow').fadeOut();
+				$("#xg_price_btn").attr('pid','');
+				location=location
+			}
+		});
+	})
+	
 	
 	//退租确认订单
 
@@ -178,6 +220,7 @@ $(document).ready(function(){
 	var page=1,totalPage="";
 	otherorder(page);
 	function otherorder(page){
+		 fnBase.loadShow();
     	$.ajax({
     		type:'POST',
     		dataType:'JSON',
@@ -186,6 +229,7 @@ $(document).ready(function(){
     			'page':page
     		},
     		success:function(data){
+    			fnBase.loadHide();
     			console.log(data)
     			totalPage=data.content.pageCount;
     			if(totalPage>=2){

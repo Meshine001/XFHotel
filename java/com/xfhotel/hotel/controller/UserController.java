@@ -216,9 +216,15 @@ public class UserController {
 			if(u.getAuthority()==0){
 				return new Message(Constants.MESSAGE_SUCCESS_CODE,orderservice.list(0));
 			} else{
-				List<Order> o=orderservice.list(0);
-				 list1.add(o);
-			 
+				List<Apartment> apartments = apartmentService.list();
+				for(Apartment apartment : apartments){
+					if(apartment.getSteward()==u.getId()){
+						List<Order> o=orderservice.getOrders(apartment.getId());
+						for(Order o1 : o){
+							list1.add(o1);
+						}
+					}
+				}
 				}
 	} catch (Exception e) {
 		e.printStackTrace();

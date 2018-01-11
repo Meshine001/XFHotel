@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="shortcut icon" href="images/bitbug_favicon2.ico" />
+	    <link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/orderlist.css" />
+		<style type="text/css">
+		.module-con ul li{
+			    width: 100%;
+			    padding: 0.1rem;
+			    margin-bottom: 0.12rem;
+			    border-radius: 0.06rem;
+			    overflow: hidden;
+			    font-size: 0.14rem;
+			    background: #fafafa;
+			    line-height: 0.26rem;
+			    cursor: pointer;
+		}
+		#newIp,.setadminIp{
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    /* display: block; */
+    padding: 0.1rem 0.35rem;
+    color: #fafafa;
+    background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, rgba(0, 0, 0, 0.05)), color-stop(.25, transparent), to(transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(0, 0, 0, 0.05)), color-stop(.25, transparent), to(transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, rgba(0, 0, 0, 0.05))), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, rgba(0, 0, 0, 0.05)));
+    background-image: -moz-linear-gradient(45deg, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent), -moz-linear-gradient(-45deg, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent), -moz-linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.05) 75%), -moz-linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.05) 75%);
+    -moz-background-size: 3px 3px;
+    -webkit-background-size: 3px 3px;
+    background-size: 3px 3px;
+    background: #428739;
+    background: -webkit-gradient(linear, left top, left bottom, from(#c8dd95), to(#428739) );
+    border-radius: 0.05rem;
+    cursor: pointer;
+    font-size: 0.14rem;
+		}
+		</style>
+	</head>
+	<body style="display: none;">
+		<div class="layer-title">
+			<span class="layer-logo"><img src="images/notes.png">合作商户</span>
+			<span class="layer-setwin">
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+			</span>
+		</div>
+		<div class="content">
+			<div class="layer-select">
+				<a class="layer-nav show">+创建商户ID<i></i></a>
+			</div>
+			
+			<div class="houseList">
+				<ul>
+<!-- 					<li data-id="'+data.content[i].id+'">
+						<p>姓名：'+data.content[i].name+'</p>
+						<p>电话号码：'+data.content[i].cusName+'</p>
+						<p>收款账号：'+data.content[i].number+'</p>
+						<p class="cz-btn">操作：<span>查看</span><span>删除</span></p>
+					</li>	 -->
+				</ul>
+			</div>
+			
+			<div class="houseList" style="display:none">
+				<ul>
+
+				</ul>
+<!-- 				<div class="page">
+					<a>上一页</a>
+					<a>下一页</a>
+				</div> --> 
+			</div>
+			
+			
+			
+			
+		</div>
+		<div id="maskShow"></div>
+		<div id="module-box">
+			<div class="module-state">
+				<span class="layer-logo"><img src="images/computer.png">创建成员</span>
+				<span class="layer-setwin">
+					<a class="layer-icon"><i></i></a>
+					<a class="layer-icon"><i></i></a>
+					<a class="layer-icon"><i></i></a>
+				</span>
+			</div>
+			<div class="module-con">
+				<ul>
+					<li>
+						<laber>账号：</laber>
+						<input type="text" id="inputzh" class="form-control" placeholder="Account">
+					</li>
+					<li>
+						<laber>登录密码：</laber>
+						<input type="text" id="inputmm" class="form-control" placeholder="Password">
+					</li>	
+					<li>
+						<laber>公司名称：</laber>
+						<input type="text" id="inputname" class="form-control" placeholder="Telephone number">
+					</li>						
+					<li>
+						<laber>联系电话：</laber>
+						<input type="number" id="inputtel" class="form-control" placeholder="Telephone number">
+					</li>																			
+				</ul>
+					<a id="newIp">提交</a>
+			</div>
+			<div class="module-footer">
+
+			</div>
+		</div>
+		
+		
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
+	    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+		<script charset="gb2312" language="javascript" type="text/javascript" src="js/jointwork.js"></script>
+<!------------------------------>
+<script>
+  (function(){
+
+	$(".houseList ul li .hbtn .selected").click(function(){
+		if($(this).hasClass('show')==false){
+			$(this).addClass('show')
+		}else{
+			$(this).removeClass('show')
+		}
+	})
+
+  })()
+</script>
+
+
+	</body>
+</html>

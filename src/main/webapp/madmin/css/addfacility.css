@@ -1,0 +1,89 @@
+
+.content{left: 0;width: 100%;bottom: 0;position: absolute;top: 0.42rem;overflow: hidden;overflow-y: auto;}
+.layer-select{width: 100%;overflow: hidden;background: #FAFAFA;position: relative;border-bottom: 1px solid #eee;}
+.layer-select .layer-nav{cursor: pointer;color: #333;background: none !important;height: 0.4rem;display: block;float: left;font-size: 0.13rem;width: 33.333%;border-right: 1px solid #eee;text-align: center;line-height: 0.4rem;}
+.layer-select .layer-nav.show{background:#cfcfcf !important;color:#333}
+
+.layer-select select{border: none;height: 0.39rem !important;}
+.houseList{width: 100%;}
+.houseList ul{padding: 0.1rem;}
+.houseList ul li{
+	width: 100%;padding: 0.1rem;border: 1px solid #ddd;margin-bottom: 0.12rem;border-radius: 0.06rem;overflow: hidden;
+	font-size: 0.14rem;background: #fafafa;line-height: 0.26rem;cursor: pointer;
+}
+.houseList ul li .row{clear: both;}
+.houseList ul li .fl{float: left;width: 50%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.houseList ul li .cz-btn span{font-size: 0.12rem;padding: 0.05rem;background: orange;margin-right: 0.04rem;color: #fafafa;border-radius: 0.04rem;cursor: pointer;}
+
+.navbar-car{width:100%;padding-bottom:0.15rem;background:#fafafa;display:none}
+.navbar-car .tab,.addTab{overflow:hidden;width:90%;margin:0 auto;}
+.navbar-car .tab li{
+	width: 50%;
+    height: 0.4rem;
+    float: left;
+  /*   background: #5a5461;  */
+    font-size: 0.14rem;
+    text-align: center;
+    line-height: 0.4rem;
+    color:#5a5461;
+    cursor:pointer;
+   
+}
+.addTab .input:last-child{}
+.navbar-car .tab li.ac{color:#3f51b5;border-bottom:2px solid #3f51b5;font-weight:bold}
+.navbar-car .tab li:last-child{float:right}
+.addTab .scel{display:none}
+.addTab .tab1{display:block}
+.addTab .input{transition:all .3s; border-radius:0.1rem;;border:1px solid #cfcfcf;width:100%;margin:0.1rem 0;font-size:0.14rem;line-height:0.35rem;padding:0 0.12rem;}
+.addTab .input:focus{border-color:#3f51b5}
+ .addTab .type-r{cursor:pointer;font-size:0.13rem;padding:0.05rem 0.2rem;border:1px solid #ddd;background:#3f51b5;color:#fafafa;border-radius:0.15rem}
+
+
+
+
+#module-box{display: none;width: 3.5rem;background: #fff;border-radius: 0.1rem;position: fixed;left: 50%;margin-left: -1.75rem;top: 50%;margin-top: -1.4rem;z-index: 101;}
+.module-state{text-align: center;font-size: 0.16rem;font-weight: bold;display: block;line-height: 0.45rem;color: #333;    color: #333;
+    background: #fafafa;border-top-left-radius: 0.1rem;border-top-right-radius: 0.1rem;}
+
+.module-con{border-top: 1px solid #eee;border-bottom: 1px solid #EEEEEE;padding:0.15rem;overflow:hidden}
+.module-con a{
+	    cursor: pointer;
+    width: 1rem;
+    text-align: center;
+    float: left;
+    font-size: 0.14rem;
+    border: 1px solid #EEEEEE;
+    border-radius: 0.06rem;
+    padding: 0.08rem 0;
+    margin-bottom: 0.06rem;
+    margin: 0.03rem;
+    position:relative;
+}
+.module-con a span{
+	width: 0.2rem;
+    height: 0.12rem;
+    border-bottom: 1px solid #28CA40;
+    border-left: 1px solid #28CA40;
+    display: none;
+    position: absolute;
+    right: -0.06rem;
+    top: -0.06rem;
+    transform: rotate(-50deg);
+    -ms-transform: rotate(-50deg);
+    -webkit-transform: rotate(-50deg);
+    -o-transform: rotate(-50deg);
+}
+.module-con a.active{color:#28CA40;border-color:#28CA40;}
+.module-con a.active span{display:block}
+.module-footer{background: #FAFAFA;height: 0.45rem;border-bottom-left-radius:0.1rem;border-bottom-right-radius:0.1rem;line-height: 0.45rem;font-size: 0.14rem;}
+.module-footer a{display: block;float: left;width: 50%;text-align: center;cursor: pointer;}
+.module-footer a:nth-child(1){color: #28CA40;}
+.module-footer a:nth-child(2){color: #FF6057;}
+
+
+.navbar-car .mf-con{width:100%;display:block}
+.navbar-car .mf-con li{height:0.35rem;margin-top:0.1rem;}
+.navbar-car .mf-con li span{text-align:center;line-height:0.35rem;width:33.333%;height:0.35rem;display:inline-block;padding:0 0.1rem;overflow:hidden;font-size:0.14rem;}
+.navbar-car .mf-con li span:first-child{background:#5aa7d6;color:#fafafa}
+.navbar-car .mf-con li span:last-child{color:red;cursor:pointer}
+

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	    <link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/addfacility.css" />
+		
+	</head>
+	<body style="display: none;">
+		<div class="layer-title">
+			<span class="layer-logo"><img src="images/maps.png">叫车服务</span>
+			<span class="layer-setwin">
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+				<a class="layer-icon"><i></i></a>
+			</span>
+		</div>
+		<div class="content">
+			<div class="layer-select">
+				<a class="layer-nav">设置服务</a>
+				<a class="layer-nav">接送站</a>
+				<a class="layer-nav">包车</a>
+				<div class="navbar-car">
+					<ul id="tablist" class="tab">
+						<li class="ac">接送站</li>
+						<li>包车</li>
+					</ul>
+					<div class="addTab">
+						<div class="tab1 scel" >
+							<p><input type="text" class="input" placeholder="接送站名" id="jiesongName"></p>
+							<p><input type="number" min="0" id="jiesongPrice" class="input" placeholder="接送站价格" style="margin-top:0"></p>
+							<p><input type="button" value="提交" class="type-r" id="jiesongBtn"></p>
+						</div>
+						<div class="tab2 scel">
+							<p><input type="text" class="input" placeholder="包车路线" id="baocheName"></p>
+							<p><input type="number" min="0" id="baochePrice" class="input" placeholder="包车价格" style="margin-top:0"></p>
+							<p><input type="button" value="提交" class="type-r" id="baocheBtn"></p>
+						</div>						
+					</div>
+					
+				</div>
+				<div class="navbar-car">
+					<ul class="mf-con" id="jiesongList">
+					
+					</ul>
+				</div>
+				<div class="navbar-car">
+					<ul class="mf-con" id="baocheList">
+						
+					</ul>
+				</div>
+			</div>
+			
+			<div class="houseList">
+				<ul>
+
+				</ul>
+			</div>
+		</div>
+
+		<div id="maskShow"></div>
+		<div id="module-box">
+			<span class="module-state">选择房东</span>
+			<div class="module-con">
+				<a>入住</a>
+				<a>空闲</a>
+			</div>
+			<div class="module-footer">
+				<a id="contuse">确定</a>
+				<a>取消</a>
+			</div>
+		</div>
+		
+		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
+	    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
+		<script type="text/javascript" src="js/dialogueCar.js" ></script>
+<!------------------------------>
+
+
+	</body>
+</html>

@@ -5,9 +5,61 @@ body,html{background: #fff;}
 .layer-select select{border: none;outline: none;;height: 0.3rem;font-size: 0.13rem;margin: 0.05rem 0 0.05rem 0.12rem;border: 1px solid #eee;text-align: center;padding: 0 0.2rem;}
 .layer-select .fl-csz i{display: inline-block;width: 0.2rem;height: 0.1rem;background: red;}
 .layer-select .fl-csz{font-size: 0.14rem;margin: 0.1rem;color: #333;}
-.houseList{width: 100%;overflow: hidden;}
-.houseList ul{padding: 0.12rem;margin-bottom: 0.6rem;}
-.houseList ul li{width: 100%;padding: 0.1rem;border: 1px solid #ddd;margin-bottom: 0.12rem;border-radius: 0.06rem;}
+.houseList{
+	 overflow: auto;
+    position: relative;
+}
+.houseList #h-name{
+	width:1.8rem;
+	height:auto;
+	border:1px solid #cfcfcf;
+	border-right:0;
+}
+#h-status{
+	border:1px solid #cfcfcf;
+	position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 1.8rem;
+}
+#h-name tr{
+    width: 100%;
+    line-height: 0.4rem;
+    height: 0.4rem;
+    border-bottom: 1px solid #cfcfcf;
+    background: #eee;
+    font-size: 0.13rem;
+    text-indent: 0.1rem;
+}
+#h-status th,#h-status td{
+	line-height:0.4rem;
+	height:0.4rem;
+	border:1px solid #cfcfcf;
+	background:#eee;
+	font-size:0.13rem;
+	width:1rem;
+	text-align:center;
+}
+#h-status th,#h-name th{background:#e1e1e1;height:0.4rem;position:relative}
+
+#h-name th #siledleft{
+    width: 0.1rem;
+    background: #4fbf0c;
+    display: inline-block;
+    height: 0.1rem;
+    position: absolute;
+    right: .12rem;
+    top: 0.13rem;
+    cursor:pointer;
+}
+#h-name th{text-align:left}
+#h-status th{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#h-status th .w100{width:0.8rem}
+ #h-status td{background:#f8f8f8}
 .info{
     font-size: 0.14rem;
     color: #333;
@@ -21,4 +73,4 @@ body,html{background: #fff;}
 	width: 100%;
 	overflow: hidden;
 }
-.date .data-item{width: 0.47rem;height: 0.4rem;border: 1px solid #eee;float: left;font-size: 0.12rem;text-align: center;line-height: 0.2rem;}
+.date .data-item{width: 0.8rem;height: 0.4rem;border: 1px solid #eee;float: left;font-size: 0.12rem;text-align: center;line-height: 0.2rem;}

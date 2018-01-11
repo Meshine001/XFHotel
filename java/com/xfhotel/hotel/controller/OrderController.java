@@ -526,6 +526,7 @@ public class OrderController {
 	@RequestMapping(value = "/cleanOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public Message cleanOrder(Long id) {
+		System.out.println(id);
 		Clean c = cleanService.get(id);
 		if (c == null) {
 			return new Message(Constants.MESSAGE_ERR_CODE, "无此订单");

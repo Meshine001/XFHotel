@@ -11,7 +11,7 @@
 	</head>
 	<body style="display: none;">
 		<div class="layer-title">
-			<span class="layer-logo"><img src="images/notes.png">订单管理</span>
+			<span class="layer-logo"><img src="images/notes.png">故障维修</span>
 			<span class="layer-setwin">
 				<a class="layer-icon"><i></i></a>
 				<a class="layer-icon"><i></i></a>
@@ -19,39 +19,33 @@
 			</span>
 		</div>
 		<div class="content">
-			<div class="layer-select">
+<!-- 			<div class="layer-select">
 				<a class="layer-nav show">青舍订单<i></i></a>
 				<a class="layer-nav ">第三方订单<i></i></a>
-			</div>
+			</div> -->
 			
 			<div class="houseList">
 				<ul>
-<!-- 					<li data-id="'+data.content[i].id+'">
+ 					<li data-id="'+data.content[i].id+'">
 						<div class="row">
-							<span class="fl">订单号：'+data.content[i].id+'</span>
-							<span class="fl">下单人：'+data.content[i].cusName+'</span>
+							<span class="fl">房间id：'+data.content[i].roomId+'</span>
 						</div>
-						<p>房间：'+data.content[i].description+'</p>
-						<p>状态：'+orderStatus(data.content[i].status)+'</p>
+						<p>服务内容：'+data.content[i].content+'</p>
+						<p>打扫时间：'+data.content[i].cleanTime+'</p> 
+						<p>下单时间：'+data.content[i].time+'</p>
+						<p>订单状态：'+data.content[i].status+'</p>
+						<p>备注：'+data.content[i].demand+'</p>
 						<p class="cz-btn">操作：<span>发送密码</span><span>确定</span></p>
 					</li>	
-					<li>
-						<div class="row">
-							<span class="fl">订单号：1561323132</span>
-							<span class="fl">下单人：陈某某</span>
-						</div>
-						<p>房间：城东-福邸铭门-12208</p>
-						<p>状态：进行中</p>
-						<p class="cz-btn">操作：<span data-id="'+data.results[i].id+'">发送密码</span><span data-id="'+data.results[i].id+'">确定</span></p>
-					</li> -->	
+
 				</ul>
 <!-- 				<div class="page">
 					<a>上一页</a>
 					<a>下一页</a>
-				</div> -->
+				</div> --><!-- orderStatus(data.content.cleanTime) -->
 			</div>
 			
-			<div class="houseList" style="display:none">
+<!-- 			<div class="houseList" style="display:none">
 				<ul>
 					<li>
 						<div class="row">
@@ -74,13 +68,13 @@
 					<a>上一页</a>
 					<a>下一页</a>
 				</div> 
-			</div>
+			</div> -->
 			
 			
 			
 			
 		</div>
-		<div id="maskShow"></div>
+		<!-- <div id="maskShow"></div>
 		<div id="module-box">
 			<div class="module-state">
 				<span class="layer-logo"><img src="images/computer.png">订单详情</span>
@@ -133,9 +127,9 @@
 			<div class="module-footer">
 	
 			</div>
-		</div>
+		</div> -->
 		
-		
+<!-- 		
 		<div id="module-box2">
 			<span class="module-state">修改订单价格</span>
 			<div class="module-con">
@@ -146,24 +140,88 @@
 				<a id="xg_price_btn">确定</a>
 				<a>取消</a>
 			</div>
-		</div>
+		</div> -->
 		
 		
 		<script charset="UTF-8" language="javascript"  type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 	    <script charset="UTF-8" language="javascript"  type="text/javascript" src="js/zoom.js"></script>
 	    <script charset="gb2312" language="javascript" type="text/javascript" src="js/fnBase.js"></script>
-		<script charset="gb2312" language="javascript" type="text/javascript" src="js/orderlist.js"></script>
+		<!-- <script charset="gb2312" language="javascript" type="text/javascript" src="js/clearlist.js"></script> -->
 <!------------------------------>
 <script>
   (function(){
 
-	$(".houseList ul li .hbtn .selected").click(function(){
-		if($(this).hasClass('show')==false){
-			$(this).addClass('show')
-		}else{
-			$(this).removeClass('show')
-		}
-	})
+		masglistData();
+		function masglistData(){
+			$.ajax({
+				type:'post',
+				dataType:'json',
+				data:{},
+				async: false,
+				url:'/admin/weixiu',
+				success:function(data){
+					console.log(data);
+				
+ 					$(".content .houseList ul").html('');
+					var ai="";
+					for(var i=0;i<data.content.length;i++){
+						ai+='<li data-id="'+data.content[i].id+'"><div class="row"><span>房间：'+data.content[i].roomId+'</span></div><p>服务内容：'+data.content[i].faultItem+'</p><p>打扫时间：'+data.content[i].maintainTime+'</p><p>下单时间：'+data.content[i].time+'</p><p>订单状态：'+data.content[i].status+'</p><p>备注：'+data.content[i].demand+'</p>';
+						if(data.content[i].status=="等待管理员呼叫维修"){
+							ai+='<p class="cz-btn">操作：<span class="comfirm-order" data-id="'+data.content[i].id+'">确认服务</span></p>'
+						}else if(data.content[i].status=='正在维修'){
+							ai+='<p class="cz-btn">操作：<span class="comfirm-success" data-id="'+data.content[i].id+'">确定完成</span></p>'
+						}
+						ai+='</li>';
+					}
+					$(".content .houseList ul").append(ai); 
+				}
+			})
+			
+			$(".content .houseList ul").on('click','li .cz-btn .comfirm-order',function(){
+				var url = '../order/faultOrder';
+				var id = $(this).attr('data-id');
+				$.ajax({
+					type : 'POST',
+					dataType : 'json',
+					data : {
+						'id' : id,
+					},
+					url : url,
+					success : function(data) {
+						console.log(data)
+						if(data.statusCode == 1){
+							location=location
+						}else{
+							alert(data.content);
+						}
+					}
+				});
+			})
+			
+			$(".content .houseList ul").on('click','li .cz-btn .comfirm-success',function(){
+				var url = '../order/faultOrders';
+				var id = $(this).attr('data-id');
+				$.ajax({
+					type : 'POST',
+					dataType : 'json',
+					data : {
+						'id' : id,
+					},
+					url : url,
+					success : function(data) {
+						console.log(data)
+						if(data.statusCode == 1){
+							location=location
+						}else{
+							alert(data.content);
+						}
+						
+					}
+				});
+			})
+			
+			
+		};
 
   })()
 </script>
