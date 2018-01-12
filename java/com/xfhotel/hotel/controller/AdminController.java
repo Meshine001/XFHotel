@@ -524,6 +524,7 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/dsendlist", method = RequestMethod.POST)
 	public @ResponseBody Message dsendlist(Double money , String sex , Double time){
+		System.out.println("wozaizhie");
 		Map<String, Object> map = new HashMap<String, Object>();
 		try{
 			if(money!=null){

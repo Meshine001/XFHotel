@@ -23,7 +23,7 @@ $(document).ready(function(){
 				}
 				$("#usdlist").append(sp);
 				$(".page a:last-child").html('第'+data.currentPage+'/'+data.pageCount+'页')
-			
+				$(".page").show();
 			}
 		})
 	}
@@ -77,7 +77,7 @@ $(document).ready(function(){
 						sp='<tr><td colspan="4"><p>没有满足条件的用户</p></td></tr>'
 					}
 					$("#usdlist").append(sp);
-					$(".page").html("");
+					 $(".page").hide();
 		        });
 		    }
 
@@ -101,20 +101,21 @@ $(document).ready(function(){
 						sp='<tr><td colspan="4"><p>没有满足条件的用户</p></td></tr>'
 					}
 					$("#usdlist").append(sp);
-					$(".page").html("");
+					 $(".page").hide();
 		        });
+		       
 			}
 
 	})
 	
 	
 	$(".layer-select .layer-nav").eq(2).on('change',function(){
-			var data=$(".layer-select .layer-nav:first-child+.layer-nav+.layer-nav option:selected").val();
+			var data=$(".layer-select .layer-nav:last-child option:selected").val();
 			if(data=='全部'){
 				listpage();
 			}else{
 				var frontURL= baseUrl+'/admin/dsendlist';
-		        var postData={"money":data};
+		        var postData={"sex":data};
 		      
 		        fnBase.commonAjax(frontURL,postData,function(data){
 		            console.log(data);
@@ -126,9 +127,10 @@ $(document).ready(function(){
 					if(data.content.length<=0){
 						sp='<tr><td colspan="4"><p>没有满足条件的用户</p></td></tr>'
 					}
-					$("#usdlist").append(sp);
-					$(".page").html("");
+					$("#usdlist").append(sp);		
+					 $(".page").hide();
 		        });
+		       
 			}
 
 	})	

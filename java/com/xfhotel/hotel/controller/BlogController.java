@@ -62,6 +62,7 @@ public class BlogController {
 		return "/admin/blog/edit_blog";
 	}
 	
+
 	@RequestMapping(value = "/load_blog")
 	public @ResponseBody Map loadBlog(HttpServletRequest request,Long id) {
 		String path = request.getSession().getServletContext().getRealPath("/");
